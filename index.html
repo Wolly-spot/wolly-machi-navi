@@ -1309,7 +1309,7 @@ function sheetHtml(kind){
 }
 const SHEETS=/^(news|near|dent|dk-kid|dk-mom|[mhxslp]-\d+)$/;
 function openSheet(kind){
-  sheetKind=kind;
+  closeViewer();sheetKind=kind;
   if(kind==="news")fillNewsSheet();else if(kind==="near")fillNearSheet();else $("#sheetBody").innerHTML=sheetHtml(kind);
   const sh=$("#sheet");sh.scrollTop=0;
   sh.classList.remove("on");void sh.offsetWidth;
