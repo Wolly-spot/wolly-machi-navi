@@ -445,15 +445,18 @@ svg .a-strike{animation:a-strike 1.3s cubic-bezier(.7,0,.3,1) infinite;transform
 .feat li{display:flex;gap:8px;font-size:14px;line-height:1.6}
 .feat li::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--accent);margin-top:8px}
 .go{display:flex;justify-content:center;align-items:center;gap:6px;width:100%;box-sizing:border-box;text-align:center;border-radius:999px;padding:13px 18px;font-weight:700;font-size:15px;text-decoration:none;color:var(--accent-ink);background:var(--accent);box-shadow:0 12px 22px -14px var(--accent)}
-.go.reveal{border:0;cursor:pointer;font-family:inherit}
-.go.reveal[hidden],.pop[hidden]{display:none}
-.pop{position:relative;margin:4px 0 0;padding:44px 14px 14px;border-radius:22px;background:color-mix(in srgb,var(--surface) 82%,transparent);border:1px solid var(--glass-line);box-shadow:0 18px 40px -22px rgba(40,30,120,.45);transform-origin:50% 0}
-.pop.on{animation:popin .55s cubic-bezier(.16,1,.3,1) both}
-.pop.off{animation:popout .26s ease both}
-@keyframes popin{from{opacity:0;transform:translateY(14px) scale(.96);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
-@keyframes popout{to{opacity:0;transform:translateY(8px) scale(.97);filter:blur(4px)}}
-.pop .pop-x{position:absolute;top:8px;right:8px}
-.pop .foot{margin-bottom:0}
+.go.vbtn{border:0;cursor:pointer;font-family:inherit}
+.viewer{position:fixed;z-index:80;left:50%;top:max(10px,env(safe-area-inset-top,0px));bottom:max(10px,env(safe-area-inset-bottom,0px));width:min(calc(100% - 16px),760px);
+  display:flex;flex-direction:column;border-radius:26px;overflow:hidden;background:var(--glass);-webkit-backdrop-filter:blur(22px) saturate(1.5);backdrop-filter:blur(22px) saturate(1.5);
+  border:1px solid var(--glass-line);box-shadow:0 30px 70px -30px rgba(20,20,80,.6);
+  transform:translate(-50%,40px) scale(.95);opacity:0;filter:blur(8px);transition:transform .6s cubic-bezier(.16,1,.3,1),opacity .4s ease,filter .45s ease}
+.viewer.on{transform:translate(-50%,0) scale(1);opacity:1;filter:none}
+.viewer .vbar{display:flex;align-items:center;gap:8px;padding:8px 8px 8px 18px;border-bottom:1px solid var(--glass-line)}
+.viewer .vbar b{flex:1;min-width:0;font:500 15px/1.4 var(--f-display);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.viewer .vbody{position:relative;flex:1;background:var(--surface)}
+.viewer iframe{position:absolute;inset:0;width:100%;height:100%;border:0;opacity:0;transition:opacity .35s}
+.viewer.ready iframe{opacity:1}
+.viewer .vload{position:absolute;inset:0;display:grid;place-items:center;color:var(--muted);font-size:13px}
 .go.sub{background:color-mix(in srgb,var(--surface) 70%,transparent);color:var(--ink);box-shadow:none;border:1px solid var(--line);margin-top:8px}
 .wards{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:0 0 12px}
 .wards a{display:flex;align-items:center;justify-content:space-between;gap:8px;text-decoration:none;padding:12px 14px;border-radius:14px;background:color-mix(in srgb,var(--surface) 72%,transparent);border:1px solid var(--line);font-weight:700;font-size:14px;line-height:1.4}
@@ -586,6 +589,11 @@ svg .a-strike{animation:a-strike 1.3s cubic-bezier(.7,0,.3,1) infinite;transform
   <div class="grab"></div>
   <button class="iconbtn close" id="sheetClose" type="button" aria-label="閉じる"><svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
   <div id="sheetBody"></div>
+</div>
+<!-- その場で開くページ（お金・保活ナビ） -->
+<div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-labelledby="vTitle" hidden>
+  <div class="vbar"><b id="vTitle"></b><button class="iconbtn" id="vClose" type="button" aria-label="閉じる"><svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <div class="vbody"><span class="vload">ひらいています…</span><iframe id="vFrame" title="" loading="eager"></iframe></div>
 </div>
 
 <!-- tab bar -->
@@ -1122,20 +1130,22 @@ function myWardGroup(l){const w=S.profile?.ward;if(!w)return null;return l.w.fin
 /* ---------- detail sheets ---------- */
 const extA=(u,label,cls="go")=>`<a class="${cls}" href="${esc(u)}" target="_blank" rel="noopener">${esc(label)} ${ico('<path d="M7 17L17 7M9 7h8v8"/>')}</a>`;
 function dhead(iconSvg,bg,eb,title,sub){return `<div class="dhead" style="--dbg:${bg}"><span class="dic">${iconSvg}</span><div><div class="eyebrow">${eb}</div><h3 id="sheetTitle">${esc(title)}</h3>${sub?`<p class="sub" style="margin:0">${sub}</p>`:""}</div></div>`}
-/* 説明はボタンを押すと、その場にふわっと出る（×で閉じる） */
-const reveal=(label,inner)=>`<button class="go reveal" type="button" data-reveal aria-expanded="false">${esc(label)}</button><div class="pop" role="region" hidden><button class="iconbtn pop-x" type="button" data-popx aria-label="閉じる">${ico('<path d="M6 6l12 12M18 6L6 18"/>')}</button>${inner}</div>`;
+/* claude.ai のページは埋め込めないので、写しを GitHub Pages（pages/<ID>.html）に置いて、その場にふわっと開く（×で閉じる） */
+const PAGES_BASE="https://wolly-spot.github.io/wolly-machi-navi/pages/";
+const LOCAL_PAGES=new Set(["1A9FVjMyjw7Z1qeTR1PYb8", "46aiXnFAPJqq2TFrKg3YPU", "4DXLnYxw49xGkQLqb2JUff", "5sw7jm2a4RuUXWCBZrN4kW", "6nL3ULCWeDax2UrVyBJZyD", "835bgbNMZayWbxA3uQndR5", "8KxvgMDXNHUPWJqrrBjVMY", "9tRNjnjZgo6ahsXRrvvNKA", "BAZjQop2hS7NzefxH9hnbT", "D5TZbxjxGckC92efTtLFPA", "DP2ABq3gWDZT8QfciTMVst", "EBSjH4tPPXWnRohvo4dyUm", "GDsUKaWvcL5kR9qmzFgJ1Z", "GFvaTmMVnMNyi9qm15Ti9y", "HgEtKiUhTrM7ZP3uu3UNti", "Jq1szNceCTZRM4o2Ljgf2q", "LFhrH9kdQhJtuo1ZuzA7fS", "MmmV3f6hXy5cWggak1rXaH", "MpfmmxyxegrpSPYYF69Gqw", "PhjBg2uw9qhp9nZMc4Mu4h", "QJFPMd2pikgS9nd44Dwkpc", "RtwsQaVbRj8tjVuLmDNoLX", "Uz8Uj6qnV8z7K3BRs62FDd", "VQS3aiwxShGyPvvZ3ditfe"]);
+const artId=u=>{const m=/claude\.ai\/artifact\/([A-Za-z0-9]+)/.exec(u||"");return m&&LOCAL_PAGES.has(m[1])?m[1]:null};
+const openA=(u,label,title,cls="go")=>{const id=artId(u);return id?`<button class="${cls} vbtn" type="button" data-view="${id}" data-vt="${esc(title)}">${esc(label)} ${ico('<path d="M5 12h14M13 6l6 6-6 6"/>')}</button>`:extA(u,label,cls)};
 function sheetMoney(i){const m=MONEY[i];if(!m)return"";const c=MONEY_CAT[m.c];
   return dhead(svg(MINI[c.ic],40),c.bg,c.n,m.t,`<span class="pill">${esc(m.k)}</span><span class="pill ${m.wait?"wait":""}">${m.wait?"次回募集待ち":"受付中"}</span>`)+
-   `<div class="price"><b>${esc(m.num)}</b><span>${esc(m.sub)}</span></div>`+
-   reveal("くわしく見る・いくらもらえるか計算",`<dl class="dl"><div><dt>どんな</dt><dd>${esc(m.one)}</dd></div><div><dt>対象</dt><dd>${esc(m.who)}</dd></div><div><dt>窓口</dt><dd>${esc(m.how)}</dd></div></dl>
+   `<div class="price"><b>${esc(m.num)}</b><span>${esc(m.sub)}</span></div>
+    <dl class="dl"><div><dt>どんな</dt><dd>${esc(m.one)}</dd></div><div><dt>対象</dt><dd>${esc(m.who)}</dd></div><div><dt>窓口</dt><dd>${esc(m.how)}</dd></div></dl>
     ${m.note?`<p class="note">${esc(m.note)}</p>`:""}
-    ${extA(m.url,"いくらもらえるか計算する")}
-    <p class="foot">金額や条件は年度ごとに変わることがあります。わからないときは さいたまコールセンター 048-835-3156</p>`)}
+    ${openA(m.url,"くわしく見る・いくらもらえるか計算",m.t)}
+    <p class="foot">金額や条件は年度ごとに変わることがあります。わからないときは さいたまコールセンター 048-835-3156</p>`}
 function sheetInfo(item,cat,i){
   const st=STYLE[cat][i%STYLE[cat].length];
-  const body=`<p style="margin:0 0 12px;font-size:14.5px;line-height:1.8">${esc(item.lead)}</p><ul class="feat">${item.f.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>${item.u?extA(item.u,"ページをひらく"):""}`;
   return dhead(`<svg viewBox="0 0 24 24" style="width:44px;height:44px;fill:none;stroke:#fff;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round">${P[item.p]}</svg>`,st[0],TAG[cat],item.t,esc(item.k))+
-   (item.pop?reveal("くわしく見る",body):body)}
+   `<p style="margin:0 0 12px;font-size:14.5px;line-height:1.8">${esc(item.lead)}</p><ul class="feat">${item.f.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>${item.u?(item.pop?openA(item.u,"ページをひらく",item.t):extA(item.u,"ページをひらく")):""}`}
 /* 教室リスト（CLASSES にデータがある習い事だけ） */
 let clsKey=null,clsArea="all",clsSort="rec",clsT={},clsQ="",clsShow=20;
 const CLS_TOGGLES=[["kid","幼児OK"],["fee","料金がわかる"],["park","駐車場あり"]];
@@ -1307,19 +1317,23 @@ function openSheet(kind){
   document.body.classList.add("sheet-open");
   setTimeout(()=>$("#sheetClose").focus({preventScroll:true}),60);
 }
-function closeSheet(){sheetKind=null;$("#scrim").classList.remove("on");$("#sheet").classList.remove("on");document.body.classList.remove("sheet-open")}
+function closeSheet(){closeViewer();sheetKind=null;$("#scrim").classList.remove("on");$("#sheet").classList.remove("on");document.body.classList.remove("sheet-open")}
 $("#scrim").addEventListener("click",()=>goBack());
 $("#sheetClose").addEventListener("click",()=>goBack());
 $("#sheet").addEventListener("click",e=>{if(e.target.closest("a[href='#mypage']"))closeSheet()});
-$("#sheet").addEventListener("click",e=>{
-  const r=e.target.closest("[data-reveal]");
-  if(r){const pop=r.nextElementSibling;r.hidden=true;r.setAttribute("aria-expanded","true");pop.hidden=false;pop.classList.remove("on");void pop.offsetWidth;pop.classList.add("on");
-    requestAnimationFrame(()=>pop.scrollIntoView({behavior:"smooth",block:"nearest"}));return}
-  const x=e.target.closest("[data-popx]");
-  if(x){const pop=x.closest(".pop"),btn=pop.previousElementSibling;pop.classList.remove("on");pop.classList.add("off");
-    setTimeout(()=>{pop.hidden=true;pop.classList.remove("off");btn.hidden=false;btn.setAttribute("aria-expanded","false");btn.focus({preventScroll:true})},260)}
-});
-document.addEventListener("keydown",e=>{if(e.key==="Escape"&&sheetKind)goBack()});
+let viewerOpen=false;
+function openViewer(id,title){
+  const v=$("#viewer"),f=$("#vFrame");
+  $("#vTitle").textContent=title||"";v.classList.remove("ready");
+  f.onload=()=>v.classList.add("ready");f.src=PAGES_BASE+id+".html";f.title=title||"";
+  v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
+  setTimeout(()=>$("#vClose").focus({preventScroll:true}),60);
+}
+function closeViewer(){if(!viewerOpen)return;viewerOpen=false;const v=$("#viewer");v.classList.remove("on");
+  setTimeout(()=>{if(!viewerOpen){v.hidden=true;$("#vFrame").src="about:blank"}},420)}
+$("#sheet").addEventListener("click",e=>{const b=e.target.closest("[data-view]");if(b)openViewer(b.dataset.view,b.dataset.vt)});
+$("#vClose").addEventListener("click",closeViewer);
+document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;if(viewerOpen){closeViewer();return}if(sheetKind)goBack()});
 
 /* ---------- routing ---------- */
 let route="home",lastSheet=null,inApp=false;
