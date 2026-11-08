@@ -503,7 +503,12 @@ svg .a-ring{animation:ring 2.4s ease-in-out infinite;transform-box:fill-box;tran
 .call .cic{width:24px;height:24px;border-radius:50%;background:#fff;display:grid;place-items:center;color:#D2477A;flex:none}
 .call .cic svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2.2}
 .call b{font-variant-numeric:tabular-nums;font-size:13.5px;letter-spacing:.02em}
-.call small{font-size:10.5px;opacity:.9;border-left:1px solid rgba(255,255,255,.5);padding-left:6px}
+.call small{font-size:10.5px;opacity:.9;border-left:1px solid rgba(255,255,255,.5);padding-left:6px;white-space:nowrap}
+/* 一覧の中の電話ボタンは同じ幅にして「電話する」を縦一列にそろえる */
+.dc .row2,.ky-c .row2{display:grid!important;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:10px}
+.dc .row2 .call,.ky-c .row2 .call{width:100%;max-width:250px;box-sizing:border-box}
+.dc .row2 .call small,.ky-c .row2 .call small{margin-left:auto}
+.dc .row2>a:last-child,.ky-c .row2>a:last-child{white-space:nowrap;min-width:5.5em;text-align:right}
 .call.mini{padding:2px 9px 2px 2px;gap:4px;box-shadow:none}
 .call.mini .cic{width:20px;height:20px}.call.mini .cic svg{width:12px;height:12px}
 .call.mini b{font-size:12px}.call.mini small{display:none}
@@ -511,7 +516,7 @@ svg .a-ring{animation:ring 2.4s ease-in-out infinite;transform-box:fill-box;tran
 .call.big .cic{width:40px;height:40px}.call.big .cic svg{width:22px;height:22px;animation:ring 2.4s ease-in-out infinite}
 .call.big b{font:500 clamp(19px,5.6vw,24px)/1.2 var(--f-display);flex:1;white-space:nowrap}
 .call b{white-space:nowrap}
-.call.big small{font-size:12px}
+.call.big small{font-size:12px;margin-left:auto}
 /* タップでふわっと出る小窓 */
 .ky-tap{display:flex;align-items:center;gap:10px;width:100%;margin-top:8px;padding:8px 12px 8px 8px;border-radius:14px;border:1.5px dashed color-mix(in srgb,#A68BFF 60%,transparent);background:rgba(255,255,255,.7);
   font:700 13.5px/1.4 var(--f-body);color:#1F2140;cursor:pointer;text-align:left}
@@ -543,9 +548,21 @@ svg .a-ring{animation:ring 2.4s ease-in-out infinite;transform-box:fill-box;tran
 .ky-sz{display:inline-block;margin-top:3px;font-size:11px;font-weight:700;color:#5B3FA0;background:#F1E8FF;border-radius:999px;padding:1px 9px}
 .ky-sub{border-top:1px dashed var(--line);padding-top:12px}
 .ky-sub p{margin:4px 0 0;font-size:12.5px;color:var(--muted)}
-.ky-cl{display:grid;gap:8px}
-.ky-c{border-radius:16px;padding:12px 14px;background:color-mix(in srgb,var(--surface) 80%,transparent);border:1px solid var(--line);display:grid;gap:4px}
+.ky-cl{display:grid;gap:14px;padding-top:6px}
+.ky-c{position:relative;border-radius:16px;padding:12px 14px;background:color-mix(in srgb,var(--surface) 80%,transparent);border:1px solid var(--line);display:grid;gap:4px}
 .ky-c>b{font-size:15px}
+.ky-c.first{border:2px solid #FF9CC8;box-shadow:0 10px 22px -16px rgba(210,70,140,.7)}
+.ky-rank{position:absolute;top:-10px;right:10px;display:inline-flex;align-items:baseline;gap:1px;padding:3px 10px;border-radius:999px;color:#fff;font:500 18px/1.1 var(--f-display);background:#9A9CC0;box-shadow:0 4px 10px -4px rgba(30,30,90,.45)}
+.ky-rank small{font:700 10px/1 var(--f-body);margin:0 2px}
+.ky-rank.r1{background:linear-gradient(120deg,#FF7FB8,#A68BFF)}
+.ky-rank.r2{background:#A68BFF}
+.ky-rank.r3{background:#7C8CFF}
+.ky-ch>div{padding-right:72px}
+.ky-km{display:inline-block;margin:3px 0 0 6px;font-size:11px;font-weight:700;color:var(--muted)}
+.ky-near{display:flex;gap:6px;align-items:flex-start;margin:0;font-size:12.5px;line-height:1.6;color:var(--muted)}
+.ky-near svg{flex:none;width:16px;height:16px;margin-top:3px;color:#D2477A}
+.ky-near b{color:var(--ink)}
+.ky-near a{color:var(--accent);font-weight:700}
 .ky-c .ad{font-size:12.5px;color:var(--muted)}
 .ky-t{font-size:13px;line-height:1.55}
 .ky-t span{display:inline-block;font-size:11px;font-weight:700;color:var(--accent);background:var(--accent-soft);border-radius:6px;padding:0 7px;margin-right:6px}
@@ -1431,7 +1448,14 @@ const BLD={
   mid:{d:`<path d="M6 58h52" ${KK}/><rect x="14" y="20" width="36" height="38" rx="2" fill="#fff" ${KK}/><rect x="14" y="32" width="36" height="12" fill="#FFE3EC"/><rect x="14" y="20" width="36" height="38" rx="2" fill="none" ${KK}/>${[0,1,2].map(r=>[0,1,2].map(c=>`<rect x="${19+c*10}" y="${24+r*12}" width="6" height="5" rx="1" fill="#B9E3FF"/>`).join("")).join("")}<text x="52" y="40" font-size="9" font-weight="700" fill="#D2477A" font-family="sans-serif">2F</text><path d="M24 14h16l-3 6H27z" fill="#E5E8FF" ${KK}/><rect x="28" y="50" width="8" height="8" fill="#A68BFF" ${KK}/>`},
   small:{d:`<path d="M6 58h52" ${KK}/><path d="M14 34L32 20l18 14v24H14z" fill="#fff" ${KK}/><path d="M11 36L32 19l21 17" fill="none" stroke="#A68BFF" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="32" cy="34" r="6" fill="#FF8FB8" ${KK}/><path d="M32 31v6M29 34h6" stroke="#fff" stroke-width="2" stroke-linecap="round"/><rect x="28" y="46" width="8" height="12" fill="#A68BFF" ${KK}/><rect x="18" y="44" width="6" height="5" rx="1" fill="#B9E3FF"/><rect x="40" y="44" width="6" height="5" rx="1" fill="#B9E3FF"/>`}
 };
+/* 近い順：登録した区（区役所の位置）から各診療所までのまっすぐの距離で 1〜4番 */
+const WARD_LL={"西区":[35.9256,139.5794],"北区":[35.9305,139.6203],"大宮区":[35.9063,139.6290],"見沼区":[35.9265,139.6540],"中央区":[35.8840,139.6260],"桜区":[35.8563,139.6090],"浦和区":[35.8616,139.6457],"南区":[35.8447,139.6450],"緑区":[35.8710,139.6830],"岩槻区":[35.9497,139.6939]};
+const CLINIC_LL=[[35.9375,139.6055],[35.8665,139.6420],[35.8838,139.6262],[35.9500,139.6930]];
+function clinicRank(){const w=S.profile&&WARD_LL[S.profile.ward];if(!w)return null;
+  const d=CLINIC_LL.map(([a,b],i)=>({i,d:Math.hypot(a-w[0],(b-w[1])*Math.cos(w[0]*Math.PI/180))*111}));
+  const r=[];d.slice().sort((x,y)=>x.d-y.d).forEach((x,k)=>r[x.i]={n:k+1,km:x.d});return r}
 function sheetKyukan(i){
+  const rank=clinicRank();
   const item=HEALTH[i],st=STYLE.health[i%STYLE.health.length];
   const tel=(n,big=true)=>callA(n,big?"call big":"call");
   /* タップするとその場にふわっと出る小窓（×で閉じる） */
@@ -1449,7 +1473,8 @@ function sheetKyukan(i){
        ${who(KYU_PEOPLE.n8000,"子どもの病気の経験もある看護師さん","埼玉県では、看護師さんが相談にのってくれます。<b>小児科のお医者さん</b>がうしろで支えていて、必要なときはお医者さんが直接答えてくれることもあります。電話でのアドバイスなので、診察ではありません。")}</div>
      <div class="ky-memo">${pop("電話の前にメモしておくと伝えやすいこと",svg(MEMO_IC.note,40),`<b class="ky-mh">電話の前にメモしておくと伝えやすいこと</b><ul class="ky-ml">${MEMO.map(([k,t])=>`<li><span class="mi">${svg(MEMO_IC[k],40)}</span><span>${t}</span></li>`).join("")}</ul>`)}</div>
      <div class="ky-sub"><h4>休日・夜間の急患診療所（4か所）</h4><p>小児科は、かぜや発熱などの内科的な病気のみ。時間は受付時間です。</p></div>
-     <div class="ky-cl">${KYU_CLINICS.map(c=>`<div class="ky-c"><div class="ky-ch"><span class="ky-bld">${svg(BLD[c.sz].d,64)}</span><div><b>${esc(c.n)}</b><span class="ky-sz">${esc(c.sl)}</span></div></div><div class="ad">${esc(c.a)}</div>${c.h.map(([k,v])=>`<div class="ky-t"><span>${esc(k)}</span>${esc(v)}</div>`).join("")}
+     ${rank?`<p class="ky-near">${ico(P.pin)}<span><b>${esc(S.profile.ward)}</b>から近い順に <b>1〜4番</b> をつけています（区役所からのまっすぐの距離のめやす）</span></p>`:`<p class="ky-near">${ico(P.pin)}<span><a href="#mypage">マイページ</a>で区を登録すると、家から近い順の番号がつきます</span></p>`}
+     <div class="ky-cl">${KYU_CLINICS.map((c,ci)=>`<div class="ky-c${rank&&rank[ci].n===1?" first":""}">${rank?`<span class="ky-rank r${rank[ci].n}"><small>近い順</small>${rank[ci].n}<small>番</small></span>`:""}<div class="ky-ch"><span class="ky-bld">${svg(BLD[c.sz].d,64)}</span><div><b>${esc(c.n)}</b><span class="ky-sz">${esc(c.sl)}</span>${rank?`<span class="ky-km">約${rank[ci].km<1?"1":Math.round(rank[ci].km)}km</span>`:""}</div></div><div class="ad">${esc(c.a)}</div>${c.h.map(([k,v])=>`<div class="ky-t"><span>${esc(k)}</span>${esc(v)}</div>`).join("")}
        <div class="row2">${tel(c.t,false)}<a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(c.n+" さいたま市"+c.a.replace(/（.*）/,""))}" target="_blank" rel="noopener">地図 ›</a></div></div>`).join("")}</div>
      <p class="foot">熱などの症状があるときは、受診の前に電話で相談してください。出典：さいたま市「子ども急患電話相談」「休日・夜間の急患診療所」、埼玉県「小児救急電話相談」（2026年11月時点）。診療日や時間は変わることがあるので、出かける前に電話などで確認してください。</p>
      ${extA("https://www.city.saitama.lg.jp/002/001/017/006/p019179.html","急患診療所のくわしいページ（さいたま市）","go sub")}
