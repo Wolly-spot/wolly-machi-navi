@@ -563,6 +563,7 @@ svg .a-ring{animation:ring 2.4s ease-in-out infinite;transform-box:fill-box;tran
 .ky-near svg{flex:none;width:16px;height:16px;margin-top:3px;color:#D2477A}
 .ky-near b{color:var(--ink)}
 .ky-near a{color:var(--accent);font-weight:700}
+.geo-st{display:block;margin-top:4px;color:var(--accent)!important;font-weight:700}
 .ky-c .ad{font-size:12.5px;color:var(--muted)}
 .ky-t{font-size:13px;line-height:1.55}
 .ky-t span{display:inline-block;font-size:11px;font-weight:700;color:var(--accent);background:var(--accent-soft);border-radius:6px;padding:0 7px;margin-right:6px}
@@ -699,7 +700,7 @@ svg .a-ring{animation:ring 2.4s ease-in-out infinite;transform-box:fill-box;tran
           <div class="field"><label for="fName">ニックネーム</label><input id="fName" maxlength="16" placeholder="例：さくらママ" autocomplete="nickname"><small>メンバー一覧に表示されます。</small></div>
           <div class="field"><span class="lab">アイコンをえらぶ</span><div class="icons" id="iconPick"></div></div>
           <div class="field"><label for="fWard">お住まいの区</label><select id="fWard"></select><small>習い事は、登録した区の教室ページへ直接つながります。</small></div>
-          <div class="field"><label for="fTown">町名（任意）</label><input id="fTown" maxlength="20" placeholder="例：高砂、常盤、大宮駅西口 など"><small>家の近くで探すときだけ使います。ほかのメンバーには公開されません。</small></div>
+          <div class="field"><label for="fTown">町名・番地（任意）</label><input id="fTown" maxlength="40" placeholder="例：常盤6-4-18" autocomplete="address-line1"><small>番地まで入れると、病院や急患診療所を家から近い順に正しく並べられます。ほかのメンバーには公開されません（位置を調べるために国土地理院の住所検索を使います）。</small><small class="geo-st" id="geoSt" role="status"></small></div>
           <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><button class="btn" type="submit" id="saveBtn">登録する</button><span class="status" id="saveStatus" role="status"></span></div>
         </form>
       </section>
@@ -1114,6 +1115,19 @@ const LS={get(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return 
 S.lastSeenChat=LS.get("wolly.seenChat")||0;
 
 function area(){return S.profile?("さいたま市"+S.profile.ward+(S.town?S.town:"")):"さいたま市"}
+/* 画面のあいさつなどには番地を出さない（町名まで） */
+const townName=()=>String(S.town||"").replace(/[\s　]*[0-9０-９][\s\S]*$/,"");
+/* 登録した住所の位置（国土地理院の住所検索）。この端末に覚えておき、住所が変わったら取り直す */
+async function geocodeHome(){
+  if(!S.profile||!S.town){S.geo=null;return null}
+  const q="埼玉県さいたま市"+S.profile.ward+S.town;
+  if(S.geo&&S.geo.q===q)return S.geo;
+  try{const r=await fetch("https://msearch.gsi.go.jp/address-search/AddressSearch?q="+encodeURIComponent(q));const d=await r.json();
+    const f=d&&d[0];if(!f)return null;const [lon,lat]=f.geometry.coordinates;
+    if(!String(f.properties.title||"").includes(S.profile.ward)){S.geo={q,lat:null,lon:null,ok:false};return null}
+    S.geo={q,lat,lon,ok:true,title:f.properties.title};
+    const l=LS.get("wolly.profile");if(l)LS.set("wolly.profile",{...l,geo:S.geo});return S.geo}
+  catch(e){return null}}
 function mapUrl(q){return "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q+" "+area())}
 const fmtDate=s=>{if(!s)return"";const d=new Date(s);if(isNaN(d))return esc(s);return `${d.getMonth()+1}/${d.getDate()}`};
 const fmtTime=ms=>{const d=new Date(ms),n=new Date();const hm=`${d.getHours()}:${String(d.getMinutes()).padStart(2,"0")}`;
@@ -1127,7 +1141,7 @@ function renderMe(){
   else{me.className="me guest";me.innerHTML=avatar(-1)+`<span>未登録</span>`;me.setAttribute("aria-label","マイページ（未登録）")}
   const h=new Date().getHours(),greet=h<11?"おはようございます":h<18?"こんにちは":"こんばんは";
   $("#helloTitle").textContent=S.profile?`${greet}、${S.profile.name}さん`:greet;
-  $("#helloSub").textContent=S.profile?`さいたま市${S.profile.ward}${S.town?" "+S.town:""}の暮らしを、近くから。`:"さいたま市の暮らしを、近くから。";
+  $("#helloSub").textContent=S.profile?`さいたま市${S.profile.ward}${townName()?" "+townName():""}の暮らしを、近くから。`:"さいたま市の暮らしを、近くから。";
   $("#regBanner").innerHTML=S.profile?"":`<div class="reg-banner">${avatar(-1)}<p><b>マイページ未登録です</b>名前とアイコンを登録すると、メンバーとして参加できます。</p><a class="btn" href="#mypage">登録する</a></div><div class="kyu-under">${KYU_BTN}</div>`;
   /* 小児科 急患電話マップのボタン：登録済みは「カテゴリーからさがす」の横、未登録はマイページ登録の下 */
   $("#kyuSlotHead").innerHTML=S.profile?KYU_BTN:"";
@@ -1398,13 +1412,16 @@ $("#myForm").addEventListener("submit",async e=>{
   if(!ward){st.textContent="お住まいの区を選んでください";$("#fWard").focus();return}
   const prof={name,icon:pickIcon,ward};
   $("#saveBtn").disabled=true;st.textContent="保存しています…";
-  S.profile=prof;S.town=town;LS.set("wolly.profile",{...prof,town});
+  S.profile=prof;S.town=town;LS.set("wolly.profile",{...prof,town,geo:S.geo&&S.geo.q===("埼玉県さいたま市"+ward+town)?S.geo:null});
   if(S.db&&S.uid){
     try{await S.db.doc("members/"+S.uid).set({...prof,at:Date.now()});await S.db.doc(`data/users/${S.uid}/profile`).set({town});st.textContent="保存しました"}
     catch(err){st.textContent="この端末に保存しました（メンバー一覧への反映には書き込み権限が必要です）"}
   }else st.textContent="この端末に保存しました";
   $("#saveBtn").disabled=false;
   renderAll();fillMyPage();
+  if(town){$("#geoSt").textContent="住所の位置を調べています…";const g=await geocodeHome();
+    $("#geoSt").textContent=g&&g.ok?`位置がわかりました：${g.title.replace(/^埼玉県/,"")}`:"住所の位置が見つかりませんでした。区役所の位置で近い順を出します（「常盤6-4-18」のように書くと見つかりやすくなります）"}
+  else $("#geoSt").textContent="";
 });
 
 /* ---------- glass sheet ---------- */
@@ -1450,10 +1467,10 @@ const BLD={
 };
 /* 近い順：登録した区（区役所の位置）から各診療所までのまっすぐの距離で 1〜4番 */
 const WARD_LL={"西区":[35.9256,139.5794],"北区":[35.9305,139.6203],"大宮区":[35.9063,139.6290],"見沼区":[35.9265,139.6540],"中央区":[35.8840,139.6260],"桜区":[35.8563,139.6090],"浦和区":[35.8616,139.6457],"南区":[35.8447,139.6450],"緑区":[35.8710,139.6830],"岩槻区":[35.9497,139.6939]};
-const CLINIC_LL=[[35.9375,139.6055],[35.8665,139.6420],[35.8838,139.6262],[35.9500,139.6930]];
-function clinicRank(){const w=S.profile&&WARD_LL[S.profile.ward];if(!w)return null;
+const CLINIC_LL=[[35.932766,139.619705],[35.861156,139.643845],[35.884136,139.620514],[35.94384,139.710403]]; /* 国土地理院の住所検索で調べた位置 */
+function clinicRank(){const home=!!(S.geo&&S.geo.ok&&S.profile&&S.geo.q===("埼玉県さいたま市"+S.profile.ward+S.town));const w=home?[S.geo.lat,S.geo.lon]:(S.profile&&WARD_LL[S.profile.ward]);if(!w)return null;
   const d=CLINIC_LL.map(([a,b],i)=>({i,d:Math.hypot(a-w[0],(b-w[1])*Math.cos(w[0]*Math.PI/180))*111}));
-  const r=[];d.slice().sort((x,y)=>x.d-y.d).forEach((x,k)=>r[x.i]={n:k+1,km:x.d});return r}
+  const r=[];d.slice().sort((x,y)=>x.d-y.d).forEach((x,k)=>r[x.i]={n:k+1,km:x.d});r.home=home;return r}
 function sheetKyukan(i){
   const rank=clinicRank();
   const item=HEALTH[i],st=STYLE.health[i%STYLE.health.length];
@@ -1473,8 +1490,8 @@ function sheetKyukan(i){
        ${who(KYU_PEOPLE.n8000,"子どもの病気の経験もある看護師さん","埼玉県では、看護師さんが相談にのってくれます。<b>小児科のお医者さん</b>がうしろで支えていて、必要なときはお医者さんが直接答えてくれることもあります。電話でのアドバイスなので、診察ではありません。")}</div>
      <div class="ky-memo">${pop("電話の前にメモしておくと伝えやすいこと",svg(MEMO_IC.note,40),`<b class="ky-mh">電話の前にメモしておくと伝えやすいこと</b><ul class="ky-ml">${MEMO.map(([k,t])=>`<li><span class="mi">${svg(MEMO_IC[k],40)}</span><span>${t}</span></li>`).join("")}</ul>`)}</div>
      <div class="ky-sub"><h4>休日・夜間の急患診療所（4か所）</h4><p>小児科は、かぜや発熱などの内科的な病気のみ。時間は受付時間です。</p></div>
-     ${rank?`<p class="ky-near">${ico(P.pin)}<span><b>${esc(S.profile.ward)}</b>から近い順に <b>1〜4番</b> をつけています（区役所からのまっすぐの距離のめやす）</span></p>`:`<p class="ky-near">${ico(P.pin)}<span><a href="#mypage">マイページ</a>で区を登録すると、家から近い順の番号がつきます</span></p>`}
-     <div class="ky-cl">${KYU_CLINICS.map((c,ci)=>`<div class="ky-c${rank&&rank[ci].n===1?" first":""}">${rank?`<span class="ky-rank r${rank[ci].n}"><small>近い順</small>${rank[ci].n}<small>番</small></span>`:""}<div class="ky-ch"><span class="ky-bld">${svg(BLD[c.sz].d,64)}</span><div><b>${esc(c.n)}</b><span class="ky-sz">${esc(c.sl)}</span>${rank?`<span class="ky-km">約${rank[ci].km<1?"1":Math.round(rank[ci].km)}km</span>`:""}</div></div><div class="ad">${esc(c.a)}</div>${c.h.map(([k,v])=>`<div class="ky-t"><span>${esc(k)}</span>${esc(v)}</div>`).join("")}
+     ${rank?`<p class="ky-near">${ico(P.pin)}<span>${rank.home?`<b>登録した住所</b>（${esc(S.profile.ward+townName())}）`:`<b>${esc(S.profile.ward)}</b>（区役所の位置）`}から近い順に <b>1〜4番</b> をつけています（まっすぐの距離のめやす）${rank.home?"":"。マイページで番地まで登録すると、家からの近さで並びます"}</span></p>`:`<p class="ky-near">${ico(P.pin)}<span><a href="#mypage">マイページ</a>で区を登録すると、家から近い順の番号がつきます</span></p>`}
+     <div class="ky-cl">${KYU_CLINICS.map((c,ci)=>`<div class="ky-c${rank&&rank[ci].n===1?" first":""}">${rank?`<span class="ky-rank r${rank[ci].n}"><small>近い順</small>${rank[ci].n}<small>番</small></span>`:""}<div class="ky-ch"><span class="ky-bld">${svg(BLD[c.sz].d,64)}</span><div><b>${esc(c.n)}</b><span class="ky-sz">${esc(c.sl)}</span>${rank?`<span class="ky-km">${rank[ci].km<1?"1km未満":"約"+Math.round(rank[ci].km)+"km"}</span>`:""}</div></div><div class="ad">${esc(c.a)}</div>${c.h.map(([k,v])=>`<div class="ky-t"><span>${esc(k)}</span>${esc(v)}</div>`).join("")}
        <div class="row2">${tel(c.t,false)}<a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(c.n+" さいたま市"+c.a.replace(/（.*）/,""))}" target="_blank" rel="noopener">地図 ›</a></div></div>`).join("")}</div>
      <p class="foot">熱などの症状があるときは、受診の前に電話で相談してください。出典：さいたま市「子ども急患電話相談」「休日・夜間の急患診療所」、埼玉県「小児救急電話相談」（2026年11月時点）。診療日や時間は変わることがあるので、出かける前に電話などで確認してください。</p>
      ${extA("https://www.city.saitama.lg.jp/002/001/017/006/p019179.html","急患診療所のくわしいページ（さいたま市）","go sub")}
@@ -1573,7 +1590,8 @@ function renderAll(){renderMe();renderNews();renderCats();renderRows()}
 
 /* ---------- local profile first, then shared data ---------- */
 const local=LS.get("wolly.profile");
-if(local&&local.name){S.profile={name:local.name,icon:local.icon|0,ward:local.ward};S.town=local.town||""}
+if(local&&local.name){S.profile={name:local.name,icon:local.icon|0,ward:local.ward};S.town=local.town||"";S.geo=local.geo||null}
+geocodeHome();
 renderAll();applyRoute();
 
 (async()=>{
@@ -1593,7 +1611,7 @@ renderAll();applyRoute();
       if(m.exists){const d=m.data();S.profile={name:d.name,icon:d.icon|0,ward:d.ward}}
       else if(S.profile){db.doc("members/"+S.uid).set({...S.profile,at:Date.now()}).catch(()=>{})}
       const p=await db.doc(`data/users/${S.uid}/profile`).get();if(p.exists)S.town=p.data().town||S.town;
-      LS.set("wolly.profile",S.profile?{...S.profile,town:S.town}:null);
+      LS.set("wolly.profile",S.profile?{...S.profile,town:S.town,geo:S.geo||null}:null);geocodeHome();
     }catch(e){}
   }
   renderAll();if(route==="mypage")fillMyPage();
