@@ -1559,7 +1559,7 @@ let viewerOpen=false;
 function openViewer(id,title){
   const v=$("#viewer"),f=$("#vFrame");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
-  f.onload=()=>v.classList.add("ready");f.src=PAGES_BASE+id+".html";f.title=title||"";
+  f.onload=()=>{v.classList.add("ready");sendHome()};f.src=PAGES_BASE+id+".html";f.title=title||"";
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
   setTimeout(()=>$("#vClose").focus({preventScroll:true}),60);
 }
@@ -1567,6 +1567,12 @@ function closeViewer(){if(!viewerOpen)return;viewerOpen=false;const v=$("#viewer
   setTimeout(()=>{if(!viewerOpen){v.hidden=true;$("#vFrame").src="about:blank"}},420)}
 $("#sheet").addEventListener("click",e=>{const b=e.target.closest("[data-view]");if(b)openViewer(b.dataset.view,b.dataset.vt)});
 $("#vClose").addEventListener("click",closeViewer);
+/* 写しのページ（あずかりマップの「近くの園をさがす」など）へ、登録した区・住所の位置を渡す。写しから「マイページ登録」を押されたらマイページへ */
+const PAGES_ORIGIN=new URL(PAGES_BASE).origin;
+function sendHome(){const w=$("#vFrame").contentWindow;if(!w)return;const p=S.profile;
+  try{w.postMessage(p&&p.ward?{type:"wolly-home",ward:p.ward,town:S.town||"",geo:S.geo||null}:{type:"wolly-home",ward:null},PAGES_ORIGIN)}catch(e){}}
+window.addEventListener("message",e=>{if(e.origin!==PAGES_ORIGIN||!e.data||e.data.type!=="wolly-mypage")return;
+  closeViewer();closeSheet();location.hash="#mypage"});
 document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;if(viewerOpen){closeViewer();return}if(sheetKind)goBack()});
 
 /* ---------- routing ---------- */
