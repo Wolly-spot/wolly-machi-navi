@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>家の近くで探す</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Mochiy+Pop+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<style>
+:root{--ink:#2E2B4F;--muted:#6B6890;--line:#ECE8F7;--card:#FFFFFF;--bg:#FBF8FF;--pink:#FF6FA5;--blue:#3DB2F2;
+  --ac:#FF6FA5;--soft:#FFE3EC;--soft2:#FFF4F8;--font-display:"Mochiy Pop One","Zen Maru Gothic","Hiragino Maru Gothic ProN",sans-serif;--font-body:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Yu Gothic",system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ink:#F4F2FF;--muted:#B5B3D6;--line:#3A3B62;--card:#26274A;--bg:#1B1C33}}
+:root[data-theme="dark"]{--ink:#F4F2FF;--muted:#B5B3D6;--line:#3A3B62;--card:#26274A;--bg:#1B1C33}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:500 14px/1.6 var(--font-body);padding-bottom:calc(30px + env(safe-area-inset-bottom,0px))}
+button{font:inherit;color:inherit}
+a{color:inherit}
+.wrap{max-width:860px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-left,0px))}
+
+/* ---------- ヒーロー ---------- */
+.hero{position:relative;overflow:hidden;margin:0 calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding:22px max(16px,env(safe-area-inset-left,0px)) 26px;
+  background:radial-gradient(120% 90% at 0% 0%,var(--soft) 0,transparent 60%),radial-gradient(90% 80% at 100% 10%,var(--soft2) 0,transparent 60%),linear-gradient(180deg,var(--soft2),var(--bg));border-bottom-left-radius:36px;border-bottom-right-radius:36px}
+.hero .deco{position:absolute;inset:0;pointer-events:none}
+.hero .deco span{position:absolute;width:var(--s);height:var(--s);opacity:.55;animation:float 6s ease-in-out infinite;animation-delay:var(--d)}
+.hero .deco span svg{width:100%;height:100%}
+@keyframes float{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-10px) rotate(8deg)}}
+.hrow{position:relative;display:flex;align-items:center;gap:14px}
+.hic{flex:0 0 auto;width:84px;height:84px;border-radius:30px;display:grid;place-items:center;background:#fff;border:3px solid #fff;box-shadow:0 8px 22px color-mix(in srgb,var(--ac) 30%,transparent),inset 0 0 0 999px var(--soft)}
+.hic svg{width:62px;height:62px;overflow:visible;animation:nicw 3.4s ease-in-out infinite}
+@keyframes nicw{0%,100%{transform:translateY(0) rotate(0)}30%{transform:translateY(-3px) rotate(-6deg)}60%{transform:translateY(0) rotate(5deg)}}
+.eyebrow{font:800 11px/1 var(--font-body);letter-spacing:.14em;color:var(--ac)}
+h1{margin:4px 0 2px;font:400 clamp(22px,6.4vw,30px)/1.25 var(--font-display);color:var(--ink)}
+.hsub{margin:0;font-size:13px;color:var(--muted)}
+.hstat{position:relative;display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.hstat span{display:inline-flex;align-items:center;gap:5px;background:#fff;border-radius:999px;padding:4px 12px;font-size:12px;font-weight:700;color:#2E2B4F;box-shadow:0 3px 0 rgba(46,43,79,.06)}
+.hstat b{font:800 16px/1 system-ui,sans-serif;color:var(--ac)}
+
+/* ---------- 中心・条件 ---------- */
+.from{display:flex;align-items:center;gap:8px;margin:6px 0 6px;font-weight:700}
+.from .dot{flex:0 0 auto;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--ac);color:#fff;box-shadow:0 3px 8px color-mix(in srgb,var(--ac) 40%,transparent)}
+.from .dot svg{width:20px;height:20px}
+.from small{display:block;font-size:11px;font-weight:600;color:var(--muted)}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:6px 2px 6px;scrollbar-width:none;margin:0 calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px))}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:0 0 auto;display:inline-flex;align-items:center;gap:5px;border:2px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:4px 13px;font-size:12.5px;font-weight:700;cursor:pointer;transition:transform .25s cubic-bezier(.3,1.6,.5,1),background .2s}
+.chip svg{width:16px;height:16px}
+.chip.on{background:var(--ac);border-color:var(--ac);color:#fff}
+.chip:active{transform:scale(.94)}
+.chips .lab{flex:0 0 auto;align-self:center;font-size:11px;font-weight:800;color:var(--muted);margin-right:2px}
+
+/* ---------- 地図 ---------- */
+.mapbox{position:relative;margin:8px calc(-1 * max(16px,env(safe-area-inset-left,0px))) 0}
+#map{height:clamp(380px,112vw,620px);overflow:hidden;background:linear-gradient(var(--soft2),var(--soft));border-top:2px solid var(--line);border-bottom:2px solid var(--line)}
+@media (min-width:860px){.mapbox{margin-inline:0}#map{border-radius:26px;border:2px solid var(--line)}}
+#map.swap::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:radial-gradient(circle at 50% 55%,rgba(255,255,255,0) 30%,color-mix(in srgb,var(--soft) 80%,transparent));animation:flash .8s ease forwards}
+@keyframes flash{0%{opacity:0}30%{opacity:1}100%{opacity:0}}
+.mload{position:absolute;inset:0;z-index:1;display:grid;place-items:center;font-size:13px;font-weight:700;color:var(--muted);pointer-events:none}
+.mtools{position:absolute;left:10px;top:10px;z-index:3;display:flex;gap:6px}
+.mtools button{display:inline-flex;align-items:center;gap:4px;border:2px solid #fff;background:rgba(255,255,255,.94);border-radius:999px;padding:4px 12px;font-size:12px;font-weight:800;color:#2E2B4F;box-shadow:0 3px 10px rgba(46,43,79,.2);cursor:pointer}
+.mtools button svg{width:16px;height:16px}
+.mtools button[aria-pressed="true"]{background:#2E2B4F;color:#fff;border-color:#2E2B4F}
+.mhint{margin:6px 0 0;font-size:11.5px;color:var(--muted)}
+.mw{display:grid;grid-template-rows:1fr;transition:grid-template-rows .45s cubic-bezier(.3,1,.5,1)}
+.mw.shut{grid-template-rows:0fr}
+.mw>div{min-height:0}
+.mw.shut>div,.mw.anim>div{overflow:hidden}
+.tgrow{display:flex;justify-content:flex-end;margin-top:4px}
+.tg{border:2px solid var(--line);background:var(--card);border-radius:999px;padding:3px 12px;font-size:12px;font-weight:700;cursor:pointer}
+.pw{width:32px;height:42px;cursor:pointer}
+.pin{position:relative;width:32px;height:42px;animation:drop .6s cubic-bezier(.3,1.6,.5,1) both;animation-delay:calc(var(--b,0s) + var(--d) * 55ms);filter:drop-shadow(0 2px 2px rgba(46,43,79,.3))}
+.pin svg{position:absolute;inset:0;width:32px;height:42px;z-index:0!important}
+.pin b{position:absolute;z-index:1;left:0;right:0;top:6px;text-align:center;font:800 12.5px/18px system-ui,sans-serif;color:var(--pc)}
+@keyframes drop{0%{opacity:0;transform:translateY(-30px) scale(.5)}60%{opacity:1;transform:translateY(3px) scale(1.05)}100%{opacity:1;transform:none}}
+.sh{position:absolute;left:50%;bottom:-3px;width:16px;height:6px;margin-left:-8px;border-radius:50%;background:rgba(46,43,79,.28);animation:shd .6s both;animation-delay:calc(var(--b,0s) + var(--d) * 55ms)}
+@keyframes shd{0%{opacity:0;transform:scale(.2)}100%{opacity:1;transform:none}}
+.pw.out .pin,.pw.out .sh{animation:pout .25s forwards}
+@keyframes pout{to{opacity:0;transform:translateY(-16px) scale(.4)}}
+.home{position:relative;width:42px;height:42px;display:grid;place-items:center;border-radius:50%;background:#FF6FA5;color:#FF6FA5;border:3px solid #fff;box-shadow:0 3px 8px rgba(46,43,79,.35);animation:drop .5s both}
+.home svg{width:24px;height:24px;color:#fff}
+.home.guest{background:#9C7BFF;color:#9C7BFF}
+.home .ring{position:absolute;inset:-4px;border-radius:50%;border:3px solid currentColor;animation:pulse 1.8s ease-out infinite}
+@keyframes pulse{0%{opacity:.8;transform:scale(1)}100%{opacity:0;transform:scale(2.2)}}
+.maplibregl-popup-content{border-radius:16px;padding:10px 26px 10px 12px;font-family:var(--font-body);box-shadow:0 6px 18px rgba(46,43,79,.22);color:#2E2B4F}
+.maplibregl-popup-close-button{font-size:18px;width:24px;height:24px}
+.maplibregl-ctrl-attrib{font-size:10px}
+.pp b{display:block;font-size:14px;line-height:1.35}
+.pp span{display:block;font-size:11px;color:#6B6890;margin:2px 0 6px}
+.pp .bt{display:flex;gap:6px;flex-wrap:wrap}
+.pp .bt a,.pp .bt button{border:2px solid #E2E6F3;background:#fff;border-radius:999px;padding:2px 10px;font-size:12px;font-weight:700;color:#2E2B4F;text-decoration:none;cursor:pointer}
+.pp .bt button{background:var(--ac);border-color:var(--ac);color:#fff}
+
+/* ---------- 登録のおすすめ ---------- */
+.reg{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:14px 0 0;padding:12px 14px;border-radius:20px;background:color-mix(in srgb,var(--pink) 10%,var(--card));border:2px dashed color-mix(in srgb,var(--pink) 45%,transparent);font-size:13px;line-height:1.55}
+.reg p{margin:0;flex:1 1 200px}
+.reg button{border:0;border-radius:999px;background:var(--pink);color:#fff;font-size:13px;font-weight:800;padding:8px 16px;cursor:pointer;box-shadow:0 3px 0 rgba(46,43,79,.12)}
+
+/* ---------- 一覧 ---------- */
+.lhead{display:flex;align-items:baseline;gap:8px;margin:20px 0 8px}
+.lhead h2{margin:0;font:400 18px/1.3 var(--font-display)}
+.lhead span{font-size:12px;color:var(--muted)}
+.list{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+@media (min-width:640px){.list{grid-template-columns:1fr 1fr}}
+.card{position:relative;display:grid;grid-template-columns:auto 1fr;gap:4px 12px;padding:12px 12px 12px 12px;border-radius:22px;background:var(--card);border:2px solid var(--line);box-shadow:0 4px 0 rgba(46,43,79,.04);cursor:pointer;animation:row .45s both;animation-delay:calc(var(--d) * 30ms);overflow:hidden}
+.card::before{content:"";position:absolute;inset:0 auto 0 0;width:6px;background:var(--pc)}
+.card:hover,.card:focus-visible{border-color:var(--pc);outline:none}
+@keyframes row{from{opacity:0;transform:translateY(8px)}}
+.cic{grid-row:1/4;position:relative;width:56px;height:56px;border-radius:20px;display:grid;place-items:center;background:var(--soft)}
+.cic svg{width:42px;height:42px;overflow:visible}
+.card:hover .cic svg{animation:nicw 1s ease-in-out infinite}
+.rk{position:absolute;right:-6px;bottom:-6px;min-width:24px;height:24px;padding:0 5px;border-radius:999px;background:var(--pc);color:#fff;border:2px solid var(--card);font:800 12px/20px system-ui,sans-serif;text-align:center}
+.ct{min-width:0;display:flex;align-items:flex-start;gap:8px}
+.ct h3{flex:1;min-width:0;margin:0;font-size:15px;line-height:1.35;font-weight:900}
+.km{flex:0 0 auto;text-align:right;font:800 14px/1.15 system-ui,sans-serif;font-variant-numeric:tabular-nums}
+.km small{display:block;font-size:10px;font-weight:700;color:#D2477A}
+.cm{font-size:11.5px;color:var(--muted);line-height:1.45;display:flex;gap:4px;align-items:flex-start}
+.cm svg{flex:0 0 auto;width:14px;height:14px;margin-top:1px}
+.tags{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:5px;margin-top:4px}
+.tag{display:inline-flex;align-items:center;gap:3px;border-radius:999px;padding:1px 9px 1px 6px;font-size:11px;font-weight:800;background:var(--tb);color:var(--tc)}
+.tag svg{width:14px;height:14px}
+.btns{grid-column:1/-1;display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.btns a{display:inline-flex;align-items:center;gap:4px;border:2px solid var(--line);background:var(--card);border-radius:999px;padding:3px 12px;font-size:12px;font-weight:800;text-decoration:none}
+.btns a svg{width:15px;height:15px}
+.btns a.main{background:var(--ac);border-color:var(--ac);color:#fff}
+.more{display:flex;justify-content:center;margin:14px 0 0}
+.more button{border:2px solid var(--ac);background:var(--card);color:var(--ac);border-radius:999px;padding:8px 22px;font-size:13px;font-weight:800;cursor:pointer}
+.empty{padding:20px;text-align:center;color:var(--muted);font-size:13px}
+.note{margin:22px 0 0;padding:12px 14px;border-radius:16px;background:color-mix(in srgb,var(--ac) 7%,var(--card));font-size:11.5px;line-height:1.7;color:var(--muted)}
+.totop{position:fixed;z-index:60;right:max(14px,env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));display:grid;justify-items:center;align-content:center;width:58px;height:58px;padding:0;border-radius:50%;border:3px solid #fff;cursor:pointer;background:linear-gradient(160deg,#FF8FB8,#9C7BFF);color:#fff;font:800 10px/1.1 var(--font-body);box-shadow:0 6px 16px rgba(46,43,79,.25);opacity:0;transform:translateY(14px) scale(.85);pointer-events:none;transition:opacity .3s,transform .45s cubic-bezier(.3,1.6,.5,1)}
+.totop.on{opacity:1;transform:none;pointer-events:auto}
+.totop svg{width:22px;height:22px;margin-bottom:1px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head>
+<body>
+<div class="wrap">
+  <header class="hero" id="hero"></header>
+  <div class="from" id="from"></div>
+  <div class="chips" id="areas" aria-label="エリア"></div>
+  <div class="chips" id="filters" aria-label="しぼりこみ"></div>
+  <div class="tgrow"><button type="button" class="tg" id="tg" aria-expanded="true" aria-controls="mw">地図をとじる ▴</button></div>
+  <div class="mw" id="mw"><div>
+    <div class="mapbox"><div id="map" role="region" aria-label="地図（立体）"><span class="mload" id="mload">地図をよみこみ中…</span></div>
+      <div class="mtools"><button type="button" id="ph" aria-pressed="false"></button></div></div>
+    <p class="mhint"><span id="legend"></span>ピンをタップすると名前が出ます。地図は2本の指で動かす・回す・かたむけることができます。</p>
+  </div></div>
+  <div id="reg"></div>
+  <div class="lhead"><h2 id="lt">近い順</h2><span id="lc"></span></div>
+  <ol class="list" id="list"></ol>
+  <div class="more" id="more"></div>
+  <p class="note" id="note"></p>
+</div>
+<button type="button" class="totop" id="totop" aria-label="いちばん上にもどる"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 14l6-6 6 6"/><path d="M12 8v12"/></svg>上に<br>もどる</button>
+<script>
+const svg=(body,vb=64,cls="")=>`<svg viewBox="0 0 ${vb} ${vb}" class="${cls}" aria-hidden="true">${body}</svg>`;
+
+const NO=`stroke="#1F2140" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"`;
+const NF=(x,y)=>`<circle cx="${x-3.6}" cy="${y}" r="1.5" fill="#1F2140"/><circle cx="${x+3.6}" cy="${y}" r="1.5" fill="#1F2140"/><path d="M${x-2} ${y+2.6}q2 2 4 0" stroke="#1F2140" stroke-width="1.5" fill="none" stroke-linecap="round"/><circle cx="${x-7}" cy="${y+2.4}" r="1.7" fill="#FF8FB8" opacity=".75"/><circle cx="${x+7}" cy="${y+2.4}" r="1.7" fill="#FF8FB8" opacity=".75"/>`;
+const NIC={
+  kids:`<circle cx="18" cy="19" r="11" fill="#FFE0C8" ${NO}/><path d="M15 9q3-4 6 0" fill="none" ${NO}/>${NF(18,19)}<path d="M26 22v4a6 6 0 0 0 12 0v-3" fill="none" stroke="#5A5AEF" stroke-width="2.4" stroke-linecap="round"/><circle cx="38" cy="21" r="2.6" fill="#FF8FB8" ${NO}/>`,
+  tooth:`<path d="M13 8c-5 0-7 4.5-6 9 1 5 2.6 8 3.2 15 .4 3.6 4 3.6 4.6 0L16 26h8l1.2 6c.6 3.6 4.2 3.6 4.6 0 .6-7 2.2-10 3.2-15 1-4.5-1-9-6-9-3.4 0-4.6 1.6-7 1.6S16.4 8 13 8z" fill="#fff" ${NO}/>${NF(20,17)}<path d="M33 4l1 2.4 2.4 1-2.4 1L33 11l-1-2.6-2.4-1 2.4-1z" fill="#35B3EE"/>`,
+  ear:`<path d="M12 18a10 10 0 0 1 20 0c0 6-6 7.5-6 13a5 5 0 0 1-10 0" fill="#FFD9C2" ${NO}/><path d="M18 18a4 4 0 0 1 8 0c0 3-3 3.6-3 6.4" fill="none" ${NO}/><path d="M35 12q3 4 0 8M38 9q5 7 0 14" fill="none" stroke="#5A5AEF" stroke-width="2" stroke-linecap="round"/>`,
+  eye:`<path d="M3 20s6.5-11 17-11 17 11 17 11-6.5 11-17 11S3 20 3 20z" fill="#fff" ${NO}/><circle cx="20" cy="20" r="7" fill="#7CC4FF" ${NO}/><circle cx="20" cy="20" r="3.4" fill="#1F2140"/><circle cx="22" cy="18" r="1.4" fill="#fff"/><path d="M10 9.5l-2-3M20 7V3.5M30 9.5l2-3" stroke="#1F2140" stroke-width="2" stroke-linecap="round"/>`,
+  cream:`<path d="M9 13h18l3 20a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3z" fill="#FFB7D8" ${NO} transform="rotate(-12 18 24)"/><rect x="11" y="6" width="10" height="7" rx="2" fill="#A68BFF" ${NO} transform="rotate(-12 18 24)"/>${NF(18,25)}<circle cx="32" cy="10" r="3" fill="#fff" ${NO}/><circle cx="35" cy="17" r="1.8" fill="#fff" ${NO}/>`,
+  plaster:`<g transform="rotate(-35 20 20)"><rect x="2" y="13" width="36" height="14" rx="7" fill="#FFD9B8" ${NO}/><rect x="14" y="13" width="12" height="14" fill="#FFF3E8" ${NO}/><circle cx="17.5" cy="17.5" r=".9" fill="#E8B48C"/><circle cx="22.5" cy="17.5" r=".9" fill="#E8B48C"/><circle cx="17.5" cy="22.5" r=".9" fill="#E8B48C"/><circle cx="22.5" cy="22.5" r=".9" fill="#E8B48C"/></g><path d="M31 5l1.4-3M35 9l3-1" stroke="#FF8FB8" stroke-width="2" stroke-linecap="round"/>`,
+  bone:`<path d="M10 15a4 4 0 1 1 5-5l10 10a4 4 0 1 1 5 5 4 4 0 1 1-5 5L15 20a4 4 0 1 1-5-5z" fill="#fff" ${NO} transform="rotate(10 20 20)"/>${NF(20,19.5)}`,
+  pill:`<g transform="rotate(-40 20 20)"><path d="M20 8h7a8 8 0 0 1 0 16h-7z" fill="#fff" ${NO}/><path d="M20 8h-7a8 8 0 0 0 0 16h7z" fill="#FF8FB8" ${NO}/></g><path d="M29 30l1 2.2 2.2 1-2.2 1-1 2.2-1-2.2-2.2-1 2.2-1z" fill="#FFD23F"/><path d="M8 32l.8 1.6 1.6.8-1.6.8-.8 1.6-.8-1.6-1.6-.8 1.6-.8z" fill="#35B3EE"/>`,
+  nursery:`<path d="M5 18L20 7l15 11v17H5z" fill="#fff" ${NO}/><path d="M3 19L20 6l17 13" fill="none" stroke="#FF8FB8" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 6V1.5l5 1.6-5 1.6" fill="#FFD23F" ${NO}/><rect x="16" y="26" width="8" height="9" rx="3" fill="#A68BFF" ${NO}/><circle cx="12" cy="22" r="2.4" fill="#7CC4FF" ${NO}/><circle cx="28" cy="22" r="2.4" fill="#7CC4FF" ${NO}/>`,
+  slide:`<circle cx="33" cy="8" r="4" fill="#FFD23F"/><path d="M8 35V12h6v23" fill="none" ${NO}/><path d="M8 17h6M8 23h6M8 29h6" ${NO}/><path d="M14 12q4 0 8 8t10 15h4" fill="none" stroke="#FF8FB8" stroke-width="4" stroke-linecap="round"/><path d="M14 12q4 0 8 8t10 15h4" fill="none" ${NO} stroke-width="1.2"/><path d="M3 36h34" ${NO}/>`
+};
+
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const I=(d,extra="")=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ${extra}>${d}</svg>`;
+const IC={
+  clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  pin:'<path d="M12 21s-7-6.5-7-12a7 7 0 0 1 14 0c0 5.5-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/>',
+  sat:'<rect x="4" y="5" width="16" height="15" rx="3"/><path d="M4 10h16M9 3v4M15 3v4"/>',
+  sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.4 1.4M17.6 17.6 19 19M5 19l1.4-1.4M17.6 6.4 19 5"/>',
+  moon:'<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>',
+  hosp:'<rect x="4" y="4" width="16" height="16" rx="4"/><path d="M12 8v8M8 12h8"/>',
+  kid:'<circle cx="12" cy="8" r="4"/><path d="M5 21a7 7 0 0 1 14 0"/>',
+  map:'<path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/>',
+  web:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',
+  search:'<circle cx="11" cy="11" r="6"/><path d="m20 20-4-4"/>',
+  photo:'<rect x="3" y="6" width="18" height="14" rx="3"/><circle cx="12" cy="13" r="3.5"/><path d="M8 6l1.5-2h5L16 6"/>',
+  house:'<path d="M4 11l8-7 8 7"/><path d="M6 10v10h12V10"/><path d="M10 20v-5h4v5"/>',
+  star:'<path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7z"/>',
+  tree:'<path d="M12 3 6 12h3l-4 6h14l-4-6h3z"/><path d="M12 18v3"/>',
+  big:'<path d="M3 20h18M5 20V9l7-5 7 5v11"/><path d="M9 20v-6h6v6"/>'
+};
+const GENRES={
+  ped:{t:"小児科・内科",ic:"kids",ac:"#FF6FA5",soft:"#FFE3EC",soft2:"#FFF5F8",sub:"子どもの熱・せき・おなかの調子に。おとなの内科も。",deco:["kids","pill","plaster"],
+       subs:[["小児科","小児科","#FF6FA5"],["内科","内科","#3DB2F2"]],word:"クリニック・病院"},
+  dent:{t:"歯医者さん",ic:"tooth",ac:"#3DB2F2",soft:"#E1F3FF",soft2:"#F3FAFF",sub:"子どもの歯のチェックも、おとなの虫歯も。",deco:["tooth","tooth","pill"],
+       subs:[["小児歯科","小児歯科","#FF6FA5"],["矯正歯科","矯正歯科","#9C7BFF"]],word:"歯医者さん"},
+  ent:{t:"耳鼻科",ic:"ear",ac:"#E0A100",soft:"#FFF1C2",soft2:"#FFFAE6",sub:"鼻水・中耳炎・花粉症のときに。",deco:["ear","pill","kids"],subs:[],word:"耳鼻科"},
+  eye:{t:"眼科",ic:"eye",ac:"#5A5AEF",soft:"#E5E8FF",soft2:"#F4F5FF",sub:"目のかゆみ・ものもらい・視力のチェックに。",deco:["eye","eye","kids"],subs:[],word:"眼科"},
+  skin:{t:"皮膚科",ic:"cream",ac:"#C45BD9",soft:"#FBE6FF",soft2:"#FDF4FF",sub:"湿疹・あせも・とびひ・虫さされに。",deco:["cream","plaster","kids"],subs:[],word:"皮膚科"},
+  plastic:{t:"形成外科",ic:"plaster",ac:"#E8558E",soft:"#FFE6F2",soft2:"#FFF5FA",sub:"ケガのきず・やけど・できものの相談に。",deco:["plaster","plaster","cream"],subs:[],word:"形成外科"},
+  ortho:{t:"整形外科",ic:"bone",ac:"#2E8FD6",soft:"#E1F3FF",soft2:"#F3FAFF",sub:"ねんざ・骨折・腰や肩のいたみに。",deco:["bone","plaster","bone"],subs:[],word:"整形外科"},
+  pharm:{t:"薬局",ic:"pill",ac:"#9C7BFF",soft:"#F1E8FF",soft2:"#F9F5FF",sub:"処方せんのお薬を受け取りに。",deco:["pill","pill","cream"],subs:[],word:"薬局"},
+  park:{t:"公園",ic:"slide",ac:"#3DB2F2",soft:"#E5F4FF",soft2:"#FFFBEA",sub:"おさんぽ・遊具・ピクニックに。",deco:["slide","kids","slide"],subs:[["大きな公園","big","#FF6FA5"]],word:"公園",noHours:true}
+};
+const g=(new URLSearchParams(location.search).get("g")||"ped");
+const G=GENRES[g]||GENRES.ped;
+document.documentElement.style.setProperty("--ac",G.ac);document.documentElement.style.setProperty("--soft",G.soft);document.documentElement.style.setProperty("--soft2",G.soft2);
+document.title=G.t+"マップ｜家の近くで探す";
+
+const WARDS=["西","北","大宮","見沼","中央","桜","浦和","南","緑","岩槻"];
+const WARD_LL={"西区":[35.9256,139.5794],"北区":[35.9305,139.6203],"大宮区":[35.9063,139.6290],"見沼区":[35.9265,139.6540],"中央区":[35.8840,139.6260],"桜区":[35.8563,139.6090],"浦和区":[35.8616,139.6457],"南区":[35.8447,139.6450],"緑区":[35.8710,139.6830],"岩槻区":[35.9497,139.6939]};
+const CITY=[35.8617,139.6455];
+const N=20;
+const RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
+const S={area:null,subs:new Set(),sat:false,sun:false,night:false,shown:N};
+let DATA=[],prof=null,map=null,ready=false,queued=null,markers=[],popup=null,photo=false,swing=18,first=true,pending=false,afterLoad=null,mapOpen=true;
+try{prof=JSON.parse(localStorage.getItem("wolly.profile")||"null")}catch(e){}
+addEventListener("message",e=>{const d=e.data;if(e.source!==window.parent||!d||d.type!=="wolly-home")return;
+  prof=d.ward?{ward:d.ward,town:d.town||"",geo:d.geo||null}:null;S.area=null;renderAreas();refresh()});
+
+/* ---------- ヒーロー ---------- */
+function hero(){
+  const deco=[[8,"14%",40,"-1s"],[78,"8%",34,"-3s"],[88,"62%",28,"-2s"],[30,"78%",24,"-4s"]].map(([l,t,s,d],i)=>`<span style="left:${l}%;top:${t};--s:${s}px;--d:${d}">${svg(NIC[G.deco[i%G.deco.length]],40)}</span>`).join("");
+  $("#hero").innerHTML=`<div class="deco" aria-hidden="true">${deco}</div>
+    <div class="hrow"><div class="hic">${svg(NIC[G.ic],40)}</div><div><div class="eyebrow">NEAR HOME MAP</div><h1>${esc(G.t)}マップ</h1><p class="hsub">${esc(G.sub)}</p></div></div>
+    <div class="hstat"><span>さいたま市内 <b id="hn">…</b> か所</span><span>近い順に <b>20</b> か所をピンで</span></div>`;
+}
+/* ---------- 中心 ---------- */
+const town=()=>String(prof&&prof.town||"").replace(/[0-9０-９].*$/,"");
+function origin(){
+  const reg=!!(prof&&prof.ward);
+  if(S.area&&S.area!=="home"){const w=S.area+"区";return {ll:WARD_LL[w],reg,t:w+"のまんなか（区役所）から近い順",s:reg?"「家の近く」をえらぶと、おうちからの順にもどります":"区のボタンで場所を変えられます"}}
+  if(reg){
+    const gg=prof.geo;
+    if(gg&&gg.ok&&gg.lat&&(!gg.q||gg.q===("埼玉県さいたま市"+prof.ward+(prof.town||""))))return {ll:[gg.lat,gg.lon],reg,home:true,t:"登録した住所から近い順",s:prof.ward+town()};
+    if(WARD_LL[prof.ward])return {ll:WARD_LL[prof.ward],reg,t:prof.ward+"（区役所）から近い順",s:"マイページで番地まで入れると、おうちから測れます"};
+  }
+  return {ll:CITY,reg,t:"さいたま市役所のあたりから近い順",s:"区のボタンで場所を変えられます"};
+}
+function renderAreas(){
+  const reg=!!(prof&&prof.ward);
+  const cur=S.area||(reg?"home":"");
+  $("#areas").innerHTML=`<span class="lab">場所</span>`+(reg?`<button class="chip${cur==="home"?" on":""}" data-a="home">${I(IC.house)}家の近く</button>`:`<button class="chip${cur===""?" on":""}" data-a="">${I(IC.star)}市役所のあたり</button>`)
+    +WARDS.map(w=>`<button class="chip${cur===w?" on":""}" data-a="${w}">${w}区</button>`).join("");
+}
+function renderFilters(){
+  const f=[];
+  G.subs.forEach(([lab,key,c])=>f.push(`<button class="chip${S.subs.has(key)?" on":""}" data-s="${esc(key)}">${key==="big"?I(IC.big):I(IC.kid)}${esc(lab)}</button>`));
+  if(!G.noHours){
+    f.push(`<button class="chip${S.sat?" on":""}" data-f="sat">${I(IC.sat)}土曜も</button>`);
+    f.push(`<button class="chip${S.sun?" on":""}" data-f="sun">${I(IC.sun)}日曜・祝日も</button>`);
+    f.push(`<button class="chip${S.night?" on":""}" data-f="night">${I(IC.moon)}夜18:30以降も</button>`);
+  }
+  $("#filters").innerHTML=f.length?`<span class="lab">しぼる</span>`+f.join(""):"";
+  $("#filters").hidden=!f.length;
+}
+$("#areas").onclick=e=>{const b=e.target.closest("button");if(!b)return;S.area=b.dataset.a||null;if(S.area==="")S.area=null;S.shown=N;renderAreas();refresh(true)};
+$("#filters").onclick=e=>{const b=e.target.closest("button");if(!b)return;
+  if(b.dataset.s){const k=b.dataset.s;S.subs.has(k)?S.subs.delete(k):S.subs.add(k)}
+  if(b.dataset.f)S[b.dataset.f]=!S[b.dataset.f];
+  S.shown=N;renderFilters();refresh(true)};
+
+/* ---------- しぼりこみ・近い順 ---------- */
+const dist=(a,b)=>{const R=6371,r=Math.PI/180,dl=(b[0]-a[0])*r,dn=(b[1]-a[1])*r;const h=Math.sin(dl/2)**2+Math.cos(a[0]*r)*Math.cos(b[0]*r)*Math.sin(dn/2)**2;return 2*R*Math.asin(Math.sqrt(h))};
+function match(r){
+  if(S.subs.size){let ok=false;for(const k of S.subs){if(k==="big"?r.big:(r.s||[]).includes(k))ok=true}if(!ok)return false}
+  const f=r.f||[];
+  if(S.sat&&!f[0])return false;if(S.sun&&!f[1])return false;if(S.night&&!f[2])return false;
+  return true;
+}
+function sorted(o){return DATA.filter(match).map(r=>({r,km:dist(o.ll,[r.la,r.lo])})).sort((a,b)=>a.km-b.km)}
+const kmT=km=>km<0.1?"0.1km未満":km.toFixed(1)+"km";
+const carT=km=>"車で約"+Math.max(1,Math.round(km*1.3/25*60))+"分";
+const walkT=km=>"歩いて約"+Math.max(1,Math.round(km*1.25/4.8*60))+"分";
+const moveT=km=>km<1.2?walkT(km):carT(km);
+const pc=r=>{for(const [lab,key,c] of G.subs){if(key==="big"?r.big:(r.s||[]).includes(key))return c}return G.ac};
+const url=u=>!u?"":(/^https?:\/\//i.test(u)?u:"https://"+u.replace(/^\/+/,""));
+const gmap=r=>"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(r.n+" さいたま市"+r.a.split(" ")[0]);
+const gsearch=r=>"https://www.google.com/search?q="+encodeURIComponent(r.n+" さいたま市"+r.w+"区 電話");
+
+/* ---------- 一覧 ---------- */
+function tags(r){
+  const t=[],f=r.f||[];
+  (r.s||[]).filter(s=>G.subs.some(x=>x[1]===s)).forEach(s=>t.push(`<span class="tag" style="--tb:#FFE3EC;--tc:#C8326E">${I(IC.kid)}${esc(s)}</span>`));
+  if(r.big)t.push(`<span class="tag" style="--tb:#FFE3EC;--tc:#C8326E">${I(IC.big)}大きな公園</span>`);
+  if(f[3])t.push(`<span class="tag" style="--tb:#E5E8FF;--tc:#4545C9">${I(IC.hosp)}病院</span>`);
+  if(f[0])t.push(`<span class="tag" style="--tb:#E1F3FF;--tc:#1F78B8">${I(IC.sat)}土曜も</span>`);
+  if(f[1])t.push(`<span class="tag" style="--tb:#FFF1C2;--tc:#8A6400">${I(IC.sun)}日曜・祝日も</span>`);
+  if(f[2])t.push(`<span class="tag" style="--tb:#EFE8FF;--tc:#6A47D1">${I(IC.moon)}夜もやってる</span>`);
+  return t.join("");
+}
+function card(x,i){
+  const r=x.r,c=pc(r);
+  return `<li class="card" tabindex="0" data-i="${i}" style="--pc:${c};--d:${i%N}">
+    <div class="cic">${svg(NIC[G.ic],40)}<span class="rk">${i+1}</span></div>
+    <div class="ct"><h3>${esc(r.n)}</h3><span class="km">${kmT(x.km)}<small>${moveT(x.km)}</small></span></div>
+    <div class="cm">${I(IC.pin)}<span>${esc(r.a)}</span></div>
+    ${r.h?`<div class="cm">${I(IC.clock)}<span>${esc(r.h)}</span></div>`:"<div></div>"}
+    <div class="tags">${tags(r)}</div>
+    <div class="btns"><a class="main" href="${gmap(r)}" target="_blank" rel="noopener">${I(IC.map)}地図・道順</a>${r.u?`<a href="${esc(url(r.u))}" target="_blank" rel="noopener">${I(IC.web)}ホームページ</a>`:""}${G.noHours?"":`<a href="${gsearch(r)}" target="_blank" rel="noopener">${I(IC.search)}電話・口コミ</a>`}</div>
+  </li>`;
+}
+let LAST=[],LO=null;
+function refresh(move){
+  if(!DATA.length)return;
+  const o=origin(),all=sorted(o);LAST=all;LO=o;
+  $("#from").innerHTML=`<span class="dot">${I(o.home?IC.house:IC.pin)}</span><span>${esc(o.t)}<small>${esc(o.s)}</small></span>`;
+  $("#reg").innerHTML=o.reg?"":`<div class="reg"><p><b>マイページに住所を登録すると、</b>おうちの近くの${esc(G.word)}を自動でしぼりこんで、近い順に出せます。</p><button type="button" id="regBtn">マイページ登録する</button></div>`;
+  const rb=$("#regBtn");if(rb)rb.onclick=toMyPage;
+  const rows=all.slice(0,S.shown);
+  $("#lt").textContent="近い順";
+  $("#lc").textContent=all.length?`${all.length}か所のうち ${rows.length}か所`:"";
+  $("#list").innerHTML=rows.length?rows.map(card).join(""):`<li class="empty">この条件の${esc(G.word)}は見つかりませんでした。しぼりこみをへらしてみてね。</li>`;
+  $("#more").innerHTML=all.length>rows.length?`<button type="button" id="moreBtn">もっと見る（次の${Math.min(N,all.length-rows.length)}か所）</button>`:"";
+  const mb=$("#moreBtn");if(mb)mb.onclick=()=>{S.shown+=N;refresh(false)};
+  if(mapOpen&&move!==false)drawMap(o,all.slice(0,N));
+}
+$("#list").addEventListener("click",e=>{if(e.target.closest("a"))return;const li=e.target.closest(".card");if(!li)return;const i=+li.dataset.i;focusOn(i)});
+$("#list").addEventListener("keydown",e=>{const li=e.target.closest(".card");if(li&&(e.key==="Enter"||e.key===" ")&&!e.target.closest("a")){e.preventDefault();focusOn(+li.dataset.i)}});
+function focusOn(i){
+  const x=LAST[i];if(!x)return;
+  if(!mapOpen)toggleMap();
+  const el=$("#map");el.scrollIntoView({behavior:RM?"auto":"smooth",block:"center"});
+  if(ready)setTimeout(()=>openPin(x,i),RM?0:350);
+}
+function toMyPage(){
+  if(window.parent!==window){window.parent.postMessage({type:"wolly-mypage"},"*");return}
+  location.href="https://liff.line.me/2007823365-Ckc0dnQW#mypage";
+}
+
+/* ---------- 立体の地図（あずかりマップと同じ作り） ---------- */
+const STYLE_URL="https://tiles.openfreemap.org/styles/liberty";
+const pinSvg=c=>`<svg viewBox="0 0 30 40" aria-hidden="true"><path d="M15 39S2 24 2 14.5a13 13 0 0 1 26 0C28 24 15 39 15 39z" fill="${c}" stroke="#fff" stroke-width="2.5"/><circle cx="15" cy="14" r="9" fill="#fff"/></svg>`;
+function failMsg(){const m=$("#mload");if(m)m.textContent="地図を読みこめませんでした。下のリストからえらべます。"}
+function loadL(cb){
+  if(window.maplibregl)return cb();
+  afterLoad=cb;if(pending)return;pending=true;
+  const s=document.createElement("script");s.src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js";
+  s.onload=()=>{pending=false;afterLoad&&afterLoad()};s.onerror=()=>{pending=false;failMsg()};document.head.appendChild(s);
+}
+function paint(){
+  const set=(id,k,v)=>{if(map.getLayer(id))try{map.setPaintProperty(id,k,v)}catch(e){}};
+  const hide=id=>{if(map.getLayer(id))map.setLayoutProperty(id,"visibility","none")};
+  set("background","background-color","#FFF6FA");set("natural_earth","raster-opacity",0);
+  set("landuse_residential","fill-color","#F7EFFA");
+  ["park","landcover_grass","landcover_wood","landuse_pitch","landuse_track","landuse_cemetery"].forEach(id=>{set(id,"fill-color","#FFF0B0");set(id,"fill-opacity",.8)});
+  set("park","fill-outline-color","#FFE07A");set("park_outline","line-color","#FFE07A");
+  set("landuse_school","fill-color","#E1F0FF");set("landuse_hospital","fill-color","#FFE0EC");
+  set("water","fill-color","#A6DAFF");["waterway_river","waterway_other","waterway_tunnel"].forEach(id=>set(id,"line-color","#86C9F4"));
+  map.getStyle().layers.forEach(l=>{const id=l.id;
+    if(l.type==="line"){
+      if(/casing/.test(id))set(id,"line-color","#E0D4F5");
+      else if(/rail/.test(id))set(id,"line-color","#B5ADE6");
+      else if(/motorway|trunk_primary/.test(id))set(id,"line-color","#FFC3DA");
+      else if(/secondary_tertiary|_link$/.test(id))set(id,"line-color","#FFF0BD");
+    }
+    if(l.type==="symbol"){
+      if(/shield|one_way|highway-name-path/.test(id)){hide(id);return}
+      if(l.layout&&l.layout["text-field"])try{map.setLayoutProperty(id,"text-field",["coalesce",["get","name:ja"],["get","name"]])}catch(e){}
+      set(id,"text-color","#4A4778");set(id,"text-halo-color","#FFFFFF");set(id,"text-halo-width",1.4);
+    }
+  });
+  [["poi_r1",14],["poi_r7",14.4],["poi_r20",15.2]].forEach(([id,z])=>{if(map.getLayer(id))try{map.setLayerZoomRange(id,z,24);set(id,"text-color","#5B4FA0");set(id,"text-halo-width",1.6);map.setLayoutProperty(id,"text-size",11.5)}catch(e){}});
+  set("label_other","text-color","#7A6FB0");
+  set("building","fill-color","#ECE4FF");
+  set("building-3d","fill-extrusion-color",["interpolate",["linear"],["coalesce",["get","render_height"],0],0,"#EAE2FF",18,"#D8CBFF",50,"#FFC6DF"]);
+  set("building-3d","fill-extrusion-opacity",.92);
+  if(map.getLayer("building-3d"))try{map.setLayerZoomRange("building-3d",13.3,24)}catch(e){}
+  try{
+    map.addSource("photo",{type:"raster",tiles:["https://cyberjapandata.gsi.go.jp/xyz/seamlessphoto/{z}/{x}/{y}.jpg"],tileSize:256,maxzoom:18,attribution:'<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener">国土地理院</a>'});
+    map.addLayer({id:"photo",type:"raster",source:"photo",layout:{visibility:"none"},paint:{"raster-fade-duration":400}},map.getLayer("building")?"building":undefined);
+  }catch(e){}
+}
+function setPhoto(){
+  const v=photo?"visible":"none",nv=photo?"none":"visible";
+  if(map.getLayer("photo"))map.setLayoutProperty("photo","visibility",v);
+  ["building","building-3d"].forEach(id=>{if(map.getLayer(id))map.setLayoutProperty(id,"visibility",nv)});
+}
+const phLabel=()=>$("#ph").innerHTML=I(IC.photo)+(photo?"イラストで見る":"写真で見る");phLabel();
+$("#ph").onclick=function(){photo=!photo;this.setAttribute("aria-pressed",photo);phLabel();if(ready)setPhoto()};
+function drawMap(o,rows){
+  loadL(()=>{
+    if(!map){
+      try{
+        map=new maplibregl.Map({container:"map",style:STYLE_URL,center:[o.ll[1],o.ll[0]],zoom:10.2,pitch:0,bearing:0,cooperativeGestures:true,attributionControl:{compact:true},maxPitch:70,
+          locale:{"CooperativeGesturesHandler.MobileHelpText":"地図は2本の指で動かせます","CooperativeGesturesHandler.WindowsHelpText":"Ctrl を押しながらスクロールで拡大・縮小","CooperativeGesturesHandler.MacHelpText":"⌘ を押しながらスクロールで拡大・縮小","NavigationControl.ZoomIn":"大きく","NavigationControl.ZoomOut":"小さく","NavigationControl.ResetBearing":"北を上にもどす"}});
+      }catch(e){failMsg();return}
+      map.addControl(new maplibregl.NavigationControl({visualizePitch:true}),"top-right");
+      map.on("load",()=>{const at=document.querySelector("#map .maplibregl-ctrl-attrib");at&&at.classList.remove("maplibregl-compact-show");paint();ready=true;setPhoto();const l=$("#mload");l&&l.remove();if(queued){const q=queued;queued=null;place(q[0],q[1])}});
+    }
+    if(!ready){queued=[o,rows];return}
+    place(o,rows);
+  });
+}
+function place(o,rows){
+  markers.forEach(m=>{m.getElement().classList.add("out");setTimeout(()=>m.remove(),260)});markers=[];
+  popup&&popup.remove();
+  const el=$("#map");el.classList.remove("swap");void el.offsetWidth;el.classList.add("swap");
+  const delay=first&&!RM?"2.4s":".35s";
+  const hm=document.createElement("div");hm.innerHTML=`<div class="home${o.home?"":" guest"}">${I(o.home?IC.house:IC.star)}<i class="ring"></i></div>`;hm.style.zIndex=200;hm.title=o.home?"登録した住所":"さがす中心";
+  markers.push(new maplibregl.Marker({element:hm}).setLngLat([o.ll[1],o.ll[0]]).addTo(map));
+  const b=new maplibregl.LngLatBounds([o.ll[1],o.ll[0]],[o.ll[1],o.ll[0]]);
+  rows.forEach((x,i)=>{const r=x.r,c=pc(r);b.extend([r.lo,r.la]);
+    const e=document.createElement("div");e.className="pw";e.style.zIndex=100-i;e.style.setProperty("--b",delay);
+    e.innerHTML=`<div class="pin" style="--pc:${c};--d:${i}">${pinSvg(c)}<b>${i+1}</b></div><i class="sh" style="--d:${i}"></i>`;
+    e.setAttribute("role","button");e.setAttribute("aria-label",(i+1)+"番 "+r.n);e.title=(i+1)+". "+r.n;
+    e.addEventListener("click",ev=>{ev.stopPropagation();openPin(x,i)});
+    markers.push(new maplibregl.Marker({element:e,anchor:"bottom"}).setLngLat([r.lo,r.la]).addTo(map))});
+  swing=-swing;
+  const cam=map.cameraForBounds(b,{padding:{top:60,bottom:20,left:24,right:24},maxZoom:16.5})||{center:[o.ll[1],o.ll[0]],zoom:14};
+  const to={center:cam.center,zoom:Math.max(10,(cam.zoom||14)-.05),pitch:55,bearing:swing};
+  if(RM)map.jumpTo(to);
+  else if(first){
+    map.flyTo({center:[o.ll[1],o.ll[0]],zoom:16,pitch:64,bearing:swing*2,duration:2600,curve:1.6,essential:true});
+    map.once("moveend",()=>{let done=false;const go=()=>{if(done)return;done=true;setTimeout(()=>map.flyTo({...to,duration:2000,curve:1.3,essential:true}),700)};map.once("idle",go);setTimeout(go,3500)});
+  }else map.flyTo({...to,duration:1500,curve:1.5,essential:true});
+  first=false;
+}
+function openPin(x,i){
+  if(!map)return;const r=x.r;popup&&popup.remove();
+  popup=new maplibregl.Popup({offset:[0,-42],maxWidth:"260px"}).setLngLat([r.lo,r.la])
+    .setHTML(`<div class="pp"><b>${i+1}. ${esc(r.n)}</b><span>${esc(r.w)}区 ／ ${kmT(x.km)}（${moveT(x.km)}）${r.h?"<br>"+esc(r.h):""}</span><div class="bt"><a href="${gmap(r)}" target="_blank" rel="noopener">地図・道順 ↗</a>${r.u?`<a href="${esc(url(r.u))}" target="_blank" rel="noopener">HP ↗</a>`:""}</div></div>`).addTo(map);
+  const t={center:[r.lo,r.la],zoom:Math.max(map.getZoom(),16),pitch:62};
+  RM?map.jumpTo(t):map.easeTo({...t,duration:1100});
+}
+function toggleMap(){
+  mapOpen=!mapOpen;const t=$("#tg");t.textContent=mapOpen?"地図をとじる ▴":"地図をひらく ▾";t.setAttribute("aria-expanded",mapOpen);
+  const mw=$("#mw");mw.classList.add("anim");mw.classList.toggle("shut",!mapOpen);setTimeout(()=>mw.classList.remove("anim"),480);
+  if(mapOpen)setTimeout(()=>{map&&map.resize();refresh(true)},470);
+}
+$("#tg").onclick=toggleMap;
+
+/* ---------- 上にもどる ---------- */
+const tt=$("#totop");const onS=()=>tt.classList.toggle("on",scrollY>400);addEventListener("scroll",onS,{passive:true});onS();
+tt.onclick=()=>scrollTo({top:0,behavior:RM?"auto":"smooth"});
+
+/* ---------- はじめる ---------- */
+$("#note").innerHTML=g==="park"
+  ?"公園の場所と名前は OpenStreetMap（© OpenStreetMap contributors）をもとにしています。遊具やトイレ・駐車場の有無は、行く前に市のページなどで確かめてください。"
+  :"病院・薬局の情報は、厚生労働省「医療情報ネット」のオープンデータ（2025年12月1日時点）をもとにしています。診療時間・休みは変わることがあるので、行く前に電話やホームページで確かめてください。夜や休日の急な病気は「小児科 急患電話マップ」（#8000）へ。";
+hero();renderAreas();renderFilters();
+if(G.subs.length)$("#legend").innerHTML="ピンの色："+G.subs.map(([lab,k,c])=>`<b style="color:${c}">●${esc(lab)}</b>`).join(" ")+` <b style="color:${G.ac}">●そのほか</b>　`;
+fetch("near-data/"+g+".json").then(r=>r.json()).then(d=>{DATA=d;$("#hn").textContent=d.length;refresh(true)}).catch(()=>{$("#list").innerHTML='<li class="empty">データを読みこめませんでした。時間をおいて開きなおしてください。</li>'});
+</script>
+<script>/* 外へのリンクは新しい画面で開く（街ナビの中で開いたとき） */document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a[href]");if(!a)return;var h=a.getAttribute("href")||"";if(h.charAt(0)==="#"||/^(javascript|tel|mailto):/i.test(h))return;a.target="_blank";a.rel="noopener"},true);</script>
+</body></html>

@@ -973,6 +973,8 @@ document.getElementById("nearBtn").onclick=function(){
 };
 /* 条件（ジャンル・区など）が変わったら、地図のピンも自動で入れかえる */
 const _render=render;render=function(a){_render(a);refresh()};
+/* 街ナビの「家の近くで探す」→「あずかりマップ」から開いたとき（?near=1）：タイトルの部分を出さず、「近くの園をさがす」をひらいた状態で始める */
+if(/[?&]near=1\b/.test(location.search)){hd.style.display="none";box.style.marginTop="12px";document.getElementById("nearBtn").click()}
 })();
 </script>
 <!--/wolly-near-->
