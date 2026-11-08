@@ -747,7 +747,10 @@ b.addEventListener("click",function(){window.scrollTo({top:0,behavior:matchMedia
 .np-ph[aria-pressed="true"]{background:#2E2B4F;color:#fff;border-color:#2E2B4F}
 .np-load{position:absolute;inset:0;z-index:1;display:grid;place-items:center;font-size:13px;font-weight:700;color:var(--muted);pointer-events:none}
 .np-ward{margin-top:10px}
-.np-ward .mapcard{box-shadow:none}
+.np-ward .mapcard{box-shadow:0 10px 30px rgba(90,120,60,.12);background:repeating-linear-gradient(135deg,#dcefc8 0 26px,#e5f4d4 26px 52px);border:4px solid #fff}
+.np-ward .ward path{filter:drop-shadow(0 4px 0 rgba(80,120,50,.22))}
+.np-ward .maphint{background:rgba(255,255,255,.8);border-radius:999px;padding:4px 12px;width:fit-content;max-width:100%;margin:4px auto 8px;color:#5d6b4a}
+.np-ward .total{background:rgba(255,255,255,.85)}
 .np-msg{margin:8px 0 0;font-size:12px;color:var(--muted)}
 .npw{width:30px;height:40px;cursor:pointer}
 .npin{position:relative;width:30px;height:40px;animation:npDrop .6s cubic-bezier(.3,1.6,.5,1) both;animation-delay:calc(var(--b,0s) + var(--d) * 55ms);filter:drop-shadow(0 2px 2px rgba(46,43,79,.3))}
@@ -825,8 +828,8 @@ function origin(){
     if(WARD_LL[prof.ward])return {ll:WARD_LL[prof.ward],reg:true,t:prof.ward+"（区役所）から近い順",s:"マイページで番地まで入れると、おうちから測れます"};
   }
   const ws=[...S.wards].map(w=>WARD_LL[w+"区"]).filter(Boolean);
-  if(ws.length)return {ll:[ws.reduce((a,b)=>a+b[0],0)/ws.length,ws.reduce((a,b)=>a+b[1],0)/ws.length],t:[...S.wards].map(w=>w+"区").join("・")+"のまんなかから近い順",s:"区はこの下の地図や「区」のボタンで変えられます"};
-  return {ll:CITY,t:"さいたま市役所のあたりから近い順",s:"区はこの下の地図や「区」のボタンで変えられます"};
+  if(ws.length)return {ll:[ws.reduce((a,b)=>a+b[0],0)/ws.length,ws.reduce((a,b)=>a+b[1],0)/ws.length],t:[...S.wards].map(w=>w+"区").join("・")+(S.wards.size===1?"役所のあたりから近い順":"のまんなかから近い順"),s:"区はこの地図や「区」のボタンで変えられます（マイページに住所を登録すると、おうちから近い順になります）"};
+  return {ll:CITY,t:"さいたま市役所のあたりから近い順",s:"区はこの地図や「区」のボタンで変えられます（マイページに住所を登録すると、おうちから近い順になります）"};
 }
 function nearest(o){
   return DATA.filter(r=>LL[r.id]&&match(r)).map(r=>({r,km:dist(o.ll,LL[r.id])})).sort((a,b)=>a.km-b.km).slice(0,N);

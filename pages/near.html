@@ -197,6 +197,35 @@ h1 .mk{background:linear-gradient(transparent 62%,#ffe7a3 62%)}
 .note{background:#fff;border:2px dashed var(--line)}
 .totop{background:var(--base);box-shadow:0 4px 0 var(--dk),0 8px 18px rgba(0,0,0,.08)}
 .pp .bt button{background:var(--base);border-color:var(--base)}
+
+/* ===== 種類ごとの色（全ジャンル共通のルール）=====
+   背景・カードのふち・番号はジャンルの色。ボタンとバッジは「何の情報か」で色を決め、どのページでも同じ色にする。
+   ボタン：地図・道順＝水色／ホームページ＝ラベンダー／電話・口コミ＝ローズ
+   バッジ：土曜＝青／日曜・祝日＝ピンク／夜＝夜空の藍／病院＝グレイッシュブルー／小児（子ども）＝たまご色／内科（おとな）＝ブルーグリーン／矯正＝ふじ色／大きな公園＝さくら色 */
+:root{--map:#76b6dc;--map-d:#2f7aa8;--map-l:#e9f4fb;--web:#b5a0e6;--web-d:#7155bd;--web-l:#f4f0fd;--tel:#ef9fb5;--tel-d:#c4547a;--tel-l:#fdeef3}
+.btns a.b-map{background:var(--map);border-color:var(--map);color:#fff;box-shadow:0 4px 0 var(--map-d)}
+.btns a.b-web{background:var(--web-l);border-color:var(--web);color:var(--web-d);box-shadow:0 3px 0 var(--web)}
+.btns a.b-tel{background:var(--tel-l);border-color:var(--tel);color:var(--tel-d);box-shadow:0 3px 0 var(--tel)}
+.btns a.b-map:active{box-shadow:0 1px 0 var(--map-d)}.btns a.b-web:active{box-shadow:0 1px 0 var(--web)}.btns a.b-tel:active{box-shadow:0 1px 0 var(--tel)}
+.url{color:var(--web-d)}
+.pp .bt a.b-map{background:var(--map);border-color:var(--map);color:#fff}
+.pp .bt a.b-web{background:var(--web-l);border-color:var(--web);color:var(--web-d)}
+.t-sat{--tl:#e6f1fb;--td:#2f74b5}
+.t-sun{--tl:#fde9ef;--td:#c44d72}
+.t-night{--tl:#ecebfa;--td:#4a47a3}
+.t-hosp{--tl:#edf1f5;--td:#4b6180}
+.t-kid{--tl:#fff3cc;--td:#94700a}
+.t-adult{--tl:#e2f3f4;--td:#22808a}
+.t-brace{--tl:#f4ecfb;--td:#8a54af}
+.t-big{--tl:#fdeef4;--td:#c0538a}
+.tags .tag[class*="t-"]{background:var(--tl)!important;color:var(--td)!important}
+.chips .chip[class*="t-"]:not(.on){background:var(--tl)!important;border-color:color-mix(in srgb,var(--td) 22%,#fff)!important;color:var(--td)}
+.chips .chip[class*="t-"].on{background:var(--td)!important;border-color:var(--td)!important;color:#fff;box-shadow:0 3px 0 color-mix(in srgb,var(--td) 70%,#000)!important}
+
+/* ===== 10区の地図：芝生の上に区が浮かぶ ===== */
+.wcard{background:repeating-linear-gradient(135deg,#dcefc8 0 26px,#e5f4d4 26px 52px)!important;border:4px solid #fff!important;box-shadow:0 10px 30px rgba(90,120,60,.12)!important}
+.ward path{filter:drop-shadow(0 4px 0 rgba(80,120,50,.22))}
+.whint{color:#5d6b4a;background:rgba(255,255,255,.8);border-radius:999px;padding:4px 12px;width:fit-content;max-width:100%;margin:4px auto 0}
 </style></head>
 <body>
 <div class="wrap">
@@ -211,7 +240,7 @@ h1 .mk{background:linear-gradient(transparent 62%,#ffe7a3 62%)}
     <p class="mhint"><span id="legend"></span>ピンをタップすると名前が出ます。地図は2本の指で動かす・回す・かたむけることができます。</p>
   </div></div>
   <section class="wardsec" id="wardsec" hidden><div class="wcard">
-    <svg id="wmap" viewBox="-12 -12 624 634" role="group" aria-label="さいたま市の区の地図"><g id="wpaths"></g><g id="wlabels"></g></svg>
+    <svg id="wmap" viewBox="-12 -12 624 634" role="group" aria-label="さいたま市の区の地図"><g id="wdeco" aria-hidden="true"></g><g id="wpaths"></g><g id="wlabels"></g></svg>
     <p class="whint" id="whint"></p></div></section>
   <div id="reg"></div>
   <div class="lhead"><h2 id="lt">近い順</h2><span id="lc"></span></div>
@@ -277,16 +306,16 @@ Object.assign(NIC,{
 const PAL=[["#FFF0F6","#FF6FA5"],["#EAF6FF","#2FA4EA"],["#FFF7D6","#E0A100"],["#F3EEFF","#8E6BF5"],["#FFEDF4","#EC5A92"],["#ECEFFF","#5A5AEF"]];
 const GENRES={
   ped:{t:"小児科・内科",ic:"kids",ac:"#FF6FA5",soft:"#FFE3EC",soft2:"#FFF5F8",sub:"子どもの熱・せき・おなかの調子に。おとなの内科も。",deco:["kids","pill","plaster"],
-       subs:[["小児科","小児科","#FF6FA5","kids"],["内科","内科","#2FA4EA","adult"]],word:"クリニック・病院"},
+       subs:[["小児科","小児科","#FF6FA5","kids","kid"],["内科","内科","#2FA4EA","adult","adult"]],word:"クリニック・病院"},
   dent:{t:"歯医者さん",ic:"tooth",ac:"#3DB2F2",soft:"#E1F3FF",soft2:"#F3FAFF",sub:"子どもの歯のチェックも、おとなの虫歯も。",deco:["tooth","tooth","pill"],
-       subs:[["小児歯科","小児歯科","#FF6FA5","kids"],["矯正歯科","矯正歯科","#8E6BF5","brace"]],word:"歯医者さん"},
+       subs:[["小児歯科","小児歯科","#FF6FA5","kids","kid"],["矯正歯科","矯正歯科","#8E6BF5","brace","brace"]],word:"歯医者さん"},
   ent:{t:"耳鼻科",ic:"ear",ac:"#E0A100",soft:"#FFF1C2",soft2:"#FFFAE6",sub:"鼻水・中耳炎・花粉症のときに。",deco:["ear","pill","kids"],subs:[],word:"耳鼻科"},
   eye:{t:"眼科",ic:"eye",ac:"#5A5AEF",soft:"#E5E8FF",soft2:"#F4F5FF",sub:"目のかゆみ・ものもらい・視力のチェックに。",deco:["eye","eye","kids"],subs:[],word:"眼科"},
   skin:{t:"皮膚科",ic:"cream",ac:"#C45BD9",soft:"#FBE6FF",soft2:"#FDF4FF",sub:"湿疹・あせも・とびひ・虫さされに。",deco:["cream","plaster","kids"],subs:[],word:"皮膚科"},
   plastic:{t:"形成外科",ic:"plaster",ac:"#E8558E",soft:"#FFE6F2",soft2:"#FFF5FA",sub:"ケガのきず・やけど・できものの相談に。",deco:["plaster","plaster","cream"],subs:[],word:"形成外科"},
   ortho:{t:"整形外科",ic:"bone",ac:"#2E8FD6",soft:"#E1F3FF",soft2:"#F3FAFF",sub:"ねんざ・骨折・腰や肩のいたみに。",deco:["bone","plaster","bone"],subs:[],word:"整形外科"},
   pharm:{t:"薬局",ic:"pill",ac:"#9C7BFF",soft:"#F1E8FF",soft2:"#F9F5FF",sub:"処方せんのお薬を受け取りに。",deco:["pill","pill","cream"],subs:[],word:"薬局"},
-  park:{t:"公園",ic:"slide",ac:"#3DB2F2",soft:"#E5F4FF",soft2:"#FFFBEA",sub:"おさんぽ・遊具・ピクニックに。",deco:["slide","kids","slide"],subs:[["大きな公園","big","#FF6FA5","tree"]],word:"公園",noHours:true}
+  park:{t:"公園",ic:"slide",ac:"#3DB2F2",soft:"#E5F4FF",soft2:"#FFFBEA",sub:"おさんぽ・遊具・ピクニックに。",deco:["slide","kids","slide"],subs:[["大きな公園","big","#FF6FA5","tree","big"]],word:"公園",noHours:true}
 };
 const g=(new URLSearchParams(location.search).get("g")||"ped");
 const G=GENRES[g]||GENRES.ped;
@@ -326,8 +355,8 @@ function origin(){
     if(gg&&gg.ok&&gg.lat&&(!gg.q||gg.q===("埼玉県さいたま市"+prof.ward+(prof.town||""))))return {ll:[gg.lat,gg.lon],reg,home:true,t:"登録した住所から近い順"+inW,s:prof.ward+town()};
     if(WARD_LL[prof.ward])return {ll:WARD_LL[prof.ward],reg,t:prof.ward+"（区役所）から近い順"+inW,s:"マイページで番地まで入れると、おうちから測れます"};
   }
-  if(S.area)return {ll:WARD_LL[S.area+"区"],reg,t:S.area+"区の"+G.word,s:"区のまんなか（区役所）から近い順。下の地図の区をもう一度タップで全体にもどります"};
-  return {ll:CITY,reg,t:"さいたま市の"+G.word,s:"市役所のあたりから近い順。下の地図の区をタップすると、その区だけになります"};
+  if(S.area)return {ll:WARD_LL[S.area+"区"],reg,t:S.area+"区の"+G.word,s:S.area+"区役所のあたりから近い順に並べています。地図の区をもう一度タップで全体にもどります"};
+  return {ll:CITY,reg,t:"さいたま市の"+G.word,s:"さいたま市役所のあたりから近い順に並べています。地図の区をタップすると、その区だけになります"};
 }
 const WCOL=["#FFB3CF","#FFE38A","#9FD8FF","#CDB8FF","#FFC6DA","#B8C4FF","#FFD6E8","#FFF0A6","#BFE6FF","#E2D2FF"];
 function renderAreas(){
@@ -350,6 +379,15 @@ function buildWardMap(){
     gl.appendChild(l);
   });
 }
+function lawnDeco(){
+  let h='';const R=(n=>()=>(n=(n*9301+49297)%233280)/233280)(7);
+  for(let i=0;i<70;i++){const x=R()*600,y=R()*610;h+=`<path d="M${x} ${y}l3-8 2 8 3-10 2 10 3-7 1 7" fill="none" stroke="#a8d48a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>`}
+  const FC=["#ffffff","#ffd1e1","#fff1a8","#e3d7ff"];
+  for(let i=0;i<34;i++){const x=R()*600,y=R()*610,c=FC[i%4];h+=`<g transform="translate(${x} ${y})">${[0,72,144,216,288].map(a=>`<circle cx="0" cy="-5" r="4" fill="${c}" transform="rotate(${a})"/>`).join("")}<circle r="2.8" fill="#ffc94d"/></g>`}
+  h+=`<g transform="translate(40 26)"><g stroke="#ffc94d" stroke-width="5" stroke-linecap="round">${[0,45,90,135,180,225,270,315].map(a=>`<line x1="0" y1="-36" x2="0" y2="-28" transform="rotate(${a})"/>`).join("")}</g><circle r="21" fill="#ffd84d"/><circle cx="-7" cy="-2" r="2.6" fill="#4a3f3a"/><circle cx="7" cy="-2" r="2.6" fill="#4a3f3a"/><circle cx="-12" cy="5" r="3.4" fill="#ff9ec0" opacity=".7"/><circle cx="12" cy="5" r="3.4" fill="#ff9ec0" opacity=".7"/><path d="M-6 6q6 6 12 0" stroke="#4a3f3a" stroke-width="2.6" fill="none" stroke-linecap="round"/></g>`;
+  h+=`<g fill="#fff" opacity=".95"><path d="M440 40a16 16 0 0 1 28-12 20 20 0 0 1 36 6 13 13 0 0 1 3 26h-64a12 12 0 0 1-3-20z"/><path d="M500 560a12 12 0 0 1 22-9 15 15 0 0 1 27 5 10 10 0 0 1 2 19h-48a9 9 0 0 1-3-15z"/></g>`;
+  $("#wdeco").innerHTML=h;
+}
 function renderWardMap(){
   const wc={};DATA.forEach(r=>{if(match(r,true))wc[r.w]=(wc[r.w]||0)+1});
   document.querySelectorAll(".wl").forEach(l=>l.querySelector(".cnt").textContent=(wc[l.dataset.w]||0)+"か所");
@@ -364,11 +402,11 @@ function showMaps(){
 }
 function renderFilters(){
   const f=[];
-  G.subs.forEach(([lab,key,c,ic])=>f.push(`<button class="chip${S.subs.has(key)?" on":""}" data-s="${esc(key)}" style="--cc:${c}">${svg(NIC[ic],40)}${esc(lab)}</button>`));
+  G.subs.forEach(([lab,key,c,ic,tt])=>f.push(`<button class="chip t-${tt}${S.subs.has(key)?" on":""}" data-s="${esc(key)}">${svg(NIC[ic],40)}${esc(lab)}</button>`));
   if(!G.noHours){
-    f.push(`<button class="chip${S.sat?" on":""}" data-f="sat" style="--cc:#2FA4EA">${svg(NIC.cal,40)}土曜も</button>`);
-    f.push(`<button class="chip${S.sun?" on":""}" data-f="sun" style="--cc:#E0A100">${svg(NIC.sunf,40)}日曜・祝日も</button>`);
-    f.push(`<button class="chip${S.night?" on":""}" data-f="night" style="--cc:#8E6BF5">${svg(NIC.moonf,40)}夜18:30以降も</button>`);
+    f.push(`<button class="chip t-sat${S.sat?" on":""}" data-f="sat">${svg(NIC.cal,40)}土曜も</button>`);
+    f.push(`<button class="chip t-sun${S.sun?" on":""}" data-f="sun">${svg(NIC.sunf,40)}日曜・祝日も</button>`);
+    f.push(`<button class="chip t-night${S.night?" on":""}" data-f="night">${svg(NIC.moonf,40)}夜18:30以降も</button>`);
   }
   $("#filters").innerHTML=f.length?`<span class="lab">しぼる</span>`+f.join(""):"";
   $("#filters").hidden=!f.length;
@@ -405,12 +443,12 @@ const gsearch=r=>"https://www.google.com/search?q="+encodeURIComponent(r.n+" さ
 /* ---------- 一覧 ---------- */
 function tags(r){
   const t=[],f=r.f||[];
-  G.subs.filter(x=>x[1]!=="big"&&(r.s||[]).includes(x[1])).forEach(([lab,key,c,ic])=>t.push(`<span class="tag" style="--tb:color-mix(in srgb,${c} 16%,#fff);--tc:color-mix(in srgb,${c} 80%,#2E2B4F)">${svg(NIC[ic],40)}${esc(lab)}</span>`));
-  if(r.big)t.push(`<span class="tag" style="--tb:#FFE3EF;--tc:#C8326E">${svg(NIC.tree,40)}大きな公園</span>`);
-  if(f[3])t.push(`<span class="tag" style="--tb:#FFE3EF;--tc:#C8326E">${svg(NIC.hospf,40)}病院</span>`);
-  if(f[0])t.push(`<span class="tag" style="--tb:#E1F3FF;--tc:#1F78B8">${svg(NIC.cal,40)}土曜も</span>`);
-  if(f[1])t.push(`<span class="tag" style="--tb:#FFF3C4;--tc:#8A6400">${svg(NIC.sunf,40)}日曜・祝日も</span>`);
-  if(f[2])t.push(`<span class="tag" style="--tb:#EFE8FF;--tc:#6A47D1">${svg(NIC.moonf,40)}夜もやってる</span>`);
+  G.subs.filter(x=>x[1]!=="big"&&(r.s||[]).includes(x[1])).forEach(([lab,key,c,ic,tt])=>t.push(`<span class="tag t-${tt}">${svg(NIC[ic],40)}${esc(lab)}</span>`));
+  if(r.big)t.push(`<span class="tag t-big">${svg(NIC.tree,40)}大きな公園</span>`);
+  if(f[3])t.push(`<span class="tag t-hosp">${svg(NIC.hospf,40)}病院</span>`);
+  if(f[0])t.push(`<span class="tag t-sat">${svg(NIC.cal,40)}土曜も</span>`);
+  if(f[1])t.push(`<span class="tag t-sun">${svg(NIC.sunf,40)}日曜・祝日も</span>`);
+  if(f[2])t.push(`<span class="tag t-night">${svg(NIC.moonf,40)}夜もやってる</span>`);
   return t.join("");
 }
 function card(x,i){
@@ -422,7 +460,7 @@ function card(x,i){
     ${r.h?`<div class="cm">${I(IC.clock)}<span>${esc(r.h)}</span></div>`:"<div></div>"}
     <div class="tags">${tags(r)}</div>
     ${r.u?`<a class="url" href="${esc(url(r.u))}" target="_blank" rel="noopener">${svg(NIC.web,40)}<span>${esc(host(r.u))}</span></a>`:""}
-    <div class="btns"><a class="main" href="${gmap(r)}" target="_blank" rel="noopener">${I(IC.map)}地図・道順</a>${r.u?`<a href="${esc(url(r.u))}" target="_blank" rel="noopener">${I(IC.web)}ホームページ</a>`:""}${G.noHours?"":`<a href="${gsearch(r)}" target="_blank" rel="noopener">${I(IC.search)}電話・口コミ</a>`}</div>
+    <div class="btns"><a class="b-map" href="${gmap(r)}" target="_blank" rel="noopener">${I(IC.map)}地図・道順</a>${r.u?`<a class="b-web" href="${esc(url(r.u))}" target="_blank" rel="noopener">${I(IC.web)}ホームページ</a>`:""}${G.noHours?"":`<a class="b-tel" href="${gsearch(r)}" target="_blank" rel="noopener">${I(IC.search)}電話・口コミ</a>`}</div>
   </li>`;
 }
 let LAST=[],LO=null;
@@ -547,7 +585,7 @@ function place(o,rows){
 function openPin(x,i){
   if(!map)return;const r=x.r;popup&&popup.remove();
   popup=new maplibregl.Popup({offset:[0,-42],maxWidth:"260px"}).setLngLat([r.lo,r.la])
-    .setHTML(`<div class="pp"><b>${i+1}. ${esc(r.n)}</b><span>${esc(r.w)}区 ／ ${kmT(x.km)}（${moveT(x.km)}）${r.h?"<br>"+esc(r.h):""}</span><div class="bt"><a href="${gmap(r)}" target="_blank" rel="noopener">地図・道順 ↗</a>${r.u?`<a href="${esc(url(r.u))}" target="_blank" rel="noopener">HP ↗</a>`:""}</div></div>`).addTo(map);
+    .setHTML(`<div class="pp"><b>${i+1}. ${esc(r.n)}</b><span>${esc(r.w)}区 ／ ${kmT(x.km)}（${moveT(x.km)}）${r.h?"<br>"+esc(r.h):""}</span><div class="bt"><a class="b-map" href="${gmap(r)}" target="_blank" rel="noopener">地図・道順 ↗</a>${r.u?`<a class="b-web" href="${esc(url(r.u))}" target="_blank" rel="noopener">HP ↗</a>`:""}</div></div>`).addTo(map);
   const t={center:[r.lo,r.la],zoom:Math.max(map.getZoom(),16),pitch:62};
   RM?map.jumpTo(t):map.easeTo({...t,duration:1100});
 }
@@ -567,7 +605,7 @@ tt.onclick=()=>scrollTo({top:0,behavior:RM?"auto":"smooth"});
 $("#note").innerHTML=g==="park"
   ?"公園の場所と名前は OpenStreetMap（© OpenStreetMap contributors）をもとにしています。遊具やトイレ・駐車場の有無は、行く前に市のページなどで確かめてください。"
   :"病院・薬局の情報は、厚生労働省「医療情報ネット」のオープンデータ（2025年12月1日時点）をもとにしています。診療時間・休みは変わることがあるので、行く前に電話やホームページで確かめてください。夜や休日の急な病気は「小児科 急患電話マップ」（#8000）へ。";
-hero();buildWardMap();renderAreas();renderFilters();
+hero();lawnDeco();buildWardMap();renderAreas();renderFilters();
 if(false)$("#legend").innerHTML="ピンの色："+G.subs.map(([lab,k,c])=>`<b style="color:${c}">●${esc(lab)}</b>`).join(" ")+(g==="ped"?"　":` <b style="color:${G.ac}">●そのほか</b>　`);
 fetch("near-data/"+g+".json").then(r=>r.json()).then(d=>{DATA=d;$("#hn").textContent=d.length;refresh(true)}).catch(()=>{$("#list").innerHTML='<li class="empty">データを読みこめませんでした。時間をおいて開きなおしてください。</li>'});
 </script>
