@@ -10,6 +10,7 @@
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ink:#F4F2FF;--muted:#B5B3D6;--line:#3A3B62;--card:#26274A;--bg:#1B1C33}}
 :root[data-theme="dark"]{--ink:#F4F2FF;--muted:#B5B3D6;--line:#3A3B62;--card:#26274A;--bg:#1B1C33}
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--ink);font:500 14px/1.6 var(--font-body);padding-bottom:calc(30px + env(safe-area-inset-bottom,0px))}
 button{font:inherit;color:inherit}
@@ -18,20 +19,21 @@ a{color:inherit}
 
 /* ---------- ヒーロー ---------- */
 .hero{position:relative;overflow:hidden;margin:0 calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding:22px max(16px,env(safe-area-inset-left,0px)) 26px;
-  background:radial-gradient(120% 90% at 0% 0%,var(--soft) 0,transparent 60%),radial-gradient(90% 80% at 100% 10%,var(--soft2) 0,transparent 60%),linear-gradient(180deg,var(--soft2),var(--bg));border-bottom-left-radius:36px;border-bottom-right-radius:36px}
+  background:radial-gradient(70% 60% at 0% 0%,color-mix(in srgb,var(--ac) 22%,transparent) 0,transparent 70%),linear-gradient(125deg,#FFE1EE 0%,#FFF4C7 32%,#DDF1FF 64%,#EADFFF 100%);border-bottom-left-radius:36px;border-bottom-right-radius:36px}
+.hero::after{content:"";position:absolute;left:-10%;right:-10%;bottom:-40px;height:80px;background:radial-gradient(closest-side,rgba(255,255,255,.75),transparent);pointer-events:none}
 .hero .deco{position:absolute;inset:0;pointer-events:none}
-.hero .deco span{position:absolute;width:var(--s);height:var(--s);opacity:.55;animation:float 6s ease-in-out infinite;animation-delay:var(--d)}
+.hero .deco span{position:absolute;width:var(--s);height:var(--s);opacity:.9;animation:float 6s ease-in-out infinite;animation-delay:var(--d)}
 .hero .deco span svg{width:100%;height:100%}
 @keyframes float{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-10px) rotate(8deg)}}
 .hrow{position:relative;display:flex;align-items:center;gap:14px}
-.hic{flex:0 0 auto;width:84px;height:84px;border-radius:30px;display:grid;place-items:center;background:#fff;border:3px solid #fff;box-shadow:0 8px 22px color-mix(in srgb,var(--ac) 30%,transparent),inset 0 0 0 999px var(--soft)}
+.hic{flex:0 0 auto;width:88px;height:88px;border-radius:30px;display:grid;place-items:center;background:linear-gradient(145deg,#fff,var(--soft));border:4px solid #fff;box-shadow:0 8px 22px color-mix(in srgb,var(--ac) 35%,transparent);transform:rotate(-4deg)}
 .hic svg{width:62px;height:62px;overflow:visible;animation:nicw 3.4s ease-in-out infinite}
 @keyframes nicw{0%,100%{transform:translateY(0) rotate(0)}30%{transform:translateY(-3px) rotate(-6deg)}60%{transform:translateY(0) rotate(5deg)}}
 .eyebrow{font:800 11px/1 var(--font-body);letter-spacing:.14em;color:var(--ac)}
 h1{margin:4px 0 2px;font:400 clamp(22px,6.4vw,30px)/1.25 var(--font-display);color:var(--ink)}
 .hsub{margin:0;font-size:13px;color:var(--muted)}
 .hstat{position:relative;display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
-.hstat span{display:inline-flex;align-items:center;gap:5px;background:#fff;border-radius:999px;padding:4px 12px;font-size:12px;font-weight:700;color:#2E2B4F;box-shadow:0 3px 0 rgba(46,43,79,.06)}
+.hstat span{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.9);border-radius:999px;padding:4px 12px;font-size:12px;font-weight:700;color:#2E2B4F;box-shadow:0 3px 0 rgba(46,43,79,.06)}
 .hstat b{font:800 16px/1 system-ui,sans-serif;color:var(--ac)}
 
 /* ---------- 中心・条件 ---------- */
@@ -43,7 +45,10 @@ h1{margin:4px 0 2px;font:400 clamp(22px,6.4vw,30px)/1.25 var(--font-display);col
 .chips::-webkit-scrollbar{display:none}
 .chip{flex:0 0 auto;display:inline-flex;align-items:center;gap:5px;border:2px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:4px 13px;font-size:12.5px;font-weight:700;cursor:pointer;transition:transform .25s cubic-bezier(.3,1.6,.5,1),background .2s}
 .chip svg{width:16px;height:16px}
-.chip.on{background:var(--ac);border-color:var(--ac);color:#fff}
+.chip{--cc:var(--ac)}
+.chip svg{width:20px;height:20px;overflow:visible}
+.chip:not(.on){background:color-mix(in srgb,var(--cc) 9%,var(--card));border-color:color-mix(in srgb,var(--cc) 30%,var(--line))}
+.chip.on{background:var(--cc);border-color:var(--cc);color:#fff;box-shadow:0 3px 8px color-mix(in srgb,var(--cc) 40%,transparent)}
 .chip:active{transform:scale(.94)}
 .chips .lab{flex:0 0 auto;align-self:center;font-size:11px;font-weight:800;color:var(--muted);margin-right:2px}
 
@@ -99,11 +104,12 @@ h1{margin:4px 0 2px;font:400 clamp(22px,6.4vw,30px)/1.25 var(--font-display);col
 .lhead span{font-size:12px;color:var(--muted)}
 .list{list-style:none;margin:0;padding:0;display:grid;gap:10px}
 @media (min-width:640px){.list{grid-template-columns:1fr 1fr}}
-.card{position:relative;display:grid;grid-template-columns:auto 1fr;gap:4px 12px;padding:12px 12px 12px 12px;border-radius:22px;background:var(--card);border:2px solid var(--line);box-shadow:0 4px 0 rgba(46,43,79,.04);cursor:pointer;animation:row .45s both;animation-delay:calc(var(--d) * 30ms);overflow:hidden}
+.card{position:relative;display:grid;grid-template-columns:auto 1fr;gap:4px 12px;padding:12px 12px 12px 14px;border-radius:24px;background:linear-gradient(150deg,var(--cb) 0%,var(--card) 70%);border:2px solid color-mix(in srgb,var(--pc) 28%,var(--line));box-shadow:0 4px 0 rgba(46,43,79,.04);cursor:pointer;animation:row .45s both;animation-delay:calc(var(--d) * 30ms);overflow:hidden}
 .card::before{content:"";position:absolute;inset:0 auto 0 0;width:6px;background:var(--pc)}
 .card:hover,.card:focus-visible{border-color:var(--pc);outline:none}
 @keyframes row{from{opacity:0;transform:translateY(8px)}}
-.cic{grid-row:1/4;position:relative;width:56px;height:56px;border-radius:20px;display:grid;place-items:center;background:var(--soft)}
+.cic{grid-row:1/4;position:relative;width:58px;height:58px;border-radius:20px;display:grid;place-items:center;background:#fff;border:3px solid color-mix(in srgb,var(--pc) 35%,#fff);box-shadow:0 4px 10px color-mix(in srgb,var(--pc) 22%,transparent)}
+.cic svg{animation:nicw 3.6s ease-in-out infinite;animation-delay:calc(var(--d) * -.4s)}
 .cic svg{width:42px;height:42px;overflow:visible}
 .card:hover .cic svg{animation:nicw 1s ease-in-out infinite}
 .rk{position:absolute;right:-6px;bottom:-6px;min-width:24px;height:24px;padding:0 5px;border-radius:999px;background:var(--pc);color:#fff;border:2px solid var(--card);font:800 12px/20px system-ui,sans-serif;text-align:center}
@@ -115,7 +121,10 @@ h1{margin:4px 0 2px;font:400 clamp(22px,6.4vw,30px)/1.25 var(--font-display);col
 .cm svg{flex:0 0 auto;width:14px;height:14px;margin-top:1px}
 .tags{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:5px;margin-top:4px}
 .tag{display:inline-flex;align-items:center;gap:3px;border-radius:999px;padding:1px 9px 1px 6px;font-size:11px;font-weight:800;background:var(--tb);color:var(--tc)}
-.tag svg{width:14px;height:14px}
+.tag svg{width:17px;height:17px;overflow:visible}
+.url{grid-column:1/-1;display:flex;align-items:center;gap:4px;min-width:0;margin-top:2px;font-size:11.5px;font-weight:700;color:color-mix(in srgb,var(--pc) 75%,var(--ink));text-decoration:none}
+.url svg{flex:0 0 auto;width:14px;height:14px}
+.url span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-decoration:underline;text-underline-offset:2px}
 .btns{grid-column:1/-1;display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
 .btns a{display:inline-flex;align-items:center;gap:4px;border:2px solid var(--line);background:var(--card);border-radius:999px;padding:3px 12px;font-size:12px;font-weight:800;text-decoration:none}
 .btns a svg{width:15px;height:15px}
@@ -123,6 +132,22 @@ h1{margin:4px 0 2px;font:400 clamp(22px,6.4vw,30px)/1.25 var(--font-display);col
 .more{display:flex;justify-content:center;margin:14px 0 0}
 .more button{border:2px solid var(--ac);background:var(--card);color:var(--ac);border-radius:999px;padding:8px 22px;font-size:13px;font-weight:800;cursor:pointer}
 .empty{padding:20px;text-align:center;color:var(--muted);font-size:13px}
+/* 10区の絵の地図（あずかりマップと同じ形） */
+.wardsec{margin-top:8px}
+.wcard{background:linear-gradient(160deg,#FFF6FB,#F1F8FF 60%,#FFFBEA);border:3px solid #fff;border-radius:30px;padding:8px 8px 12px;box-shadow:0 6px 18px rgba(46,43,79,.08)}
+#wmap{display:block;width:100%;max-width:520px;margin:0 auto;height:auto}
+.ward{cursor:pointer;transform-box:fill-box;transform-origin:center;animation:wpop .7s cubic-bezier(.3,1.6,.5,1) both;transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
+.ward path{stroke:#fff;stroke-width:5;stroke-linejoin:round;transition:opacity .2s}
+.ward:hover{transform:translateY(-5px)}
+.ward.on{transform:translateY(-8px) scale(1.04)}
+.ward.on path{stroke:#2E2B4F;stroke-width:4}
+.ward.dim path{opacity:.35}
+@keyframes wpop{0%{opacity:0;transform:scale(.6)}100%{opacity:1;transform:none}}
+.wl{pointer-events:none}
+.wl rect{fill:#fff;stroke:#2E2B4F;stroke-width:2}
+.wl text{fill:#2E2B4F;font-family:var(--font-body);font-weight:900;font-size:16px;text-anchor:middle}
+.wl .cnt{font-family:var(--font-display);font-weight:400;font-size:14px;fill:var(--ac)}
+.whint{text-align:center;font-size:12.5px;font-weight:700;color:var(--muted);margin:2px 0 0}
 .note{margin:22px 0 0;padding:12px 14px;border-radius:16px;background:color-mix(in srgb,var(--ac) 7%,var(--card));font-size:11.5px;line-height:1.7;color:var(--muted)}
 .totop{position:fixed;z-index:60;right:max(14px,env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));display:grid;justify-items:center;align-content:center;width:58px;height:58px;padding:0;border-radius:50%;border:3px solid #fff;cursor:pointer;background:linear-gradient(160deg,#FF8FB8,#9C7BFF);color:#fff;font:800 10px/1.1 var(--font-body);box-shadow:0 6px 16px rgba(46,43,79,.25);opacity:0;transform:translateY(14px) scale(.85);pointer-events:none;transition:opacity .3s,transform .45s cubic-bezier(.3,1.6,.5,1)}
 .totop.on{opacity:1;transform:none;pointer-events:auto}
@@ -141,6 +166,9 @@ h1{margin:4px 0 2px;font:400 clamp(22px,6.4vw,30px)/1.25 var(--font-display);col
       <div class="mtools"><button type="button" id="ph" aria-pressed="false"></button></div></div>
     <p class="mhint"><span id="legend"></span>ピンをタップすると名前が出ます。地図は2本の指で動かす・回す・かたむけることができます。</p>
   </div></div>
+  <section class="wardsec" id="wardsec" hidden><div class="wcard">
+    <svg id="wmap" viewBox="-12 -12 624 634" role="group" aria-label="さいたま市の区の地図"><g id="wpaths"></g><g id="wlabels"></g></svg>
+    <p class="whint" id="whint"></p></div></section>
   <div id="reg"></div>
   <div class="lhead"><h2 id="lt">近い順</h2><span id="lc"></span></div>
   <ol class="list" id="list"></ol>
@@ -166,6 +194,8 @@ const NIC={
   slide:`<circle cx="33" cy="8" r="4" fill="#FFD23F"/><path d="M8 35V12h6v23" fill="none" ${NO}/><path d="M8 17h6M8 23h6M8 29h6" ${NO}/><path d="M14 12q4 0 8 8t10 15h4" fill="none" stroke="#FF8FB8" stroke-width="4" stroke-linecap="round"/><path d="M14 12q4 0 8 8t10 15h4" fill="none" ${NO} stroke-width="1.2"/><path d="M3 36h34" ${NO}/>`
 };
 
+const MAP={"W":600,"H":610,"cen":{"西":[70,330],"北":[200,215],"大宮":[222,345],"見沼":[345,250],"中央":[222,440],"桜":[160,505],"浦和":[305,450],"南":[330,560],"緑":[465,430],"岩槻":[480,190]},"d":{"西":"M130,429L106,429L107,432L105,432L101,423L87,430L83,424L76,429L71,424L65,428L78,444L86,460L72,457L49,458L34,448L34,445L41,435L40,429L15,418L10,407L11,402L16,400L31,404L34,400L35,395L32,390L21,382L14,374L14,369L20,362L25,347L23,337L16,335L17,324L14,322L11,323L7,318L11,308L12,298L6,290L4,286L0,283L3,275L1,269L3,267L5,267L8,264L12,268L13,260L17,258L13,256L13,250L5,240L14,240L15,245L16,236L21,236L20,240L26,236L31,236L36,247L34,249L34,252L41,258L41,260L38,260L42,267L42,269L45,270L46,268L44,264L43,266L42,265L41,261L42,259L41,256L43,255L42,250L45,243L53,238L54,224L56,221L81,205L86,209L94,208L96,210L114,200L120,202L127,216L137,223L141,230L147,232L146,239L151,251L150,262L140,282L139,288L141,299L152,319L147,335L150,343L147,349L149,358L147,358L140,365L147,369L148,375L140,376L147,383L145,389L149,396L153,398L161,396L164,402L159,435L157,435L156,431L147,428L130,429Z","北":"M145,307L140,297L139,286L150,262L151,251L146,239L146,227L152,215L151,207L144,191L129,167L132,161L131,160L127,159L120,149L120,144L122,143L124,144L123,145L126,144L128,146L131,143L151,146L154,152L185,135L192,129L205,132L230,184L240,189L259,217L261,214L274,222L273,233L274,240L272,256L273,266L275,267L275,271L277,273L273,274L263,281L261,282L260,279L261,270L239,279L230,284L222,296L211,302L206,283L196,286L195,290L187,292L187,303L169,304L169,307L167,306L167,309L164,309L163,309L163,306L156,309L145,307Z","大宮":"M146,392L145,388L147,383L140,376L147,376L147,370L140,365L147,358L149,358L147,349L150,343L147,335L152,319L145,307L156,309L163,306L163,309L164,309L167,309L167,306L169,307L169,304L187,303L187,292L195,290L196,286L206,283L211,302L222,296L230,284L233,281L261,270L260,278L261,282L271,275L275,278L278,288L277,300L280,298L280,302L285,307L289,317L293,322L288,322L291,331L294,355L282,354L281,357L279,358L278,362L275,365L275,367L282,364L284,370L281,372L287,385L285,390L287,391L287,396L281,396L281,399L279,400L278,394L274,390L278,389L279,384L281,383L278,383L276,386L272,388L274,392L272,392L272,394L267,394L267,396L259,400L258,397L255,398L249,380L246,380L243,374L235,367L234,367L235,373L233,373L224,354L218,356L217,352L209,356L216,372L214,373L217,384L216,385L214,381L210,382L210,380L188,381L186,377L174,374L171,396L166,399L164,404L161,396L151,397L146,392Z","見沼":"M290,355L294,355L291,331L288,322L293,322L293,321L289,317L285,307L280,302L280,298L277,300L278,285L276,280L271,275L277,273L275,271L275,267L273,266L272,256L274,240L273,233L274,222L261,214L259,217L240,189L231,185L226,176L241,172L250,172L259,167L263,172L271,173L271,179L277,182L281,181L283,173L286,169L288,169L291,161L295,147L295,144L292,142L294,137L304,138L304,142L306,143L308,138L314,136L318,137L329,132L341,133L345,135L341,136L341,138L348,137L349,140L351,137L355,141L351,142L352,146L356,143L361,147L361,151L365,155L363,156L369,160L371,170L374,172L371,175L372,177L385,184L386,190L384,195L387,202L384,206L387,210L386,212L388,218L386,220L391,229L388,239L393,244L403,248L406,253L412,255L417,268L424,271L425,278L429,282L428,291L433,302L438,305L435,304L432,306L424,295L416,301L424,311L416,319L419,330L422,333L419,336L433,352L440,364L439,385L438,386L420,382L421,378L406,375L398,379L398,383L376,382L374,381L376,373L351,371L351,366L348,367L345,360L342,359L339,363L342,363L341,366L326,369L326,382L301,381L295,365L293,365L291,361L290,355Z","中央":"M165,437L166,425L179,423L179,419L180,415L183,414L172,401L165,400L171,396L174,374L186,377L188,381L210,380L210,382L214,381L216,385L217,384L214,373L216,372L209,356L215,352L217,352L218,356L224,354L233,373L235,373L234,367L235,367L243,374L246,380L249,380L252,385L251,388L258,405L255,405L248,396L248,400L246,401L249,406L256,406L263,419L268,417L270,420L258,425L262,450L261,462L265,462L267,468L272,468L271,471L274,471L274,473L278,474L281,472L281,469L283,469L283,472L274,479L267,481L268,506L265,510L265,520L263,506L258,499L256,499L251,488L244,490L242,482L238,479L231,481L230,478L227,479L224,471L222,471L221,469L222,466L224,464L223,459L215,458L215,456L214,456L213,463L211,463L213,463L209,465L214,468L213,470L207,468L202,462L199,451L192,440L173,439L169,436L165,437Z","桜":"M177,594L169,574L172,564L171,559L168,556L154,553L145,541L128,525L121,511L116,502L94,488L88,465L83,452L65,428L71,424L76,429L83,424L87,430L101,423L105,432L107,432L106,429L147,428L156,431L157,435L159,435L163,404L165,400L168,402L171,401L183,414L180,415L179,419L179,423L166,425L165,437L169,436L173,439L192,440L206,468L213,470L214,468L209,465L213,463L211,463L213,463L214,456L215,456L215,458L223,459L224,464L222,466L221,469L222,471L224,471L227,479L230,478L231,481L238,479L242,482L244,490L251,488L256,499L260,519L257,524L251,526L247,531L249,544L255,556L252,558L255,567L243,570L246,575L235,573L200,591L197,587L189,589L182,599L177,594Z","浦和":"M248,405L246,401L248,400L247,397L255,405L258,405L255,398L258,397L259,400L267,396L267,394L272,394L272,392L274,392L272,388L276,386L278,383L281,383L279,384L278,389L274,390L278,394L279,400L281,399L281,396L287,396L287,391L285,390L287,385L281,372L284,370L282,364L275,367L275,365L278,362L279,358L281,357L282,354L290,355L291,361L293,365L295,365L301,381L329,382L339,379L338,382L331,394L335,399L339,410L342,407L348,422L348,424L344,426L347,434L343,434L345,447L344,452L346,456L342,463L339,464L336,472L339,492L345,501L338,507L342,510L343,519L345,519L340,531L335,534L337,540L332,540L332,546L321,546L318,548L314,539L310,535L293,534L295,520L290,519L288,514L282,518L282,512L280,512L279,509L277,509L277,506L267,507L268,491L267,481L274,479L283,472L283,469L281,469L281,472L278,474L274,473L274,471L271,471L272,468L267,468L265,462L261,462L262,450L258,425L270,420L268,417L263,419L256,406L249,406L248,405Z","南":"M206,609L202,605L200,591L235,573L246,575L243,570L255,567L252,558L255,556L249,544L247,531L250,527L256,524L258,520L260,521L256,499L258,499L263,506L264,520L266,518L266,507L277,506L277,509L279,509L280,512L282,512L282,518L288,514L290,519L295,520L293,534L310,535L314,539L318,548L321,546L332,546L332,540L337,540L335,534L339,533L343,526L345,519L343,519L342,510L338,507L345,501L342,496L354,488L366,500L371,495L364,484L366,480L372,477L385,478L388,476L386,479L390,483L393,484L392,485L399,485L399,486L402,482L402,476L405,478L403,487L407,489L415,485L418,488L420,486L422,488L423,499L429,504L432,509L429,514L420,521L423,523L426,519L431,521L426,523L427,525L424,528L427,530L425,532L425,540L413,541L411,543L404,544L401,541L400,542L393,538L390,539L383,536L372,530L367,532L370,537L368,539L375,544L374,546L370,544L369,551L372,551L374,557L367,562L371,566L373,564L377,569L368,574L372,596L347,586L346,596L331,610L324,610L322,604L318,607L306,587L301,587L302,591L294,593L295,596L281,599L285,605L284,607L275,605L274,603L271,604L269,598L249,603L248,608L242,608L222,589L206,609Z","緑":"M343,495L339,492L336,472L339,464L342,463L346,456L344,452L345,447L343,434L347,434L344,426L348,424L348,422L342,407L339,410L335,399L331,394L338,382L339,379L333,381L326,382L326,369L341,366L342,363L339,363L342,359L345,360L348,367L351,366L351,371L376,373L374,381L376,382L398,383L398,379L406,375L421,378L420,382L438,386L440,364L433,352L420,338L419,336L422,333L419,330L416,319L424,311L416,301L424,295L432,306L435,304L437,305L442,303L447,307L449,313L450,312L451,316L456,320L462,319L464,321L470,319L467,327L478,327L482,331L487,329L491,335L497,333L497,339L505,348L515,354L525,364L530,376L539,380L542,388L543,393L547,399L557,403L560,408L560,409L555,405L553,407L564,421L559,424L556,419L544,426L550,434L549,437L553,443L553,445L550,447L547,445L548,450L545,450L546,452L549,449L548,459L555,459L549,465L547,466L544,463L541,468L541,462L535,458L531,440L524,445L519,443L516,436L509,443L507,440L501,443L491,433L476,442L493,462L495,467L486,475L486,480L490,491L470,494L470,497L467,500L476,499L475,505L470,508L466,507L464,510L463,510L461,502L456,504L449,496L451,494L449,492L438,496L438,498L435,500L436,505L432,509L429,504L423,499L424,496L420,486L418,488L415,485L411,486L407,489L402,486L405,478L402,476L402,482L399,486L399,485L392,485L393,484L390,483L386,479L388,476L385,478L372,477L366,480L364,484L371,495L366,500L354,488L343,495Z","岩槻":"M573,423L571,417L560,409L557,403L547,399L543,393L542,388L539,380L530,376L525,364L515,354L505,348L497,339L497,333L491,335L487,329L482,331L478,327L467,327L470,319L464,321L462,319L456,320L451,316L450,312L449,313L445,305L442,303L438,305L433,302L428,291L429,282L425,278L424,271L417,268L416,263L411,254L406,253L403,248L393,244L388,239L391,229L386,220L388,218L386,212L387,210L384,206L387,202L384,194L386,191L386,186L384,183L372,177L374,172L371,170L369,160L363,156L365,155L361,151L361,147L356,143L352,146L351,142L355,141L351,137L349,140L348,137L341,138L341,136L345,135L341,133L329,132L318,137L317,129L308,132L305,121L307,117L314,117L316,110L327,102L330,105L333,103L334,105L337,104L341,95L343,97L345,95L348,98L357,100L362,93L369,100L396,95L420,99L421,97L418,94L401,88L403,76L408,67L416,57L418,51L420,52L422,49L422,46L425,41L414,13L417,10L411,3L414,1L416,4L420,1L422,2L425,0L436,16L445,17L459,26L461,29L466,27L467,31L482,40L484,38L488,40L491,40L489,42L491,43L490,46L511,62L509,63L511,72L513,73L506,94L507,105L502,110L499,118L487,121L483,120L481,122L471,113L468,112L474,118L469,123L470,125L471,126L470,122L474,120L473,124L475,125L475,127L478,124L475,121L479,123L479,127L477,128L478,131L470,126L470,128L475,135L478,134L483,139L486,138L488,148L498,151L509,147L496,155L496,160L492,165L492,177L497,176L500,177L503,174L501,172L504,173L508,170L511,170L510,172L512,173L513,170L518,172L521,166L529,167L531,159L537,159L538,165L536,163L535,165L537,169L536,171L541,173L542,176L546,174L549,179L555,180L567,177L579,210L584,213L581,216L579,214L577,215L585,218L591,227L593,226L594,228L598,226L600,227L597,234L589,238L587,251L577,264L566,266L566,270L569,271L568,273L570,281L575,282L565,299L575,309L578,321L586,319L587,324L592,323L594,344L591,344L593,354L586,355L585,362L588,367L590,367L586,370L589,374L588,377L578,376L573,380L567,380L566,382L575,391L572,404L579,421L586,429L573,423Z"}};
+
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const I=(d,extra="")=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ${extra}>${d}</svg>`;
@@ -186,18 +216,33 @@ const IC={
   tree:'<path d="M12 3 6 12h3l-4 6h14l-4-6h3z"/><path d="M12 18v3"/>',
   big:'<path d="M3 20h18M5 20V9l7-5 7 5v11"/><path d="M9 20v-6h6v6"/>'
 };
+/* 追加のかわいいアイコン（40×40。NIC と同じ描き方） */
+Object.assign(NIC,{
+  adult:`<path d="M9 38q0-10 11-10t11 10" fill="#8FD0FF" ${NO}/><path d="M17 28l3 4 3-4" fill="#fff" ${NO}/><circle cx="20" cy="17" r="9.5" fill="#FFE0C8" ${NO}/><path d="M10.5 16q0-9 9.5-9t9.5 9q-3-4-9.5-4.5Q14 12 10.5 16z" fill="#7A5A48" ${NO}/>${NF(20,18)}<path d="M28 30v3a4 4 0 0 1-8 0" fill="none" stroke="#5A5AEF" stroke-width="2" stroke-linecap="round"/><circle cx="20" cy="34" r="1.8" fill="#5A5AEF"/>`,
+  brace:`<path d="M13 8c-5 0-7 4.5-6 9 1 5 2.6 8 3.2 15 .4 3.6 4 3.6 4.6 0L16 26h8l1.2 6c.6 3.6 4.2 3.6 4.6 0 .6-7 2.2-10 3.2-15 1-4.5-1-9-6-9-3.4 0-4.6 1.6-7 1.6S16.4 8 13 8z" fill="#fff" ${NO}/>${NF(20,15)}<path d="M8.5 21h23" stroke="#B79CFF" stroke-width="2.4" stroke-linecap="round"/><rect x="12" y="19" width="4" height="4" rx="1" fill="#B79CFF"/><rect x="24" y="19" width="4" height="4" rx="1" fill="#B79CFF"/>`,
+  tree:`<path d="M20 26v11" stroke="#9A6B4F" stroke-width="3.4" stroke-linecap="round"/><circle cx="20" cy="16" r="11" fill="#FFB7D5" ${NO}/><circle cx="12" cy="20" r="6" fill="#FFCFE2" ${NO}/><circle cx="28" cy="20" r="6" fill="#FFCFE2" ${NO}/>${NF(20,17)}<circle cx="31" cy="7" r="2" fill="#FFD23F"/>`,
+  cal:`<rect x="6" y="9" width="28" height="26" rx="6" fill="#fff" ${NO}/><path d="M6 17h28" ${NO}/><rect x="6" y="9" width="28" height="8" rx="4" fill="#7CC4FF" ${NO}/><path d="M13 5v7M27 5v7" ${NO}/>${NF(20,26)}`,
+  sunf:`<g stroke="#FFB020" stroke-width="2.6" stroke-linecap="round"><path d="M20 2v5M20 33v5M2 20h5M33 20h5M7 7l3.5 3.5M29.5 29.5 33 33M7 33l3.5-3.5M29.5 10.5 33 7"/></g><circle cx="20" cy="20" r="10" fill="#FFD84D" ${NO}/>${NF(20,20)}`,
+  moonf:`<path d="M27 5a15 15 0 1 0 9 22A12 12 0 0 1 27 5z" fill="#C9B6FF" ${NO}/>${NF(19,22)}<path d="M33 6l1 2 2 1-2 1-1 2-1-2-2-1 2-1z" fill="#FFD23F"/>`,
+  hospf:`<path d="M5 36V15l15-9 15 9v21z" fill="#fff" ${NO}/><path d="M3 16 20 5l17 11" fill="none" stroke="#FF8FB8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><rect x="16" y="13" width="8" height="8" rx="1.5" fill="#FF6FA5"/><path d="M20 14.5v5M17.5 17h5" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/><path d="M16 36v-8h8v8" fill="#BFE3FF" ${NO}/>`,
+  heart:`<path d="M20 34S6 25.5 6 15.5A7 7 0 0 1 20 12a7 7 0 0 1 14 3.5C34 25.5 20 34 20 34z" fill="#FF9EC4" ${NO}/>`,
+  star:`<path d="M20 4l4.4 9.4 10.2 1.2-7.6 7 2 10.1L20 26.6 11 31.7l2-10.1-7.6-7 10.2-1.2z" fill="#FFE070" ${NO}/>`,
+  bub:`<circle cx="20" cy="20" r="13" fill="#BFE6FF" ${NO}/><circle cx="15" cy="15" r="3.5" fill="#fff"/>`,
+  web:`<circle cx="20" cy="20" r="14" fill="#BFE6FF" ${NO}/><path d="M6 20h28M20 6c-5 5-5 23 0 28M20 6c5 5 5 23 0 28" fill="none" ${NO}/>`
+});
+const PAL=[["#FFF0F6","#FF6FA5"],["#EAF6FF","#2FA4EA"],["#FFF7D6","#E0A100"],["#F3EEFF","#8E6BF5"],["#FFEDF4","#EC5A92"],["#ECEFFF","#5A5AEF"]];
 const GENRES={
   ped:{t:"小児科・内科",ic:"kids",ac:"#FF6FA5",soft:"#FFE3EC",soft2:"#FFF5F8",sub:"子どもの熱・せき・おなかの調子に。おとなの内科も。",deco:["kids","pill","plaster"],
-       subs:[["小児科","小児科","#FF6FA5"],["内科","内科","#3DB2F2"]],word:"クリニック・病院"},
+       subs:[["小児科","小児科","#FF6FA5","kids"],["内科","内科","#2FA4EA","adult"]],word:"クリニック・病院"},
   dent:{t:"歯医者さん",ic:"tooth",ac:"#3DB2F2",soft:"#E1F3FF",soft2:"#F3FAFF",sub:"子どもの歯のチェックも、おとなの虫歯も。",deco:["tooth","tooth","pill"],
-       subs:[["小児歯科","小児歯科","#FF6FA5"],["矯正歯科","矯正歯科","#9C7BFF"]],word:"歯医者さん"},
+       subs:[["小児歯科","小児歯科","#FF6FA5","kids"],["矯正歯科","矯正歯科","#8E6BF5","brace"]],word:"歯医者さん"},
   ent:{t:"耳鼻科",ic:"ear",ac:"#E0A100",soft:"#FFF1C2",soft2:"#FFFAE6",sub:"鼻水・中耳炎・花粉症のときに。",deco:["ear","pill","kids"],subs:[],word:"耳鼻科"},
   eye:{t:"眼科",ic:"eye",ac:"#5A5AEF",soft:"#E5E8FF",soft2:"#F4F5FF",sub:"目のかゆみ・ものもらい・視力のチェックに。",deco:["eye","eye","kids"],subs:[],word:"眼科"},
   skin:{t:"皮膚科",ic:"cream",ac:"#C45BD9",soft:"#FBE6FF",soft2:"#FDF4FF",sub:"湿疹・あせも・とびひ・虫さされに。",deco:["cream","plaster","kids"],subs:[],word:"皮膚科"},
   plastic:{t:"形成外科",ic:"plaster",ac:"#E8558E",soft:"#FFE6F2",soft2:"#FFF5FA",sub:"ケガのきず・やけど・できものの相談に。",deco:["plaster","plaster","cream"],subs:[],word:"形成外科"},
   ortho:{t:"整形外科",ic:"bone",ac:"#2E8FD6",soft:"#E1F3FF",soft2:"#F3FAFF",sub:"ねんざ・骨折・腰や肩のいたみに。",deco:["bone","plaster","bone"],subs:[],word:"整形外科"},
   pharm:{t:"薬局",ic:"pill",ac:"#9C7BFF",soft:"#F1E8FF",soft2:"#F9F5FF",sub:"処方せんのお薬を受け取りに。",deco:["pill","pill","cream"],subs:[],word:"薬局"},
-  park:{t:"公園",ic:"slide",ac:"#3DB2F2",soft:"#E5F4FF",soft2:"#FFFBEA",sub:"おさんぽ・遊具・ピクニックに。",deco:["slide","kids","slide"],subs:[["大きな公園","big","#FF6FA5"]],word:"公園",noHours:true}
+  park:{t:"公園",ic:"slide",ac:"#3DB2F2",soft:"#E5F4FF",soft2:"#FFFBEA",sub:"おさんぽ・遊具・ピクニックに。",deco:["slide","kids","slide"],subs:[["大きな公園","big","#FF6FA5","tree"]],word:"公園",noHours:true}
 };
 const g=(new URLSearchParams(location.search).get("g")||"ped");
 const G=GENRES[g]||GENRES.ped;
@@ -217,41 +262,70 @@ addEventListener("message",e=>{const d=e.data;if(e.source!==window.parent||!d||d
 
 /* ---------- ヒーロー ---------- */
 function hero(){
-  const deco=[[8,"14%",40,"-1s"],[78,"8%",34,"-3s"],[88,"62%",28,"-2s"],[30,"78%",24,"-4s"]].map(([l,t,s,d],i)=>`<span style="left:${l}%;top:${t};--s:${s}px;--d:${d}">${svg(NIC[G.deco[i%G.deco.length]],40)}</span>`).join("");
+  const dk=[G.deco[0],"heart","star",G.deco[1],"bub","star",G.deco[2],"heart"];
+  const deco=[[6,"6%",30,"-1s"],[80,"6%",36,"-3s"],[92,"40%",22,"-2s"],[66,"58%",28,"-4s"],[2,"70%",22,"-2.5s"],[44,"4%",18,"-1.5s"],[86,"78%",30,"-.5s"],[28,"84%",18,"-3.5s"]].map(([l,t,s,d],i)=>`<span style="left:${l}%;top:${t};--s:${s}px;--d:${d}">${svg(NIC[dk[i]],40)}</span>`).join("");
   $("#hero").innerHTML=`<div class="deco" aria-hidden="true">${deco}</div>
     <div class="hrow"><div class="hic">${svg(NIC[G.ic],40)}</div><div><div class="eyebrow">NEAR HOME MAP</div><h1>${esc(G.t)}マップ</h1><p class="hsub">${esc(G.sub)}</p></div></div>
     <div class="hstat"><span>さいたま市内 <b id="hn">…</b> か所</span><span>近い順に <b>20</b> か所をピンで</span></div>`;
 }
 /* ---------- 中心 ---------- */
 const town=()=>String(prof&&prof.town||"").replace(/[0-9０-９].*$/,"");
+const isReg=()=>!!(prof&&prof.ward);
 function origin(){
-  const reg=!!(prof&&prof.ward);
-  if(S.area&&S.area!=="home"){const w=S.area+"区";return {ll:WARD_LL[w],reg,t:w+"のまんなか（区役所）から近い順",s:reg?"「家の近く」をえらぶと、おうちからの順にもどります":"区のボタンで場所を変えられます"}}
+  const reg=isReg(),inW=S.area?`（${S.area}区の中だけ）`:"";
   if(reg){
     const gg=prof.geo;
-    if(gg&&gg.ok&&gg.lat&&(!gg.q||gg.q===("埼玉県さいたま市"+prof.ward+(prof.town||""))))return {ll:[gg.lat,gg.lon],reg,home:true,t:"登録した住所から近い順",s:prof.ward+town()};
-    if(WARD_LL[prof.ward])return {ll:WARD_LL[prof.ward],reg,t:prof.ward+"（区役所）から近い順",s:"マイページで番地まで入れると、おうちから測れます"};
+    if(gg&&gg.ok&&gg.lat&&(!gg.q||gg.q===("埼玉県さいたま市"+prof.ward+(prof.town||""))))return {ll:[gg.lat,gg.lon],reg,home:true,t:"登録した住所から近い順"+inW,s:prof.ward+town()};
+    if(WARD_LL[prof.ward])return {ll:WARD_LL[prof.ward],reg,t:prof.ward+"（区役所）から近い順"+inW,s:"マイページで番地まで入れると、おうちから測れます"};
   }
-  return {ll:CITY,reg,t:"さいたま市役所のあたりから近い順",s:"区のボタンで場所を変えられます"};
+  if(S.area)return {ll:WARD_LL[S.area+"区"],reg,t:S.area+"区の"+G.word,s:"区のまんなか（区役所）から近い順。下の地図の区をもう一度タップで全体にもどります"};
+  return {ll:CITY,reg,t:"さいたま市の"+G.word,s:"市役所のあたりから近い順。下の地図の区をタップすると、その区だけになります"};
 }
+const WCOL=["#FFB3CF","#FFE38A","#9FD8FF","#CDB8FF","#FFC6DA","#B8C4FF","#FFD6E8","#FFF0A6","#BFE6FF","#E2D2FF"];
 function renderAreas(){
-  const reg=!!(prof&&prof.ward);
-  const cur=S.area||(reg?"home":"");
-  $("#areas").innerHTML=`<span class="lab">場所</span>`+(reg?`<button class="chip${cur==="home"?" on":""}" data-a="home">${I(IC.house)}家の近く</button>`:`<button class="chip${cur===""?" on":""}" data-a="">${I(IC.star)}市役所のあたり</button>`)
-    +WARDS.map(w=>`<button class="chip${cur===w?" on":""}" data-a="${w}">${w}区</button>`).join("");
+  const reg=isReg();
+  $("#areas").innerHTML=`<span class="lab">場所</span>`+`<button class="chip${!S.area?" on":""}" data-a="" style="--cc:#FF6FA5">${reg?svg(NIC.nursery,40)+"家の近く":svg(NIC.star,40)+"市全体"}</button>`
+    +WARDS.map((w,i)=>`<button class="chip${S.area===w?" on":""}" data-a="${w}" style="--cc:${PAL[i%PAL.length][1]}">${w}区</button>`).join("");
+}
+/* 10区の絵の地図：区をタップするとその区だけ、もう一度で全体 */
+function buildWardMap(){
+  const ns="http://www.w3.org/2000/svg",gp=$("#wpaths"),gl=$("#wlabels");
+  WARDS.forEach((w,i)=>{
+    const el=document.createElementNS(ns,"g");el.setAttribute("class","ward");el.setAttribute("tabindex","0");el.setAttribute("role","button");el.setAttribute("aria-label",w+"区");el.dataset.w=w;el.style.animationDelay=(i*60)+"ms";
+    el.innerHTML=`<path d="${MAP.d[w]}" fill="${WCOL[i]}"/>`;
+    const go=()=>{S.area=S.area===w?null:w;S.shown=N;renderAreas();refresh(true)};
+    el.addEventListener("click",go);el.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();go()}});
+    gp.appendChild(el);
+    const [x,y]=MAP.cen[w],wd=Math.max(w.length*17+34,78);
+    const l=document.createElementNS(ns,"g");l.setAttribute("class","wl");l.dataset.w=w;
+    l.innerHTML=`<rect x="${x-wd/2}" y="${y-23}" width="${wd}" height="44" rx="15"/><text x="${x}" y="${y-3}">${w}区</text><text class="cnt" x="${x}" y="${y+15}">0</text>`;
+    gl.appendChild(l);
+  });
+}
+function renderWardMap(){
+  const wc={};DATA.forEach(r=>{if(match(r,true))wc[r.w]=(wc[r.w]||0)+1});
+  document.querySelectorAll(".wl").forEach(l=>l.querySelector(".cnt").textContent=(wc[l.dataset.w]||0)+"か所");
+  document.querySelectorAll(".ward").forEach(el=>{const w=el.dataset.w;el.classList.toggle("on",S.area===w);el.classList.toggle("dim",!!S.area&&S.area!==w);el.setAttribute("aria-pressed",S.area===w)});
+  $("#whint").textContent=S.area?`${S.area}区の${G.word}を並べています（もう一度タップで全体）`:`区をタップすると、その区の${G.word}だけを並べます`;
+}
+function showMaps(){
+  const reg=isReg();
+  $("#tg").parentElement.hidden=!reg;
+  $("#mw").hidden=!reg;
+  $("#wardsec").hidden=reg&&mapOpen;
 }
 function renderFilters(){
   const f=[];
-  G.subs.forEach(([lab,key,c])=>f.push(`<button class="chip${S.subs.has(key)?" on":""}" data-s="${esc(key)}">${key==="big"?I(IC.big):I(IC.kid)}${esc(lab)}</button>`));
+  G.subs.forEach(([lab,key,c,ic])=>f.push(`<button class="chip${S.subs.has(key)?" on":""}" data-s="${esc(key)}" style="--cc:${c}">${svg(NIC[ic],40)}${esc(lab)}</button>`));
   if(!G.noHours){
-    f.push(`<button class="chip${S.sat?" on":""}" data-f="sat">${I(IC.sat)}土曜も</button>`);
-    f.push(`<button class="chip${S.sun?" on":""}" data-f="sun">${I(IC.sun)}日曜・祝日も</button>`);
-    f.push(`<button class="chip${S.night?" on":""}" data-f="night">${I(IC.moon)}夜18:30以降も</button>`);
+    f.push(`<button class="chip${S.sat?" on":""}" data-f="sat" style="--cc:#2FA4EA">${svg(NIC.cal,40)}土曜も</button>`);
+    f.push(`<button class="chip${S.sun?" on":""}" data-f="sun" style="--cc:#E0A100">${svg(NIC.sunf,40)}日曜・祝日も</button>`);
+    f.push(`<button class="chip${S.night?" on":""}" data-f="night" style="--cc:#8E6BF5">${svg(NIC.moonf,40)}夜18:30以降も</button>`);
   }
   $("#filters").innerHTML=f.length?`<span class="lab">しぼる</span>`+f.join(""):"";
   $("#filters").hidden=!f.length;
 }
-$("#areas").onclick=e=>{const b=e.target.closest("button");if(!b)return;S.area=b.dataset.a||null;if(S.area==="")S.area=null;S.shown=N;renderAreas();refresh(true)};
+$("#areas").onclick=e=>{const b=e.target.closest("button");if(!b)return;S.area=b.dataset.a||null;S.shown=N;renderAreas();refresh(true)};
 $("#filters").onclick=e=>{const b=e.target.closest("button");if(!b)return;
   if(b.dataset.s){const k=b.dataset.s;S.subs.has(k)?S.subs.delete(k):S.subs.add(k)}
   if(b.dataset.f)S[b.dataset.f]=!S[b.dataset.f];
@@ -259,18 +333,21 @@ $("#filters").onclick=e=>{const b=e.target.closest("button");if(!b)return;
 
 /* ---------- しぼりこみ・近い順 ---------- */
 const dist=(a,b)=>{const R=6371,r=Math.PI/180,dl=(b[0]-a[0])*r,dn=(b[1]-a[1])*r;const h=Math.sin(dl/2)**2+Math.cos(a[0]*r)*Math.cos(b[0]*r)*Math.sin(dn/2)**2;return 2*R*Math.asin(Math.sqrt(h))};
-function match(r){
+function match(r,skipArea){
+  if(!skipArea&&S.area&&r.w!==S.area)return false;
   if(S.subs.size){let ok=false;for(const k of S.subs){if(k==="big"?r.big:(r.s||[]).includes(k))ok=true}if(!ok)return false}
   const f=r.f||[];
   if(S.sat&&!f[0])return false;if(S.sun&&!f[1])return false;if(S.night&&!f[2])return false;
   return true;
 }
-function sorted(o){return DATA.filter(match).map(r=>({r,km:dist(o.ll,[r.la,r.lo])})).sort((a,b)=>a.km-b.km)}
+function sorted(o){return DATA.filter(r=>match(r)).map(r=>({r,km:dist(o.ll,[r.la,r.lo])})).sort((a,b)=>a.km-b.km)}
 const kmT=km=>km<0.1?"0.1km未満":km.toFixed(1)+"km";
 const carT=km=>"車で約"+Math.max(1,Math.round(km*1.3/25*60))+"分";
 const walkT=km=>"歩いて約"+Math.max(1,Math.round(km*1.25/4.8*60))+"分";
 const moveT=km=>km<1.2?walkT(km):carT(km);
-const pc=r=>{for(const [lab,key,c] of G.subs){if(key==="big"?r.big:(r.s||[]).includes(key))return c}return G.ac};
+const pc=(r,i)=>{for(const [lab,key,c] of G.subs){if(key==="big"?r.big:(r.s||[]).includes(key))return c}return G.subs.length?G.ac:PAL[(i||0)%PAL.length][1]};
+const cardIc=r=>g==="ped"?((r.s||[]).includes("小児科")?"kids":"adult"):g==="park"?(r.big?"tree":"slide"):g==="dent"&&(r.s||[]).includes("小児歯科")?"tooth":G.ic;
+const host=u=>{try{const x=new URL(url(u));return (x.host+x.pathname).replace(/^www\./,"").replace(/\/$/,"")}catch(e){return u}};
 const url=u=>!u?"":(/^https?:\/\//i.test(u)?u:"https://"+u.replace(/^\/+/,""));
 const gmap=r=>"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(r.n+" さいたま市"+r.a.split(" ")[0]);
 const gsearch=r=>"https://www.google.com/search?q="+encodeURIComponent(r.n+" さいたま市"+r.w+"区 電話");
@@ -278,22 +355,23 @@ const gsearch=r=>"https://www.google.com/search?q="+encodeURIComponent(r.n+" さ
 /* ---------- 一覧 ---------- */
 function tags(r){
   const t=[],f=r.f||[];
-  (r.s||[]).filter(s=>G.subs.some(x=>x[1]===s)).forEach(s=>t.push(`<span class="tag" style="--tb:#FFE3EC;--tc:#C8326E">${I(IC.kid)}${esc(s)}</span>`));
-  if(r.big)t.push(`<span class="tag" style="--tb:#FFE3EC;--tc:#C8326E">${I(IC.big)}大きな公園</span>`);
-  if(f[3])t.push(`<span class="tag" style="--tb:#E5E8FF;--tc:#4545C9">${I(IC.hosp)}病院</span>`);
-  if(f[0])t.push(`<span class="tag" style="--tb:#E1F3FF;--tc:#1F78B8">${I(IC.sat)}土曜も</span>`);
-  if(f[1])t.push(`<span class="tag" style="--tb:#FFF1C2;--tc:#8A6400">${I(IC.sun)}日曜・祝日も</span>`);
-  if(f[2])t.push(`<span class="tag" style="--tb:#EFE8FF;--tc:#6A47D1">${I(IC.moon)}夜もやってる</span>`);
+  G.subs.filter(x=>x[1]!=="big"&&(r.s||[]).includes(x[1])).forEach(([lab,key,c,ic])=>t.push(`<span class="tag" style="--tb:color-mix(in srgb,${c} 16%,#fff);--tc:color-mix(in srgb,${c} 80%,#2E2B4F)">${svg(NIC[ic],40)}${esc(lab)}</span>`));
+  if(r.big)t.push(`<span class="tag" style="--tb:#FFE3EF;--tc:#C8326E">${svg(NIC.tree,40)}大きな公園</span>`);
+  if(f[3])t.push(`<span class="tag" style="--tb:#FFE3EF;--tc:#C8326E">${svg(NIC.hospf,40)}病院</span>`);
+  if(f[0])t.push(`<span class="tag" style="--tb:#E1F3FF;--tc:#1F78B8">${svg(NIC.cal,40)}土曜も</span>`);
+  if(f[1])t.push(`<span class="tag" style="--tb:#FFF3C4;--tc:#8A6400">${svg(NIC.sunf,40)}日曜・祝日も</span>`);
+  if(f[2])t.push(`<span class="tag" style="--tb:#EFE8FF;--tc:#6A47D1">${svg(NIC.moonf,40)}夜もやってる</span>`);
   return t.join("");
 }
 function card(x,i){
-  const r=x.r,c=pc(r);
-  return `<li class="card" tabindex="0" data-i="${i}" style="--pc:${c};--d:${i%N}">
-    <div class="cic">${svg(NIC[G.ic],40)}<span class="rk">${i+1}</span></div>
+  const r=x.r,c=pc(r,i),cb=PAL[i%PAL.length][0];
+  return `<li class="card" tabindex="0" data-i="${i}" style="--pc:${c};--cb:${cb};--d:${i%N}">
+    <div class="cic">${svg(NIC[cardIc(r)],40)}<span class="rk">${i+1}</span></div>
     <div class="ct"><h3>${esc(r.n)}</h3><span class="km">${kmT(x.km)}<small>${moveT(x.km)}</small></span></div>
     <div class="cm">${I(IC.pin)}<span>${esc(r.a)}</span></div>
     ${r.h?`<div class="cm">${I(IC.clock)}<span>${esc(r.h)}</span></div>`:"<div></div>"}
     <div class="tags">${tags(r)}</div>
+    ${r.u?`<a class="url" href="${esc(url(r.u))}" target="_blank" rel="noopener">${svg(NIC.web,40)}<span>${esc(host(r.u))}</span></a>`:""}
     <div class="btns"><a class="main" href="${gmap(r)}" target="_blank" rel="noopener">${I(IC.map)}地図・道順</a>${r.u?`<a href="${esc(url(r.u))}" target="_blank" rel="noopener">${I(IC.web)}ホームページ</a>`:""}${G.noHours?"":`<a href="${gsearch(r)}" target="_blank" rel="noopener">${I(IC.search)}電話・口コミ</a>`}</div>
   </li>`;
 }
@@ -304,18 +382,21 @@ function refresh(move){
   $("#from").innerHTML=`<span class="dot">${I(o.home?IC.house:IC.pin)}</span><span>${esc(o.t)}<small>${esc(o.s)}</small></span>`;
   $("#reg").innerHTML=o.reg?"":`<div class="reg"><p><b>マイページに住所を登録すると、</b>おうちの近くの${esc(G.word)}を自動でしぼりこんで、近い順に出せます。</p><button type="button" id="regBtn">マイページ登録する</button></div>`;
   const rb=$("#regBtn");if(rb)rb.onclick=toMyPage;
+  if(!o.reg)$("#reg").querySelector("p").innerHTML=`<b>マイページに住所を登録すると、</b>立体の地図にピンが立って、おうちから近い${esc(G.word)}を順番に出せます。`;
   const rows=all.slice(0,S.shown);
   $("#lt").textContent="近い順";
   $("#lc").textContent=all.length?`${all.length}か所のうち ${rows.length}か所`:"";
   $("#list").innerHTML=rows.length?rows.map(card).join(""):`<li class="empty">この条件の${esc(G.word)}は見つかりませんでした。しぼりこみをへらしてみてね。</li>`;
   $("#more").innerHTML=all.length>rows.length?`<button type="button" id="moreBtn">もっと見る（次の${Math.min(N,all.length-rows.length)}か所）</button>`:"";
   const mb=$("#moreBtn");if(mb)mb.onclick=()=>{S.shown+=N;refresh(false)};
-  if(mapOpen&&move!==false)drawMap(o,all.slice(0,N));
+  showMaps();renderWardMap();
+  if(o.reg&&mapOpen&&move!==false)drawMap(o,all.slice(0,N));
 }
 $("#list").addEventListener("click",e=>{if(e.target.closest("a"))return;const li=e.target.closest(".card");if(!li)return;const i=+li.dataset.i;focusOn(i)});
 $("#list").addEventListener("keydown",e=>{const li=e.target.closest(".card");if(li&&(e.key==="Enter"||e.key===" ")&&!e.target.closest("a")){e.preventDefault();focusOn(+li.dataset.i)}});
 function focusOn(i){
   const x=LAST[i];if(!x)return;
+  if(!isReg()){window.open(gmap(x.r),"_blank","noopener");return}
   if(!mapOpen)toggleMap();
   const el=$("#map");el.scrollIntoView({behavior:RM?"auto":"smooth",block:"center"});
   if(ready)setTimeout(()=>openPin(x,i),RM?0:350);
@@ -397,8 +478,8 @@ function place(o,rows){
   const hm=document.createElement("div");hm.innerHTML=`<div class="home${o.home?"":" guest"}">${I(o.home?IC.house:IC.star)}<i class="ring"></i></div>`;hm.style.zIndex=200;hm.title=o.home?"登録した住所":"さがす中心";
   markers.push(new maplibregl.Marker({element:hm}).setLngLat([o.ll[1],o.ll[0]]).addTo(map));
   const b=new maplibregl.LngLatBounds([o.ll[1],o.ll[0]],[o.ll[1],o.ll[0]]);
-  rows.forEach((x,i)=>{const r=x.r,c=pc(r);b.extend([r.lo,r.la]);
-    const e=document.createElement("div");e.className="pw";e.style.zIndex=100-i;e.style.setProperty("--b",delay);
+  rows.forEach((x,i)=>{const r=x.r,c=pc(r,i);b.extend([r.lo,r.la]);
+    const c2=pc(r,i);const e=document.createElement("div");e.className="pw";e.style.zIndex=100-i;e.style.setProperty("--b",delay);
     e.innerHTML=`<div class="pin" style="--pc:${c};--d:${i}">${pinSvg(c)}<b>${i+1}</b></div><i class="sh" style="--d:${i}"></i>`;
     e.setAttribute("role","button");e.setAttribute("aria-label",(i+1)+"番 "+r.n);e.title=(i+1)+". "+r.n;
     e.addEventListener("click",ev=>{ev.stopPropagation();openPin(x,i)});
@@ -423,6 +504,7 @@ function openPin(x,i){
 function toggleMap(){
   mapOpen=!mapOpen;const t=$("#tg");t.textContent=mapOpen?"地図をとじる ▴":"地図をひらく ▾";t.setAttribute("aria-expanded",mapOpen);
   const mw=$("#mw");mw.classList.add("anim");mw.classList.toggle("shut",!mapOpen);setTimeout(()=>mw.classList.remove("anim"),480);
+  showMaps();
   if(mapOpen)setTimeout(()=>{map&&map.resize();refresh(true)},470);
 }
 $("#tg").onclick=toggleMap;
@@ -435,8 +517,8 @@ tt.onclick=()=>scrollTo({top:0,behavior:RM?"auto":"smooth"});
 $("#note").innerHTML=g==="park"
   ?"公園の場所と名前は OpenStreetMap（© OpenStreetMap contributors）をもとにしています。遊具やトイレ・駐車場の有無は、行く前に市のページなどで確かめてください。"
   :"病院・薬局の情報は、厚生労働省「医療情報ネット」のオープンデータ（2025年12月1日時点）をもとにしています。診療時間・休みは変わることがあるので、行く前に電話やホームページで確かめてください。夜や休日の急な病気は「小児科 急患電話マップ」（#8000）へ。";
-hero();renderAreas();renderFilters();
-if(G.subs.length)$("#legend").innerHTML="ピンの色："+G.subs.map(([lab,k,c])=>`<b style="color:${c}">●${esc(lab)}</b>`).join(" ")+` <b style="color:${G.ac}">●そのほか</b>　`;
+hero();buildWardMap();renderAreas();renderFilters();
+if(G.subs.length)$("#legend").innerHTML="ピンの色："+G.subs.map(([lab,k,c])=>`<b style="color:${c}">●${esc(lab)}</b>`).join(" ")+(g==="ped"?"　":` <b style="color:${G.ac}">●そのほか</b>　`);
 fetch("near-data/"+g+".json").then(r=>r.json()).then(d=>{DATA=d;$("#hn").textContent=d.length;refresh(true)}).catch(()=>{$("#list").innerHTML='<li class="empty">データを読みこめませんでした。時間をおいて開きなおしてください。</li>'});
 </script>
 <script>/* 外へのリンクは新しい画面で開く（街ナビの中で開いたとき） */document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a[href]");if(!a)return;var h=a.getAttribute("href")||"";if(h.charAt(0)==="#"||/^(javascript|tel|mailto):/i.test(h))return;a.target="_blank";a.rel="noopener"},true);</script>

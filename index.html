@@ -1562,15 +1562,24 @@ $("#scrim").addEventListener("click",()=>goBack());
 $("#sheetClose").addEventListener("click",()=>goBack());
 $("#sheet").addEventListener("click",e=>{if(e.target.closest("a[href='#mypage']"))closeSheet()});
 let viewerOpen=false;
+/* iframe の src を入れかえると、ブラウザの「もどる」の履歴が1つふえる。
+   そのせいで × やパネルの「閉じる」（history.back）が中のページをもどるだけになり、反応しないように見えていた。
+   開くたびに新しい iframe に取りかえて、履歴をふやさないようにする */
+function freshFrame(url,title){
+  const old=$("#vFrame"),f=document.createElement("iframe");
+  f.id="vFrame";f.title=title||"";f.setAttribute("loading","eager");
+  if(url)f.src=url;old.replaceWith(f);return f;
+}
 function openViewer(id,title){
-  const v=$("#viewer"),f=$("#vFrame");
+  const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
-  f.onload=()=>{v.classList.add("ready");sendHome()};f.src=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");f.title=title||"";
+  const f=freshFrame(PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html"),title);
+  f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
   setTimeout(()=>$("#vClose").focus({preventScroll:true}),60);
 }
 function closeViewer(){if(!viewerOpen)return;viewerOpen=false;const v=$("#viewer");v.classList.remove("on");
-  setTimeout(()=>{if(!viewerOpen){v.hidden=true;$("#vFrame").src="about:blank"}},420)}
+  setTimeout(()=>{if(!viewerOpen){v.hidden=true;freshFrame("","")}},420)}
 $("#sheet").addEventListener("click",e=>{const b=e.target.closest("[data-view]");if(b){e.preventDefault();openViewer(b.dataset.view,b.dataset.vt)}});
 $("#vClose").addEventListener("click",closeViewer);
 /* 写しのページ（あずかりマップの「近くの園をさがす」など）へ、登録した区・住所の位置を渡す。写しから「マイページ登録」を押されたらマイページへ */

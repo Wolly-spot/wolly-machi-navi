@@ -457,6 +457,7 @@ b.addEventListener("click",function(){
 </style>
 <button type="button" class="wtotop" id="wtotop" aria-label="いちばん上にもどる"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 14l6-6 6 6"/><path d="M12 8v12"/></svg>上に<br>もどる</button>
 <script>
+(function(){if(window.parent!==window){var bb=document.getElementById("backbtn");if(bb)bb.style.display="none"}})();
 (function(){var b=document.getElementById("wtotop");if(!b)return;
 function on(){b.classList.toggle("on",window.scrollY>400&&document.body.style.overflow!=="hidden")}
 addEventListener("scroll",on,{passive:true});on();

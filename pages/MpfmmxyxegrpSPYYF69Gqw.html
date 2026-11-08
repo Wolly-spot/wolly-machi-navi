@@ -700,6 +700,7 @@ b.addEventListener("click",function(){
 </style>
 <button type="button" class="wtotop" id="wtotop" aria-label="いちばん上にもどる"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 14l6-6 6 6"/><path d="M12 8v12"/></svg>上に<br>もどる</button>
 <script>
+(function(){if(window.parent!==window){var bb=document.getElementById("backbtn");if(bb)bb.style.display="none"}})();
 (function(){var b=document.getElementById("wtotop");if(!b)return;
 function on(){b.classList.toggle("on",window.scrollY>400&&document.body.style.overflow!=="hidden")}
 addEventListener("scroll",on,{passive:true});on();
@@ -745,6 +746,8 @@ b.addEventListener("click",function(){window.scrollTo({top:0,behavior:matchMedia
 .np-ph svg{width:16px;height:16px}
 .np-ph[aria-pressed="true"]{background:#2E2B4F;color:#fff;border-color:#2E2B4F}
 .np-load{position:absolute;inset:0;z-index:1;display:grid;place-items:center;font-size:13px;font-weight:700;color:var(--muted);pointer-events:none}
+.np-ward{margin-top:10px}
+.np-ward .mapcard{box-shadow:none}
 .np-msg{margin:8px 0 0;font-size:12px;color:var(--muted)}
 .npw{width:30px;height:40px;cursor:pointer}
 .npin{position:relative;width:30px;height:40px;animation:npDrop .6s cubic-bezier(.3,1.6,.5,1) both;animation-delay:calc(var(--b,0s) + var(--d) * 55ms);filter:drop-shadow(0 2px 2px rgba(46,43,79,.3))}
@@ -799,6 +802,7 @@ const WARD_LL={"西区":[35.9256,139.5794],"北区":[35.9305,139.6203],"大宮�
 const CITY=[35.8617,139.6455];
 const N=20;
 let prof=null,open=false,mapOpen=true,map=null,layer=null,first=true,pending=false;
+const NEARMODE=/[?&]near=1\b/.test(location.search);
 try{prof=JSON.parse(localStorage.getItem("wolly.profile")||"null")}catch(e){}
 /* 街ナビの中で開いたときは、街ナビから登録内容（区・住所の位置）を受け取る */
 addEventListener("message",e=>{const d=e.data;if(e.source!==window.parent||!d||d.type!=="wolly-home")return;
@@ -836,12 +840,15 @@ const STAR='<svg viewBox="0 0 24 24" fill="#fff"><path d="M12 3l2.6 5.6 6 .7-4.5
 function shell(){
   const P=document.getElementById("nearP");
   P.innerHTML=`<div class="np-head"><div class="np-from" id="npFrom"></div><button type="button" class="np-tg" id="npTg" aria-expanded="true" aria-controls="npMw">地図をとじる ▴</button></div>
-    <div class="np-mw" id="npMw"><div><div class="np-mapbox"><div id="nearMap" role="region" aria-label="近くの園の地図（立体）"><span class="np-load" id="npLoad">地図をよみこみ中…</span></div><button type="button" class="np-ph" id="npPh" aria-pressed="false">${PHOTO}写真で見る</button></div><p class="np-msg" id="npMsg">ピンをタップすると、園の名前が出ます。地図は2本の指で動かす・回す・かたむけることができます。</p></div></div>
+    <div id="npWard" class="np-ward"></div><div class="np-mw" id="npMw"><div><div class="np-mapbox"><div id="nearMap" role="region" aria-label="近くの園の地図（立体）"><span class="np-load" id="npLoad">地図をよみこみ中…</span></div><button type="button" class="np-ph" id="npPh" aria-pressed="false">${PHOTO}写真で見る</button></div><p class="np-msg" id="npMsg">ピンをタップすると、園の名前が出ます。地図は2本の指で動かす・回す・かたむけることができます。</p></div></div>
     <div class="np-cats" id="npCats" aria-label="ジャンル">${`<button class="chip" data-k="">全種類</button>`+CATS.map(c=>`<button class="chip" data-k="${c.k}" style="--cc:${c.c}">${ic(c.ic)}${c.l}</button>`).join("")}</div>
     <div id="npReg"></div><ol class="np-list" id="npList"></ol>`;
+  /* 「家の近くで探す」から開いたとき：途中にあった10区の絵の地図をここへ移す（立体の地図をとじたとき・未登録のときに出す） */
+  const mc=document.querySelector(".mapcard");
+  if(NEARMODE&&mc){const sec=mc.closest("section");P.querySelector("#npWard").appendChild(mc);sec&&(sec.style.display="none")}
   P.querySelector("#npCats").onclick=e=>{const b=e.target.closest("button");if(!b)return;const k=b.dataset.k;if(!k)S.cats.clear();else S.cats.has(k)?S.cats.delete(k):S.cats.add(k);render()};
   P.querySelector("#npTg").onclick=()=>{mapOpen=!mapOpen;const t=P.querySelector("#npTg");t.textContent=mapOpen?"地図をとじる ▴":"地図をひらく ▾";t.setAttribute("aria-expanded",mapOpen);
-    const mw=P.querySelector("#npMw");mw.classList.add("anim");mw.classList.toggle("shut",!mapOpen);setTimeout(()=>mw.classList.remove("anim"),480);if(mapOpen)setTimeout(()=>{map&&map.resize();refresh()},470)};
+    const mw=P.querySelector("#npMw");mw.classList.add("anim");mw.classList.toggle("shut",!mapOpen);setTimeout(()=>mw.classList.remove("anim"),480);showMaps();if(mapOpen)setTimeout(()=>{map&&map.resize();refresh()},470)};
   P.querySelector("#npPh").onclick=function(){photo=!photo;this.setAttribute("aria-pressed",photo);this.innerHTML=PHOTO+(photo?"イラストで見る":"写真で見る");if(ready)setPhoto()};
   P.querySelector("#npList").onclick=e=>{const li=e.target.closest("li");if(li)openPop(+li.dataset.id,li)};
   P.querySelector("#npList").onkeydown=e=>{const li=e.target.closest("li");if(li&&(e.key==="Enter"||e.key===" ")){e.preventDefault();openPop(+li.dataset.id,li)}};
@@ -951,17 +958,24 @@ function openPin(x,i,ll){
 }
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-npo]");if(b){e.preventDefault();e.stopPropagation();popup&&popup.remove();openPop(+b.dataset.npo,null)}},true);
 
+function showMaps(){
+  const reg=!!(prof&&prof.ward);
+  document.getElementById("npTg").hidden=!reg;
+  document.getElementById("npMw").hidden=!reg;
+  const w=document.getElementById("npWard");w.hidden=!w.firstChild||(reg&&mapOpen);
+}
 function refresh(){
   if(!open)return;
   const o=origin(),rows=nearest(o);
+  showMaps();
   document.getElementById("npFrom").innerHTML=`${ic(o.home?"house":"pin")}<span>${esc(o.t)}<small>${esc(o.s)}</small></span>`;
-  document.getElementById("npReg").innerHTML=o.reg?"":`<div class="np-reg"><p><b>マイページに住所を登録すると、</b>おうちの近くの園に自動でしぼりこんで、近い順に出せます。</p><button type="button" id="npRegBtn">マイページ登録する</button></div>`;
+  document.getElementById("npReg").innerHTML=o.reg?"":`<div class="np-reg"><p><b>マイページに住所を登録すると、</b>立体の地図にピンが立って、おうちの近くの園に自動でしぼりこんで近い順に出せます。</p><button type="button" id="npRegBtn">マイページ登録する</button></div>`;
   const rb=document.getElementById("npRegBtn");if(rb)rb.onclick=toMyPage;
   document.querySelectorAll("#npCats .chip").forEach(b=>b.classList.toggle("on",b.dataset.k?S.cats.has(b.dataset.k):S.cats.size===0));
   document.getElementById("npList").innerHTML=rows.length?rows.map((x,i)=>{const r=x.r,c=CAT[r.c];
     return `<li tabindex="0" data-id="${r.id}" style="--cc:${c.c};--d:${i}" aria-label="${i+1}番目 ${esc(r.n)} ${kmT(x.km)}"><span class="np-n">${i+1}</span><span class="np-t"><b>${esc(r.n)}</b><span>${c.l}・${r.w}区</span></span><span class="np-km">${kmT(x.km)}<small>${carT(x.km)}</small></span></li>`}).join("")
     :`<li class="np-empty" style="cursor:default">この条件の園は見つかりませんでした。ジャンルや条件をへらしてみてね。</li>`;
-  if(mapOpen)drawMap(o,rows);
+  if(o.reg&&mapOpen)drawMap(o,rows);
 }
 function toMyPage(){
   if(window.parent!==window){window.parent.postMessage({type:"wolly-mypage"},"*");return}
