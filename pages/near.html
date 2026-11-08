@@ -50,6 +50,8 @@ h1{margin:4px 0 2px;font:400 clamp(22px,6.4vw,30px)/1.25 var(--font-display);col
 .chip:not(.on){background:color-mix(in srgb,var(--cc) 9%,var(--card));border-color:color-mix(in srgb,var(--cc) 30%,var(--line))}
 .chip.on{background:var(--cc);border-color:var(--cc);color:#fff;box-shadow:0 3px 8px color-mix(in srgb,var(--cc) 40%,transparent)}
 .chip:active{transform:scale(.94)}
+.chip.pop{animation:chipPop .45s cubic-bezier(.3,1.6,.5,1)}
+@keyframes chipPop{0%{transform:scale(.88)}60%{transform:scale(1.06)}100%{transform:none}}
 .chips .lab{flex:0 0 auto;align-self:center;font-size:11px;font-weight:800;color:var(--muted);margin-right:2px}
 
 /* ---------- 地図 ---------- */
@@ -413,7 +415,12 @@ function renderFilters(){
 }
 /* 区をえらんだら、近い順の一覧の頭までするっと移動（立体の地図を見ているときは動かさない） */
 function toList(){setTimeout(()=>{const h=$(".lhead");h&&h.scrollIntoView({behavior:RM?"auto":"smooth",block:"start"})},120)}
-$("#areas").onclick=e=>{const b=e.target.closest("button");if(!b)return;S.area=b.dataset.a||null;S.shown=N;renderAreas();refresh(true);if(!isReg()||!mapOpen)toList()};
+/* 場所のボタン：えらんでいる区をもう一度押すと外れて「家の近く／市全体」にもどる（10区の地図と同じ動き） */
+$("#areas").onclick=e=>{const b=e.target.closest("button");if(!b)return;const a=b.dataset.a||null;
+  S.area=(a&&S.area===a)?null:a;S.shown=N;renderAreas();refresh(true);popChip(a&&!S.area?$('#areas [data-a=""]'):$(`#areas [data-a="${a||""}"]`));if(!isReg()||!mapOpen)toList()};
+/* 押したことがわかるように、ボタンがぷにっとはずむ */
+function popChip(el){if(!el||RM)return;el.classList.remove("pop");void el.offsetWidth;el.classList.add("pop")}
+$("#filters").addEventListener("click",e=>{const b=e.target.closest("button");if(b)setTimeout(()=>popChip($(`#filters [data-${b.dataset.s?"s":"f"}="${b.dataset.s||b.dataset.f}"]`)),0)});
 $("#filters").onclick=e=>{const b=e.target.closest("button");if(!b)return;
   if(b.dataset.s){const k=b.dataset.s;S.subs.has(k)?S.subs.delete(k):S.subs.add(k)}
   if(b.dataset.f)S[b.dataset.f]=!S[b.dataset.f];
