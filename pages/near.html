@@ -153,6 +153,50 @@ h1{margin:4px 0 2px;font:400 clamp(22px,6.4vw,30px)/1.25 var(--font-display);col
 .totop.on{opacity:1;transform:none;pointer-events:auto}
 .totop svg{width:22px;height:22px;margin-bottom:1px}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ===== 見やすいタッチ（「歯科健診のくわしい案内」と同じ）。色はジャンルごとに --base / --dk / --lt ===== */
+@media not (prefers-color-scheme:dark){:root:not([data-theme="dark"]){--ink:#4a3f3a;--muted:#7d706a;--line:#efe4d8;--bg:#fffaf3;--card:#fff}}
+:root[data-theme="light"]{--ink:#4a3f3a;--muted:#7d706a;--line:#efe4d8;--bg:#fffaf3;--card:#fff}
+.hero{background:var(--bg)!important}
+.hero::before{content:"";position:absolute;width:230px;height:230px;border-radius:50%;background:var(--lt);top:-80px;left:-70px;filter:blur(2px)}
+.hero::after{content:"";position:absolute;left:auto;right:-50px;top:10px;bottom:auto;width:180px;height:180px;border-radius:50%;background:#fff3cf;filter:blur(2px)}
+.hero .deco{z-index:1}.hero .deco span{opacity:.55}
+.hrow,.hstat{z-index:2}
+.hic{background:var(--lt);border:4px solid #fff;box-shadow:0 10px 30px rgba(120,90,60,.10);transform:none}
+.eyebrow{display:inline-block;background:#fff;border:2px solid var(--line);border-radius:999px;padding:4px 12px;font-size:10.5px;color:var(--muted);letter-spacing:.12em}
+h1 .mk{background:linear-gradient(transparent 62%,#ffe7a3 62%)}
+.hstat span{background:#fff;border:2px solid var(--line);box-shadow:none;color:var(--ink)}
+.hstat b{color:var(--dk)}
+.from .dot{background:var(--base);box-shadow:0 3px 0 var(--dk)}
+.chip:not(.on){background:#fff!important;border-color:var(--line)!important;color:var(--ink)}
+.chip.on{background:var(--base)!important;border-color:var(--base)!important;color:#fff;box-shadow:0 3px 0 var(--dk)!important}
+.chips .lab{color:var(--muted)}
+.tg{border-color:var(--base);color:var(--dk);background:#fff;box-shadow:0 3px 0 var(--base)}
+.wcard{background:#fff;border:3px solid var(--lt);box-shadow:0 10px 30px rgba(120,90,60,.08)}
+.reg{background:var(--lt);border:2px dashed var(--base);color:var(--ink)}
+.reg button{background:var(--base);box-shadow:0 4px 0 var(--dk)}
+.lhead{scroll-margin-top:14px}
+.lhead h2 span,.lhead h2{color:var(--ink)}
+.lhead h2{background:linear-gradient(transparent 62%,#ffe7a3 62%);padding:0 2px}
+.card{background:#fff;border:3px solid var(--lt);box-shadow:0 10px 30px rgba(120,90,60,.08);border-radius:26px}
+.card::before{display:none}
+.card:hover,.card:focus-visible{border-color:var(--base)}
+.cic{background:var(--lt);border:0;box-shadow:none}
+.rk{background:var(--dk);border-color:#fff}
+.ct h3{color:var(--ink)}
+.km{color:var(--ink)}
+.km small{color:var(--dk)}
+.cm{color:var(--muted)}
+.tags{border-top:2px dashed var(--line);padding-top:8px;margin-top:6px}
+.tag{background:var(--lt)!important;color:var(--dk)!important}
+.url{color:var(--dk)}
+.btns a{background:#fff;border:2px solid var(--base);color:var(--dk);box-shadow:0 3px 0 var(--base);transition:transform .4s cubic-bezier(.34,1.56,.64,1),box-shadow .4s}
+.btns a.main{background:var(--base);border-color:var(--base);color:#fff;box-shadow:0 4px 0 var(--dk)}
+.btns a:active{transform:translateY(2px);box-shadow:0 1px 0 var(--dk)}
+.more button{border-color:var(--base);color:var(--dk);background:#fff;box-shadow:0 3px 0 var(--base)}
+.note{background:#fff;border:2px dashed var(--line)}
+.totop{background:var(--base);box-shadow:0 4px 0 var(--dk),0 8px 18px rgba(0,0,0,.08)}
+.pp .bt button{background:var(--base);border-color:var(--base)}
 </style></head>
 <body>
 <div class="wrap">
@@ -246,7 +290,11 @@ const GENRES={
 };
 const g=(new URLSearchParams(location.search).get("g")||"ped");
 const G=GENRES[g]||GENRES.ped;
-document.documentElement.style.setProperty("--ac",G.ac);document.documentElement.style.setProperty("--soft",G.soft);document.documentElement.style.setProperty("--soft2",G.soft2);
+/* ジャンルの色：[ふつう, こい, うすい]。1つのページの中は全部この色にそろえる */
+const TH={ped:["#f2a7b8","#d6688a","#fdeef2"],dent:["#7fb8de","#3f86b8","#eaf5fc"],ent:["#e5b544","#a47812","#fff5d9"],eye:["#a5a8ea","#5c5fc4","#eff0fc"],
+  skin:["#dcaee6","#a560b8","#fbf0fd"],plastic:["#f0a9c8","#c95a8c","#fdeef5"],ortho:["#8fb6ea","#3e71c2","#edf3fd"],pharm:["#bfaaee","#7a5ccb","#f4effd"],park:["#86cbe9","#2f8ab8","#eaf6fc"]};
+const th=TH[g]||TH.ped;
+{const st=document.documentElement.style;st.setProperty("--base",th[0]);st.setProperty("--dk",th[1]);st.setProperty("--lt",th[2]);st.setProperty("--ac",th[1]);st.setProperty("--soft",th[2]);st.setProperty("--soft2",th[2])}
 document.title=G.t+"マップ｜家の近くで探す";
 
 const WARDS=["西","北","大宮","見沼","中央","桜","浦和","南","緑","岩槻"];
@@ -265,7 +313,7 @@ function hero(){
   const dk=[G.deco[0],"heart","star",G.deco[1],"bub","star",G.deco[2],"heart"];
   const deco=[[6,"6%",30,"-1s"],[80,"6%",36,"-3s"],[92,"40%",22,"-2s"],[66,"58%",28,"-4s"],[2,"70%",22,"-2.5s"],[44,"4%",18,"-1.5s"],[86,"78%",30,"-.5s"],[28,"84%",18,"-3.5s"]].map(([l,t,s,d],i)=>`<span style="left:${l}%;top:${t};--s:${s}px;--d:${d}">${svg(NIC[dk[i]],40)}</span>`).join("");
   $("#hero").innerHTML=`<div class="deco" aria-hidden="true">${deco}</div>
-    <div class="hrow"><div class="hic">${svg(NIC[G.ic],40)}</div><div><div class="eyebrow">NEAR HOME MAP</div><h1>${esc(G.t)}マップ</h1><p class="hsub">${esc(G.sub)}</p></div></div>
+    <div class="hrow"><div class="hic">${svg(NIC[G.ic],40)}</div><div><div class="eyebrow">NEAR HOME MAP</div><h1><span class="mk">${esc(G.t)}</span>マップ</h1><p class="hsub">${esc(G.sub)}</p></div></div>
     <div class="hstat"><span>さいたま市内 <b id="hn">…</b> か所</span><span>近い順に <b>20</b> か所をピンで</span></div>`;
 }
 /* ---------- 中心 ---------- */
@@ -293,7 +341,7 @@ function buildWardMap(){
   WARDS.forEach((w,i)=>{
     const el=document.createElementNS(ns,"g");el.setAttribute("class","ward");el.setAttribute("tabindex","0");el.setAttribute("role","button");el.setAttribute("aria-label",w+"区");el.dataset.w=w;el.style.animationDelay=(i*60)+"ms";
     el.innerHTML=`<path d="${MAP.d[w]}" fill="${WCOL[i]}"/>`;
-    const go=()=>{S.area=S.area===w?null:w;S.shown=N;renderAreas();refresh(true)};
+    const go=()=>{S.area=S.area===w?null:w;S.shown=N;renderAreas();refresh(true);toList()};
     el.addEventListener("click",go);el.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();go()}});
     gp.appendChild(el);
     const [x,y]=MAP.cen[w],wd=Math.max(w.length*17+34,78);
@@ -325,7 +373,9 @@ function renderFilters(){
   $("#filters").innerHTML=f.length?`<span class="lab">しぼる</span>`+f.join(""):"";
   $("#filters").hidden=!f.length;
 }
-$("#areas").onclick=e=>{const b=e.target.closest("button");if(!b)return;S.area=b.dataset.a||null;S.shown=N;renderAreas();refresh(true)};
+/* 区をえらんだら、近い順の一覧の頭までするっと移動（立体の地図を見ているときは動かさない） */
+function toList(){setTimeout(()=>{const h=$(".lhead");h&&h.scrollIntoView({behavior:RM?"auto":"smooth",block:"start"})},120)}
+$("#areas").onclick=e=>{const b=e.target.closest("button");if(!b)return;S.area=b.dataset.a||null;S.shown=N;renderAreas();refresh(true);if(!isReg()||!mapOpen)toList()};
 $("#filters").onclick=e=>{const b=e.target.closest("button");if(!b)return;
   if(b.dataset.s){const k=b.dataset.s;S.subs.has(k)?S.subs.delete(k):S.subs.add(k)}
   if(b.dataset.f)S[b.dataset.f]=!S[b.dataset.f];
@@ -345,7 +395,7 @@ const kmT=km=>km<0.1?"0.1km未満":km.toFixed(1)+"km";
 const carT=km=>"車で約"+Math.max(1,Math.round(km*1.3/25*60))+"分";
 const walkT=km=>"歩いて約"+Math.max(1,Math.round(km*1.25/4.8*60))+"分";
 const moveT=km=>km<1.2?walkT(km):carT(km);
-const pc=(r,i)=>{for(const [lab,key,c] of G.subs){if(key==="big"?r.big:(r.s||[]).includes(key))return c}return G.subs.length?G.ac:PAL[(i||0)%PAL.length][1]};
+const pc=()=>th[1];
 const cardIc=r=>g==="ped"?((r.s||[]).includes("小児科")?"kids":"adult"):g==="park"?(r.big?"tree":"slide"):g==="dent"&&(r.s||[]).includes("小児歯科")?"tooth":G.ic;
 const host=u=>{try{const x=new URL(url(u));return (x.host+x.pathname).replace(/^www\./,"").replace(/\/$/,"")}catch(e){return u}};
 const url=u=>!u?"":(/^https?:\/\//i.test(u)?u:"https://"+u.replace(/^\/+/,""));
@@ -364,7 +414,7 @@ function tags(r){
   return t.join("");
 }
 function card(x,i){
-  const r=x.r,c=pc(r,i),cb=PAL[i%PAL.length][0];
+  const r=x.r,c=pc(),cb=th[2];
   return `<li class="card" tabindex="0" data-i="${i}" style="--pc:${c};--cb:${cb};--d:${i%N}">
     <div class="cic">${svg(NIC[cardIc(r)],40)}<span class="rk">${i+1}</span></div>
     <div class="ct"><h3>${esc(r.n)}</h3><span class="km">${kmT(x.km)}<small>${moveT(x.km)}</small></span></div>
@@ -518,7 +568,7 @@ $("#note").innerHTML=g==="park"
   ?"公園の場所と名前は OpenStreetMap（© OpenStreetMap contributors）をもとにしています。遊具やトイレ・駐車場の有無は、行く前に市のページなどで確かめてください。"
   :"病院・薬局の情報は、厚生労働省「医療情報ネット」のオープンデータ（2025年12月1日時点）をもとにしています。診療時間・休みは変わることがあるので、行く前に電話やホームページで確かめてください。夜や休日の急な病気は「小児科 急患電話マップ」（#8000）へ。";
 hero();buildWardMap();renderAreas();renderFilters();
-if(G.subs.length)$("#legend").innerHTML="ピンの色："+G.subs.map(([lab,k,c])=>`<b style="color:${c}">●${esc(lab)}</b>`).join(" ")+(g==="ped"?"　":` <b style="color:${G.ac}">●そのほか</b>　`);
+if(false)$("#legend").innerHTML="ピンの色："+G.subs.map(([lab,k,c])=>`<b style="color:${c}">●${esc(lab)}</b>`).join(" ")+(g==="ped"?"　":` <b style="color:${G.ac}">●そのほか</b>　`);
 fetch("near-data/"+g+".json").then(r=>r.json()).then(d=>{DATA=d;$("#hn").textContent=d.length;refresh(true)}).catch(()=>{$("#list").innerHTML='<li class="empty">データを読みこめませんでした。時間をおいて開きなおしてください。</li>'});
 </script>
 <script>/* 外へのリンクは新しい画面で開く（街ナビの中で開いたとき） */document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a[href]");if(!a)return;var h=a.getAttribute("href")||"";if(h.charAt(0)==="#"||/^(javascript|tel|mailto):/i.test(h))return;a.target="_blank";a.rel="noopener"},true);</script>

@@ -782,7 +782,7 @@ b.addEventListener("click",function(){window.scrollTo({top:0,behavior:matchMedia
 .np-reg{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:10px;padding:10px 12px;border-radius:18px;background:color-mix(in srgb,var(--pink) 12%,var(--card));border:2px dashed color-mix(in srgb,var(--pink) 45%,transparent);font-size:13px;line-height:1.5;color:var(--ink)}
 .np-reg p{margin:0;flex:1 1 200px}
 .np-reg button{border:0;border-radius:999px;background:var(--pink);color:#fff;font:800 13px/1.4 inherit;padding:8px 16px;cursor:pointer;box-shadow:0 3px 0 rgba(46,43,79,.12)}
-.np-list{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:6px}
+.np-list{scroll-margin-top:16px;list-style:none;margin:10px 0 0;padding:0;display:grid;gap:6px}
 @media (min-width:640px){.np-list{grid-template-columns:1fr 1fr}}
 .np-list li{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:16px;border:2px solid var(--line);background:var(--card);cursor:pointer;animation:npRow .45s both;animation-delay:calc(var(--d) * 35ms)}
 .np-list li:hover,.np-list li:focus-visible{border-color:var(--cc)}
@@ -986,7 +986,11 @@ document.getElementById("nearBtn").onclick=function(){
   if(open){if(!P.firstChild)shell();P.hidden=false;refresh();setTimeout(()=>{map&&map.resize()},60)}else P.hidden=true;
 };
 /* 条件（ジャンル・区など）が変わったら、地図のピンも自動で入れかえる */
-const _render=render;render=function(a){_render(a);refresh()};
+const _render=render;render=function(a){
+  /* 「家の近くで探す」から開いたときは、区をタップしてもページの下の一覧へ飛ばず、近い順の一覧の頭へするっと移動する */
+  _render(NEARMODE?false:a);refresh();
+  if(a===true&&NEARMODE&&open)setTimeout(()=>{const t=document.getElementById("npList");t&&t.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"})},120);
+};
 /* 街ナビの「家の近くで探す」→「あずかりマップ」から開いたとき（?near=1）：タイトルの部分を出さず、「近くの園をさがす」をひらいた状態で始める */
 if(/[?&]near=1\b/.test(location.search)){hd.style.display="none";box.style.marginTop="12px";document.getElementById("nearBtn").click()}
 })();
