@@ -109,6 +109,18 @@ body.is-ready .page{opacity:1;transform:none}
 .wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:color-mix(in srgb,var(--bg) 90%,transparent)}
 
+.linebar{background:linear-gradient(90deg,color-mix(in srgb,var(--accent) 12%,var(--bg)),color-mix(in srgb,var(--pink) 12%,var(--bg)));border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
+.linebar button{display:flex;align-items:center;gap:6px;width:100%;border:0;background:none;padding:9px 0;font:700 14px/1.2 var(--f-body);color:var(--accent);cursor:pointer;text-align:left}
+.linebar button svg{width:18px;height:18px}
+.linebar small{margin-left:auto;font-size:11px;font-weight:500;color:var(--muted)}
+.totop{position:fixed;z-index:39;right:max(14px,env(safe-area-inset-right,0px));bottom:calc(var(--tabbar) + 26px + env(safe-area-inset-bottom,0px));
+  display:grid;justify-items:center;gap:0;width:54px;height:54px;padding:6px 0 0;box-sizing:border-box;border-radius:50%;border:1px solid var(--glass-line);cursor:pointer;
+  background:color-mix(in srgb,var(--surface) 82%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);color:var(--accent);box-shadow:var(--shadow);
+  opacity:0;transform:translateY(12px) scale(.9);pointer-events:none;transition:opacity .3s,transform .4s cubic-bezier(.3,1.5,.5,1)}
+.totop.on{opacity:1;transform:none;pointer-events:auto}
+.totop svg{width:20px;height:20px}
+.totop span{font-size:10px;font-weight:700;line-height:1}
+body.sheet-open .totop{opacity:0;pointer-events:none}
 header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 86%,transparent);
   -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
 .top .wrap{display:flex;align-items:center;gap:10px;padding-block:8px;min-height:60px}
@@ -653,6 +665,8 @@ svg .a-ring{animation:ring 2.4s ease-in-out infinite;transform-box:fill-box;tran
 
 <!-- ============ APP ============ -->
 <div class="page" id="page">
+  <!-- LINEのトーク（リッチメニュー）へもどる：LINEの中で開いたときだけ出す -->
+  <div class="linebar" id="lineBar" hidden><div class="wrap"><button type="button" id="lineBack"><svg class="i" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>メニューにもどる<small>LINEのトーク画面へ</small></button></div></div>
   <header class="top">
     <div class="wrap">
       <button class="back" id="back" type="button" aria-label="もどる" hidden><svg class="i" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
@@ -723,6 +737,9 @@ svg .a-ring{animation:ring 2.4s ease-in-out infinite;transform-box:fill-box;tran
   <div class="vbar"><b id="vTitle"></b><button class="iconbtn" id="vClose" type="button" aria-label="閉じる"><svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
   <div class="vbody"><span class="vload">ひらいています…</span><iframe id="vFrame" title="" loading="eager"></iframe></div>
 </div>
+
+<!-- いつでも上へもどる -->
+<button class="totop" id="toTop" type="button" aria-label="いちばん上へもどる"><svg class="i" viewBox="0 0 24 24"><path d="M6 14l6-6 6 6"/><path d="M12 8v11"/></svg><span>もどる</span></button>
 
 <!-- tab bar -->
 <nav class="tabbar" id="tabbar" aria-label="メインメニュー">
@@ -1587,6 +1604,22 @@ function updateChrome(h,sheet){
   $("#back").hidden=route==="home"&&!sheet&&h!=="search";
 }
 window.addEventListener("hashchange",()=>{inApp=true;applyRoute()});
+/* いつでも上へもどる：少し下に進んだら右下に出る */
+const toTop=$("#toTop");
+const onScroll=()=>toTop.classList.toggle("on",window.scrollY>500);
+window.addEventListener("scroll",onScroll,{passive:true});onScroll();
+toTop.addEventListener("click",()=>window.scrollTo({top:0,behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"}));
+/* メニューにもどる：LINEの中で開いたときだけ。LIFF の closeWindow でトーク画面（リッチメニュー）へ */
+const LIFF_ID="2007823365-Ckc0dnQW";
+if(/\bLine\//i.test(navigator.userAgent)&&!window.claude){
+  $("#lineBar").hidden=false;
+  const sc=document.createElement("script");sc.src="https://static.line-scdn.net/liff/edge/2/sdk.js";sc.async=true;
+  sc.onload=()=>{try{liff.init({liffId:LIFF_ID}).catch(()=>{})}catch(e){}};document.head.appendChild(sc);
+  $("#lineBack").addEventListener("click",()=>{
+    try{if(window.liff&&liff.closeWindow){liff.closeWindow();return}}catch(e){}
+    window.close();
+  });
+}
 $("#back").addEventListener("click",goBack);
 
 function renderAll(){renderMe();renderNews();renderCats();renderRows()}
