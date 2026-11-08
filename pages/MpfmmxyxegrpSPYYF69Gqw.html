@@ -708,7 +708,7 @@ b.addEventListener("click",function(){window.scrollTo({top:0,behavior:matchMedia
 </script>
 <!--/wolly-totop-->
 <!--wolly-near-->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
 <style>
 .nearwrap{margin-top:14px}
 .nearbtn{display:flex;align-items:center;gap:12px;width:100%;margin:16px 0 0;padding:12px 16px;box-sizing:border-box;border:3px solid #fff;border-radius:26px;cursor:pointer;text-align:left;
@@ -732,19 +732,35 @@ b.addEventListener("click",function(){window.scrollTo({top:0,behavior:matchMedia
 .np-mw{display:grid;grid-template-rows:1fr;transition:grid-template-rows .45s cubic-bezier(.3,1,.5,1)}
 .np-mw.shut{grid-template-rows:0fr}
 .np-mw>div{overflow:hidden;min-height:0}
-#nearMap{height:clamp(260px,68vw,420px);border-radius:20px;margin-top:10px;z-index:0;background:#EAF3FB;border:2px solid var(--line)}
-#nearMap.swap .leaflet-tile-pane{animation:npSwap .6s ease}
-@keyframes npSwap{0%{opacity:1}35%{opacity:.2;filter:blur(4px) saturate(.4)}100%{opacity:1;filter:none}}
+.np-mapbox{position:relative;margin-top:10px}
+#nearMap{height:clamp(300px,82vw,460px);border-radius:22px;overflow:hidden;background:linear-gradient(#E6F4FF,#FFEFF6);border:2px solid var(--line)}
+#nearMap.swap::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:radial-gradient(circle at 50% 55%,rgba(255,255,255,0) 30%,rgba(255,240,248,.75));animation:npFlash .8s ease forwards}
+@keyframes npFlash{0%{opacity:0}30%{opacity:1}100%{opacity:0}}
+.np-ph{position:absolute;left:10px;top:10px;z-index:3;display:inline-flex;align-items:center;gap:4px;border:2px solid #fff;background:rgba(255,255,255,.94);border-radius:999px;padding:4px 12px;font:800 12px/1.4 inherit;color:#2E2B4F;box-shadow:0 3px 10px rgba(46,43,79,.2);cursor:pointer}
+.np-ph svg{width:16px;height:16px}
+.np-ph[aria-pressed="true"]{background:#2E2B4F;color:#fff;border-color:#2E2B4F}
+.np-load{position:absolute;inset:0;z-index:1;display:grid;place-items:center;font-size:13px;font-weight:700;color:var(--muted);pointer-events:none}
 .np-msg{margin:8px 0 0;font-size:12px;color:var(--muted)}
-.npin{position:relative;width:30px;height:40px;animation:npDrop .55s cubic-bezier(.3,1.6,.5,1) both;animation-delay:calc(var(--d) * 45ms);filter:drop-shadow(0 2px 2px rgba(46,43,79,.3))}
+.npw{width:30px;height:40px;cursor:pointer}
+.npin{position:relative;width:30px;height:40px;animation:npDrop .6s cubic-bezier(.3,1.6,.5,1) both;animation-delay:calc(var(--b,0s) + var(--d) * 55ms);filter:drop-shadow(0 2px 2px rgba(46,43,79,.3))}
 .npin svg{position:absolute;inset:0;width:30px;height:40px;z-index:0!important}
 .npin b{position:absolute;z-index:1;left:0;right:0;top:5px;text-align:center;font:800 12px/18px system-ui,sans-serif;color:var(--cc)}
 .npin.top b{font-size:13px}
 @keyframes npDrop{0%{opacity:0;transform:translateY(-30px) scale(.5)}60%{opacity:1;transform:translateY(3px) scale(1.05)}100%{opacity:1;transform:none}}
-.nhome{width:42px;height:42px;display:grid;place-items:center;border-radius:50%;background:#FF6FA5;border:3px solid #fff;box-shadow:0 3px 8px rgba(46,43,79,.35);animation:npDrop .5s both}
+.nsh{position:absolute;left:50%;bottom:-3px;width:16px;height:6px;margin-left:-8px;border-radius:50%;background:rgba(46,43,79,.28);animation:npSh .6s both;animation-delay:calc(var(--b,0s) + var(--d) * 55ms)}
+@keyframes npSh{0%{opacity:0;transform:scale(.2)}100%{opacity:1;transform:none}}
+.npw.out .npin,.npw.out .nsh{animation:npOut .25s forwards}
+@keyframes npOut{to{opacity:0;transform:translateY(-16px) scale(.4)}}
+.npw:hover .npin{transform:translateY(-4px)}
+.nhome{position:relative;width:42px;height:42px;display:grid;place-items:center;border-radius:50%;background:#FF6FA5;color:#FF6FA5;border:3px solid #fff;box-shadow:0 3px 8px rgba(46,43,79,.35);animation:npDrop .5s both}
+.nhome .ring{position:absolute;inset:-4px;border-radius:50%;border:3px solid currentColor;animation:npPulse 1.8s ease-out infinite}
+@keyframes npPulse{0%{opacity:.8;transform:scale(1)}100%{opacity:0;transform:scale(2.2)}}
 .nhome svg{width:24px;height:24px}
-.nhome.guest{background:#9C7BFF}
-.leaflet-popup-content{margin:10px 12px;font-family:var(--font-body,inherit)}
+.nhome.guest{background:#9C7BFF;color:#9C7BFF}
+.maplibregl-popup-content{border-radius:16px;padding:10px 26px 10px 12px;font-family:var(--font-body,inherit);box-shadow:0 6px 18px rgba(46,43,79,.22)}
+.maplibregl-popup-close-button{font-size:18px;width:24px;height:24px}
+.maplibregl-ctrl-attrib{font-size:10px}
+@media (prefers-reduced-motion:reduce){.npin,.nsh,.nhome,.nhome .ring,#nearMap.swap::after{animation:none!important}}
 .npp b{display:block;font-size:14px;line-height:1.35;color:#2E2B4F}
 .npp span{display:block;font-size:11px;color:#6B6890;margin:2px 0 6px}
 .npp .bt{display:flex;gap:6px;flex-wrap:wrap}
@@ -815,42 +831,117 @@ const STAR='<svg viewBox="0 0 24 24" fill="#fff"><path d="M12 3l2.6 5.6 6 .7-4.5
 function shell(){
   const P=document.getElementById("nearP");
   P.innerHTML=`<div class="np-head"><div class="np-from" id="npFrom"></div><button type="button" class="np-tg" id="npTg" aria-expanded="true" aria-controls="npMw">地図をとじる ▴</button></div>
-    <div class="np-mw" id="npMw"><div><div id="nearMap" role="region" aria-label="近くの園の地図"></div><p class="np-msg" id="npMsg">ピンをタップすると、園の名前が出ます。</p></div></div>
+    <div class="np-mw" id="npMw"><div><div class="np-mapbox"><div id="nearMap" role="region" aria-label="近くの園の地図（立体）"><span class="np-load" id="npLoad">地図をよみこみ中…</span></div><button type="button" class="np-ph" id="npPh" aria-pressed="false">${PHOTO}写真で見る</button></div><p class="np-msg" id="npMsg">ピンをタップすると、園の名前が出ます。地図は2本の指で動かす・回す・かたむけることができます。</p></div></div>
     <div class="np-cats" id="npCats" aria-label="ジャンル">${`<button class="chip" data-k="">全種類</button>`+CATS.map(c=>`<button class="chip" data-k="${c.k}" style="--cc:${c.c}">${ic(c.ic)}${c.l}</button>`).join("")}</div>
     <div id="npReg"></div><ol class="np-list" id="npList"></ol>`;
   P.querySelector("#npCats").onclick=e=>{const b=e.target.closest("button");if(!b)return;const k=b.dataset.k;if(!k)S.cats.clear();else S.cats.has(k)?S.cats.delete(k):S.cats.add(k);render()};
   P.querySelector("#npTg").onclick=()=>{mapOpen=!mapOpen;const t=P.querySelector("#npTg");t.textContent=mapOpen?"地図をとじる ▴":"地図をひらく ▾";t.setAttribute("aria-expanded",mapOpen);
-    P.querySelector("#npMw").classList.toggle("shut",!mapOpen);if(mapOpen)setTimeout(()=>{map&&map.invalidateSize();refresh()},470)};
+    P.querySelector("#npMw").classList.toggle("shut",!mapOpen);if(mapOpen)setTimeout(()=>{map&&map.resize();refresh()},470)};
+  P.querySelector("#npPh").onclick=function(){photo=!photo;this.setAttribute("aria-pressed",photo);this.innerHTML=PHOTO+(photo?"イラストで見る":"写真で見る");if(ready)setPhoto()};
   P.querySelector("#npList").onclick=e=>{const li=e.target.closest("li");if(li)openPop(+li.dataset.id,li)};
   P.querySelector("#npList").onkeydown=e=>{const li=e.target.closest("li");if(li&&(e.key==="Enter"||e.key===" ")){e.preventDefault();openPop(+li.dataset.id,li)}};
 }
+/* 立体のアニメーション地図：MapLibre GL ＋ OpenFreeMap（無料・登録不要）。色は Wolly のパステルにそめる。「写真で見る」は国土地理院の航空写真 */
+const STYLE_URL="https://tiles.openfreemap.org/styles/liberty";
+const PHOTO='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="14" rx="3"/><circle cx="12" cy="13" r="3.5"/><path d="M8 6l1.5-2h5L16 6"/></svg>';
+const RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
+let afterLoad=null,ready=false,queued=null,markers=[],popup=null,photo=false,swing=18;
+function failMsg(){const m=document.getElementById("npMsg");if(m)m.textContent="地図を読みこめませんでした。下のリストからえらべます。";const l=document.getElementById("npLoad");l&&l.remove()}
 function loadL(cb){
-  if(window.L)return cb();
-  if(pending)return;pending=true;
-  const s=document.createElement("script");s.src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js";
-  s.onload=()=>{pending=false;cb()};s.onerror=()=>{pending=false;document.getElementById("npMsg").textContent="地図を読みこめませんでした。下のリストからえらべます。"};
+  if(window.maplibregl)return cb();
+  afterLoad=cb;if(pending)return;pending=true;
+  const s=document.createElement("script");s.src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js";
+  s.onload=()=>{pending=false;afterLoad&&afterLoad()};s.onerror=()=>{pending=false;failMsg()};
   document.head.appendChild(s);
+}
+function paint(){
+  const set=(id,k,v)=>{if(map.getLayer(id))try{map.setPaintProperty(id,k,v)}catch(e){}};
+  const hide=id=>{if(map.getLayer(id))map.setLayoutProperty(id,"visibility","none")};
+  set("background","background-color","#FFF6FA");
+  set("natural_earth","raster-opacity",0);
+  set("landuse_residential","fill-color","#F7EFFA");
+  ["park","landcover_grass","landcover_wood","landuse_pitch","landuse_track","landuse_cemetery"].forEach(id=>{set(id,"fill-color","#FFF0B0");set(id,"fill-opacity",.8)});
+  set("park","fill-outline-color","#FFE07A");set("park_outline","line-color","#FFE07A");
+  set("landuse_school","fill-color","#E1F0FF");set("landuse_hospital","fill-color","#FFE0EC");
+  set("water","fill-color","#A6DAFF");["waterway_river","waterway_other","waterway_tunnel"].forEach(id=>set(id,"line-color","#86C9F4"));
+  map.getStyle().layers.forEach(l=>{const id=l.id;
+    if(l.type==="line"){
+      if(/casing/.test(id))set(id,"line-color","#E0D4F5");
+      else if(/rail/.test(id))set(id,"line-color","#B5ADE6");
+      else if(/motorway|trunk_primary/.test(id))set(id,"line-color","#FFC3DA");
+      else if(/secondary_tertiary|_link$/.test(id))set(id,"line-color","#FFF0BD");
+    }
+    if(l.type==="symbol"){
+      if(/^poi_r|shield|one_way|highway-name-path/.test(id)){hide(id);return}
+      if(l.layout&&l.layout["text-field"])try{map.setLayoutProperty(id,"text-field",["coalesce",["get","name:ja"],["get","name"]])}catch(e){}
+      set(id,"text-color","#4A4778");set(id,"text-halo-color","#FFFFFF");set(id,"text-halo-width",1.4);
+    }
+  });
+  set("building","fill-color","#ECE4FF");
+  set("building-3d","fill-extrusion-color",["interpolate",["linear"],["coalesce",["get","render_height"],0],0,"#EAE2FF",18,"#D8CBFF",50,"#FFC6DF"]);
+  set("building-3d","fill-extrusion-opacity",.92);
+  if(map.getLayer("building-3d"))try{map.setLayerZoomRange("building-3d",13.3,24)}catch(e){}
+  try{
+    map.addSource("photo",{type:"raster",tiles:["https://cyberjapandata.gsi.go.jp/xyz/seamlessphoto/{z}/{x}/{y}.jpg"],tileSize:256,maxzoom:18,attribution:'<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener">国土地理院</a>'});
+    map.addLayer({id:"photo",type:"raster",source:"photo",layout:{visibility:"none"},paint:{"raster-fade-duration":400}},map.getLayer("building")?"building":undefined);
+  }catch(e){}
+}
+function setPhoto(){
+  const v=photo?"visible":"none",nv=photo?"none":"visible";
+  if(map.getLayer("photo"))map.setLayoutProperty("photo","visibility",v);
+  ["building","building-3d"].forEach(id=>{if(map.getLayer(id))map.setLayoutProperty(id,"visibility",nv)});
 }
 function drawMap(o,rows){
   loadL(()=>{
-    const el=document.getElementById("nearMap");
     if(!map){
-      map=L.map(el,{scrollWheelZoom:false,zoomSnap:.5});
-      L.tileLayer("https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png",{maxZoom:18,attribution:'<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener">国土地理院</a>'}).addTo(map);
-      layer=L.layerGroup().addTo(map);map.setView(o.ll,14);
+      try{
+        map=new maplibregl.Map({container:"nearMap",style:STYLE_URL,center:[o.ll[1],o.ll[0]],zoom:10.2,pitch:0,bearing:0,
+          cooperativeGestures:true,attributionControl:{compact:true},maxPitch:70,
+          locale:{"CooperativeGesturesHandler.MobileHelpText":"地図は2本の指で動かせます","CooperativeGesturesHandler.WindowsHelpText":"Ctrl を押しながらスクロールで拡大・縮小","CooperativeGesturesHandler.MacHelpText":"⌘ を押しながらスクロールで拡大・縮小",
+            "NavigationControl.ZoomIn":"大きく","NavigationControl.ZoomOut":"小さく","NavigationControl.ResetBearing":"北を上にもどす"}});
+      }catch(e){failMsg();return}
+      map.addControl(new maplibregl.NavigationControl({visualizePitch:true}),"top-right");
+      map.on("load",()=>{const at=document.querySelector("#nearMap .maplibregl-ctrl-attrib");at&&at.classList.remove("maplibregl-compact-show");paint();ready=true;setPhoto();const l=document.getElementById("npLoad");l&&l.remove();if(queued){const q=queued;queued=null;place(q[0],q[1])}});
     }
-    el.classList.remove("swap");void el.offsetWidth;el.classList.add("swap");
-    layer.clearLayers();
-    L.marker(o.ll,{icon:L.divIcon({className:"",html:`<div class="nhome${o.home?"":" guest"}">${o.home?HOUSE:STAR}</div>`,iconSize:[42,42],iconAnchor:[21,21]}),zIndexOffset:1000,keyboard:false,title:o.home?"登録した住所":"さがす中心"}).addTo(layer);
-    rows.forEach((x,i)=>{const r=x.r,c=CAT[r.c];
-      const m=L.marker(LL[r.id],{icon:L.divIcon({className:"",html:`<div class="npin${i<3?" top":""}" style="--cc:${c.c};--d:${i}">${pinSvg(c.c)}<b>${i+1}</b></div>`,iconSize:[30,40],iconAnchor:[15,39],popupAnchor:[0,-36]}),zIndexOffset:500-i,title:(i+1)+". "+r.n});
-      m.bindPopup(`<div class="npp"><b>${i+1}. ${esc(r.n)}</b><span>${c.l}・${r.w}区 ／ ${kmT(x.km)}（${carT(x.km)}）</span><div class="bt"><button type="button" data-npo="${r.id}">くわしく</button><a href="${mapURL(r)}" target="_blank" rel="noopener">Googleマップ ↗</a></div></div>`,{maxWidth:240});
-      m.addTo(layer)});
-    const b=L.latLngBounds([o.ll].concat(rows.map(x=>LL[x.r.id])));
-    if(first){map.fitBounds(b,{padding:[30,30],maxZoom:16});first=false}else map.flyToBounds(b,{padding:[30,30],maxZoom:16,duration:.8});
+    if(!ready){queued=[o,rows];return}
+    place(o,rows);
   });
 }
-document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-npo]");if(b){e.preventDefault();e.stopPropagation();map&&map.closePopup();openPop(+b.dataset.npo,null)}},true);
+function place(o,rows){
+  markers.forEach(m=>{m.getElement().classList.add("out");setTimeout(()=>m.remove(),260)});markers=[];
+  popup&&popup.remove();
+  const el=document.getElementById("nearMap");el.classList.remove("swap");void el.offsetWidth;el.classList.add("swap");
+  const delay=first&&!RM?"2.4s":".35s";
+  const hm=document.createElement("div");hm.innerHTML=`<div class="nhome${o.home?"":" guest"}">${o.home?HOUSE:STAR}<i class="ring"></i></div>`;hm.title=o.home?"登録した住所":"さがす中心";hm.style.zIndex=200;
+  markers.push(new maplibregl.Marker({element:hm}).setLngLat([o.ll[1],o.ll[0]]).addTo(map));
+  const b=new maplibregl.LngLatBounds([o.ll[1],o.ll[0]],[o.ll[1],o.ll[0]]);
+  rows.forEach((x,i)=>{const r=x.r,c=CAT[r.c],ll=LL[r.id];b.extend([ll[1],ll[0]]);
+    const e=document.createElement("div");e.className="npw";e.style.zIndex=100-i;e.style.setProperty("--b",delay);
+    e.innerHTML=`<div class="npin${i<3?" top":""}" style="--cc:${c.c};--d:${i}">${pinSvg(c.c)}<b>${i+1}</b></div><i class="nsh" style="--d:${i}"></i>`;
+    e.setAttribute("role","button");e.setAttribute("aria-label",(i+1)+"番 "+r.n);e.title=(i+1)+". "+r.n;
+    const m=new maplibregl.Marker({element:e,anchor:"bottom"}).setLngLat([ll[1],ll[0]]).addTo(map);
+    e.addEventListener("click",ev=>{ev.stopPropagation();openPin(x,i,ll)});
+    markers.push(m)});
+  swing=-swing;
+  const cam=map.cameraForBounds(b,{padding:{top:70,bottom:40,left:40,right:40},maxZoom:16})||{center:[o.ll[1],o.ll[0]],zoom:14};
+  const to={center:cam.center,zoom:Math.max(10,(cam.zoom||14)-.35),pitch:58,bearing:swing};
+  if(RM)map.jumpTo(to);
+  else if(first){
+    /* はじめて開いたとき：空から家のあたりへ急降下 → 立体の建物の間を少し回って → 20か所が見える高さへ */
+    map.flyTo({center:[o.ll[1],o.ll[0]],zoom:16,pitch:64,bearing:swing*2,duration:2600,curve:1.6,essential:true});
+    map.once("moveend",()=>{let done=false;const go=()=>{if(done)return;done=true;setTimeout(()=>map.flyTo({...to,duration:2000,curve:1.3,essential:true}),700)};
+      map.once("idle",go);setTimeout(go,3500)});
+  }else map.flyTo({...to,duration:1500,curve:1.5,essential:true});
+  first=false;
+}
+function openPin(x,i,ll){
+  const r=x.r,c=CAT[r.c];popup&&popup.remove();
+  popup=new maplibregl.Popup({offset:[0,-40],maxWidth:"250px"}).setLngLat([ll[1],ll[0]])
+    .setHTML(`<div class="npp"><b>${i+1}. ${esc(r.n)}</b><span>${c.l}・${r.w}区 ／ ${kmT(x.km)}（${carT(x.km)}）</span><div class="bt"><button type="button" data-npo="${r.id}">くわしく</button><a href="${mapURL(r)}" target="_blank" rel="noopener">Googleマップ ↗</a></div></div>`).addTo(map);
+  const t={center:[ll[1],ll[0]],zoom:Math.max(map.getZoom(),16),pitch:62};
+  RM?map.jumpTo(t):map.easeTo({...t,duration:1100});
+}
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-npo]");if(b){e.preventDefault();e.stopPropagation();popup&&popup.remove();openPop(+b.dataset.npo,null)}},true);
 
 function refresh(){
   if(!open)return;
@@ -870,7 +961,7 @@ function toMyPage(){
 }
 document.getElementById("nearBtn").onclick=function(){
   const P=document.getElementById("nearP");open=!open;this.setAttribute("aria-expanded",open);
-  if(open){if(!P.firstChild)shell();P.hidden=false;refresh();setTimeout(()=>{map&&map.invalidateSize()},60)}else P.hidden=true;
+  if(open){if(!P.firstChild)shell();P.hidden=false;refresh();setTimeout(()=>{map&&map.resize()},60)}else P.hidden=true;
 };
 /* 条件（ジャンル・区など）が変わったら、地図のピンも自動で入れかえる */
 const _render=render;render=function(a){_render(a);refresh()};
