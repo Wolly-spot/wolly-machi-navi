@@ -498,9 +498,49 @@ svg .a-ring{animation:ring 2.4s ease-in-out infinite;transform-box:fill-box;tran
 .ky-who small{display:inline-block;font-size:11px;font-weight:700;color:#fff;background:#A68BFF;border-radius:999px;padding:1px 9px}
 .ky-who p{margin:2px 0 0;font-size:13px;line-height:1.7;color:#4A4D6A}
 .ky-who p b{color:#1F2140}
-.ky-memo{border-radius:16px;padding:12px 14px;background:color-mix(in srgb,var(--lemon) 22%,var(--surface))}
-.ky-memo b{font-size:14px}
-.ky-memo ul{margin:6px 0 0;padding-left:1.2em;font-size:13.5px;line-height:1.7}
+/* 電話ボタン（どこでも共通） */
+.call{display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:#fff;background:linear-gradient(120deg,#FF7FB8,#A68BFF);border-radius:999px;padding:4px 12px 4px 4px;font-weight:700;line-height:1.2;vertical-align:middle;box-shadow:0 6px 14px -8px rgba(210,70,140,.8)}
+.call .cic{width:24px;height:24px;border-radius:50%;background:#fff;display:grid;place-items:center;color:#D2477A;flex:none}
+.call .cic svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2.2}
+.call b{font-variant-numeric:tabular-nums;font-size:13.5px;letter-spacing:.02em}
+.call small{font-size:10.5px;opacity:.9;border-left:1px solid rgba(255,255,255,.5);padding-left:6px}
+.call.mini{padding:2px 9px 2px 2px;gap:4px;box-shadow:none}
+.call.mini .cic{width:20px;height:20px}.call.mini .cic svg{width:12px;height:12px}
+.call.mini b{font-size:12px}.call.mini small{display:none}
+.call.big{display:flex;width:100%;box-sizing:border-box;padding:8px 16px 8px 8px;gap:10px;margin:6px 0 4px}
+.call.big .cic{width:40px;height:40px}.call.big .cic svg{width:22px;height:22px;animation:ring 2.4s ease-in-out infinite}
+.call.big b{font:500 clamp(19px,5.6vw,24px)/1.2 var(--f-display);flex:1;white-space:nowrap}
+.call b{white-space:nowrap}
+.call.big small{font-size:12px}
+/* タップでふわっと出る小窓 */
+.ky-tap{display:flex;align-items:center;gap:10px;width:100%;margin-top:8px;padding:8px 12px 8px 8px;border-radius:14px;border:1.5px dashed color-mix(in srgb,#A68BFF 60%,transparent);background:rgba(255,255,255,.7);
+  font:700 13.5px/1.4 var(--f-body);color:#1F2140;cursor:pointer;text-align:left}
+.ky-tap .kt-ic{flex:none;width:40px;height:40px;border-radius:12px;background:#F1E8FF;display:grid;place-items:center;overflow:hidden}
+.ky-tap .kt-ic svg{width:36px;height:36px}
+.ky-tap .kt-pp svg{width:44px;height:44px;margin-top:6px}
+.ky-tap .kt-ar{margin-left:auto;flex:none;color:#A68BFF}
+.ky-tap .kt-ar svg{width:18px;height:18px;transition:transform .3s}
+.ky-tap.is-open .kt-ar svg{transform:rotate(180deg)}
+.ky-pop{position:relative;margin-top:8px;padding:40px 12px 12px;border-radius:18px;background:#fff;border:2px solid #E2D6F5;box-shadow:0 16px 32px -20px rgba(80,50,160,.55);transform-origin:50% 0}
+.ky-pop.on{animation:kypop .5s cubic-bezier(.16,1,.3,1) both}
+.ky-pop.off{animation:kyout .24s ease both}
+@keyframes kypop{from{opacity:0;transform:translateY(-8px) scale(.96);filter:blur(5px)}to{opacity:1;transform:none;filter:none}}
+@keyframes kyout{to{opacity:0;transform:translateY(-6px) scale(.97);filter:blur(4px)}}
+.ky-pop .ky-x{position:absolute;top:4px;right:4px;width:34px;height:34px;color:#5B3FA0}
+.ky-pop .ky-who{margin-top:0;background:#FBF8FF}
+.ky-memo .ky-tap{margin-top:0;background:color-mix(in srgb,var(--lemon) 25%,#fff);border-color:#F0C94A}
+.ky-memo .ky-tap .kt-ic{background:#FFF3C4}
+.ky-mh{display:block;font-size:14px;color:#1F2140;margin-bottom:8px}
+.ky-ml{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.ky-ml li{display:flex;align-items:center;gap:10px;font-size:13.5px;line-height:1.6;color:#1F2140;background:#FFFBEA;border-radius:12px;padding:8px 10px}
+.ky-ml .mi{flex:none;width:42px;height:42px;border-radius:12px;background:#fff;display:grid;place-items:center}
+.ky-ml .mi svg{width:34px;height:34px;overflow:visible}
+/* 診療所の建物 */
+.ky-ch{display:flex;align-items:center;gap:10px}
+.ky-bld{flex:none;width:58px;height:58px;border-radius:16px;background:#F1F4FF;display:grid;place-items:center}
+.ky-bld svg{width:50px;height:50px}
+.ky-ch b{display:block;font-size:15px}
+.ky-sz{display:inline-block;margin-top:3px;font-size:11px;font-weight:700;color:#5B3FA0;background:#F1E8FF;border-radius:999px;padding:1px 9px}
 .ky-sub{border-top:1px dashed var(--line);padding-top:12px}
 .ky-sub p{margin:4px 0 0;font-size:12.5px;color:var(--muted)}
 .ky-cl{display:grid;gap:8px}
@@ -678,6 +718,9 @@ svg .a-ring{animation:ring 2.4s ease-in-out infinite;transform-box:fill-box;tran
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const ico=(d,cls="i")=>`<svg class="${cls}" viewBox="0 0 24 24">${d}</svg>`;
+/* 電話番号はどこでもタップしてその場でかけられるボタンにする（tel:） */
+const PHONE='<path d="M7 4c1.4 0 2 2.6 2 3.6S7.6 9 7.6 10s2.6 4 4 4.4c1 0 1.4-1.4 2.4-1.4s3.6.4 3.6 1.8-1.4 3.2-3.2 3.2C9 18 4 13 4 8c0-2 1.6-4 3-4z"/>';
+const callA=(num,cls="call")=>`<a class="${cls}" href="tel:${String(num).replace(/[^0-9#+]/g,"").replace("#","%23")}" aria-label="${esc(num)} に電話する"><span class="cic">${ico(PHONE)}</span><b>${esc(num)}</b><small>電話する</small></a>`;
 
 /* ---------- constants ---------- */
 const WARDS=["西区","北区","大宮区","見沼区","中央区","桜区","浦和区","南区","緑区","岩槻区"];
@@ -1212,7 +1255,7 @@ function sheetMoney(i){const m=MONEY[i];if(!m)return"";const c=MONEY_CAT[m.c];
     <dl class="dl"><div><dt>どんな</dt><dd>${esc(m.one)}</dd></div><div><dt>対象</dt><dd>${esc(m.who)}</dd></div><div><dt>窓口</dt><dd>${esc(m.how)}</dd></div></dl>
     ${m.note?`<p class="note">${esc(m.note)}</p>`:""}
     ${openA(m.url,"くわしく見る・いくらもらえるか計算",m.t)}
-    <p class="foot">金額や条件は年度ごとに変わることがあります。わからないときは さいたまコールセンター 048-835-3156</p>`}
+    <p class="foot">金額や条件は年度ごとに変わることがあります。わからないときは さいたまコールセンター ${callA("048-835-3156","call mini")}</p>`}
 function sheetInfo(item,cat,i){
   const st=STYLE[cat][i%STYLE[cat].length];
   return dhead(`<svg viewBox="0 0 24 24" style="width:44px;height:44px;fill:none;stroke:#fff;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round">${P[item.p]}</svg>`,st[0],TAG[cat],item.t,esc(item.k))+
@@ -1300,8 +1343,8 @@ function dentList(){
   const ward=dentWard;
   const f={all:()=>1,y:d=>d[4].includes("y"),p:d=>d[4].includes("p"),f:d=>d[4].includes("f"),s:d=>d[4].includes("s"),u:d=>d[4].includes("u")}[dentF];
   const list=DENT.filter(d=>d[0]===ward&&f(d));
-  const items=list.slice(0,dentShow).map(d=>`<div class="dc"><b>${esc(d[1])}</b><div class="ad">${esc(ward+d[2])}</div><div class="fl">${d[4].includes("y")?"<span>幼児</span>":""}${d[4].includes("p")?"<span>妊婦</span>":""}${d[4].includes("f")?"<span>フッ素塗布</span>":""}${d[4].includes("s")?'<span class="s">土曜</span>':""}${d[4].includes("u")?'<span class="u">日曜</span>':""}</div>${d[5]?`<div class="hrs">土曜 ${esc(d[5])}</div>`:""}${d[6]?`<div class="hrs">日曜 ${esc(d[6])}</div>`:""}<div class="row2"><span class="tel">${esc(d[3])}</span><a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(d[1]+" さいたま市"+ward+d[2])}" target="_blank" rel="noopener">地図を見る ›</a></div></div>`).join("");
-  return `<p class="sub" style="margin:4px 0 8px">${esc(ward)}：${list.length}件</p><div class="dent">${items||'<p class="note">この条件の歯医者さんは見つかりませんでした。</p>'}</div>${list.length>dentShow?`<button class="more-dent" type="button" data-dmore>もっと見る（あと${list.length-dentShow}件）</button>`:""}<p class="foot">保健センター（${esc(ward)}）：${HC[ward]}　市の実施医療機関一覧（幼児：令和8年8月10日時点／妊婦：令和8年4月1日時点）をもとにしています。受診前に医院へご確認ください。</p>`;
+  const items=list.slice(0,dentShow).map(d=>`<div class="dc"><b>${esc(d[1])}</b><div class="ad">${esc(ward+d[2])}</div><div class="fl">${d[4].includes("y")?"<span>幼児</span>":""}${d[4].includes("p")?"<span>妊婦</span>":""}${d[4].includes("f")?"<span>フッ素塗布</span>":""}${d[4].includes("s")?'<span class="s">土曜</span>':""}${d[4].includes("u")?'<span class="u">日曜</span>':""}</div>${d[5]?`<div class="hrs">土曜 ${esc(d[5])}</div>`:""}${d[6]?`<div class="hrs">日曜 ${esc(d[6])}</div>`:""}<div class="row2">${callA(d[3])}<a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(d[1]+" さいたま市"+ward+d[2])}" target="_blank" rel="noopener">地図を見る ›</a></div></div>`).join("");
+  return `<p class="sub" style="margin:4px 0 8px">${esc(ward)}：${list.length}件</p><div class="dent">${items||'<p class="note">この条件の歯医者さんは見つかりませんでした。</p>'}</div>${list.length>dentShow?`<button class="more-dent" type="button" data-dmore>もっと見る（あと${list.length-dentShow}件）</button>`:""}<p class="foot">保健センター（${esc(ward)}）：${callA(HC[ward],"call mini")}　市の実施医療機関一覧（幼児：令和8年8月10日時点／妊婦：令和8年4月1日時点）をもとにしています。受診前に医院へご確認ください。</p>`;
 }
 function sheetDent(){
   if(!dentWard)dentWard=S.profile?.ward||"浦和区";
@@ -1369,31 +1412,56 @@ function fillNearSheet(){
 /* 小児科 急患電話マップ：「ページをひらく」で、元のページの「どうしよう…と思ったら」〜「休日・夜間の急患診療所」を下にひらく（元: claude.ai/artifact/19zW2LwJWVt2xazYSEy1KL、2026-11-08 に読み取り） */
 const KYU_PEOPLE={city:`<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="52" r="46" fill="#FFFFFF"></circle><path d="M20 98q0-26 30-26t30 26z" fill="#FFC7D6" stroke="#2B3A55" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"></path><path d="M42 74l8 10 8-10" fill="#FFFFFF" stroke="#2B3A55" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"></path><path d="M27 50q-3-26 23-27q26 1 23 27q-2-14-23-14t-23 14z" fill="#8A5A3C" stroke="#2B3A55" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"></path><circle cx="50" cy="50" r="20" fill="#FFE3CF" stroke="#2B3A55" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"></circle><path d="M39.0 51q4.0-4.4 8.0 0M53.0 51q4.0-4.4 8.0 0" fill="none" stroke="#2B3A55" stroke-width="2.4" stroke-linecap="round"></path><ellipse cx="37.6" cy="57.6" rx="3.8" ry="2.4" fill="#FFB4A8" opacity=".85"></ellipse><ellipse cx="62.4" cy="57.6" rx="3.8" ry="2.4" fill="#FFB4A8" opacity=".85"></ellipse><path d="M46 58.4q4 4 8 0" fill="none" stroke="#2B3A55" stroke-width="2.2" stroke-linecap="round"></path><path d="M34 34q16-12 32 0l-3 6q-13-6-26 0z" fill="#FFFFFF" stroke="#2B3A55" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"></path><path d="M50 30.5s-3.6-2.3-3.6-4.6a1.8 1.8 0 0 1 3.6-.6a1.8 1.8 0 0 1 3.6.6c0 2.3-3.6 4.6-3.6 4.6z" fill="#FF8FA8"></path><path d="M27 50a23 23 0 0 1 46 0" fill="none" stroke="#2B3A55" stroke-width="3.2" stroke-linecap="round"></path><rect x="23" y="45" width="8" height="13" rx="3.5" fill="#7B5CC2" stroke="#2B3A55" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"></rect><rect x="69" y="45" width="8" height="13" rx="3.5" fill="#7B5CC2" stroke="#2B3A55" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"></rect><path d="M27 57q2 12 14 12" fill="none" stroke="#2B3A55" stroke-width="2.4" stroke-linecap="round"></path><circle cx="42" cy="69" r="3" fill="#2B3A55"></circle></svg>`,n8000:`<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="52" r="46" fill="#DCEBFB"></circle><path d="M80 14a10 10 0 1 0 8 15a8 8 0 0 1-8-15z" fill="#F6C445" stroke="#2B3A55" stroke-width="2"></path><path d="M16 22l1.4 3 3 1.4-3 1.4-1.4 3-1.4-3-3-1.4 3-1.4z" fill="#FFFFFF" stroke="#2B3A55" stroke-width="1.4" stroke-linejoin="round"></path><path d="M20 98q0-26 30-26t30 26z" fill="#9FD0F2" stroke="#2B3A55" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"></path><path d="M42 74l8 10 8-10" fill="#FFFFFF" stroke="#2B3A55" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"></path><path d="M28 52q-4-28 22-29q26 1 22 29q-4-10-12-12q-6 6-20 5q-8 1-12 7z" fill="#3E3A55" stroke="#2B3A55" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"></path><circle cx="50" cy="52" r="19" fill="#FFE3CF" stroke="#2B3A55" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"></circle><path d="M39.55 53q3.8000000000000003-4.18 7.6000000000000005 0M52.85 53q3.8000000000000003-4.18 7.6000000000000005 0" fill="none" stroke="#2B3A55" stroke-width="2.4" stroke-linecap="round"></path><ellipse cx="38.22" cy="59.22" rx="3.8" ry="2.4" fill="#FFB4A8" opacity=".85"></ellipse><ellipse cx="61.78" cy="59.22" rx="3.8" ry="2.4" fill="#FFB4A8" opacity=".85"></ellipse><path d="M46 59.98q4 4 8 0" fill="none" stroke="#2B3A55" stroke-width="2.2" stroke-linecap="round"></path><path d="M28 52a22 22 0 0 1 44 0" fill="none" stroke="#2B3A55" stroke-width="3.2" stroke-linecap="round"></path><rect x="24" y="47" width="8" height="13" rx="3.5" fill="#7B5CC2" stroke="#2B3A55" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"></rect><rect x="68" y="47" width="8" height="13" rx="3.5" fill="#7B5CC2" stroke="#2B3A55" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"></rect><path d="M28 59q2 12 14 12" fill="none" stroke="#2B3A55" stroke-width="2.4" stroke-linecap="round"></path><circle cx="43" cy="71" r="3" fill="#2B3A55"></circle></svg>`};
 const KYU_CLINICS=[
-  {n:"大宮休日夜間急患センター",a:"北区宮原町1-851（さいたま北部医療センター内）",t:"048-667-8180",h:[["小児科（夜間）","19:00〜翌6:00"],["内科","土曜夜 19:00〜21:30／休日 9:00〜11:30・13:00〜16:30・19:00〜21:30"]]},
-  {n:"浦和休日急患診療所",a:"浦和区常盤6-4-18（浦和区保健センター2階）",t:"048-833-0119",h:[["小児科（夜間）","19:30〜22:00（診療日は市のページで確認）"],["内科","土曜夜 19:00〜21:30／休日 9:00〜11:30・13:00〜16:30・19:00〜21:30"]]},
-  {n:"与野休日急患診療所",a:"中央区本町西2-9-30",t:"048-711-6067",h:[["内科","土曜夜 18:45〜21:15／休日 8:45〜11:45・13:00〜15:00・18:45〜21:15"],["小児科","時間は市のページで確認してください"]]},
-  {n:"岩槻休日夜間急患診療所",a:"岩槻区府内1-8-1（府内別館2階）",t:"048-798-2221",h:[["内科","19:00〜21:30"],["小児科","時間は市のページで確認してください"]]}];
+  {n:"大宮休日夜間急患センター",sz:"big",sl:"大きな病院の中にある",a:"北区宮原町1-851（さいたま北部医療センター内）",t:"048-667-8180",h:[["小児科（夜間）","19:00〜翌6:00"],["内科","土曜夜 19:00〜21:30／休日 9:00〜11:30・13:00〜16:30・19:00〜21:30"]]},
+  {n:"浦和休日急患診療所",sz:"mid",sl:"保健センターの建物の2階",a:"浦和区常盤6-4-18（浦和区保健センター2階）",t:"048-833-0119",h:[["小児科（夜間）","19:30〜22:00（診療日は市のページで確認）"],["内科","土曜夜 19:00〜21:30／休日 9:00〜11:30・13:00〜16:30・19:00〜21:30"]]},
+  {n:"与野休日急患診療所",sz:"small",sl:"休日・夜間専用の診療所",a:"中央区本町西2-9-30",t:"048-711-6067",h:[["内科","土曜夜 18:45〜21:15／休日 8:45〜11:45・13:00〜15:00・18:45〜21:15"],["小児科","時間は市のページで確認してください"]]},
+  {n:"岩槻休日夜間急患診療所",sz:"mid",sl:"市の建物の2階",a:"岩槻区府内1-8-1（府内別館2階）",t:"048-798-2221",h:[["内科","19:00〜21:30"],["小児科","時間は市のページで確認してください"]]}];
+const KK=`stroke="#1F2140" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"`;
+const MEMO=[["age","子どもの<b>年齢</b>と、だいたいの<b>体重</b>"],["temp","<b>いつから、どんな様子か</b>（熱の高さ、せき、吐いたかなど）"],["pill","飲んでいる<b>薬</b>や、<b>持病・アレルギー</b>"],["cup","<b>水分</b>がとれているか、<b>おしっこ</b>が出ているか"]];
+const MEMO_IC={
+  note:`<rect x="8" y="5" width="22" height="30" rx="3" fill="#fff" ${KK}/><path d="M13 13h12M13 19h12M13 25h7" stroke="#A68BFF" stroke-width="2.2" stroke-linecap="round"/><g class="a-tilt" style="transform-origin:30px 30px"><path d="M27 33l8-14 3 2-8 14-4 1z" fill="#FFD23F" ${KK}/></g>`,
+  age:`<circle cx="15" cy="13" r="7" fill="#FFE0C8" ${KK}/><circle cx="12.6" cy="13" r="1.1" fill="#1F2140"/><circle cx="17.4" cy="13" r="1.1" fill="#1F2140"/><path d="M13 16q2 1.6 4 0" stroke="#1F2140" stroke-width="1.4" fill="none" stroke-linecap="round"/><rect x="5" y="25" width="30" height="10" rx="4" fill="#B9E3FF" ${KK}/><path d="M20 30l4-3" stroke="#1F2140" stroke-width="2" stroke-linecap="round"/><circle cx="20" cy="30" r="1.4" fill="#1F2140"/><text x="30" y="16" font-size="9" font-weight="700" fill="#5A5AEF" font-family="sans-serif">kg</text>`,
+  temp:`<rect x="10" y="4" width="8" height="24" rx="4" fill="#fff" ${KK}/><circle cx="14" cy="30" r="6" fill="#FF8FB8" ${KK}/><path d="M14 30V14" stroke="#FF5A8A" stroke-width="3" stroke-linecap="round"/><circle cx="29" cy="15" r="8" fill="#fff" ${KK}/><path d="M29 10v5l3 2" stroke="#5A5AEF" stroke-width="2" stroke-linecap="round" fill="none"/>`,
+  pill:`<g transform="rotate(-40 18 20)"><rect x="5" y="14" width="26" height="12" rx="6" fill="#fff" ${KK}/><path d="M18 14h7a6 6 0 0 1 0 12h-7z" fill="#FF8FB8" ${KK}/></g><circle cx="31" cy="30" r="5" fill="#FFD23F" ${KK}/><path d="M28.5 30h5" stroke="#1F2140" stroke-width="1.6"/>`,
+  cup:`<path d="M8 12h18l-2 22H10z" fill="#fff" ${KK}/><path d="M9.3 20h15.4l-1.3 14H10.6z" fill="#9FD0F2"/><path d="M8 12h18l-2 22H10z" fill="none" ${KK}/><path d="M32 6q4 5 0 8q-4-3 0-8z" fill="#5A9BE6" ${KK}/>`
+};
+/* 急患診療所の建物の大きさのイメージ */
+const BLD={
+  big:{d:`<path d="M6 58h52" ${KK}/><rect x="12" y="14" width="40" height="44" rx="2" fill="#fff" ${KK}/><rect x="4" y="30" width="10" height="28" fill="#E5E8FF" ${KK}/><rect x="50" y="30" width="10" height="28" fill="#E5E8FF" ${KK}/>${[0,1,2,3].map(r=>[0,1,2,3].map(c=>`<rect x="${17+c*8}" y="${28+r*7}" width="5" height="4" rx="1" fill="#B9E3FF"/>`).join("")).join("")}<rect x="22" y="6" width="20" height="12" rx="2" fill="#FF8FB8" ${KK}/><path d="M28.5 9v6M35.5 9v6M28.5 12h7" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><rect x="28" y="50" width="8" height="8" fill="#A68BFF" ${KK}/>`},
+  mid:{d:`<path d="M6 58h52" ${KK}/><rect x="14" y="20" width="36" height="38" rx="2" fill="#fff" ${KK}/><rect x="14" y="32" width="36" height="12" fill="#FFE3EC"/><rect x="14" y="20" width="36" height="38" rx="2" fill="none" ${KK}/>${[0,1,2].map(r=>[0,1,2].map(c=>`<rect x="${19+c*10}" y="${24+r*12}" width="6" height="5" rx="1" fill="#B9E3FF"/>`).join("")).join("")}<text x="52" y="40" font-size="9" font-weight="700" fill="#D2477A" font-family="sans-serif">2F</text><path d="M24 14h16l-3 6H27z" fill="#E5E8FF" ${KK}/><rect x="28" y="50" width="8" height="8" fill="#A68BFF" ${KK}/>`},
+  small:{d:`<path d="M6 58h52" ${KK}/><path d="M14 34L32 20l18 14v24H14z" fill="#fff" ${KK}/><path d="M11 36L32 19l21 17" fill="none" stroke="#A68BFF" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="32" cy="34" r="6" fill="#FF8FB8" ${KK}/><path d="M32 31v6M29 34h6" stroke="#fff" stroke-width="2" stroke-linecap="round"/><rect x="28" y="46" width="8" height="12" fill="#A68BFF" ${KK}/><rect x="18" y="44" width="6" height="5" rx="1" fill="#B9E3FF"/><rect x="40" y="44" width="6" height="5" rx="1" fill="#B9E3FF"/>`}
+};
 function sheetKyukan(i){
   const item=HEALTH[i],st=STYLE.health[i%STYLE.health.length];
-  const tel=(n,show)=>`<a class="ky-tel" href="tel:${n.replace("#","%23")}">${ico('<path d="M7 4c1.4 0 2 2.6 2 3.6S7.6 9 7.6 10s2.6 4 4 4.4c1 0 1.4-1.4 2.4-1.4s3.6.4 3.6 1.8-1.4 3.2-3.2 3.2C9 18 4 13 4 8c0-2 1.6-4 3-4z"/>')}${show}</a>`;
-  const who=(icon,name,more)=>`<div class="ky-who"><span class="ky-pp">${icon}</span><div class="ky-wn"><small>電話に出てくれる人</small><b>${name}</b></div><p>${more}</p></div>`;
+  const tel=(n,big=true)=>callA(n,big?"call big":"call");
+  /* タップするとその場にふわっと出る小窓（×で閉じる） */
+  const pop=(label,icon,inner)=>`<button class="ky-tap" type="button" data-kypop aria-expanded="false"><span class="kt-ic">${icon}</span>${label}<span class="kt-ar">${ico('<path d="M6 9l6 6 6-6"/>')}</span></button><div class="ky-pop" hidden><button class="iconbtn ky-x" type="button" data-kyx aria-label="閉じる">${ico('<path d="M6 6l12 12M18 6L6 18"/>')}</button>${inner}</div>`;
+  const who=(icon,name,more)=>pop("電話に出てくれるのはどんな人？",`<span class="kt-pp">${icon}</span>`,`<div class="ky-who"><span class="ky-pp">${icon}</span><div class="ky-wn"><small>電話に出てくれる人</small><b>${name}</b></div><p>${more}</p></div>`);
   return dhead(`<svg viewBox="0 0 24 24" style="width:44px;height:44px;fill:none;stroke:#fff;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round">${P[item.p]}</svg>`,st[0],TAG.health,item.t,esc(item.k))+
    `<p style="margin:0 0 12px;font-size:14.5px;line-height:1.8">${esc(item.lead)}</p><ul class="feat">${item.f.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>
    <button class="go ky-open" type="button" data-kyopen aria-expanded="false" aria-controls="kyBox">ページをひらく <span class="chev">${ico('<path d="M6 9l6 6 6-6"/>')}</span></button>
    <div class="ky-wrap" id="kyBox"><div class="ky-in"><section class="ky">
      <div class="ky-h"><span class="ky-ring">${svg(`<circle cx="20" cy="20" r="18" fill="#FFE9EF"/><g class="a-ring"><path d="M13 11c2 0 3 4 3 5.4s-2 2-2 3.4 4 6 6 6.6c1.4 0 2-2 3.4-2s5.4.6 5.4 2.6-2 4.6-4.6 4.6C17.6 31.6 9 23 9 16.4 9 13.6 11 11 13 11z" fill="none" stroke="#D2477A" stroke-width="2.2" stroke-linejoin="round"/></g>`,40)}</span><h4>夜中や休日に「どうしよう…」と思ったら</h4></div>
      <p class="ky-lead">受診すべきか迷ったら、まず電話で相談できます。</p>
-     <div class="ky-card pink"><b class="ky-name">さいたま市子ども急患電話相談</b>${tel("048-825-5252","048-825-5252")}<span class="ky-hr">平日17時〜翌9時／土日祝 9時〜翌9時</span>
+     <div class="ky-card pink"><b class="ky-name">さいたま市子ども急患電話相談</b>${tel("048-825-5252")}<span class="ky-hr">平日17時〜翌9時／土日祝 9時〜翌9時</span>
        ${who(KYU_PEOPLE.city,"看護師さん・保健師さん","子どもの急な病気で困ったとき、家でどうしたらいいか、受診したほうがいいかなどのアドバイスがもらえます。さいたま市に住んでいる、または滞在している子どもと、その家族が相談できます。")}</div>
-     <div class="ky-card blue"><b class="ky-name">小児救急電話相談</b>${tel("#8000","#8000")}<span class="ky-hr">全国共通の短縮番号</span>
+     <div class="ky-card blue"><b class="ky-name">小児救急電話相談</b>${tel("#8000")}<span class="ky-hr">全国共通の短縮番号</span>
        ${who(KYU_PEOPLE.n8000,"子どもの病気の経験もある看護師さん","埼玉県では、看護師さんが相談にのってくれます。<b>小児科のお医者さん</b>がうしろで支えていて、必要なときはお医者さんが直接答えてくれることもあります。電話でのアドバイスなので、診察ではありません。")}</div>
-     <div class="ky-memo"><b>電話の前にメモしておくと伝えやすいこと</b><ul><li>子どもの年齢と、だいたいの体重</li><li>いつから、どんな様子か（熱の高さ、せき、吐いたかなど）</li><li>飲んでいる薬や、持病・アレルギー</li><li>水分がとれているか、おしっこが出ているか</li></ul></div>
+     <div class="ky-memo">${pop("電話の前にメモしておくと伝えやすいこと",svg(MEMO_IC.note,40),`<b class="ky-mh">電話の前にメモしておくと伝えやすいこと</b><ul class="ky-ml">${MEMO.map(([k,t])=>`<li><span class="mi">${svg(MEMO_IC[k],40)}</span><span>${t}</span></li>`).join("")}</ul>`)}</div>
      <div class="ky-sub"><h4>休日・夜間の急患診療所（4か所）</h4><p>小児科は、かぜや発熱などの内科的な病気のみ。時間は受付時間です。</p></div>
-     <div class="ky-cl">${KYU_CLINICS.map(c=>`<div class="ky-c"><b>${esc(c.n)}</b><div class="ad">${esc(c.a)}</div>${c.h.map(([k,v])=>`<div class="ky-t"><span>${esc(k)}</span>${esc(v)}</div>`).join("")}
-       <div class="row2">${tel(c.t,c.t)}<a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(c.n+" さいたま市"+c.a.replace(/（.*）/,""))}" target="_blank" rel="noopener">地図 ›</a></div></div>`).join("")}</div>
+     <div class="ky-cl">${KYU_CLINICS.map(c=>`<div class="ky-c"><div class="ky-ch"><span class="ky-bld">${svg(BLD[c.sz].d,64)}</span><div><b>${esc(c.n)}</b><span class="ky-sz">${esc(c.sl)}</span></div></div><div class="ad">${esc(c.a)}</div>${c.h.map(([k,v])=>`<div class="ky-t"><span>${esc(k)}</span>${esc(v)}</div>`).join("")}
+       <div class="row2">${tel(c.t,false)}<a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(c.n+" さいたま市"+c.a.replace(/（.*）/,""))}" target="_blank" rel="noopener">地図 ›</a></div></div>`).join("")}</div>
      <p class="foot">熱などの症状があるときは、受診の前に電話で相談してください。出典：さいたま市「子ども急患電話相談」「休日・夜間の急患診療所」、埼玉県「小児救急電話相談」（2026年11月時点）。診療日や時間は変わることがあるので、出かける前に電話などで確認してください。</p>
      ${extA("https://www.city.saitama.lg.jp/002/001/017/006/p019179.html","急患診療所のくわしいページ（さいたま市）","go sub")}
    </section></div></div>`}
+$("#sheet").addEventListener("click",e=>{
+  const t=e.target.closest("[data-kypop]");
+  if(t){const pp=t.nextElementSibling,open=pp.hidden;
+    if(open){pp.hidden=false;pp.classList.remove("on");void pp.offsetWidth;pp.classList.add("on");t.setAttribute("aria-expanded","true");t.classList.add("is-open")}
+    else closePop(pp);return}
+  const x=e.target.closest("[data-kyx]");if(x){closePop(x.closest(".ky-pop"))}});
+function closePop(pp){const t=pp.previousElementSibling;pp.classList.remove("on");pp.classList.add("off");t.setAttribute("aria-expanded","false");t.classList.remove("is-open");
+  setTimeout(()=>{pp.hidden=true;pp.classList.remove("off")},240)}
 $("#sheet").addEventListener("click",e=>{const b=e.target.closest("[data-kyopen]");if(!b)return;
   const w=$("#kyBox"),open=!w.classList.contains("open");w.classList.toggle("open",open);b.setAttribute("aria-expanded",open);
   b.firstChild.textContent=open?"とじる ":"ページをひらく ";
