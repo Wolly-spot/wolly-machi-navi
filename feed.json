@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-09T12:00:00+09:00",
+ "updatedAt": "2026-11-09T19:10:00+09:00",
  "shops": [
   {
    "id": "s-more-donut",
@@ -104,15 +104,48 @@
    "ai": true
   },
   {
-   "id": "s-shotengai-cp",
-   "kind": "coupon",
-   "title": "秋のさいたま市商店街キャンペーン",
-   "desc": "参加しているお店でお買いものをすると、アプリから応募できるキャンペーン。",
-   "date": "2026-09-24",
+   "id": "s-bamiyan-omiya",
+   "kind": "open",
+   "title": "バーミヤンが大宮駅東口に11/27オープン",
+   "desc": "駅から歩いて1分のビル2階。家族で入りやすい中華のファミレスです。",
+   "date": "2026-11-27",
+   "src": "宮原大宮ドットコム",
+   "url": "https://miyahara-kitaku.com/bamiyan-omiya-east-open/",
+   "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/09/IMG_2125.jpg",
+   "ai": false
+  },
+  {
+   "id": "s-parc-de-vague",
+   "kind": "open",
+   "title": "与野公園のパン屋の新店がコクーン2に11/27",
+   "desc": "北海道産小麦のパンとソフトクリームのお店。コクーン2の1階外側に。",
+   "date": "2026-11-27",
+   "src": "宮原大宮ドットコム",
+   "url": "https://miyahara-kitaku.com/cocoon2-parc-de-vague-petit-open-2026/",
+   "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/08/ed6fda18b29c5d5ec05e0bd613c8e126.png",
+   "ai": false
+  },
+  {
+   "id": "s-petit-marche",
+   "kind": "event",
+   "title": "市内でとれた農産物のプチマルシェ（11/11ほか）",
+   "desc": "市役所（11/11）、中央区役所（11/16・30）などで地元の農産物を販売。",
+   "date": "2026-11-11",
    "src": "さいたま市",
-   "url": "https://www.city.saitama.lg.jp/004/001/001/p133683.html",
-   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/s-shotengai-cp.jpg",
+   "url": "https://www.city.saitama.lg.jp/004/001/003/002/p086011.html",
+   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/s-petit-marche.jpg",
    "ai": true
+  },
+  {
+   "id": "s-rikyu-afternoon",
+   "kind": "info",
+   "title": "大宮璃宮 秋のくまアフタヌーンティー（〜11/16）",
+   "desc": "マスカットや洋梨を使ったくまのスイーツ。火曜休み、120分制。",
+   "date": "2026-11-16",
+   "src": "ウォーカープラス",
+   "url": "https://www.walkerplus.com/event/ar0311e611530/",
+   "img": "https://ms-cache.walkerplus.com/walkertouch/wtd/event/30/l2/611530.jpg",
+   "ai": false
   }
  ],
  "news": [
@@ -236,6 +269,42 @@
    "url": "https://www.city.saitama.lg.jp/006/014/010/001/012/023/p134665.html",
    "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-shiho-11.jpg",
    "ai": true
+  },
+  {
+   "id": "n-flu-2026",
+   "kind": "kosodate",
+   "title": "インフルエンザ 注意報レベル近くで流行中",
+   "desc": "市内の患者数が増えています（11/5発表）。手洗いと体調の変化に気をつけて。",
+   "date": "2026-11-05",
+   "src": "さいたま市",
+   "url": "https://www.city.saitama.lg.jp/002/001/008/001/007/002/p007833.html",
+   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-flu-2026.jpg",
+   "ai": true,
+   "important": false
+  },
+  {
+   "id": "n-charifes",
+   "kind": "kids",
+   "title": "大宮けいりん チャリフェス（11/23）",
+   "desc": "キックバイクやふわふわ遊具など、子どもの体験がすべて無料。",
+   "date": "2026-11-23",
+   "src": "埼玉県",
+   "url": "https://www.pref.saitama.lg.jp/b0201/20261123.html",
+   "img": "https://www.pref.saitama.lg.jp/shared/images/sns/logo.png",
+   "ai": false,
+   "important": false
+  },
+  {
+   "id": "n-kousaku-hiroba",
+   "kind": "kids",
+   "title": "浦和住宅公園の工作ひろば（11/14・23）",
+   "desc": "小学生以下が無料で工作できます。予約不要、各日先着15名。",
+   "date": "2026-11-14",
+   "src": "いこーよ",
+   "url": "https://iko-yo.net/events/612142",
+   "img": "https://d2goguvysdoarq.cloudfront.net/system/event_photos/photos/1780842/normal.jpg?1793755283",
+   "ai": false,
+   "important": false
   }
  ]
 }
