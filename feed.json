@@ -79,7 +79,8 @@
    "date": "2026-11-14",
    "src": "さいたま市",
    "url": "https://www.city.saitama.lg.jp/001/010/018/001/001/p133136.html",
-   "img": ""
+   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/s-saitamarche.png",
+   "ai": true
   },
   {
    "id": "s-yume-marche",
@@ -99,7 +100,8 @@
    "date": "2026-11-05",
    "src": "さいたま市",
    "url": "https://www.city.saitama.lg.jp/001/154/009/002/p135012.html",
-   "img": ""
+   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/s-minna-app.png",
+   "ai": true
   },
   {
    "id": "s-shotengai-cp",
@@ -109,7 +111,8 @@
    "date": "2026-09-24",
    "src": "さいたま市",
    "url": "https://www.city.saitama.lg.jp/004/001/001/p133683.html",
-   "img": ""
+   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/s-shotengai-cp.png",
+   "ai": true
   }
  ],
  "news": [
@@ -121,8 +124,9 @@
    "date": "2026-11-06",
    "src": "さいたま市",
    "url": "https://www.city.saitama.lg.jp/001/011/001/p134706.html",
-   "img": "",
-   "important": true
+   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-system-stop.png",
+   "important": true,
+   "ai": true
   },
   {
    "id": "n-bousai-leak",
@@ -132,8 +136,9 @@
    "date": "2026-11",
    "src": "さいたま市",
    "url": "https://www.city.saitama.lg.jp/001/011/015/004/002/p134482.html",
-   "img": "",
-   "important": true
+   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-bousai-leak.png",
+   "important": true,
+   "ai": true
   },
   {
    "id": "n-hoiku-tour",
@@ -143,7 +148,8 @@
    "date": "2026-11-06",
    "src": "さいたま市",
    "url": "https://www.city.saitama.lg.jp/003/001/015/006/002/p075327.html",
-   "img": ""
+   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-hoiku-tour.png",
+   "ai": true
   },
   {
    "id": "n-holiday-window",
@@ -153,7 +159,8 @@
    "date": "2026-11-29",
    "src": "さいたま市",
    "url": "https://www.city.saitama.lg.jp/001/001/007/p016829.html",
-   "img": ""
+   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-holiday-window.png",
+   "ai": true
   },
   {
    "id": "n-window-time",
@@ -163,7 +170,8 @@
    "date": "2027-01-04",
    "src": "さいたま市",
    "url": "https://www.city.saitama.lg.jp/006/007/014/020/p133609.html",
-   "img": ""
+   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-window-time.png",
+   "ai": true
   },
   {
    "id": "n-zootopia",
@@ -183,7 +191,8 @@
    "date": "2026-11-14",
    "src": "さいたま市",
    "url": "https://www.city.saitama.lg.jp/minuma/001/001/007/p121764.html",
-   "img": ""
+   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-minuma-fair.png",
+   "ai": true
   },
   {
    "id": "n-tour-de-france",
@@ -203,7 +212,8 @@
    "date": "2026-11-21",
    "src": "さいたま市",
    "url": "https://www.city.saitama.lg.jp/006/014/008/003/015/007/p134622.html",
-   "img": ""
+   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-minuma-akifes.png",
+   "ai": true
   },
   {
    "id": "n-bousai-fair",
@@ -213,7 +223,8 @@
    "date": "2026-11-23",
    "src": "さいたま市",
    "url": "https://www.city.saitama.lg.jp/001/011/015/005/p130175.html",
-   "img": ""
+   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-bousai-fair.png",
+   "ai": true
   },
   {
    "id": "n-shiho-11",
@@ -223,7 +234,8 @@
    "date": "2026-11-04",
    "src": "さいたま市",
    "url": "https://www.city.saitama.lg.jp/006/014/010/001/012/023/p134665.html",
-   "img": ""
+   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-shiho-11.png",
+   "ai": true
   }
  ]
 }

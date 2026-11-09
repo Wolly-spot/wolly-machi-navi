@@ -395,6 +395,8 @@ footer img{height:56px;width:auto;filter:var(--logo-filter)}
 .fimg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#fff}
 .flab{position:absolute;left:8px;top:8px;z-index:1;padding:3px 10px;border-radius:999px;background:var(--fk);color:#fff;font-size:11px;font-weight:800;line-height:1.35;box-shadow:0 2px 6px rgba(31,33,64,.18);letter-spacing:.02em}
 .fimp{position:absolute;right:8px;top:8px;z-index:1;padding:3px 9px;border-radius:999px;background:#E5484D;color:#fff;font-size:11px;font-weight:800;line-height:1.35}
+/* 写真がない記事は Canva で作ったアニメ調のイラスト。本物の写真とまちがえないよう「イメージ」と出す */
+.fai{position:absolute;right:8px;bottom:8px;z-index:1;padding:2px 8px;border-radius:999px;background:rgba(31,33,64,.55);color:#fff;font-size:10px;font-weight:700;line-height:1.4;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
 .fbig{position:absolute;left:10px;right:10px;bottom:10px;z-index:1;color:#fff;font-weight:900;font-size:clamp(15px,4.4vw,20px);line-height:1.25;text-shadow:0 2px 6px rgba(31,33,64,.35)}
 .fc b{font-size:13.5px;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-top:4px}
 .fc p{margin:0;font-size:12px;line-height:1.5;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
@@ -1265,7 +1267,7 @@ const fDate=d=>{const m=String(d||"").match(/^(\d{4})-(\d{2})(?:-(\d{2}))?/);ret
 function feedCard(it,K){
   const k=K[it.kind]||Object.values(K)[0];
   return `<a class="fc" href="${esc(it.url)}" target="_blank" rel="noopener" style="--fk:${k[1]};--fg:${k[3]}">
-    <div class="fimg"><svg viewBox="0 0 24 24" aria-hidden="true">${P[k[2]]||P.info}</svg>${it.img?`<img src="${esc(it.img)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`:""}<span class="flab">${k[0]}</span>${it.important?'<span class="fimp">重要</span>':""}</div>
+    <div class="fimg"><svg viewBox="0 0 24 24" aria-hidden="true">${P[k[2]]||P.info}</svg>${it.img?`<img src="${esc(it.img)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`:""}<span class="flab">${k[0]}</span>${it.important?'<span class="fimp">重要</span>':""}${it.ai?'<span class="fai">イメージ</span>':""}</div>
     <b>${esc(it.title)}</b>${it.desc?`<p>${esc(it.desc)}</p>`:""}<small>${esc([fDate(it.date),it.src].filter(Boolean).join("・"))}</small></a>`;
 }
 function feedTabs(id,K,list,cur,attr){
@@ -1539,7 +1541,7 @@ function fillNewsSheet(animate=true){
   if(FEED&&FEED.news&&FEED.news.length){
     const news=FEED.news.slice().sort((a,b)=>(b.important?1:0)-(a.important?1:0)||byDate(a,b));
     $("#sheetBody").innerHTML=`<div class="eyebrow">SAITAMA NEWS</div><h3 id="sheetTitle">さいたま市の最新ニュース</h3><p class="sub">子育て・子どもイベント・ママ向け・事件や安全の情報を、毎日あつめています。</p>
-      <div class="feedgrid">${news.map(x=>feedCard(x,NEWS_K)).join("")}</div><p class="foot">写真は各ページの紹介用の画像です。くわしい内容は各リンク先でご確認ください。</p>`;
+      <div class="feedgrid">${news.map(x=>feedCard(x,NEWS_K)).join("")}</div><p class="foot">写真は各ページの紹介用の画像です。「イメージ」と書かれた絵は、写真のない記事のためにWollyが作ったイラストで、実際の様子とはちがいます。くわしい内容は各リンク先でご確認ください。</p>`;
     return;
   }
   const list=sortedNews();
