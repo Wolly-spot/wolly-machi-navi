@@ -505,6 +505,31 @@ svg .a-strike{animation:a-strike 1.3s cubic-bezier(.7,0,.3,1) infinite;transform
 .g-tool{display:inline-flex;align-items:center;padding:3px 10px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:11.5px;font-weight:800;color:var(--c)}
 .g-ft .gbtn{margin:0;padding:7px 14px;font-size:13px;background:var(--c);border-color:var(--c);color:#fff}
 @keyframes gUp{from{opacity:0;transform:translateY(10px)}}
+/* 保活ナビの説明パネル（ガイドとつながる色・アイコン） */
+.hk-hero{display:flex;align-items:center;gap:14px;margin:0 44px 14px 0;padding:14px;border-radius:24px;background:linear-gradient(150deg,var(--bg),color-mix(in srgb,var(--c) 18%,var(--surface)));border:1px solid color-mix(in srgb,var(--c) 25%,var(--line))}
+.hk-ic{position:relative;flex:none;width:78px;height:78px;border-radius:26px;display:grid;place-items:center;background:#fff;box-shadow:0 8px 18px color-mix(in srgb,var(--c) 30%,transparent)}
+.hk-ic svg{animation:nicw 3.4s ease-in-out infinite}
+.hk-no{position:absolute;left:-7px;top:-7px;width:28px;height:28px;border-radius:50%;background:var(--c);color:#fff;font:900 14px/28px system-ui,sans-serif;text-align:center;border:3px solid #fff}
+.hk-step{font-size:11.5px;font-weight:800;color:var(--c);letter-spacing:.04em}
+.hk h3{margin:2px 0 2px;font-size:19px;line-height:1.35}
+.hk-sl{font-size:13px;font-weight:700;color:var(--ink);opacity:.8}
+.hk-lead{margin:0 0 16px;font-size:14.5px;line-height:1.95}
+.hk-kw{display:inline-flex;align-items:center;gap:2px;padding:0 6px 0 3px;margin:0 1px;border-radius:999px;background:color-mix(in srgb,var(--c) 14%,#fff);font-weight:800;white-space:nowrap}
+.hk-kw svg{width:20px;height:20px;overflow:visible;vertical-align:-4px}
+.hk-pt-h{display:flex;align-items:center;gap:6px;font-weight:900;font-size:14px;margin:0 0 8px}
+.hk-pts{list-style:none;margin:0 0 16px;padding:0;display:grid;gap:8px}
+.hk-pts li{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:18px;background:var(--bg);border:1px solid color-mix(in srgb,var(--c) 22%,var(--line));font-size:14px;line-height:1.6;font-weight:600;animation:gUp .5s both;animation-delay:calc(var(--n)*90ms + 120ms)}
+.hk-pic{flex:none;width:46px;height:46px;border-radius:16px;display:grid;place-items:center;background:#fff;box-shadow:0 3px 8px color-mix(in srgb,var(--c) 20%,transparent)}
+.hk-pic svg{animation:nicw 3.6s ease-in-out infinite;animation-delay:calc(var(--n)*-.5s)}
+.hk-go{display:grid;gap:6px;justify-items:center;margin:0 0 16px}
+.hk-go .hk-open{width:100%;justify-content:center;margin:0;padding:13px 16px;font-size:15.5px;background:var(--c);border-color:var(--c);color:#fff;box-shadow:0 5px 0 color-mix(in srgb,var(--c) 70%,#1F2140)}
+.hk-go small{font-size:11.5px;color:var(--muted);text-align:center}
+.hk-navs{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.hk-nav{display:flex;align-items:center;gap:6px;padding:10px 12px;border-radius:16px;border:1px solid var(--line);background:var(--surface);text-decoration:none;color:var(--ink);font-weight:800;font-size:13px}
+.hk-nav.next{justify-content:flex-end;text-align:right;grid-column:2}
+.hk-nav span{display:grid}
+.hk-nav small{font-size:10.5px;color:var(--muted);font-weight:700}
+@media (prefers-reduced-motion:reduce){.hk-pts li,.hk-ic svg,.hk-pic svg{animation:none}}
 @media (prefers-reduced-motion:reduce){.g-steps li,.g-how>div,.g-ic svg{animation:none}}
 .feat li{display:flex;gap:8px;font-size:14px;line-height:1.6}
 .feat li::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--accent);margin-top:8px}
@@ -1469,6 +1494,51 @@ function sheetHokatsuGuide(){
       <div class="g-ft"><span class="g-tool">${esc(g.tool)}</span>${tool(g.tool)}</div></div></li>`).join("")}</ol>
   <p class="foot">日程や制度は年度ごとに変わります。正しい日付は「ほかつのカレンダー」や、さいたま市のページでたしかめてください。</p>`;
 }
+/* ===== 保活ナビの説明（ふわっと出るパネル）：ポイントごとにかわいいアイコン。ガイドと同じ色・つながるデザイン ===== */
+Object.assign(GIC,{
+  tap:`<circle cx="20" cy="15" r="9" fill="#FFE0EC" ${GO}/><path d="M17 33v-14a2.4 2.4 0 0 1 4.8 0v6l6 1.4a3 3 0 0 1 2.2 3.4L29 35H18z" fill="#FFE0C8" ${GO}/>`,
+  compare:`<path d="M20 6v28M9 34h22" ${GO}/><path d="M6 12h28" ${GO}/><path d="M3 22l6-10 6 10a6 6 0 0 1-12 0z" fill="#BFE6FF" ${GO}/><path d="M25 22l6-10 6 10a6 6 0 0 1-12 0z" fill="#FFC6DA" ${GO}/>`,
+  up:`<rect x="6" y="24" width="7" height="10" rx="2" fill="#BFE6FF" ${GO}/><rect x="16.5" y="17" width="7" height="17" rx="2" fill="#E3D7FF" ${GO}/><rect x="27" y="9" width="7" height="25" rx="2" fill="#FFC6DA" ${GO}/><path d="M7 17l9-7 5 4 9-8" fill="none" stroke="#FF6FA5" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>`,
+  flag:`<path d="M10 35V6" ${GO}/><path d="M10 7h20l-4 6 4 6H10z" fill="#FFC6DA" ${GO}/>${GF(19,12)}<path d="M4 35h14" ${GO}/>`,
+  leaf:`<path d="M8 32C8 16 18 7 33 7c0 15-9 25-25 25z" fill="#FFE59A" ${GO}/><path d="M8 32 24 16" ${GO}/>${GF(22,20)}`,
+  pencil:`<path d="M9 31l2-8L27 7l6 6-16 16z" fill="#FFE59A" ${GO}/><path d="M24 10l6 6" ${GO}/><path d="M9 31l8-2" ${GO}/><circle cx="31" cy="30" r="3" fill="#FF8FB8"/>`,
+  clock:`<circle cx="20" cy="21" r="14" fill="#BFE6FF" ${GO}/><path d="M20 13v8l5 3" fill="none" ${GO}/><path d="M9 6l-3 3M31 6l3 3" ${GO}/>`,
+  blocks:`<rect x="5" y="20" width="13" height="13" rx="3" fill="#BFE6FF" ${GO}/><rect x="22" y="20" width="13" height="13" rx="3" fill="#FFC6DA" ${GO}/><rect x="13.5" y="6" width="13" height="13" rx="3" fill="#FFE59A" ${GO}/>${GF(20,12)}`,
+  globe:`<circle cx="20" cy="20" r="14" fill="#BFE6FF" ${GO}/><path d="M6 20h28M20 6c-5 5-5 23 0 28M20 6c5 5 5 23 0 28" fill="none" ${GO}/>`,
+  talk:`<path d="M6 9a5 5 0 0 1 5-5h18a5 5 0 0 1 5 5v13a5 5 0 0 1-5 5H17l-7 6v-6H11a5 5 0 0 1-5-5z" fill="#FFD1DE" ${GO}/>${GF(20,15)}`,
+  free:`<path d="M6 16h28v18H6z" fill="#FFC6DA" ${GO}/><path d="M4 11h32v6H4z" fill="#FFE59A" ${GO}/><path d="M20 11v23" ${GO}/><path d="M20 11c-3-6-10-6-9-1 1 3 9 1 9 1zm0 0c3-6 10-6 9-1-1 3-9 1-9 1z" fill="#C9B6FF" ${GO}/>`,
+  city:`<rect x="6" y="14" width="28" height="20" rx="3" fill="#fff" ${GO}/><path d="M3 15 20 5l17 10" fill="none" stroke="#7CC4FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 20v8M17 20v8M23 20v8M29 20v8" ${GO}/>`,
+  phone:`<rect x="11" y="4" width="18" height="32" rx="5" fill="#C9B6FF" ${GO}/>${GF(20,17)}<path d="M17 30h6" ${GO}/>`,
+  house:`<path d="M6 19 20 7l14 12v15H6z" fill="#fff" ${GO}/><path d="M4 20 20 6l16 14" fill="none" stroke="#FF8FB8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>${GF(20,22)}<rect x="16" y="27" width="8" height="7" rx="2" fill="#C9B6FF" ${GO}/>`,
+  check:`<circle cx="20" cy="20" r="14" fill="#FFE59A" ${GO}/><path d="M13 20l5 5 9-10" fill="none" stroke="#1F2140" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>`
+});
+/* ポイントの文に合うアイコンを、ことばから自動でえらぶ（新しい項目にも自動でつく） */
+const PT_IC=[[/えらぶ|タップ/,"tap"],[/くらべ/,"compare"],[/上げ/,"up"],[/流れ|たどれ/,"flag"],[/季節/,"leaf"],[/書き方|ヒント/,"pencil"],[/締切/,"clock"],[/毎月/,"cal"],
+  [/地図|区の/,"map"],[/ジャンル|年齢/,"blocks"],[/ホームページ|HP/,"globe"],[/口コミ/,"talk"],[/時期別/,"cal"],[/無料/,"free"],[/日程|市のページ/,"city"],[/電子申請|郵送|持参/,"mail"],[/問い合わせ|支援課/,"phone"],[/コツ|書類/,"docs"]];
+const ptIcon=t=>(PT_IC.find(([re])=>re.test(t))||[0,"check"])[1];
+/* 説明文の大事なことばに、小さなアイコンとマーカー */
+const LEAD_KW=[["点数","ruler"],["締切","clock"],["書類","docs"],["地図","map"],["722か所","house"],["コツ","bulb"],["口コミ","talk"],["無料","free"],["見学","bus"],["電子申請","mail"],["郵送","mail"]];
+function leadHtml(t){
+  let h=esc(t);
+  LEAD_KW.forEach(([w,ic])=>{const k=GIC[ic]?ic:"check";h=h.replace(w,`<span class="hk-kw">${svg(GIC[k],40)}${w}</span>`)});
+  return h;
+}
+function sheetHokatsuItem(i){
+  const h=HOKATSU[i],g=GSTEPS.find(x=>x.tool===h.t)||GSTEPS[0];
+  const big=(k,w)=>svg(GIC[k],40).replace("<svg ",`<svg style="width:${w}px;height:${w}px;overflow:visible" `);
+  const prev=HOKATSU[i-1],next=HOKATSU[i+1];
+  const nav=(x,j,dir)=>x?`<a class="hk-nav ${dir}" href="#h-${j}">${dir==="prev"?"‹ ":""}<span><small>${x.guide?"はじめに":"STEP "+x.step}</small>${esc(x.guide?"保活ガイド":x.sl)}</span>${dir==="next"?" ›":""}</a>`:"<span></span>";
+  const open=h.u?(h.pop?openA(h.u,"ページをひらく",h.t,"go hk-open"):extA(h.u,"市のページをひらく","go hk-open")):"";
+  return `<div class="hk" style="--c:${g.c};--bg:${g.bg}">
+    <div class="hk-hero"><div class="hk-ic">${big(g.ic,58)}<span class="hk-no">${g.n}</span></div>
+      <div><div class="hk-step">STEP ${g.n}・${esc(g.when)}</div><h3 id="sheetTitle">${esc(h.t)}</h3><div class="hk-sl">${esc(g.t)}</div></div></div>
+    <p class="hk-lead">${leadHtml(h.lead)}</p>
+    <div class="hk-pt-h">${big("check",22)}ここがポイント</div>
+    <ul class="hk-pts">${h.f.map((x,j)=>`<li style="--n:${j}"><span class="hk-pic">${big(ptIcon(x),34)}</span><span>${esc(x)}</span></li>`).join("")}</ul>
+    <div class="hk-go">${open}<small>${h.pop?"ページがその場でふわっと開きます（×でここにもどれます）":"さいたま市のページが開きます"}</small></div>
+    <div class="hk-navs">${nav(prev,i-1,"prev")}${nav(next,i+1,"next")}</div>
+  </div>`;
+}
 /* 教室リスト（CLASSES にデータがある習い事だけ） */
 let clsKey=null,clsArea="all",clsSort="rec",clsT={},clsQ="",clsShow=20;
 const CLS_TOGGLES=[["kid","幼児OK"],["fee","料金がわかる"],["park","駐車場あり"]];
@@ -1699,7 +1769,7 @@ function sheetHtml(kind){
   if(kind==="dent")return sheetDent();
   if(kind==="dk-kid"||kind==="dk-mom")return sheetDentalKind(kind);
   if(k==="m")return sheetMoney(i);
-  if(k==="h"&&HOKATSU[i])return HOKATSU[i].guide?sheetHokatsuGuide():sheetInfo(HOKATSU[i],"hokatsu",i);
+  if(k==="h"&&HOKATSU[i])return HOKATSU[i].guide?sheetHokatsuGuide():sheetHokatsuItem(i);
   if(k==="x"&&HEALTH[i])return HEALTH[i].kyu?sheetKyukan(i):sheetInfo(HEALTH[i],"health",i);
   if(k==="s"&&SHOPS[i])return sheetInfo(SHOPS[i],"shop",i);
   if(k==="l")return sheetLesson(i);
