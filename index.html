@@ -1671,7 +1671,7 @@ function sheetDentalKind(kind){
    :`<dl class="dl"><div><dt>対象</dt><dd>さいたま市に住所のある妊婦さん（転入前の市区町村で受けた方は対象外）</dd></div><div><dt>時期</dt><dd>妊娠中に1回。体調が安定しやすい16〜32週ごろがおすすめ。</dd></div><div><dt>持ち物</dt><dd>妊婦歯科健康診査票・母子健康手帳・本人確認書類</dd></div></dl>
       <ol class="steps"><li>健診票を確認（母子手帳と一緒）</li><li>歯医者さんに電話で予約</li><li>持ち物を持って受診</li></ol>
       <p class="note">同じ日に歯石除去などの治療をした場合は、別に費用がかかります。</p>`)+
-   `<button class="go vbtn" type="button" data-view="near?g=dent&amp;f=${kid?"kid":"mom"}" data-vt="${kid?"幼児":"妊婦"}の歯科健診ができる歯医者さん">${kid?"幼児":"妊婦"}の歯科健診ができる歯医者さんを地図でさがす</button>${extA(ART+"2YWsBacW5ZG28Q3Yn9T2ei","歯科健診のくわしい案内","go sub")}`}
+   `<button class="go vbtn" type="button" data-view="near?g=dent&amp;f=${kid?"kid":"mom"}" data-vt="${kid?"幼児":"妊婦"}の歯科健診ができる歯医者さん">${kid?"幼児":"妊婦"}の歯科健診ができる歯医者さんを地図でさがす</button><button class="go sub vbtn" type="button" data-view="dental-${kid?"kid":"mom"}" data-vt="${kid?"幼児":"妊婦"}の歯科健診のくわしい案内">${kid?"幼児":"妊婦"}の歯科健診のくわしい案内 ${ico('<path d="M5 12h14M13 6l6 6-6 6"/>')}</button>`}
 let dentWard=null,dentF="all",dentShow=20;
 function dentList(){
   const ward=dentWard;
