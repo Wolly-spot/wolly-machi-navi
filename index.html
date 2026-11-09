@@ -381,7 +381,28 @@ footer img{height:56px;width:auto;filter:var(--logo-filter)}
 }
 
 /* ====== v4 additions ====== */
-.cats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+/* カテゴリー：横一列にならべて、指でスライド */
+.cats{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding:2px 2px 10px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.cats::-webkit-scrollbar{display:none}
+.cats .cat{flex:0 0 calc((100% - 22px)/3.3);min-width:104px;scroll-snap-align:start}
+@media (min-width:760px){.cats .cat{flex-basis:calc((100% - 50px)/6)}}
+/* お店情報・最新ニュース・Wolly限定クーポン：正方形の写真カードを横にスライド */
+.feedrow{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 10px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.feedrow::-webkit-scrollbar{display:none}
+.fc{flex:0 0 min(44%,210px);scroll-snap-align:start;display:flex;flex-direction:column;gap:4px;text-decoration:none;color:var(--ink)}
+.fimg{position:relative;aspect-ratio:1/1;border-radius:20px;overflow:hidden;background:var(--fg);box-shadow:0 6px 16px rgba(31,33,64,.10);border:1px solid var(--line)}
+.fimg>svg{position:absolute;left:50%;top:50%;width:46%;height:46%;translate:-50% -50%;fill:none;stroke:rgba(255,255,255,.95);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 2px 4px rgba(31,33,64,.15))}
+.fimg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#fff}
+.flab{position:absolute;left:8px;top:8px;z-index:1;padding:3px 10px;border-radius:999px;background:var(--fk);color:#fff;font-size:11px;font-weight:800;line-height:1.35;box-shadow:0 2px 6px rgba(31,33,64,.18);letter-spacing:.02em}
+.fimp{position:absolute;right:8px;top:8px;z-index:1;padding:3px 9px;border-radius:999px;background:#E5484D;color:#fff;font-size:11px;font-weight:800;line-height:1.35}
+.fbig{position:absolute;left:10px;right:10px;bottom:10px;z-index:1;color:#fff;font-weight:900;font-size:clamp(15px,4.4vw,20px);line-height:1.25;text-shadow:0 2px 6px rgba(31,33,64,.35)}
+.fc b{font-size:13.5px;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-top:4px}
+.fc p{margin:0;font-size:12px;line-height:1.5;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.fc small{font-size:10.5px;color:var(--muted)}
+.fc:active .fimg{transform:scale(.97)}
+.feedgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 12px}
+.feedgrid .fc{flex:none}
+.cats{display:flex}
 .cat{display:grid;justify-items:center;gap:6px;text-align:center;text-decoration:none;padding:14px 6px 12px;border-radius:20px;background:var(--surface);border:1px solid var(--line);transition:transform .3s cubic-bezier(.3,1.6,.5,1),box-shadow .3s}
 .cat:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
 .cat .ci{width:50px;height:50px;border-radius:16px;display:grid;place-items:center;background:var(--cbg)}
@@ -695,8 +716,17 @@ svg .a-ring{animation:ring 2.4s ease-in-out infinite;transform-box:fill-box;tran
         <nav class="cats" id="cats" aria-label="カテゴリー"></nav>
       </section>
 
+      <!-- さいたまのお店情報（OPEN・お知らせ・イベント・クーポン）。data/feed.json → GitHub Pages の feed.json -->
+      <section class="block" id="feedShops" hidden>
+        <div class="head"><div><div class="eyebrow">SHOP NEWS</div><h2>さいたまのお店情報</h2></div></div>
+        <div class="filt" role="group" aria-label="お店情報の種類" id="shopTabs"></div>
+        <div class="feedrow" id="shopRow"></div>
+      </section>
+
         <section class="block">
           <div class="head"><div><div class="eyebrow">SAITAMA NEWS</div><h2>さいたま市の最新ニュース</h2></div><a class="more" href="#news">すべて見る</a></div>
+          <div class="filt" role="group" aria-label="ニュースの種類" id="newsTabs" hidden></div>
+          <div class="feedrow" id="newsRow" hidden></div>
           <div class="news" id="newsHome"></div>
           <div class="stamp"><i></i><span id="newsStamp">自動更新</span></div>
         </section>
@@ -846,6 +876,7 @@ const CH={
   health:`<path d="M20 10c-7 0-10 6-9 13 1 7 4 10 5 19 .6 6 2.4 12 6 12 4 0 3-12 7-14 1.6-.8 3-.8 4.6 0 4 2 3 14 7 14 3.6 0 5.4-6 6-12 1-9 4-12 5-19 1-7-2-13-9-13-5 0-7 3-12 3s-7-3-12-3z" fill="#fff" stroke="#1F2140" stroke-width="2.2"/>${FACE(32,28)}<g class="a-pop"><path d="M52 8l1.8 4 4 1.8-4 1.8L52 20l-1.8-4.4-4-1.8 4-1.8z" fill="#35B3EE"/></g>`,
   lesson:`<g class="a-tilt"><path d="M32 6l7.6 15.4 17 2.5-12.3 12 2.9 16.9L32 44.8 16.8 52.8l2.9-16.9-12.3-12 17-2.5z" fill="#FFD23F" stroke="#1F2140" stroke-width="2.2" stroke-linejoin="round"/>${FACE(32,32,.9)}</g>`,
   park:`<path d="M8 56h48" stroke="#1F2140" stroke-width="2.2" stroke-linecap="round"/><path d="M14 56V14h36v42" fill="none" stroke="#1F2140" stroke-width="2.6" stroke-linecap="round"/><path d="M10 14h44" stroke="#5A5AEF" stroke-width="5" stroke-linecap="round"/><g class="a-tilt" style="transform-origin:50% 0"><path d="M24 14v26M40 14v26" stroke="#1F2140" stroke-width="1.8"/><rect x="20" y="38" width="24" height="6" rx="3" fill="#FF8FB8" stroke="#1F2140" stroke-width="2"/><circle cx="32" cy="32" r="6" fill="#FFD23F" stroke="#1F2140" stroke-width="1.8"/></g>`,
+  coupon:`<g class="a-bob"><path d="M8 20a4 4 0 0 1 4-4h40a4 4 0 0 1 4 4v6a6 6 0 0 0 0 12v6a4 4 0 0 1-4 4H12a4 4 0 0 1-4-4v-6a6 6 0 0 0 0-12z" fill="#FFB7D5" stroke="#1F2140" stroke-width="2.2" stroke-linejoin="round"/><path d="M40 17v30" stroke="#1F2140" stroke-width="2.2" stroke-dasharray="3 3"/><circle cx="20" cy="27" r="2" fill="#1F2140"/><circle cx="30" cy="27" r="2" fill="#1F2140"/><path d="M21 34q4 4 8 0" stroke="#1F2140" stroke-width="2.2" fill="none" stroke-linecap="round"/><path d="M47 26l1.5 3 3 .4-2.2 2.1.5 3-2.8-1.5-2.8 1.5.5-3-2.2-2.1 3-.4z" fill="#FFD23F" stroke="#1F2140" stroke-width="1.4" stroke-linejoin="round"/></g>`,
   shop:`<rect x="10" y="24" width="44" height="32" rx="4" fill="#fff" stroke="#1F2140" stroke-width="2.2"/><path d="M8 24l4-12h40l4 12z" fill="#A68BFF" stroke="#1F2140" stroke-width="2.2" stroke-linejoin="round"/><path d="M20 12l-2 12M32 12v12M44 12l2 12" stroke="#fff" stroke-width="4"/>${FACE(32,40)}`
 };
 const CATS=[
@@ -854,7 +885,7 @@ const CATS=[
   {id:"money",n:"助成金・手当",s:"もらえるお金",bg:"#FFF1C2"},
   {id:"lesson",n:"習い事",s:"21種類",bg:"#FFE6F2"},
   {id:"park",n:"公園",s:"駐車場のある公園",bg:"#E5E8FF"},
-  {id:"shop",n:"お店",s:"地域のお店",bg:"#FBE6FF"}
+  {id:"coupon",n:"Wolly限定クーポン",s:"お店のおトク",bg:"#FBE6FF"}
 ];
 const MINI={
   coin:`<circle cx="20" cy="20" r="14" fill="#FFD23F" stroke="#1F2140" stroke-width="2"/><path d="M15 13l5 6 5-6M20 19v9M15.5 21.5h9M15.5 25h9" stroke="#1F2140" stroke-width="2" fill="none" stroke-linecap="round"/>`,
@@ -1223,6 +1254,58 @@ function newsItem(n,i){
 }
 const newsEmpty=()=>`<div class="empty">${S.newsLoaded?"いま表示できるニュースはありません。":"最新のニュースを読み込んでいます…"}<br><a href="https://www.city.saitama.lg.jp/" target="_blank" rel="noopener">さいたま市公式ホームページ</a></div>`;
 const stampText=()=>{if(!S.newsAt)return S.newsLoaded?"自動更新":"読み込み中";const d=new Date(S.newsAt);return `${S.db?"自動更新 ・ ":""}${d.getMonth()+1}/${d.getDate()} ${d.getHours()}:${String(d.getMinutes()).padStart(2,"0")} 更新`};
+/* ===== お店情報・最新ニュース（写真カード）：GitHub Pages の feed.json（毎日 自動で集めて更新） ===== */
+const FEED_URL="https://wolly-spot.github.io/wolly-machi-navi/feed.json";
+const SHOP_K={open:["OPEN","#FF5C9A","bag","linear-gradient(150deg,#FFC2DA,#FF8FB8)"],info:["お知らせ","#2FA4EA","info","linear-gradient(150deg,#BFE6FF,#7CC4FF)"],
+  event:["イベント","#8E6BF5","park","linear-gradient(150deg,#DCD0FF,#A88BFF)"],coupon:["クーポン","#D99A00","yen","linear-gradient(150deg,#FFEAA8,#FFC94D)"]};
+const NEWS_K={kosodate:["子育て","#FF5C9A","baby","linear-gradient(150deg,#FFC2DA,#FF9EC4)"],kids:["子どもイベント","#2FA4EA","school","linear-gradient(150deg,#BFE6FF,#7CC4FF)"],
+  mama:["ママ向け","#8E6BF5","hand","linear-gradient(150deg,#DCD0FF,#B49BFF)"],safety:["事件・安全","#4A47A3","info","linear-gradient(150deg,#CACEF5,#8E95E3)"]};
+let FEED=null,shopKind="all",newsKind="all";
+const fDate=d=>{const m=String(d||"").match(/^(\d{4})-(\d{2})(?:-(\d{2}))?/);return m?(+m[2])+(m[3]?"/"+(+m[3]):"月"):""};
+function feedCard(it,K){
+  const k=K[it.kind]||Object.values(K)[0];
+  return `<a class="fc" href="${esc(it.url)}" target="_blank" rel="noopener" style="--fk:${k[1]};--fg:${k[3]}">
+    <div class="fimg"><svg viewBox="0 0 24 24" aria-hidden="true">${P[k[2]]||P.info}</svg>${it.img?`<img src="${esc(it.img)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`:""}<span class="flab">${k[0]}</span>${it.important?'<span class="fimp">重要</span>':""}</div>
+    <b>${esc(it.title)}</b>${it.desc?`<p>${esc(it.desc)}</p>`:""}<small>${esc([fDate(it.date),it.src].filter(Boolean).join("・"))}</small></a>`;
+}
+function feedTabs(id,K,list,cur,attr){
+  const have=Object.keys(K).filter(k=>list.some(x=>x.kind===k));
+  $(id).innerHTML=[["all","すべて"]].concat(have.map(k=>[k,K[k][0]])).map(([k,n])=>`<button class="chip" type="button" ${attr}="${k}" aria-pressed="${cur===k}">${n}</button>`).join("");
+}
+const byDate=(a,b)=>String(b.date||"").localeCompare(String(a.date||""));
+function renderFeed(){
+  if(!FEED)return;
+  const shops=(FEED.shops||[]).slice().sort(byDate),news=(FEED.news||[]).slice().sort((a,b)=>(b.important?1:0)-(a.important?1:0)||byDate(a,b));
+  if(shops.length){$("#feedShops").hidden=false;feedTabs("#shopTabs",SHOP_K,shops,shopKind,"data-sk");
+    const l=shops.filter(x=>shopKind==="all"||x.kind===shopKind);$("#shopRow").innerHTML=l.map(x=>feedCard(x,SHOP_K)).join("")}
+  if(news.length){$("#newsTabs").hidden=false;$("#newsRow").hidden=false;$("#newsHome").hidden=true;feedTabs("#newsTabs",NEWS_K,news,newsKind,"data-nk");
+    const l=news.filter(x=>newsKind==="all"||x.kind===newsKind);$("#newsRow").innerHTML=l.map(x=>feedCard(x,NEWS_K)).join("");
+    $("#bellDot").hidden=!news.some(n=>n.important);
+    const t=new Date(FEED.updatedAt);$("#newsStamp").textContent=isNaN(t)?"毎日 自動更新":`毎日 朝と夕方に自動更新（最終 ${t.getMonth()+1}/${t.getDate()} ${String(t.getHours()).padStart(2,"0")}:${String(t.getMinutes()).padStart(2,"0")}）`}
+}
+document.addEventListener("click",e=>{
+  const a=e.target.closest("[data-sk]");if(a){shopKind=a.dataset.sk;renderFeed();$("#shopRow").scrollLeft=0;return}
+  const b=e.target.closest("[data-nk]");if(b){newsKind=b.dataset.nk;renderFeed();$("#newsRow").scrollLeft=0}
+});
+function loadFeed(){fetch(FEED_URL,{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(d=>{if(d&&(d.shops||d.news)){FEED=d;renderFeed();if(sheetKind==="news")fillNewsSheet(false)}}).catch(()=>{})}
+
+/* ===== Wolly限定クーポン：Wolly の業務システムで「掲載中」になった広告（お店の紹介・クーポン・イベント） ===== */
+let COUPONS=null;
+const AD_K={"クーポン":["クーポン","#D99A00","yen","linear-gradient(150deg,#FFEAA8,#FFB3CF)"],"お店・サービスの紹介":["お店","#FF5C9A","bag","linear-gradient(150deg,#FFC2DA,#C9B6FF)"],"イベント・教室の告知":["イベント","#8E6BF5","park","linear-gradient(150deg,#DCD0FF,#A8DBFF)"]};
+function couponCards(){
+  if(!COUPONS||!COUPONS.length)return `<div class="fc" style="--fk:#FF5C9A;--fg:linear-gradient(150deg,#FFEAA8,#FFB3CF)"><div class="fimg"><svg viewBox="0 0 24 24" aria-hidden="true">${P.yen}</svg><span class="flab">準備中</span></div>
+    <b>Wollyのお店のクーポン、もうすぐ</b><p>パートナーのお店からクーポンやおトク情報が届くと、ここに並びます。</p></div>`;
+  return COUPONS.map(a=>{const k=AD_K[a.adType]||AD_K["お店・サービスの紹介"];const tag=a.url?"a":"div";
+    const until=a.couponUntil?`${fDate(a.couponUntil)}まで`:a.to?`${fDate(a.to)}まで掲載`:"";
+    return `<${tag} class="fc" ${a.url?`href="${esc(a.url)}" target="_blank" rel="noopener"`:""} style="--fk:${k[1]};--fg:${k[3]}">
+      <div class="fimg"><svg viewBox="0 0 24 24" aria-hidden="true">${P[k[2]]}</svg><span class="flab">${k[0]}</span>${a.coupon?`<span class="fbig">${esc(a.coupon)}</span>`:""}</div>
+      <b>${esc(a.title)}</b><p>${esc([a.shop,a.category].filter(Boolean).join("・"))}${a.eventAt?"<br>"+esc(a.eventAt):""}</p><small>${esc(until)}</small></${tag}>`}).join("");
+}
+function loadCoupons(){
+  fetch(WOLLY_API,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({app:"navi",action:"partnerAds"})})
+    .then(r=>r.json()).then(r=>{if(r&&r.ok){COUPONS=r.data||[];const el=$("#couponRow");if(el)el.innerHTML=couponCards()}}).catch(()=>{});
+}
+
 function renderNews(){
   const list=sortedNews();
   $("#newsHome").innerHTML=list.length?list.slice(0,3).map(newsItem).join(""):newsEmpty();
@@ -1267,16 +1350,16 @@ function renderRows(){
   const mChips=[["all","すべて"]].concat(Object.entries(MONEY_CAT).map(([k,v])=>[k,v.n]));
   const lChips=[["all","すべて"],["sports","スポーツ"],["study","まなび"],["art","アート・音楽"]];
   $("#rows").innerHTML=
-   `<section class="block" id="row-money">${head("money","MONEY & SUPPORT","子育てのお金・サポート<small class=\"h2sub\">（Saitama City）</small>",`<span class="rowhint">${MONEY.length}件</span>`)}
-     <p class="sec-lead">もらえるお金、タダになるもの、安くなるサービス。タップで対象・窓口がわかります。</p>
-     <div class="filt" role="group" aria-label="お金の種類">${mChips.map(([k,n])=>`<button class="chip" type="button" data-mf="${k}" aria-pressed="${moneyFilter===k}">${n}</button>`).join("")}</div>
-     <div class="row" id="moneyRow">${moneyCards()}</div></section>`+
    `<section class="block" id="row-hokatsu">${head("hokatsu","HOKATSU","保活ナビ",`<a class="more" href="${ART}Rz9bnEsv1WzysWFn98jTMe" target="_blank" rel="noopener">表紙を見る</a>`)}
      <p class="sec-lead">点数のめやす → 締切 → 書類 → 預け先さがし。順番にたどれます。</p>
      <div class="row">${HOKATSU.map((h,i)=>tc("#h-"+i,cover("hokatsu",i,glyph(h.p),h.t,h.k),h.lead.slice(0,26)+"…",false)).join("")}</div></section>`+
    `<section class="block" id="row-health">${head("health","HEALTH","健診・病院","")}
      <p class="sec-lead">無料の歯科健診と、健診ができる歯医者さん441件。夜・休日の急患もここから。</p>
      <div class="row">${HEALTH.map((h,i)=>tc(h.kind?"#"+h.kind:"#x-"+i,cover("health",i,glyph(h.p),h.t,h.k),h.kind==="dent"?(S.profile?`${S.profile.ward}の歯医者さんから表示`:"区をえらんで探せる"):h.k,false)).join("")}</div></section>`+
+   `<section class="block" id="row-money">${head("money","MONEY & SUPPORT","子育てのお金・サポート<small class=\"h2sub\">（Saitama City）</small>",`<span class="rowhint">${MONEY.length}件</span>`)}
+     <p class="sec-lead">もらえるお金、タダになるもの、安くなるサービス。タップで対象・窓口がわかります。</p>
+     <div class="filt" role="group" aria-label="お金の種類">${mChips.map(([k,n])=>`<button class="chip" type="button" data-mf="${k}" aria-pressed="${moneyFilter===k}">${n}</button>`).join("")}</div>
+     <div class="row" id="moneyRow">${moneyCards()}</div></section>`+
    `<section class="block" id="row-lesson">${head("lesson","LESSONS","地域の習い事",`<span class="rowhint">${LESSONS.length}種類</span>`)}
      <p class="sec-lead">${S.profile?`${esc(S.profile.ward)}の教室・チームから表示します。名前・駅・学校名でさがせます。`:"約1,000の教室・チームを、エリア・駅から近い順・料金などでさがせます。"}</p>
      <div class="filt" role="group" aria-label="習い事の種類">${lChips.map(([k,n])=>`<button class="chip" type="button" data-lf="${k}" aria-pressed="${lessonFilter===k}">${n}</button>`).join("")}</div>
@@ -1284,15 +1367,16 @@ function renderRows(){
    `<section class="block" id="row-park">${head("park","PARKS WITH PARKING","駐車場がある公園",`<span class="rowhint">口コミつき</span>`)}
      <p class="sec-lead">台数・時間・トイレ・注意点を、行く前にチェック。</p>
      <div class="row">${tc(CANVA+"dahi3vg9fds",cover("park",1,glyph("list"),"公園チェック100","忘れ物チェックシートにも"),"駐車台数・トイレ・テント可否など100項目",true)}${PARKS.map((p,i)=>tc("#p-"+i,cover("park",i,`<span class="big" style="top:34%;color:#fff">P<small style="font-size:20px;font-family:var(--f-display);font-weight:500;margin-top:2px">${esc(p.p1)}</small></span>`,p.t,p.p3),`${p.area?p.area+"・":""}${p.p2}`,false)).join("")}</div></section>`+
-   `<section class="block" id="row-shop">${head("shop","LOCAL SHOPS","地域のお店","")}
-     <div class="row">${SHOPS.map((s,i)=>tc("#s-"+i,cover("shop",i,glyph(s.p),s.t,s.k),s.lead.slice(0,24)+"…",false)).join("")}</div></section>`;
+   `<section class="block" id="row-coupon">${head("coupon","WOLLY COUPON","Wolly限定クーポン",`<span class="rowhint">お店の紹介</span>`)}
+     <p class="sec-lead">Wollyのパートナーのお店から届いた、クーポン・お店の紹介・イベントです。</p>
+     <div class="feedrow" id="couponRow">${couponCards()}</div></section>`;
 }
 $("#rows").addEventListener("click",e=>{
   const m=e.target.closest("[data-mf]");if(m){moneyFilter=m.dataset.mf;$("#row-money").querySelectorAll("[data-mf]").forEach(b=>b.setAttribute("aria-pressed",b===m));$("#moneyRow").innerHTML=moneyCards();$("#moneyRow").scrollLeft=0;return}
   const l=e.target.closest("[data-lf]");if(l){lessonFilter=l.dataset.lf;$("#row-lesson").querySelectorAll("[data-lf]").forEach(b=>b.setAttribute("aria-pressed",b===l));$("#lessonRow").innerHTML=lessonCards();$("#lessonRow").scrollLeft=0}
 });
 function renderCats(){
-  const target={money:"row-money",hokatsu:"row-hokatsu",health:"row-health",lesson:"row-lesson",park:"row-park",shop:"row-shop"};
+  const target={money:"row-money",hokatsu:"row-hokatsu",health:"row-health",lesson:"row-lesson",park:"row-park",coupon:"row-coupon"};
   $("#cats").innerHTML=CATS.map(c=>`<a class="cat" href="#go-${c.id}" style="--cbg:${c.bg}"><span class="ci">${svg(CH[c.id])}</span><b>${c.n}</b><small>${c.s}</small></a>`).join("");
 }
 function myWardGroup(l){const w=S.profile?.ward;if(!w)return null;return l.w.find(([lab])=>lab.split(/[・、]/).includes(w))||null}
@@ -1452,6 +1536,12 @@ $("#myForm").addEventListener("submit",async e=>{
 /* ---------- glass sheet ---------- */
 let sheetKind=null;
 function fillNewsSheet(animate=true){
+  if(FEED&&FEED.news&&FEED.news.length){
+    const news=FEED.news.slice().sort((a,b)=>(b.important?1:0)-(a.important?1:0)||byDate(a,b));
+    $("#sheetBody").innerHTML=`<div class="eyebrow">SAITAMA NEWS</div><h3 id="sheetTitle">さいたま市の最新ニュース</h3><p class="sub">子育て・子どもイベント・ママ向け・事件や安全の情報を、毎日あつめています。</p>
+      <div class="feedgrid">${news.map(x=>feedCard(x,NEWS_K)).join("")}</div><p class="foot">写真は各ページの紹介用の画像です。くわしい内容は各リンク先でご確認ください。</p>`;
+    return;
+  }
   const list=sortedNews();
   $("#sheetBody").innerHTML=`<div class="eyebrow">SAITAMA NEWS</div><h3 id="sheetTitle">さいたま市の最新ニュース</h3><p class="sub">${esc(stampText())}　市のホームページ・ニュースから定期的に集めています</p>
     <div class="news">${list.length?list.map((n,i)=>newsItem(n,animate?i:0)).join(""):newsEmpty()}</div><p class="foot">詳しい内容は各リンク先でご確認ください。</p>`;
@@ -1613,7 +1703,7 @@ let route="home",lastSheet=null,inApp=false;
 function goBack(){if(sheetKind&&inApp){history.back()}else location.hash=""}
 function applyRoute(){
   let h=location.hash.replace("#","");
-  if(h.startsWith("go-")){const key=h.slice(3);const id={money:"row-money",hokatsu:"row-hokatsu",health:"row-health",lesson:"row-lesson",park:"row-park",shop:"row-shop",kyukan:"row-health"}[key];
+  if(h.startsWith("go-")){const key=h.slice(3);const id={money:"row-money",hokatsu:"row-hokatsu",health:"row-health",lesson:"row-lesson",park:"row-park",coupon:"row-coupon",shop:"row-coupon",kyukan:"row-health"}[key];
     history.replaceState(null,"",location.pathname+location.search);h="";closeSheet();route="home";
     document.querySelectorAll(".view").forEach(v=>v.classList.toggle("on",v.id==="v-home"));
     requestAnimationFrame(()=>{document.getElementById(id)?.scrollIntoView({behavior:"smooth",block:"start"});
@@ -1661,7 +1751,7 @@ if(/\bLine\//i.test(navigator.userAgent)&&!window.claude){
 }
 $("#back").addEventListener("click",goBack);
 
-function renderAll(){renderMe();renderNews();renderCats();renderRows()}
+function renderAll(){renderMe();renderNews();renderCats();renderRows();renderFeed()}
 
 
 /* ---------- local profile first, then shared data ---------- */
@@ -1669,6 +1759,7 @@ const local=LS.get("wolly.profile");
 if(local&&local.name){S.profile={name:local.name,icon:local.icon|0,ward:local.ward};S.town=local.town||"";S.geo=local.geo||null}
 geocodeHome();
 renderAll();applyRoute();
+loadFeed();loadCoupons();
 
 (async()=>{
   const use=window.claude&&window.claude.use;

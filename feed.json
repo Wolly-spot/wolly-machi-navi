@@ -1,0 +1,229 @@
+{
+ "updatedAt": "2026-11-09T12:00:00+09:00",
+ "shops": [
+  {
+   "id": "s-more-donut",
+   "kind": "open",
+   "title": "生ドーナツ専門店「MORE DONUT」ルミネ大宮に11月オープン",
+   "desc": "ふわふわ食感の生ドーナツのお店。はじめての常設店が大宮に。",
+   "date": "2026-11",
+   "src": "宮原大宮ドットコム",
+   "url": "https://miyahara-kitaku.com/more-donut-omiya-lumine/",
+   "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/10/99298976b13a148c5ce347acb7a5fc95.png"
+  },
+  {
+   "id": "s-ecute-rikyu",
+   "kind": "open",
+   "title": "エキュート大宮に「利久」など4店舗が11/13オープン",
+   "desc": "牛たんの利久やかにチャーハンの店が再び。駅ナカでランチ・おみやげに。",
+   "date": "2026-11-13",
+   "src": "宮原大宮ドットコム",
+   "url": "https://miyahara-kitaku.com/rikyu-kanichahan-ecute-omiya-open/",
+   "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/10/IMG_3680-e1792117924912.jpg"
+  },
+  {
+   "id": "s-oasis",
+   "kind": "open",
+   "title": "宮原に「ビストロ＆ワイン Oasis」12/5オープン予定",
+   "desc": "大宮コーヒーロースターズが移転。夜はビストロとワインも楽しめるお店に。",
+   "date": "2026-12-05",
+   "src": "宮原大宮ドットコム",
+   "url": "https://miyahara-kitaku.com/oasis-miyahara-open/",
+   "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/10/IMG_3886.jpg"
+  },
+  {
+   "id": "s-crane-kiwami",
+   "kind": "open",
+   "title": "「クレーン横丁 極 大宮北店」12月オープン",
+   "desc": "クレーンゲームがたくさん並ぶお店。家族や友だちとのおでかけ先に。",
+   "date": "2026-12",
+   "src": "宮原大宮ドットコム",
+   "url": "https://miyahara-kitaku.com/crane-yokocho-kiwami-omiyakita-open/",
+   "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/10/a5f2ec4f-5b27-4b05-88cf-34dff45f833a.png"
+  },
+  {
+   "id": "s-ecute-autumn",
+   "kind": "info",
+   "title": "エキュート大宮 9ショップが順次リニューアルオープン",
+   "desc": "新しいお店4つを含むリニューアル。営業時間や限定メニューをまとめてチェック。",
+   "date": "2026-10-21",
+   "src": "宮原大宮ドットコム",
+   "url": "https://miyahara-kitaku.com/ecute-omiya-renewal-2026-autumn/",
+   "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/10/output_ecute-omiya-renewal-x.png"
+  },
+  {
+   "id": "s-toriichizu",
+   "kind": "open",
+   "title": "宮原駅近くに鶏料理「とりいちず」この秋オープン予定",
+   "desc": "宮原駅から歩いて5分。気軽に入れる鶏料理の居酒屋。",
+   "date": "2026-11",
+   "src": "宮原大宮ドットコム",
+   "url": "https://miyahara-kitaku.com/toriichizu-miyahara-open/",
+   "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/02/ea2e58d08c635b40242eb79156bb4ae4.png"
+  },
+  {
+   "id": "s-cocoon-xmas",
+   "kind": "event",
+   "title": "コクーンシティ クリスマスマーケット（〜12/25）",
+   "desc": "さいたま新都心に屋台とイルミネーション。夕方からの雰囲気がすてき。入場無料。",
+   "date": "2026-11-07",
+   "src": "ウォーカープラス",
+   "url": "https://www.walkerplus.com/event/ar0311e621639/",
+   "img": "https://ms-cache.walkerplus.com/walkertouch/wtd/event/39/l2/621639.jpg"
+  },
+  {
+   "id": "s-saitamarche",
+   "kind": "event",
+   "title": "サイクルフェスタ・さいたマルシェ（11/14〜15）",
+   "desc": "自転車のイベントと、さいたまのおいしいものが集まるマルシェ。",
+   "date": "2026-11-14",
+   "src": "さいたま市",
+   "url": "https://www.city.saitama.lg.jp/001/010/018/001/001/p133136.html",
+   "img": ""
+  },
+  {
+   "id": "s-yume-marche",
+   "kind": "event",
+   "title": "市民活動夢マルシェ（11/15 浦和駅東口）",
+   "desc": "手づくり品の販売やワークショップ。子ども向けの工作もあります。",
+   "date": "2026-11-15",
+   "src": "ウォーカープラス",
+   "url": "https://www.walkerplus.com/event/ar0311e616364/",
+   "img": "https://ms-cache.walkerplus.com/walkertouch/wtd/event/64/l2/616364.jpg"
+  },
+  {
+   "id": "s-minna-app",
+   "kind": "coupon",
+   "title": "「さいたま市みんなのアプリ」感謝キャンペーン",
+   "desc": "利用者40万人・4,000店舗を記念したキャンペーン。お店でのお買いものがおトクに。",
+   "date": "2026-11-05",
+   "src": "さいたま市",
+   "url": "https://www.city.saitama.lg.jp/001/154/009/002/p135012.html",
+   "img": ""
+  },
+  {
+   "id": "s-shotengai-cp",
+   "kind": "coupon",
+   "title": "秋のさいたま市商店街キャンペーン",
+   "desc": "参加しているお店でお買いものをすると、アプリから応募できるキャンペーン。",
+   "date": "2026-09-24",
+   "src": "さいたま市",
+   "url": "https://www.city.saitama.lg.jp/004/001/001/p133683.html",
+   "img": ""
+  }
+ ],
+ "news": [
+  {
+   "id": "n-system-stop",
+   "kind": "safety",
+   "title": "市のシステム・サービスの一部が緊急停止",
+   "desc": "11月6日から一部の市のサービスが止まっています。使えるようになる時期は市のページで確認を。",
+   "date": "2026-11-06",
+   "src": "さいたま市",
+   "url": "https://www.city.saitama.lg.jp/001/011/001/p134706.html",
+   "img": "",
+   "important": true
+  },
+  {
+   "id": "n-bousai-leak",
+   "kind": "safety",
+   "title": "防災情報の配信システムに不正アクセス",
+   "desc": "登録していた人の個人情報が漏れたおそれ。市からのお知らせと問い合わせ先をチェック。",
+   "date": "2026-11",
+   "src": "さいたま市",
+   "url": "https://www.city.saitama.lg.jp/001/011/015/004/002/p134482.html",
+   "img": "",
+   "important": true
+  },
+  {
+   "id": "n-hoiku-tour",
+   "kind": "kosodate",
+   "title": "さいたま市「保育体感ツアー」参加者募集中",
+   "desc": "保育園の様子を見学できる市のツアー。参加費は無料。保活の前に雰囲気を知りたい方に。",
+   "date": "2026-11-06",
+   "src": "さいたま市",
+   "url": "https://www.city.saitama.lg.jp/003/001/015/006/002/p075327.html",
+   "img": ""
+  },
+  {
+   "id": "n-holiday-window",
+   "kind": "mama",
+   "title": "区役所の休日窓口 次回は11/29（日）",
+   "desc": "平日に行けない手続きを日曜日にできます。8:30〜17:15。",
+   "date": "2026-11-29",
+   "src": "さいたま市",
+   "url": "https://www.city.saitama.lg.jp/001/001/007/p016829.html",
+   "img": ""
+  },
+  {
+   "id": "n-window-time",
+   "kind": "mama",
+   "title": "1月4日から区役所の窓口受付時間が変わります",
+   "desc": "区役所・市税事務所の受付時間が変わる予定（試行）。出かける前に確認を。",
+   "date": "2027-01-04",
+   "src": "さいたま市",
+   "url": "https://www.city.saitama.lg.jp/006/007/014/020/p133609.html",
+   "img": ""
+  },
+  {
+   "id": "n-zootopia",
+   "kind": "kids",
+   "title": "名画鑑賞会『ズートピア』（11/14 プラザノース）",
+   "desc": "親子で楽しめる映画の上映会。予約が必要です。",
+   "date": "2026-11-14",
+   "src": "ウォーカープラス",
+   "url": "https://www.walkerplus.com/event/ar0311e609528/",
+   "img": "https://ms-cache.walkerplus.com/walkertouch/wtd/event/28/l2/609528.jpg"
+  },
+  {
+   "id": "n-minuma-fair",
+   "kind": "kids",
+   "title": "見沼区ふれあいフェア（11/14 堀崎公園ほか）",
+   "desc": "地域のお祭り。ステージや体験コーナーで子どもも楽しめます。",
+   "date": "2026-11-14",
+   "src": "さいたま市",
+   "url": "https://www.city.saitama.lg.jp/minuma/001/001/007/p121764.html",
+   "img": ""
+  },
+  {
+   "id": "n-tour-de-france",
+   "kind": "kids",
+   "title": "ツール・ド・フランス さいたまクリテリウム（11/15）",
+   "desc": "世界のトップ選手がさいたま新都心を走る自転車レース。交通規制にも注意。",
+   "date": "2026-11-15",
+   "src": "PR TIMES",
+   "url": "https://prtimes.jp/main/html/rd/p/000000308.000140218.html",
+   "img": "https://prcdn.freetls.fastly.net/release_image/140218/308/140218-308-d66f6cc560dfb847e444122d67b0211b-1920x1080.jpg?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260"
+  },
+  {
+   "id": "n-minuma-akifes",
+   "kind": "kids",
+   "title": "みぬま秋フェス2026 inさぎ山（11/21〜22）",
+   "desc": "さぎ山記念公園の秋のお祭り。広い公園で家族でゆっくり。",
+   "date": "2026-11-21",
+   "src": "さいたま市",
+   "url": "https://www.city.saitama.lg.jp/006/014/008/003/015/007/p134622.html",
+   "img": ""
+  },
+  {
+   "id": "n-bousai-fair",
+   "kind": "kids",
+   "title": "市総合防災訓練・防災フェア（11/23）",
+   "desc": "大宮消防署・見沼公園で。消防車や体験コーナーで親子で防災を学べます。",
+   "date": "2026-11-23",
+   "src": "さいたま市",
+   "url": "https://www.city.saitama.lg.jp/001/011/015/005/p130175.html",
+   "img": ""
+  },
+  {
+   "id": "n-shiho-11",
+   "kind": "mama",
+   "title": "市報さいたま11月号 氷川神社ライトアップ特集",
+   "desc": "今月の市のお知らせとおでかけ情報がまとめて読めます。",
+   "date": "2026-11-04",
+   "src": "さいたま市",
+   "url": "https://www.city.saitama.lg.jp/006/014/010/001/012/023/p134665.html",
+   "img": ""
+  }
+ ]
+}
