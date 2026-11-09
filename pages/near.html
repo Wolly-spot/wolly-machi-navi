@@ -224,6 +224,42 @@ h1 .mk{background:linear-gradient(transparent 62%,#ffe7a3 62%)}
 .chips .chip[class*="t-"]:not(.on){background:var(--tl)!important;border-color:color-mix(in srgb,var(--td) 22%,#fff)!important;color:var(--td)}
 .chips .chip[class*="t-"].on{background:var(--td)!important;border-color:var(--td)!important;color:#fff;box-shadow:0 3px 0 color-mix(in srgb,var(--td) 70%,#000)!important}
 
+/* ===== 施設の小窓（ふわっと半透明） ===== */
+.fs{position:fixed;inset:0;z-index:80;display:grid;align-items:end;justify-items:center;padding:0 10px calc(10px + env(safe-area-inset-bottom,0px))}
+.fs-bd{position:absolute;inset:0;background:rgba(74,63,58,.18);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);opacity:0;transition:opacity .35s}
+.fs-p{position:relative;width:min(560px,100%);max-height:min(82vh,720px);overflow:auto;overscroll-behavior:contain;border-radius:30px;padding:18px 16px 18px;
+  background:color-mix(in srgb,#fffaf3 80%,transparent);-webkit-backdrop-filter:blur(18px) saturate(1.2);backdrop-filter:blur(18px) saturate(1.2);
+  border:2px solid rgba(255,255,255,.85);box-shadow:0 20px 50px rgba(120,90,60,.22);
+  opacity:0;transform:translateY(40px) scale(.96);transition:opacity .4s,transform .55s cubic-bezier(.3,1.4,.5,1)}
+.fs.on .fs-bd{opacity:1}.fs.on .fs-p{opacity:1;transform:none}
+.fs-x{position:absolute;right:12px;top:12px;width:38px;height:38px;border-radius:50%;border:2px solid var(--line);background:#fff;color:var(--ink);font-size:20px;line-height:1;cursor:pointer;display:grid;place-items:center}
+.fs-h{display:flex;align-items:center;gap:12px;padding-right:44px}
+.fs-ic{flex:0 0 auto;width:64px;height:64px;border-radius:22px;background:var(--lt);display:grid;place-items:center;border:3px solid #fff}
+.fs-ic svg{width:46px;height:46px;overflow:visible;animation:nicw 3.4s ease-in-out infinite}
+.fs-h h3{margin:0;font-size:17px;line-height:1.35;font-weight:900;color:var(--ink)}
+.fs-h small{display:block;font-size:11.5px;color:var(--muted);font-weight:700;margin-top:2px}
+.fs-km{display:inline-flex;gap:6px;align-items:baseline;margin-top:4px;font:800 14px/1 system-ui,sans-serif;color:var(--ink)}
+.fs-km i{font-style:normal;font-size:11px;color:var(--dk)}
+.fs-dl{margin:14px 0 0;border-top:2px dashed var(--line)}
+.fs-dl>div{display:grid;grid-template-columns:5em 1fr;gap:8px;padding:9px 2px;border-bottom:2px dashed var(--line);font-size:13px;line-height:1.6}
+.fs-dl dt{font-weight:800;color:var(--dk)}
+.fs-dl dd{margin:0;color:var(--ink);word-break:break-word}
+.fs-dl dd a{color:var(--web-d)}
+.fs .tags{border-top:0;padding-top:0;margin-top:12px}
+.fs .btns{margin-top:12px}
+.fs-rv{margin-top:16px;padding:14px;border-radius:22px;background:rgba(255,255,255,.75);border:2px dashed var(--tel)}
+.fs-rv h4{display:flex;align-items:center;gap:6px;margin:0 0 4px;font-size:14px;font-weight:900;color:var(--tel-d)}
+.fs-rv h4 svg{width:26px;height:26px;overflow:visible}
+.fs-rv p{margin:0;font-size:12.5px;line-height:1.7;color:var(--muted)}
+.fs-st{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 2px}
+.fs-st span{display:inline-flex;align-items:center;gap:4px;padding:3px 11px 3px 6px;border-radius:999px;background:#fff;border:2px solid var(--line);font-size:12px;font-weight:800;color:#a49a94}
+.fs-st span svg{width:18px;height:18px;opacity:.75}
+.fs-st b{font:800 10px/1 system-ui;background:var(--line);color:var(--muted);border-radius:999px;padding:3px 6px;margin-left:2px}
+.fs-rv .btns{margin-top:10px}
+.fs-go{display:block;width:100%;margin-top:12px;border:0;border-radius:999px;padding:11px 14px;background:var(--base);color:#fff;font-size:14px;font-weight:900;box-shadow:0 4px 0 var(--dk);cursor:pointer}
+body.fs-open{overflow:hidden}
+@media (prefers-reduced-motion:reduce){.fs-p,.fs-bd{transition:none}}
+
 /* ===== 10区の地図：芝生の上に区が浮かぶ ===== */
 .wcard{background:repeating-linear-gradient(135deg,#dcefc8 0 26px,#e5f4d4 26px 52px)!important;border:4px solid #fff!important;box-shadow:0 10px 30px rgba(90,120,60,.12)!important}
 .ward path{filter:drop-shadow(0 4px 0 rgba(80,120,50,.22))}
@@ -250,6 +286,7 @@ h1 .mk{background:linear-gradient(transparent 62%,#ffe7a3 62%)}
   <div class="more" id="more"></div>
   <p class="note" id="note"></p>
 </div>
+<div class="fs" id="fs" hidden role="dialog" aria-modal="true" aria-labelledby="fsT"><div class="fs-bd" data-fsx></div><div class="fs-p" id="fsP"></div></div>
 <button type="button" class="totop" id="totop" aria-label="いちばん上にもどる"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 14l6-6 6 6"/><path d="M12 8v12"/></svg>上に<br>もどる</button>
 <script>
 const svg=(body,vb=64,cls="")=>`<svg viewBox="0 0 ${vb} ${vb}" class="${cls}" aria-hidden="true">${body}</svg>`;
@@ -304,6 +341,13 @@ Object.assign(NIC,{
   star:`<path d="M20 4l4.4 9.4 10.2 1.2-7.6 7 2 10.1L20 26.6 11 31.7l2-10.1-7.6-7 10.2-1.2z" fill="#FFE070" ${NO}/>`,
   bub:`<circle cx="20" cy="20" r="13" fill="#BFE6FF" ${NO}/><circle cx="15" cy="15" r="3.5" fill="#fff"/>`,
   web:`<circle cx="20" cy="20" r="14" fill="#BFE6FF" ${NO}/><path d="M6 20h28M20 6c-5 5-5 23 0 28M20 6c5 5 5 23 0 28" fill="none" ${NO}/>`
+});
+Object.assign(NIC,{
+  talk:`<path d="M6 9a6 6 0 0 1 6-6h16a6 6 0 0 1 6 6v12a6 6 0 0 1-6 6H17l-7 6v-6H12a6 6 0 0 1-6-6z" fill="#FFD1DE" ${NO}/>${NF(20,15)}`,
+  smile:`<circle cx="20" cy="20" r="14" fill="#FFE59A" ${NO}/>${NF(20,19)}`,
+  clockf:`<circle cx="20" cy="21" r="14" fill="#BFE3FF" ${NO}/><path d="M20 13v8l5 3" fill="none" ${NO}/>`,
+  car:`<path d="M6 27v-7l4-8h20l4 8v7z" fill="#C9B8FF" ${NO}/><circle cx="12" cy="28" r="3.5" fill="#fff" ${NO}/><circle cx="28" cy="28" r="3.5" fill="#fff" ${NO}/>`,
+  phonef:`<rect x="11" y="4" width="18" height="32" rx="5" fill="#FFC6D8" ${NO}/>${NF(20,17)}`
 });
 const PAL=[["#FFF0F6","#FF6FA5"],["#EAF6FF","#2FA4EA"],["#FFF7D6","#E0A100"],["#F3EEFF","#8E6BF5"],["#FFEDF4","#EC5A92"],["#ECEFFF","#5A5AEF"]];
 const GENRES={
@@ -487,8 +531,41 @@ function refresh(move){
   showMaps();renderWardMap();
   if(o.reg&&mapOpen&&move!==false)drawMap(o,all.slice(0,N));
 }
-$("#list").addEventListener("click",e=>{if(e.target.closest("a"))return;const li=e.target.closest(".card");if(!li)return;const i=+li.dataset.i;focusOn(i)});
-$("#list").addEventListener("keydown",e=>{const li=e.target.closest(".card");if(li&&(e.key==="Enter"||e.key===" ")&&!e.target.closest("a")){e.preventDefault();focusOn(+li.dataset.i)}});
+$("#list").addEventListener("click",e=>{if(e.target.closest("a"))return;const li=e.target.closest(".card");if(!li)return;openFs(+li.dataset.i,li)});
+$("#list").addEventListener("keydown",e=>{const li=e.target.closest(".card");if(li&&(e.key==="Enter"||e.key===" ")&&!e.target.closest("a")){e.preventDefault();openFs(+li.dataset.i,li)}});
+
+/* ---------- 施設の小窓：タップするとふわっと半透明で出る ---------- */
+const STAMPS=[["smile","子どもにやさしい"],["clockf","待ち時間みじかめ"],["car","駐車場あり"],["phonef","予約しやすい"]];
+let fsFrom=null;
+function openFs(i,from){
+  const x=LAST[i];if(!x)return;const r=x.r;fsFrom=from||null;
+  const rows=[["住所",esc("さいたま市"+r.a)],["距離",`${kmT(x.km)}（${moveT(x.km)}）<br><small style="color:var(--muted)">${esc((LO&&LO.home)?"登録した住所":isReg()?prof.ward+"役所":S.area?S.area+"区役所のあたり":"さいたま市役所のあたり")}からのまっすぐの距離のめやす</small>`]];
+  if(r.h)rows.push(["診療時間",esc(r.h).replace(/／/g,"<br>")]);
+  if(r.u)rows.push(["ホームページ",`<a href="${esc(url(r.u))}" target="_blank" rel="noopener">${esc(host(r.u))}</a>`]);
+  const reg=isReg();
+  $("#fsP").innerHTML=`<button type="button" class="fs-x" data-fsx aria-label="閉じる">×</button>
+    <div class="fs-h"><div class="fs-ic">${svg(NIC[cardIc(r)],40)}</div><div><h3 id="fsT">${esc(r.n)}</h3><small>${esc(r.w)}区・${esc(G.word)}</small><div class="fs-km">${kmT(x.km)}<i>${moveT(x.km)}</i></div></div></div>
+    <div class="tags">${tags(r)}</div>
+    <dl class="fs-dl">${rows.map(([a,b])=>`<div><dt>${a}</dt><dd>${b}</dd></div>`).join("")}</dl>
+    <div class="btns"><a class="b-map" href="${gmap(r)}" target="_blank" rel="noopener">${I(IC.map)}地図・道順</a>${r.u?`<a class="b-web" href="${esc(url(r.u))}" target="_blank" rel="noopener">${I(IC.web)}ホームページ</a>`:""}${G.noHours?"":`<a class="b-tel" href="${gsearch(r)}" target="_blank" rel="noopener">${I(IC.search)}電話番号をしらべる</a>`}</div>
+    ${reg?`<button type="button" class="fs-go" data-fsmap="${i}">立体の地図でこの場所を見る</button>`:""}
+    <div class="fs-rv"><h4>${svg(NIC.talk,40)}Wollyの口コミ</h4>
+      <p>はじめてのスタンプを押してね。「子どもにやさしい」「待ち時間みじかめ」などを、タップだけで残せるスタンプ口コミを準備しています。</p>
+      <div class="fs-st" aria-label="スタンプ（準備中）">${STAMPS.map(([ic,lab])=>`<span>${svg(NIC[ic],40)}${lab}<b>準備中</b></span>`).join("")}</div>
+      <div class="btns"><a class="b-tel" href="${gmap(r)}" target="_blank" rel="noopener">${I(IC.search)}Googleの口コミを見る</a></div></div>`;
+  const fs=$("#fs");fs.hidden=false;document.body.classList.add("fs-open");
+  requestAnimationFrame(()=>requestAnimationFrame(()=>fs.classList.add("on")));
+  setTimeout(()=>$("#fsP .fs-x").focus({preventScroll:true}),80);
+}
+function closeFs(){
+  const fs=$("#fs");if(fs.hidden)return;fs.classList.remove("on");document.body.classList.remove("fs-open");
+  setTimeout(()=>{fs.hidden=true;$("#fsP").innerHTML="";fsFrom&&fsFrom.focus&&fsFrom.focus({preventScroll:true});fsFrom=null},RM?0:400);
+}
+$("#fs").addEventListener("click",e=>{
+  if(e.target.closest("[data-fsx]")){closeFs();return}
+  const m=e.target.closest("[data-fsmap]");if(m){const i=+m.dataset.fsmap;closeFs();setTimeout(()=>focusOn(i),RM?0:420)}
+});
+addEventListener("keydown",e=>{if(e.key==="Escape")closeFs()});
 function focusOn(i){
   const x=LAST[i];if(!x)return;
   if(!isReg()){window.open(gmap(x.r),"_blank","noopener");return}
@@ -589,10 +666,11 @@ function place(o,rows){
   }else map.flyTo({...to,duration:1500,curve:1.5,essential:true});
   first=false;
 }
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-fsopen]");if(b){e.preventDefault();e.stopPropagation();popup&&popup.remove();openFs(+b.dataset.fsopen,null)}},true);
 function openPin(x,i){
   if(!map)return;const r=x.r;popup&&popup.remove();
   popup=new maplibregl.Popup({offset:[0,-42],maxWidth:"260px"}).setLngLat([r.lo,r.la])
-    .setHTML(`<div class="pp"><b>${i+1}. ${esc(r.n)}</b><span>${esc(r.w)}区 ／ ${kmT(x.km)}（${moveT(x.km)}）${r.h?"<br>"+esc(r.h):""}</span><div class="bt"><a class="b-map" href="${gmap(r)}" target="_blank" rel="noopener">地図・道順 ↗</a>${r.u?`<a class="b-web" href="${esc(url(r.u))}" target="_blank" rel="noopener">HP ↗</a>`:""}</div></div>`).addTo(map);
+    .setHTML(`<div class="pp"><b>${i+1}. ${esc(r.n)}</b><span>${esc(r.w)}区 ／ ${kmT(x.km)}（${moveT(x.km)}）${r.h?"<br>"+esc(r.h):""}</span><div class="bt"><button type="button" data-fsopen="${i}">くわしく</button><a class="b-map" href="${gmap(r)}" target="_blank" rel="noopener">地図・道順 ↗</a>${r.u?`<a class="b-web" href="${esc(url(r.u))}" target="_blank" rel="noopener">HP ↗</a>`:""}</div></div>`).addTo(map);
   const t={center:[r.lo,r.la],zoom:Math.max(map.getZoom(),16),pitch:62};
   RM?map.jumpTo(t):map.easeTo({...t,duration:1100});
 }
