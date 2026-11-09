@@ -1563,7 +1563,7 @@ Object.assign(GIC,{
 });
 /* ポイントの文に合うアイコンを、ことばから自動でえらぶ（新しい項目にも自動でつく） */
 const PT_IC=[[/えらぶ|タップ/,"tap"],[/くらべ/,"compare"],[/上げ/,"up"],[/流れ|たどれ/,"flag"],[/季節/,"leaf"],[/書き方|ヒント/,"pencil"],[/締切/,"clock"],[/毎月/,"cal"],
-  [/問い合わせ|支援課/,"phone"],[/地図|区の/,"map"],[/ジャンル|年齢/,"blocks"],[/ホームページ|HP/,"globe"],[/口コミ/,"talk"],[/時期別/,"cal"],[/無料/,"free"],[/日程|市のページ/,"city"],[/電子申請|郵送|持参/,"mail"],[/問い合わせ|支援課/,"phone"],[/コツ|書類/,"docs"]];
+  [/問い合わせ|支援課/,"phone"],[/預けられる時間/,"clock"],[/施設/,"house"],[/地図|区の/,"map"],[/ジャンル|年齢/,"blocks"],[/ホームページ|HP/,"globe"],[/口コミ/,"talk"],[/時期別/,"cal"],[/無料/,"free"],[/日程|市のページ/,"city"],[/電子申請|郵送|持参/,"mail"],[/問い合わせ|支援課/,"phone"],[/コツ|書類/,"docs"]];
 const ptIcon=t=>(PT_IC.find(([re])=>re.test(t))||[0,"check"])[1];
 /* 説明文の大事なことばに、小さなアイコンとマーカー */
 const LEAD_KW=[["点数","ruler"],["締切","clock"],["書類","docs"],["地図","map"],["722か所","house"],["コツ","bulb"],["口コミ","talk"],["無料","free"],["見学","bus"],["電子申請","mail"],["郵送","mail"]];
@@ -1584,7 +1584,7 @@ function sheetHokatsuItem(i){
     <p class="hk-lead">${leadHtml(h.lead)}</p>
     <div class="hk-pt-h">${big("check",22)}ここがポイント</div>
     <ul class="hk-pts">${h.f.map((x,j)=>`<li style="--n:${j}"><span class="hk-pic">${big(ptIcon(x),34)}</span><span>${esc(x)}</span></li>`).join("")}</ul>
-    <div class="hk-go">${open}<small>${h.pop?"ページがその場でふわっと開きます（×でここにもどれます）":"さいたま市のページが開きます"}</small></div>
+    <div class="hk-go">${open}<small>${h.pop||h.view?"ページがその場でふわっと開きます（×でここにもどれます）":"さいたま市のページが開きます"}</small></div>
     <div class="hk-navs">${nav(prev,i-1,"prev")}${nav(next,i+1,"next")}</div>
   </div>`;
 }
