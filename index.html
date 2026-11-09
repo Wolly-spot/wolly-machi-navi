@@ -263,9 +263,10 @@ section.block{padding-block:16px}
 /* 保活ナビの表紙のイラスト（白いまるい四角の中に） */
 .cv .tag{z-index:2}
 /* 保活ナビの表紙：タイトルは1行に（長い名前は文字を少し小さく） */
-#row-hokatsu .cv strong{white-space:nowrap;font-size:clamp(12px,3.6vw,17px);letter-spacing:0}
+#row-hokatsu .cv .tag{top:8px;left:8px;padding:2px 8px}
+#row-hokatsu .cv strong{bottom:10px;white-space:nowrap;font-size:clamp(12px,3.6vw,17px);letter-spacing:0}
 #row-hokatsu .cv strong small{white-space:nowrap}
-.cv .hkart{position:absolute;left:50%;top:44%;translate:-50% -50%;width:80%;aspect-ratio:1;border-radius:22px;overflow:hidden;background:#fff;border:3px solid rgba(255,255,255,.95);box-shadow:0 12px 22px -12px rgba(40,20,60,.55);animation:hkBob 4.2s ease-in-out infinite}
+.cv .hkart{position:absolute;left:50%;top:46%;translate:-50% -50%;width:88%;aspect-ratio:1;border-radius:22px;overflow:hidden;background:#fff;border:3px solid rgba(255,255,255,.95);box-shadow:0 12px 22px -12px rgba(40,20,60,.55);animation:hkBob 4.2s ease-in-out infinite}
 .cv .hkart img{width:100%;height:100%;object-fit:cover;display:block}
 @keyframes hkBob{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-5px) rotate(1.5deg)}}
 @media (prefers-reduced-motion:reduce){.cv .hkart{animation:none}}
@@ -1001,7 +1002,7 @@ const HOKATSU=[
   {t:"はじめての保活ガイド",guide:1,k:"使い方と準備の順番",p:"hand",lead:"保活ナビの使い方と、保育園の申込みまでの準備の順番を、7つのステップでまとめました。",f:[]},
   {t:"ほかつのカレンダー",step:1,sl:"いつまでに？",pop:1,k:"申込みの締切",p:"cal",u:ART+"835bgbNMZayWbxA3uQndR5",lead:"保育園・認定こども園・幼稚園・放課後児童クラブの申込み日をひと目で確認。きょうから「締切まであと何日」も自動で出ます。",f:["4月入園までの流れをたどれる","5月以降の毎月の締切もわかる","季節ごとに、いつごろ何をするかイメージしやすい"]},
   {t:"ほかつのものさし",step:2,sl:"点数をはかる",pop:1,k:"点数のめやす",p:"yen",u:ART+"RtwsQaVbRj8tjVuLmDNoLX",lead:"おうちの状況をえらぶだけで、保育園の「点数（保育指数）」のめやすが出ます。さいたま市では点数が高いほど、希望の園に入りやすくなります。",f:["パパ・ママの働き方や子どもの過ごし方をえらぶだけ","よくあるおうちの点数とくらべられる","点数を上げられるところも教えてくれる"]},
-  {t:"さいたま あずかりマップ",step:3,sl:"園をさがす",pop:1,k:"預け先722か所",p:"house",u:ART+"MpfmmxyxegrpSPYYF69Gqw",lead:"保育園・幼稚園・認定こども園・認可外など、さいたま市の預け先722か所を区の地図とジャンルから探せます。",f:["区の地図をタップしてその区だけにしぼれる","ジャンルごとの数・年齢・説明がわかる","園のホームページにそのままとべる"]},
+  {t:"さいたま あずかりマップ",ct:"あずかりマップ",step:3,sl:"園をさがす",pop:1,k:"預け先722か所",p:"house",u:ART+"MpfmmxyxegrpSPYYF69Gqw",lead:"保育園・幼稚園・認定こども園・認可外など、さいたま市の預け先722か所を区の地図とジャンルから探せます。",f:["区の地図をタップしてその区だけにしぼれる","ジャンルごとの数・年齢・説明がわかる","園のホームページにそのままとべる"]},
   {t:"保育体感ツアー",step:4,sl:"見学する",k:"市の見学ツアー",p:"bus",u:"https://www.city.saitama.lg.jp/003/001/015/006/002/p075327.html",lead:"さいたま市が行っている、保育園の見学ツアーです。参加費は無料。園の雰囲気を知りたいときに。",f:["参加無料","くわしい日程・申込みは市のページで"]},
   {t:"ほかつのもちもの",step:5,sl:"書類をそろえる",pop:1,k:"必要な書類",p:"list",u:ART+"Jq1szNceCTZRM4o2Ljgf2q",lead:"おうちの状況をえらぶと、出す書類だけがリストになります。そろったものにチェックしていけます。",f:["書き方のヒントつき","書き方のコツ12個と、出したあとに変わったときの書類","締切もいっしょに確認できる"]},
   {t:"令和9年度の申込み",step:6,sl:"申し込む",k:"市の受付案内",p:"book",u:"https://www.city.saitama.lg.jp/003/001/015/001/p132346.html",lead:"令和9年4月入所の一次申込みは、令和8年10月16日〜10月30日でした。二次以降や年度途中の入所は市のページで確認できます。",f:["申込みは電子申請・郵送・持参","問い合わせはお住まいの区の支援課へ"]},
@@ -1419,7 +1420,7 @@ function renderRows(){
   $("#rows").innerHTML=
    `<section class="block" id="row-hokatsu">${head("hokatsu","HOKATSU","保活ナビ",`<a class="more" href="${ART}Rz9bnEsv1WzysWFn98jTMe" target="_blank" rel="noopener">表紙を見る</a>`)}
      <p class="sec-lead">締切 → 点数 → 園さがし → 見学 → 書類 → 申込み。準備の順番にならんでいます。はじめての方は「はじめての保活ガイド」から。</p>
-     <div class="row">${HOKATSU.map((h,i)=>tc("#h-"+i,cover("hokatsu",i,hkArt(h),h.t,h.guide?"まずはここから":`STEP${h.step}・${h.sl}`),h.lead.slice(0,26)+"…",false)).join("")}</div></section>`+
+     <div class="row">${HOKATSU.map((h,i)=>tc("#h-"+i,cover("hokatsu",i,hkArt(h),h.ct||h.t,h.guide?"まずはここから":`STEP${h.step}・${h.sl}`),h.lead.slice(0,26)+"…",false)).join("")}</div></section>`+
    `<section class="block" id="row-health">${head("health","HEALTH","健診・病院","")}
      <p class="sec-lead">無料の歯科健診と、健診ができる歯医者さん441件。夜・休日の急患もここから。</p>
      <div class="row">${HEALTH.map((h,i)=>tc(h.kind?"#"+h.kind:"#x-"+i,cover("health",i,glyph(h.p),h.t,h.k),h.kind==="dent"?(S.profile?`${S.profile.ward}の歯医者さんから表示`:"区をえらんで探せる"):h.k,false)).join("")}</div></section>`+
