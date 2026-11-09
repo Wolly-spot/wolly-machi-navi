@@ -481,6 +481,31 @@ svg .a-strike{animation:a-strike 1.3s cubic-bezier(.7,0,.3,1) infinite;transform
 .dl dd{margin:0;min-width:0}
 .note{font-size:13px;line-height:1.7;padding:10px 12px;border-radius:14px;background:color-mix(in srgb,var(--lemon) 25%,transparent);margin:0 0 12px}
 .feat{list-style:none;margin:0 0 14px;padding:0;display:grid;gap:6px}
+/* はじめての保活ガイド */
+.g-lead{margin:0 0 14px;font-size:14.5px;line-height:1.85}
+.g-lead b{background:linear-gradient(transparent 60%,#FFE59A 60%)}
+.g-how{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:0 0 14px}
+.g-how>div{display:grid;justify-items:center;gap:2px;text-align:center;padding:10px 4px;border-radius:18px;background:color-mix(in srgb,var(--surface) 80%,#FFF0F6);border:1px solid var(--line);animation:gUp .5s both;animation-delay:calc(var(--n)*80ms)}
+.g-how b{font-size:13px}
+.g-how small{font-size:10.5px;color:var(--muted);line-height:1.4}
+.g-season{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:0 0 16px}
+.g-season span{display:grid;gap:2px;padding:8px 4px;border-radius:14px;text-align:center;font-weight:900;font-size:15px;background:color-mix(in srgb,var(--c) 22%,var(--surface));color:var(--ink);border-bottom:4px solid var(--c)}
+.g-season small{font-size:10px;font-weight:700;color:var(--muted);line-height:1.35}
+.g-steps{list-style:none;margin:0;padding:0;position:relative;display:grid;gap:14px}
+.g-steps::before{content:"";position:absolute;left:31px;top:30px;bottom:30px;border-left:3px dotted color-mix(in srgb,var(--accent) 45%,transparent)}
+.g-steps li{position:relative;display:grid;grid-template-columns:64px 1fr;gap:12px;align-items:start;animation:gUp .55s both;animation-delay:calc(var(--n)*90ms + 200ms)}
+.g-ic{position:relative;z-index:1;width:64px;height:64px;border-radius:22px;display:grid;place-items:center;background:var(--bg);border:3px solid #fff;box-shadow:0 6px 14px color-mix(in srgb,var(--c) 28%,transparent)}
+.g-ic svg{animation:nicw 3.4s ease-in-out infinite;animation-delay:calc(var(--n)*-.4s)}
+.g-no{position:absolute;left:-6px;top:-6px;width:24px;height:24px;border-radius:50%;background:var(--c);color:#fff;font:900 13px/24px system-ui,sans-serif;text-align:center;border:2px solid #fff}
+.g-bd{padding:12px 14px;border-radius:20px;background:linear-gradient(150deg,var(--bg),color-mix(in srgb,var(--surface) 92%,transparent));border:1px solid color-mix(in srgb,var(--c) 25%,var(--line))}
+.g-when{font-size:11px;font-weight:800;color:var(--c);letter-spacing:.04em}
+.g-bd h4{margin:2px 0 4px;font-size:16px;line-height:1.4}
+.g-bd p{margin:0;font-size:13px;line-height:1.75;color:var(--ink)}
+.g-ft{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:10px}
+.g-tool{display:inline-flex;align-items:center;padding:3px 10px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:11.5px;font-weight:800;color:var(--c)}
+.g-ft .gbtn{margin:0;padding:7px 14px;font-size:13px;background:var(--c);border-color:var(--c);color:#fff}
+@keyframes gUp{from{opacity:0;transform:translateY(10px)}}
+@media (prefers-reduced-motion:reduce){.g-steps li,.g-how>div,.g-ic svg{animation:none}}
 .feat li{display:flex;gap:8px;font-size:14px;line-height:1.6}
 .feat li::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--accent);margin-top:8px}
 .go{display:flex;justify-content:center;align-items:center;gap:6px;width:100%;box-sizing:border-box;text-align:center;border-radius:999px;padding:13px 18px;font-weight:700;font-size:15px;text-decoration:none;color:var(--accent-ink);background:var(--accent);box-shadow:0 12px 22px -14px var(--accent)}
@@ -934,13 +959,14 @@ const CANVA="https://mosa0131.my.canva.site/";
 const ART="https://claude.ai/artifact/";
 const MONEY=[{"c": "cash", "k": "もらえる", "one": "子育て家庭に毎月お金が届く", "t": "児童手当", "num": "月1〜3万円", "sub": "子どもの年齢・人数で変わります", "who": "0歳〜高校生年代の子どもを育てている方", "how": "各区役所 支援課", "note": "所得制限なし！第3子以降は月3万円。", "url": "https://claude.ai/artifact/6nL3ULCWeDax2UrVyBJZyD", "wait": false}, {"c": "cash", "k": "もらえる", "one": "ひとり親家庭の毎日を支える手当", "t": "児童扶養手当", "num": "毎月支給", "sub": "所得に応じて金額が決まります", "who": "ひとり親家庭などで子どもを育てている方", "how": "各区役所 支援課", "note": "子ども1人なら最大月48,050円（全部支給）。", "url": "https://claude.ai/artifact/BAZjQop2hS7NzefxH9hnbT", "wait": false}, {"c": "cash", "k": "もらえる", "one": "妊娠・出産のときにもらえるお祝い金", "t": "妊婦のための支援給付", "num": "10万円〜", "sub": "妊娠届出後5万円＋出産後に子ども1人につき5万円", "who": "さいたま市に住む妊婦の方", "how": "妊娠届のときの面談・出産後の家庭訪問で案内があります", "note": "アプリのポイントで受け取ると最大12万円分（2027年2月28日までの申請）。", "url": "https://claude.ai/artifact/QJFPMd2pikgS9nd44Dwkpc", "wait": false}, {"c": "med", "k": "タダになる", "one": "子どもの病院代がタダになる", "t": "子育て支援医療費助成", "num": "0円", "sub": "保険診療の自己負担分を全額助成", "who": "0歳〜18歳の年度末までの子ども", "how": "各区役所 保険年金課・各支所", "note": "県内の病院なら受給資格証とマイナ保険証を見せるだけ。所得制限なし！", "url": "https://claude.ai/artifact/8KxvgMDXNHUPWJqrrBjVMY", "wait": false}, {"c": "med", "k": "タダになる", "one": "ひとり親家庭は親の病院代も0円に", "t": "ひとり親家庭等医療費支給", "num": "0円", "sub": "親も子も、保険診療の自己負担分を支給", "who": "ひとり親家庭の親と子ども（収入の条件あり）", "how": "各区役所 保険年金課", "note": "ひとり親になった日から15日以内に申請を。", "url": "https://claude.ai/artifact/9tRNjnjZgo6ahsXRrvvNKA", "wait": false}, {"c": "med", "k": "安くなる", "one": "妊婦健診の費用をサポート", "t": "妊婦健康診査費の助成", "num": "14回分の助成券", "sub": "妊婦健診の費用を助成（検査の券も）", "who": "さいたま市に住む妊婦の方", "how": "妊娠届出のときにもらえます", "note": "里帰り先の病院でも、あとで申請すればお金が戻ります。", "url": "https://claude.ai/artifact/5sw7jm2a4RuUXWCBZrN4kW", "wait": false}, {"c": "buy", "k": "もらえる", "one": "子ども乗せ電動自転車が半額に", "t": "3人乗り電動アシスト自転車の購入補助", "num": "最大3万円", "sub": "本体価格の半分＋子ども用ヘルメット2個", "who": "幼児2人以上を育てている16歳以上の市民", "how": "自転車まちづくり推進課", "note": "今年度の募集は終了。次回の募集は市のホームページで発表されます。購入は市の協力店のみ。", "url": "https://claude.ai/artifact/MmmV3f6hXy5cWggak1rXaH", "wait": true}, {"c": "buy", "k": "安くなる", "one": "子どもの補聴器の購入を助ける", "t": "軽・中等度難聴児の補聴器購入費助成", "num": "自己負担 原則1割", "sub": "補聴器代のほとんどを市が助成", "who": "障害者手帳の対象にならない難聴の子ども（高校生まで）", "how": "各区役所 支援課（買う前に相談）", "note": "先に買うと助成されません。", "url": "https://claude.ai/artifact/HgEtKiUhTrM7ZP3uu3UNti", "wait": false}, {"c": "buy", "k": "安くなる", "one": "補聴器などの補装具が1割負担に", "t": "補装具費支給制度", "num": "原則1割負担", "sub": "所得に応じた上限あり", "who": "身体障害者手帳を持つ子ども（難病の子も）", "how": "各区役所 支援課（作る前に相談）", "note": "車いす・装具なども対象。修理代も助成されます。", "url": "https://claude.ai/artifact/46aiXnFAPJqq2TFrKg3YPU", "wait": false}, {"c": "buy", "k": "安くなる", "one": "弱視治療のメガネ代もサポート", "t": "治療用眼鏡・装具", "num": "実質0円（上限まで）", "sub": "健康保険＋市の医療費助成で戻ってくる", "who": "治療用のメガネなどが必要な子ども（弱視などは9歳未満）", "how": "①健康保険 → ②各区役所 保険年金課", "note": "メガネの上限額は40,492円。申請は2回に分けて行います。", "url": "https://claude.ai/artifact/LFhrH9kdQhJtuo1ZuzA7fS", "wait": false}, {"c": "edu", "k": "もらえる", "one": "幼稚園の入園料を補助", "t": "幼稚園・認定こども園の入園料補助", "num": "最大2万円", "sub": "園児1人につき", "who": "幼稚園・認定こども園（幼稚園機能）に入園した子ども", "how": "通っている園（園から案内があります）", "note": "6月下旬ごろに園から案内。市外の園も対象です。", "url": "https://claude.ai/artifact/DP2ABq3gWDZT8QfciTMVst", "wait": false}, {"c": "edu", "k": "タダになる", "one": "幼稚園の預かり保育がタダに", "t": "子育て支援型幼稚園の預かり保育", "num": "原則0円", "sub": "朝・夕方・夏休みの預かり保育料が無料", "who": "保護者の仕事などで保育が必要な園児", "how": "通っている（入園したい）園", "note": "市が選んだ「子育て支援型幼稚園」だけが対象です。", "url": "https://claude.ai/artifact/EBSjH4tPPXWnRohvo4dyUm", "wait": false}, {"c": "school", "k": "もらえる", "one": "高校・大学の受験費用を応援", "t": "低所得の子育て家庭児童進学支援金", "num": "最大31.1万円", "sub": "模試代・受験料・大学等の入学一時金（高3の場合）", "who": "市の学習支援教室に登録している中3・高3がいる、児童扶養手当全額受給または住民税非課税の世帯", "how": "子育て支援課 048-829-1271", "note": "今年度分の申請期限は2027年3月31日。", "url": "https://claude.ai/artifact/GFvaTmMVnMNyi9qm15Ti9y", "wait": false}, {"c": "single", "k": "立て替え", "one": "届かない養育費を市が立て替え", "t": "養育費立替支援事業", "num": "最大15万円", "sub": "子ども1人あたり月5万円×最大3か月", "who": "養育費を受け取れていないひとり親（児童扶養手当受給相当）", "how": "ひとり親家庭就業・自立支援センター 048-829-1948", "note": "公正証書などで養育費を取り決めている方が対象です。", "url": "https://claude.ai/artifact/Uz8Uj6qnV8z7K3BRs62FDd", "wait": false}, {"c": "single", "k": "安くなる", "one": "養育費の手続き費用を補助", "t": "養育費に関する各種補助", "num": "最大15万円", "sub": "公正証書の作成（最大4.3万）・保証料（最大5万）・強制執行（最大15万）", "who": "さいたま市に住むひとり親（保証料の補助だけ収入の条件あり）", "how": "ひとり親家庭就業・自立支援センター 048-829-1948", "note": "どの補助も、手続きのあと6か月以内に申請。使えるのは1回だけです。", "url": "https://claude.ai/artifact/VQS3aiwxShGyPvvZ3ditfe", "wait": false}, {"c": "service", "k": "安くなる", "one": "産後のママの休息をサポート", "t": "産後ケア事業", "num": "泊まり1日4,300円〜", "sub": "クーポンで半額（住民税がかからない世帯は0〜900円）", "who": "赤ちゃんが1歳になる前のママと赤ちゃん（育児の手助けが少ない、体や心が不安など）", "how": "各区 こども家庭センター（妊娠中から申請できます）", "note": "泊まり・日帰り・訪問で、全部で7回まで使えます。", "url": "https://claude.ai/artifact/4DXLnYxw49xGkQLqb2JUff", "wait": false}, {"c": "service", "k": "サポート", "one": "家事・育児のヘルパーさんが来てくれる", "t": "子育てヘルパー派遣", "num": "1時間500円", "sub": "家事や育児をお手伝い（住民税がかからない世帯は250円）", "who": "妊娠中・1歳未満の子どもがいて日中に手伝える人がいない世帯", "how": "市の一覧にある事業所へ直接電話", "note": "産後20日まで（双子などは30日）。1か月前の申し込みが安心です。", "url": "https://claude.ai/artifact/D5TZbxjxGckC92efTtLFPA", "wait": false}, {"c": "service", "k": "安くなる", "one": "子どもの預かりを安く使える", "t": "ファミリー・サポート・センター利用支援", "num": "利用料が半分", "sub": "1か月2万円まで市が負担", "who": "ひとり親・子ども3人以上・双子など決まった5つの家庭", "how": "子育て支援課へ3か月ごとに申請", "note": "", "url": "https://claude.ai/artifact/PhjBg2uw9qhp9nZMc4Mu4h", "wait": false}, {"c": "service", "k": "サポート", "one": "双子・三つ子のお出かけに付き添い", "t": "多胎児家庭サポート支援", "num": "1時間500円", "sub": "支援員が健診のお出かけや育児をお手伝い（15回まで）", "who": "1歳未満の双子・三つ子などを育てる家庭", "how": "事業所へ問い合わせ→電子申請", "note": "", "url": "https://claude.ai/artifact/GDsUKaWvcL5kR9qmzFgJ1Z", "wait": false}];
 const HOKATSU=[
-  {t:"ほかつのものさし",pop:1,k:"点数のめやす",p:"yen",u:ART+"RtwsQaVbRj8tjVuLmDNoLX",lead:"おうちの状況をえらぶだけで、保育園の「点数（保育指数）」のめやすが出ます。さいたま市では点数が高いほど、希望の園に入りやすくなります。",f:["パパ・ママの働き方や子どもの過ごし方をえらぶだけ","よくあるおうちの点数とくらべられる","点数を上げられるところも教えてくれる"]},
-  {t:"ほかつのカレンダー",pop:1,k:"申込みの締切",p:"cal",u:ART+"835bgbNMZayWbxA3uQndR5",lead:"保育園・認定こども園・幼稚園・放課後児童クラブの申込み日をひと目で確認。きょうから「締切まであと何日」も自動で出ます。",f:["4月入園までの流れをたどれる","5月以降の毎月の締切もわかる","季節ごとに、いつごろ何をするかイメージしやすい"]},
-  {t:"ほかつのもちもの",pop:1,k:"必要な書類",p:"list",u:ART+"Jq1szNceCTZRM4o2Ljgf2q",lead:"おうちの状況をえらぶと、出す書類だけがリストになります。そろったものにチェックしていけます。",f:["書き方のヒントつき","書き方のコツ12個と、出したあとに変わったときの書類","締切もいっしょに確認できる"]},
-  {t:"さいたま あずかりマップ",pop:1,k:"預け先722か所",p:"house",u:ART+"MpfmmxyxegrpSPYYF69Gqw",lead:"保育園・幼稚園・認定こども園・認可外など、さいたま市の預け先722か所を区の地図とジャンルから探せます。",f:["区の地図をタップしてその区だけにしぼれる","ジャンルごとの数・年齢・説明がわかる","園のホームページにそのままとべる"]},
-  {t:"ほかつのうらワザ",pop:1,k:"コツと口コミ",p:"bulb",u:ART+"1A9FVjMyjw7Z1qeTR1PYb8",lead:"さいたま市の資料にもとづく保活のコツが24個。時期別に「市の資料ではこう書いてある」もセットで読めます。口コミボードも。",f:["申し込む前・申し込むとき・入れなかったら…時期別にわかる","経験した人の口コミを読んだり書いたりできる"]},
-  {t:"保育体感ツアー",k:"市の見学ツアー",p:"bus",u:"https://www.city.saitama.lg.jp/003/001/015/006/002/p075327.html",lead:"さいたま市が行っている、保育園の見学ツアーです。参加費は無料。園の雰囲気を知りたいときに。",f:["参加無料","くわしい日程・申込みは市のページで"]},
-  {t:"令和9年度の申込み",k:"市の受付案内",p:"book",u:"https://www.city.saitama.lg.jp/003/001/015/001/p132346.html",lead:"令和9年4月入所の一次申込みは、令和8年10月16日〜10月30日でした。二次以降や年度途中の入所は市のページで確認できます。",f:["申込みは電子申請・郵送・持参","問い合わせはお住まいの区の支援課へ"]}
+  {t:"はじめての保活ガイド",guide:1,k:"使い方と準備の順番",p:"hand",lead:"保活ナビの使い方と、保育園の申込みまでの準備の順番を、7つのステップでまとめました。",f:[]},
+  {t:"ほかつのカレンダー",step:1,sl:"いつまでに？",pop:1,k:"申込みの締切",p:"cal",u:ART+"835bgbNMZayWbxA3uQndR5",lead:"保育園・認定こども園・幼稚園・放課後児童クラブの申込み日をひと目で確認。きょうから「締切まであと何日」も自動で出ます。",f:["4月入園までの流れをたどれる","5月以降の毎月の締切もわかる","季節ごとに、いつごろ何をするかイメージしやすい"]},
+  {t:"ほかつのものさし",step:2,sl:"点数をはかる",pop:1,k:"点数のめやす",p:"yen",u:ART+"RtwsQaVbRj8tjVuLmDNoLX",lead:"おうちの状況をえらぶだけで、保育園の「点数（保育指数）」のめやすが出ます。さいたま市では点数が高いほど、希望の園に入りやすくなります。",f:["パパ・ママの働き方や子どもの過ごし方をえらぶだけ","よくあるおうちの点数とくらべられる","点数を上げられるところも教えてくれる"]},
+  {t:"さいたま あずかりマップ",step:3,sl:"園をさがす",pop:1,k:"預け先722か所",p:"house",u:ART+"MpfmmxyxegrpSPYYF69Gqw",lead:"保育園・幼稚園・認定こども園・認可外など、さいたま市の預け先722か所を区の地図とジャンルから探せます。",f:["区の地図をタップしてその区だけにしぼれる","ジャンルごとの数・年齢・説明がわかる","園のホームページにそのままとべる"]},
+  {t:"保育体感ツアー",step:4,sl:"見学する",k:"市の見学ツアー",p:"bus",u:"https://www.city.saitama.lg.jp/003/001/015/006/002/p075327.html",lead:"さいたま市が行っている、保育園の見学ツアーです。参加費は無料。園の雰囲気を知りたいときに。",f:["参加無料","くわしい日程・申込みは市のページで"]},
+  {t:"ほかつのもちもの",step:5,sl:"書類をそろえる",pop:1,k:"必要な書類",p:"list",u:ART+"Jq1szNceCTZRM4o2Ljgf2q",lead:"おうちの状況をえらぶと、出す書類だけがリストになります。そろったものにチェックしていけます。",f:["書き方のヒントつき","書き方のコツ12個と、出したあとに変わったときの書類","締切もいっしょに確認できる"]},
+  {t:"令和9年度の申込み",step:6,sl:"申し込む",k:"市の受付案内",p:"book",u:"https://www.city.saitama.lg.jp/003/001/015/001/p132346.html",lead:"令和9年4月入所の一次申込みは、令和8年10月16日〜10月30日でした。二次以降や年度途中の入所は市のページで確認できます。",f:["申込みは電子申請・郵送・持参","問い合わせはお住まいの区の支援課へ"]},
+  {t:"ほかつのうらワザ",step:7,sl:"こまったら",pop:1,k:"コツと口コミ",p:"bulb",u:ART+"1A9FVjMyjw7Z1qeTR1PYb8",lead:"さいたま市の資料にもとづく保活のコツが24個。時期別に「市の資料ではこう書いてある」もセットで読めます。口コミボードも。",f:["申し込む前・申し込むとき・入れなかったら…時期別にわかる","経験した人の口コミを読んだり書いたりできる"]}
 ];
 const HEALTH=[
   {t:"幼児の歯科健診",k:"1歳6か月・3歳",p:"baby",kind:"dk-kid"},
@@ -1353,8 +1379,8 @@ function renderRows(){
   const lChips=[["all","すべて"],["sports","スポーツ"],["study","まなび"],["art","アート・音楽"]];
   $("#rows").innerHTML=
    `<section class="block" id="row-hokatsu">${head("hokatsu","HOKATSU","保活ナビ",`<a class="more" href="${ART}Rz9bnEsv1WzysWFn98jTMe" target="_blank" rel="noopener">表紙を見る</a>`)}
-     <p class="sec-lead">点数のめやす → 締切 → 書類 → 預け先さがし。順番にたどれます。</p>
-     <div class="row">${HOKATSU.map((h,i)=>tc("#h-"+i,cover("hokatsu",i,glyph(h.p),h.t,h.k),h.lead.slice(0,26)+"…",false)).join("")}</div></section>`+
+     <p class="sec-lead">締切 → 点数 → 園さがし → 見学 → 書類 → 申込み。準備の順番にならんでいます。はじめての方は「はじめての保活ガイド」から。</p>
+     <div class="row">${HOKATSU.map((h,i)=>tc("#h-"+i,cover("hokatsu",i,glyph(h.p),h.t,h.guide?"まずはここから":`STEP${h.step}・${h.sl}`),h.lead.slice(0,26)+"…",false)).join("")}</div></section>`+
    `<section class="block" id="row-health">${head("health","HEALTH","健診・病院","")}
      <p class="sec-lead">無料の歯科健診と、健診ができる歯医者さん441件。夜・休日の急患もここから。</p>
      <div class="row">${HEALTH.map((h,i)=>tc(h.kind?"#"+h.kind:"#x-"+i,cover("health",i,glyph(h.p),h.t,h.k),h.kind==="dent"?(S.profile?`${S.profile.ward}の歯医者さんから表示`:"区をえらんで探せる"):h.k,false)).join("")}</div></section>`+
@@ -1402,6 +1428,47 @@ function sheetInfo(item,cat,i){
   const st=STYLE[cat][i%STYLE[cat].length];
   return dhead(`<svg viewBox="0 0 24 24" style="width:44px;height:44px;fill:none;stroke:#fff;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round">${P[item.p]}</svg>`,st[0],TAG[cat],item.t,esc(item.k))+
    `<p style="margin:0 0 12px;font-size:14.5px;line-height:1.8">${esc(item.lead)}</p><ul class="feat">${item.f.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>${item.u?(item.pop?openA(item.u,"ページをひらく",item.t):extA(item.u,"ページをひらく")):""}`}
+/* ===== はじめての保活ガイド：保活ナビの使い方と、準備の順番（7ステップ） ===== */
+const GO=`stroke="#1F2140" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"`;
+const GF=(x,y)=>`<circle cx="${x-3.4}" cy="${y}" r="1.4" fill="#1F2140"/><circle cx="${x+3.4}" cy="${y}" r="1.4" fill="#1F2140"/><path d="M${x-1.8} ${y+2.4}q1.8 1.8 3.6 0" stroke="#1F2140" stroke-width="1.4" fill="none" stroke-linecap="round"/><circle cx="${x-6.4}" cy="${y+2}" r="1.6" fill="#FF8FB8" opacity=".6"/><circle cx="${x+6.4}" cy="${y+2}" r="1.6" fill="#FF8FB8" opacity=".6"/>`;
+const GIC={
+  cal:`<rect x="5" y="8" width="30" height="27" rx="6" fill="#fff" ${GO}/><rect x="5" y="8" width="30" height="9" rx="4.5" fill="#FF8FB8" ${GO}/><path d="M12 4v7M28 4v7" ${GO}/>${GF(20,25)}<path d="M30 30l5-5" stroke="#FFC94D" stroke-width="3" stroke-linecap="round"/>`,
+  ruler:`<rect x="3" y="14" width="34" height="13" rx="4" fill="#FFE59A" ${GO} transform="rotate(-12 20 20)"/><g transform="rotate(-12 20 20)" stroke="#1F2140" stroke-width="1.6" stroke-linecap="round"><path d="M9 14v4M14 14v6M19 14v4M24 14v6M29 14v4"/></g>${GF(20,24)}<path d="M31 5l1.2 2.6 2.8.4-2 2 .5 2.8-2.5-1.3-2.5 1.3.5-2.8-2-2 2.8-.4z" fill="#FF8FB8"/>`,
+  map:`<path d="M5 10l9-4 12 4 9-4v24l-9 4-12-4-9 4z" fill="#BFE6FF" ${GO}/><path d="M14 6v24M26 10v24" stroke="#1F2140" stroke-width="1.4" opacity=".5"/><path d="M20 30s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z" fill="#FF8FB8" ${GO}/><circle cx="20" cy="19" r="2.6" fill="#fff"/>`,
+  bus:`<rect x="5" y="9" width="30" height="20" rx="6" fill="#FFE59A" ${GO}/><rect x="9" y="13" width="9" height="6" rx="2" fill="#BFE6FF" ${GO}/><rect x="22" y="13" width="9" height="6" rx="2" fill="#BFE6FF" ${GO}/><circle cx="12" cy="30" r="3.4" fill="#fff" ${GO}/><circle cx="28" cy="30" r="3.4" fill="#fff" ${GO}/>${GF(20,24)}`,
+  docs:`<rect x="10" y="5" width="22" height="28" rx="4" fill="#E3D7FF" ${GO}/><rect x="6" y="9" width="22" height="28" rx="4" fill="#fff" ${GO}/><path d="M11 17l2.5 2.5L18 15M11 26l2.5 2.5L18 24" stroke="#5A5AEF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 18h3M21 27h3" ${GO}/>`,
+  mail:`<rect x="4" y="10" width="32" height="22" rx="5" fill="#FFC6DA" ${GO}/><path d="M5 12l15 11 15-11" fill="none" ${GO}/>${GF(20,27)}<path d="M33 5l1.4 3 3 .4-2.2 2 .6 3-2.8-1.5-2.8 1.5.6-3-2.2-2 3-.4z" fill="#FFC94D" stroke="#1F2140" stroke-width="1.2"/>`,
+  bulb:`<path d="M20 4a11 11 0 0 1 6.5 19.8V28h-13v-4.2A11 11 0 0 1 20 4z" fill="#FFE59A" ${GO}/><rect x="14" y="28" width="12" height="7" rx="3" fill="#C9B6FF" ${GO}/>${GF(20,15)}<path d="M4 12l3 1M36 12l-3 1M8 4l2 2.4M32 4l-2 2.4" stroke="#FFB020" stroke-width="2" stroke-linecap="round"/>`,
+  hand:`<path d="M12 20V9a2.6 2.6 0 0 1 5.2 0v8m0-10a2.6 2.6 0 0 1 5.2 0v10m0-8a2.6 2.6 0 0 1 5.2 0v10m0-6a2.6 2.6 0 0 1 5.2 0v8c0 7-5 11-11 11h-2c-5 0-8-3-10-7l-3-6a2.4 2.4 0 0 1 4-2.6L12 22" fill="#FFE0C8" ${GO}/>`,
+  pop:`<rect x="6" y="10" width="28" height="22" rx="6" fill="#fff" ${GO}/><path d="M6 16h28" ${GO}/><circle cx="10" cy="13" r="1" fill="#FF8FB8"/><circle cx="13.4" cy="13" r="1" fill="#FFC94D"/><path d="M14 6q6-4 12 0" fill="none" stroke="#C9B6FF" stroke-width="2.4" stroke-linecap="round"/>${GF(20,24)}`,
+  close:`<circle cx="20" cy="20" r="14" fill="#BFE6FF" ${GO}/><path d="M14.5 14.5l11 11M25.5 14.5l-11 11" stroke="#1F2140" stroke-width="2.6" stroke-linecap="round"/>`
+};
+const GSTEPS=[
+  {n:1,ic:"cal",c:"#FF6FA5",bg:"#FFE8F1",t:"いつまでに？締切をチェック",tool:"ほかつのカレンダー",when:"まず最初に",d:"4月入園の申込みは、例年10月ごろ。きょうから「締切まであと何日」かがわかるので、これからの予定を立てられます。"},
+  {n:2,ic:"ruler",c:"#E0A100",bg:"#FFF6D6",t:"点数（保育指数）をはかる",tool:"ほかつのものさし",when:"春〜夏",d:"働き方などをえらぶと、点数のめやすが出ます。点数が高いほど入りやすいので、どのくらい入りやすいかがわかります。"},
+  {n:3,ic:"map",c:"#2FA4EA",bg:"#E6F4FF",t:"通える園をさがす",tool:"さいたま あずかりマップ",when:"夏ごろ",d:"家の近くの保育園・こども園・認可外まで、722か所を地図でさがせます。候補をいくつか見つけておきましょう。"},
+  {n:4,ic:"bus",c:"#8E6BF5",bg:"#F1ECFF",t:"見学する",tool:"保育体感ツアー",when:"夏〜秋",d:"市の見学ツアー（参加無料）や、園の見学で雰囲気をたしかめます。希望の順番を決めるヒントに。"},
+  {n:5,ic:"docs",c:"#5A5AEF",bg:"#ECEEFF",t:"書類をそろえる",tool:"ほかつのもちもの",when:"申込みの前",d:"おうちの状況をえらぶと、出す書類だけがリストになります。そろったものにチェックしていけます。"},
+  {n:6,ic:"mail",c:"#EC5A92",bg:"#FFEAF2",t:"申し込む",tool:"令和9年度の申込み",when:"例年10月ごろ",d:"電子申請・郵送・区役所への持参で申し込みます。日程や二次の申込みは市のページでたしかめます。"},
+  {n:7,ic:"bulb",c:"#C27A00",bg:"#FFF3CF",t:"こまったら・コツを知りたい",tool:"ほかつのうらワザ",when:"いつでも",d:"市の資料にもとづくコツ24個と、入れなかったときにできること。経験した人の口コミも読めます。"}
+];
+function sheetHokatsuGuide(){
+  const tool=name=>{const h=HOKATSU.find(x=>x.t===name);if(!h||!h.u)return "";return h.pop?openA(h.u,"ひらく",h.t,"go gbtn"):extA(h.u,"市のページへ","go gbtn")};
+  const sz=(k,w)=>svg(GIC[k],40).replace("<svg ",`<svg style="width:${w}px;height:${w}px;overflow:visible" `);
+  return dhead(sz("hand",44),"linear-gradient(150deg,#FFC6DA,#C9B6FF)","HOKATSU GUIDE","はじめての保活ガイド","使い方と、準備の順番")+
+  `<p class="g-lead">保活は<b>「いつまでに」「どのくらい入りやすい」「どこに」</b>がわかると、ぐっとラクになります。下の<b>1→7の順番</b>で、Wollyの保活ナビを使ってみてね。</p>
+  <div class="g-how" aria-label="保活ナビの使い方">
+    <div style="--n:0">${sz("hand",36)}<b>順番にタップ</b><small>ステップの「ひらく」を押す</small></div>
+    <div style="--n:1">${sz("pop",36)}<b>ふわっと開く</b><small>その場でページが出る</small></div>
+    <div style="--n:2">${sz("close",36)}<b>×でもどる</b><small>ここに帰ってこられる</small></div>
+  </div>
+  <div class="g-season" aria-label="1年の流れ（例年）"><span style="--c:#FF8FB8">春<small>情報あつめ・点数</small></span><span style="--c:#7CC4FF">夏<small>園さがし・見学</small></span><span style="--c:#B49BFF">秋<small>書類・申込み</small></span><span style="--c:#FFC94D">冬<small>結果・二次</small></span></div>
+  <ol class="g-steps">${GSTEPS.map((g,i)=>`<li style="--c:${g.c};--bg:${g.bg};--n:${i}">
+    <div class="g-ic">${sz(g.ic,46)}<span class="g-no">${g.n}</span></div>
+    <div class="g-bd"><div class="g-when">STEP ${g.n}・${g.when}</div><h4>${g.t}</h4><p>${g.d}</p>
+      <div class="g-ft"><span class="g-tool">${esc(g.tool)}</span>${tool(g.tool)}</div></div></li>`).join("")}</ol>
+  <p class="foot">日程や制度は年度ごとに変わります。正しい日付は「ほかつのカレンダー」や、さいたま市のページでたしかめてください。</p>`;
+}
 /* 教室リスト（CLASSES にデータがある習い事だけ） */
 let clsKey=null,clsArea="all",clsSort="rec",clsT={},clsQ="",clsShow=20;
 const CLS_TOGGLES=[["kid","幼児OK"],["fee","料金がわかる"],["park","駐車場あり"]];
@@ -1632,7 +1699,7 @@ function sheetHtml(kind){
   if(kind==="dent")return sheetDent();
   if(kind==="dk-kid"||kind==="dk-mom")return sheetDentalKind(kind);
   if(k==="m")return sheetMoney(i);
-  if(k==="h"&&HOKATSU[i])return sheetInfo(HOKATSU[i],"hokatsu",i);
+  if(k==="h"&&HOKATSU[i])return HOKATSU[i].guide?sheetHokatsuGuide():sheetInfo(HOKATSU[i],"hokatsu",i);
   if(k==="x"&&HEALTH[i])return HEALTH[i].kyu?sheetKyukan(i):sheetInfo(HEALTH[i],"health",i);
   if(k==="s"&&SHOPS[i])return sheetInfo(SHOPS[i],"shop",i);
   if(k==="l")return sheetLesson(i);
