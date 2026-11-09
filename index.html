@@ -1042,9 +1042,7 @@ const HOKATSU=[
 const HEALTH=[
   {t:"幼児の歯科健診",k:"1歳6か月・3歳",p:"baby",kind:"dk-kid"},
   {t:"妊婦の歯科健診",k:"妊娠中に1回",p:"mom",kind:"dk-mom"},
-  {t:"健診ができる歯医者さん",k:"441件を区ごとに",p:"tooth",kind:"dent"},
-  {t:"小児科 急患電話マップ",kyu:1,k:"夜・休日のとき",p:"moon",u:ART+"19zW2LwJWVt2xazYSEy1KL",lead:"夜中や休日に子どもの具合が悪くなったときの電話相談（#8000）と、休日・夜間の急患診療所、区ごとの小児科さがしをまとめたページです。",f:["電話相談 #8000・048-825-5252","休日・夜間の急患診療所4か所の時間と場所","夜・土曜・日曜祝日で小児科をしぼりこめる"]},
-  {t:"家の近くのクリニック",k:"小児科・内科・耳鼻科…",p:"cross",kind:"near"}
+  {t:"小児科 急患電話マップ",kyu:1,k:"夜・休日のとき",p:"moon",u:ART+"19zW2LwJWVt2xazYSEy1KL",lead:"夜中や休日に子どもの具合が悪くなったときの電話相談（#8000）と、休日・夜間の急患診療所、区ごとの小児科さがしをまとめたページです。",f:["電話相談 #8000・048-825-5252","休日・夜間の急患診療所4か所の時間と場所","夜・土曜・日曜祝日で小児科をしぼりこめる"]}
 ];
 /* Lessons: add a new one by appending a line. w = [[区の表示名, ページのURL末尾], ...] */
 const LESSONS=[
@@ -1955,7 +1953,7 @@ function applyRoute(){
     document.querySelectorAll(".view").forEach(v=>v.classList.toggle("on",v.id==="v-home"));
     requestAnimationFrame(()=>{document.getElementById(id)?.scrollIntoView({behavior:"smooth",block:"start"});
       /* 着いた先のカードを横スライドの中で見せて、ふわっと光らせる */
-      const sel=key==="kyukan"?['#row-health a[href="#x-3"]']:key==="health"?['#row-health a[href="#dk-kid"]','#row-health a[href="#dk-mom"]']:[];
+      const sel=key==="kyukan"?['#row-health a[href="#x-2"]']:key==="health"?['#row-health a[href="#dk-kid"]','#row-health a[href="#dk-mom"]']:[];
       const cards=sel.map(q=>document.querySelector(q)).filter(Boolean);
       if(cards.length){const row=cards[0].closest(".row");row.scrollTo({left:Math.max(0,cards[0].offsetLeft-row.offsetLeft-8),behavior:"smooth"});
         cards.forEach(c=>{c.classList.remove("hl");void c.offsetWidth;c.classList.add("hl")});setTimeout(()=>cards.forEach(c=>c.classList.remove("hl")),2600)}});
