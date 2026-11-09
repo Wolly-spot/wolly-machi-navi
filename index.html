@@ -502,7 +502,8 @@ svg .a-strike{animation:a-strike 1.3s cubic-bezier(.7,0,.3,1) infinite;transform
 /* キャラのイラスト */
 .chimg{display:block;object-fit:contain;border-radius:14px;background:#fff}
 .chhead{border-radius:16px}
-.g-season .gs{justify-self:center;border-radius:50%;border:2px solid #fff;box-shadow:0 3px 8px color-mix(in srgb,var(--c) 35%,transparent);margin-bottom:2px;animation:nicw 3.6s ease-in-out infinite}
+.g-season .gs{justify-self:center;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:#fff;box-shadow:0 3px 8px color-mix(in srgb,var(--c) 35%,transparent);margin-bottom:2px;animation:nicw 3.6s ease-in-out infinite}
+.g-season .gs svg{width:28px;height:28px;overflow:visible}
 .g-season span:nth-child(2) .gs{animation-delay:-.9s}.g-season span:nth-child(3) .gs{animation-delay:-1.8s}.g-season span:nth-child(4) .gs{animation-delay:-2.7s}
 .g-ic.g-ch{background:#fff;overflow:visible}
 .g-ic.g-ch .chimg{border-radius:18px}
@@ -1499,6 +1500,13 @@ const GIC={
   pop:`<rect x="6" y="10" width="28" height="22" rx="6" fill="#fff" ${GO}/><path d="M6 16h28" ${GO}/><circle cx="10" cy="13" r="1" fill="#FF8FB8"/><circle cx="13.4" cy="13" r="1" fill="#FFC94D"/><path d="M14 6q6-4 12 0" fill="none" stroke="#C9B6FF" stroke-width="2.4" stroke-linecap="round"/>${GF(20,24)}`,
   close:`<circle cx="20" cy="20" r="14" fill="#BFE6FF" ${GO}/><path d="M14.5 14.5l11 11M25.5 14.5l-11 11" stroke="#1F2140" stroke-width="2.6" stroke-linecap="round"/>`
 };
+/* 春夏秋冬のアイコン（時期をあらわす） */
+const SEASON_IC={
+  spring:`${[0,72,144,216,288].map(a=>`<ellipse cx="20" cy="11" rx="5.6" ry="8" fill="#FFB7D5" ${GO} transform="rotate(${a} 20 20)"/>`).join("")}<circle cx="20" cy="20" r="4.2" fill="#FFE070" ${GO}/>`,
+  summer:`<g stroke="#FFB020" stroke-width="2.6" stroke-linecap="round">${[0,45,90,135,180,225,270,315].map(a=>`<path d="M20 2v5" transform="rotate(${a} 20 20)"/>`).join("")}</g><circle cx="20" cy="20" r="11" fill="#FFD84D" ${GO}/>${GF(20,20)}`,
+  autumn:`<path d="M20 4l3 7 6-3-1 7 7 1-5 5 3 5-8-1v7h-2v-7l-8 1 3-5-5-5 7-1-1-7 6 3z" fill="#FF9B6A" ${GO}/><path d="M20 15v19" ${GO}/>`,
+  winter:`<g stroke="#5EB7F2" stroke-width="2.8" stroke-linecap="round" fill="none">${[0,60,120].map(a=>`<g transform="rotate(${a} 20 20)"><path d="M20 4v32"/><path d="M15 8l5 4 5-4M15 32l5-4 5 4"/></g>`).join("")}</g><circle cx="20" cy="20" r="3.4" fill="#BFE6FF" ${GO}/>`
+};
 const GSTEPS=[
   {n:1,ic:"cal",c:"#FF6FA5",bg:"#FFE8F1",t:"いつまでに？締切をチェック",tool:"ほかつのカレンダー",when:"まず最初に",d:"4月入園の申込みは、例年10月ごろ。きょうから「締切まであと何日」かがわかるので、これからの予定を立てられます。"},
   {n:2,ic:"ruler",c:"#E0A100",bg:"#FFF6D6",t:"点数（保育指数）をはかる",tool:"ほかつのものさし",when:"春〜夏",d:"働き方などをえらぶと、点数のめやすが出ます。点数が高いほど入りやすいので、どのくらい入りやすいかがわかります。"},
@@ -1518,7 +1526,7 @@ function sheetHokatsuGuide(){
     <div style="--n:1">${sz("pop",36)}<b>ふわっと開く</b><small>その場でページが出る</small></div>
     <div style="--n:2">${sz("close",36)}<b>×でもどる</b><small>ここに帰ってこられる</small></div>
   </div>
-  <div class="g-season" aria-label="1年の流れ（例年）"><span style="--c:#FF8FB8">${chImg("spring",54,"chimg gs")}春<small>情報あつめ・点数</small></span><span style="--c:#7CC4FF">${chImg("summer",54,"chimg gs")}夏<small>園さがし・見学</small></span><span style="--c:#B49BFF">${chImg("autumn",54,"chimg gs")}秋<small>書類・申込み</small></span><span style="--c:#FFC94D">${chImg("winter",54,"chimg gs")}冬<small>結果・二次</small></span></div>
+  <div class="g-season" aria-label="1年の流れ（例年）"><span style="--c:#FF8FB8"><span class="gs">${svg(SEASON_IC.spring,40)}</span>春<small>情報あつめ・点数</small></span><span style="--c:#7CC4FF"><span class="gs">${svg(SEASON_IC.summer,40)}</span>夏<small>園さがし・見学</small></span><span style="--c:#B49BFF"><span class="gs">${svg(SEASON_IC.autumn,40)}</span>秋<small>書類・申込み</small></span><span style="--c:#FFC94D"><span class="gs">${svg(SEASON_IC.winter,40)}</span>冬<small>結果・二次</small></span></div>
   <ol class="g-steps">${GSTEPS.map((g,i)=>`<li style="--c:${g.c};--bg:${g.bg};--n:${i}">
     <div class="g-ic${HK_CHARS["s"+g.n]?" g-ch":""}">${chImg("s"+g.n,58)||sz(g.ic,46)}<span class="g-no">${g.n}</span></div>
     <div class="g-bd"><div class="g-when">STEP ${g.n}・${g.when}</div><h4>${g.t}</h4><p>${g.d}</p>
@@ -1565,7 +1573,7 @@ function sheetHokatsuItem(i){
       <div><div class="hk-step">STEP ${g.n}・${esc(g.when)}</div><h3 id="sheetTitle">${esc(h.t)}</h3><div class="hk-sl">${esc(g.t)}</div></div></div>
     <p class="hk-lead">${leadHtml(h.lead)}</p>
     <div class="hk-pt-h">${big("check",22)}ここがポイント</div>
-    <ul class="hk-pts">${h.f.map((x,j)=>`<li style="--n:${j}"><span class="hk-pic${HK_CHARS[ptIcon(x)]?" hk-ch":""}">${chImg(ptIcon(x),52)||big(ptIcon(x),34)}</span><span>${esc(x)}</span></li>`).join("")}</ul>
+    <ul class="hk-pts">${h.f.map((x,j)=>`<li style="--n:${j}"><span class="hk-pic">${big(ptIcon(x),34)}</span><span>${esc(x)}</span></li>`).join("")}</ul>
     <div class="hk-go">${open}<small>${h.pop?"ページがその場でふわっと開きます（×でここにもどれます）":"さいたま市のページが開きます"}</small></div>
     <div class="hk-navs">${nav(prev,i-1,"prev")}${nav(next,i+1,"next")}</div>
   </div>`;
