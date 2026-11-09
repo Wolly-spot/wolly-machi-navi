@@ -252,6 +252,19 @@ h1 .mk{background:linear-gradient(transparent 62%,#ffe7a3 62%)}
 .fs-rv h4 svg{width:26px;height:26px;overflow:visible}
 .fs-rv p{margin:0;font-size:12.5px;line-height:1.7;color:var(--muted)}
 .fs-st{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 2px}
+.fs-st button{display:inline-flex;align-items:center;gap:5px;padding:5px 12px 5px 7px;border-radius:999px;background:#fff;border:2px solid var(--tel);color:var(--tel-d);font-size:12.5px;font-weight:800;cursor:pointer;box-shadow:0 3px 0 var(--tel);transition:transform .35s cubic-bezier(.3,1.6,.5,1),background .2s}
+.fs-st button svg{width:20px;height:20px;overflow:visible}
+.fs-st button b{font:800 12px/1 system-ui,sans-serif;min-width:20px;padding:3px 6px;border-radius:999px;background:var(--tel-l);color:var(--tel-d);text-align:center}
+.fs-st button[aria-pressed="true"]{background:var(--tel);color:#fff;box-shadow:0 3px 0 var(--tel-d)}
+.fs-st button[aria-pressed="true"] b{background:#fff}
+.fs-st button:active{transform:translateY(2px) scale(.97);box-shadow:0 1px 0 var(--tel)}
+.fs-st button.pop{animation:chipPop .5s cubic-bezier(.3,1.6,.5,1)}
+.fs-st button[disabled]{opacity:.6;cursor:wait}
+.fs-msg{margin:8px 0 0;font-size:12px;font-weight:700;color:var(--tel-d);min-height:1em}
+.stsum{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.stsum span{display:inline-flex;align-items:center;gap:3px;padding:1px 9px 1px 5px;border-radius:999px;background:var(--tel-l);color:var(--tel-d);font-size:11px;font-weight:800}
+.stsum span svg{width:16px;height:16px;overflow:visible}
+.stsum b{font:800 11px/1 system-ui,sans-serif}
 .fs-st span{display:inline-flex;align-items:center;gap:4px;padding:3px 11px 3px 6px;border-radius:999px;background:#fff;border:2px solid var(--line);font-size:12px;font-weight:800;color:#a49a94}
 .fs-st span svg{width:18px;height:18px;opacity:.75}
 .fs-st b{font:800 10px/1 system-ui;background:var(--line);color:var(--muted);border-radius:999px;padding:3px 6px;margin-left:2px}
@@ -510,6 +523,7 @@ function card(x,i){
     <div class="cm">${I(IC.pin)}<span>${esc(r.a)}</span></div>
     ${r.h?`<div class="cm">${I(IC.clock)}<span>${esc(r.h)}</span></div>`:"<div></div>"}
     <div class="tags">${tags(r)}</div>
+    ${stampSum(r)?`<div class="stsum" aria-label="Wollyの口コミ">${stampSum(r)}</div>`:""}
     ${r.u?`<a class="url" href="${esc(url(r.u))}" target="_blank" rel="noopener">${svg(NIC.web,40)}<span>${esc(host(r.u))}</span></a>`:""}
     <div class="btns"><a class="b-map" href="${gmap(r)}" target="_blank" rel="noopener">${I(IC.map)}地図・道順</a>${r.u?`<a class="b-web" href="${esc(url(r.u))}" target="_blank" rel="noopener">${I(IC.web)}ホームページ</a>`:""}${G.noHours?"":`<a class="b-tel" href="${gsearch(r)}" target="_blank" rel="noopener">${I(IC.search)}電話・口コミ</a>`}</div>
   </li>`;
@@ -535,7 +549,21 @@ $("#list").addEventListener("click",e=>{if(e.target.closest("a"))return;const li
 $("#list").addEventListener("keydown",e=>{const li=e.target.closest(".card");if(li&&(e.key==="Enter"||e.key===" ")&&!e.target.closest("a")){e.preventDefault();openFs(+li.dataset.i,li)}});
 
 /* ---------- 施設の小窓：タップするとふわっと半透明で出る ---------- */
-const STAMPS=[["smile","子どもにやさしい"],["clockf","待ち時間みじかめ"],["car","駐車場あり"],["phonef","予約しやすい"]];
+const STAMPS=[["kind","smile","子どもにやさしい"],["wait","clockf","待ち時間みじかめ"],["park","car","駐車場あり"],["reserve","phonef","予約しやすい"]]
+  .filter(([k])=>g==="park"?(k==="kind"||k==="park"):g==="pharm"?k!=="reserve":true);
+let CNT={},MINE={},stampBusy=false;
+/* Wolly の業務システムとのやりとり：街ナビの中なら親（街ナビ）にお願いする（LINEのログインは親だけが持つ） */
+const WOLLY_API="https://script.google.com/macros/s/AKfycbwv5gVNmYIem_rxce3Zo50cPFtFQ2duU6PqFN61-bjXfDycVBzF3nqpSZwsPaLe26aFSQ/exec";
+let reqN=0;const waits={};
+addEventListener("message",e=>{const d=e.data;if(e.source!==window.parent||!d||d.type!=="wolly-stamp-res"||!waits[d.req])return;waits[d.req](d);delete waits[d.req]});
+function naviCall(action,payload){
+  if(window.parent!==window)return new Promise(res=>{const req=++reqN;waits[req]=res;window.parent.postMessage({type:"wolly-stamp",req,action,payload},"*");
+    setTimeout(()=>{if(waits[req]){delete waits[req];res({ok:false,error:"通信できませんでした。もう一度押してください。"})}},20000)});
+  if(action!=="stampCounts")return Promise.resolve({ok:false,code:"noline",error:"スタンプは、LINEの中で開くと押せます。"});
+  return fetch(WOLLY_API,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({app:"navi",action,payload})}).then(r=>r.json()).catch(()=>({ok:false}));
+}
+function loadStamps(){naviCall("stampCounts",{genre:g}).then(r=>{if(!r||!r.ok)return;CNT=r.data.counts||{};MINE=r.data.mine||{};refresh(false)})}
+const stampSum=r=>{const c=CNT[r.id]||{};return STAMPS.filter(([k])=>c[k]).map(([k,ic,lab])=>`<span>${svg(NIC[ic],40)}${lab}<b>${c[k]}</b></span>`).join("")};
 let fsFrom=null;
 function openFs(i,from){
   const x=LAST[i];if(!x)return;const r=x.r;fsFrom=from||null;
@@ -550,12 +578,30 @@ function openFs(i,from){
     <div class="btns"><a class="b-map" href="${gmap(r)}" target="_blank" rel="noopener">${I(IC.map)}地図・道順</a>${r.u?`<a class="b-web" href="${esc(url(r.u))}" target="_blank" rel="noopener">${I(IC.web)}ホームページ</a>`:""}${G.noHours?"":`<a class="b-tel" href="${gsearch(r)}" target="_blank" rel="noopener">${I(IC.search)}電話番号をしらべる</a>`}</div>
     ${reg?`<button type="button" class="fs-go" data-fsmap="${i}">立体の地図でこの場所を見る</button>`:""}
     <div class="fs-rv"><h4>${svg(NIC.talk,40)}Wollyの口コミ</h4>
-      <p>はじめてのスタンプを押してね。「子どもにやさしい」「待ち時間みじかめ」などを、タップだけで残せるスタンプ口コミを準備しています。</p>
-      <div class="fs-st" aria-label="スタンプ（準備中）">${STAMPS.map(([ic,lab])=>`<span>${svg(NIC[ic],40)}${lab}<b>準備中</b></span>`).join("")}</div>
+      <p id="fsRvP"></p>
+      <div class="fs-st" id="fsSt" data-i="${i}" role="group" aria-label="スタンプ">${stampBtns(r)}</div>
+      <p class="fs-msg" id="fsMsg" aria-live="polite"></p>
       <div class="btns"><a class="b-tel" href="${gmap(r)}" target="_blank" rel="noopener">${I(IC.search)}Googleの口コミを見る</a></div></div>`;
+  rvLead(r);
   const fs=$("#fs");fs.hidden=false;document.body.classList.add("fs-open");
   requestAnimationFrame(()=>requestAnimationFrame(()=>fs.classList.add("on")));
   setTimeout(()=>$("#fsP .fs-x").focus({preventScroll:true}),80);
+}
+function stampBtns(r){const c=CNT[r.id]||{},m=MINE[r.id]||[];
+  return STAMPS.map(([k,ic,lab])=>`<button type="button" data-stamp="${k}" aria-pressed="${m.includes(k)}">${svg(NIC[ic],40)}${lab}<b>${c[k]||0}</b></button>`).join("")}
+function rvLead(r){const c=CNT[r.id]||{},n=Object.values(c).reduce((a,b)=>a+b,0);
+  $("#fsRvP").textContent=n?"メンバーが押したスタンプです。あなたも、行ったことがあればタップしてね（もう一度で取り消し。名前は出ません）。":"はじめてのスタンプを押してね。行ったことがあれば、タップだけで残せます（もう一度で取り消し。名前は出ません）。"}
+async function pressStamp(btn){
+  if(stampBusy)return;const box=$("#fsSt"),x=LAST[+box.dataset.i];if(!x)return;const r=x.r,k=btn.dataset.stamp;
+  const was=btn.getAttribute("aria-pressed")==="true",num=btn.querySelector("b"),n0=+num.textContent;
+  btn.setAttribute("aria-pressed",!was);num.textContent=Math.max(0,n0+(was?-1:1));popChip(btn);
+  stampBusy=true;box.querySelectorAll("button").forEach(b=>b.disabled=true);$("#fsMsg").textContent="";
+  const res=await naviCall("stampToggle",{genre:g,placeId:r.id,placeName:r.n,stamp:k});
+  stampBusy=false;box.querySelectorAll("button").forEach(b=>b.disabled=false);
+  if(!res||!res.ok){btn.setAttribute("aria-pressed",was);num.textContent=n0;$("#fsMsg").textContent=(res&&res.error)||"うまく押せませんでした。もう一度押してください。";return}
+  CNT[r.id]=res.data.place||{};const m=new Set(MINE[r.id]||[]);res.data.on?m.add(k):m.delete(k);MINE[r.id]=[...m];
+  box.innerHTML=stampBtns(r);rvLead(r);$("#fsMsg").textContent=res.data.on?"スタンプを押しました。ありがとう！":"スタンプを取り消しました。";
+  refresh(false);
 }
 function closeFs(){
   const fs=$("#fs");if(fs.hidden)return;fs.classList.remove("on");document.body.classList.remove("fs-open");
@@ -563,6 +609,7 @@ function closeFs(){
 }
 $("#fs").addEventListener("click",e=>{
   if(e.target.closest("[data-fsx]")){closeFs();return}
+  const sb=e.target.closest("[data-stamp]");if(sb){pressStamp(sb);return}
   const m=e.target.closest("[data-fsmap]");if(m){const i=+m.dataset.fsmap;closeFs();setTimeout(()=>focusOn(i),RM?0:420)}
 });
 addEventListener("keydown",e=>{if(e.key==="Escape")closeFs()});
@@ -692,7 +739,7 @@ $("#note").innerHTML=g==="park"
   :"病院・薬局の情報は、厚生労働省「医療情報ネット」のオープンデータ（2025年12月1日時点）をもとにしています。診療時間・休みは変わることがあるので、行く前に電話やホームページで確かめてください。夜や休日の急な病気は「小児科 急患電話マップ」（#8000）へ。";
 hero();lawnDeco();buildWardMap();renderAreas();renderFilters();
 if(false)$("#legend").innerHTML="ピンの色："+G.subs.map(([lab,k,c])=>`<b style="color:${c}">●${esc(lab)}</b>`).join(" ")+(g==="ped"?"　":` <b style="color:${G.ac}">●そのほか</b>　`);
-fetch("near-data/"+g+".json").then(r=>r.json()).then(d=>{DATA=d;$("#hn").textContent=d.length;refresh(true)}).catch(()=>{$("#list").innerHTML='<li class="empty">データを読みこめませんでした。時間をおいて開きなおしてください。</li>'});
+fetch("near-data/"+g+".json").then(r=>r.json()).then(d=>{DATA=d;$("#hn").textContent=d.length;refresh(true);loadStamps()}).catch(()=>{$("#list").innerHTML='<li class="empty">データを読みこめませんでした。時間をおいて開きなおしてください。</li>'});
 </script>
 <script>/* 外へのリンクは新しい画面で開く（街ナビの中で開いたとき） */document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a[href]");if(!a)return;var h=a.getAttribute("href")||"";if(h.charAt(0)==="#"||/^(javascript|tel|mailto):/i.test(h))return;a.target="_blank";a.rel="noopener"},true);</script>
 </body></html>

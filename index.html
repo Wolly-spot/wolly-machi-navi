@@ -1586,6 +1586,24 @@ $("#vClose").addEventListener("click",closeViewer);
 const PAGES_ORIGIN=new URL(PAGES_BASE).origin;
 function sendHome(){const w=$("#vFrame").contentWindow;if(!w)return;const p=S.profile;
   try{w.postMessage(p&&p.ward?{type:"wolly-home",ward:p.ward,town:S.town||"",geo:S.geo||null}:{type:"wolly-home",ward:null},PAGES_ORIGIN)}catch(e){}}
+/* スタンプ口コミ：写しのページ（near.html）から頼まれて、Wolly の業務システム（GAS）へ送る。
+   LINEのIDトークンは街ナビの中だけで使い、写しのページには渡さない */
+const WOLLY_API="https://script.google.com/macros/s/AKfycbwv5gVNmYIem_rxce3Zo50cPFtFQ2duU6PqFN61-bjXfDycVBzF3nqpSZwsPaLe26aFSQ/exec";
+async function lineToken(){
+  try{if(window.liffReady)await window.liffReady;if(window.liff&&liff.isLoggedIn&&liff.isLoggedIn())return liff.getIDToken()||null}catch(e){}
+  return null;
+}
+window.addEventListener("message",async e=>{
+  if(e.origin!==PAGES_ORIGIN||!e.data||e.data.type!=="wolly-stamp")return;
+  const {req,action,payload}=e.data,reply=o=>{try{e.source.postMessage(Object.assign({type:"wolly-stamp-res",req},o),PAGES_ORIGIN)}catch(_){}};
+  if(["stampCounts","stampToggle"].indexOf(action)<0)return;
+  const idToken=await lineToken();
+  if(action==="stampToggle"&&!idToken){reply({ok:false,code:"noline",error:"スタンプは、LINEの中で開くと押せます。"});return}
+  try{
+    const r=await fetch(WOLLY_API,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({app:"navi",action,idToken,payload})});
+    reply(await r.json());
+  }catch(err){reply({ok:false,error:"通信できませんでした。電波のよいところで、もう一度押してください。"})}
+});
 window.addEventListener("message",e=>{if(e.origin!==PAGES_ORIGIN||!e.data||e.data.type!=="wolly-mypage")return;
   closeViewer();closeSheet();location.hash="#mypage"});
 document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;if(viewerOpen){closeViewer();return}if(sheetKind)goBack()});
@@ -1635,7 +1653,7 @@ const LIFF_ID="2007823365-Ckc0dnQW";
 if(/\bLine\//i.test(navigator.userAgent)&&!window.claude){
   $("#lineBar").hidden=false;
   const sc=document.createElement("script");sc.src="https://static.line-scdn.net/liff/edge/2/sdk.js";sc.async=true;
-  sc.onload=()=>{try{liff.init({liffId:LIFF_ID}).catch(()=>{})}catch(e){}};document.head.appendChild(sc);
+  sc.onload=()=>{try{window.liffReady=liff.init({liffId:LIFF_ID}).then(()=>true).catch(()=>false)}catch(e){}};document.head.appendChild(sc);
   $("#lineBack").addEventListener("click",()=>{
     try{if(window.liff&&liff.closeWindow){liff.closeWindow();return}}catch(e){}
     window.close();
