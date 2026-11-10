@@ -596,6 +596,16 @@ svg .a-strike{animation:a-strike 1.3s cubic-bezier(.7,0,.3,1) infinite;transform
 @media (prefers-reduced-motion:reduce){.bym-btn::after,.bym-pin{animation:none}}
 
 
+
+/* カーソルが合う（指・マウス）とふわっ、押すとぷにっ */
+.hp,.ej,.ma-links a,.fbar,.az-b,.cat{transition:transform .35s cubic-bezier(.3,1.6,.5,1),box-shadow .35s,background .25s;-webkit-tap-highlight-color:transparent;cursor:pointer}
+@media (hover:hover){.hp:hover,.ej:hover,.ma-links a:hover,.fbar:hover,.az-b:hover,.cat:hover{transform:translateY(-4px);box-shadow:0 14px 26px -14px rgba(90,90,239,.45)}}
+.hp:focus-visible,.ej:focus-visible,.fbar:focus-visible{outline:3px solid #C9B6FF;outline-offset:2px;transform:translateY(-4px)}
+.tapped{animation:tapPop .45s cubic-bezier(.3,1.6,.5,1)}
+@keyframes tapPop{0%{transform:scale(1)}35%{transform:scale(.94)}100%{transform:scale(1) translateY(-2px)}}
+.hp .ci svg,.ej .ci svg{transition:transform .4s cubic-bezier(.3,1.6,.5,1)}
+@media (hover:hover){.hp:hover .ci svg,.ej:hover .ci svg{transform:rotate(-8deg) scale(1.08)}}
+@media (prefers-reduced-motion:reduce){.tapped{animation:none}.hp,.ej{transition:none}}
 /* ① 折りたたみ */
 .fold>.fhead{display:none}
 .fbar{display:flex;align-items:center;gap:12px;width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:22px;background:var(--surface);cursor:pointer;text-align:left;font-family:inherit;color:var(--ink)}
@@ -1836,6 +1846,8 @@ document.addEventListener("click",e=>{
 });
 /* ホームの中の data-view（交流施設・あずかりマップなど）もその場でふわっと */
 document.addEventListener("click",e=>{const b=e.target.closest("#v-home [data-view]");if(b){e.preventDefault();openViewer(b.dataset.view,b.dataset.vt)}});
+/* カテゴリーを押すと、押したことがわかるように「ぷにっ」 */
+document.addEventListener("pointerdown",e=>{const c=e.target.closest(".hp,.ej,.ma-links a,.fbar,.cat,.tc,.az-b");if(!c)return;c.classList.remove("tapped");void c.offsetWidth;c.classList.add("tapped")});
 /* 今週のイベント（feed.json の events。なければ ニュースの子ども・ママ向け） */
 const EV_K={free:["週末の無料イベント","#FF5C9A","park","linear-gradient(150deg,#FFC2DA,#FF9EC4)"],kids:["子ども向け","#2FA4EA","school","linear-gradient(150deg,#BFE6FF,#7CC4FF)"],
   facility:["親子の施設","#8E6BF5","house","linear-gradient(150deg,#DCD0FF,#B49BFF)"],deadline:["申請期限が近い","#C4457C","doc","linear-gradient(150deg,#FFD0E2,#FFA8C8)"],
@@ -1884,9 +1896,9 @@ function openFold(id,on=true){
 document.addEventListener("click",e=>{const b=e.target.closest(".fbar");if(!b)return;const sec=b.closest("section");openFold(sec.id,!sec.classList.contains("open"))});
 
 /* ===== ⑦ 文字の大きさ（この端末に覚える） ===== */
-function setFsz(n){n=+n||0;document.documentElement.dataset.fsz=n;try{localStorage.setItem("wolly.fsz",n)}catch(e){};document.querySelectorAll("[data-fsz]").forEach(b=>b.setAttribute("aria-pressed",+b.dataset.fsz===n))}
+function setFsz(n){n=+n||0;document.documentElement.dataset.fsz=n;try{localStorage.setItem("wolly.fsz",n)}catch(e){};document.querySelectorAll("button[data-fsz]").forEach(b=>b.setAttribute("aria-pressed",+b.dataset.fsz===n))}
 try{setFsz(localStorage.getItem("wolly.fsz")||0)}catch(e){setFsz(0)}
-document.addEventListener("click",e=>{const b=e.target.closest("[data-fsz]");if(b){e.preventDefault();setFsz(b.dataset.fsz)}});
+document.addEventListener("click",e=>{const b=e.target.closest("button[data-fsz]");if(b){e.preventDefault();setFsz(b.dataset.fsz)}});
 /* ===== ② 画面に見えていない動きは止める（電池と重さ対策） ===== */
 (function(){
   if(!("IntersectionObserver" in window))return;
