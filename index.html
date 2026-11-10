@@ -595,6 +595,46 @@ svg .a-strike{animation:a-strike 1.3s cubic-bezier(.7,0,.3,1) infinite;transform
 .bym-chips button.on{border-color:#7B5CFF;background:#F3EEFF}.bym-chips button.on b{background:#7B5CFF}
 @media (prefers-reduced-motion:reduce){.bym-btn::after,.bym-pin{animation:none}}
 
+
+/* ① 折りたたみ */
+.fold>.fhead{display:none}
+.fbar{display:flex;align-items:center;gap:12px;width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:22px;background:var(--surface);cursor:pointer;text-align:left;font-family:inherit;color:var(--ink)}
+.fb-ic{flex:0 0 auto;width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:color-mix(in srgb,var(--accent) 10%,#fff)}.fb-ic svg{width:40px;height:40px}
+.fb-t{flex:1;display:grid;gap:2px;font:500 17px/1.3 var(--f-display)}.fb-t small{font:600 12px/1.4 var(--f-body,inherit);color:var(--muted)}.fb-t .h2sub{font-size:11px}
+.fb-ar{flex:0 0 auto;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#F1ECFF;color:#5A5AEF;transition:transform .3s}.fb-ar .i{width:20px;height:20px}
+.fold.open .fb-ar{transform:rotate(180deg)}
+.fold .fbody{display:none}.fold.open .fbody{display:block;animation:fbIn .35s ease}
+@keyframes fbIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+#rows .block.fold{margin-top:12px}
+/* ② 見えていない所の動きを止める */
+.offscreen,.offscreen *{animation-play-state:paused!important}
+/* ③ 登録の案内 */
+.reg2{display:grid;gap:10px}.reg2 .rg-top{display:flex;align-items:center;gap:10px}.reg2 .rg-top p{margin:0;font-size:12.5px;color:var(--muted)}.reg2 .rg-top b{display:block;font-size:15px;color:var(--ink)}
+.rg-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.rg-list li{display:flex;align-items:center;gap:6px;padding:8px;border-radius:14px;background:color-mix(in srgb,var(--accent) 6%,#fff);font-size:12px;line-height:1.45}.rg-list svg{flex:0 0 auto;width:26px;height:26px}
+.rg-btn{justify-self:stretch;text-align:center}
+/* ④ よくさがすことば */
+.hs-tags button.mine{background:#5A5AEF;color:#fff;display:inline-flex;align-items:center;gap:3px}.hs-tags button.mine .i{width:13px;height:13px}
+/* ⑤ お気に入り・カレンダー */
+.evw{display:grid;gap:6px;flex:0 0 auto}
+.feedrow .evw{flex:0 0 min(44%,210px);scroll-snap-align:start}.evw .fc{flex:none}
+.ev-act{display:flex;gap:6px}
+.ev-fav,.ev-cal{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:4px;padding:7px 6px;border-radius:999px;border:1.5px solid #FFC2DA;background:#fff;font:inherit;font-size:11.5px;font-weight:800;color:#D2448A;text-decoration:none;cursor:pointer}
+.ev-cal{border-color:#C9E0FA;color:#2F7FC4}.ev-fav .i,.ev-cal .i{width:15px;height:15px}
+.ev-fav.on{background:#FF6FA5;border-color:#FF6FA5;color:#fff}.ev-fav.on .i{fill:#fff}
+.ev-favtab{display:inline-flex;align-items:center;gap:4px}.ev-favtab .i{width:14px;height:14px;fill:#FF6FA5;stroke:#FF6FA5}
+.ev-none{margin:6px 0;font-size:13px;color:var(--muted)}
+/* ⑥ 締切が近いもの */
+.dl-alert{display:grid;gap:6px;margin:0 0 14px;padding:12px;border-radius:18px;background:#FFF0F6;border:2px solid #FFC2DA}
+.dl-alert>b{display:flex;align-items:center;gap:6px;font-size:14px;color:#C4457C}.dl-alert .i{width:18px;height:18px}
+.dl-alert a{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:12px;background:#fff;text-decoration:none;color:var(--ink);font-size:13px;font-weight:700}
+.dl-left{flex:0 0 auto;padding:2px 8px;border-radius:999px;background:#FF6FA5;color:#fff;font-size:11px}
+/* ⑦ 文字の大きさ */
+.fsz{display:flex;gap:6px}.fsz button{flex:1;padding:10px 6px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);font:inherit;font-weight:700;cursor:pointer;color:var(--ink)}
+.fsz button[data-fsz="1"]{font-size:1.08em}.fsz button[data-fsz="2"]{font-size:1.16em}
+.fsz button[aria-pressed="true"]{background:#5A5AEF;border-color:#5A5AEF;color:#fff}
+html[data-fsz="1"] #page,html[data-fsz="1"] .sheet{zoom:1.1}
+html[data-fsz="2"] #page,html[data-fsz="2"] .sheet{zoom:1.22}
 /* ===== ホーム（2026-11-10 作り直し） ===== */
 .hero2{position:relative;overflow:hidden;margin:14px 0 6px;padding:20px 16px 16px;border-radius:26px;text-align:center;background:linear-gradient(140deg,#FFF0F7,#F1ECFF 55%,#E8F5FF);border:1px solid var(--line)}
 .h2-bub{position:absolute;border-radius:50%;opacity:.55;pointer-events:none}.h2-bub.b1{width:120px;height:120px;background:#FFD6E8;left:-40px;top:-50px}.h2-bub.b2{width:90px;height:90px;background:#D9EEFF;right:-30px;top:10px}.h2-bub.b3{width:60px;height:60px;background:#FFF1B8;right:30%;bottom:-30px}
@@ -1057,6 +1097,7 @@ svg .a-ring{animation:ring 2.4s ease-in-out infinite;transform-box:fill-box;tran
           <div class="field"><span class="lab">アイコンをえらぶ</span><div class="icons" id="iconPick"></div></div>
           <div class="field"><label for="fWard">お住まいの区</label><select id="fWard"></select><small>習い事は、登録した区の教室ページへ直接つながります。</small></div>
           <div class="field"><label for="fTown">町名・番地（任意）</label><input id="fTown" maxlength="40" placeholder="例：常盤6-4-18" autocomplete="address-line1"><small>番地まで入れると、病院や急患診療所を家から近い順に正しく並べられます。ほかのメンバーには公開されません（位置を調べるために国土地理院の住所検索を使います）。</small><small class="geo-st" id="geoSt" role="status"></small></div>
+          <div class="field"><span class="lab">文字の大きさ</span><div class="fsz" role="group" aria-label="文字の大きさ"><button type="button" data-fsz="0">ふつう</button><button type="button" data-fsz="1">大きめ</button><button type="button" data-fsz="2">とても大きく</button></div><small>この端末だけに覚えます。すぐに変わります。</small></div>
           <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><button class="btn" type="submit" id="saveBtn">登録する</button><span class="status" id="saveStatus" role="status"></span></div>
         </form>
       </section>
@@ -1518,7 +1559,9 @@ function renderMe(){
   const h=new Date().getHours(),greet=h<11?"おはようございます":h<18?"こんにちは":"こんばんは";
   $("#helloTitle").textContent=S.profile?`${greet}、${S.profile.name}さん`:greet;
   $("#helloSub").textContent=S.profile?`さいたま市${S.profile.ward}${townName()?" "+townName():""}の暮らしを、近くから。`:"さいたま市の暮らしを、近くから。";
-  $("#regBanner").innerHTML=S.profile?"":`<div class="reg-banner">${avatar(-1)}<p><b>マイページ未登録です</b>名前とアイコンを登録すると、メンバーとして参加できます。</p><a class="btn" href="#mypage">登録する</a></div>`;
+  $("#regBanner").innerHTML=S.profile?"":`<div class="reg-banner reg2"><div class="rg-top">${avatar(-1)}<p><b>マイページに区を登録すると、もっと便利に</b>30秒でおわります（名前はニックネームでOK）</p></div>
+    <ul class="rg-list"><li>${svg(MINI.cross,40)}病院・園・支援センターが<b>家から近い順</b>に</li><li>${svg(GIC.map,40)}立体の地図に<b>ピン</b>が立つ</li><li>${svg(GIC.cal,40)}<b>あなたの区</b>の情報を先に表示</li><li>${svg(MINI.heart,40)}口コミの<b>スタンプ</b>が押せる</li></ul>
+    <a class="btn rg-btn" href="#mypage">登録する（無料）</a></div>`;
   /* 小児科 急患電話マップのボタン：登録済みは「カテゴリーからさがす」の横、未登録はマイページ登録の下 */
   $("#kyuSlotHead").innerHTML=S.profile?KYU_BTN:"";
   const others=S.members.filter(m=>m.id!==S.uid);
@@ -1782,11 +1825,11 @@ function hsRender(){
   box.innerHTML=r.length?r.map(x=>{const v=!x.to.startsWith("#");return `<a class="hr" ${v?`href="#" data-view="${esc(x.to)}" data-vt="${esc(x.t)}"`:`href="${esc(x.to)}"`}><span class="hr-c">${esc(x.c)}</span><b>${esc(x.t)}</b><i>›</i></a>`}).join("")
     :`<p class="hr-none">「${esc(q)}」に合うものが見つかりませんでした。ことばを短くするか、下のカテゴリーからさがしてね。</p>`;
 }
-function renderSearchTags(){$("#hsTags").innerHTML=HS_TAGS.map(t=>`<button type="button" data-hq="${esc(t)}">${esc(t)}</button>`).join("")}
+function renderSearchTags(){const top=hsTop();const list=top.concat(HS_TAGS.filter(t=>!top.includes(t))).slice(0,8);$("#hsTags").innerHTML=list.map(t=>`<button type="button" data-hq="${esc(t)}"${top.includes(t)?' class="mine"':""}>${top.includes(t)?ico('<circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/>'):""}${esc(t)}</button>`).join("")}
 document.addEventListener("input",e=>{if(e.target.id==="hq")hsRender()});
 document.addEventListener("click",e=>{
   const tg=e.target.closest("[data-hq]");if(tg){$("#hq").value=tg.dataset.hq;hsRender();return}
-  const hr=e.target.closest(".hr");if(hr&&!hr.dataset.view){setTimeout(()=>{$("#hq").value="";hsRender()},300)}
+  const hr=e.target.closest(".hr");if(hr){hsCount($("#hq").value);setTimeout(()=>{$("#hq").value="";hsRender();renderSearchTags()},300)}
 });
 /* ホームの中の data-view（交流施設・あずかりマップなど）もその場でふわっと */
 document.addEventListener("click",e=>{const b=e.target.closest("#v-home [data-view]");if(b){e.preventDefault();openViewer(b.dataset.view,b.dataset.vt)}});
@@ -1803,11 +1846,78 @@ function renderEvents(){
   ev.sort((a,b)=>String(a.date||"9").localeCompare(String(b.date||"9")));
   if(!ev.length)return;
   $("#feedEvents").hidden=false;feedTabs("#evTabs",EV_K,ev,evKind,"data-ek");
-  const l=ev.filter(x=>evKind==="all"||x.kind===evKind);
-  $("#evRow").innerHTML=l.map(x=>feedCard(Object.assign({},x,{src:[x.area,x.src].filter(Boolean).join("・")}),EV_K)).join("");
+  const l=ev.filter(x=>evKind==="all"||evKind==="fav"||x.kind===evKind);
+  const fv=favs();const l2=evKind==="fav"?ev.filter(x=>fv.has(x.id)):l;
+  $("#evRow").innerHTML=l2.length?l2.map(evCard).join(""):`<p class="ev-none">ハートを押したイベントがここに集まります。</p>`;
+  if(fv.size){const tb=$("#evTabs");tb.insertAdjacentHTML("beforeend",`<button class="chip ev-favtab" type="button" data-ek="fav" aria-pressed="${evKind==="fav"}">${ico('<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>')}お気に入り ${[...fv].filter(id=>ev.some(x=>x.id===id)).length}</button>`)}
+  const dl=soonDeadlines();$("#bellDot").hidden=!(dl.length||((FEED.news||[]).some(n=>n.important)));
   const t=new Date(FEED.updatedAt);$("#evStamp").textContent=isNaN(t)?"毎日 自動更新":`毎日 朝と夕方に自動更新（最終 ${t.getMonth()+1}/${t.getDate()} ${String(t.getHours()).padStart(2,"0")}:${String(t.getMinutes()).padStart(2,"0")}）`;
 }
 document.addEventListener("click",e=>{const a=e.target.closest("[data-ek]");if(a){evKind=a.dataset.ek;renderEvents();$("#evRow").scrollLeft=0}});
+
+/* ===== ① 下のカテゴリーの列を折りたたむ（ホームを短く）。見出しをタップでひらく／とじる。行き先（#go-…）へ飛ぶときは自動でひらく ===== */
+const FOLD_OPEN=new Set();
+const FOLD_IC={"row-hokatsu":"hokatsu","row-health":"health","row-money":"money","row-lesson":"lesson","row-park":"park","row-coupon":"coupon"};
+function foldRows(){
+  document.querySelectorAll("#rows > section.block").forEach(sec=>{
+    if(sec.classList.contains("fold"))return;
+    const h=sec.querySelector(":scope > .head");if(!h)return;
+    const body=document.createElement("div");body.className="fbody";
+    [...sec.children].filter(c=>c!==h).forEach(c=>body.appendChild(c));sec.appendChild(body);
+    const n=body.querySelectorAll(".row > a, .row > div.tc, .row > .tc").length;
+    const ic=FOLD_IC[sec.id];
+    const bar=document.createElement("button");bar.type="button";bar.className="fbar";bar.setAttribute("aria-expanded","false");
+    bar.innerHTML=`${ic&&CH[ic]?`<span class="fb-ic">${svg(CH[ic])}</span>`:""}<span class="fb-t">${h.querySelector("h2").innerHTML}<small>${n?n+"件 ・ ":""}タップでひらく</small></span><span class="fb-ar">${ico('<path d="M6 9l6 6 6-6"/>')}</span>`;
+    sec.insertBefore(bar,body);sec.classList.add("fold");h.classList.add("fhead");
+    if(FOLD_OPEN.has(sec.id))openFold(sec.id,true);
+  });
+}
+function openFold(id,on=true){
+  const sec=document.getElementById(id);if(!sec||!sec.classList.contains("fold"))return;
+  sec.classList.toggle("open",on);const b=sec.querySelector(".fbar");b&&b.setAttribute("aria-expanded",on);
+  const sm=b&&b.querySelector("small");if(sm)sm.textContent=sm.textContent.replace(/タップで(ひらく|とじる)/,on?"タップでとじる":"タップでひらく");
+  on?FOLD_OPEN.add(id):FOLD_OPEN.delete(id);
+}
+document.addEventListener("click",e=>{const b=e.target.closest(".fbar");if(!b)return;const sec=b.closest("section");openFold(sec.id,!sec.classList.contains("open"))});
+
+/* ===== ⑦ 文字の大きさ（この端末に覚える） ===== */
+function setFsz(n){n=+n||0;document.documentElement.dataset.fsz=n;try{localStorage.setItem("wolly.fsz",n)}catch(e){};document.querySelectorAll("[data-fsz]").forEach(b=>b.setAttribute("aria-pressed",+b.dataset.fsz===n))}
+try{setFsz(localStorage.getItem("wolly.fsz")||0)}catch(e){setFsz(0)}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-fsz]");if(b){e.preventDefault();setFsz(b.dataset.fsz)}});
+/* ===== ② 画面に見えていない動きは止める（電池と重さ対策） ===== */
+(function(){
+  if(!("IntersectionObserver" in window))return;
+  const io=new IntersectionObserver(es=>es.forEach(en=>en.target.classList.toggle("offscreen",!en.isIntersecting)),{rootMargin:"120px 0px"});
+  const watch=()=>document.querySelectorAll("#v-home .block,#v-home .hero2,#v-home .myarea").forEach(el=>{if(!el.dataset.io){el.dataset.io=1;io.observe(el)}});
+  window.__wollyWatch=watch;setTimeout(watch,500);
+})();
+
+/* ===== ④ よくさがすことば：この端末でさがして開いたことばを数えて、ボタンの先頭に ===== */
+const HS_KEY="wolly.searchcount";
+function hsCount(q){q=String(q||"").trim();if(!q||q.length>16)return;try{const c=JSON.parse(localStorage.getItem(HS_KEY)||"{}");c[q]=(c[q]||0)+1;localStorage.setItem(HS_KEY,JSON.stringify(c))}catch(e){}}
+function hsTop(){try{const c=JSON.parse(localStorage.getItem(HS_KEY)||"{}");return Object.entries(c).sort((a,b)=>b[1]-a[1]).map(([k])=>k).slice(0,4)}catch(e){return []}}
+
+/* ===== ⑤ イベントのお気に入り・カレンダー ===== */
+const FAV_KEY="wolly.favevents";
+const favs=()=>{try{return new Set(JSON.parse(localStorage.getItem(FAV_KEY)||"[]"))}catch(e){return new Set()}};
+function favToggle(id){const f=favs();f.has(id)?f.delete(id):f.add(id);try{localStorage.setItem(FAV_KEY,JSON.stringify([...f]))}catch(e){};return f.has(id)}
+function gcalUrl(x){
+  const m=String(x.date||"").match(/^(\d{4})-(\d{2})-(\d{2})/);if(!m)return "";
+  const d=m[1]+m[2]+m[3],n=new Date(+m[1],+m[2]-1,+m[3]+1),d2=n.getFullYear()+String(n.getMonth()+1).padStart(2,"0")+String(n.getDate()).padStart(2,"0");
+  return "https://calendar.google.com/calendar/render?action=TEMPLATE&text="+encodeURIComponent((x.kind==="deadline"?"【締切】":"")+x.title)+"&dates="+d+"/"+d2+"&details="+encodeURIComponent((x.desc||"")+"\n"+(x.url||"")+"\n（wolly街ナビより）")+(x.area?"&location="+encodeURIComponent(x.area):"");
+}
+function evCard(x){
+  const on=favs().has(x.id),g=gcalUrl(x);
+  return `<div class="evw">${feedCard(Object.assign({},x,{src:[x.area,x.src].filter(Boolean).join("・")}),EV_K)}<div class="ev-act"><button type="button" class="ev-fav${on?" on":""}" data-fav="${esc(x.id)}" aria-pressed="${on}">${ico('<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>')}${on?"お気に入り":"お気に入りに"}</button>${g?`<a class="ev-cal" href="${esc(g)}" target="_blank" rel="noopener">${ico('<rect x="4" y="5" width="16" height="15" rx="3"/><path d="M4 10h16M9 3v4M15 3v4"/>')}カレンダーへ</a>`:""}</div></div>`;
+}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-fav]");if(!b)return;e.preventDefault();favToggle(b.dataset.fav);renderEvents()});
+
+/* ===== ⑥ 申請期限が近い制度（10日以内）をベルで知らせる ===== */
+function soonDeadlines(){
+  const now=new Date();now.setHours(0,0,0,0);
+  return (FEED&&FEED.events||[]).filter(x=>x.kind==="deadline").map(x=>{const m=String(x.date||"").match(/^(\d{4})-(\d{2})-(\d{2})/);return m?Object.assign({},x,{left:Math.round((new Date(+m[1],+m[2]-1,+m[3])-now)/864e5)}):null})
+    .filter(x=>x&&x.left>=0&&x.left<=10).sort((a,b)=>a.left-b.left);
+}
 function renderCats(){
   const target={money:"row-money",hokatsu:"row-hokatsu",health:"row-health",lesson:"row-lesson",park:"row-park",coupon:"row-coupon"};
   $("#cats").innerHTML=CATS.map(c=>`<a class="cat" href="#go-${c.id}" style="--cbg:${c.bg}"><span class="ci">${svg(CH[c.id])}</span><b>${c.n}</b><small>${c.s}</small></a>`).join("");
@@ -2066,7 +2176,8 @@ let sheetKind=null;
 function fillNewsSheet(animate=true){
   if(FEED&&FEED.news&&FEED.news.length){
     const news=FEED.news.slice().sort((a,b)=>(b.important?1:0)-(a.important?1:0)||byDate(a,b));
-    $("#sheetBody").innerHTML=`<div class="eyebrow">SAITAMA NEWS</div><h3 id="sheetTitle">さいたま市の最新ニュース</h3><p class="sub">子育て・子どもイベント・ママ向け・事件や安全の情報を、毎日あつめています。</p>
+    const dl=soonDeadlines();
+    $("#sheetBody").innerHTML=(dl.length?`<div class="dl-alert"><b>${ico('<path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20a2 2 0 0 0 4 0"/>')}申請の締切が近いもの</b>${dl.map(x=>`<a href="${esc(x.url)}" target="_blank" rel="noopener"><span class="dl-left">${x.left===0?"今日まで":"あと"+x.left+"日"}</span><span>${esc(x.title)}</span></a>`).join("")}</div>`:"")+`<div class="eyebrow">SAITAMA NEWS</div><h3 id="sheetTitle">さいたま市の最新ニュース</h3><p class="sub">子育て・子どもイベント・ママ向け・事件や安全の情報を、毎日あつめています。</p>
       <div class="feedgrid">${news.map(x=>feedCard(x,NEWS_K)).join("")}</div><p class="foot">写真は各ページの紹介用の画像です。「イメージ」と書かれた絵は、写真のない記事のためにWollyが作ったイラストで、実際の様子とはちがいます。くわしい内容は各リンク先でご確認ください。</p>`;
     return;
   }
@@ -2577,6 +2688,7 @@ function applyRoute(){
   if(h.startsWith("go-")){const key=h.slice(3);const id={money:"row-money",hokatsu:"row-hokatsu",health:"row-health",lesson:"row-lesson",park:"row-park",coupon:"row-coupon",shop:"row-coupon",kyukan:"row-health",event:"feedEvents",shopnews:"feedShops"}[key];
     history.replaceState(null,"",location.pathname+location.search);h="";closeSheet();route="home";
     document.querySelectorAll(".view").forEach(v=>v.classList.toggle("on",v.id==="v-home"));
+    if(id&&id.startsWith("row-"))openFold(id,true);
     requestAnimationFrame(()=>{document.getElementById(id)?.scrollIntoView({behavior:"smooth",block:"start"});
       /* 着いた先のカードを横スライドの中で見せて、ふわっと光らせる */
       const sel=key==="kyukan"?[`#row-health a[href="#x-${HEALTH.findIndex(h=>h.kyu)}"]`]:key==="health"?['#row-health a[href="#dk-kid"]','#row-health a[href="#dk-mom"]']:[];
@@ -2622,7 +2734,7 @@ if(/\bLine\//i.test(navigator.userAgent)&&!window.claude){
 }
 $("#back").addEventListener("click",goBack);
 
-function renderAll(){renderMe();renderNews();renderCats();renderHome2();renderRows();renderFeed();renderEvents()}
+function renderAll(){renderMe();renderNews();renderCats();renderHome2();renderRows();foldRows();renderFeed();renderEvents();window.__wollyWatch&&window.__wollyWatch()}
 
 
 /* ---------- local profile first, then shared data ---------- */
@@ -2682,7 +2794,10 @@ function play(){
 window.addEventListener("load",()=>{loaded=true});
 $("#skip").addEventListener("click",()=>{loaded=true;finish()});
 $("#replay").addEventListener("click",()=>{loaded=true;play()});
-document.body.classList.add("is-loading");raf=requestAnimationFrame(tick);
+const SPL_KEY="wolly.splashday",today=new Date().toDateString();
+let seen=false;try{seen=localStorage.getItem(SPL_KEY)===today;localStorage.setItem(SPL_KEY,today)}catch(e){}
+if(seen&&!location.hash.includes("splash")){done=true;splash.hidden=true;document.body.classList.add("is-ready")}
+else{document.body.classList.add("is-loading");raf=requestAnimationFrame(tick)}
 })();
 </script>
 
