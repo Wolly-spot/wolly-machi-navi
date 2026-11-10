@@ -549,6 +549,51 @@ svg .a-strike{animation:a-strike 1.3s cubic-bezier(.7,0,.3,1) infinite;transform
 .hk-kw svg{width:20px;height:20px;overflow:visible;vertical-align:-4px}
 
 
+
+.nw{white-space:nowrap}
+.by-steps li{line-height:1.5;word-break:keep-all;white-space:nowrap;font-size:12.5px}
+.bym-btn{position:relative;overflow:hidden;display:flex;align-items:center;gap:10px;width:100%;margin:0 0 8px;padding:11px 14px;border:3px solid #fff;border-radius:22px;cursor:pointer;text-align:left;font-family:inherit;color:#fff;
+  background:linear-gradient(110deg,#35B3EE,#7C8CFF 50%,#A68BFF);box-shadow:0 5px 0 #3A7BD0,0 10px 22px rgba(53,179,238,.35)}
+.bym-btn::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);animation:fsGoShine 3.2s ease-in-out infinite}
+.bym-bi{flex:0 0 auto;width:44px;height:44px;border-radius:14px;background:rgba(255,255,255,.3);display:grid;place-items:center}.bym-bi svg{width:36px;height:36px}
+.by-hint{margin:2px 0 8px;font-size:12px;color:var(--muted)}
+.by-tap{grid-template-columns:1fr auto;align-items:center;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.by-tap:active{transform:scale(.98)}
+.by-more{font-size:12.5px;font-weight:800;color:#fff;background:#A68BFF;border-radius:999px;padding:5px 11px;white-space:nowrap}
+.byi-tags{display:flex;flex-wrap:wrap;gap:4px;margin:0 0 10px}
+.byi dt{display:flex;align-items:center;gap:3px;white-space:nowrap}.byi dt svg{width:20px;height:20px;overflow:visible}
+.byi small{color:var(--muted);font-size:12px}
+.byi-btns{display:grid;gap:8px;margin:0 0 12px}
+.bym-go{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;border:3px solid #fff;border-radius:999px;font:inherit;font-size:15px;font-weight:900;color:#fff;cursor:pointer;
+  background:linear-gradient(100deg,#FF4F9A,#B45CFF 45%,#3D9BFF);box-shadow:0 5px 0 #7B35C9,0 10px 22px rgba(180,92,255,.4)}
+.bym-go svg{width:26px;height:26px}
+.byi-g{text-align:center;font-size:13.5px;font-weight:800;color:var(--accent)}
+.bym-ov{position:fixed;inset:0;z-index:310;display:grid;grid-template-rows:auto 1fr auto auto;background:#FBF6EF;opacity:0;transform:scale(.97);transition:opacity .3s,transform .4s cubic-bezier(.2,1.2,.4,1)}
+.bym-ov.on{opacity:1;transform:none}
+.bym-head{display:flex;gap:10px;align-items:flex-start;padding:calc(10px + env(safe-area-inset-top,0px)) 14px 8px;background:linear-gradient(180deg,#FFF0F6,#FBF6EF)}
+.bym-head>div{flex:1;min-width:0}.bym-head h3{margin:0;font-size:17px;font-weight:900;color:#2C2866}
+.bym-head .rm-x{position:static;flex:0 0 auto}
+.bym-lead{margin:3px 0 0;font-size:12px;line-height:1.6;color:#6B6690}
+#bymMap{position:relative;isolation:isolate;min-height:0;border-top:2px solid #F3E8FF;border-bottom:2px solid #F3E8FF}
+.bym-load{position:absolute;inset:0;display:grid;place-items:center;font-size:13px;font-weight:700;color:#8A84A0}
+.bym-pin{width:36px;height:46px;border:0;padding:0;background:none;cursor:pointer}
+.bym-pin>span{animation:bymDrop .6s cubic-bezier(.3,1.6,.5,1) var(--dl) both}
+.bym-pin span{display:grid;place-items:center;width:34px;height:34px;margin:0 auto;border-radius:50% 50% 50% 4px;transform:rotate(-45deg);background:#FF5F9E;border:3px solid #fff;box-shadow:0 4px 10px rgba(120,40,90,.35)}
+.bym-pin i{font-style:normal;transform:rotate(45deg)}
+.bym-pin span{color:#fff;font:900 14px/1 system-ui,sans-serif}
+.bym-pin.on span{background:#7B5CFF;transform:rotate(-45deg) scale(1.25)}
+@keyframes bymDrop{from{opacity:0;translate:0 -30px}to{opacity:1;translate:0 0}}
+.bym-card{margin:8px 12px 0;padding:10px 12px;border-radius:18px;background:#fff;box-shadow:0 8px 20px -10px rgba(60,30,100,.35);display:grid;gap:4px}
+.bym-card b{font-size:15px;color:#2C2866}.bym-card small{font-size:12px;color:#6B6690}
+.bym-card .row2{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:4px}
+.bym-more,.bym-all{border:0;border-radius:999px;padding:7px 12px;font:inherit;font-size:12.5px;font-weight:800;cursor:pointer}
+.bym-more{background:#A68BFF;color:#fff}.bym-all{background:#EEF4FF;color:#2F7FC4}
+.bym-chips{display:flex;gap:6px;overflow-x:auto;padding:10px 12px calc(12px + env(safe-area-inset-bottom,0px));scrollbar-width:none}
+.bym-chips button{flex:0 0 auto;display:flex;align-items:center;gap:5px;padding:7px 12px 7px 6px;border:2px solid #F3E8FF;border-radius:999px;background:#fff;font:inherit;font-size:12.5px;font-weight:800;color:#2C2866;cursor:pointer}
+.bym-chips button b{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:#FF5F9E;color:#fff;font-size:11.5px}
+.bym-chips button small{font-size:10.5px;color:#8A84A0;font-weight:700}
+.bym-chips button.on{border-color:#7B5CFF;background:#F3EEFF}.bym-chips button.on b{background:#7B5CFF}
+@media (prefers-reduced-motion:reduce){.bym-btn::after,.bym-pin{animation:none}}
 /* 病児保育室のイメージ図 */
 .rm-btn{position:relative;overflow:hidden;display:flex;align-items:center;gap:10px;width:100%;margin:0 0 14px;padding:12px 14px;border:3px solid #fff;border-radius:22px;cursor:pointer;text-align:left;font-family:inherit;color:#fff;
   background:linear-gradient(110deg,#FF5FA2,#FF8FB8 35%,#A68BFF 70%,#FF5FA2);background-size:240% 100%;box-shadow:0 5px 0 #D2448A,0 10px 24px rgba(255,95,162,.4);animation:rmBg 5s linear infinite,rmBob 2.2s ease-in-out infinite}
@@ -2052,18 +2097,151 @@ function sheetByouji(){
    `<p class="lead" style="margin:0 0 12px;font-size:14.5px;line-height:1.8">お子さんが病気や病気の治りかけで保育園などに行けない日に、看護師さん・保育士さんがいる「病児保育室」で預かってもらえます。</p>
     <button type="button" class="rm-btn" data-room><span class="rm-bi">${svg('<path d="M6 26l14 7 14-7-14-7z" fill="#fff" opacity=".6"/><path d="M6 26V14l14-7v12zM34 26V14L20 7v12z" fill="#fff" opacity=".9"/><circle cx="31" cy="7" r="3" fill="#FFE45C"/>',40)}</span><span class="rm-bt"><b>施設イメージ図はこんなかんじ</b><small>タップで立体のイメージ図が出るよ</small></span><span class="rm-ar">›</span></button>
     <dl class="dl"><div><dt>対象</dt><dd>さいたま市に住む、保育園・認定こども園などに通うお子さん（保育の認定がある幼稚園などのお子さんも）</dd></div>
-      <div><dt>時間</dt><dd>月〜金 8:00〜18:00（祝日・年末年始は休み）。1回につき最長7日</dd></div>
-      <div><dt>費用</dt><dd>1人1日 2,000円（所得によって減免あり）</dd></div>
-      <div><dt>持ち物</dt><dd>かかりつけ医が書く「病児保育利用連絡書」（発行の手数料は市が一部補助）</dd></div></dl>
-    <ol class="steps"><li>元気なうちに利用登録</li><li>当日、施設に電話で予約</li><li>受診して連絡書をもらい、預ける</li></ol>
+      <div><dt>時間</dt><dd><span class="nw">月〜金 8:00〜18:00</span><br><span class="nw">（祝日・年末年始はお休み）</span></dd></div>
+      <div><dt>費用</dt><dd><span class="nw">1人1日 2,000円（減免あり）</span></dd></div>
+      <div><dt>持ち物</dt><dd><span class="nw">「病児保育利用連絡書」</span><br><span class="nw">（かかりつけ医が書きます）</span></dd></div></dl>
+    <ol class="steps by-steps"><li>元気なうちに<br>利用登録</li><li>当日、施設に<br>電話で予約</li><li>連絡書を<br>もらって預ける</li></ol>
     <p class="secttl">病児保育室（12か所${mine?`・${esc(mine)}を先に`:""}）</p>
-    <div class="byl">${list.map(r=>`<div class="by${r[1]===mine?" mine":""}"><div><b>${esc(r[0])}</b><span class="bw">${esc(r[1])}</span>${r[4]?`<span class="bx">${esc(r[4])}</span>`:""}<small>${esc(r[2])}</small></div><div class="row2">${callA(r[3],"call")}<a href="${gm(r)}" target="_blank" rel="noopener">地図 ›</a></div></div>`).join("")}</div>
-    <p class="note">定員は1日4名（ハートラちゃんのいえは5名）。空きがあれば当日の申込みもできます。感染症のときは使えないことがあるので、施設にたしかめてね。</p>
+    <button type="button" class="bym-btn" data-bymap><span class="bym-bi">${svg(GIC.map,40)}</span><span class="rm-bt"><b>12か所を地図で見る</b><small>Wollyの立体マップで、場所をまとめて見られるよ</small></span><span class="rm-ar">›</span></button>
+    <p class="by-hint">施設をタップすると、くわしい情報が出ます</p>
+    <div class="byl">${list.map(r=>`<div class="by by-tap${r[1]===mine?" mine":""}" data-by="${BYOUJI.indexOf(r)}" role="button" tabindex="0"><div><b>${esc(r[0])}</b><span class="bw">${esc(r[1])}</span>${r[4]?`<span class="bx">${esc(r[4])}</span>`:""}<small>${esc(r[2])}</small></div><span class="by-more">くわしく ›</span></div>`).join("")}</div>
+    <p class="note">1回につき最長7日（ようすで延長も）。定員は1日4名（ハートラちゃんのいえは5名）。空きがあれば当日の申込みもできます。連絡書の発行の手数料は市が一部補助。感染症のときは使えないことがあるので、施設にたしかめてね。</p>
     ${extA(HC_URL.byouji,"市の病児保育のページ（申込書など）","go")}
     <p class="foot">問い合わせ：保育施設支援課 ${callA("048-829-1866","call mini")}</p>`;
 }
 const HDENT=[["大宮歯科休日急患診療所","北区東大成町2-107 大宮医師会館1階","048-652-7225","駐車場は台数が少なめ。満車のときは近くのコインパーキングへ。"],
   ["与野歯科休日急患診療所","中央区本町西2-9-30","048-706-8020","駐車場は台数が少なめ。路上駐車はしないでね。"]];
+
+/* 病児保育室の位置（国土地理院の住所検索で調べた。data/byouji_ll.json） */
+const BYOUJI_LL={"西遊馬保育園": [35.90915, 139.56836], "にじいろ": [35.93688, 139.61644], "ベーネ": [35.90464, 139.63364], "あすなろ": [35.95112, 139.64699], "けいあいはうす": [35.90868, 139.65868], "おひさま": [35.87814, 139.6272], "ハートラちゃんのいえ": [35.89182, 139.63223], "こりすの家": [35.87168, 139.61379], "キッズカサイ": [35.88266, 139.64375], "こばと": [35.84864, 139.6667], "みどり": [35.86726, 139.6817], "ピュア": [35.95002, 139.71639]};
+/* 施設の小窓（ふわっと） */
+function byInfo(i){
+  const r=BYOUJI[i];if(!r)return;
+  const host=(r[2].match(/（(.+)）/)||[])[1]||"",addr=r[2].replace(/（.*）/,"");
+  const g="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent("さいたま市"+r[1]+addr);
+  openPop(`<p class="rm-eb">SICK CHILD CARE</p><h3>病児保育室 ${esc(r[0])}</h3>
+    <div class="byi-tags"><span class="bw">${esc(r[1])}</span>${r[4]?`<span class="bx">${esc(r[4])}</span>`:""}<span class="bw">月〜金 8:00〜18:00</span></div>
+    <dl class="dl byi"><div><dt>${svg(GIC.map,40)}場所</dt><dd>さいたま市${esc(r[1])}${esc(addr)}${host?`<br><small>${esc(host)}</small>`:""}</dd></div>
+      <div><dt>${svg(GIC.phone,40)}予約</dt><dd>${callA(r[3],"call")}${r[4]==="WEB予約"?`<br><small>この施設はWEB予約です</small>`:""}</dd></div>
+      <div><dt>${svg(GIC.check,40)}定員</dt><dd>1日${r[4]==="定員5名"?5:4}名（空きがあれば当日も）</dd></div></dl>
+    <div class="byi-btns"><button type="button" class="bym-go" data-bymap="${i}">${svg(GIC.map,40)}Wollyの地図でこの場所を見る</button>
+    <a class="byi-g" href="${g}" target="_blank" rel="noopener">Googleマップで道順 ›</a></div>
+    <p class="rm-note">利用には、前もっての登録と、かかりつけ医の「連絡書」が必要です。くわしくは施設にたしかめてね。</p>`,"病児保育室 "+r[0]);
+}
+/* ふわっと出る小窓（共通） */
+function openPop(html,label){
+  closeRoom(true);
+  const el=document.createElement("div");el.className="rm-ov";el.id="rmOv";el.setAttribute("role","dialog");el.setAttribute("aria-modal","true");el.setAttribute("aria-label",label||"");
+  el.innerHTML=`<div class="rm-card"><button type="button" class="rm-x" data-rmx aria-label="閉じる">×</button>${html}<button type="button" class="rm-close" data-rmx>とじて、もどる</button></div>`;
+  document.body.appendChild(el);document.body.classList.add("rm-open");
+  requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.add("on")));
+}
+/* 病児保育室マップ（Wollyの立体マップ：MapLibre＋OpenFreeMap。家の近くで探すと同じ色） */
+let bym=null,bymMk=[];
+function byLoadMap(cb){
+  if(window.maplibregl)return cb();
+  if(!document.getElementById("mlcss")){const l=document.createElement("link");l.id="mlcss";l.rel="stylesheet";l.href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css";document.head.appendChild(l)}
+  const s=document.createElement("script");s.src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js";s.onload=cb;s.onerror=()=>{const m=$("#bymMsg");m&&(m.textContent="地図を読みこめませんでした。電波のよいところで開きなおしてね。")};document.head.appendChild(s);
+}
+function byPaint(map){
+  /* 立体の地図の色：パステルのまま、場所の種類ごとにはっきり色分け（位置がつかみやすいように） */
+  const set=(id,k,v)=>{if(map.getLayer(id))try{map.setPaintProperty(id,k,v)}catch(e){}};
+  const lay=(id,k,v)=>{if(map.getLayer(id))try{map.setLayoutProperty(id,k,v)}catch(e){}};
+  const hide=id=>lay(id,"visibility","none");
+  const zr=(id,z)=>{if(map.getLayer(id))try{map.setLayerZoomRange(id,z,24)}catch(e){}};
+  set("background","background-color","#FBF6EF");set("natural_earth","raster-opacity",0);
+  map.getStyle().layers.forEach(l=>{const id=l.id;
+    if(l.type==="fill"){
+      if(/residential/.test(id))set(id,"fill-color","#F5ECF7");
+      else if(/commercial|retail/.test(id))set(id,"fill-color","#FFF2C4");
+      else if(/industrial|railway/.test(id))set(id,"fill-color","#ECE9F4");
+      else if(/school|university|kindergarten/.test(id))set(id,"fill-color","#FFF0A8");
+      else if(/hospital/.test(id))set(id,"fill-color","#FFD6E6");
+      else if(/wood|forest/.test(id)){set(id,"fill-color","#BFE6CF");set(id,"fill-opacity",.95)}
+      else if(/park|grass|pitch|track|cemetery|meadow|farmland|scrub/.test(id)){set(id,"fill-color","#D6F1E1");set(id,"fill-opacity",.95)}
+      else if(/water/.test(id))set(id,"fill-color","#7CC3F2");
+    }
+    if(l.type==="line"){
+      if(/waterway/.test(id)){set(id,"line-color","#62B2EC")}
+      else if(/park_outline/.test(id))set(id,"line-color","#A3D9BC");
+      else if(/hatching/.test(id))set(id,"line-color","#FFFFFF");
+      else if(/rail/.test(id))set(id,"line-color","#4E4BC9");
+      else if(/motorway/.test(id))set(id,"line-color",/casing/.test(id)?"#D9468E":"#FF8DBE");
+      else if(/trunk|primary/.test(id))set(id,"line-color",/casing/.test(id)?"#E2AE2E":"#FFD565");
+      else if(/_link/.test(id))set(id,"line-color",/casing/.test(id)?"#E2AE2E":"#FFE59A");
+      else if(/path|pedestrian|footway|cycle/.test(id))set(id,"line-color","#D9CBEF");
+      else if(/casing/.test(id))set(id,"line-color","#D6CCE6");
+      else if(/road|highway|bridge|tunnel/.test(id))set(id,"line-color","#FFFFFF");
+      if(/boundary/.test(id))set(id,"line-color","#B9A9E6");
+    }
+    if(l.type==="symbol"){
+      if(/shield|one_way/.test(id)){hide(id);return}
+      if(l.layout&&l.layout["text-field"])lay(id,"text-field",["coalesce",["get","name:ja"],["get","name"]]);
+      set(id,"text-halo-color","#FFFFFF");set(id,"text-halo-width",1.6);
+      if(/water/.test(id))set(id,"text-color","#2378B8");
+      else if(/label_(city|town|state|country)/.test(id))set(id,"text-color","#2C2866");
+      else if(/label_village|label_other|place/.test(id))set(id,"text-color","#4B3F8F");
+      else if(/highway-name|road/.test(id))set(id,"text-color","#7A5A2E");
+      else set(id,"text-color","#4A4778");
+    }
+  });
+  /* 町名は少し大きく、駅は早めに大きく */
+  ["label_village","label_other"].forEach(id=>{lay(id,"text-size",["interpolate",["linear"],["zoom"],11,11,16,14]);});
+  if(map.getLayer("poi_transit")){zr("poi_transit",11.5);set("poi_transit","text-color","#3B38B5");lay("poi_transit","text-size",["interpolate",["linear"],["zoom"],12,11.5,16,14])}
+  /* まわりの建物・お店・駅の名前：もとの地図より少し引いた高さから出す */
+  [["poi_r1",13.2],["poi_r7",14],["poi_r20",15]].forEach(([id,z])=>{if(map.getLayer(id)){zr(id,z);set(id,"text-color","#5B4FA0");lay(id,"text-size",11.5)}});
+  /* 建物：低い所はうすいラベンダー → 高いビルほどこく、とても高いビルはピンク。上から光が当たるように */
+  set("building","fill-color","#E4DBFA");set("building","fill-outline-color","#C9BBF0");
+  set("building-3d","fill-extrusion-color",["interpolate",["linear"],["coalesce",["get","render_height"],0],0,"#F1ECFF",8,"#E1D8FF",20,"#C9B9FF",40,"#A992F5",70,"#FF9EC8"]);
+  set("building-3d","fill-extrusion-opacity",.95);
+  try{map.setPaintProperty("building-3d","fill-extrusion-vertical-gradient",true)}catch(e){}
+  zr("building-3d",13.2);
+  try{map.setLight({anchor:"viewport",color:"#ffffff",intensity:.42,position:[1.3,200,35]})}catch(e){}
+  try{map.setSky&&map.setSky({"sky-color":"#BFE3FF","horizon-color":"#FFE3F0","fog-color":"#FFF4F8","sky-horizon-blend":.55,"horizon-fog-blend":.6,"fog-ground-blend":.25})}catch(e){}
+  try{
+    map.addSource("photo",{type:"raster",tiles:["https://cyberjapandata.gsi.go.jp/xyz/seamlessphoto/{z}/{x}/{y}.jpg"],tileSize:256,maxzoom:18,attribution:'<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener">国土地理院</a>'});
+    map.addLayer({id:"photo",type:"raster",source:"photo",layout:{visibility:"none"},paint:{"raster-fade-duration":400}},map.getLayer("building")?"building":undefined);
+  }catch(e){}
+}
+function openByMap(focus){
+  closeRoom(true);closeByMap(true);
+  const el=document.createElement("div");el.className="bym-ov";el.id="bymOv";el.setAttribute("role","dialog");el.setAttribute("aria-modal","true");el.setAttribute("aria-label","病児保育室マップ");
+  el.innerHTML=`<div class="bym-head"><div><p class="rm-eb">MAP</p><h3>病児保育室マップ（12か所）</h3><p class="bym-lead">ピンや下の名前をタップすると、その施設へズームします。地図は2本の指で動かす・回す・かたむけられます。</p></div><button type="button" class="rm-x" data-bymx aria-label="閉じる">×</button></div>
+    <div id="bymMap"><span class="bym-load" id="bymMsg">地図をよみこみ中…</span></div>
+    <div class="bym-card" id="bymCard" hidden></div>
+    <div class="bym-chips">${BYOUJI.map((r,i)=>`<button type="button" data-bymi="${i}"><b>${i+1}</b>${esc(r[0])}<small>${esc(r[1])}</small></button>`).join("")}</div>`;
+  document.body.appendChild(el);document.body.classList.add("rm-open");
+  requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.add("on")));
+  byLoadMap(()=>{
+    const b=new maplibregl.LngLatBounds();BYOUJI.forEach(r=>{const p=BYOUJI_LL[r[0]];p&&b.extend([p[1],p[0]])});
+    bym=new maplibregl.Map({container:"bymMap",style:"https://tiles.openfreemap.org/styles/liberty",bounds:b,fitBoundsOptions:{padding:{top:40,bottom:40,left:30,right:30}},pitch:0,cooperativeGestures:true,attributionControl:{compact:true},maxPitch:70});
+    bym.addControl(new maplibregl.NavigationControl({visualizePitch:true}),"top-right");
+    bym.on("load",()=>{byPaint(bym);const m=$("#bymMsg");m&&m.remove();
+      BYOUJI.forEach((r,i)=>{const p=BYOUJI_LL[r[0]];if(!p)return;const d=document.createElement("button");d.type="button";d.className="bym-pin";d.innerHTML=`<span><i>${i+1}</i></span>`;d.setAttribute("aria-label",r[0]);d.style.setProperty("--dl",(i*0.06)+"s");
+        d.addEventListener("click",ev=>{ev.stopPropagation();byFocus(i)});bymMk.push(new maplibregl.Marker({element:d,anchor:"bottom"}).setLngLat([p[1],p[0]]).addTo(bym))});
+      bym.easeTo({pitch:45,duration:1400});
+      if(focus!=null)setTimeout(()=>byFocus(focus),900);
+    });
+  });
+}
+function byFocus(i){
+  const r=BYOUJI[i],p=BYOUJI_LL[r[0]];if(!bym||!p)return;
+  bymMk.forEach((m,k)=>m.getElement().classList.toggle("on",k===i));
+  document.querySelectorAll(".bym-chips button").forEach(b=>b.classList.toggle("on",+b.dataset.bymi===i));
+  const c=document.querySelector(`.bym-chips [data-bymi="${i}"]`);c&&c.scrollIntoView({inline:"center",block:"nearest",behavior:"smooth"});
+  bym.flyTo({center:[p[1],p[0]],zoom:16.6,pitch:58,bearing:-20,speed:.9,curve:1.5,essential:true});
+  const card=$("#bymCard");card.hidden=false;
+  card.innerHTML=`<b>${i+1}. ${esc(r[0])}</b><small>${esc(r[1])}${esc(r[2])}</small><div class="row2">${callA(r[3],"call")}<button type="button" class="bym-more" data-by="${i}">くわしく ›</button><button type="button" class="bym-all" data-bymall>全体にもどる</button></div>`;
+}
+function closeByMap(now){const el=$("#bymOv");if(!el)return;document.body.classList.remove("rm-open");if(bym){try{bym.remove()}catch(e){}bym=null;bymMk=[]}if(now){el.remove();return}el.classList.remove("on");setTimeout(()=>el.remove(),350)}
+document.addEventListener("click",e=>{
+  const mb=e.target.closest("[data-bymap]");if(mb){e.preventDefault();openByMap(mb.dataset.bymap===""?null:+mb.dataset.bymap);return}
+  if(e.target.closest("[data-bymx]")){closeByMap();return}
+  const ch=e.target.closest("[data-bymi]");if(ch){byFocus(+ch.dataset.bymi);return}
+  if(e.target.closest("[data-bymall]")&&bym){const b=new maplibregl.LngLatBounds();BYOUJI.forEach(r=>{const p=BYOUJI_LL[r[0]];p&&b.extend([p[1],p[0]])});bym.fitBounds(b,{padding:40,pitch:45,bearing:0,duration:1400});$("#bymCard").hidden=true;bymMk.forEach(m=>m.getElement().classList.remove("on"));return}
+  const by=e.target.closest("[data-by]");if(by){e.preventDefault();if($("#bymOv"))closeByMap(true);byInfo(+by.dataset.by);return}
+});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&$("#bymOv"))closeByMap();if(e.key==="Enter"){const b=document.activeElement&&document.activeElement.closest&&document.activeElement.closest(".by-tap");b&&byInfo(+b.dataset.by)}});
 function sheetHolidayDent(){
   const gm=r=>"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(r[0]+" さいたま市"+r[1]);
   return dhead(`<svg viewBox="0 0 24 24" style="width:44px;height:44px;fill:none;stroke:#fff;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round">${P.tooth}</svg>`,"#7CC4FF","HOLIDAY DENTAL","休日の歯医者さん",`<span class="pill">日曜・祝日 9:00〜12:00</span>`)+
@@ -2125,6 +2303,7 @@ function kwDecorate(kind){
   if(!/^(m|x|s|l|p)-\d+$|^dk-|^(kenshin|byouji|hdent)$/.test(kind))return;
   const body=$("#sheetBody");
   body.querySelectorAll(".dl dt").forEach(dt=>{const k=DT_IC[dt.textContent.trim()];if(k&&KIC(k)&&!dt.querySelector("svg"))dt.insertAdjacentHTML("afterbegin",svg(KIC(k),40))});
+  if(kind==="byouji")return;
   const used=new Set(Object.values(DT_IC).filter(k=>[...body.querySelectorAll(".dl dt")].some(dt=>DT_IC[dt.textContent.trim()]===k)));let n=0;
   body.querySelectorAll(".dl dd,.note,.feat li,.ptopic li,.steps li,p.lead,.price span").forEach(el=>{
     const tw=document.createTreeWalker(el,NodeFilter.SHOW_TEXT),nodes=[];while(tw.nextNode())nodes.push(tw.currentNode);
