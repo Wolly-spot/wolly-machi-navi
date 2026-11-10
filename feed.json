@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-09T19:10:00+09:00",
+ "updatedAt": "2026-11-10T09:55:00+09:00",
  "shops": [
   {
    "id": "s-more-donut",
@@ -145,6 +145,17 @@
    "src": "ウォーカープラス",
    "url": "https://www.walkerplus.com/event/ar0311e611530/",
    "img": "https://ms-cache.walkerplus.com/walkertouch/wtd/event/30/l2/611530.jpg",
+   "ai": false
+  },
+  {
+   "id": "s-randoseru-keyholder",
+   "kind": "event",
+   "title": "ランドセルの端材でキーホルダー作り（〜1/31）",
+   "desc": "大宮のランドセルのショールームで無料の工作体験。予約制です。",
+   "date": "2027-01-31",
+   "src": "いこーよ",
+   "url": "https://report.iko-yo.net/articles/33865",
+   "img": "https://d28w2qw7dtr435.cloudfront.net/uploaded/cover_images/images/33837/normal.jpg?1790803287",
    "ai": false
   }
  ],
@@ -304,6 +315,18 @@
    "url": "https://iko-yo.net/events/612142",
    "img": "https://d2goguvysdoarq.cloudfront.net/system/event_photos/photos/1780842/normal.jpg?1793755283",
    "ai": false,
+   "important": false
+  },
+  {
+   "id": "n-sango-care",
+   "kind": "mama",
+   "title": "産後ケア 訪問・日帰り・宿泊が使えます",
+   "desc": "1歳未満の赤ちゃんとお母さんが対象。妊娠28週から申し込めます。",
+   "date": "2026-09-28",
+   "src": "さいたま市",
+   "url": "https://www.city.saitama.lg.jp/003/001/011/sangocaregigyo.html",
+   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-sango-care.jpg",
+   "ai": true,
    "important": false
   }
  ]
