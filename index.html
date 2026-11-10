@@ -605,12 +605,15 @@ svg .a-strike{animation:a-strike 1.3s cubic-bezier(.7,0,.3,1) infinite;transform
 .fold.open .fb-ar{transform:rotate(180deg)}
 .fold .fbody{display:none}.fold.open .fbody{display:block;animation:fbIn .35s ease}
 @keyframes fbIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
-#rows .block.fold{margin-top:12px}
+#rows section.block.fold{padding-block:5px;margin:0}
+#rows section.block.fold.open{padding-block:10px 14px}
+#rows{margin-top:10px}
 /* ② 見えていない所の動きを止める */
 .offscreen,.offscreen *{animation-play-state:paused!important}
 /* ③ 登録の案内 */
 .reg2{display:grid;gap:10px}.reg2 .rg-top{display:flex;align-items:center;gap:10px}.reg2 .rg-top p{margin:0;font-size:12.5px;color:var(--muted)}.reg2 .rg-top b{display:block;font-size:15px;color:var(--ink)}
 .rg-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.rg-list li span{display:block}.rg-list li span b{display:inline}
 .rg-list li{display:flex;align-items:center;gap:6px;padding:8px;border-radius:14px;background:color-mix(in srgb,var(--accent) 6%,#fff);font-size:12px;line-height:1.45}.rg-list svg{flex:0 0 auto;width:26px;height:26px}
 .rg-btn{justify-self:stretch;text-align:center}
 /* ④ よくさがすことば */
@@ -619,7 +622,7 @@ svg .a-strike{animation:a-strike 1.3s cubic-bezier(.7,0,.3,1) infinite;transform
 .evw{display:grid;gap:6px;flex:0 0 auto}
 .feedrow .evw{flex:0 0 min(44%,210px);scroll-snap-align:start}.evw .fc{flex:none}
 .ev-act{display:flex;gap:6px}
-.ev-fav,.ev-cal{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:4px;padding:7px 6px;border-radius:999px;border:1.5px solid #FFC2DA;background:#fff;font:inherit;font-size:11.5px;font-weight:800;color:#D2448A;text-decoration:none;cursor:pointer}
+.ev-fav,.ev-cal{flex:1;white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;gap:4px;padding:7px 6px;border-radius:999px;border:1.5px solid #FFC2DA;background:#fff;font:inherit;font-size:11.5px;font-weight:800;color:#D2448A;text-decoration:none;cursor:pointer}
 .ev-cal{border-color:#C9E0FA;color:#2F7FC4}.ev-fav .i,.ev-cal .i{width:15px;height:15px}
 .ev-fav.on{background:#FF6FA5;border-color:#FF6FA5;color:#fff}.ev-fav.on .i{fill:#fff}
 .ev-favtab{display:inline-flex;align-items:center;gap:4px}.ev-favtab .i{width:14px;height:14px;fill:#FF6FA5;stroke:#FF6FA5}
@@ -1560,7 +1563,7 @@ function renderMe(){
   $("#helloTitle").textContent=S.profile?`${greet}、${S.profile.name}さん`:greet;
   $("#helloSub").textContent=S.profile?`さいたま市${S.profile.ward}${townName()?" "+townName():""}の暮らしを、近くから。`:"さいたま市の暮らしを、近くから。";
   $("#regBanner").innerHTML=S.profile?"":`<div class="reg-banner reg2"><div class="rg-top">${avatar(-1)}<p><b>マイページに区を登録すると、もっと便利に</b>30秒でおわります（名前はニックネームでOK）</p></div>
-    <ul class="rg-list"><li>${svg(MINI.cross,40)}病院・園・支援センターが<b>家から近い順</b>に</li><li>${svg(GIC.map,40)}立体の地図に<b>ピン</b>が立つ</li><li>${svg(GIC.cal,40)}<b>あなたの区</b>の情報を先に表示</li><li>${svg(MINI.heart,40)}口コミの<b>スタンプ</b>が押せる</li></ul>
+    <ul class="rg-list"><li>${svg(MINI.cross,40)}<span>病院や施設が<b>家から近い順</b>に</span></li><li>${svg(GIC.map,40)}<span>立体の地図に<b>ピン</b>が立つ</span></li><li>${svg(GIC.cal,40)}<span><b>あなたの区</b>の情報を先に</span></li><li>${svg(MINI.heart,40)}<span>口コミの<b>スタンプ</b>が押せる</span></li></ul>
     <a class="btn rg-btn" href="#mypage">登録する（無料）</a></div>`;
   /* 小児科 急患電話マップのボタン：登録済みは「カテゴリーからさがす」の横、未登録はマイページ登録の下 */
   $("#kyuSlotHead").innerHTML=S.profile?KYU_BTN:"";
@@ -1908,7 +1911,7 @@ function gcalUrl(x){
 }
 function evCard(x){
   const on=favs().has(x.id),g=gcalUrl(x);
-  return `<div class="evw">${feedCard(Object.assign({},x,{src:[x.area,x.src].filter(Boolean).join("・")}),EV_K)}<div class="ev-act"><button type="button" class="ev-fav${on?" on":""}" data-fav="${esc(x.id)}" aria-pressed="${on}">${ico('<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>')}${on?"お気に入り":"お気に入りに"}</button>${g?`<a class="ev-cal" href="${esc(g)}" target="_blank" rel="noopener">${ico('<rect x="4" y="5" width="16" height="15" rx="3"/><path d="M4 10h16M9 3v4M15 3v4"/>')}カレンダーへ</a>`:""}</div></div>`;
+  return `<div class="evw">${feedCard(Object.assign({},x,{src:[x.area,x.src].filter(Boolean).join("・")}),EV_K)}<div class="ev-act"><button type="button" class="ev-fav${on?" on":""}" data-fav="${esc(x.id)}" aria-pressed="${on}">${ico('<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>')}${on?"保存ずみ":"保存"}</button>${g?`<a class="ev-cal" href="${esc(g)}" target="_blank" rel="noopener">${ico('<rect x="4" y="5" width="16" height="15" rx="3"/><path d="M4 10h16M9 3v4M15 3v4"/>')}予定に</a>`:""}</div></div>`;
 }
 document.addEventListener("click",e=>{const b=e.target.closest("[data-fav]");if(!b)return;e.preventDefault();favToggle(b.dataset.fav);renderEvents()});
 
