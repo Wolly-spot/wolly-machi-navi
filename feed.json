@@ -1,6 +1,28 @@
 {
- "updatedAt": "2026-11-10T09:55:00+09:00",
+ "updatedAt": "2026-11-10T22:05:00+09:00",
  "shops": [
+  {
+   "id": "s-tomochin-omiya",
+   "kind": "open",
+   "title": "大宮駅東口に「新橋ニューともちんラーメン」11月下旬",
+   "desc": "チャーシューたっぷりの中華そばのお店。すずらん通り沿いです。",
+   "date": "2026-11",
+   "src": "宮原大宮ドットコム",
+   "url": "https://miyahara-kitaku.com/new-tomochin-ramen-omiya-open/",
+   "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/11/IMG_5113.jpg",
+   "ai": false
+  },
+  {
+   "id": "s-bocchi-nisshin",
+   "kind": "open",
+   "title": "日進にカット専門店「Bocchi」オープン（11/1）",
+   "desc": "予約なしで入れて、カットは1,500円。すきま時間に。",
+   "date": "2026-11-01",
+   "src": "宮原大宮ドットコム",
+   "url": "https://miyahara-kitaku.com/bocchi-nisshin-open/",
+   "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/11/IMG_9933.jpg",
+   "ai": false
+  },
   {
    "id": "s-more-donut",
    "kind": "open",
@@ -42,21 +64,11 @@
    "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/10/a5f2ec4f-5b27-4b05-88cf-34dff45f833a.png"
   },
   {
-   "id": "s-ecute-autumn",
-   "kind": "info",
-   "title": "エキュート大宮 9ショップが順次リニューアルオープン",
-   "desc": "新しいお店4つを含むリニューアル。営業時間や限定メニューをまとめてチェック。",
-   "date": "2026-10-21",
-   "src": "宮原大宮ドットコム",
-   "url": "https://miyahara-kitaku.com/ecute-omiya-renewal-2026-autumn/",
-   "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/10/output_ecute-omiya-renewal-x.png"
-  },
-  {
    "id": "s-toriichizu",
    "kind": "open",
-   "title": "宮原駅近くに鶏料理「とりいちず」この秋オープン予定",
+   "title": "宮原駅東口に鶏料理「とりいちず」オープン（11/1）",
    "desc": "宮原駅から歩いて5分。気軽に入れる鶏料理の居酒屋。",
-   "date": "2026-11",
+   "date": "2026-11-01",
    "src": "宮原大宮ドットコム",
    "url": "https://miyahara-kitaku.com/toriichizu-miyahara-open/",
    "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/02/ea2e58d08c635b40242eb79156bb4ae4.png"
@@ -163,13 +175,13 @@
   {
    "id": "n-system-stop",
    "kind": "safety",
-   "title": "市のシステム・サービスの一部が緊急停止",
-   "desc": "11月6日から一部の市のサービスが止まっています。使えるようになる時期は市のページで確認を。",
-   "date": "2026-11-06",
+   "title": "市のシステム緊急停止 多くが再開（11/10）",
+   "desc": "安全を確かめたものから順に再開。盆栽美術館・人形博物館のHPはまだ停止中です。",
+   "date": "2026-11-10",
    "src": "さいたま市",
    "url": "https://www.city.saitama.lg.jp/001/011/001/p134706.html",
    "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-system-stop.jpg",
-   "important": true,
+   "important": false,
    "ai": true
   },
   {
