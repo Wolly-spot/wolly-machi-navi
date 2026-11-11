@@ -100,18 +100,43 @@ h2{font:400 18px/1.3 var(--fd);margin:18px 0 8px}h2 mark{background:linear-gradi
 .lh2{list-style:none}.lh2 h2{margin:16px 0 2px}
 .pin.star span{width:34px;height:34px;background:linear-gradient(150deg,#FFB020,#FF6FA5)}.pin.star{height:44px}
 .pin.sp span i{font-size:12px}
+#map.far .pin.star span,#map.far .pin.sp span{width:28px;height:28px;border-width:2.5px}#map.far .pin.star i,#map.far .pin.sp i{display:inline}#map.far .pin.star,#map.far .pin.sp{height:38px}
+.smode{margin:6px 0 12px}.smq{margin:0 0 6px;font:400 15px/1.3 var(--fd)}
+.smb{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.smb button{display:grid;justify-items:start;gap:2px;text-align:left;padding:12px;border-radius:18px;border:2.5px solid var(--line);background:#fff;transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
+.smb button:active{transform:scale(.97)}
+.smb button[aria-pressed="true"]{border-color:var(--ac);background:#f4efff;box-shadow:0 5px 0 color-mix(in srgb,var(--ac) 45%,#fff)}
+.smb b{font:400 15px/1.3 var(--fd)}.smb small{font-size:11.5px;line-height:1.5;color:var(--muted)}
+.smi{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:900;background:linear-gradient(150deg,#FFB020,#FF6FA5)}.smi.n{background:linear-gradient(150deg,#FF6FA5,#5A7BF0);font-size:13px}
+.wch{margin-top:10px}.wch button small{margin-left:3px;font-size:11px;opacity:.8}
+.wb{border:0;background:none;padding:0;cursor:pointer}
+.wb span{display:grid;justify-items:center;padding:6px 10px;border-radius:16px;background:rgba(255,255,255,.95);border:2.5px solid #8E6BF5;box-shadow:0 6px 14px -6px rgba(60,30,100,.5);line-height:1.2}
+.wb b{font:400 13px/1.2 var(--fd);color:#4a3f3a}.wb i{font-style:normal;font-size:11px;font-weight:900;color:#8E6BF5}
+.wb:hover span{transform:translateY(-2px)}
+
 .sub svg{width:26px;height:26px}
 .totop{position:fixed;z-index:40;right:14px;bottom:calc(18px + env(safe-area-inset-bottom,0px));width:58px;height:58px;border-radius:50%;border:3px solid #fff;color:#fff;
   background:linear-gradient(150deg,#FF5FA2,#8E6BF5);box-shadow:0 8px 20px -6px rgba(142,107,245,.7);display:grid;place-items:center;font-size:10px;font-weight:800;opacity:0;pointer-events:none;transition:opacity .3s}
 .totop.on{opacity:1;pointer-events:auto}.totop svg{width:22px;height:22px}
 .maplibregl-ctrl-attrib.maplibregl-compact{font-size:10px}
+
+.hdeco{position:absolute;inset:0;pointer-events:none;z-index:0}
+.hdeco span{position:absolute;display:block;opacity:.9;filter:drop-shadow(0 4px 6px rgba(90,60,140,.18));animation:hdf 5.5s ease-in-out infinite}
+.hdeco span svg{display:block;width:100%;height:100%}
+@keyframes hdf{0%,100%{translate:0 0;rotate:var(--r)}50%{translate:0 -6px;rotate:calc(var(--r) + 6deg)}}
+@media (max-width:520px){.hdeco span{opacity:.7;transform:scale(.85)}}
+@media (prefers-reduced-motion:reduce){.hdeco span{animation:none}}
 </style></head><body>
 <div class="wrap">
   <header class="hero" id="hero"><span class="bub" style="width:120px;height:120px;left:-40px;top:-40px;background:#ffd6e8"></span><span class="bub" style="width:90px;height:90px;right:-20px;top:20px;background:#d9eeff"></span>
-    <div class="hrow"><span class="hic" id="hic"></span><div><h1 id="ttl"></h1><p id="lead"></p></div></div></header>
-  <nav class="tabs"><a href="?t=e" id="te">小学校</a><a href="?t=j" id="tj">中学校</a><a href="?t=s" id="ts">特別支援</a></nav>
+    <div id="hdeco"></div><div class="hrow"><span class="hic" id="hic"></span><div><h1 id="ttl"></h1><p id="lead"></p></div></div></header>
+  <nav class="tabs"><a href="?t=e" id="te">小学校</a><a href="?t=j" id="tj">中学校</a></nav>
   <div id="learn"></div>
   <div class="talk" id="talk"></div>
+  <div class="smode" id="smode" hidden><p class="smq">どちらをさがしますか？</p>
+    <div class="smb"><button type="button" data-m="sch" aria-pressed="true"><span class="smi">★</span><b>特別支援学校</b><small>障害の種類ごとの学校</small></button>
+    <button type="button" data-m="cls" aria-pressed="false"><span class="smi n">学</span><b>特別支援学級</b><small>区をえらぶと、その区の小・中学校</small></button></div>
+    <div class="chips wch" id="swards"></div></div>
   <div class="mapbox"><div id="map"><span class="mload" id="mload">地図をよみこみ中…</span></div>
     <div class="mtools"><button type="button" id="other" aria-pressed="false"><i style="--k:#8E6BF5"></i><span id="otherL"></span></button>
       <button type="button" id="tilt" aria-pressed="false"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M3 17l9 4 9-4-9-4z"/><path d="M3 12l9 4 9-4"/></svg><span>立体にかたむける</span></button></div></div>
@@ -133,11 +158,11 @@ const C={e:{t:"小学校マップ",l:"さいたま市の市立小学校（{n}校
   s:{t:"特別支援教育マップ",l:"特別支援学校{n}校と、特別支援学級のある市立小・中学校",ac:"#8E6BF5",h1:"#efe8ff",h2:"#e3f3ff",word:"児童・生徒",other:"",talk:["c_support","その子に合った学びの場があるよ。まずは気軽に相談してみてね。"],gr:[]},
   j:{t:"中学校マップ",l:"さいたま市の市立中学校（{n}校）と学区（通学区域）",ac:"#5A7BF0",h1:"#e1efff",h2:"#efe8ff",word:"生徒",other:"小学校の学区もかさねる",talk:["c_school_j","中学校の学区は、小学校よりひろいよ。部活のある習い事もさがしてみてね。"],gr:["1年","2年","3年"]}}[T];
 document.documentElement.style.setProperty("--ac",C.ac);$("#hero").style.setProperty("--h1",C.h1);$("#hero").style.setProperty("--h2",C.h2);
-$("#t"+T).classList.add("on");
+if(T==="s")$(".tabs").hidden=true;else $("#t"+T).classList.add("on");
 const ICON={e:'<svg viewBox="0 0 64 64"><rect x="14" y="20" width="36" height="34" rx="10" fill="#FF8FB8" stroke="#2E2B4F" stroke-width="2.6"/><path d="M14 30h36" stroke="#2E2B4F" stroke-width="2.6"/><rect x="27" y="33" width="10" height="7" rx="2" fill="#FFE070" stroke="#2E2B4F" stroke-width="2.2"/><path d="M22 20q0-10 10-10t10 10" fill="none" stroke="#2E2B4F" stroke-width="2.6"/></svg>',
   j:'<svg viewBox="0 0 64 64"><path d="M32 8l10 6v40H22V14z" fill="#BFD7FF" stroke="#2E2B4F" stroke-width="2.6" stroke-linejoin="round"/><path d="M32 8l-6 12 6 6 6-6z" fill="#fff" stroke="#2E2B4F" stroke-width="2.4" stroke-linejoin="round"/><path d="M32 26v26" stroke="#2E2B4F" stroke-width="2.2"/><circle cx="32" cy="34" r="1.8" fill="#2E2B4F"/><circle cx="32" cy="42" r="1.8" fill="#2E2B4F"/><path d="M26 20l-4 6M38 20l4 6" stroke="#2E2B4F" stroke-width="2.2"/></svg>'};
 ICON.s='<svg viewBox="0 0 64 64"><path d="M32 54S10 40 10 25a11 11 0 0 1 22-4 11 11 0 0 1 22 4c0 15-22 29-22 29z" fill="#D9CCFF" stroke="#2E2B4F" stroke-width="2.6" stroke-linejoin="round"/><path d="M22 30h20M32 20v20" stroke="#fff" stroke-width="5" stroke-linecap="round"/><circle cx="48" cy="12" r="5" fill="#FFE070" stroke="#2E2B4F" stroke-width="2"/></svg>';
-$("#hic").innerHTML=ICON[T];
+$("#hic").innerHTML=ICON[T];$("#hdeco").outerHTML={"e": "<div class=\"hdeco\" aria-hidden=\"true\"><span style=\"left:calc(92% - 20px);top:3%;width:40px;height:40px;--r:10deg;animation-delay:0.0s\"><svg viewBox=\"0 0 64 64\"><rect x=\"14\" y=\"18\" width=\"36\" height=\"38\" rx=\"11\" fill=\"#FF8FB8\" stroke=\"#2E2B4F\" stroke-width=\"2.4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M14 30h36\" fill=\"none\" stroke=\"#2E2B4F\" stroke-width=\"2.4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><rect x=\"27\" y=\"33\" width=\"10\" height=\"8\" rx=\"2\" fill=\"#FFE070\" stroke=\"#2E2B4F\" stroke-width=\"2.4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M22 18q0-10 10-10t10 10\" fill=\"none\" stroke=\"#2E2B4F\" stroke-width=\"2.4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/></svg></span><span style=\"left:calc(76% - 16px);top:2%;width:32px;height:32px;--r:-12deg;animation-delay:-0.9s\"><svg viewBox=\"0 0 64 64\"><path d=\"M14 50l4-12 26-26 8 8-26 26z\" fill=\"#FFE070\" stroke=\"#2E2B4F\" stroke-width=\"2.4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M14 50l4-12 8 8z\" fill=\"#FFE3CF\" stroke=\"#2E2B4F\" stroke-width=\"2.4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M40 16l8 8\" stroke=\"#2E2B4F\" stroke-width=\"2.4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M44 12l4-4 8 8-4 4\" fill=\"#FF9EC4\" stroke=\"#2E2B4F\" stroke-width=\"2.4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/></svg></span><span style=\"left:calc(97% - 14px);top:42%;width:28px;height:28px;--r:14deg;animation-delay:-1.8s\"><svg viewBox=\"0 0 64 64\"><g fill=\"#FFC6DA\" stroke=\"#2E2B4F\" stroke-width=\"2.4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"><path d=\"M32 30c-6-6-6-16 0-20 6 4 6 14 0 20z\"/><path d=\"M32 30c-8 2-17-2-18-9 7-2 15 2 18 9z\"/><path d=\"M32 30c8 2 17-2 18-9-7-2-15 2-18 9z\"/><path d=\"M32 30c-5 6-6 15-1 19 5-3 5-12 1-19z\"/></g><circle cx=\"32\" cy=\"30\" r=\"3.5\" fill=\"#FFE070\" stroke=\"#2E2B4F\" stroke-width=\"2.4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/></svg></span><span style=\"left:calc(60% - 13px);top:1%;width:26px;height:26px;--r:-6deg;animation-delay:-2.7s\"><svg viewBox=\"0 0 64 64\"><rect x=\"8\" y=\"12\" width=\"48\" height=\"32\" rx=\"4\" fill=\"#8FD9C8\" stroke=\"#2E2B4F\" stroke-width=\"2.4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M16 22h18M16 30h26\" stroke=\"#fff\" stroke-width=\"3\" stroke-linecap=\"round\"/><path d=\"M20 44l-4 12M44 44l4 12\" fill=\"none\" stroke=\"#2E2B4F\" stroke-width=\"2.4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/></svg></span><span style=\"left:calc(90% - 15px);top:84%;width:30px;height:30px;--r:-10deg;animation-delay:-3.6s\"><svg viewBox=\"0 0 64 64\"><path d=\"M24 46V16l24-6v30\" fill=\"none\" stroke=\"#2E2B4F\" stroke-width=\"2.4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><ellipse cx=\"18\" cy=\"46\" rx=\"7\" ry=\"5.5\" fill=\"#D9CCFF\" stroke=\"#2E2B4F\" stroke-width=\"2.4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><ellipse cx=\"42\" cy=\"40\" rx=\"7\" ry=\"5.5\" fill=\"#D9CCFF\" stroke=\"#2E2B4F\" stroke-width=\"2.4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/></svg></span></div>", "j": "<div class=\"hdeco\" aria-hidden=\"true\"><span style=\"left:calc(92% - 20px);top:3%;width:40px;height:40px;--r:10deg;animation-delay:0.0s\"><svg viewBox=\"0 0 64 64\"><path d=\"M6 26l26-12 26 12-26 12z\" fill=\"#7A8BFF\" stroke=\"#2E2B4F\" stroke-width=\"2.4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M16 31v12q16 9 32 0V31\" fill=\"#BFD7FF\" stroke=\"#2E2B4F\" stroke-width=\"2.4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M54 28v14\" fill=\"none\" stroke=\"#2E2B4F\" stroke-width=\"2.4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><circle cx=\"54\" cy=\"44\" r=\"3\" fill=\"#FFE070\" stroke=\"#2E2B4F\" stroke-width=\"2.4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/></svg></span><span style=\"left:calc(76% - 16px);top:2%;width:32px;height:32px;--r:-12deg;animation-delay:-0.9s\"><svg viewBox=\"0 0 64 64\"><path d=\"M32 16q-10-6-22-4v38q12-2 22 4 10-6 22-4V12q-12-2-22 4z\" fill=\"#BFD7FF\" stroke=\"#2E2B4F\" stroke-width=\"2.4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M32 16v38\" fill=\"none\" stroke=\"#2E2B4F\" stroke-width=\"2.4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M16 22q6-1 11 2M16 30q6-1 11 2M37 24q5-3 11-2\" fill=\"none\" stroke=\"#2E2B4F\" stroke-width=\"2\" stroke-linecap=\"round\"/></svg></span><span style=\"left:calc(97% - 14px);top:42%;width:28px;height:28px;--r:14deg;animation-delay:-1.8s\"><svg viewBox=\"0 0 64 64\"><circle cx=\"32\" cy=\"32\" r=\"20\" fill=\"#FFB86B\" stroke=\"#2E2B4F\" stroke-width=\"2.4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M12 32h40M32 12v40M18 18q10 14 0 28M46 18q-10 14 0 28\" fill=\"none\" stroke=\"#2E2B4F\" stroke-width=\"2.2\"/></svg></span><span style=\"left:calc(60% - 13px);top:1%;width:26px;height:26px;--r:-6deg;animation-delay:-2.7s\"><svg viewBox=\"0 0 64 64\"><path d=\"M24 46V16l24-6v30\" fill=\"none\" stroke=\"#2E2B4F\" stroke-width=\"2.4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><ellipse cx=\"18\" cy=\"46\" rx=\"7\" ry=\"5.5\" fill=\"#D9CCFF\" stroke=\"#2E2B4F\" stroke-width=\"2.4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><ellipse cx=\"42\" cy=\"40\" rx=\"7\" ry=\"5.5\" fill=\"#D9CCFF\" stroke=\"#2E2B4F\" stroke-width=\"2.4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/></svg></span><span style=\"left:calc(90% - 15px);top:84%;width:30px;height:30px;--r:-10deg;animation-delay:-3.6s\"><svg viewBox=\"0 0 64 64\"><path d=\"M14 50l4-12 26-26 8 8-26 26z\" fill=\"#FFE070\" stroke=\"#2E2B4F\" stroke-width=\"2.4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M14 50l4-12 8 8z\" fill=\"#FFE3CF\" stroke=\"#2E2B4F\" stroke-width=\"2.4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M40 16l8 8\" stroke=\"#2E2B4F\" stroke-width=\"2.4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M44 12l4-4 8 8-4 4\" fill=\"#FF9EC4\" stroke=\"#2E2B4F\" stroke-width=\"2.4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/></svg></span></div>", "s": "<div class=\"hdeco\" aria-hidden=\"true\"><span style=\"left:calc(92% - 20px);top:3%;width:40px;height:40px;--r:10deg;animation-delay:0.0s\"><svg viewBox=\"0 0 64 64\"><path d=\"M32 54S10 40 10 25a11 11 0 0 1 22-4 11 11 0 0 1 22 4c0 15-22 29-22 29z\" fill=\"#FFC6DA\" stroke=\"#2E2B4F\" stroke-width=\"2.4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/></svg></span><span style=\"left:calc(76% - 16px);top:2%;width:32px;height:32px;--r:-12deg;animation-delay:-0.9s\"><svg viewBox=\"0 0 64 64\"><path d=\"M12 20h12a6 6 0 1 1 12 0h12v12a6 6 0 1 0 0 12v12H36a6 6 0 1 0-12 0H12V44a6 6 0 1 1 0-12z\" fill=\"#D9CCFF\" stroke=\"#2E2B4F\" stroke-width=\"2.4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/></svg></span><span style=\"left:calc(97% - 14px);top:42%;width:28px;height:28px;--r:14deg;animation-delay:-1.8s\"><svg viewBox=\"0 0 64 64\"><g fill=\"none\" stroke-width=\"5\" stroke-linecap=\"round\"><path d=\"M8 48a24 24 0 0 1 48 0\" stroke=\"#FF9EC4\"/><path d=\"M15 48a17 17 0 0 1 34 0\" stroke=\"#FFE070\"/><path d=\"M22 48a10 10 0 0 1 20 0\" stroke=\"#8FC8FF\"/></g></svg></span><span style=\"left:calc(60% - 13px);top:1%;width:26px;height:26px;--r:-6deg;animation-delay:-2.7s\"><svg viewBox=\"0 0 64 64\"><path d=\"M10 40q8-14 22-8 14-6 22 8-10 12-22 10-12 2-22-10z\" fill=\"#FFE3CF\" stroke=\"#2E2B4F\" stroke-width=\"2.4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M24 34q8 6 16 0\" fill=\"none\" stroke=\"#2E2B4F\" stroke-width=\"2.4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M32 22l2 4 4.5.6-3.3 3.2.8 4.4L32 32l-4 2.2.8-4.4-3.3-3.2L30 26z\" fill=\"#FFE070\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" transform=\"translate(0 -12)\"/></svg></span><span style=\"left:calc(90% - 15px);top:84%;width:30px;height:30px;--r:-10deg;animation-delay:-3.6s\"><svg viewBox=\"0 0 64 64\"><g fill=\"#BFE6FF\" stroke=\"#2E2B4F\" stroke-width=\"2.4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"><circle cx=\"32\" cy=\"18\" r=\"8\"/><circle cx=\"45\" cy=\"28\" r=\"8\"/><circle cx=\"40\" cy=\"43\" r=\"8\"/><circle cx=\"24\" cy=\"43\" r=\"8\"/><circle cx=\"19\" cy=\"28\" r=\"8\"/></g><circle cx=\"32\" cy=\"31\" r=\"7\" fill=\"#FFE070\" stroke=\"#2E2B4F\" stroke-width=\"2.4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/></svg></span></div>"}[T];
 const PAL=["#FFC6DA","#BFE6FF","#FFE59A","#D8CBFF","#C9F0E0","#FFD6B8","#E6D4FF","#CDEBFF"];
 const WARDS=["西区","北区","大宮区","見沼区","中央区","桜区","浦和区","南区","緑区","岩槻区"];
 let S=[],O=[],L=[],map=null,mk=[],ward=null,shown=30,sel=-1;
@@ -247,10 +272,12 @@ function initMap(){
       const first=map.getStyle().layers.find(l=>l.type==="symbol")?.id;
       if(T==="s"){
         S.forEach((s,i)=>{const d=document.createElement("button");d.type="button";d.className="pin sp";d.setAttribute("aria-label",s.n);d.innerHTML=`<span style="background:${s.kk==="e"?"#FF6FA5":"#5A7BF0"}"><i>${s.sp}</i></span>`;d.onclick=ev=>{ev.stopPropagation();openSchool(i,true)};mk.push(new maplibregl.Marker({element:d,anchor:"bottom"}).setLngLat([s.lo,s.la]).addTo(map))});
-        SP.forEach((s,i)=>{const d=document.createElement("button");d.type="button";d.className="pin star";d.setAttribute("aria-label",s.n);d.innerHTML=`<span><i>★</i></span>`;d.onclick=ev=>{ev.stopPropagation();openSpecial(i)};new maplibregl.Marker({element:d,anchor:"bottom"}).setLngLat([s.lo,s.la]).addTo(map)});
-        map.addSource("names",{type:"geojson",data:{type:"FeatureCollection",features:SP.map(s=>({type:"Feature",properties:{n:s.n.replace(/^(埼玉県立|さいたま市立)/,"")},geometry:{type:"Point",coordinates:[s.lo,s.la]}})).concat(S.map(s=>({type:"Feature",properties:{n:s.n.replace(/学校$/,"")},geometry:{type:"Point",coordinates:[s.lo,s.la]}})))}});
-        map.addLayer({id:"names",type:"symbol",source:"names",minzoom:12.2,layout:{"text-field":["get","n"],"text-font":["Noto Sans Regular"],"text-size":["interpolate",["linear"],["zoom"],12.2,11,16,14],"text-offset":[0,.9],"text-anchor":"top","text-allow-overlap":true,"text-ignore-placement":true},paint:{"text-color":"#6B4FD8","text-halo-color":"#fff","text-halo-width":2.2}});
-        const b2=new maplibregl.LngLatBounds();S.forEach(s=>b2.extend([s.lo,s.la]));$(".hint").textContent="数字のピン＝特別支援学級の数（ピンク＝小学校、青＝中学校）。★＝特別支援学校（市外の学校もあります）。タップでくわしく。2本の指で動かす・回す・かたむけられます。";map.fitBounds(b2,{padding:30,duration:0});
+        SP.forEach((s,i)=>{const d=document.createElement("button");d.type="button";d.className="pin star";d.setAttribute("aria-label",s.n);d.innerHTML=`<span><i>★</i></span>`;d.onclick=ev=>{ev.stopPropagation();openSpecial(i)};spk.push(new maplibregl.Marker({element:d,anchor:"bottom"}).setLngLat([s.lo,s.la]).addTo(map))});
+        WARDS.forEach(w=>{const l=S.filter(s=>s.w===w);if(!l.length)return;const la=l.reduce((a,s)=>a+s.la,0)/l.length,lo=l.reduce((a,s)=>a+s.lo,0)/l.length;
+          const d=document.createElement("button");d.type="button";d.className="wb";d.innerHTML=`<span><b>${w}</b><i>${l.length}校 ›</i></span>`;d.onclick=ev=>{ev.stopPropagation();ward=w;smode="cls";applyS(true)};wbk.push(new maplibregl.Marker({element:d}).setLngLat([lo,la]).addTo(map))});
+        map.addSource("names",{type:"geojson",data:{type:"FeatureCollection",features:[]}});
+        map.addLayer({id:"names",type:"symbol",source:"names",minzoom:9,layout:{"text-field":["get","n"],"text-font":["Noto Sans Regular"],"text-size":["interpolate",["linear"],["zoom"],10,11.5,16,14],"text-offset":[0,.9],"text-anchor":"top","text-allow-overlap":false,"text-padding":4},paint:{"text-color":"#6B4FD8","text-halo-color":"#fff","text-halo-width":2.2}});
+        applyS(true,true);
         const far=()=>$("#map").classList.toggle("far",map.getZoom()<12.6);map.on("zoom",far);far();
         map.touchPitch&&map.touchPitch.enable();setTimeout(()=>{map.easeTo({pitch:35,duration:1400});$("#tilt").setAttribute("aria-pressed","true");$("#tilt span").textContent="上から見る"},400);
         return;
@@ -274,6 +301,30 @@ function initMap(){
     });
   });
 }
+/* 特別支援：見せるものを切りかえる */
+let smode="sch",spk=[],wbk=[];
+function applyS(fly,first){
+  const cls=smode==="cls";
+  document.querySelectorAll("#smode [data-m]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.m===smode));
+  $("#swards").hidden=!cls;
+  $("#swards").innerHTML=WARDS.map(w=>`<button type="button" data-sw="${w}" aria-pressed="${ward===w}">${w}<small>${S.filter(s=>s.w===w).length}</small></button>`).join("");
+  $(".hint").textContent=!cls?"★＝特別支援学校（市外の学校もあります）。★をタップすると、種類・学部・通う地域が出ます。2本の指で動かす・回す・かたむけられます。"
+    :ward?`${ward}の、特別支援学級のある小・中学校です。ピンの数字＝特別支援学級の数（ピンク＝小学校、青＝中学校）。`:"区の名前をタップすると、その区の学校が出ます。";
+  if(map){
+    mk.forEach((m,k)=>{m.getElement().style.display=cls&&ward&&S[k].w===ward?"":"none"});
+    spk.forEach(m=>m.getElement().style.display=cls?"none":"");
+    wbk.forEach(m=>m.getElement().style.display=cls&&!ward?"":"none");
+    const src=map.getSource("names");
+    const pts=!cls?SP.map(s=>[s.n.replace(/^(埼玉県立|さいたま市立)/,""),s]):ward?S.filter(s=>s.w===ward).map(s=>[s.n.replace(/学校$/,""),s]):[];
+    src&&src.setData({type:"FeatureCollection",features:pts.map(([n,s])=>({type:"Feature",properties:{n},geometry:{type:"Point",coordinates:[s.lo,s.la]}}))});
+    if(fly){const b=new maplibregl.LngLatBounds();(cls&&ward?S.filter(s=>s.w===ward):cls?S:SP).forEach(s=>b.extend([s.lo,s.la]));map.fitBounds(b,{padding:cls&&ward?60:36,duration:first?0:1100,maxZoom:14.5})}
+  }
+  if(!first)renderList();
+}
+document.addEventListener("click",e=>{
+  const m=e.target.closest("#smode [data-m]");if(m){smode=m.dataset.m;if(smode==="sch")ward=null;applyS(true);return}
+  const w=e.target.closest("[data-sw]");if(w){ward=w.dataset.sw===ward?null:w.dataset.sw;applyS(true);if(ward)setTimeout(()=>$(".mapbox").scrollIntoView({behavior:RM?"auto":"smooth",block:"start"}),50)}
+});
 function selectOnMap(i,fly){
   if(map&&T==="s"){map.flyTo({center:[S[i].lo,S[i].la],zoom:15.4,pitch:55,duration:1300});mk.forEach((m,k)=>m.getElement().classList.toggle("on",k===i));return}
   if(!map||!map.getSource("d"))return;
@@ -290,11 +341,19 @@ $("#q").oninput=()=>{shown=30;renderList()};
 function renderList(){
   const q=$("#q").value.trim();
   if(T==="s"){
+    $("#wards").hidden=true;
+    if(smode==="cls"){
+      const l=S.map((s,i)=>[s,i]).filter(([s])=>(q?true:ward&&s.w===ward)&&(!q||(s.n+s.a).includes(q)));
+      $("#lh").textContent=q?`特別支援学級のある学校（${l.length}校）`:ward?`${ward}の特別支援学級のある学校（${l.length}校）`:"特別支援学級のある学校";
+      $("#list").innerHTML=!q&&!ward?`<li class="sc" style="cursor:default;display:block"><b>区をえらんでね</b><small>地図の上の区のボタンか、地図の中の区の名前をタップすると、その区の学校が並びます。学校名で検索もできます。</small></li>`
+        :l.map(([s,i])=>`<li class="sc" data-i="${i}" role="button" tabindex="0"><span class="sw" style="--c:${s.kk==="e"?"#FFC6DA":"#BFD7FF"}"></span><div><b>${esc(s.n)}</b><small>${s.kk==="e"?"小学校":"中学校"}・${esc(s.a)}</small></div><span class="num"><b>${s.sp}</b>学級</span></li>`).join("");
+      return;
+    }
     const sp=SP.map((s,i)=>[s,i]).filter(([s])=>!q||(s.n+s.t+s.ar).includes(q));
-    const l=S.map((s,i)=>[s,i]).filter(([s])=>(!ward||s.w===ward)&&(!q||(s.n+s.a).includes(q)));
     $("#lh").textContent="特別支援学校（"+sp.length+"校）";
-    $("#list").innerHTML=sp.map(([s,i])=>`<li class="sc ssc" data-sp="${i}" role="button" tabindex="0"><span class="sw" style="--c:#D9CCFF"></span><div><b>${esc(s.n.replace(/^(埼玉県立|さいたま市立)/,""))}</b><small><span class="tg">${esc(s.k)}</span><span class="tg">${esc(s.t)}</span>${esc(s.b)}</small></div><span class="num">くわしく ›</span></li>`).join("")
-      +`<li class="lh2"><h2><mark>特別支援学級のある学校（${ward||"市内"}・${l.length}校）</mark></h2><p class="hint">数字は特別支援学級の数（令和8年5月1日現在）。ピンク＝小学校、青＝中学校。</p></li>`
+    $("#list").innerHTML=sp.map(([s,i])=>`<li class="sc ssc" data-sp="${i}" role="button" tabindex="0"><span class="sw" style="--c:#D9CCFF"></span><div><b>${esc(s.n.replace(/^(埼玉県立|さいたま市立)/,""))}</b><small><span class="tg">${esc(s.k)}</span><span class="tg">${esc(s.t)}</span>${esc(s.b)}</small></div><span class="num">くわしく ›</span></li>`).join("");
+    return;
+      ""+`<li class="lh2"><h2><mark>特別支援学級のある学校（${ward||"市内"}・${l.length}校）</mark></h2><p class="hint">数字は特別支援学級の数（令和8年5月1日現在）。ピンク＝小学校、青＝中学校。</p></li>`
       +l.slice(0,shown).map(([s,i])=>`<li class="sc" data-i="${i}" role="button" tabindex="0"><span class="sw" style="--c:${s.kk==="e"?"#FFC6DA":"#BFD7FF"}"></span><div><b>${esc(s.n)}</b><small>${esc(s.a)}</small></div><span class="num"><b>${s.sp}</b>学級</span></li>`).join("")
       +(l.length>shown?`<li><button type="button" class="more" id="more">もっと見る（あと${l.length-shown}校）</button></li>`:"");
     return;
@@ -389,7 +448,7 @@ $("#ttl").textContent=C.t;$("#otherL").textContent=C.other;
 $("#note").innerHTML=T==="s"?"特別支援学校の種類・学部・通学区域は さいたま市「さいたま市における特別支援学校の通学区域等一覧」（令和6年9月）、特別支援学級の数は「市立学校 児童・生徒数」（令和8年5月1日現在）より。学校の位置は OpenStreetMap。最新の情報や、どの学びの場が合うかは、市の教育委員会（特別支援教育室）の就学相談でたしかめてください。":"学区の形は国土数値情報「小学校区・中学校区データ」（国土交通省、令和5年度）をもとにしています。その後の変更（新しい学校・学区の見直し）は入っていないことがあるので、正しい学区は区役所の区民課・学校でたしかめてください。"+C.word+"数・学級数は、さいたま市「市立学校 児童・生徒数」（令和8年5月1日現在）。習い事はWollyの習い事リストから、住所や活動場所をもとに位置を出しています。";
 let SP=[];
 Promise.all([fetch("school-data/"+(T==="s"?"e":T)+".json").then(r=>r.json()),fetch("school-data/"+(T==="e"?"j":T==="j"?"e":"j")+".json").then(r=>r.json()),fetch("school-data/lessons.json").then(r=>r.json()),T==="s"?fetch("school-data/special.json").then(r=>r.json()):Promise.resolve([])]).then(([a,b,c,d])=>{
-  if(T==="s"){S=a.map(x=>Object.assign({kk:"e"},x)).concat(b.map(x=>Object.assign({kk:"j"},x))).filter(x=>x.sp);O=[];SP=d;$("#other").hidden=true}else{S=a;O=b}L=c;renderLearn();$("#lead").textContent=C.l.replace("{n}",T==="s"?SP.length:S.length);renderWards();renderList();initMap();
+  if(T==="s"){S=a.map(x=>Object.assign({kk:"e"},x)).concat(b.map(x=>Object.assign({kk:"j"},x))).filter(x=>x.sp);O=[];SP=d;$("#other").hidden=true;$("#smode").hidden=false;$("#q").placeholder="学校名・地域でさがす"}else{S=a;O=b}L=c;renderLearn();$("#lead").textContent=C.l.replace("{n}",T==="s"?SP.length:S.length);renderWards();renderList();initMap();
   const pre=new URLSearchParams(location.search).get("s");if(pre){const i=S.findIndex(x=>x.n.includes(pre));if(i>=0)setTimeout(()=>openSchool(i,false),800)}
 }).catch(()=>{$("#list").innerHTML="<li>データを読みこめませんでした。時間をおいて開きなおしてください。</li>"});
 </script>
