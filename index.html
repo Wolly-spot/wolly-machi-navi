@@ -737,6 +737,7 @@ html[data-fsz="2"] .ej b{font-size:11.5px}
 .hp b{font:500 16px/1.3 var(--f-display)}.hp small{font-size:12px;color:var(--muted)}
 .enjoy{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .ej{display:grid;justify-items:center;gap:6px;padding:12px 4px 10px;border-radius:18px;background:var(--surface);border:1px solid var(--line);text-decoration:none;color:var(--ink);text-align:center;transition:transform .2s}
+.ej-wide{grid-column:1/-1;display:flex!important;align-items:center;gap:12px;text-align:left;padding:12px 14px!important}.ej-wide>span:nth-child(2){flex:1;display:grid;gap:2px}.ej-wide b{font-size:15px!important}.ej-wide small{font-size:11.5px;color:var(--muted)}.ej-wide i{font-style:normal;font-size:22px;color:#A68BFF}
 .ej .ci{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:var(--cbg)}.ej .ci svg{width:38px;height:38px}
 .ej b{font:500 12.5px/1.25 var(--f-display);letter-spacing:-.02em}
 .myarea{margin:18px 0 6px;padding:16px;border-radius:24px;background:var(--surface);border:1px solid var(--line)}
@@ -1849,7 +1850,8 @@ const ENJOY=[
 const linkAttr=c=>c.view?`href="#" data-view="${c.view}" data-vt="${esc(c.vt||c.n)}"`:`href="${c.href}"`;
 function renderHome2(){
   $("#helpGrid").innerHTML=HELP.map(c=>`<a class="hp" ${linkAttr(c)} style="--cbg:${c.bg}"><span class="ci">${c.ic()}</span><b>${c.n}</b><small>${c.s}</small></a>`).join("");
-  $("#enjoyGrid").innerHTML=ENJOY.map(c=>`<a class="ej" ${linkAttr(c)} style="--cbg:${c.bg}"><span class="ci">${c.ic()}</span><b>${c.n}</b></a>`).join("");/* n は自分で書いた文字だけ（<br> を使う） */
+  $("#enjoyGrid").innerHTML=ENJOY.map(c=>`<a class="ej" ${linkAttr(c)} style="--cbg:${c.bg}"><span class="ci">${c.ic()}</span><b>${c.n}</b></a>`).join("")+
+    `<a class="ej ej-wide" href="#" data-view="near?g=odekake" data-vt="おでかけスポット" style="--cbg:#E6ECFF"><span class="ci">${svg(GIC.bus,40)}</span><span><b>おでかけスポット</b><small>プール・動物園・科学館・大きな公園。市外の人気スポットも</small></span><i>›</i></a>`;/* n は自分で書いた文字だけ（<br> を使う） */
   const w=S.profile&&S.profile.ward;
   $("#myArea").innerHTML=`<div class="ma-h"><div><div class="eyebrow">MY AREA</div><h2>あなたの地域の情報</h2></div><a class="ma-set" href="#mypage">${ico('<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/>')}地域設定</a></div>
     <p class="ma-w">${w?`<b>${esc("さいたま市"+w+(townName()?" "+townName():""))}</b>のまわり`:"マイページで区を登録すると、あなたの地域の情報になります"}</p>
@@ -1889,6 +1891,7 @@ const SYN=[
   ["クーポン おトク 割引","Wolly限定クーポン","#go-coupon","クーポン"],
   ["お店 オープン ランチ カフェ","さいたまのお店情報","#go-shopnews","お店"],
   ["習い事 教室 スポーツ","習い事","#go-lesson","習い事"],
+  ["プール 動物園 水族館 科学館 博物館 おでかけ 雨の日 室内 モール","おでかけスポット","view:near?g=odekake","おでかけ"],
   ["小学校 学区 通学区域 ランドセル 入学","小学校マップ","view:school?t=e","学校"],["中学校 学区 制服 部活","中学校マップ","view:school?t=j","学校"]];
 const HS_TAGS=["熱が出た","預けたい","支援センター","公園","歯医者","児童手当","予防接種"];
 const nz=t=>String(t||"").toLowerCase().replace(/[\s　]/g,"").replace(/[ァ-ン]/g,c=>String.fromCharCode(c.charCodeAt(0)-96));
@@ -2014,7 +2017,7 @@ function soonDeadlines(){
 const HS_CAT={"健診・病院":["#go-health",()=>svg(CH.health)],"保活ナビ":["#go-hokatsu",()=>svg(CH.hokatsu)],"お金":["#go-money",()=>svg(CH.money)],
   "習い事":["#go-lesson",()=>svg(CH.lesson)],"公園":["#go-park",()=>svg(CH.park)],"家の近く":["#near",()=>svg(MINI.cross,40)],"交流施設":["view:near?g=hub",()=>svg(MINI.hand,40)],
   "イベント":["#go-event",()=>svg(GIC.cal,40)],"クーポン":["#go-coupon",()=>svg(CH.coupon)],"お店":["#go-shopnews",()=>svg(CH.shop)],"困ったとき":["#sec-help",()=>svg(MEMO_IC.temp,40)],
-  "地域":["#myArea",()=>svg(GIC.map,40)],"学校":["#go-school",()=>svg(MINI.school,40)],"おでかけ":["#go-odekake",()=>svg(GIC.bus,40)]};
+  "地域":["#myArea",()=>svg(GIC.map,40)],"学校":["#go-school",()=>svg(MINI.school,40)],"おでかけ":["view:near?g=odekake",()=>svg(GIC.bus,40)]};
 const hsLink=to=>to.startsWith("view:")?`href="#" data-view="${esc(to.slice(5))}"`:to.startsWith("#")?`href="${esc(to)}"`:`href="#" data-view="${esc(to)}"`;
 function hsRender(){
   const q=$("#hq").value,box=$("#hsRes");
