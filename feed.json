@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-10T23:26:00+09:00",
+ "updatedAt": "2026-11-11T09:50:00+09:00",
  "events": [
   {
    "id": "e-lalaport-bf",
@@ -71,6 +71,18 @@
    "src": "ウォーカープラス",
    "url": "https://www.walkerplus.com/event/ar0311e615217/",
    "img": "https://ms-cache.walkerplus.com/walkertouch/wtd/event/17/l2/615217.jpg",
+   "ai": false
+  },
+  {
+   "id": "e-kawagoe-koyo",
+   "kind": "free",
+   "title": "県営川越公園の紅葉（〜12月中旬）入園無料",
+   "desc": "広い公園で秋の散歩。週末の親子のおでかけにぴったり。",
+   "date": "2026-11-14",
+   "area": "川越市",
+   "src": "ウォーカープラス",
+   "url": "https://www.walkerplus.com/event/ar0311e618037/",
+   "img": "https://ms-cache.walkerplus.com/walkertouch/wtd/event/37/l2/618037.jpg",
    "ai": false
   },
   {
@@ -334,7 +346,7 @@
    "id": "n-system-stop",
    "kind": "safety",
    "title": "市のシステム緊急停止 多くが再開（11/10）",
-   "desc": "安全を確かめたものから順に再開。盆栽美術館・人形博物館のHPはまだ停止中です。",
+   "desc": "安全を確かめたものから再開。盆栽美術館・人形博物館のHPはまだ停止中。",
    "date": "2026-11-10",
    "src": "さいたま市",
    "url": "https://www.city.saitama.lg.jp/001/011/001/p134706.html",
@@ -485,18 +497,6 @@
    "url": "https://iko-yo.net/events/612142",
    "img": "https://d2goguvysdoarq.cloudfront.net/system/event_photos/photos/1780842/normal.jpg?1793755283",
    "ai": false,
-   "important": false
-  },
-  {
-   "id": "n-sango-care",
-   "kind": "mama",
-   "title": "産後ケア 訪問・日帰り・宿泊が使えます",
-   "desc": "1歳未満の赤ちゃんとお母さんが対象。妊娠28週から申し込めます。",
-   "date": "2026-09-28",
-   "src": "さいたま市",
-   "url": "https://www.city.saitama.lg.jp/003/001/011/sangocaregigyo.html",
-   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-sango-care.jpg",
-   "ai": true,
    "important": false
   }
  ]
