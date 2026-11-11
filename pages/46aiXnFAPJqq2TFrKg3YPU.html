@@ -872,4 +872,27 @@ p,li,dd,small,.hint,.bubble{text-wrap:pretty}
 })();
 </script>
 
+<!--wolly-totop-->
+<style>
+.wtotop{position:fixed;z-index:60;right:max(14px,env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));
+  display:grid;justify-items:center;align-content:center;width:58px;height:58px;padding:0;border-radius:50%;border:3px solid #fff;cursor:pointer;
+  background:linear-gradient(150deg,#FF5FA2,#8E6BF5);color:#fff;font:800 10px/1.1 "Zen Maru Gothic","Hiragino Maru Gothic ProN",system-ui,sans-serif;
+  box-shadow:0 6px 16px rgba(46,43,79,.25);opacity:0;transform:translateY(14px) scale(.85);pointer-events:none;
+  transition:opacity .3s,transform .45s cubic-bezier(.3,1.6,.5,1)}
+.wtotop.on{opacity:1;transform:none;pointer-events:auto}
+.wtotop svg{width:22px;height:22px;margin-bottom:1px}
+.wtotop:active{transform:scale(.9)}
+.wtotop:focus-visible{outline:3px solid #3DB2F2;outline-offset:2px}
+@media (prefers-reduced-motion:reduce){.wtotop{transition:none}}
+</style>
+<button type="button" class="wtotop" id="wtotop" aria-label="いちばん上にもどる"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 14l6-6 6 6"/><path d="M12 8v12"/></svg>上に<br>もどる</button>
+<script>
+(function(){if(window.parent!==window){var bb=document.getElementById("backbtn");if(bb)bb.style.display="none"}})();
+(function(){var b=document.getElementById("wtotop");if(!b)return;
+function on(){b.classList.toggle("on",window.scrollY>400&&document.body.style.overflow!=="hidden")}
+addEventListener("scroll",on,{passive:true});on();
+b.addEventListener("click",function(){window.scrollTo({top:0,behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"})});
+})();
+</script>
+<!--/wolly-totop-->
 </body></html>
