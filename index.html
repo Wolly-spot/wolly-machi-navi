@@ -607,6 +607,21 @@ svg .a-strike{animation:a-strike 1.3s cubic-bezier(.7,0,.3,1) infinite;transform
 @media (hover:hover){.hp:hover .ci svg,.ej:hover .ci svg{transform:rotate(-8deg) scale(1.08)}}
 @media (prefers-reduced-motion:reduce){.tapped{animation:none}.hp,.ej{transition:none}}
 
+
+/* 子どもの年齢 */
+.kidlist{display:grid;gap:6px;margin:0 0 8px}
+.kidrow{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:14px;background:color-mix(in srgb,var(--accent) 6%,var(--surface));border:1px solid var(--line)}
+.kid-ic{flex:0 0 auto;width:36px;height:36px;display:grid;place-items:center;border-radius:12px;background:#FFF0F6}.kid-ic svg{width:30px;height:30px}
+.kidrow>span:nth-child(2){flex:1;display:grid}.kidrow b{font-size:14px}.kidrow small{font-size:12px;color:var(--muted)}
+.kidrow button{width:32px;height:32px;border-radius:50%;border:1.5px solid #FFC2DA;background:#fff;color:#D2448A;font-size:16px;font-weight:700;cursor:pointer}
+.kid-none{margin:0;font-size:12.5px;color:var(--muted)}
+.kidadd{display:flex;gap:8px}.kidadd input{flex:1;min-width:0}
+.btn.ghost{background:#fff;color:#5A5AEF;border:2px solid #C9B6FF}
+.kidpick{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:6px}
+.kidpick button{padding:7px 12px;border-radius:999px;border:2px solid #E3D7FF;background:#fff;font:inherit;font-weight:800;font-size:13px;color:#5A5AEF;cursor:pointer}
+.kidpick button small{font-weight:700;color:var(--muted)}.kidpick button[aria-pressed="true"]{background:#5A5AEF;border-color:#5A5AEF;color:#fff}.kidpick button[aria-pressed="true"] small{color:#E8E2FF}
+.agerec{display:inline-flex;align-items:center;gap:3px;width:fit-content;margin-bottom:3px;padding:2px 9px;border-radius:999px;background:linear-gradient(110deg,#FF5FA2,#8E6BF5);color:#fff;font:800 10.5px/1.5 var(--f-body,system-ui)}
+.agerec .i{width:12px;height:12px;fill:#FFE45C;stroke:#FFE45C}
 /* さがす：ふわっと出る候補 */
 .hs-res{position:relative;margin-top:10px;display:grid;gap:8px;text-align:left;padding:12px;border-radius:22px;background:rgba(255,255,255,.62);-webkit-backdrop-filter:blur(14px) saturate(1.3);backdrop-filter:blur(14px) saturate(1.3);border:1px solid rgba(255,255,255,.8);box-shadow:0 18px 40px -20px rgba(60,30,100,.45);opacity:0;transform:translateY(-8px) scale(.98);transition:opacity .3s,transform .4s cubic-bezier(.2,1.3,.4,1)}
 .hs-res.on{opacity:1;transform:none}
@@ -1152,6 +1167,9 @@ svg .a-ring{animation:ring 2.4s ease-in-out infinite;transform-box:fill-box;tran
           <div class="field"><span class="lab">アイコンをえらぶ</span><div class="icons" id="iconPick"></div></div>
           <div class="field"><label for="fWard">お住まいの区</label><select id="fWard"></select><small>習い事は、登録した区の教室ページへ直接つながります。</small></div>
           <div class="field"><label for="fTown">町名・番地（任意）</label><input id="fTown" maxlength="40" placeholder="例：常盤6-4-18" autocomplete="address-line1"><small>番地まで入れると、病院や急患診療所を家から近い順に正しく並べられます。ほかのメンバーには公開されません（位置を調べるために国土地理院の住所検索を使います）。</small><small class="geo-st" id="geoSt" role="status"></small></div>
+          <div class="field"><span class="lab">お子さんの生まれた年月（何人でも・任意）</span><div class="kidlist" id="kidList"></div>
+            <div class="kidadd"><input type="month" id="kidNew" aria-label="お子さんの生まれた年月"><button type="button" class="btn ghost" id="kidAdd">＋ 追加</button></div>
+            <small>ページには表示しません。お子さんの年齢に合う情報（健診・保活・習い事・学校など）を先に出すためだけに使い、この端末だけに覚えます。</small></div>
           <div class="field"><span class="lab">文字の大きさ</span><div class="fsz" role="group" aria-label="文字の大きさ"><button type="button" data-fsz="0">ふつう</button><button type="button" data-fsz="1">大きめ</button><button type="button" data-fsz="2">とても大きく</button></div><small>この端末だけに覚えます。すぐに変わります。</small></div>
           <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><button class="btn" type="submit" id="saveBtn">登録する</button><span class="status" id="saveStatus" role="status"></span></div>
         </form>
@@ -2275,7 +2293,18 @@ let pickIcon=0;
 $("#fWard").innerHTML=`<option value="">選択してください</option>`+WARDS.map(w=>`<option>${w}</option>`).join("");
 function renderIconPick(){$("#iconPick").innerHTML=AVATARS.map((a,i)=>`<button type="button" data-icon="${i}" aria-pressed="${i===pickIcon}">${avatar(i)}${a.n}</button>`).join("")}
 $("#iconPick").addEventListener("click",e=>{const b=e.target.closest("[data-icon]");if(!b)return;pickIcon=+b.dataset.icon;renderIconPick()});
+function renderKidList(){
+  const el=$("#kidList");if(!el)return;const kids=getKids();
+  el.innerHTML=kids.length?kids.map((k,i)=>`<div class="kidrow"><span class="kid-ic">${svg(MEMO_IC.age,40)}</span><span><b>${i+1}人目</b><small>${k.replace("-","年")}月生まれ・いま${ageTxt(monthsOf(k))}</small></span><button type="button" data-kiddel="${i}" aria-label="${i+1}人目を消す">×</button></div>`).join("")
+    :`<p class="kid-none">まだ登録されていません</p>`;
+  const n=$("#kidNew");if(n)n.max=new Date().toISOString().slice(0,7);
+}
+document.addEventListener("click",e=>{
+  if(e.target.closest("#kidAdd")){const v=$("#kidNew").value;if(!/^\d{4}-\d{2}$/.test(v)){$("#kidNew").focus();return}setKids(getKids().concat([v]));$("#kidNew").value="";renderKidList();applyAgeOrder();return}
+  const d=e.target.closest("[data-kiddel]");if(d){const k=getKids();k.splice(+d.dataset.kiddel,1);setKids(k);kidSel=0;renderKidList();applyAgeOrder()}
+});
 function fillMyPage(){
+  renderKidList();
   const p=S.profile;
   $("#myTitle").textContent=p?"マイページ":"マイページ登録";
   $("#profileCard").innerHTML=p?`${avatar(p.icon,"lg")}<div><b>${esc(p.name)}</b><small>さいたま市${esc(p.ward)}${S.town?" ・ "+esc(S.town):""} ・ メンバー</small></div>`
@@ -2402,11 +2431,35 @@ $("#sheet").addEventListener("click",e=>{const b=e.target.closest("[data-kyopen]
 const HC_URL={kenshin:"https://www.city.saitama.lg.jp/kosodate/shiritai/category4/p103698.html",vaccine:"https://www.city.saitama.lg.jp/kosodate/shiritai/category4/p103680.html",
   byouji:"https://www.city.saitama.lg.jp/003/001/015/002/p097696.html",hdent:"https://www.city.saitama.lg.jp/002/001/017/006/p019179.html"};
 /* 生まれた年月（この端末だけに覚える） */
-const kidBirth=()=>{const v=LS.get("wolly.kidbirth");return /^\d{4}-\d{2}$/.test(v||"")?v:""};
-function kidMonths(){const b=kidBirth();if(!b)return null;const [y,m]=b.split("-").map(Number);const d=new Date();return (d.getFullYear()-y)*12+(d.getMonth()+1-m)-(d.getDate()<15?0:0)}
+/* 子どもの生まれた年月（何人でも。この端末の localStorage wolly.kids）。ページには出さず、並び順・「いまの時期」だけに使う */
+function getKids(){let k=LS.get("wolly.kids");if(!Array.isArray(k)){k=[];const o=LS.get("wolly.kidbirth");if(/^\d{4}-\d{2}$/.test(o||""))k=[o];LS.set("wolly.kids",k)}return k.filter(v=>/^\d{4}-\d{2}$/.test(v))}
+function setKids(k){LS.set("wolly.kids",k.filter(v=>/^\d{4}-\d{2}$/.test(v)).sort())}
+const monthsOf=b=>{const [y,m]=b.split("-").map(Number);const d=new Date();return (d.getFullYear()-y)*12+(d.getMonth()+1-m)};
+let kidSel=0;
+const kidBirth=()=>{const k=getKids();return k[Math.min(kidSel,k.length-1)]||""};
+function kidMonths(){const b=kidBirth();return b?monthsOf(b):null}
+/* 年齢から「いま関係がありそうなもの」の点数（何人いても合計して、多い順に並べる） */
+const STAGE=mo=>mo<0?"pre":mo<12?"baby":mo<36?"todd":mo<72?"kinder":mo<144?"elem":mo<180?"jhs":"teen";
+const AGE_W={hokatsu:{pre:3,baby:3,todd:3,kinder:1},health:{pre:3,baby:3,todd:3,kinder:2,elem:1,jhs:1},money:{pre:3,baby:2,todd:2,kinder:2,elem:2,jhs:2,teen:1},
+  lesson:{todd:1,kinder:3,elem:3,jhs:2},park:{baby:1,todd:3,kinder:3,elem:2,jhs:1},coupon:{baby:1,todd:1,kinder:1,elem:1,jhs:1},school:{kinder:2,elem:3,jhs:3},odekake:{todd:2,kinder:3,elem:3,jhs:2}};
+function ageScore(cat){return getKids().reduce((sc,b)=>sc+((AGE_W[cat]||{})[STAGE(monthsOf(b))]||0),0)}
+function applyAgeOrder(){
+  const kids=getKids(),rows=$("#rows");if(!rows)return;
+  const secs=[...rows.querySelectorAll(":scope > section.block")];
+  secs.forEach(x=>{const b=x.querySelector(".fb-t");b&&b.querySelectorAll(".agerec").forEach(e=>e.remove())});
+  if(!kids.length)return;
+  const key=sec=>(sec.id||"").replace("row-","");
+  const sorted=secs.map((sec,i)=>[ageScore(key(sec)),-i,sec]).sort((a,b)=>b[0]-a[0]||b[1]-a[1]);
+  sorted.forEach(([,,sec])=>rows.appendChild(sec));
+  const top=sorted.filter(([sc])=>sc>=3).slice(0,2);
+  top.forEach(([,,sec])=>{const b=sec.querySelector(".fb-t");b&&b.insertAdjacentHTML("afterbegin",`<span class="agerec">${ico('<path d="M12 3l2.6 5.6 6 .7-4.5 4 1.2 6L12 16.4 6.7 19.3l1.2-6-4.5-4 6-.7z"/>')}お子さんの年齢におすすめ</span>`)});
+}
 const ageTxt=mo=>mo<0?"まだ生まれていません":mo<12?`${mo}か月`:`${Math.floor(mo/12)}歳${mo%12?mo%12+"か月":""}`;
 function birthBox(kind){
-  const b=kidBirth(),mo=kidMonths();
+  const kids=getKids(),b=kidBirth(),mo=kidMonths();
+  if(kids.length)return `<div class="bbox"><label>${svg(GIC.cal,40)}<span>どのお子さんの時期を見る？</span></label>
+    <div class="kidpick">${kids.map((k,i)=>`<button type="button" data-kidsel="${i}" data-kk="${kind}" aria-pressed="${k===b}">${i+1}人目 <small>${ageTxt(monthsOf(k))}</small></button>`).join("")}</div>
+    <p>マイページで登録したお子さん（${kids.length}人）。ページには出ません。</p></div>`;
   return `<div class="bbox"><label for="kidB">${svg(GIC.cal,40)}<span>お子さんの生まれた年月</span></label><input id="kidB" type="month" value="${b}" data-kidb="${kind}" max="${new Date().toISOString().slice(0,7)}">
     <p>${mo==null?"入れると「いまの時期」に印がつきます（この端末だけに保存）":`いま <b>${ageTxt(mo)}</b>`}</p></div>`;
 }
@@ -2676,8 +2729,9 @@ function sheetHolidayDent(){
     ${extA(HC_URL.hdent,"市の休日急患診療所のページ","go")}`;
 }
 $("#sheet").addEventListener("change",e=>{const i=e.target.closest("[data-kidb]");if(!i)return;
-  if(/^\d{4}-\d{2}$/.test(i.value))LS.set("wolly.kidbirth",i.value);else{try{localStorage.removeItem("wolly.kidbirth")}catch(_){}}
+  if(/^\d{4}-\d{2}$/.test(i.value)){setKids(getKids().concat([i.value]));kidSel=getKids().indexOf(i.value);applyAgeOrder()}
   const k=i.dataset.kidb,sc=$("#sheetBody").scrollTop;$("#sheetBody").innerHTML=k==="vaccine"?sheetVaccine():sheetKenshin();addTalk(k);kwDecorate(k);$("#sheetBody").scrollTop=sc});
+$("#sheet").addEventListener("click",e=>{const b=e.target.closest("[data-kidsel]");if(!b)return;kidSel=+b.dataset.kidsel;const k=b.dataset.kk,sc=$("#sheetBody").scrollTop;$("#sheetBody").innerHTML=k==="vaccine"?sheetVaccine():sheetKenshin();addTalk(k);kwDecorate(k);$("#sheetBody").scrollTop=sc});
 function sheetHtml(kind){
   const [k,n]=kind.split("-");const i=+n;
   if(kind==="dent")return sheetDent();
@@ -2868,7 +2922,7 @@ if(/\bLine\//i.test(navigator.userAgent)&&!window.claude){
 }
 $("#back").addEventListener("click",goBack);
 
-function renderAll(){renderMe();renderNews();renderCats();renderHome2();renderRows();foldRows();renderFeed();renderEvents();window.__wollyWatch&&window.__wollyWatch()}
+function renderAll(){renderMe();renderNews();renderCats();renderHome2();renderRows();foldRows();applyAgeOrder();renderFeed();renderEvents();window.__wollyWatch&&window.__wollyWatch()}
 
 
 /* ---------- local profile first, then shared data ---------- */
