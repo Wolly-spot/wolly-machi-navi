@@ -11,7 +11,8 @@
    "src": "ららぽーと富士見",
    "url": "https://mitsui-shopping-park.com/lalaport/fujimi/event/3632625.html",
    "img": "https://mitsui-shopping-park.com/lalaport/fujimi/event/3632625/image1.jpg",
-   "ai": false
+   "ai": false,
+   "added": "2026-11-11T09:50:00+09:00"
   },
   {
    "id": "e-lalaport-point",
@@ -23,7 +24,8 @@
    "src": "ららぽーと富士見",
    "url": "https://mitsui-shopping-park.com/lalaport/fujimi/event/3672763.html",
    "img": "https://mitsui-shopping-park.com/lalaport/fujimi/event/3672763/image1.jpg",
-   "ai": false
+   "ai": false,
+   "added": "2026-11-11T09:50:00+09:00"
   },
   {
    "id": "e-ario-sdgs",
@@ -35,7 +37,8 @@
    "src": "アリオ川口",
    "url": "https://kawaguchi.ario.jp/event/1700012566",
    "img": "https://kawaguchi.ario.jp/app/17/img/event/1700012566/img_3sb4bojaz94wg.jpg",
-   "ai": false
+   "ai": false,
+   "added": "2026-11-11T09:50:00+09:00"
   },
   {
    "id": "e-nishi-fureai",
@@ -47,7 +50,8 @@
    "src": "さいたま市",
    "url": "https://www.city.saitama.lg.jp/004/001/002/005/nishi/p133368.html",
    "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/e-nishi-fureai.jpg",
-   "ai": true
+   "ai": true,
+   "added": "2026-11-11T09:50:00+09:00"
   },
   {
    "id": "e-musashino-kairo",
@@ -59,7 +63,8 @@
    "src": "さんたつ",
    "url": "https://san-tatsu.jp/pressrelease/541672/",
    "img": "https://prtimes.jp/img/7006/19955/resize/d7006-19955-19063c38337dee4c807a-0.png",
-   "ai": false
+   "ai": false,
+   "added": "2026-11-11T09:50:00+09:00"
   },
   {
    "id": "e-thomas-skip",
@@ -71,7 +76,8 @@
    "src": "ウォーカープラス",
    "url": "https://www.walkerplus.com/event/ar0311e615217/",
    "img": "https://ms-cache.walkerplus.com/walkertouch/wtd/event/17/l2/615217.jpg",
-   "ai": false
+   "ai": false,
+   "added": "2026-11-11T09:50:00+09:00"
   },
   {
    "id": "e-kawagoe-koyo",
@@ -83,7 +89,8 @@
    "src": "ウォーカープラス",
    "url": "https://www.walkerplus.com/event/ar0311e618037/",
    "img": "https://ms-cache.walkerplus.com/walkertouch/wtd/event/37/l2/618037.jpg",
-   "ai": false
+   "ai": false,
+   "added": "2026-11-11T09:50:00+09:00"
   },
   {
    "id": "e-uchu-workshop",
@@ -95,7 +102,8 @@
    "src": "さいたま市",
    "url": "https://www.city.saitama.lg.jp/kagakukan/category/006/p133558.html",
    "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/e-uchu-workshop.jpg",
-   "ai": true
+   "ai": true,
+   "added": "2026-11-11T09:50:00+09:00"
   },
   {
    "id": "e-ario-happyday",
@@ -107,7 +115,8 @@
    "src": "アリオ川口",
    "url": "https://kawaguchi.ario.jp/event/1700012385",
    "img": "https://kawaguchi.ario.jp/app/17/img/event/1700012385/img_3s1np1ftxhogo.png",
-   "ai": false
+   "ai": false,
+   "added": "2026-11-11T09:50:00+09:00"
   },
   {
    "id": "e-moomin-cocoon",
@@ -119,7 +128,8 @@
    "src": "コクーンシティ",
    "url": "https://www.cocooncity.jp/event/detail/2895",
    "img": "https://www.cocooncity.jp/theme/cocooncity/resources/images/ogp.png",
-   "ai": false
+   "ai": false,
+   "added": "2026-11-11T09:50:00+09:00"
   },
   {
    "id": "e-ario-glass",
@@ -131,7 +141,8 @@
    "src": "アリオ川口",
    "url": "https://kawaguchi.ario.jp/event/1700012570",
    "img": "https://kawaguchi.ario.jp/app/17/img/event/1700012570/img_3sb4v64vijmso.jpg",
-   "ai": false
+   "ai": false,
+   "added": "2026-11-11T09:50:00+09:00"
   },
   {
    "id": "e-planetarium-day",
@@ -143,7 +154,8 @@
    "src": "さいたま市",
    "url": "https://www.city.saitama.lg.jp/kagakukan/news/p117361.html",
    "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/e-planetarium-day.jpg",
-   "ai": true
+   "ai": true,
+   "added": "2026-11-11T09:50:00+09:00"
   },
   {
    "id": "e-waza1",
@@ -155,7 +167,8 @@
    "src": "埼玉県",
    "url": "https://www.pref.saitama.lg.jp/a0811/library-info/2026waza-1.html",
    "img": "https://www.pref.saitama.lg.jp/shared/images/sns/logo.png",
-   "ai": false
+   "ai": false,
+   "added": "2026-11-11T09:50:00+09:00"
   },
   {
    "id": "e-gakudo-r9",
@@ -167,7 +180,8 @@
    "src": "さいたま市",
    "url": "https://www.city.saitama.lg.jp/003/001/013/p115480.html",
    "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/e-gakudo-r9.jpg",
-   "ai": true
+   "ai": true,
+   "added": "2026-11-11T09:50:00+09:00"
   }
  ],
  "shops": [
@@ -180,7 +194,8 @@
    "src": "宮原大宮ドットコム",
    "url": "https://miyahara-kitaku.com/new-tomochin-ramen-omiya-open/",
    "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/11/IMG_5113.jpg",
-   "ai": false
+   "ai": false,
+   "added": "2026-11-11T09:50:00+09:00"
   },
   {
    "id": "s-bocchi-nisshin",
@@ -191,7 +206,8 @@
    "src": "宮原大宮ドットコム",
    "url": "https://miyahara-kitaku.com/bocchi-nisshin-open/",
    "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/11/IMG_9933.jpg",
-   "ai": false
+   "ai": false,
+   "added": "2026-11-11T09:50:00+09:00"
   },
   {
    "id": "s-more-donut",
@@ -201,7 +217,8 @@
    "date": "2026-11",
    "src": "宮原大宮ドットコム",
    "url": "https://miyahara-kitaku.com/more-donut-omiya-lumine/",
-   "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/10/99298976b13a148c5ce347acb7a5fc95.png"
+   "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/10/99298976b13a148c5ce347acb7a5fc95.png",
+   "added": "2026-11-11T09:50:00+09:00"
   },
   {
    "id": "s-ecute-rikyu",
@@ -211,7 +228,8 @@
    "date": "2026-11-13",
    "src": "宮原大宮ドットコム",
    "url": "https://miyahara-kitaku.com/rikyu-kanichahan-ecute-omiya-open/",
-   "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/10/IMG_3680-e1792117924912.jpg"
+   "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/10/IMG_3680-e1792117924912.jpg",
+   "added": "2026-11-11T09:50:00+09:00"
   },
   {
    "id": "s-oasis",
@@ -221,7 +239,8 @@
    "date": "2026-12-05",
    "src": "宮原大宮ドットコム",
    "url": "https://miyahara-kitaku.com/oasis-miyahara-open/",
-   "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/10/IMG_3886.jpg"
+   "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/10/IMG_3886.jpg",
+   "added": "2026-11-11T09:50:00+09:00"
   },
   {
    "id": "s-crane-kiwami",
@@ -231,7 +250,8 @@
    "date": "2026-12",
    "src": "宮原大宮ドットコム",
    "url": "https://miyahara-kitaku.com/crane-yokocho-kiwami-omiyakita-open/",
-   "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/10/a5f2ec4f-5b27-4b05-88cf-34dff45f833a.png"
+   "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/10/a5f2ec4f-5b27-4b05-88cf-34dff45f833a.png",
+   "added": "2026-11-11T09:50:00+09:00"
   },
   {
    "id": "s-toriichizu",
@@ -241,7 +261,8 @@
    "date": "2026-11-01",
    "src": "宮原大宮ドットコム",
    "url": "https://miyahara-kitaku.com/toriichizu-miyahara-open/",
-   "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/02/ea2e58d08c635b40242eb79156bb4ae4.png"
+   "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/02/ea2e58d08c635b40242eb79156bb4ae4.png",
+   "added": "2026-11-11T09:50:00+09:00"
   },
   {
    "id": "s-cocoon-xmas",
@@ -251,7 +272,8 @@
    "date": "2026-11-07",
    "src": "ウォーカープラス",
    "url": "https://www.walkerplus.com/event/ar0311e621639/",
-   "img": "https://ms-cache.walkerplus.com/walkertouch/wtd/event/39/l2/621639.jpg"
+   "img": "https://ms-cache.walkerplus.com/walkertouch/wtd/event/39/l2/621639.jpg",
+   "added": "2026-11-11T09:50:00+09:00"
   },
   {
    "id": "s-saitamarche",
@@ -262,7 +284,8 @@
    "src": "さいたま市",
    "url": "https://www.city.saitama.lg.jp/001/010/018/001/001/p133136.html",
    "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/s-saitamarche.jpg",
-   "ai": true
+   "ai": true,
+   "added": "2026-11-11T09:50:00+09:00"
   },
   {
    "id": "s-yume-marche",
@@ -272,7 +295,8 @@
    "date": "2026-11-15",
    "src": "ウォーカープラス",
    "url": "https://www.walkerplus.com/event/ar0311e616364/",
-   "img": "https://ms-cache.walkerplus.com/walkertouch/wtd/event/64/l2/616364.jpg"
+   "img": "https://ms-cache.walkerplus.com/walkertouch/wtd/event/64/l2/616364.jpg",
+   "added": "2026-11-11T09:50:00+09:00"
   },
   {
    "id": "s-minna-app",
@@ -283,7 +307,8 @@
    "src": "さいたま市",
    "url": "https://www.city.saitama.lg.jp/001/154/009/002/p135012.html",
    "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/s-minna-app.jpg",
-   "ai": true
+   "ai": true,
+   "added": "2026-11-11T09:50:00+09:00"
   },
   {
    "id": "s-bamiyan-omiya",
@@ -294,7 +319,8 @@
    "src": "宮原大宮ドットコム",
    "url": "https://miyahara-kitaku.com/bamiyan-omiya-east-open/",
    "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/09/IMG_2125.jpg",
-   "ai": false
+   "ai": false,
+   "added": "2026-11-11T09:50:00+09:00"
   },
   {
    "id": "s-parc-de-vague",
@@ -305,7 +331,8 @@
    "src": "宮原大宮ドットコム",
    "url": "https://miyahara-kitaku.com/cocoon2-parc-de-vague-petit-open-2026/",
    "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/08/ed6fda18b29c5d5ec05e0bd613c8e126.png",
-   "ai": false
+   "ai": false,
+   "added": "2026-11-11T09:50:00+09:00"
   },
   {
    "id": "s-petit-marche",
@@ -316,7 +343,8 @@
    "src": "さいたま市",
    "url": "https://www.city.saitama.lg.jp/004/001/003/002/p086011.html",
    "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/s-petit-marche.jpg",
-   "ai": true
+   "ai": true,
+   "added": "2026-11-11T09:50:00+09:00"
   },
   {
    "id": "s-rikyu-afternoon",
@@ -327,7 +355,8 @@
    "src": "ウォーカープラス",
    "url": "https://www.walkerplus.com/event/ar0311e611530/",
    "img": "https://ms-cache.walkerplus.com/walkertouch/wtd/event/30/l2/611530.jpg",
-   "ai": false
+   "ai": false,
+   "added": "2026-11-11T09:50:00+09:00"
   },
   {
    "id": "s-randoseru-keyholder",
@@ -338,7 +367,8 @@
    "src": "いこーよ",
    "url": "https://report.iko-yo.net/articles/33865",
    "img": "https://d28w2qw7dtr435.cloudfront.net/uploaded/cover_images/images/33837/normal.jpg?1790803287",
-   "ai": false
+   "ai": false,
+   "added": "2026-11-11T09:50:00+09:00"
   }
  ],
  "news": [
@@ -352,7 +382,8 @@
    "url": "https://www.city.saitama.lg.jp/001/011/001/p134706.html",
    "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-system-stop.jpg",
    "important": false,
-   "ai": true
+   "ai": true,
+   "added": "2026-11-11T09:50:00+09:00"
   },
   {
    "id": "n-bousai-leak",
@@ -364,7 +395,8 @@
    "url": "https://www.city.saitama.lg.jp/001/011/015/004/002/p134482.html",
    "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-bousai-leak.jpg",
    "important": true,
-   "ai": true
+   "ai": true,
+   "added": "2026-11-11T09:50:00+09:00"
   },
   {
    "id": "n-hoiku-tour",
@@ -375,7 +407,8 @@
    "src": "さいたま市",
    "url": "https://www.city.saitama.lg.jp/003/001/015/006/002/p075327.html",
    "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-hoiku-tour.jpg",
-   "ai": true
+   "ai": true,
+   "added": "2026-11-11T09:50:00+09:00"
   },
   {
    "id": "n-holiday-window",
@@ -386,7 +419,8 @@
    "src": "さいたま市",
    "url": "https://www.city.saitama.lg.jp/001/001/007/p016829.html",
    "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-holiday-window.jpg",
-   "ai": true
+   "ai": true,
+   "added": "2026-11-11T09:50:00+09:00"
   },
   {
    "id": "n-window-time",
@@ -397,7 +431,8 @@
    "src": "さいたま市",
    "url": "https://www.city.saitama.lg.jp/006/007/014/020/p133609.html",
    "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-window-time.jpg",
-   "ai": true
+   "ai": true,
+   "added": "2026-11-11T09:50:00+09:00"
   },
   {
    "id": "n-zootopia",
@@ -407,7 +442,8 @@
    "date": "2026-11-14",
    "src": "ウォーカープラス",
    "url": "https://www.walkerplus.com/event/ar0311e609528/",
-   "img": "https://ms-cache.walkerplus.com/walkertouch/wtd/event/28/l2/609528.jpg"
+   "img": "https://ms-cache.walkerplus.com/walkertouch/wtd/event/28/l2/609528.jpg",
+   "added": "2026-11-11T09:50:00+09:00"
   },
   {
    "id": "n-minuma-fair",
@@ -418,7 +454,8 @@
    "src": "さいたま市",
    "url": "https://www.city.saitama.lg.jp/minuma/001/001/007/p121764.html",
    "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-minuma-fair.jpg",
-   "ai": true
+   "ai": true,
+   "added": "2026-11-11T09:50:00+09:00"
   },
   {
    "id": "n-tour-de-france",
@@ -428,7 +465,8 @@
    "date": "2026-11-15",
    "src": "PR TIMES",
    "url": "https://prtimes.jp/main/html/rd/p/000000308.000140218.html",
-   "img": "https://prcdn.freetls.fastly.net/release_image/140218/308/140218-308-d66f6cc560dfb847e444122d67b0211b-1920x1080.jpg?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260"
+   "img": "https://prcdn.freetls.fastly.net/release_image/140218/308/140218-308-d66f6cc560dfb847e444122d67b0211b-1920x1080.jpg?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+   "added": "2026-11-11T09:50:00+09:00"
   },
   {
    "id": "n-minuma-akifes",
@@ -439,7 +477,8 @@
    "src": "さいたま市",
    "url": "https://www.city.saitama.lg.jp/006/014/008/003/015/007/p134622.html",
    "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-minuma-akifes.jpg",
-   "ai": true
+   "ai": true,
+   "added": "2026-11-11T09:50:00+09:00"
   },
   {
    "id": "n-bousai-fair",
@@ -450,7 +489,8 @@
    "src": "さいたま市",
    "url": "https://www.city.saitama.lg.jp/001/011/015/005/p130175.html",
    "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-bousai-fair.jpg",
-   "ai": true
+   "ai": true,
+   "added": "2026-11-11T09:50:00+09:00"
   },
   {
    "id": "n-shiho-11",
@@ -461,7 +501,8 @@
    "src": "さいたま市",
    "url": "https://www.city.saitama.lg.jp/006/014/010/001/012/023/p134665.html",
    "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-shiho-11.jpg",
-   "ai": true
+   "ai": true,
+   "added": "2026-11-11T09:50:00+09:00"
   },
   {
    "id": "n-flu-2026",
@@ -473,7 +514,8 @@
    "url": "https://www.city.saitama.lg.jp/002/001/008/001/007/002/p007833.html",
    "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-flu-2026.jpg",
    "ai": true,
-   "important": false
+   "important": false,
+   "added": "2026-11-11T09:50:00+09:00"
   },
   {
    "id": "n-charifes",
@@ -485,7 +527,8 @@
    "url": "https://www.pref.saitama.lg.jp/b0201/20261123.html",
    "img": "https://www.pref.saitama.lg.jp/shared/images/sns/logo.png",
    "ai": false,
-   "important": false
+   "important": false,
+   "added": "2026-11-11T09:50:00+09:00"
   },
   {
    "id": "n-kousaku-hiroba",
@@ -497,7 +540,8 @@
    "url": "https://iko-yo.net/events/612142",
    "img": "https://d2goguvysdoarq.cloudfront.net/system/event_photos/photos/1780842/normal.jpg?1793755283",
    "ai": false,
-   "important": false
+   "important": false,
+   "added": "2026-11-11T09:50:00+09:00"
   }
  ]
 }
