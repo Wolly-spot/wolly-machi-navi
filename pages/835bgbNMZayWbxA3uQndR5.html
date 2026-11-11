@@ -465,4 +465,35 @@ b.addEventListener("click",function(){window.scrollTo({top:0,behavior:matchMedia
 })();
 </script>
 <!--/wolly-totop-->
+<!--wolly-minical-->
+<style>
+.now{position:relative}
+.mcal{grid-column:2!important;justify-self:start;width:min(100%,220px);margin-top:8px;display:grid;grid-template-columns:repeat(7,1fr);gap:2px;padding:8px;border-radius:14px;background:color-mix(in srgb,var(--cc) 8%,#fff);font:700 10.5px/1 "Zen Maru Gothic",system-ui,sans-serif;text-align:center}
+.mcal .mh{grid-column:1 / -1;font-size:12px;margin-bottom:3px;color:var(--cc)}
+.mcal i{font-style:normal;color:#9a93b8;padding:2px 0;font-size:9.5px}.mcal i.su{color:#E2468E}.mcal i.sa{color:#2F7FC4}
+.mcal span{display:grid;place-items:center;height:22px;border-radius:50%;color:#5a5478}
+.mcal span.on{background:var(--cc);color:#fff;box-shadow:0 0 0 2px #fff,0 0 0 4px var(--cc);font-weight:900}
+.mcal span.rg{background:color-mix(in srgb,var(--cc) 22%,#fff)}
+.mcal span.td{outline:2px dashed #5A5AEF;outline-offset:-1px}
+.mcal i.wd{background:var(--cc);color:#fff;border-radius:999px}
+</style>
+<script>
+(function(){
+  if(typeof nowCards!=="function"||typeof EVENTS==="undefined")return;
+  const W2=["日","月","火","水","木","金","土"];
+  function cal(target,start){
+    const y=target.getFullYear(),m=target.getMonth(),first=new Date(y,m,1).getDay(),n=new Date(y,m+1,0).getDate();
+    let h=`<div class="mcal" aria-hidden="true"><b class="mh">${y}年${m+1}月</b>`+W2.map((w,i)=>`<i class="${i===0?"su":i===6?"sa":""}${i===target.getDay()?" wd":""}">${w}</i>`).join("");
+    for(let i=0;i<first;i++)h+="<span></span>";
+    for(let d=1;d<=n;d++){const dt=new Date(y,m,d);const on=d===target.getDate();const rg=start&&dt>=start&&dt<target&&start.getMonth()===m;const td=+dt===+TODAY;
+      h+=`<span class="${on?"on":""}${rg?" rg":""}${td?" td":""}">${d}</span>`}
+    return h+"</div>";
+  }
+  const orig=nowCards;
+  nowCards=function(){orig();const up=EVENTS.filter(e=>(e[3]||e[2])>=TODAY).slice(0,3);
+    document.querySelectorAll("#nowcards .now").forEach((el,i)=>{const e=up[i];if(!e)return;el.insertAdjacentHTML("beforeend",cal(e[3]||e[2],e[3]?e[2]:null))})};
+  nowCards();
+})();
+</script>
+<!--/wolly-minical-->
 </body></html>
