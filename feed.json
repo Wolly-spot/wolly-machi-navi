@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-11T09:50:00+09:00",
+ "updatedAt": "2026-11-11T20:30:00+09:00",
  "events": [
   {
    "id": "e-lalaport-bf",
@@ -91,6 +91,19 @@
    "img": "https://ms-cache.walkerplus.com/walkertouch/wtd/event/37/l2/618037.jpg",
    "ai": false,
    "added": "2026-11-11T09:50:00+09:00"
+  },
+  {
+   "id": "e-wako-jurin-koyo",
+   "kind": "free",
+   "title": "和光樹林公園の紅葉（〜12月上旬）入園無料",
+   "desc": "木がたくさんの広い公園で紅葉さんぽ。週末のおでかけに。",
+   "date": "2026-11-14",
+   "area": "和光市",
+   "src": "ウォーカープラス",
+   "url": "https://www.walkerplus.com/event/ar0311e393046/",
+   "img": "https://ms-cache.walkerplus.com/walkertouch/wtd/event/46/l2/393046_2.jpg",
+   "ai": false,
+   "added": "2026-11-11T20:30:00+09:00"
   },
   {
    "id": "e-uchu-workshop",
