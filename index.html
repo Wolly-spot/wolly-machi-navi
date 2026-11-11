@@ -919,7 +919,7 @@ svg .a-ring{animation:ring 2.4s ease-in-out infinite;transform-box:fill-box;tran
 .ky-open[aria-expanded="true"] .chev svg{transform:rotate(180deg)}
 .ky-wrap{display:grid;grid-template-rows:0fr;transition:grid-template-rows .6s cubic-bezier(.16,1,.3,1)}
 .ky-wrap.open{grid-template-rows:1fr}
-.ky-in{overflow:hidden;min-height:0}
+.ky-in{overflow:hidden;min-height:0;min-width:0}.ky-card{min-width:0;box-sizing:border-box}.ky-card>*{min-width:0;max-width:100%;box-sizing:border-box}.ky-card .call.big{max-width:100%}
 .ky{margin-top:12px;padding:16px 14px;border-radius:22px;background:color-mix(in srgb,var(--surface) 86%,transparent);border:2px solid color-mix(in srgb,var(--pink) 35%,var(--line));
   display:grid;gap:12px;opacity:0;transform:translateY(-10px);transition:opacity .45s ease .1s,transform .55s cubic-bezier(.16,1,.3,1) .05s}
 .ky-wrap.open .ky{opacity:1;transform:none}
@@ -995,7 +995,7 @@ svg .a-ring{animation:ring 2.4s ease-in-out infinite;transform-box:fill-box;tran
 .ky-sub{border-top:1px dashed var(--line);padding-top:12px}
 .ky-sub p{margin:4px 0 0;font-size:12.5px;color:var(--muted)}
 .ky-cl{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;padding-top:6px}
-.ky-c{min-width:0;box-sizing:border-box;grid-template-columns:minmax(0,1fr)}.ky-c *{overflow-wrap:anywhere;min-width:0}.ky{box-sizing:border-box;max-width:100%}
+.ky-c{min-width:0;box-sizing:border-box;grid-template-columns:minmax(0,1fr)}.ky-c *{overflow-wrap:anywhere;min-width:0}.ky{box-sizing:border-box;max-width:100%;min-width:0}.ky>*{min-width:0;max-width:100%;box-sizing:border-box}.ky-h h4,.ky-lead,.ky-hr,.ky-name{white-space:normal!important;overflow-wrap:anywhere}
 .ky-c{position:relative;border-radius:16px;padding:12px 14px;background:color-mix(in srgb,var(--surface) 80%,transparent);border:1px solid var(--line);display:grid;gap:4px}
 .ky-c>b{font-size:15px}
 .ky-c.first{border:2px solid #FF9CC8;box-shadow:0 10px 22px -16px rgba(210,70,140,.7)}
@@ -1015,7 +1015,9 @@ svg .a-ring{animation:ring 2.4s ease-in-out infinite;transform-box:fill-box;tran
 .geo-st{display:block;margin-top:4px;color:var(--accent)!important;font-weight:700}
 .ky-c .ad{font-size:12.5px;color:var(--muted)}
 .ky-t{font-size:13px;line-height:1.55}
-.ky-t span{display:inline-block;font-size:11px;font-weight:700;color:var(--accent);background:var(--accent-soft);border-radius:6px;padding:0 7px;margin-right:6px}
+.ky-t{display:grid!important;grid-template-columns:auto minmax(0,1fr);gap:8px;align-items:start}
+.ky-t span{display:inline-block;white-space:nowrap;overflow-wrap:normal!important;font-size:11px;font-weight:700;color:var(--accent);background:var(--accent-soft);border-radius:6px;padding:1px 7px;margin-top:2px;line-height:1.5}
+.ky-t em{font-style:normal;line-height:1.6;min-width:0;word-break:normal;overflow-wrap:anywhere}
 .ky-c .row2{display:flex;justify-content:space-between;align-items:center;margin-top:4px}
 .ky-c .ky-tel{font-size:18px}
 .ky-c .ky-tel svg{width:16px;height:16px}
@@ -2124,13 +2126,13 @@ document.addEventListener("click",e=>{const v=e.target.closest("[data-vac]");if(
 
 /* 見出しの文字が変なところで折り返さないように：1行に入るまで少しずつ小さく（下限あり） */
 function fitLine(el,min){
-  if(!el||el.dataset.fit)return;el.dataset.fit=1;
+  if(!el||el.dataset.fit||!el.clientWidth)return;el.dataset.fit=1;
   const cs=getComputedStyle(el);let fs=parseFloat(cs.fontSize);const lh=parseFloat(cs.lineHeight)||fs*1.35;
   el.style.whiteSpace="nowrap";
   let guard=0;while(el.scrollWidth>el.clientWidth+1&&fs>min&&guard++<30){fs-=.5;el.style.fontSize=fs+"px"}
   if(el.scrollWidth>el.clientWidth+1){el.style.whiteSpace="";el.style.fontSize=""}
 }
-function fitTitles(root){(root||document).querySelectorAll(".dhead h3,#sheetTitle,.cv strong>small,.hp b,.ej b:not(:has(br)),.sch b,.fb-t>:first-child,.ky-c .ky-ch b,.by>div>b").forEach(el=>fitLine(el,13));
+function fitTitles(root){(root||document).querySelectorAll(".dhead h3,#sheetTitle,.cv strong>small,.hp b,.ej b:not(:has(br)),.sch b,.fb-t>:first-child,.ky-c .ky-ch b,.by>div>b,.ky-sz").forEach(el=>fitLine(el,13));
   (root||document).querySelectorAll(".cv strong").forEach(el=>{const sm=el.querySelector("small");const tx=[...el.childNodes].filter(n=>n.nodeType===3).map(n=>n.textContent).join("");
     if(!el.querySelector(".tline")&&tx){[...el.childNodes].filter(n=>n.nodeType===3).forEach(n=>{const sp=document.createElement("span");sp.className="tline";sp.textContent=n.textContent;n.replaceWith(sp)})}
     el.querySelectorAll(".tline").forEach(x=>fitLine(x,11.5))})}
@@ -2474,7 +2476,7 @@ function sheetKyukan(i){
      <div class="ky-memo">${pop("電話の前にメモしておくと伝えやすいこと",svg(MEMO_IC.note,40),`<b class="ky-mh">電話の前にメモしておくと伝えやすいこと</b><ul class="ky-ml">${MEMO.map(([k,t])=>`<li><span class="mi">${svg(MEMO_IC[k],40)}</span><span>${t}</span></li>`).join("")}</ul>`)}</div>
      <div class="ky-sub"><h4>休日・夜間の急患診療所（4か所）</h4><p>小児科は、かぜや発熱などの内科的な病気のみ。時間は受付時間です。診療所をタップすると、くわしい情報と地図が出ます。</p></div>
      ${rank?`<p class="ky-near">${ico(P.pin)}<span>${rank.home?`<b>登録した住所</b>（${esc(S.profile.ward+townName())}）`:`<b>${esc(S.profile.ward)}</b>（区役所の位置）`}から近い順に <b>1〜4番</b> をつけています（距離は家からのまっすぐの距離、車の時間は道のりを考えた目安。実際の道順は「地図」で確認できます）${rank.home?"":"。マイページで番地まで登録すると、家からの近さで並びます"}</span></p>`:`<p class="ky-near">${ico(P.pin)}<span><a href="#mypage">マイページ</a>で区を登録すると、家から近い順の番号がつきます</span></p>`}
-     <div class="ky-cl">${KYU_CLINICS.map((c,ci)=>`<div class="ky-c ky-tap${rank&&rank[ci].n===1?" first":""}" data-kyc="${ci}" role="button" tabindex="0">${rank?`<span class="ky-rank r${rank[ci].n}"><small>近い順</small>${rank[ci].n}<small>番</small></span>`:""}<div class="ky-ch"><span class="ky-bld">${svg(BLD[c.sz].d,64)}</span><div><b>${esc(c.n)}</b><span class="ky-sz">${esc(c.sl)}</span>${rank?`<span class="ky-km">${kmText(rank[ci].km)}</span>`:""}</div></div><div class="ad">${esc(c.a)}</div>${c.h.map(([k,v])=>`<div class="ky-t"><span>${esc(k)}</span>${esc(v)}</div>`).join("")}
+     <div class="ky-cl">${KYU_CLINICS.map((c,ci)=>`<div class="ky-c ky-tap${rank&&rank[ci].n===1?" first":""}" data-kyc="${ci}" role="button" tabindex="0">${rank?`<span class="ky-rank r${rank[ci].n}"><small>近い順</small>${rank[ci].n}<small>番</small></span>`:""}<div class="ky-ch"><span class="ky-bld">${svg(BLD[c.sz].d,64)}</span><div><b>${esc(c.n)}</b><span class="ky-sz">${esc(c.sl)}</span>${rank?`<span class="ky-km">${kmText(rank[ci].km)}</span>`:""}</div></div><div class="ad">${esc(c.a)}</div>${c.h.map(([k,v])=>`<div class="ky-t"><span>${esc(k)}</span><em>${esc(v).replace(/／/g,"<br>").replace(/・/g,"・<wbr>")}</em></div>`).join("")}
        <div class="row2">${tel(c.t,false)}</div></div>`).join("")}</div>
      <p class="foot">熱などの症状があるときは、受診の前に電話で相談してください。出典：さいたま市「子ども急患電話相談」「休日・夜間の急患診療所」、埼玉県「小児救急電話相談」（2026年11月時点）。診療日や時間は変わることがあるので、出かける前に電話などで確認してください。</p>
      ${extA("https://www.city.saitama.lg.jp/002/001/017/006/p019179.html","急患診療所のくわしいページ（さいたま市）","go sub")}
@@ -2829,8 +2831,8 @@ function sheetHolidayDent(){
 }
 $("#sheet").addEventListener("change",e=>{const i=e.target.closest("[data-kidb]");if(!i)return;
   if(/^\d{4}-\d{2}$/.test(i.value)){setKids(getKids().concat([i.value]));kidSel=getKids().indexOf(i.value);applyAgeOrder()}
-  const k=i.dataset.kidb,sc=$("#sheetBody").scrollTop;$("#sheetBody").innerHTML=k==="vaccine"?sheetVaccine():sheetKenshin();addTalk(k);kwDecorate(k);$("#sheetBody").scrollTop=sc});document.addEventListener("click",e=>{if(e.target.closest("[data-kyopen]"))setTimeout(()=>fitTitles($("#sheetBody")),60)});
-$("#sheet").addEventListener("click",e=>{const b=e.target.closest("[data-kidsel]");if(!b)return;kidSel=+b.dataset.kidsel;const k=b.dataset.kk,sc=$("#sheetBody").scrollTop;$("#sheetBody").innerHTML=k==="vaccine"?sheetVaccine():sheetKenshin();addTalk(k);kwDecorate(k);$("#sheetBody").scrollTop=sc});document.addEventListener("click",e=>{if(e.target.closest("[data-kyopen]"))setTimeout(()=>fitTitles($("#sheetBody")),60)});
+  const k=i.dataset.kidb,sc=$("#sheetBody").scrollTop;$("#sheetBody").innerHTML=k==="vaccine"?sheetVaccine():sheetKenshin();addTalk(k);kwDecorate(k);$("#sheetBody").scrollTop=sc});document.addEventListener("click",e=>{if(e.target.closest("[data-kyopen]"))[80,400,800].forEach(ms=>setTimeout(()=>fitTitles($("#sheetBody")),ms))});
+$("#sheet").addEventListener("click",e=>{const b=e.target.closest("[data-kidsel]");if(!b)return;kidSel=+b.dataset.kidsel;const k=b.dataset.kk,sc=$("#sheetBody").scrollTop;$("#sheetBody").innerHTML=k==="vaccine"?sheetVaccine():sheetKenshin();addTalk(k);kwDecorate(k);$("#sheetBody").scrollTop=sc});document.addEventListener("click",e=>{if(e.target.closest("[data-kyopen]"))[80,400,800].forEach(ms=>setTimeout(()=>fitTitles($("#sheetBody")),ms))});
 function sheetHtml(kind){
   const [k,n]=kind.split("-");const i=+n;
   if(kind==="dent")return sheetDent();
