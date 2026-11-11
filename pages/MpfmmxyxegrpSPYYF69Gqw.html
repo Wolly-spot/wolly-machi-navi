@@ -922,6 +922,40 @@ function paint(){
   set("building-3d","fill-extrusion-opacity",.95);
   try{map.setPaintProperty("building-3d","fill-extrusion-vertical-gradient",true)}catch(e){}
   zr("building-3d",13.2);
+
+  /* アップしたとき：家ごとに少しずつちがう色（おもちゃの町のように）・建物のふち・番地・お店の名前を早めに */
+  const PAST=["#FFE3EC","#E3F0FF","#FFF4C9","#ECE5FF","#E4F6F0","#F7E8FF","#FFFFFF"];
+  const hid=["%",["abs",["to-number",["coalesce",["id"],["get","render_height"],0],0]],7];
+  set("building-3d","fill-extrusion-color",["case",[">",["coalesce",["get","render_height"],0],18],
+    ["interpolate",["linear"],["coalesce",["get","render_height"],0],18,"#D8CBFF",40,"#A992F5",70,"#FF9EC8"],
+    ["match",hid,0,PAST[0],1,PAST[1],2,PAST[2],3,PAST[3],4,PAST[4],5,PAST[5],PAST[6]]]);
+  set("building","fill-color",["match",hid,0,PAST[0],1,PAST[1],2,PAST[2],3,PAST[3],4,PAST[4],5,PAST[5],PAST[6]]);
+  try{
+    const src=map.getLayer("building")?map.getLayer("building").source:"openmaptiles";
+    if(!map.getLayer("w-bline"))map.addLayer({id:"w-bline",type:"line",source:src,"source-layer":"building",minzoom:15.5,paint:{"line-color":"#9C8BD6","line-width":["interpolate",["linear"],["zoom"],15.5,.4,18,1.2],"line-opacity":.7}},map.getLayer("building-3d")?"building-3d":undefined);
+    if(!map.getLayer("w-hnum"))map.addLayer({id:"w-hnum",type:"symbol",source:src,"source-layer":"housenumber",minzoom:17.3,layout:{"text-field":["get","housenumber"],"text-size":10,"text-font":["Noto Sans Regular"]},paint:{"text-color":"#8A7FB8","text-halo-color":"#fff","text-halo-width":1.2}});
+  }catch(e){}
+  map.getStyle().layers.forEach(l=>{if(/^poi/.test(l.id)){try{map.setLayerZoomRange(l.id,Math.min(l.minzoom||14,14.6),24)}catch(e){}}});
+
+  /* 窓の模様：アップしても「箱」に見えないように */
+  try{
+    const mk=(name,wall,win,frame,cw,ch,wx,wy,ww,wh)=>{if(map.hasImage(name))return;const c=document.createElement("canvas");c.width=cw;c.height=ch;const g=c.getContext("2d");
+      g.fillStyle=wall;g.fillRect(0,0,cw,ch);g.fillStyle=frame;g.fillRect(wx-1,wy-1,ww+2,wh+2);g.fillStyle=win;g.fillRect(wx,wy,ww,wh);
+      g.fillStyle="rgba(255,255,255,.55)";g.fillRect(wx,wy,Math.max(1,ww/3),wh);g.fillStyle="rgba(0,0,0,.05)";g.fillRect(0,ch-2,cw,2);
+      map.addImage(name,g.getImageData(0,0,cw,ch),{pixelRatio:2})};
+    mk("w-tall","#D9CCFF","#BFE6FF","#FFFFFF",16,20,4,5,8,9);
+    mk("w-tall2","#C9B9FF","#E3F2FF","#FFFFFF",16,20,4,5,8,9);
+    mk("w-h0","#FFE3EC","#BFE6FF","#FFFFFF",24,24,8,8,8,7);
+    mk("w-h1","#E3F0FF","#FFF4C9","#FFFFFF",24,24,8,8,8,7);
+    mk("w-h2","#FFF4C9","#BFE6FF","#FFFFFF",24,24,8,8,8,7);
+    mk("w-h3","#ECE5FF","#FFE3EC","#FFFFFF",24,24,8,8,8,7);
+    mk("w-h4","#F7E8FF","#E3F0FF","#FFFFFF",24,24,8,8,8,7);
+    if(map.getLayer("building-3d")){
+      map.setPaintProperty("building-3d","fill-extrusion-pattern",["case",[">",["coalesce",["get","render_height"],0],30],"w-tall2",[">",["coalesce",["get","render_height"],0],14],"w-tall",
+        ["match",["%",["abs",["to-number",["coalesce",["id"],["get","render_height"],0],0]],5],0,"w-h0",1,"w-h1",2,"w-h2",3,"w-h3","w-h4"]]);
+      map.setPaintProperty("building-3d","fill-extrusion-opacity",1);
+    }
+  }catch(e){}
   try{map.setLight({anchor:"viewport",color:"#ffffff",intensity:.42,position:[1.3,200,35]})}catch(e){}
   try{map.setSky&&map.setSky({"sky-color":"#BFE3FF","horizon-color":"#FFE3F0","fog-color":"#FFF4F8","sky-horizon-blend":.55,"horizon-fog-blend":.6,"fog-ground-blend":.25})}catch(e){}
   try{
