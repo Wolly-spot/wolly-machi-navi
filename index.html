@@ -621,6 +621,13 @@ svg .a-strike{animation:a-strike 1.3s cubic-bezier(.7,0,.3,1) infinite;transform
 .sch.sm{flex-direction:column;gap:6px;text-align:center;padding:12px 6px}.sch.sm .ci{width:48px;height:48px}.sch.sm .ci svg{width:38px;height:38px}.sch.sm b{font-size:14px}.sch.sm small{font-size:10.5px}
 .evage{display:inline-flex;align-items:center;gap:3px;width:fit-content;padding:2px 9px;border-radius:999px;background:linear-gradient(110deg,#FF5FA2,#8E6BF5);color:#fff;font-size:10.5px;font-weight:800}
 .evage .i{width:12px;height:12px;fill:#FFE45C;stroke:#FFE45C}
+
+/* 文字の並び */
+.by-stack{grid-template-columns:1fr!important}.by-stack .row2{justify-content:flex-start}
+.cv strong .tline{display:block;max-width:100%}
+.kw{white-space:normal}
+h2,h3,.sec-lead,.sub,.note,p{line-break:strict}
+@supports (word-break:auto-phrase){body{word-break:auto-phrase}}
 /* 子どもの年齢 */
 .kidlist{display:grid;gap:6px;margin:0 0 8px}
 .kidrow{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:14px;background:color-mix(in srgb,var(--accent) 6%,var(--surface));border:1px solid var(--line)}
@@ -2113,6 +2120,19 @@ document.addEventListener("click",e=>{const v=e.target.closest("[data-vac]");if(
   sh.addEventListener("scroll",on,{passive:true});new MutationObserver(on).observe(document.body,{attributes:true,attributeFilter:["class"]});
   b.addEventListener("click",()=>sh.scrollTo({top:0,behavior:"smooth"}));
 })();
+
+/* 見出しの文字が変なところで折り返さないように：1行に入るまで少しずつ小さく（下限あり） */
+function fitLine(el,min){
+  if(!el||el.dataset.fit)return;el.dataset.fit=1;
+  const cs=getComputedStyle(el);let fs=parseFloat(cs.fontSize);const lh=parseFloat(cs.lineHeight)||fs*1.35;
+  el.style.whiteSpace="nowrap";
+  let guard=0;while(el.scrollWidth>el.clientWidth+1&&fs>min&&guard++<30){fs-=.5;el.style.fontSize=fs+"px"}
+  if(el.scrollWidth>el.clientWidth+1){el.style.whiteSpace="";el.style.fontSize=""}
+}
+function fitTitles(root){(root||document).querySelectorAll(".dhead h3,#sheetTitle,.cv strong>small,.hp b,.ej b:not(:has(br)),.sch b,.fb-t>:first-child").forEach(el=>fitLine(el,13));
+  (root||document).querySelectorAll(".cv strong").forEach(el=>{const sm=el.querySelector("small");const tx=[...el.childNodes].filter(n=>n.nodeType===3).map(n=>n.textContent).join("");
+    if(!el.querySelector(".tline")&&tx){[...el.childNodes].filter(n=>n.nodeType===3).forEach(n=>{const sp=document.createElement("span");sp.className="tline";sp.textContent=n.textContent;n.replaceWith(sp)})}
+    el.querySelectorAll(".tline").forEach(x=>fitLine(x,11.5))})}
 function renderCats(){
   const target={money:"row-money",hokatsu:"row-hokatsu",health:"row-health",lesson:"row-lesson",park:"row-park",coupon:"row-coupon"};
   $("#cats").innerHTML=CATS.map(c=>`<a class="cat" href="#go-${c.id}" style="--cbg:${c.bg}"><span class="ci">${svg(CH[c.id])}</span><b>${c.n}</b><small>${c.s}</small></a>`).join("");
@@ -2801,7 +2821,7 @@ function sheetHolidayDent(){
   const gm=r=>"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(r[0]+" さいたま市"+r[1]);
   return dhead(`<svg viewBox="0 0 24 24" style="width:44px;height:44px;fill:none;stroke:#fff;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round">${P.tooth}</svg>`,"#7CC4FF","HOLIDAY DENTAL","休日の歯医者さん",`<span class="pill">日曜・祝日 9:00〜12:00</span>`)+
    `<p class="lead" style="margin:0 0 12px;font-size:14.5px;line-height:1.8">日曜・祝日に歯が痛くなったり、歯をぶつけたりしたとき。午前中なら、休日の急患歯科でみてもらえます。</p>
-    <div class="byl">${HDENT.map((r,hi)=>`<div class="by by-tap" data-hdc="${hi}" role="button" tabindex="0"><div><b>${esc(r[0])}</b><span class="bw">日曜・祝休日</span><small>${esc(r[1])}</small><small>受付 9:00〜12:00（午後はお休み）</small><small class="bnote">${esc(r[3])}</small></div><div class="row2">${callA(r[2],"call")}<span class="by-more">くわしく・地図 ›</span></div></div>`).join("")}</div>
+    <div class="byl">${HDENT.map((r,hi)=>`<div class="by by-tap by-stack" data-hdc="${hi}" role="button" tabindex="0"><div><b>${esc(r[0])}</b><span class="bw">日曜・祝休日</span><small>${esc(r[1])}</small><small>受付 9:00〜12:00（午後はお休み）</small><small class="bnote">${esc(r[3])}</small></div><div class="row2">${callA(r[2],"call")}<span class="by-more">くわしく・地図 ›</span></div></div>`).join("")}</div>
     <p class="note">行く前に電話でたしかめると安心です。保険証（マイナ保険証）・子どもの医療費受給資格証・お薬手帳があると安心。急ぎでなければ、ふだんの歯医者さんの診療時間に。</p>
     <p class="note">子どもの歯が抜けた・欠けたときは、歯を牛乳などにつけて乾かさないように持っていくとよいと言われています。</p>
     ${extA(HC_URL.hdent,"市の休日急患診療所のページ","go")}`;
@@ -2867,14 +2887,15 @@ function kwDecorate(kind){
     nodes.forEach(node=>{
       if(node.parentElement.closest("a,button,.kw,.hk-kw"))return;
       let cur=node;
-      while(cur&&n<10){
+      if(el.querySelector(".kw"))return;
+      while(cur&&n<3){
         const t=cur.nodeValue;let best=null;
         for(const [w,ic] of KW_IC){if(used.has(ic)||!KIC(ic))continue;const p=t.indexOf(w);if(p>=0&&(!best||p<best[0]))best=[p,w,ic]}
         if(!best)break;
         used.add(best[2]);n++;
         const at=cur.splitText(best[0]),rest=at.splitText(best[1].length);
         const sp=document.createElement("span");sp.className="kw";sp.innerHTML=svg(KIC(best[2]),40)+esc(best[1]);
-        at.replaceWith(sp);cur=rest;
+        at.replaceWith(sp);cur=null;
       }
     });
   });
@@ -2888,7 +2909,7 @@ function addTalk(kind){
 function openSheet(kind){
   closeViewer();sheetKind=kind;
   if(kind==="news")fillNewsSheet();else if(kind==="near")fillNearSheet();else $("#sheetBody").innerHTML=sheetHtml(kind);
-  addTalk(kind);kwDecorate(kind);
+  addTalk(kind);kwDecorate(kind);requestAnimationFrame(()=>fitTitles($("#sheetBody")));
   const sh=$("#sheet");sh.scrollTop=0;
   sh.classList.remove("on");void sh.offsetWidth;
   requestAnimationFrame(()=>{$("#scrim").classList.add("on");sh.classList.add("on")});
@@ -3000,7 +3021,8 @@ if(/\bLine\//i.test(navigator.userAgent)&&!window.claude){
 }
 $("#back").addEventListener("click",goBack);
 
-function renderAll(){renderMe();renderNews();renderCats();renderHome2();renderRows();foldRows();applyAgeOrder();renderFeed();renderEvents();window.__wollyWatch&&window.__wollyWatch()}
+function renderAll(){renderMe();renderNews();renderCats();renderHome2();renderRows();foldRows();applyAgeOrder();renderFeed();renderEvents();window.__wollyWatch&&window.__wollyWatch();requestAnimationFrame(()=>fitTitles())}
+document.addEventListener("click",e=>{if(e.target.closest(".fbar"))requestAnimationFrame(()=>fitTitles())});
 
 
 /* ---------- local profile first, then shared data ---------- */
