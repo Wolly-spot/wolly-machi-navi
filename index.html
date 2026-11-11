@@ -658,6 +658,7 @@ h2,h3,.sec-lead,.sub,.note,p{line-break:strict}
 .totop.sheettop{z-index:70;bottom:calc(18px + env(safe-area-inset-bottom,0px))}
 body:not(.sheet-open) .totop.sheettop{display:none}
 body.sheet-open .totop.sheettop.on{opacity:1;pointer-events:auto}
+.byi .pl-hr{grid-template-columns:1fr!important;gap:4px!important}.byi .pl-hr dt{white-space:nowrap}.byi .pl-hr dd{padding-left:26px;margin:0}
 /* 場所の小窓の地図 */
 .pl-map{position:relative;isolation:isolate;height:220px;margin:0 0 10px;border-radius:18px;overflow:hidden;border:2px solid #F3E8FF;background:#FBF6EF}
 .ky-tap,.by-tap{cursor:pointer}
@@ -2072,7 +2073,7 @@ function openPlace(p){
     ${p.tags?`<div class="byi-tags">${p.tags.map(x=>`<span class="bw">${esc(x)}</span>`).join("")}</div>`:""}
     <div class="pl-map" id="plMap"><span class="bym-load">地図をよみこみ中…</span></div>
     <dl class="dl byi"><div><dt>${svg(GIC.map,40)}場所</dt><dd>さいたま市${esc(p.a)}</dd></div>
-      ${(p.rows||[]).map(([k,v])=>`<div><dt>${svg(GIC.cal,40)}${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("")}
+      ${(p.rows||[]).map(([k,v])=>`<div class="pl-hr"><dt>${svg(GIC.cal,40)}${esc(k)}</dt><dd>${esc(v).replace(/／/g,"<br>").replace(/・/g,"・<wbr>")}</dd></div>`).join("")}
       <div><dt>${svg(GIC.phone,40)}電話</dt><dd>${callA(p.t,"call")}</dd></div></dl>
     ${p.note?`<p class="rm-note">${esc(p.note)}</p>`:""}
     <div class="byi-btns"><a class="byi-g" href="${g}" target="_blank" rel="noopener">Googleマップで道順 ›</a></div>`,p.n);
