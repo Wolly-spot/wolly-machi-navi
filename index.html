@@ -660,7 +660,7 @@ body:not(.sheet-open) .totop.sheettop{display:none}
 body.sheet-open .totop.sheettop.on{opacity:1;pointer-events:auto}
 /* 場所の小窓の地図 */
 .pl-map{position:relative;isolation:isolate;height:220px;margin:0 0 10px;border-radius:18px;overflow:hidden;border:2px solid #F3E8FF;background:#FBF6EF}
-.ky-tap,.by-tap{cursor:pointer}.ky-tap::after{content:"くわしく・地図 ›";position:absolute;right:12px;top:12px;font-size:11px;font-weight:800;color:#fff;background:#A68BFF;border-radius:999px;padding:3px 9px}
+.ky-tap,.by-tap{cursor:pointer}
 /* 予防接種の説明 */
 .vac-hint{display:flex;align-items:center;gap:6px;margin:0 0 6px;font-size:12px;color:#8E6BF5;font-weight:700}.vac-hint .i{width:18px;height:18px}
 .vac-tap{cursor:pointer;transition:transform .2s}.vac-tap:active{transform:scale(.98)}
@@ -994,7 +994,8 @@ svg .a-ring{animation:ring 2.4s ease-in-out infinite;transform-box:fill-box;tran
 .ky-sz{display:inline-block;margin-top:3px;font-size:11px;font-weight:700;color:#5B3FA0;background:#F1E8FF;border-radius:999px;padding:1px 9px}
 .ky-sub{border-top:1px dashed var(--line);padding-top:12px}
 .ky-sub p{margin:4px 0 0;font-size:12.5px;color:var(--muted)}
-.ky-cl{display:grid;gap:14px;padding-top:6px}
+.ky-cl{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;padding-top:6px}
+.ky-c{min-width:0;box-sizing:border-box;grid-template-columns:minmax(0,1fr)}.ky-c *{overflow-wrap:anywhere;min-width:0}.ky{box-sizing:border-box;max-width:100%}
 .ky-c{position:relative;border-radius:16px;padding:12px 14px;background:color-mix(in srgb,var(--surface) 80%,transparent);border:1px solid var(--line);display:grid;gap:4px}
 .ky-c>b{font-size:15px}
 .ky-c.first{border:2px solid #FF9CC8;box-shadow:0 10px 22px -16px rgba(210,70,140,.7)}
@@ -2129,7 +2130,7 @@ function fitLine(el,min){
   let guard=0;while(el.scrollWidth>el.clientWidth+1&&fs>min&&guard++<30){fs-=.5;el.style.fontSize=fs+"px"}
   if(el.scrollWidth>el.clientWidth+1){el.style.whiteSpace="";el.style.fontSize=""}
 }
-function fitTitles(root){(root||document).querySelectorAll(".dhead h3,#sheetTitle,.cv strong>small,.hp b,.ej b:not(:has(br)),.sch b,.fb-t>:first-child").forEach(el=>fitLine(el,13));
+function fitTitles(root){(root||document).querySelectorAll(".dhead h3,#sheetTitle,.cv strong>small,.hp b,.ej b:not(:has(br)),.sch b,.fb-t>:first-child,.ky-c .ky-ch b,.by>div>b").forEach(el=>fitLine(el,13));
   (root||document).querySelectorAll(".cv strong").forEach(el=>{const sm=el.querySelector("small");const tx=[...el.childNodes].filter(n=>n.nodeType===3).map(n=>n.textContent).join("");
     if(!el.querySelector(".tline")&&tx){[...el.childNodes].filter(n=>n.nodeType===3).forEach(n=>{const sp=document.createElement("span");sp.className="tline";sp.textContent=n.textContent;n.replaceWith(sp)})}
     el.querySelectorAll(".tline").forEach(x=>fitLine(x,11.5))})}
@@ -2471,10 +2472,10 @@ function sheetKyukan(i){
      <div class="ky-card blue"><b class="ky-name">小児救急電話相談</b>${tel("#8000")}<span class="ky-hr">全国共通の短縮番号</span>
        ${who(KYU_PEOPLE.n8000,"子どもの病気の経験もある看護師さん","埼玉県では、看護師さんが相談にのってくれます。<b>小児科のお医者さん</b>がうしろで支えていて、必要なときはお医者さんが直接答えてくれることもあります。電話でのアドバイスなので、診察ではありません。")}</div>
      <div class="ky-memo">${pop("電話の前にメモしておくと伝えやすいこと",svg(MEMO_IC.note,40),`<b class="ky-mh">電話の前にメモしておくと伝えやすいこと</b><ul class="ky-ml">${MEMO.map(([k,t])=>`<li><span class="mi">${svg(MEMO_IC[k],40)}</span><span>${t}</span></li>`).join("")}</ul>`)}</div>
-     <div class="ky-sub"><h4>休日・夜間の急患診療所（4か所）</h4><p>小児科は、かぜや発熱などの内科的な病気のみ。時間は受付時間です。</p></div>
+     <div class="ky-sub"><h4>休日・夜間の急患診療所（4か所）</h4><p>小児科は、かぜや発熱などの内科的な病気のみ。時間は受付時間です。診療所をタップすると、くわしい情報と地図が出ます。</p></div>
      ${rank?`<p class="ky-near">${ico(P.pin)}<span>${rank.home?`<b>登録した住所</b>（${esc(S.profile.ward+townName())}）`:`<b>${esc(S.profile.ward)}</b>（区役所の位置）`}から近い順に <b>1〜4番</b> をつけています（距離は家からのまっすぐの距離、車の時間は道のりを考えた目安。実際の道順は「地図」で確認できます）${rank.home?"":"。マイページで番地まで登録すると、家からの近さで並びます"}</span></p>`:`<p class="ky-near">${ico(P.pin)}<span><a href="#mypage">マイページ</a>で区を登録すると、家から近い順の番号がつきます</span></p>`}
      <div class="ky-cl">${KYU_CLINICS.map((c,ci)=>`<div class="ky-c ky-tap${rank&&rank[ci].n===1?" first":""}" data-kyc="${ci}" role="button" tabindex="0">${rank?`<span class="ky-rank r${rank[ci].n}"><small>近い順</small>${rank[ci].n}<small>番</small></span>`:""}<div class="ky-ch"><span class="ky-bld">${svg(BLD[c.sz].d,64)}</span><div><b>${esc(c.n)}</b><span class="ky-sz">${esc(c.sl)}</span>${rank?`<span class="ky-km">${kmText(rank[ci].km)}</span>`:""}</div></div><div class="ad">${esc(c.a)}</div>${c.h.map(([k,v])=>`<div class="ky-t"><span>${esc(k)}</span>${esc(v)}</div>`).join("")}
-       <div class="row2">${tel(c.t,false)}<a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(c.n+" さいたま市"+c.a.replace(/（.*）/,""))}" target="_blank" rel="noopener">地図 ›</a></div></div>`).join("")}</div>
+       <div class="row2">${tel(c.t,false)}</div></div>`).join("")}</div>
      <p class="foot">熱などの症状があるときは、受診の前に電話で相談してください。出典：さいたま市「子ども急患電話相談」「休日・夜間の急患診療所」、埼玉県「小児救急電話相談」（2026年11月時点）。診療日や時間は変わることがあるので、出かける前に電話などで確認してください。</p>
      ${extA("https://www.city.saitama.lg.jp/002/001/017/006/p019179.html","急患診療所のくわしいページ（さいたま市）","go sub")}
    </section></div></div>`}
@@ -2828,8 +2829,8 @@ function sheetHolidayDent(){
 }
 $("#sheet").addEventListener("change",e=>{const i=e.target.closest("[data-kidb]");if(!i)return;
   if(/^\d{4}-\d{2}$/.test(i.value)){setKids(getKids().concat([i.value]));kidSel=getKids().indexOf(i.value);applyAgeOrder()}
-  const k=i.dataset.kidb,sc=$("#sheetBody").scrollTop;$("#sheetBody").innerHTML=k==="vaccine"?sheetVaccine():sheetKenshin();addTalk(k);kwDecorate(k);$("#sheetBody").scrollTop=sc});
-$("#sheet").addEventListener("click",e=>{const b=e.target.closest("[data-kidsel]");if(!b)return;kidSel=+b.dataset.kidsel;const k=b.dataset.kk,sc=$("#sheetBody").scrollTop;$("#sheetBody").innerHTML=k==="vaccine"?sheetVaccine():sheetKenshin();addTalk(k);kwDecorate(k);$("#sheetBody").scrollTop=sc});
+  const k=i.dataset.kidb,sc=$("#sheetBody").scrollTop;$("#sheetBody").innerHTML=k==="vaccine"?sheetVaccine():sheetKenshin();addTalk(k);kwDecorate(k);$("#sheetBody").scrollTop=sc});document.addEventListener("click",e=>{if(e.target.closest("[data-kyopen]"))setTimeout(()=>fitTitles($("#sheetBody")),60)});
+$("#sheet").addEventListener("click",e=>{const b=e.target.closest("[data-kidsel]");if(!b)return;kidSel=+b.dataset.kidsel;const k=b.dataset.kk,sc=$("#sheetBody").scrollTop;$("#sheetBody").innerHTML=k==="vaccine"?sheetVaccine():sheetKenshin();addTalk(k);kwDecorate(k);$("#sheetBody").scrollTop=sc});document.addEventListener("click",e=>{if(e.target.closest("[data-kyopen]"))setTimeout(()=>fitTitles($("#sheetBody")),60)});
 function sheetHtml(kind){
   const [k,n]=kind.split("-");const i=+n;
   if(kind==="dent")return sheetDent();
