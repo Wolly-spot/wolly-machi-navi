@@ -193,6 +193,8 @@ h2{font:400 18px/1.3 var(--fd);margin:18px 0 8px}h2 mark{background:linear-gradi
 .gp th,.gp td{padding:8px;border-bottom:1px dashed #DCEFFA;vertical-align:top;text-align:left}.gp thead th{background:#E3F4FC;color:#2F7AA8;white-space:nowrap}.gp tbody th{color:#2F7AA8;white-space:nowrap}
 .gp .rel{display:flex;flex-wrap:wrap;gap:8px}.gp .rel a,.gp .rel button{display:inline-flex;align-items:center;gap:4px;padding:8px 13px;border-radius:999px;border:2px solid #B5A0E6;background:#F4F0FD;color:#7155BD;font-size:13px;font-weight:900;text-decoration:none;box-shadow:0 3px 0 #B5A0E6}
 .gp .rel svg{flex:0 0 auto;width:18px;height:18px}
+.gp .why{padding:12px 14px;border-radius:16px;background:#EEF3FA;border-left:5px solid #7C9CD8}.gp .why p{margin:0 0 6px;font-size:13.5px;line-height:1.8}.gp .why p:last-child{margin:0}
+.gp table{table-layout:fixed;width:100%}.gp thead th{white-space:normal}.gp tbody th{white-space:normal;word-break:auto-phrase}.gp th,.gp td{overflow-wrap:anywhere}
 .gp .rel .soonb{border-style:dashed;box-shadow:none;opacity:.75}
 .gp .tel{display:grid;gap:6px}.gp .tel div{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px;padding:9px 12px;border-radius:14px;background:#FDF0F5;font-size:13px;font-weight:700}
 .gp .tel a{padding:6px 12px;border-radius:999px;background:#fff;border:2px solid #EF9FB5;color:#C4547A;font-weight:900;text-decoration:none;white-space:nowrap}
@@ -582,7 +584,8 @@ function showItem(path,push=true){
   const key="item:"+path,fav=favSet().has(key);
   let body="";
   if(it.steps)body+=sec("いつ・何がある？","cal",`<ul class="tl">${it.steps.map(([a,b])=>`<li><b>${esc(a)}</b><span>${esc(b)}</span></li>`).join("")}</ul>`);
-  if(it.table)body+=sec("くらべてみよう","check",`<div class="tbl"><table><thead><tr>${it.table.head.map(h=>`<th>${esc(h)}</th>`).join("")}</tr></thead><tbody>${it.table.rows.map(r=>`<tr>${r.map((c,k)=>k?`<td>${esc(c)}</td>`:`<th>${esc(c)}</th>`).join("")}</tr>`).join("")}</tbody></table></div>`);
+  if(it.why)body+=sec("どうしてこんなに多いの？","bulb",`<div class="why">${it.why.map(x=>`<p>${esc(x)}</p>`).join("")}</div>`);
+  if(it.table)body+=sec(it.table_t||"くらべてみよう","check",`<div class="tbl"><table><thead><tr>${it.table.head.map(h=>`<th>${esc(h)}</th>`).join("")}</tr></thead><tbody>${it.table.rows.map(r=>`<tr>${r.map((c,k)=>k?`<td>${esc(c)}</td>`:`<th>${esc(c)}</th>`).join("")}</tr>`).join("")}</tbody></table></div>`);
   if(it.info)body+=sec("知っておきたいこと","bulb",`<dl>${it.info.map(([a,b])=>`<div><dt>${gi(kwIc(a))}<span>${esc(a)}</span></dt><dd>${esc(b)}</dd></div>`).join("")}</dl>`);
   if(it.checklist&&it.groups){const st=LS("wolly.prepcheck")||{};const all=it.groups.reduce((n,[,l])=>n+l.length,0),done=Object.values(st).filter(Boolean).length;
     body+=sec("チェックリスト","check",`<div class="ckbar"><i style="width:${Math.round(done/all*100)}%"></i></div><p class="meta"><span>${done} / ${all} できた</span></p>`+it.groups.map(([h,l])=>`<p style="margin:12px 0 6px;font-weight:900;font-size:13.5px">${esc(h)}</p><div class="ck">${l.map(x=>`<label><input type="checkbox" data-ck="${esc(x)}"${st[x]?" checked":""}>${esc(x)}</label>`).join("")}</div>`).join(""))}
