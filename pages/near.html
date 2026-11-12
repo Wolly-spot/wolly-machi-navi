@@ -606,9 +606,11 @@ function card(x,i){
   </li>`;
 }
 let LAST=[],LO=null;
+const PQ=new URLSearchParams(location.search).get("q")||"";let PQ_DONE=false;
 function refresh(move){
   if(!DATA.length)return;
   const o=origin(),all=sorted(o);LAST=all;LO=o;
+  if(PQ&&!PQ_DONE){const k=all.findIndex(z=>z.r.id===PQ||z.r.n===PQ);if(k>=0){PQ_DONE=true;setTimeout(()=>openFs(k),700)}}
   $("#from").innerHTML=`<span class="dot">${I(o.home?IC.house:IC.pin)}</span><span>${esc(o.t)}<small>${esc(o.s)}</small></span>`;
   $("#reg").innerHTML=o.reg?"":`<div class="reg"><p><b>マイページに住所を登録すると、</b>おうちの近くの${esc(G.word)}を自動でしぼりこんで、近い順に出せます。</p><button type="button" id="regBtn">マイページ登録する</button></div>`;
   const rb=$("#regBtn");if(rb)rb.onclick=toMyPage;
