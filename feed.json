@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-11T20:30:00+09:00",
+ "updatedAt": "2026-11-12T09:45:00+09:00",
  "events": [
   {
    "id": "e-lalaport-bf",
@@ -199,6 +199,18 @@
  ],
  "shops": [
   {
+   "id": "s-motsuyaki-ban",
+   "kind": "open",
+   "title": "大宮駅東口に「もつ焼きばん」11月下旬オープン",
+   "desc": "中目黒の老舗もつ焼き店が大宮に。レモンサワー発祥のお店。",
+   "date": "2026-11",
+   "src": "宮原大宮ドットコム",
+   "url": "https://miyahara-kitaku.com/motsuyaki-ban-omiya-open/",
+   "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/11/IMG_5171.jpg",
+   "ai": false,
+   "added": "2026-11-12T09:45:00+09:00"
+  },
+  {
    "id": "s-tomochin-omiya",
    "kind": "open",
    "title": "大宮駅東口に「新橋ニューともちんラーメン」11月下旬",
@@ -264,17 +276,6 @@
    "src": "宮原大宮ドットコム",
    "url": "https://miyahara-kitaku.com/crane-yokocho-kiwami-omiyakita-open/",
    "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/10/a5f2ec4f-5b27-4b05-88cf-34dff45f833a.png",
-   "added": "2026-11-11T09:50:00+09:00"
-  },
-  {
-   "id": "s-toriichizu",
-   "kind": "open",
-   "title": "宮原駅東口に鶏料理「とりいちず」オープン（11/1）",
-   "desc": "宮原駅から歩いて5分。気軽に入れる鶏料理の居酒屋。",
-   "date": "2026-11-01",
-   "src": "宮原大宮ドットコム",
-   "url": "https://miyahara-kitaku.com/toriichizu-miyahara-open/",
-   "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/02/ea2e58d08c635b40242eb79156bb4ae4.png",
    "added": "2026-11-11T09:50:00+09:00"
   },
   {
@@ -350,9 +351,9 @@
   {
    "id": "s-petit-marche",
    "kind": "event",
-   "title": "市内でとれた農産物のプチマルシェ（11/11ほか）",
-   "desc": "市役所（11/11）、中央区役所（11/16・30）などで地元の農産物を販売。",
-   "date": "2026-11-11",
+   "title": "市内でとれた農産物のプチマルシェ（11/16・30）",
+   "desc": "中央区役所などで地元の新鮮な野菜を販売。",
+   "date": "2026-11-16",
    "src": "さいたま市",
    "url": "https://www.city.saitama.lg.jp/004/001/003/002/p086011.html",
    "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/s-petit-marche.jpg",
@@ -385,6 +386,19 @@
   }
  ],
  "news": [
+  {
+   "id": "n-soccer-festa",
+   "kind": "kids",
+   "title": "さいたまサッカーフェスタ（12/20）入場無料",
+   "desc": "NACK5スタジアム大宮で小学生サッカー教室など。教室は抽選の申込制。",
+   "date": "2026-12-20",
+   "src": "さいたま市",
+   "url": "https://www.city.saitama.lg.jp/006/014/008/003/015/008/p134348.html",
+   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-soccer-festa.jpg",
+   "ai": true,
+   "important": false,
+   "added": "2026-11-12T09:45:00+09:00"
+  },
   {
    "id": "n-system-stop",
    "kind": "safety",
@@ -502,18 +516,6 @@
    "src": "さいたま市",
    "url": "https://www.city.saitama.lg.jp/001/011/015/005/p130175.html",
    "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-bousai-fair.jpg",
-   "ai": true,
-   "added": "2026-11-11T09:50:00+09:00"
-  },
-  {
-   "id": "n-shiho-11",
-   "kind": "mama",
-   "title": "市報さいたま11月号 氷川神社ライトアップ特集",
-   "desc": "今月の市のお知らせとおでかけ情報がまとめて読めます。",
-   "date": "2026-11-04",
-   "src": "さいたま市",
-   "url": "https://www.city.saitama.lg.jp/006/014/010/001/012/023/p134665.html",
-   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-shiho-11.jpg",
    "ai": true,
    "added": "2026-11-11T09:50:00+09:00"
   },
