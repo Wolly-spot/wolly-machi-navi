@@ -198,7 +198,7 @@ h2{font:400 18px/1.3 var(--fd);margin:18px 0 8px}h2 mark{background:linear-gradi
 .near3 b{display:block;font-size:13.5px}.near3 small{display:block;font-size:11.5px;color:var(--muted)}.near3 .km{margin-left:auto;font-size:12px;font-weight:800;white-space:nowrap}
 .sbadge{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}.sbadge span{padding:3px 10px;border-radius:999px;font-size:12px;font-weight:800;background:#E3F4FC;color:#2F7AA8}
 .sbadge span.hb{background:#FFF1C2;color:#8A6A00}
-.mynear{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 8px}.mynear button{padding:8px 13px;border-radius:999px;border:2px solid #5AB4E8;background:#fff;color:#2F7AA8;font-weight:900;font-size:13px}
+.mynear{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 8px}.mynear button svg{flex:0 0 auto;width:20px;height:20px}.mynear button{display:inline-flex;align-items:center;gap:6px;max-width:100%;text-align:left;line-height:1.4;padding:8px 13px;border-radius:999px;border:2px solid #5AB4E8;background:#fff;color:#2F7AA8;font-weight:900;font-size:13px}
 
 #map.far .pin.star span,#map.far .pin.sp span{width:28px;height:28px;border-width:2.5px}#map.far .pin.star i,#map.far .pin.sp i{display:inline}#map.far .pin.star,#map.far .pin.sp{height:38px}
 .smode{margin:6px 0 12px}.smq{margin:0 0 6px;font:400 15px/1.3 var(--fd)}
@@ -491,7 +491,7 @@ function renderGenres(){
   if(!GUIDE||!GUIDE.genres)return;
   $("#genres").hidden=false;
   $("#gnr").innerHTML=GUIDE.genres.map(g=>{const ch=GCHAR[g.id]||[],im=TALK[ch[0]];
-    const its=g.action==="map"?[{id:"_map",t:"地図で学校をさがす",s:"学区の色・人数",ic:"map"},{id:"_list",t:"学校の一覧",s:"区・名前でさがす",ic:"search"},{id:"_here",t:"いまいる場所の近く",s:"位置情報を使う",ic:"pin"}]:(g.items||[]);
+    const its=g.action==="map"?[{id:"_map",t:"地図で学校をさがす",s:"学区の色・人数",ic:"map"},{id:"_list",t:"学校の一覧",s:"区・名前でさがす",ic:"search"}]:(g.items||[]);
     return `<section class="gf" data-gf="${esc(g.id)}"><button type="button" class="gfbar" aria-expanded="false"><span class="gfi">${im?`<img src="${im}" alt="">`:gi(g.ic)}${im?`<i>${gi(g.ic)}</i>`:""}</span><span><b>${esc(g.t)}</b><small>${its.length}こ・タップでひらく</small></span><span class="ar">▼</span></button>
       <div class="gfbody">${ch[1]?`<div class="gftalk"><p>${esc(ch[1])}</p></div>`:""}<div class="gfrow">${its.map(it=>`<button type="button" class="gsq" ${it.id.startsWith("_")?`data-gm="${it.id}"`:`data-gi="${esc(g.id+"/"+it.id)}"`}><span class="sqi">${gi(it.ic)}</span><span><b>${esc(it.t)}</b><br><small>${esc(it.s||"")}</small></span></button>`).join("")}</div>
       ${its.length>2?`<p class="gfnote">横にスライドすると、ほかも見られます ›</p>`:""}</div></section>`}).join("");
@@ -584,11 +584,11 @@ if(T!=="s")fetch("school-data/guide-"+T+".json").then(r=>r.ok?r.json():null).the
 let HOME=null;
 addEventListener("message",e=>{const d=e.data;if(e.source!==window.parent||!d||d.type!=="wolly-home")return;HOME=d.ward?{ward:d.ward,geo:d.geo||null}:null;if(T!=="s"){renderMyNear()}});
 function renderMyNear(){const el=$("#mynear");if(!el)return;
-  el.innerHTML=(HOME&&HOME.ward?`<button type="button" data-myw>${gi("home")}${esc(HOME.ward)}の学校</button>`:"")+`<button type="button" data-here>${gi("pin")}いまいる場所の近く</button>`}
+  el.innerHTML=HOME&&HOME.ward?`<button type="button" data-myw>${gi("home")}<span>${esc(HOME.ward.replace(/区$/,""))}区の学校（マイページの住所）</span></button>`:""}
 function sortNear(la,lo,label){S.forEach(s=>s._d=dist(la,lo,s.la,s.lo));NEARFROM=label;renderList();if(map)map.flyTo({center:[lo,la],zoom:13.6,duration:1200})}
 let NEARFROM="";
 document.addEventListener("click",e=>{
-  if(e.target.closest("[data-myw]")){const w=HOME.ward.replace(/区$/,"")+"区";ward=w;if(HOME.geo&&HOME.geo.la)sortNear(HOME.geo.la,HOME.geo.lo,"登録した住所");else{shown=30;renderWards();renderList()}return}
+  if(e.target.closest("[data-myw]")){const w=HOME.ward.replace(/区$/,"")+"区";ward=w;shown=99;renderWards();const g=HOME.geo||{};if(g.lat&&g.lon)sortNear(+g.lat,+g.lon,"登録した住所");else renderList();setTimeout(()=>$("#lh").scrollIntoView({behavior:RM?"auto":"smooth",block:"start"}),80);return}
   if(e.target.closest("[data-here]")){if(!navigator.geolocation){toast("この端末では現在地が使えません");return}toast("現在地をしらべています…");
     navigator.geolocation.getCurrentPosition(p=>{ward=null;renderWards();sortNear(p.coords.latitude,p.coords.longitude,"いまいる場所")},()=>toast("現在地を使えませんでした（位置情報の許可が必要です）"),{timeout:10000,maximumAge:60000})}
 });

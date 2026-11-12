@@ -483,6 +483,7 @@ const town=()=>String(prof&&prof.town||"").replace(/[0-9０-９].*$/,"");
 const isReg=()=>!!(prof&&prof.ward);
 function origin(){
   const reg=isReg(),inW=S.area?`（${S.area}区の中だけ）`:"";
+  if(S.here)return {ll:[S.here.lat,S.here.lon],reg:true,here:true,t:"いまいる場所から近い順"+inW,s:"位置情報を使っています（この画面の中だけ。保存しません）"};
   if(reg){
     const gg=prof.geo;
     if(gg&&gg.ok&&gg.lat&&(!gg.q||gg.q===("埼玉県さいたま市"+prof.ward+(prof.town||""))))return {ll:[gg.lat,gg.lon],reg,home:true,t:"登録した住所から近い順"+inW,s:prof.ward+town()};
@@ -494,9 +495,17 @@ function origin(){
 const WCOL=["#FFB3CF","#FFE38A","#9FD8FF","#CDB8FF","#FFC6DA","#B8C4FF","#FFD6E8","#FFF0A6","#BFE6FF","#E2D2FF"];
 function renderAreas(){
   const reg=isReg();
-  $("#areas").innerHTML=`<span class="lab">場所</span>`+`<button class="chip${!S.area?" on":""}" data-a="" style="--cc:#FF6FA5">${reg?svg(NIC.nursery,40)+"家の近く":svg(NIC.star,40)+"市全体"}</button>`
+  $("#areas").innerHTML=`<span class="lab">場所</span>`+`<button class="chip${!S.area&&!S.here?" on":""}" data-a="" style="--cc:#FF6FA5">${reg?svg(NIC.nursery,40)+"家の近く":svg(NIC.star,40)+"市全体"}</button>`
+    +`<button class="chip here${S.here?" on":""}" data-here style="--cc:#35B3EE">${I(IC.pin)}いまいる場所</button>`
     +WARDS.map((w,i)=>`<button class="chip${S.area===w?" on":""}" data-a="${w}" style="--cc:${PAL[i%PAL.length][1]}">${w}区</button>`).join("");
 }
+/* いまいる場所（位置情報）から近い順。もう一度押すと元にもどる。位置は保存しない */
+document.addEventListener("click",e=>{const b=e.target.closest("[data-here]");if(!b)return;
+  if(S.here){S.here=null;renderAreas();refresh(true);return}
+  if(!navigator.geolocation){alert("この端末では位置情報が使えません");return}
+  b.classList.add("busy");b.lastChild.textContent="しらべています…";const stopBusy=()=>b.classList.remove("busy");
+  navigator.geolocation.getCurrentPosition(p=>{S.here={lat:p.coords.latitude,lon:p.coords.longitude};S.area=null;S.shown=N;renderAreas();refresh(true);toList()},
+    ()=>{renderAreas();alert("位置情報を使えませんでした。スマホの設定で、LINE（またはブラウザ）の位置情報をオンにしてね。")},{timeout:12000,maximumAge:60000})});
 /* 10区の絵の地図：区をタップするとその区だけ、もう一度で全体 */
 function buildWardMap(){
   const ns="http://www.w3.org/2000/svg",gp=$("#wpaths"),gl=$("#wlabels");
@@ -528,7 +537,7 @@ function renderWardMap(){
   $("#whint").textContent=S.area?`${S.area}区の${G.word}を並べています（もう一度タップで全体）`:`区をタップすると、その区の${G.word}だけを並べます`;
 }
 function showMaps(){
-  const reg=isReg();
+  const reg=isReg()||!!S.here;
   $("#tg").parentElement.hidden=!reg;
   $("#mw").hidden=!reg;
   $("#wardsec").hidden=reg&&mapOpen;
@@ -547,7 +556,7 @@ function renderFilters(){
 /* 区をえらんだら、近い順の一覧の頭までするっと移動（立体の地図を見ているときは動かさない） */
 function toList(){setTimeout(()=>{const h=$(".lhead");h&&h.scrollIntoView({behavior:RM?"auto":"smooth",block:"start"})},120)}
 /* 場所のボタン：えらんでいる区をもう一度押すと外れて「家の近く／市全体」にもどる（10区の地図と同じ動き） */
-$("#areas").onclick=e=>{const b=e.target.closest("button");if(!b)return;const a=b.dataset.a||null;
+$("#areas").onclick=e=>{const b=e.target.closest("button");if(!b||b.hasAttribute("data-here"))return;S.here=null;const a=b.dataset.a||null;
   S.area=(a&&S.area===a)?null:a;S.shown=N;renderAreas();refresh(true);popChip(a&&!S.area?$('#areas [data-a=""]'):$(`#areas [data-a="${a||""}"]`));if(!isReg()||!mapOpen)toList()};
 /* 押したことがわかるように、ボタンがぷにっとはずむ */
 function popChip(el){if(!el||RM)return;el.classList.remove("pop");void el.offsetWidth;el.classList.add("pop")}
@@ -667,7 +676,7 @@ function ftBox(r){
 }
 function openFs(i,from){
   const x=LAST[i];if(!x)return;const r=x.r;fsFrom=from||null;
-  const rows=[["住所",esc("さいたま市"+r.a)],["距離",`${kmT(x.km)}（${moveT(x.km)}）<br><small style="color:var(--muted)">${esc((LO&&LO.home)?"登録した住所":isReg()?prof.ward+"役所":S.area?S.area+"区役所のあたり":"さいたま市役所のあたり")}からのまっすぐの距離のめやす</small>`]];
+  const rows=[["住所",esc("さいたま市"+r.a)],["距離",`${kmT(x.km)}（${moveT(x.km)}）<br><small style="color:var(--muted)">${esc((LO&&LO.here)?"いまいる場所":(LO&&LO.home)?"登録した住所":isReg()?prof.ward+"役所":S.area?S.area+"区役所のあたり":"さいたま市役所のあたり")}からのまっすぐの距離のめやす</small>`]];
   if(r.h)rows.push([G.hl||"診療時間",esc(r.h).replace(/／/g,"<br>")]);
   if(r.who)rows.push(["対象",esc(r.who)]);
   if(r.d)rows.push(["どんな所",esc(r.d)]);
@@ -675,7 +684,7 @@ function openFs(i,from){
   if(r.pg)rows.push(["できること",esc(r.pg)]);
   if(r.tel)rows.push(["電話",`<a href="tel:${esc(r.tel.replace(/[^0-9]/g,""))}">${esc(r.tel)}</a>`]);
   if((r.ck||[]).length)rows.push(["歯科健診",(r.ck.includes("kid")?"幼児（1歳6か月・3歳）":"")+(r.ck.length>1?"・":"")+(r.ck.includes("mom")?"妊婦さん":"")+'<br><small style="color:var(--muted)">市の実施医療機関一覧より。予約のときに確かめてね</small>']);
-  const reg=isReg();
+  const reg=isReg()||!!S.here;
   $("#fsP").innerHTML=`<button type="button" class="fs-x" data-fsx aria-label="閉じる">×</button>
     <div class="fs-h"><div class="fs-ic">${svg(NIC[cardIc(r)],40)}</div><div><h3 id="fsT">${esc(r.n)}</h3><small>${esc(wn(r.w))}・${esc(G.word)}</small><div class="fs-km">${kmT(x.km)}<i>${moveT(x.km)}</i></div></div></div>
     <div class="tags">${tags(r)}</div>
@@ -721,7 +730,7 @@ $("#fs").addEventListener("click",e=>{
 addEventListener("keydown",e=>{if(e.key==="Escape")closeFs()});
 function focusOn(i){
   const x=LAST[i];if(!x)return;
-  if(!isReg()){window.open(gmap(x.r),"_blank","noopener");return}
+  if(!isReg()&&!S.here){window.open(gmap(x.r),"_blank","noopener");return}
   if(!mapOpen)toggleMap();
   const el=$("#map");el.scrollIntoView({behavior:RM?"auto":"smooth",block:"center"});
   if(ready)setTimeout(()=>openPin(x,i),RM?0:350);
