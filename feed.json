@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-12T09:45:00+09:00",
+ "updatedAt": "2026-11-12T19:30:00+09:00",
  "events": [
   {
    "id": "e-lalaport-bf",
@@ -156,6 +156,19 @@
    "img": "https://kawaguchi.ario.jp/app/17/img/event/1700012570/img_3sb4v64vijmso.jpg",
    "ai": false,
    "added": "2026-11-11T09:50:00+09:00"
+  },
+  {
+   "id": "e-kodomo-machi-saiden",
+   "kind": "kids",
+   "title": "子どもがつくるまち（11/22）無料",
+   "desc": "小学生がお店や仕事を体験する1日のまち。先着順の申込制。",
+   "date": "2026-11-22",
+   "area": "さいたま市桜区",
+   "src": "さいたま市",
+   "url": "https://www.city.saitama.lg.jp/003/002/018/sakura/p134373.html",
+   "img": "",
+   "ai": false,
+   "added": "2026-11-12T19:30:00+09:00"
   },
   {
    "id": "e-planetarium-day",
@@ -387,6 +400,19 @@
  ],
  "news": [
   {
+   "id": "n-minna-hiroba-r9",
+   "kind": "kosodate",
+   "title": "放課後みんなのひろば 4月分の申込み（〆12/28）",
+   "desc": "11/13から受付。市内35校で実施、申込みは各運営事業者へ。",
+   "date": "2026-11-13",
+   "src": "さいたま市",
+   "url": "https://www.city.saitama.lg.jp/003/001/013/p116546.html",
+   "img": "",
+   "ai": false,
+   "important": false,
+   "added": "2026-11-12T19:30:00+09:00"
+  },
+  {
    "id": "n-soccer-festa",
    "kind": "kids",
    "title": "さいたまサッカーフェスタ（12/20）入場無料",
@@ -459,17 +485,6 @@
    "url": "https://www.city.saitama.lg.jp/006/007/014/020/p133609.html",
    "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-window-time.jpg",
    "ai": true,
-   "added": "2026-11-11T09:50:00+09:00"
-  },
-  {
-   "id": "n-zootopia",
-   "kind": "kids",
-   "title": "名画鑑賞会『ズートピア』（11/14 プラザノース）",
-   "desc": "親子で楽しめる映画の上映会。予約が必要です。",
-   "date": "2026-11-14",
-   "src": "ウォーカープラス",
-   "url": "https://www.walkerplus.com/event/ar0311e609528/",
-   "img": "https://ms-cache.walkerplus.com/walkertouch/wtd/event/28/l2/609528.jpg",
    "added": "2026-11-11T09:50:00+09:00"
   },
   {
