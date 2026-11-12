@@ -516,7 +516,7 @@ function showGenre(id,push=true){
   if(g.soon){toast("「"+g.t+"」は準備中です。次の更新で追加します");return}
   if(push)gstack.push(["g",id]);openGd();$("#gdT").textContent=g.t;
   const ch=GCHAR[g.id]||[],im=TALK[ch[0]];
-  $("#gdB").innerHTML=`<div class="gp"><h2>${gi(g.ic)}${esc(g.t)}</h2>${im?`<div class="say"><img src="${im}" alt=""><p>${esc(ch[1])}</p></div>`:""}
+  $("#gdB").innerHTML=`<div class="gp"><h2>${gi(g.ic)}${esc(g.t)}</h2>${ch[1]?`<p class="lead">${esc(ch[1])}</p>`:""}
     <ul class="gl">${(g.items||[]).map(it=>`<li><button type="button" data-gi="${esc(g.id+"/"+it.id)}"><span class="gli">${gi(it.ic)}</span><span><b>${esc(it.t)}</b><small>${esc(it.s||"")}</small></span><i>›</i></button></li>`).join("")}</ul></div>`;
   $("#gdB").scrollTop=0;$("#gdTop").classList.remove("on");
 }
@@ -556,7 +556,7 @@ function showItem(path,push=true){
   body+=sec("関連するWollyの情報","star",`<div class="rel">${rel}</div>`);
   if(it.src)body+=sec("公式の情報","web",`<div class="src">${it.src.map(x=>x.u?`<a href="${esc(x.u)}" target="_blank" rel="noopener">${esc(x.t)} ›</a>`:`<span>${esc(x.t)}</span>`).join("")}</div>`);
   $("#gdB").innerHTML=`<div class="gp"><h2>${gi(it.ic)}${esc(it.t)}</h2><div class="meta"><span>${esc(g.t)}</span>${it.year?`<span>対象：${esc(it.year)}</span>`:""}</div>
-    ${(()=>{const ch=GCHAR[g.id]||[],im=TALK[ch[0]];return im?`<div class="say"><img src="${im}" alt=""><p>${esc(it.lead||"")}</p></div>`:`<p class="lead">${esc(it.lead||"")}</p>`})()}${body}
+    ${(()=>{const ch=GCHAR[g.id]||[],im=it.ch||TALK[ch[0]];return im?`<div class="say"><img src="${im}" alt=""><p>${esc(it.lead||"")}</p></div>`:`<p class="lead">${esc(it.lead||"")}</p>`})()}${body}
     <div class="foot">対象年度：${esc(it.year||"-")}／最終確認日：${esc(it.checked||"-")}<br>公式の情報をもとに、Wollyがわかりやすくまとめたものです。変わることがあるので、手続きの前に公式ページでたしかめてね。</div>
     <button type="button" class="favb" data-fav="${esc(key)}" aria-pressed="${fav}">${fav?"★ 保存しました":"☆ このページを保存"}</button></div>`;
   $("#gdB").scrollTop=0;
