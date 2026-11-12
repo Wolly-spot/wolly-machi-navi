@@ -2439,15 +2439,15 @@ function sheetClasses(i){
   all.forEach(c=>{if(!areas.includes(c.w))areas.push(c.w)});
   if(mine&&areas.includes(mine[0])){areas.splice(areas.indexOf(mine[0]),1);areas.unshift(mine[0])}
   const one=areas.length<=1;if(one&&clsArea!=="all")clsArea="all";
-  const unit=l.c==="sports"?"チーム・教室":"教室";
+  const unit=l.c==="sports"?"チーム・教室":"教室";const soc=l.t==="サッカー";
   return dhead(svg(LI[l.ic]),st[2]?st[0]:"#fff",LCAT[l.c],l.t,`${unit} ${all.length}件${one?"":` ・ ${areas.length}エリア`}${S.profile?` ・ ${esc(S.profile.ward)}から表示`:""}`)+
    (l.t==="サッカー"?`<a class="fcban" data-noicon href="#" data-view="soccer" data-vt="さいたま市 少年サッカー"><span class="fcb-n">SAITAMA KIDS FOOTBALL</span><b>さいたま市 少年サッカー</b><small>10区・129チーム 写真つきで見る</small><i>⚽</i></a>`:"")+
    `<label class="csearch">${ico('<circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/>')}<input id="clsQ" type="search" placeholder="名前・駅名・町名・学校名でさがす" value="${esc(clsQ)}" aria-label="教室をさがす"></label>
-    ${one?"":`<div class="filt" role="group" aria-label="エリア">${[["all","すべて"]].concat(areas.map(a=>[a,a])).map(([k,n])=>`<button class="chip${mine&&k===mine[0]?" mine":""}" type="button" data-cw="${esc(k)}" aria-pressed="${k===clsArea}">${esc(n)}</button>`).join("")}</div>`}
-    <div class="dent-tools" role="group" aria-label="ならべかえ・しぼりこみ">${[["rec","おすすめ順"],["near","駅から近い順"]].map(([k,n])=>`<button class="chip" type="button" data-cs="${k}" aria-pressed="${k===clsSort}">${n}</button>`).join("")}<span class="sep"></span>${CLS_TOGGLES.map(([k,n])=>`<button class="chip" type="button" data-ct="${k}" aria-pressed="${!!clsT[k]}">${n}</button>`).join("")}</div>
-    <div id="clsBox">${clsList()}</div>
+    ${one||soc?"":`<div class="filt" role="group" aria-label="エリア">${[["all","すべて"]].concat(areas.map(a=>[a,a])).map(([k,n])=>`<button class="chip${mine&&k===mine[0]?" mine":""}" type="button" data-cw="${esc(k)}" aria-pressed="${k===clsArea}">${esc(n)}</button>`).join("")}</div>`}
+    ${soc?`<p class="note">チーム名・小学校・公園・駅の名前を入れると、ここにチームが出ます。</p>`:""}<div class="dent-tools" role="group" aria-label="ならべかえ・しぼりこみ"${soc?" hidden":""}>${[["rec","おすすめ順"],["near","駅から近い順"]].map(([k,n])=>`<button class="chip" type="button" data-cs="${k}" aria-pressed="${k===clsSort}">${n}</button>`).join("")}<span class="sep"></span>${CLS_TOGGLES.map(([k,n])=>`<button class="chip" type="button" data-ct="${k}" aria-pressed="${!!clsT[k]}">${n}</button>`).join("")}</div>
+    <div id="clsBox">${clsBoxHtml()}</div>
     ${S.profile?"":`<p class="note">マイページで区を登録すると、あなたの区から表示されます。</p>`}
-    ${l.w.some(([,sl])=>sl)?`<details class="orig"><summary>元のページ（エリアごと）を見る</summary><div class="wards">${l.w.filter(([,sl])=>sl).map(([lab,slug])=>`<a href="${CANVA+slug}" target="_blank" rel="noopener">${esc(lab)}<small>見る ›</small></a>`).join("")}</div></details>`:""}
+    ${!soc&&l.w.some(([,sl])=>sl)?`<details class="orig"><summary>元のページ（エリアごと）を見る</summary><div class="wards">${l.w.filter(([,sl])=>sl).map(([lab,slug])=>`<a href="${CANVA+slug}" target="_blank" rel="noopener">${esc(lab)}<small>見る ›</small></a>`).join("")}</div></details>`:""}
     <p class="foot">Wolly spot の習い事ページ（2026年11月7日に読み取り）をもとにしています。コース・料金・募集状況は変わることがあるため、各教室にご確認ください。</p>`}
 $("#sheet").addEventListener("click",e=>{
   const re=()=>{clsShow=20;$("#clsBox").innerHTML=clsList()};
@@ -2456,7 +2456,8 @@ $("#sheet").addEventListener("click",e=>{
   const t=e.target.closest("[data-ct]");if(t){clsT[t.dataset.ct]=!clsT[t.dataset.ct];t.setAttribute("aria-pressed",!!clsT[t.dataset.ct]);re();return}
   if(e.target.closest("[data-cmore]")){clsShow+=20;$("#clsBox").innerHTML=clsList()}
 });
-$("#sheet").addEventListener("input",e=>{if(e.target.id==="clsQ"){clsQ=e.target.value;clsShow=20;$("#clsBox").innerHTML=clsList()}});
+function clsBoxHtml(){const l=LESSONS[clsKey];return l&&l.t==="サッカー"&&!clsQ.trim()?"":clsList()}
+$("#sheet").addEventListener("input",e=>{if(e.target.id==="clsQ"){clsQ=e.target.value;clsShow=20;$("#clsBox").innerHTML=clsBoxHtml()}});
 function sheetLesson(i){const l=LESSONS[i];if(!l)return"";
   if(CLASSES[l.t])return sheetClasses(i);
   const mine=myWardGroup(l);const st=STYLE[l.c][i%STYLE[l.c].length];
