@@ -445,8 +445,8 @@ const GENRES={
        subs:[["市の学童（公設）","kousetsu","#FF6FA5","star","kid"],["民間の学童（民設）","minsetsu","#2FA4EA","heart","sat"]],word:"学童",noHours:true,noNight:true},
   jidou:{t:"児童センター・放課後ひろば",ic:"kids",ac:"#3AA6D0",soft:"#E3F4FC",soft2:"#F4FBFF",sub:"子どもが自由に遊べる児童センターと、小学校の中の「放課後みんなのひろば」。",deco:["kids","star","slide"],
        subs:[["児童センター","jidou","#2FA4EA","kids","sat"],["放課後みんなのひろば","hiroba","#FF6FA5","star","kid"]],word:"児童センター・ひろば",noHours:true,noNight:true,hl:"開いている時間"},
-  odekake:{t:"おでかけスポット",ic:"star",ac:"#5A7BF0",soft:"#E6ECFF",soft2:"#F5F7FF",sub:"プール・動物園・科学館・大きな公園やモール。市外の人気スポットも（車で1時間くらいまで）。",deco:["star","slide","kids"],
-       subs:[["プール","pool","#35B3EE","star","sat"],["雨の日もOK","indoor","#8E6BF5","hospf","brace"],["無料","free","#FF6FA5","heart","kid"],["市外","out","#5A5AEF","car","night"]],word:"おでかけスポット",noHours:true}
+  odekake:{t:"おでかけスポット",ic:"star",ac:"#5A7BF0",soft:"#E6ECFF",soft2:"#F5F7FF",sub:"プール・動物園・科学館・温泉・大きな公園やモール。市外の人気スポットも（車で1時間くらいまで）。",deco:["star","slide","kids"],
+       subs:[["プール","pool","#35B3EE","star","sat"],["雨の日もOK","indoor","#8E6BF5","hospf","brace"],["無料","free","#FF6FA5","heart","kid"],["温泉・おふろ","onsen","#E58BB5","heart","sun"],["市外","out","#5A5AEF","car","night"]],word:"おでかけスポット",noHours:true}
 };
 const g=(new URLSearchParams(location.search).get("g")||"ped");
 const G=GENRES[g]||GENRES.ped;
