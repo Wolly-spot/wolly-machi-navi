@@ -195,6 +195,7 @@ body{text-wrap:pretty}
 .gp .tl{list-style:none;margin:0;padding:0}.gp .tl li{position:relative;display:grid;grid-template-columns:7.2em 1fr;gap:10px;padding:0 0 12px 0}
 .gp .tl li b{font-size:12.5px;color:#fff;background:linear-gradient(120deg,#5AB4E8,#8E6BF5);border-radius:10px;padding:4px 8px;align-self:start;text-align:center}
 .gp .tl li span{font-size:13.5px;line-height:1.7}
+.chk-last{display:flex;gap:10px;align-items:flex-start;margin:18px 0 6px;padding:12px 14px;border-radius:16px;background:linear-gradient(120deg,#E8F6FF,#F3EEFF);border:2px solid #CFE8FA}.chk-last .clk{flex:0 0 auto;width:34px;height:34px;border-radius:12px;background:#fff;display:grid;place-items:center}.chk-last .clk svg{width:24px;height:24px}.chk-last p{margin:0;font-size:13px;line-height:1.7}.chk-last b{display:block;font-size:14.5px;color:#2F7AA8;margin-bottom:2px}
 .gp .notes{margin:0;padding:10px 12px 10px 14px;border-radius:14px;background:#FFF8E1;list-style:none;display:grid;gap:6px}.gp .notes li{font-size:13px;line-height:1.7;padding-left:1.2em;text-indent:-1.2em}.gp .notes li::before{content:"！";color:#E0A100;font-weight:900;margin-right:.2em}
 .gp .tbl{overflow-x:auto;margin:0 -2px}.gp table{border-collapse:separate;border-spacing:0;min-width:100%;font-size:12.5px;line-height:1.6}
 .gp th,.gp td{padding:8px;border-bottom:1px dashed #DCEFFA;vertical-align:top;text-align:left}.gp thead th{background:#E3F4FC;color:#2F7AA8;white-space:nowrap}.gp tbody th{color:#2F7AA8;white-space:nowrap}
@@ -606,21 +607,22 @@ function showItem(path,push=true){
   if(push)gstack.push(["i",path]);openGd();$("#gdT").textContent=it.t;
   const key="item:"+path,fav=favSet().has(key);
   let body="";
-  if(it.steps)body+=sec("いつ・何がある？","cal",`<ul class="tl">${it.steps.map(([a,b])=>`<li><b>${esc(a)}</b><span>${esc(b)}</span></li>`).join("")}</ul>`);
-  if(it.why)body+=sec("どうしてこんなに多いの？","bulb",`<div class="why">${it.why.map(x=>`<p>${esc(x)}</p>`).join("")}</div>`);
+  if(it.steps)body+=sec("いつ・なにがある？","cal",`<ul class="tl">${it.steps.map(([a,b])=>`<li><b>${esc(a)}</b><span>${esc(b)}</span></li>`).join("")}</ul>`);
+  if(it.why)body+=sec("どうしてこんなにあるの？","bulb",`<div class="why">${it.why.map(x=>`<p>${esc(x)}</p>`).join("")}</div>`);
   if(it.table)body+=sec(it.table_t||"くらべてみよう","check",`<div class="tbl"><table class="c${it.table.head.length}"><thead><tr>${it.table.head.map(h=>`<th>${esc(h)}</th>`).join("")}</tr></thead><tbody>${it.table.rows.map(r=>`<tr>${r.map((c,k)=>k?`<td>${esc(c)}</td>`:`<th>${esc(c)}</th>`).join("")}</tr>`).join("")}</tbody></table></div>`);
   if(it.info)body+=sec("知っておきたいこと","bulb",`<dl>${it.info.map(([a,b])=>`<div><dt>${gi(kwIc(a))}<span>${esc(a)}</span></dt><dd>${esc(b)}</dd></div>`).join("")}</dl>`);
   if(it.checklist&&it.groups){const st=LS("wolly.prepcheck")||{};const all=it.groups.reduce((n,[,l])=>n+l.length,0),done=Object.values(st).filter(Boolean).length;
     body+=sec("チェックリスト","check",`<div class="ckbar"><i style="width:${Math.round(done/all*100)}%"></i></div><p class="meta"><span>${done} / ${all} できた</span></p>`+it.groups.map(([h,l])=>`<p style="margin:12px 0 6px;font-weight:900;font-size:13.5px">${esc(h)}</p><div class="ck">${l.map(x=>`<label><input type="checkbox" data-ck="${esc(x)}"${st[x]?" checked":""}>${esc(x)}</label>`).join("")}</div>`).join(""))}
   if(it.calendar&&it.deadlines){const l=it.deadlines.map(d=>[d,dleft(d[1],d[2])]).sort((a,b)=>a[1][1]-b[1][1]||a[0][1].localeCompare(b[0][1]));
-    body+=sec("締切の一覧","cal",`<div class="dlv">${l.map(([[t,a,b,p],[st]])=>`<div>${st}<b>${esc(t)}</b><small>${jd(a)}${b?"〜"+jd(b):""}</small><a href="${gcal(t,a,b)}" target="_blank" rel="noopener">Googleカレンダーに入れる</a>${p?`<button type="button" data-gi="${esc(p)}">くわしく</button>`:""}</div>`).join("")}</div>`)}
-  if(it.faq)body+=sec("よくある質問","bulb",it.faq.map(([q,a])=>`<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join(""));
-  if(it.how)body+=sec("手続きの方法","doc",`<ol class="how">${it.how.map(x=>`<li>${esc(x)}</li>`).join("")}</ol>`);
-  if(it.note)body+=sec("注意すること","warn",`<ul class="notes">${it.note.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`);
-  if(it.contact)body+=sec("問い合わせ","phone",`<div class="tel">${it.contact.map(([n,t,inf],ci)=>`<div${inf?' class="has-ci"':""}><span>${esc(n)}</span><span class="tbtn">${inf?`<button type="button" class="cib" data-ci="${esc(path)}|${ci}">どんなところ？</button>`:""}${t?`<a href="tel:${esc(t.replace(/[^0-9]/g,""))}">${esc(t)}</a>`:""}</span></div>`).join("")}</div>`);
+    body+=sec("しめきりの一らん","cal",`<div class="dlv">${l.map(([[t,a,b,p],[st]])=>`<div>${st}<b>${esc(t)}</b><small>${jd(a)}${b?"〜"+jd(b):""}</small><a href="${gcal(t,a,b)}" target="_blank" rel="noopener">Googleカレンダーに入れる</a>${p?`<button type="button" data-gi="${esc(p)}">くわしく</button>`:""}</div>`).join("")}</div>`)}
+  if(it.faq)body+=sec("よくきかれること","bulb",it.faq.map(([q,a])=>`<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join(""));
+  if(it.how)body+=sec("手つづきのしかた","doc",`<ol class="how">${it.how.map(x=>`<li>${esc(x)}</li>`).join("")}</ol>`);
+  if(it.note)body+=sec("気をつけること","warn",`<ul class="notes">${it.note.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`);
+  body+=`<div class="chk-last"><span class="clk">${gi("check")}</span><p><b>さいごは、まどぐちでたしかめてね</b>このページは、わかりやすくまとめた「めやす」です。申しこむ前や、手つづきの前は、区役所・学校・市の係でたしかめてください。${it.contact?"下の「電話できるところ」から電話できます。":""}</p></div>`;
+  if(it.contact)body+=sec("電話できるところ","phone",`<div class="tel">${it.contact.map(([n,t,inf],ci)=>`<div${inf?' class="has-ci"':""}><span>${esc(n)}</span><span class="tbtn">${inf?`<button type="button" class="cib" data-ci="${esc(path)}|${ci}">どんなところ？</button>`:""}${t?`<a href="tel:${esc(t.replace(/[^0-9]/g,""))}">${esc(t)}</a>`:""}</span></div>`).join("")}</div>`);
   const rel=(it.rel||[]).map(relBtn).join("")+`<button type="button" class="soonb" data-chat>${gi("people")}地域の人に聞く（準備中）</button>`;
-  body+=sec("関連するWollyの情報","star",`<div class="rel">${rel}</div>`);
-  if(it.src)body+=sec("公式の情報","web",`<div class="src">${it.src.map(x=>x.u?`<a href="${esc(x.u)}" target="_blank" rel="noopener">${esc(x.t)} ›</a>`:`<span>${esc(x.t)}</span>`).join("")}</div>`);
+  body+=sec("Wollyのほかのページ","star",`<div class="rel">${rel}</div>`);
+  if(it.src)body+=sec("市のページ（もとの情報）","web",`<div class="src">${it.src.map(x=>x.u?`<a href="${esc(x.u)}" target="_blank" rel="noopener">${esc(x.t)} ›</a>`:`<span>${esc(x.t)}</span>`).join("")}</div>`);
   $("#gdB").innerHTML=`<div class="gp"><h2>${gi(it.ic)}${esc(it.t)}</h2><div class="meta"><span>${esc(g.t)}</span>${it.year?`<span>対象：${esc(it.year)}</span>`:""}</div>
     ${(()=>{const ch=GCHAR[g.id]||[],im=it.ch||"";return im?`<div class="say"><img src="${im}" alt=""><p>${esc(it.lead||"")}</p></div>`:`<p class="lead">${esc(it.lead||"")}</p>`})()}${body}
     <div class="foot">対象年度：${esc(it.year||"-")}／最終確認日：${esc(it.checked||"-")}<br>公式の情報をもとに、Wollyがわかりやすくまとめたものです。変わることがあるので、手続きの前に公式ページでたしかめてね。</div>
