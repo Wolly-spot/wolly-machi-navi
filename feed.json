@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-12T19:30:00+09:00",
+ "updatedAt": "2026-11-13T09:45:00+09:00",
  "events": [
   {
    "id": "e-lalaport-bf",
@@ -26,6 +26,19 @@
    "img": "https://mitsui-shopping-park.com/lalaport/fujimi/event/3672763/image1.jpg",
    "ai": false,
    "added": "2026-11-11T09:50:00+09:00"
+  },
+  {
+   "id": "e-aeon-ageo-english",
+   "kind": "mall",
+   "title": "イオンモール上尾 親子の英語あそび（〜11/15）無料",
+   "desc": "外国人の先生と英語の歌やダンス。予約不要、10時〜17時。",
+   "date": "2026-11-13",
+   "area": "上尾市",
+   "src": "いこーよ",
+   "url": "https://iko-yo.net/events/612512",
+   "img": "https://d2goguvysdoarq.cloudfront.net/system/event_photos/photos/1781758/normal.png?1793854462",
+   "ai": false,
+   "added": "2026-11-13T09:45:00+09:00"
   },
   {
    "id": "e-ario-sdgs",
@@ -80,19 +93,6 @@
    "added": "2026-11-11T09:50:00+09:00"
   },
   {
-   "id": "e-kawagoe-koyo",
-   "kind": "free",
-   "title": "県営川越公園の紅葉（〜12月中旬）入園無料",
-   "desc": "広い公園で秋の散歩。週末の親子のおでかけにぴったり。",
-   "date": "2026-11-14",
-   "area": "川越市",
-   "src": "ウォーカープラス",
-   "url": "https://www.walkerplus.com/event/ar0311e618037/",
-   "img": "https://ms-cache.walkerplus.com/walkertouch/wtd/event/37/l2/618037.jpg",
-   "ai": false,
-   "added": "2026-11-11T09:50:00+09:00"
-  },
-  {
    "id": "e-wako-jurin-koyo",
    "kind": "free",
    "title": "和光樹林公園の紅葉（〜12月上旬）入園無料",
@@ -119,6 +119,19 @@
    "added": "2026-11-11T09:50:00+09:00"
   },
   {
+   "id": "e-playpark-misono",
+   "kind": "free",
+   "title": "浦和美園で1日プレーパーク（11/15）無料",
+   "desc": "公園で泥んこ・木登りなど自由に外あそび。赤ちゃんから参加OK。",
+   "date": "2026-11-15",
+   "area": "さいたま市緑区",
+   "src": "さいたま市",
+   "url": "https://www.city.saitama.lg.jp/003/001/016/005/p133353.html",
+   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/e-playpark-misono.jpg",
+   "ai": true,
+   "added": "2026-11-13T09:45:00+09:00"
+  },
+  {
    "id": "e-ario-happyday",
    "kind": "point",
    "title": "アリオ川口 nanacoポイント4倍（11/18）",
@@ -130,6 +143,19 @@
    "img": "https://kawaguchi.ario.jp/app/17/img/event/1700012385/img_3s1np1ftxhogo.png",
    "ai": false,
    "added": "2026-11-11T09:50:00+09:00"
+  },
+  {
+   "id": "e-cocoon-card10",
+   "kind": "point",
+   "title": "コクーンシティカード10%オフ（11/20〜24）",
+   "desc": "5日間、コクーンシティカードの支払いで10%オフに。",
+   "date": "2026-11-20",
+   "area": "さいたま市大宮区",
+   "src": "コクーンシティ",
+   "url": "https://www.cocooncity.jp/event/detail/2880",
+   "img": "https://www.cocooncity.jp/theme/cocooncity/resources/images/ogp.png",
+   "ai": false,
+   "added": "2026-11-13T09:45:00+09:00"
   },
   {
    "id": "e-moomin-cocoon",
@@ -328,9 +354,9 @@
   {
    "id": "s-minna-app",
    "kind": "coupon",
-   "title": "「さいたま市みんなのアプリ」感謝キャンペーン",
-   "desc": "利用者40万人・4,000店舗を記念したキャンペーン。お店でのお買いものがおトクに。",
-   "date": "2026-11-05",
+   "title": "みんなのアプリ よんよん感謝キャンペーン（〜1/15）",
+   "desc": "さいコイン加盟店で使うと抽選に。お店でのお買いものがおトクに。",
+   "date": "2026-11-09",
    "src": "さいたま市",
    "url": "https://www.city.saitama.lg.jp/001/154/009/002/p135012.html",
    "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/s-minna-app.jpg",
@@ -476,18 +502,6 @@
    "added": "2026-11-11T09:50:00+09:00"
   },
   {
-   "id": "n-window-time",
-   "kind": "mama",
-   "title": "1月4日から区役所の窓口受付時間が変わります",
-   "desc": "区役所・市税事務所の受付時間が変わる予定（試行）。出かける前に確認を。",
-   "date": "2027-01-04",
-   "src": "さいたま市",
-   "url": "https://www.city.saitama.lg.jp/006/007/014/020/p133609.html",
-   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-window-time.jpg",
-   "ai": true,
-   "added": "2026-11-11T09:50:00+09:00"
-  },
-  {
    "id": "n-minuma-fair",
    "kind": "kids",
    "title": "見沼区ふれあいフェア（11/14 堀崎公園ほか）",
@@ -537,14 +551,14 @@
   {
    "id": "n-flu-2026",
    "kind": "kosodate",
-   "title": "インフルエンザ 注意報レベル近くで流行中",
-   "desc": "市内の患者数が増えています（11/5発表）。手洗いと体調の変化に気をつけて。",
-   "date": "2026-11-05",
+   "title": "インフルエンザ注意報 市内で流行中（11/11）",
+   "desc": "患者数が注意報レベルをこえました。手洗い・換気と体調の変化に注意を。",
+   "date": "2026-11-11",
    "src": "さいたま市",
    "url": "https://www.city.saitama.lg.jp/002/001/008/001/007/002/p007833.html",
    "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-flu-2026.jpg",
    "ai": true,
-   "important": false,
+   "important": true,
    "added": "2026-11-11T09:50:00+09:00"
   },
   {
@@ -572,6 +586,19 @@
    "ai": false,
    "important": false,
    "added": "2026-11-11T09:50:00+09:00"
+  },
+  {
+   "id": "n-kamikizaki-nobinobi",
+   "kind": "kosodate",
+   "title": "上木崎のびのびルーム 来年3月中旬で終了",
+   "desc": "それまでは通常どおり利用可。あいぱれっとなど近くの施設も使えます。",
+   "date": "2026-11",
+   "src": "さいたま市",
+   "url": "https://www.city.saitama.lg.jp/kosodate/oshirase/p134549.html",
+   "img": "",
+   "ai": false,
+   "important": false,
+   "added": "2026-11-13T09:45:00+09:00"
   }
  ]
 }
