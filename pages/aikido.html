@@ -231,7 +231,7 @@ function home(){
   <section class="bench"><h2>ぜんぶの区から、しぼって探す</h2>
     <div class="chips"><button class="chip" data-f="all"><span class="dot" style="background:#fff;box-shadow:inset 0 0 0 2px var(--ink)"></span>すべて見る（${D.length}）</button>${FILTERS.map(f=>`<button class="chip" data-f="${f[0]}"><span class="dot" style="background:var(${f[2]})"></span>${f[1]}</button>`).join("")}</div>
   </section>
-  <footer class="foot"><div class="footscene"><svg viewBox="0 0 300 70" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="300" height="70" fill="#d4cd86"/><circle cx="150" cy="35" r="26" fill="none" stroke="#1a2440" stroke-width="4" stroke-dasharray="140 30"><animateTransform attributeName="transform" type="rotate" values="0 150 35;360 150 35" keyTimes="0;1" dur="3s" repeatCount="indefinite" additive="sum"/></circle></svg></div>合気道の道場の情報は、Wollyの習い事ページ（2026年11月7日に読み取り）をもとにWollyがまとめたものです。曜日・お金・入会のしかたは変わることがあるので、かならずホームページでたしかめてね。</footer>`;
+  <footer class="foot"><div class="footscene"><svg viewBox="0 0 300 70" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="300" height="70" fill="#d4cd86"/><circle cx="150" cy="35" r="26" fill="none" stroke="#1a2440" stroke-width="4" stroke-dasharray="140 30"><animateTransform attributeName="transform" type="rotate" values="0 150 35;360 150 35" keyTimes="0;1" dur="3s" repeatCount="indefinite" additive="sum"/></circle></svg></div>合気道の道場の情報は、Wollyの習い事ページ（2026年11月7日に読み取り）と、埼玉県合気道連盟「道場一覧」（2026年11月13日確認）をもとにWollyがまとめたものです。曜日・お金・入会のしかたは変わることがあるので、かならずホームページでたしかめてね。</footer>`;
   window.scrollTo(0,0);
 }
 function list(){
@@ -265,7 +265,7 @@ function panelHtml(ci){
    <div class="cap"><small>${esc(tags)}</small><b>${esc(t.n)} <span class="bb">☯️</span></b>
    ${t.u?`<a class="hp" href="${esc(t.u)}" target="_blank" rel="noopener">🏠 ホームページを見る ›</a>`:`<span class="hp none">ホームページはまだ見つかっていません</span>`}</div>
    <div class="pb">${t.st?`<div class="td num">TEAM RESULTS</div><ul class="res">${t.st.map(r=>`<li><span class="rk">${esc(r[2])}</span><b>${esc(r[0])}年度 ${esc(r[1])}</b><small>${esc(r[3]||"")}</small></li>`).join("")}</ul><p class="srcs">強豪＝ここ2年の埼玉県の大きな大会で、ベスト16以上か県リーグのいちばん上（S1）に入ったチーム。結果の出どころ：${STSRC.map(x=>`<a href="${x[1]}" target="_blank" rel="noopener">${esc(x[0])}</a>`).join("・")}</p><div style="height:10px"></div>`:""}<div class="td num">DOJO DATA</div><dl>${rows.map(r=>`<div class="row"><dt>${r[0]}</dt><dd>${esc(r[1])}</dd></div>`).join("")}</dl>
-   <p class="note">曜日・お金・入会のしかたは、かならずホームページでたしかめてね。${t.sp?"練習日は、さいたま市スポーツ協会「スポ少みっけ！」より。":""}</p></div>`;
+   <p class="note">曜日・お金・入会のしかたは、かならずホームページでたしかめてね。${t.sp?"":""}</p></div>`;
 }
 function openTeam(ci){
   let cur=ci;
