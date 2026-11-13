@@ -185,14 +185,11 @@ let state={view:"home",ward:"",f:"",q:""};
 
 function nameLines(n){
   n=String(n).trim();
-  let parts=n.split(/\s+/);
-  if(parts.length===1&&n.length>9){
-    const m=n.slice(3).match(/(サッカースポーツ少年団|スポーツ少年団|サッカー少年団|少年団|サッカースクール|フットボールクラブ|サッカー|スクール|アカデミー|U-\d+)/);
-    if(m){const k=3+m.index;parts=[n.slice(0,k),n.slice(k)]}
-    else{const e=n.match(/(FC|SC|Jr\.?FC|U-?\d+)$/i);if(e&&e.index>=4)parts=[n.slice(0,e.index),e[0]]}
-  }
-  if(parts.length>2)parts=[parts.slice(0,-1).join(" "),parts[parts.length-1]];
-  return parts.map(p=>`<span>${esc(p)}</span>`).join("");
+  const KW=/(スポーツ少年団|サッカー少年団|少年団|ミニバスケットボール|ミニバス|バスケットボールクラブ|バレーボールクラブ|ソフトボール|ベースボールクラブ|少年野球|サッカースクール|フットボールクラブ|フットボール|音楽教室|ピアノ教室|サッカー|ピアノ|バイオリン|バレエ|書道|教室|スクール|クラブ|アカデミー|センター|道場|コース|U-\d+)/g;
+  const cut=p=>{if(p.length<=9)return[p];for(const m of p.matchAll(KW)){if(m.index>=2)return[p.slice(0,m.index)].concat(cut(p.slice(m.index)))}
+    const e=p.match(/(FC|SC|Jr\.?FC|U-?\d+)$/i);if(e&&e.index>=4)return[p.slice(0,e.index),e[0]];return[p]};
+  const out=[];for(const p of n.split(/\s+/).flatMap(cut)){if(out.length&&(out[out.length-1]+p).length<=9)out[out.length-1]+=p;else out.push(p)}
+  return out.map(p=>`<span>${esc(p)}</span>`).join("");
 }
 function jersey(t,no){
   const c={sss:["#2f7d32","#fff"],club:["#1f4f8f","#fff"],school:["#c26b12","#fff"]}[t.k];
@@ -219,7 +216,7 @@ function card(t,no,ci){
 function shortCup(c){return c.includes("全国")?"全国大会":c.includes("リーグ S1")?"県リーグS1":c.includes("選手権大会")&&c.includes("リーグ")?"県リーグ選手権":"県大会"}
 function match(t){
   if(state.ward&&t.d!==state.ward)return false;
-  if(state.f){if(KIND[state.f]){if(t.k!==state.f)return false}else if(!t.tg.includes(state.f))return false}
+  if(state.f&&state.f!=="all"){if(KIND[state.f]){if(t.k!==state.f)return false}else if(!t.tg.includes(state.f))return false}
   if(state.q){const q=norm(state.q).split(/[,、]/).filter(Boolean);const h=norm(t.n+t.d+t.a+t.pl+t.i);if(!q.every(w=>h.includes(w)))return false}
   return true;
 }
@@ -233,11 +230,11 @@ function home(){
     <form class="search" id="sf"><input id="q" type="search" placeholder="チーム名・小学校・公園で探す" enterkeyhint="search"><button aria-label="探す">⚽</button></form>
   </header>
   <section class="pitch"><div class="ln"></div><div class="goal l"></div><div class="goal"></div><span class="shot">⚽</span><span class="goaltxt">GOAL!</span><h2>区をえらんでね</h2>
-    <div class="zks">${WARDS.map((w,i)=>`<button class="zk" data-w="${w}" style="${kit(w)}"><b class="num">${String(i+1).padStart(2,"0")}</b><span>${w}</span><small>${cnt(w)}チーム</small></button>`).join("")}</div>
+    <div class="zks">${WARDS.map((w,i)=>`<button class="zk" data-w="${w}" style="${kit(w)}"><b class="num">${String(i+1).padStart(2,"0")}</b><span>${w}</span><small style="${cnt(w)?"":"opacity:.45"}">${cnt(w)}チーム</small></button>`).join("")}</div>
   </section>
   <div style="background:var(--deep);padding-bottom:2px"><button class="goldbtn" data-f="strong"><span class="cup">🏆</span><span><b>強豪チーム</b><small>県の大会でベスト16以上・県リーグS1のチーム（結果つき）</small></span></button></div>
   <section class="bench"><h2>ぜんぶの区から、しぼって探す</h2>
-    <div class="chips">${FILTERS.map(f=>`<button class="chip" data-f="${f[0]}"><span class="dot" style="background:var(${f[2]})"></span>${f[1]}</button>`).join("")}</div>
+    <div class="chips"><button class="chip" data-f="all"><span class="dot" style="background:#fff;box-shadow:inset 0 0 0 2px var(--ink)"></span>すべて見る（${D.length}）</button>${FILTERS.map(f=>`<button class="chip" data-f="${f[0]}"><span class="dot" style="background:var(${f[2]})"></span>${f[1]}</button>`).join("")}</div>
   </section>
   <footer class="foot"><span class="rollball">⚽</span>チームの情報は、各チーム・スクールのページ、さいたま市スポーツ協会「スポ少みっけ！」、埼玉県U-12サッカー連盟のチームリストをもとにWollyがまとめたものです（2026年11月13日確認）。練習日・お金・入団のしかたは変わることがあるので、入る前にかならずチームにたしかめてね。</footer>`;
   window.scrollTo(0,0);
@@ -245,8 +242,8 @@ function home(){
 function list(){
   const items=D.filter(match);if(state.f==="strong")items.sort((a,b)=>(b.ss||0)-(a.ss||0));
   const wi=WARDS.indexOf(state.ward);
-  const title=state.ward||(state.q?`「${esc(state.q)}」`:FILTERS.find(f=>f[0]===state.f)?.[1]||"");
-  const lch=[["","すべて"]].concat(FILTERS.map(f=>[f[0],f[1]]));
+  const title=state.ward||(state.q?`「${esc(state.q)}」`:state.f==="all"?"すべて":FILTERS.find(f=>f[0]===state.f)?.[1]||"");
+  const lch=[[state.ward||state.q?"":"all","すべて"]].concat(FILTERS.map(f=>[f[0],f[1]]));
   CUR=items;
   const pw=wi>=0?WARDS[(wi+9)%10]:"",nw=wi>=0?WARDS[(wi+1)%10]:"";
   $("#app").innerHTML=`

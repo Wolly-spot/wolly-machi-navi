@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>さいたま市 少年野球</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dela+Gothic+One&family=Zen+Maru+Gothic:wght@500;700&display=swap">
+<style>
+:root{--deep:#10233f;--turf:#10233f;--turf2:#10233f;--chalk:#fff;--lime:#bcd7ff;--ink:#10233f;--orange:#e8462e;--orange-d:#fff;--cream:#fff;--line:#dbe4f2;--fieldbg:radial-gradient(ellipse 70% 60% at 50% 105%,#c9925a 0 55%,transparent 56%),repeating-linear-gradient(90deg,#3d7a22 0 30px,#468a28 30px 60px);--phbg:radial-gradient(circle at 50% 120%,#c9925a 0 45%,#3d7a22 46%);
+  --sss:#2f7d32;--club:#1f4f8f;--school:#c26b12;--girls:#c2457a;--kids:#7a5ac8;--jhs:#13788a;--gold:#b8860b}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+html,body{overflow-x:hidden}
+.field,.pn{touch-action:pan-y}
+.field,.pc{will-change:transform}
+body{font-family:"Zen Maru Gothic",system-ui,sans-serif;color:var(--ink);background:var(--deep);min-height:100vh;word-break:keep-all;overflow-wrap:anywhere;line-height:1.55}
+.num{font-family:"Bebas Neue",Impact,"Arial Black",sans-serif;letter-spacing:.04em;font-weight:400}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+a{color:inherit}
+.wrap{max-width:760px;margin:0 auto}
+/* ---- スコアボード ---- */
+.board{background:var(--deep);color:#fff;text-align:center;padding:20px 16px 18px;position:relative;overflow:hidden}
+.board::before,.board::after{content:"";position:absolute;width:150px;height:150px;border:2px solid rgba(192,221,151,.18);border-radius:50%;top:-70px}
+.board::before{left:-60px}.board::after{right:-60px}
+.board .en{color:var(--lime);font-size:15px;letter-spacing:.32em}
+.board h1{position:relative;font-family:"Dela Gothic One","Zen Maru Gothic",sans-serif;font-weight:400;font-size:27px;line-height:1.25;margin-top:2px}
+.score{display:inline-flex;gap:14px;align-items:center;margin-top:12px;background:#000;border-radius:8px;padding:6px 14px;box-shadow:inset 0 0 0 2px #2c2c2c}
+.score span{font-family:"Bebas Neue",Impact,"Arial Black",sans-serif;color:var(--orange);font-size:24px;line-height:1}
+.score small{color:#bbb;font-size:11px;margin-left:3px}
+.score i{width:6px;height:6px;border-radius:50%;background:var(--orange);opacity:.7;animation:blink 1.4s infinite}
+@keyframes blink{50%{opacity:.15}}
+.search{margin:14px auto 0;max-width:420px;display:flex;background:#fff;border-radius:999px;overflow:hidden;box-shadow:0 3px 0 rgba(0,0,0,.25)}
+.search input{flex:1;border:0;padding:11px 16px;font:inherit;font-size:15px;outline:none;min-width:0;color:var(--ink)}
+.search button{padding:0 16px;color:var(--turf);font-size:18px}
+/* ---- ピッチ ---- */
+.pitch{background:var(--fieldbg);position:relative;padding:18px 14px 22px;overflow:hidden}
+.pitch .ln{position:absolute;inset:8px;border:2px solid rgba(255,255,255,.55);border-radius:4px;pointer-events:none}
+.pitch .ln::before{content:"";position:absolute;left:0;right:0;top:50%;border-top:2px solid rgba(255,255,255,.55)}
+.pitch .ln::after{content:"";position:absolute;left:50%;top:50%;width:96px;height:96px;margin:-48px 0 0 -48px;border:2px solid rgba(255,255,255,.55);border-radius:50%}
+.pitch h2{position:relative;color:#fff;font-size:15px;text-align:center;margin-bottom:10px;text-shadow:0 1px 0 rgba(0,0,0,.35)}
+.zks{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.zk{position:relative;overflow:hidden;background:#fff;border:3px solid var(--ink);border-radius:10px;padding:17px 6px 7px;text-align:center;box-shadow:0 4px 0 rgba(0,0,0,.28);transition:transform .15s}
+.zk:active{transform:translateY(3px);box-shadow:0 1px 0 rgba(0,0,0,.28)}
+.zk::before{content:"";position:absolute;left:0;right:0;top:0;height:11px;border-bottom:2px solid var(--ink);background:#fff;background-image:repeating-linear-gradient(60deg,var(--wc) 0 2.5px,transparent 2.5px 8px),repeating-linear-gradient(-60deg,var(--wc) 0 2.5px,transparent 2.5px 8px);-webkit-mask:linear-gradient(#000,#000);}
+.zk b{display:inline-block;font-size:22px;line-height:1;color:var(--wn,#fff);background:var(--wc);border-radius:6px;padding:2px 7px 1px;margin-bottom:3px}
+.zk span{display:block;font-size:23px;font-weight:700;line-height:1.15;color:var(--wt,var(--wc));letter-spacing:.04em}
+.zk::after{content:"";position:absolute;right:-14px;bottom:-14px;width:42px;height:42px;border-radius:50%;background:var(--wc);opacity:.12}
+.zk small{display:block;font-size:11.5px;color:#4b6b2c}
+@media(min-width:600px){.zks{grid-template-columns:repeat(5,1fr)}}
+/* ---- baseball のアニメ ---- */
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes drb{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.dribble{display:inline-block;margin-left:4px;font-size:15px;animation:drb 1.2s ease-in-out infinite}
+.board>*:not(.kk){position:relative}
+.kk{position:absolute;inset:0;pointer-events:none}
+.foot .fdeco{display:block;width:fit-content;margin-bottom:6px;font-size:20px}
+.phx{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--phbg);color:var(--ink)}
+.phx span{font-size:44px;line-height:1.1}
+.phx b{font-size:22px;opacity:.75}
+.t.park{background:#e3ecfa;color:#1d3c78}.t.near{background:#efe3fa;color:#5b2a86}
+
+.hr{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.hr .bat{position:absolute;left:18px;bottom:22px;font-size:26px;transform-origin:80% 80%;animation:swing 6s infinite}
+@keyframes swing{0%,22%{transform:rotate(40deg)}27%{transform:rotate(-80deg)}34%,100%{transform:rotate(40deg)}}
+.hr .hx{position:absolute;left:46px;bottom:34px;animation:hx 6s cubic-bezier(.2,.5,.6,1) infinite}
+.hr .hy{display:block;font-size:18px;animation:hy 6s cubic-bezier(.25,0,.75,1) infinite}
+@keyframes hx{0%,26%{transform:translateX(0);opacity:0}27%{opacity:1}70%{transform:translateX(calc(100vw - 120px));opacity:1}76%,100%{transform:translateX(calc(100vw - 120px));opacity:0}}
+@keyframes hy{0%,26%{transform:translateY(0) rotate(0)}48%{transform:translateY(-110px) rotate(360deg)}70%,100%{transform:translateY(-60px) rotate(720deg)}}
+.hrtxt{position:absolute;right:14px;top:16px;color:#ffd84d;font-size:22px;opacity:0;animation:hrt 6s infinite;text-shadow:0 2px 0 #10233f}
+@keyframes hrt{0%,64%{opacity:0;transform:scale(.4)}70%{opacity:1;transform:scale(1.15)}82%{opacity:1;transform:scale(1)}90%,100%{opacity:0}}
+.dia{position:absolute;left:50%;top:50%;width:120px;height:120px;margin:-60px 0 0 -60px;transform:rotate(45deg);border:2px solid rgba(255,255,255,.55);pointer-events:none}
+.dia i{position:absolute;width:12px;height:12px;background:#fff;margin:-6px}
+.dia i:nth-child(1){left:0;top:0}.dia i:nth-child(2){right:-12px;top:0}.dia i:nth-child(3){right:-12px;bottom:-12px}.dia i:nth-child(4){left:0;bottom:-12px}
+.dia::after{content:"🏃";position:absolute;left:-10px;top:-14px;font-size:16px;transform:rotate(-45deg);animation:run 8s linear infinite}
+@keyframes run{0%{left:-10px;top:-14px}25%{left:110px;top:-14px}50%{left:110px;top:106px}75%{left:-10px;top:106px}100%{left:-10px;top:-14px}}
+.fdeco .bnc{display:inline-block;animation:bnc 1.2s cubic-bezier(.3,0,.7,1) infinite}
+@keyframes bnc{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px) rotate(180deg)}}
+
+.zk:active b,.card:active .no{animation:spin .4s linear}
+.cup{display:inline-block;animation:cup 2.4s ease-in-out infinite}
+@keyframes cup{0%,70%,100%{transform:rotate(0)}76%{transform:rotate(-14deg) scale(1.1)}84%{transform:rotate(12deg) scale(1.1)}}
+.goldbtn{position:relative;overflow:hidden}
+.goldbtn::after{content:"";position:absolute;top:0;bottom:0;width:40%;left:-60%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.6),transparent);animation:shine 3.2s ease-in-out infinite}
+@keyframes shine{0%,60%{left:-60%}100%{left:130%}}
+.ov.show .cap .bb{display:inline-block;animation:drb .9s ease-in-out 3}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* ---- しぼりこみ ---- */
+.bench{background:var(--deep);padding:14px 12px 18px}
+.bench h2{color:#fff;font-size:14px;margin:0 4px 8px}
+.chips{display:flex;gap:7px;flex-wrap:wrap}
+.chip{border-radius:999px;padding:6px 12px;font-size:13px;font-weight:700;background:#fff;color:var(--ink);border:2px solid transparent;display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+.chip .dot{width:9px;height:9px;border-radius:50%}
+.chip.on{background:var(--orange);color:var(--orange-d);border-color:#fff}
+/* ---- 一覧 ---- */
+.bar{position:sticky;top:0;z-index:5;background:var(--deep);color:#fff;display:flex;align-items:center;gap:8px;padding:9px 12px}
+.bar .back{font-size:14px;color:var(--lime);padding:4px 6px 4px 0}
+.bar .bn{font-size:22px;color:var(--wn,#fff);background:var(--wc,#447a16);border-radius:6px;padding:2px 7px 0;line-height:1}
+.nbw{display:flex;justify-content:space-between;gap:8px;background:var(--deep);padding:0 12px 8px}
+.nbw button{font-size:12.5px;font-weight:700;color:#fff;background:rgba(255,255,255,.1);border-radius:999px;padding:4px 11px;border-left:5px solid var(--wc)}
+.nbw button.r{border-left:0;border-right:5px solid var(--wc)}
+.swipehint{color:var(--lime);font-size:11px;text-align:center;align-self:center}
+.field.sl-l{animation:slL .38s cubic-bezier(.2,.9,.3,1)}.field.sl-r{animation:slR .38s cubic-bezier(.2,.9,.3,1)}
+@keyframes slL{from{transform:translateX(70%);opacity:.3}}@keyframes slR{from{transform:translateX(-70%);opacity:.3}}
+.bar .bt{font-size:16px;font-weight:700}
+.bar .bc{margin-left:auto;font-size:12px;color:var(--lime)}
+.lchips{background:var(--deep);padding:0 12px 10px;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+.lchips::-webkit-scrollbar{display:none}
+.field{background:var(--fieldbg);padding:12px 10px 28px;min-height:60vh}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media(min-width:620px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.empty{color:#fff;text-align:center;padding:40px 10px;font-size:14px}
+.card{background:#fff;border:3px solid var(--ink);border-radius:10px;overflow:hidden;text-align:left;display:flex;flex-direction:column;box-shadow:0 4px 0 rgba(0,0,0,.25);transition:transform .15s;animation:pop .35s both}
+.card:active{transform:scale(.97)}
+@keyframes pop{from{transform:translateY(12px) scale(.97)}}
+.ph{position:relative;aspect-ratio:4/3;background:#e9f2dd;overflow:hidden}
+.ph img{position:relative;width:100%;height:100%;object-fit:contain;display:block}
+.ph[style]::before,.pn .big[style]::before{content:"";position:absolute;inset:-12px;background:var(--bg) center/cover;filter:blur(10px) brightness(.85);opacity:.9}
+.ph .no{position:absolute;left:6px;top:2px;font-size:28px;color:#fff;-webkit-text-stroke:1.4px var(--ink);paint-order:stroke;line-height:1}
+.ph .nw{position:absolute;right:5px;top:5px;background:var(--orange);color:var(--orange-d);font-size:10.5px;font-weight:700;border-radius:4px;padding:1px 6px}
+.ph svg{width:100%;height:100%;display:block}
+.cb{padding:7px 8px 9px;display:flex;flex-direction:column;gap:5px;flex:1}
+.cn{font-size:13.5px;font-weight:700;line-height:1.3}
+.cn span{display:block}
+.tg{display:flex;flex-wrap:wrap;gap:3px;margin-top:auto}
+.t{font-size:10.5px;font-weight:700;border-radius:4px;padding:1px 5px;color:#fff;white-space:nowrap}
+.t.sss{background:var(--sss)}.t.club{background:var(--club)}.t.school{background:var(--school)}.t.girls{background:var(--girls)}.t.kids{background:var(--kids)}.t.jhs,.t.hs{background:var(--jhs)}
+.t.strong{background:linear-gradient(135deg,#f6d365,#d4a017);color:#4a3200}
+.best{font-size:11px;font-weight:700;color:#7a5600;background:#fff6d6;border-radius:5px;padding:2px 6px;line-height:1.35}
+.goldbtn{display:flex;align-items:center;gap:10px;width:calc(100% - 24px);margin:14px 12px 0;padding:12px 14px;border-radius:14px;background:linear-gradient(135deg,#ffe7a3,#f2c14e 55%,#d4a017);color:#3d2a00;border:3px solid #173404;box-shadow:0 4px 0 rgba(0,0,0,.3);text-align:left}
+.goldbtn .cup{font-size:30px}
+.goldbtn b{display:block;font-size:17px}
+.goldbtn small{display:block;font-size:12px}
+.res{margin-top:12px}
+.res li{list-style:none;display:grid;grid-template-columns:auto 1fr;gap:2px 8px;padding:8px 0;border-bottom:1.5px dashed var(--line);font-size:13px}
+.res .rk{grid-row:span 2;align-self:center;background:linear-gradient(135deg,#f6d365,#d4a017);color:#3d2a00;font-weight:700;border-radius:8px;padding:4px 8px;font-size:13px;text-align:center;min-width:4.6em}
+.res small{color:#55704a}
+.srcs{font-size:11px;color:#55704a;margin-top:8px}
+.srcs a{color:#1f4f8f}
+.t.day{background:#eaf3de;color:#27500a}.t.fee{background:#faeeda;color:#633806}
+/* ---- ふわっと出るパネル ---- */
+.ov{position:fixed;inset:0;z-index:50;background:rgba(9,26,6,.5);-webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px);display:flex;align-items:center;justify-content:center;padding:14px;opacity:0;transition:opacity .28s}
+.ov.show{opacity:1}
+.pn{position:relative;width:100%;max-width:440px;max-height:calc(100vh - 28px);overflow-y:auto;overflow-x:hidden;background:rgba(255,255,255,.94);border-radius:18px;box-shadow:0 20px 50px rgba(0,0,0,.35);transform:scale(.86) translateY(16px);transition:transform .38s cubic-bezier(.2,1.25,.35,1)}
+.ov.show .pn{transform:none}
+.pn .big{position:relative;aspect-ratio:4/3;background:#e9f2dd;overflow:hidden;border-radius:18px 18px 0 0}
+.pn .big.hasimg{aspect-ratio:auto;height:min(58vh,440px)}
+.pn .big img{position:relative;width:100%;height:100%;object-fit:contain;display:block;transform:scale(1.12);transition:transform .9s cubic-bezier(.2,.9,.3,1)}
+.ov.show .pn .big img{transform:none}
+.pn .big svg{width:100%;height:100%}
+.pn .cap{background:var(--deep);color:#fff;padding:10px 14px 11px}
+.pn .cap b{display:block;font-size:19px;line-height:1.3}
+.pn .cap small{color:var(--lime);font-size:12px}
+.hp{display:inline-flex;align-items:center;gap:6px;margin-top:8px;background:var(--orange);color:var(--orange-d);font-weight:700;font-size:14px;border-radius:999px;padding:7px 16px;text-decoration:none;box-shadow:0 3px 0 #b97515}
+.hp:active{transform:translateY(2px);box-shadow:0 1px 0 #b97515}
+.hp.none{background:#e8efe0;color:#55704a;box-shadow:none}
+.pnav{position:absolute;top:calc(min(58vh,440px)/2 - 22px);z-index:3;width:40px;height:44px;border-radius:12px;background:rgba(255,255,255,.88);color:var(--ink);font-size:24px;line-height:44px;box-shadow:0 2px 6px rgba(0,0,0,.25)}
+.pnav.p{left:8px}.pnav.n{right:8px}
+.cnt{position:absolute;left:10px;top:12px;z-index:3;background:rgba(18,48,9,.8);color:#fff;border-radius:999px;padding:2px 10px;font-size:15px}
+
+.pn .x{position:absolute;right:10px;top:10px;z-index:2;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.92);color:var(--ink);font-size:20px;line-height:36px;box-shadow:0 2px 6px rgba(0,0,0,.25)}
+.pb{padding:12px 16px 16px}
+.pb .td{font-size:13px;letter-spacing:.2em;color:var(--ink);opacity:.75;margin-bottom:2px}
+.row{display:grid;grid-template-columns:5.2em 1fr;gap:8px;padding:8px 0;border-bottom:1.5px dashed var(--line);font-size:14px}
+.row dt{color:#4b6b2c;font-size:12.5px;padding-top:1px}
+.row dd{font-weight:700}
+.go{display:block;margin-top:14px;background:var(--orange);color:var(--orange-d);text-align:center;font-weight:700;border-radius:999px;padding:11px;text-decoration:none;box-shadow:0 4px 0 #b97515}
+.go:active{transform:translateY(3px);box-shadow:0 1px 0 #b97515}
+.note{font-size:11.5px;color:#55704a;margin-top:10px}
+.foot{color:#cfe3b5;font-size:11.5px;padding:18px 16px 40px;line-height:1.7}
+.foot a{color:#fff}
+</style>
+</head>
+<body data-noicon>
+<div class="wrap" id="app"></div>
+<script>
+const D=[{"n":"加茂川ワイルドダックス","d":"西区","k":"sss","tg":[],"a":"植水小学校","pl":"植水小学校","dy":"土・日","i":"土・日・祝","fee":"","u":"https://kamogawa-wd.jimdofree.com","ph":"f09f8eaca8ce.webp","sp":1,"new":0,"st2":""},{"n":"ジュニアバッティング スクール JBS さいたま宮前校","d":"西区","k":"school","tg":[],"a":"西区宮前町140-4 新大宮バッティングセンター","pl":"","dy":"","i":"","fee":"","u":"https://www.jr-bs.jp/list/1552452/","ph":"","sp":0,"new":0,"st2":"西大宮駅 歩いて15分"},{"n":"フルスイングベースボール スクール 大宮西教室","d":"西区","k":"school","tg":[],"a":"西区佐知川5丁目1359 大宮西小学校","pl":"","dy":"","i":"","fee":"","u":"https://fs-baseball.net","ph":"","sp":0,"new":0,"st2":"西大宮駅 歩いて28分"},{"n":"さいたまオールウェイズBC","d":"北区","k":"sss","tg":[],"a":"大平公園","pl":"日進北小学校・大平公園・三橋総合公園","dy":"土・日・祝","i":"","fee":"","u":"https://omiya-powers.jimdofree.com","ph":"b9f0f327a438.webp","sp":1,"new":0,"st2":""},{"n":"宮原ドラゴンズ","d":"北区","k":"sss","tg":[],"a":"宮原公園・つつじヶ丘公園・ 吉野公園","pl":"宮原公園・つつじヶ丘公園・吉野公園","dy":"土・日・祝","i":"","fee":"","u":"https://miyaharadragons.jimdofree.com","ph":"35653d3e4139.webp","sp":1,"new":0,"st2":""},{"n":"大宮ドラゴンズ","d":"北区","k":"sss","tg":[],"a":"東大成小学校","pl":"東大成小学校","dy":"土・日・祝","i":"","fee":"","u":"https://oomiya-dragons.jimdofree.com","ph":"161134a19c09.webp","sp":1,"new":0,"st2":""},{"n":"大宮ファミリーズ","d":"北区","k":"sss","tg":[],"a":"大砂土小学校","pl":"大砂土小学校","dy":"","i":"土・日・祝","fee":"","u":"https://omiyafamilys.89dream.jp","ph":"584ce4ac8c9a.webp","sp":1,"new":0,"st2":""},{"n":"さいたまスターズ","d":"北区","k":"sss","tg":[],"a":"植竹小","pl":"植竹小学校","dy":"土・日・祝","i":"","fee":"","u":"https://www.saitamastars.com","ph":"b5a57f63e649.webp","sp":1,"new":0,"st2":""},{"n":"大宮アローズ","d":"北区","k":"club","tg":[],"a":"別所公園","pl":"","dy":"","i":"土・日・祝 土・ 8:30集合 夕方まで 日・祝日 11:45集合 夕方まで","fee":"","u":"https://arrowsikeyamahai.wixsite.com/arrows/nyudanannai","ph":"e79ae36f9d42.webp","sp":0,"new":0,"st2":""},{"n":"フルスイングベースボール スクール 大宮北教室","d":"北区","k":"school","tg":["near"],"a":"北区土呂町1-42 土呂公園","pl":"","dy":"","i":"","fee":"","u":"https://fullswing-baseball.com/school/20210217140527-656/","ph":"","sp":0,"new":0,"st2":"大宮公園駅 歩いて2分"},{"n":"ベースボールスクール ポルテ 大平","d":"北区","k":"school","tg":[],"a":"北区日進町1-551","pl":"","dy":"","i":"","fee":"","u":"https://porte.sport-school.com/school/%E5%A4%A7%E5%B9%B3-2","ph":"","sp":0,"new":0,"st2":"日進駅 歩いて11分"},{"n":"ベースボールスクール ポルテ 番場","d":"北区","k":"school","tg":["near"],"a":"北区日進町2-1435-1","pl":"","dy":"","i":"","fee":"","u":"https://porte.sport-school.com/school/%E7%95%AA%E5%A0%B4","ph":"","sp":0,"new":0,"st2":"日進駅 歩いて3分"},{"n":"三橋ヤンキース","d":"大宮区","k":"sss","tg":[],"a":"三橋小・大成中学校","pl":"三橋小学校・大宮大成中学校","dy":"土・日・祝","i":"","fee":"","u":"https://384yankees.89dream.jp","ph":"d38409253449.webp","sp":1,"new":0,"st2":""},{"n":"さいたまフェニックス","d":"大宮区","k":"sss","tg":[],"a":"大宮東小・東中・第2東中","pl":"大宮東小学校・大宮東中学校・大宮第二東中学校","dy":"土・日・祝","i":"","fee":"","u":"https://www.instagram.com/saitama.px.2024/","ph":"e384958eeef5.webp","sp":1,"new":0,"st2":""},{"n":"大宮ツインズ","d":"大宮区","k":"sss","tg":[],"a":"桜木小・上小小","pl":"桜木小学校・上小小学校・上小小学校","dy":"土・日・祝","i":"","fee":"","u":"https://oomiyatwins.89dream.jp","ph":"e59a3850c944.webp","sp":1,"new":0,"st2":""},{"n":"中川メッツ","d":"大宮区","k":"sss","tg":[],"a":"芝川小学校","pl":"芝川小学校","dy":"土・日","i":"","fee":"","u":"https://nakagawa-mets.jimdofree.com","ph":"cbce7837b0c4.webp","sp":1,"new":0,"st2":""},{"n":"大宮パワーズ","d":"大宮区","k":"sss","tg":[],"a":"三橋小","pl":"三橋小学校","dy":"土・日・祝","i":"","fee":"","u":"https://omiya-powers.jimdofree.com","ph":"14affea42eb0.webp","sp":1,"new":0,"st2":""},{"n":"フルスイングベースボールスクール 大宮テクニカル教室","d":"大宮区","k":"school","tg":[],"a":"大宮区天沼町1丁目760","pl":"","dy":"","i":"大宮区第二東中学校","fee":"","u":"https://fs-baseball.net","ph":"","sp":0,"new":0,"st2":"大宮駅 歩いて23分"},{"n":"フルスイングベース ボールスクール 大宮南教室","d":"大宮区","k":"school","tg":[],"a":"大宮区天沼町2丁目1077","pl":"","dy":"","i":"","fee":"","u":"https://fullswing-baseball.com/school/20200409-427/","ph":"","sp":0,"new":0,"st2":"さいたま新都心駅 歩いて13分"},{"n":"フルスイングベースボール スクール 大宮教室","d":"大宮区","k":"school","tg":[],"a":"大宮区三橋1丁目55-55","pl":"","dy":"","i":"","fee":"","u":"https://fs-baseball.net/lesson/20240925101553/","ph":"","sp":0,"new":0,"st2":"大宮駅 歩いて19分"},{"n":"ベースボールスクール ポルテ 大宮東","d":"大宮区","k":"school","tg":[],"a":"大宮区天沼町1-760","pl":"","dy":"","i":"","fee":"","u":"https://porte.sport-school.com/school/%E5%A4%A7%E5%AE%AE%E6%9D%B1","ph":"","sp":0,"new":0,"st2":"大宮駅 歩いて23分"},{"n":"大宮ベアーズ","d":"見沼区","k":"sss","tg":[],"a":"泰平小学校","pl":"見沼小学校・泰平小学校・堀の内公園","dy":"土・日・祝","i":"","fee":"","u":"https://www.netto.jp/omiya-bears/","ph":"24803bea9ee6.webp","sp":1,"new":0,"st2":""},{"n":"大宮フレンド","d":"見沼区","k":"sss","tg":[],"a":"大砂土東小学校","pl":"大砂土東小学校","dy":"土・日","i":"","fee":"","u":"https://omiyafriend.89dream.jp","ph":"03658930af05.webp","sp":1,"new":0,"st2":""},{"n":"南平台カージナルス","d":"見沼区","k":"sss","tg":[],"a":"七里小学校","pl":"七里小学校","dy":"土・日・祝","i":"","fee":"","u":"https://npdcardinals.89dream.jp","ph":"6aa8288b8147.webp","sp":1,"new":0,"st2":""},{"n":"島小タイガース","d":"見沼区","k":"sss","tg":[],"a":"島小学校","pl":"島小学校","dy":"","i":"","fee":"","u":"https://sstigers.89dream.jp","ph":"d52cac21f829.webp","sp":1,"new":0,"st2":""},{"n":"春岡スポーツ少年団","d":"見沼区","k":"sss","tg":[],"a":"春岡小・春おか広場","pl":"春岡小学校・春おか広場","dy":"土・日","i":"","fee":"","u":"https://haruokabaseball.89dream.jp","ph":"","sp":1,"new":0,"st2":""},{"n":"東大宮ライオンズ","d":"見沼区","k":"club","tg":[],"a":"わらた島公園","pl":"","dy":"","i":"土・日・祝","fee":"","u":"https://higashiomiyalions.web.fc2.com/fc2/","ph":"3b9874e85c76.webp","sp":0,"new":0,"st2":""},{"n":"大宮ヤマトクラブ","d":"見沼区","k":"club","tg":[],"a":"大砂土東小学校","pl":"","dy":"","i":"土・日・祝","fee":"","u":"https://www.ikz.jp/hp/oomiyayamto/","ph":"27952d33def9.webp","sp":0,"new":0,"st2":""},{"n":"YOUフレンドクラブ野球","d":"中央区","k":"sss","tg":[],"a":"与野西北小学校","pl":"与野西北小学校","dy":"土・日・祝","i":"","fee":"","u":"https://basefun.net/team/youfriendclub89","ph":"bc6a9da1ee24.webp","sp":1,"new":0,"st2":""},{"n":"風の子","d":"中央区","k":"sss","tg":[],"a":"上落合小学校・与野八幡小学校","pl":"上落合小学校・与野八幡小学校","dy":"土・日・祝","i":"","fee":"","u":"https://kazenoko-baseballteam.amebaownd.com","ph":"0edbf7f34a32.webp","sp":1,"new":0,"st2":""},{"n":"与野南グリーンズ","d":"中央区","k":"sss","tg":[],"a":"鈴谷小学校","pl":"鈴谷小学校","dy":"土・日・祝","i":"","fee":"","u":"https://greens.89dream.jp","ph":"6cdea78dcf32.webp","sp":1,"new":0,"st2":""},{"n":"東与野フェニックス野球","d":"中央区","k":"sss","tg":[],"a":"島小学校","pl":"下落合小学校","dy":"土・日・祝","i":"","fee":"","u":"https://hyphoenix.localinfo.jp","ph":"815459f4ac69.webp","sp":1,"new":0,"st2":""},{"n":"栄和クラブ軟式野球","d":"桜区","k":"sss","tg":[],"a":"栄和小学校グランド(メイン)","pl":"栄和小学校","dy":"土・日・祝","i":"","fee":"","u":"https://www.sakawaclub.com","ph":"a25ba592a300.webp","sp":1,"new":0,"st2":""},{"n":"中島ファイターズ","d":"桜区","k":"sss","tg":[],"a":"中島小学校グランド","pl":"中島小学校","dy":"土・日・祝","i":"","fee":"","u":"https://www4.hp-ez.com/hp/urawa-nf/","ph":"30c8ad2f6053.webp","sp":1,"new":0,"st2":""},{"n":"西堀A-1スポーツ少年団","d":"桜区","k":"sss","tg":[],"a":"土合小学校","pl":"土合小学校","dy":"土・日・祝","i":"","fee":"","u":"https://www.instagram.com/nishibori.a1/","ph":"8e16301371cb.webp","sp":1,"new":0,"st2":""},{"n":"土合スパローズ","d":"桜区","k":"sss","tg":[],"a":"土合小学校","pl":"土合小学校","dy":"土・日・祝","i":"","fee":"","u":"https://www.instagram.com/tsuchiai_sparrows/","ph":"a665b77c0889.webp","sp":1,"new":0,"st2":""},{"n":"浦和西バッファローズ","d":"桜区","k":"sss","tg":[],"a":"新開小学校・田島小学校","pl":"新開小学校・田島小学校","dy":"","i":"","fee":"","u":"https://www.pop.co.jp/tg/team/intro.php?teamid=42882","ph":"","sp":1,"new":0,"st2":""},{"n":"浦和ジャイアンツ","d":"桜区","k":"sss","tg":[],"a":"神田小学校","pl":"神田小学校","dy":"土・日","i":"","fee":"","u":"https://urawagiants.89dream.jp","ph":"","sp":1,"new":0,"st2":""},{"n":"浦和クラブ","d":"桜区","k":"sss","tg":[],"a":"荒川総合運動公園野球場","pl":"荒川総合運動公園野球場","dy":"日","i":"日曜","fee":"","u":"https://www.gasone.net/contents/youth-sports/teams/gasone/09-urawa.html","ph":"","sp":1,"new":0,"st2":""},{"n":"浦和ビックウェイブ","d":"桜区","k":"club","tg":[],"a":"秋ヶ瀬グランド 荒川総合グランド","pl":"","dy":"","i":"土・日","fee":"","u":"https://urawabigwave-since1994.1web.jp","ph":"","sp":0,"new":0,"st2":""},{"n":"埼玉武蔵リトルリーグ 浦和チーム","d":"桜区","k":"club","tg":[],"a":"桜区上大久保 メジャー・マイナー・ ティーボールグラウンド","pl":"","dy":"","i":"","fee":"","u":"https://www.urawa-little.com/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/%E3%82%B0%E3%83%A9%E3%82%A6%E3%83%B3%E3%83%89","ph":"","sp":0,"new":0,"st2":""},{"n":"浦和中央ボーイズ","d":"桜区","k":"club","tg":[],"a":"桜区大字宿","pl":"","dy":"","i":"浦和グラウンド","fee":"","u":"https://urawa-chuo.com/ground/","ph":"","sp":0,"new":0,"st2":""},{"n":"フルスイングベースボールスクール 中浦和教室","d":"桜区","k":"school","tg":["near"],"a":"桜区西堀8丁目2019-2 西堀高沼公園","pl":"","dy":"","i":"","fee":"","u":"https://fs-baseball.net","ph":"","sp":0,"new":0,"st2":"中浦和駅 歩いて7分"},{"n":"フルスイングベースボール スクール 特化スクール (小学生指導・中学生指導)","d":"桜区","k":"school","tg":[],"a":"桜区上大久保字東778-1 デフストリート","pl":"","dy":"","i":"","fee":"","u":"https://fs-baseball.net","ph":"","sp":0,"new":0,"st2":""},{"n":"常盤少年野球クラブ","d":"浦和区","k":"sss","tg":[],"a":"常盤小・常盤北小学校","pl":"常盤小学校・常盤北小学校","dy":"土・日・祝","i":"","fee":"","u":"https://tokiwaboy10.89dream.jp","ph":"5c27ee89ea50.webp","sp":1,"new":0,"st2":""},{"n":"本太ビクターズ","d":"浦和区","k":"sss","tg":[],"a":"本太小学校","pl":"本太小学校","dy":"土・日","i":"","fee":"","u":"https://coach-t.wixsite.com/victors","ph":"39881814ff29.webp","sp":1,"new":0,"st2":""},{"n":"木崎ラインズクラブ","d":"浦和区","k":"sss","tg":[],"a":"木崎小学校","pl":"木崎小学校","dy":"土・日・祝","i":"","fee":"","u":"https://kizaki-lines.jimdofree.com","ph":"6b38f743dfdc.webp","sp":1,"new":0,"st2":""},{"n":"高砂マリーンズ","d":"浦和区","k":"sss","tg":[],"a":"高砂小学校","pl":"高砂小学校","dy":"土・日・祝","i":"","fee":"","u":"https://takasagomarines.amebaownd.com","ph":"5a1c1a2e8d25.webp","sp":1,"new":0,"st2":""},{"n":"BATOS浦和野球部","d":"浦和区","k":"sss","tg":[],"a":"大東小学校","pl":"大東小学校","dy":"","i":"","fee":"","u":"https://batos.mystrikingly.com","ph":"cef7ff339212.webp","sp":1,"new":0,"st2":""},{"n":"浦和エンゼルス","d":"浦和区","k":"sss","tg":[],"a":"荒川総合グランド","pl":"針ヶ谷小学校・荒川総合グラウンド・見沼臨時グランド","dy":"土・日","i":"","fee":"","u":"https://urawaangels.amebaownd.com","ph":"","sp":1,"new":0,"st2":""},{"n":"浦和フレンドクラブ","d":"浦和区","k":"sss","tg":[],"a":"北浦和小学校グランド(メイン)","pl":"北浦和小学校","dy":"土・日","i":"","fee":"","u":"http://kitaurawafriendclub.web.fc2.com","ph":"","sp":1,"new":0,"st2":""},{"n":"浦和ヤンキース","d":"浦和区","k":"sss","tg":[],"a":"仲町小学校","pl":"仲町小学校","dy":"土・日・祝","i":"","fee":"","u":"http://urawayankees.web.fc2.com","ph":"","sp":1,"new":0,"st2":""},{"n":"フルスイングベース ボールスクール 浦和教室","d":"浦和区","k":"school","tg":[],"a":"浦和区元町1丁目29-10 浦和市営球場一般競技場","pl":"","dy":"","i":"","fee":"","u":"https://fullswing-baseball.com/school/20200409-425/","ph":"","sp":0,"new":0,"st2":""},{"n":"ベースボールスクール ポルテ 浦和","d":"浦和区","k":"school","tg":[],"a":"浦和区元町1丁目29-10 浦和市営球場一般競技場","pl":"","dy":"","i":"","fee":"","u":"https://porte.sport-school.com/school/%E6%B5%A6%E5%92%8C-2","ph":"","sp":0,"new":0,"st2":""},{"n":"ストロンガー","d":"南区","k":"sss","tg":[],"a":"谷田小学校グランド(メイン)","pl":"谷田小学校・大間木グランド","dy":"土・日","i":"","fee":"","u":"https://urawa-stronger.club","ph":"cb749a76e120.webp","sp":1,"new":0,"st2":""},{"n":"善前ベースボールクラブ","d":"南区","k":"sss","tg":[],"a":"善前小学校グランド","pl":"善前小学校","dy":"土・日・祝","i":"","fee":"","u":"https://zenmae-bc.amebaownd.com","ph":"2bb399ea6654.webp","sp":1,"new":0,"st2":""},{"n":"沼影少年野球クラブ","d":"南区","k":"sss","tg":[],"a":"沼影小学校グランド","pl":"沼影小学校","dy":"土・日","i":"","fee":"","u":"https://numakagebbc.1web.jp","ph":"24e166c6f9d1.webp","sp":1,"new":0,"st2":""},{"n":"浦和辻イーグルス","d":"南区","k":"sss","tg":[],"a":"辻小学校・辻南小学校","pl":"辻小学校・辻南小学校","dy":"土・日","i":"","fee":"","u":"https://ueagles.89dream.jp","ph":"","sp":1,"new":0,"st2":""},{"n":"浦和ビッグウェイブ","d":"南区","k":"sss","tg":[],"a":"浦和大里小学校・秋ヶ瀬グラウンド・荒川総合グラウンド","pl":"","dy":"土・日","i":"","fee":"","u":"https://www.ikz.jp/hp/urawabw/","ph":"","sp":1,"new":1,"st2":""},{"n":"南浦和アタックス","d":"南区","k":"sss","tg":[],"a":"大谷場小学校・大谷場東小学校","pl":"","dy":"土・日","i":"","fee":"","u":"https://attacksurawa.89dream.jp/","ph":"","sp":1,"new":1,"st2":""},{"n":"グリーンファイターズ","d":"南区","k":"club","tg":[],"a":"大里小・岸町小学校","pl":"","dy":"","i":"日・祝","fee":"","u":"https://greenfighters.win","ph":"ac86cae44a74.webp","sp":0,"new":0,"st2":""},{"n":"浦和ビックウェイブ","d":"南区","k":"club","tg":[],"a":"浦和大里小学校グランド","pl":"","dy":"","i":"土・日","fee":"","u":"https://urawabigwave-since1994.1web.jp/#google_vignette","ph":"","sp":0,"new":0,"st2":""},{"n":"南浦和アタック","d":"南区","k":"club","tg":[],"a":"大谷場小・大谷場東","pl":"","dy":"","i":"土・日","fee":"","u":"https://attacksurawa.89dream.jp","ph":"","sp":0,"new":0,"st2":""},{"n":"フルスイングベースボール スクール 南浦和教室","d":"南区","k":"school","tg":[],"a":"南区大谷場1丁目8-42","pl":"","dy":"","i":"浦和競馬場内運動場","fee":"","u":"https://fullswing-baseball.com/school/20200409-458/","ph":"","sp":0,"new":0,"st2":""},{"n":"中尾ライガース","d":"緑区","k":"sss","tg":[],"a":"中尾小学校グランド(メイン)","pl":"中尾小学校・尾間木小学校","dy":"土・日・祝","i":"","fee":"","u":"https://nakaoligers.89dream.jp","ph":"c595771ce845.webp","sp":1,"new":0,"st2":""},{"n":"道祖土フェニックス","d":"緑区","k":"sss","tg":[],"a":"道祖土小学校グランド","pl":"道祖土小学校","dy":"土・日・祝","i":"","fee":"","u":"https://www.saidophoenix.com","ph":"c9751969bc2c.webp","sp":1,"new":0,"st2":""},{"n":"三室ホークス","d":"緑区","k":"sss","tg":[],"a":"三室小・芝原小学校","pl":"三室小学校・芝原小学校","dy":"土・日","i":"土・日・祝","fee":"","u":"https://momonga-net.com/baseball/Welcome.do?team=m-hawks","ph":"4e819b8f98ed.webp","sp":1,"new":0,"st2":""},{"n":"美園ドリームス","d":"緑区","k":"sss","tg":[],"a":"沼影小学校グランド","pl":"大門小学校・美園小学校","dy":"土・日・祝","i":"土・日","fee":"","u":"https://misono-dreams.amebaownd.com","ph":"3d3ffc69ff86.webp","sp":1,"new":0,"st2":""},{"n":"浦和パワーズ","d":"緑区","k":"sss","tg":[],"a":"大谷口小学校","pl":"原山小学校・大谷口小学校","dy":"土・日・祝","i":"","fee":"","u":"https://urawa-powers2024.jimdofree.com","ph":"","sp":1,"new":0,"st2":""},{"n":"浦和エンデバーズ","d":"緑区","k":"sss","tg":[],"a":"向小学校","pl":"大牧小学校・向小学校","dy":"土・日・祝","i":"","fee":"","u":"https://www4.hp-ez.com/hp/urawa-endeavors/","ph":"","sp":1,"new":0,"st2":""},{"n":"浦和ウィングス","d":"緑区","k":"sss","tg":[],"a":"美園北小・野田小・美園中学校","pl":"美園北小学校・野田小学校・美園中学校","dy":"土・日・祝","i":"","fee":"","u":"https://basefun.net/team/urawawings","ph":"","sp":1,"new":0,"st2":""},{"n":"ベースボールスクール ポルテ 東浦和","d":"緑区","k":"school","tg":[],"a":"緑区大間木地内","pl":"","dy":"","i":"大間木公園 金【1部】 16:30-17:45","fee":"","u":"https://porte.sport-school.com/school/%E6%9D%B1%E6%B5%A6%E5%92%8C-2","ph":"","sp":0,"new":0,"st2":""},{"n":"ベースボールスクール ポルテ 浦和美園","d":"緑区","k":"school","tg":[],"a":"緑区大崎3642","pl":"","dy":"","i":"浦和ルーテル学院小学校","fee":"","u":"https://porte.sport-school.com/school/%E6%B5%A6%E5%92%8C%E7%BE%8E%E5%9C%92-3","ph":"","sp":0,"new":0,"st2":""},{"n":"西原フレンズ","d":"岩槻区","k":"sss","tg":[],"a":"西原小学校グランド","pl":"西原小学校","dy":"土・日・祝","i":"","fee":"","u":"https://nishihara-friends.crayonsite.info","ph":"f1df4f4ea988.webp","sp":1,"new":0,"st2":""},{"n":"城北イーグルス","d":"岩槻区","k":"sss","tg":[],"a":"城北小学校","pl":"城北小学校","dy":"土・日","i":"","fee":"","u":"https://www.ikz.jp/hp/jo-eagles/","ph":"361dce239908.webp","sp":1,"new":0,"st2":""},{"n":"岩槻クラブ","d":"岩槻区","k":"sss","tg":[],"a":"川通小学校","pl":"川通小学校","dy":"土・日・祝","i":"","fee":"","u":"https://xn--0et88ccz6awh1a.com/team/8841","ph":"","sp":1,"new":0,"st2":""},{"n":"大空ジュニアー","d":"岩槻区","k":"sss","tg":[],"a":"大空ジュニアー専用グラウンド","pl":"","dy":"土・日・祝","i":"","fee":"","u":"https://momonga-net.com/baseball/Welcome.do?team=ojr1973","ph":"","sp":1,"new":1,"st2":""},{"n":"新和ドラゴンズ","d":"岩槻区","k":"sss","tg":[],"a":"新和小学校","pl":"","dy":"土・日","i":"","fee":"","u":"http://niiwadragons.web.fc2.com/base-tem.html","ph":"","sp":1,"new":1,"st2":""},{"n":"かしわガッツボーイズ","d":"岩槻区","k":"sss","tg":[],"a":"柏崎小学校","pl":"","dy":"土・日・祝","i":"","fee":"","u":"http://blog.livedoor.jp/gutsneko1/","ph":"","sp":1,"new":1,"st2":""},{"n":"神和ドラゴンズ","d":"岩槻区","k":"club","tg":[],"a":"浦和大里小学校グランド","pl":"","dy":"","i":"土・日","fee":"","u":"https://www.ikz.jp/hp/niwa-dragons/","ph":"f66a1251b388.webp","sp":0,"new":0,"st2":""},{"n":"かしわガッツポーズ","d":"岩槻区","k":"club","tg":[],"a":"柏崎小学校","pl":"","dy":"","i":"土・日・祝","fee":"","u":"https://www.instagram.com/kashiwa_guts/","ph":"fbe44dd14a60.webp","sp":0,"new":0,"st2":""},{"n":"大空ジュニア","d":"岩槻区","k":"club","tg":[],"a":"大空ジュニア専用グランド","pl":"","dy":"","i":"土・日・祝","fee":"","u":"https://momonga-net.com/baseball/Welcome.do?team=ojr1973","ph":"","sp":0,"new":0,"st2":""}];
+const WARDS=["西区", "北区", "大宮区", "見沼区", "中央区", "桜区", "浦和区", "南区", "緑区", "岩槻区"];
+const STSRC=[];
+// 区の色＝ユニフォームの色 [メイン, しま, 文字, 番号の字]
+const KIT={"西区": ["#1f6fd0", "#fff", "#1f6fd0"], "北区": ["#0b2a5b", "#fff", "#0b2a5b"], "大宮区": ["#f07800", "#fff", "#d06600"], "見沼区": ["#6b2fa0", "#fff", "#6b2fa0"], "中央区": ["#e2b400", "#fff", "#9a7a00", "#2b2100"], "桜区": ["#b0123a", "#fff", "#b0123a"], "浦和区": ["#d81e1e", "#fff", "#c01818"], "南区": ["#0d8a8a", "#fff", "#0b7676"], "緑区": ["#2f8f2f", "#fff", "#2a7d2a"], "岩槻区": ["#222", "#fff", "#222"]};
+const WCOL=Object.fromEntries(Object.entries(KIT).map(([k,v])=>[k,v[0]]));
+const kit=w=>{const k=KIT[w];return k?`--wc:${k[0]};--ws:${k[1]};--wt:${k[2]};--wn:${k[3]||"#fff"}`:""};
+let CUR=[];
+const KIND={"sss": "少年団", "club": "クラブ", "school": "スクール"};
+const TAG={"girls": "女子", "kids": "幼児から", "fee": "料金がわかる", "park": "駐車場あり", "near": "駅ちかく", "strong": "強豪"};
+const FILTERS=[["sss", "少年団", "--sss"], ["club", "クラブ", "--club"], ["school", "スクール", "--school"], ["near", "駅ちかく", "--club"]];
+const $=s=>document.querySelector(s);
+const esc=s=>String(s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const norm=s=>String(s||"").normalize("NFKC").toLowerCase().replace(/[ァ-ン]/g,c=>String.fromCharCode(c.charCodeAt(0)-96)).replace(/\s/g,"");
+let state={view:"home",ward:"",f:"",q:""};
+
+function nameLines(n){
+  n=String(n).trim();
+  const KW=/(スポーツ少年団|サッカー少年団|少年団|ミニバスケットボール|ミニバス|バスケットボールクラブ|バレーボールクラブ|ソフトボール|ベースボールクラブ|少年野球|サッカースクール|フットボールクラブ|フットボール|音楽教室|ピアノ教室|サッカー|ピアノ|バイオリン|バレエ|書道|教室|スクール|クラブ|アカデミー|センター|道場|コース|U-\d+)/g;
+  const cut=p=>{if(p.length<=9)return[p];for(const m of p.matchAll(KW)){if(m.index>=2)return[p.slice(0,m.index)].concat(cut(p.slice(m.index)))}
+    const e=p.match(/(FC|SC|Jr\.?FC|U-?\d+)$/i);if(e&&e.index>=4)return[p.slice(0,e.index),e[0]];return[p]};
+  const out=[];for(const p of n.split(/\s+/).flatMap(cut)){if(out.length&&(out[out.length-1]+p).length<=9)out[out.length-1]+=p;else out.push(p)}
+  return out.map(p=>`<span>${esc(p)}</span>`).join("");
+}
+function jersey(t,no){return `<div class="phx"><span>⚾</span><b class="num">${no}</b></div>`}
+function photo(t,no){return t.ph?`<img src="baseball-img/${t.ph}" alt="" loading="lazy">`:jersey(t,no)}
+const bgStyle=t=>t.ph?` style="--bg:url('baseball-img/${t.ph}')"`:"";
+function shortDay(t){return t.dy?t.dy.replace(/（.*/,""):""}
+function shortFee(t){const m=(t.fee||"").match(/(?:月会費|月謝|団費|会費|毎月)\s*\/?\s*(?:月)?\s*([\d,]+円)/);return m?"月"+m[1]:""}
+function card(t,no,ci){
+  const tags=[`<i class="t ${t.k}">${KIND[t.k]}</i>`];
+  t.tg.forEach(g=>tags.push(`<i class="t ${g}">${TAG[g]}</i>`));
+  const d=shortDay(t);if(d)tags.push(`<i class="t day">${esc(d)}</i>`);
+  const f=shortFee(t);if(f)tags.push(`<i class="t fee">${esc(f)}</i>`);
+  return `<button class="card" data-ci="${ci}" style="animation-delay:${Math.min(no,12)*30}ms">
+   <div class="ph"${bgStyle(t)}>${photo(t,no)}<span class="no num">${no}</span>${t.new?'<span class="nw">NEW</span>':""}</div>
+   <div class="cb"><div class="cn">${nameLines(t.n)}</div>${t.st?`<div class="best">🏆 ${t.st[0][0]}年度 ${shortCup(t.st[0][1])} ${t.st[0][2]}</div>`:""}<div class="tg">${tags.slice(0,4).join("")}</div></div></button>`;
+}
+function shortCup(c){return c.includes("全国")?"全国大会":c.includes("リーグ S1")?"県リーグS1":c.includes("選手権大会")&&c.includes("リーグ")?"県リーグ選手権":"県大会"}
+function match(t){
+  if(state.ward&&t.d!==state.ward)return false;
+  if(state.f&&state.f!=="all"){if(KIND[state.f]){if(t.k!==state.f)return false}else if(!t.tg.includes(state.f))return false}
+  if(state.q){const q=norm(state.q).split(/[,、]/).filter(Boolean);const h=norm(t.n+t.d+t.a+t.pl+t.i);if(!q.every(w=>h.includes(w)))return false}
+  return true;
+}
+function home(){
+  const cnt=w=>D.filter(t=>t.d===w).length;
+  $("#app").innerHTML=`
+  <header class="board"><div class="kk"><div class="hr"><span class="bat">🏏</span><span class="hx"><span class="hy">⚾</span></span><span class="hrtxt num">HOME RUN!</span></div></div>
+    <div class="en num">SAITAMA KIDS BASEBALL</div>
+    <h1>さいたま市<br>少年野球</h1>
+    <div class="score"><span>10<small>区</small></span><i></i><span>${D.length}<small>チーム</small></span><i></i><span>${D.filter(t=>t.k==="sss").length}<small>少年団</small></span></div>
+    <form class="search" id="sf"><input id="q" type="search" placeholder="名前・駅・町名で探す" enterkeyhint="search"><button aria-label="探す">⚾</button></form>
+  </header>
+  <section class="pitch"><div class="dia"><i></i><i></i><i></i><i></i></div><h2>区をえらんでね</h2>
+    <div class="zks">${WARDS.map((w,i)=>`<button class="zk" data-w="${w}" style="${kit(w)}"><b class="num">${String(i+1).padStart(2,"0")}</b><span>${w}</span><small style="${cnt(w)?"":"opacity:.45"}">${cnt(w)}チーム</small></button>`).join("")}</div>
+  </section>
+
+  <section class="bench"><h2>ぜんぶの区から、しぼって探す</h2>
+    <div class="chips"><button class="chip" data-f="all"><span class="dot" style="background:#fff;box-shadow:inset 0 0 0 2px var(--ink)"></span>すべて見る（${D.length}）</button>${FILTERS.map(f=>`<button class="chip" data-f="${f[0]}"><span class="dot" style="background:var(${f[2]})"></span>${f[1]}</button>`).join("")}</div>
+  </section>
+  <footer class="foot"><span class="fdeco"><span class="bnc">⚾</span></span>少年野球のチームの情報は、Wollyの習い事ページ（2026年11月7日に読み取り）と、さいたま市スポーツ協会「スポ少みっけ！」（2026年11月13日確認）をもとにWollyがまとめたものです。曜日・お金・入会のしかたは変わることがあるので、かならずホームページでたしかめてね。</footer>`;
+  window.scrollTo(0,0);
+}
+function list(){
+  const items=D.filter(match);if(state.f==="strong")items.sort((a,b)=>(b.ss||0)-(a.ss||0));
+  const wi=WARDS.indexOf(state.ward);
+  const title=state.ward||(state.q?`「${esc(state.q)}」`:state.f==="all"?"すべて":FILTERS.find(f=>f[0]===state.f)?.[1]||"");
+  const lch=[[state.ward||state.q?"":"all","すべて"]].concat(FILTERS.map(f=>[f[0],f[1]]));
+  CUR=items;
+  const pw=wi>=0?WARDS[(wi+9)%10]:"",nw=wi>=0?WARDS[(wi+1)%10]:"";
+  $("#app").innerHTML=`
+  <div class="bar" style="${wi>=0?kit(state.ward):""}"><button class="back" id="back">‹ もどる</button>${wi>=0?`<span class="bn num">${String(wi+1).padStart(2,"0")}</span>`:""}<span class="bt">${title}<span class="dribble">⚾</span></span><span class="bc">${items.length}チーム</span></div>
+  ${wi>=0?`<div class="nbw"><button data-nw="${pw}" style="--wc:${WCOL[pw]}">‹ ${pw}</button><span class="swipehint">よこにスライドでとなりの区へ</span><button class="r" data-nw="${nw}" style="--wc:${WCOL[nw]}">${nw} ›</button></div>`:""}
+  ${state.q?"":`<div class="lchips">${lch.map(c=>`<button class="chip${state.f===c[0]?" on":""}" data-lf="${c[0]}">${c[1]}</button>`).join("")}</div>`}
+  <div class="field">${state.f==="strong"?`<p class="best" style="font-size:12.5px;margin:0 2px 10px;padding:8px 10px">🏆 ここ2年（2024・2025年度）の埼玉県の大きな大会で、ベスト16以上か、県リーグのいちばん上（S1）に入ったさいたま市のチームです。カードをタップすると大会の結果が見られます。</p>`:""}${items.length?`<div class="grid">${items.map((t,i)=>card(t,i+1,i)).join("")}</div>`:`<p class="empty">見つかりませんでした。ことばを変えてみてね。</p>`}</div>
+  <footer class="foot">写真をタップすると、くわしく出ます。入る前に、かならずホームページでたしかめてね。</footer>`;
+}
+function render(){state.view==="home"?home():list()}
+function panelHtml(ci){
+  const t=CUR[ci],no=ci+1;
+  const rows=[];
+  const place=t.a||t.pl;
+  if(place)rows.push(["場所",place]);
+  if(t.pl&&t.a&&!/各/.test(t.pl)&&!t.a.includes(t.pl.split("・")[0].replace(/小学校|中学校/,"")))rows.push(["市の一覧",t.pl]);
+  if(t.dy)rows.push(["練習日",t.dy]);
+  if(t.fee)rows.push(["お金",t.fee]);
+  else if(t.i&&t.i!==t.dy)rows.push(["メモ",t.i]);
+  if(t.st2)rows.push(["最寄り駅",t.st2]);
+  rows.push(["区",t.d||"さいたま市"]);
+  const tags=[KIND[t.k]].concat(t.tg.map(g=>TAG[g])).join("・");
+  return `<div class="big${t.ph?" hasimg":""}"${bgStyle(t)}>${t.ph?`<img src="baseball-img/${t.ph}" alt="">`:jersey(t,no)}</div>
+   <div class="cap"><small>${esc(tags)}</small><b>${esc(t.n)} <span class="bb">⚾</span></b>
+   ${t.u?`<a class="hp" href="${esc(t.u)}" target="_blank" rel="noopener">🏠 ホームページを見る ›</a>`:`<span class="hp none">ホームページはまだ見つかっていません</span>`}</div>
+   <div class="pb">${t.st?`<div class="td num">TEAM RESULTS</div><ul class="res">${t.st.map(r=>`<li><span class="rk">${esc(r[2])}</span><b>${esc(r[0])}年度 ${esc(r[1])}</b><small>${esc(r[3]||"")}</small></li>`).join("")}</ul><p class="srcs">強豪＝ここ2年の埼玉県の大きな大会で、ベスト16以上か県リーグのいちばん上（S1）に入ったチーム。結果の出どころ：${STSRC.map(x=>`<a href="${x[1]}" target="_blank" rel="noopener">${esc(x[0])}</a>`).join("・")}</p><div style="height:10px"></div>`:""}<div class="td num">TEAM DATA</div><dl>${rows.map(r=>`<div class="row"><dt>${r[0]}</dt><dd>${esc(r[1])}</dd></div>`).join("")}</dl>
+   <p class="note">曜日・お金・入会のしかたは、かならずホームページでたしかめてね。${t.sp?"練習日は、さいたま市スポーツ協会「スポ少みっけ！」より。":""}</p></div>`;
+}
+function openTeam(ci){
+  let cur=ci;
+  const ov=document.createElement("div");ov.className="ov";
+  ov.innerHTML=`<div class="pn" role="dialog"><button class="x" aria-label="とじる">×</button><span class="cnt num"></span>${CUR.length>1?`<button class="pnav p" aria-label="前のチーム">‹</button><button class="pnav n" aria-label="次のチーム">›</button>`:""}<div class="pc"></div></div>`;
+  const pn=ov.querySelector(".pn"),pc=ov.querySelector(".pc"),cnt=ov.querySelector(".cnt");
+  const show=()=>{pc.innerHTML=panelHtml(cur);cnt.textContent=`${cur+1} / ${CUR.length}`;pn.setAttribute("aria-label",CUR[cur].n);pn.scrollTop=0};
+  const commit=d=>{cur=(cur+d+CUR.length)%CUR.length;show();return pc};
+  const go=d=>{if(CUR.length<2)return;slideGo(pc,d,commit)};
+  show();
+  document.body.appendChild(ov);document.body.style.overflow="hidden";
+  requestAnimationFrame(()=>requestAnimationFrame(()=>ov.classList.add("show")));
+  const close=()=>{ov.classList.remove("show");document.body.style.overflow="";setTimeout(()=>ov.remove(),300);document.removeEventListener("keydown",key)};
+  const key=e=>{if(e.key==="Escape")close();else if(e.key==="ArrowRight")go(1);else if(e.key==="ArrowLeft")go(-1)};
+  document.addEventListener("keydown",key);
+  ov.addEventListener("click",e=>{if(e.target===ov||e.target.closest(".x"))close();else if(e.target.closest(".pnav.n"))go(1);else if(e.target.closest(".pnav.p"))go(-1)});
+  slider(pn,()=>pc,()=>CUR.length>1,commit);
+}
+// 指についてくるスライド
+function slideGo(T,d,commit){
+  const W=(T.offsetWidth||innerWidth)+24;
+  T.style.transition="transform .2s cubic-bezier(.4,0,1,1),opacity .2s";T.style.transform=`translate3d(${-d*W}px,0,0)`;T.style.opacity=".35";
+  setTimeout(()=>{const N=commit(d);if(!N)return;const W2=(N.offsetWidth||innerWidth)+24;
+    N.style.transition="none";N.style.transform=`translate3d(${d*W2*.55}px,0,0)`;N.style.opacity=".35";void N.offsetWidth;
+    N.style.transition="transform .38s cubic-bezier(.16,1,.3,1),opacity .3s";N.style.transform="";N.style.opacity=""},200);
+}
+function slider(host,getT,canGo,commit){
+  let x0=null,y0=0,t0=0,dx=0,mode=null,T=null,lastX=0,lastT=0,vx=0;
+  host.addEventListener("touchstart",e=>{if(e.touches.length>1){x0=null;return}const t=e.touches[0];x0=lastX=t.clientX;y0=t.clientY;t0=lastT=performance.now();mode=null;dx=0;vx=0;T=getT()},{passive:true});
+  host.addEventListener("touchmove",e=>{if(x0===null||!T)return;const t=e.touches[0],mx=t.clientX-x0,my=t.clientY-y0;
+    if(!mode){if(Math.abs(mx)<7&&Math.abs(my)<7)return;mode=Math.abs(mx)>Math.abs(my)*1.15?"x":"y";if(mode==="x")T.style.transition="none"}
+    if(mode!=="x")return;const now=performance.now();vx=(t.clientX-lastX)/Math.max(1,now-lastT);lastX=t.clientX;lastT=now;
+    dx=mx;const d=dx<0?1:-1;const k=canGo(d)?1:.25;T.style.transform=`translate3d(${dx*k}px,0,0)`;T.style.opacity=String(1-Math.min(Math.abs(dx)/(innerWidth*1.6),.3))},{passive:true});
+  const end=()=>{if(x0===null)return;x0=null;if(mode!=="x"||!T)return;const d=dx<0?1:-1;
+    if(canGo(d)&&(Math.abs(dx)>innerWidth*.2||(Math.abs(vx)>.35&&Math.abs(dx)>24&&Math.sign(vx)===Math.sign(dx))))slideGo(T,d,commit);
+    else{T.style.transition="transform .35s cubic-bezier(.16,1,.3,1),opacity .3s";T.style.transform="";T.style.opacity=""}};
+  host.addEventListener("touchend",end,{passive:true});host.addEventListener("touchcancel",end,{passive:true});
+}
+function wardCommit(d){const i=WARDS.indexOf(state.ward);state={view:"list",ward:WARDS[(i+d+10)%10],f:state.f,q:""};render();scrollTo(0,0);return $(".field")}
+function goWard(w,d){if($(".field")&&state.ward){const i=WARDS.indexOf(state.ward);slideGo($(".field"),d,()=>{state={view:"list",ward:w,f:state.f,q:""};render();scrollTo(0,0);return $(".field")})}else{state={view:"list",ward:w,f:state.f,q:""};render()}}
+slider(document.getElementById("app"),()=>state.view==="list"&&state.ward&&!document.querySelector(".ov")?$(".field"):null,()=>true,wardCommit);
+document.addEventListener("click",e=>{
+  const b=e.target.closest("button");if(!b)return;
+  if(b.closest(".ov"))return;
+  if(b.dataset.w){state={view:"list",ward:b.dataset.w,f:"",q:""};render();scrollTo(0,0)}
+  else if(b.dataset.f){state={view:"list",ward:"",f:b.dataset.f,q:""};render();scrollTo(0,0)}
+  else if(b.dataset.lf!==undefined){state.f=b.dataset.lf;render()}
+  else if(b.id==="back"){state={view:"home",ward:"",f:"",q:""};render()}
+  else if(b.dataset.ci){openTeam(+b.dataset.ci)}
+  else if(b.dataset.nw){const i=WARDS.indexOf(state.ward),j=WARDS.indexOf(b.dataset.nw);goWard(b.dataset.nw,(j-i+10)%10===1?1:-1)}
+});
+document.addEventListener("submit",e=>{if(e.target.id==="sf"){e.preventDefault();const q=$("#q").value.trim();if(q){state={view:"list",ward:"",f:"",q};render();scrollTo(0,0)}}});
+render();
+</script>
+<!--wolly-totop-->
+<style>
+.wtotop{position:fixed;z-index:60;right:max(14px,env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));
+  display:grid;justify-items:center;align-content:center;width:58px;height:58px;padding:0;border-radius:50%;border:3px solid #fff;cursor:pointer;
+  background:linear-gradient(150deg,#FF5FA2,#8E6BF5);color:#fff;font:800 10px/1.1 "Zen Maru Gothic","Hiragino Maru Gothic ProN",system-ui,sans-serif;
+  box-shadow:0 6px 16px rgba(46,43,79,.25);opacity:0;transform:translateY(14px) scale(.85);pointer-events:none;
+  transition:opacity .3s,transform .45s cubic-bezier(.3,1.6,.5,1)}
+.wtotop.on{opacity:1;transform:none;pointer-events:auto}
+.wtotop svg{width:22px;height:22px;margin-bottom:1px}
+.wtotop:active{transform:scale(.9)}
+.wtotop:focus-visible{outline:3px solid #3DB2F2;outline-offset:2px}
+@media (prefers-reduced-motion:reduce){.wtotop{transition:none}}
+</style>
+<button type="button" class="wtotop" id="wtotop" aria-label="いちばん上にもどる"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 14l6-6 6 6"/><path d="M12 8v12"/></svg>上に<br>もどる</button>
+<script>
+(function(){if(window.parent!==window){var bb=document.getElementById("backbtn");if(bb)bb.style.display="none"}})();
+(function(){var b=document.getElementById("wtotop");if(!b)return;
+function on(){b.classList.toggle("on",window.scrollY>400&&document.body.style.overflow!=="hidden")}
+addEventListener("scroll",on,{passive:true});on();
+b.addEventListener("click",function(){window.scrollTo({top:0,behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"})});
+})();
+</script>
+<!--/wolly-totop-->
+<!--wolly-icons--><script>
+(function(){
+  var IC={"tooth": "<path d=\"M6 4c2-1 4 0 6 1 2-1 4-2 6-1 3 2 2 7 0 10l-1 5c-1 2-2 1-2 0l-1-4h-4l-1 4c0 1-1 2-2 0l-1-5C4 11 3 6 6 4z\" fill=\"#fff\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>", "pill": "<rect x=\"3\" y=\"8\" width=\"18\" height=\"8\" rx=\"4\" fill=\"#FFC6DA\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M12 8v8\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M12 8h5a4 4 0 0 1 0 8h-5z\" fill=\"#fff\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>", "shield": "<path d=\"M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6z\" fill=\"#BFE6FF\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M9 12l2 2 4-4\" fill=\"none\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>", "hosp": "<rect x=\"4\" y=\"5\" width=\"16\" height=\"15\" rx=\"3\" fill=\"#fff\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M12 8v8M8 12h8\" stroke=\"#FF6FA5\" stroke-width=\"2.6\" stroke-linecap=\"round\"/>", "siren": "<path d=\"M6 18v-6a6 6 0 0 1 12 0v6z\" fill=\"#FF8FB8\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><rect x=\"4\" y=\"18\" width=\"16\" height=\"3\" rx=\"1.5\" fill=\"#fff\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M12 2v2M4 6l1.5 1.5M20 6l-1.5 1.5\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>", "phone": "<path d=\"M6 3h4l1.5 4-2.5 1.5a11 11 0 0 0 6.5 6.5L17 12.5l4 1.5v4a2 2 0 0 1-2 2A17 17 0 0 1 4 5a2 2 0 0 1 2-2z\" fill=\"#FFD6E5\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>", "pin": "<path d=\"M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z\" fill=\"#8FC8FF\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><circle cx=\"12\" cy=\"10\" r=\"2.6\" fill=\"#fff\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>", "clock": "<circle cx=\"12\" cy=\"12\" r=\"8.5\" fill=\"#FFF4C9\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M12 7v5l3.5 2\" fill=\"none\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>", "cal": "<rect x=\"3.5\" y=\"5\" width=\"17\" height=\"15\" rx=\"3\" fill=\"#fff\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M3.5 10h17\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M3.5 10V8a3 3 0 0 1 3-3h11a3 3 0 0 1 3 3v2z\" fill=\"#FF9EC4\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M8 3v4M16 3v4\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><circle cx=\"9\" cy=\"14.5\" r=\"1.2\" fill=\"#2E2B4F\"/><circle cx=\"15\" cy=\"14.5\" r=\"1.2\" fill=\"#2E2B4F\"/>", "yen": "<circle cx=\"12\" cy=\"12\" r=\"8.5\" fill=\"#FFD23F\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M8.5 7l3.5 5 3.5-5M12 12v5.5M9 13h6M9 15.5h6\" fill=\"none\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>", "car": "<path d=\"M4 15v-3l2-5h12l2 5v3z\" fill=\"#BFE6FF\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><rect x=\"3\" y=\"13\" width=\"18\" height=\"4\" rx=\"2\" fill=\"#8FC8FF\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><circle cx=\"7.5\" cy=\"18\" r=\"1.8\" fill=\"#fff\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><circle cx=\"16.5\" cy=\"18\" r=\"1.8\" fill=\"#fff\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>", "train": "<rect x=\"5\" y=\"3\" width=\"14\" height=\"14\" rx=\"4\" fill=\"#7FD0B5\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><rect x=\"7.5\" y=\"6\" width=\"9\" height=\"5\" rx=\"1.5\" fill=\"#fff\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M8 20l2-3M16 20l-2-3\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>", "baby": "<circle cx=\"12\" cy=\"12\" r=\"8\" fill=\"#FFE3CF\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M9 7q3-3 6 0\" fill=\"none\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><circle cx=\"9.5\" cy=\"12\" r=\"1\" fill=\"#2E2B4F\"/><circle cx=\"14.5\" cy=\"12\" r=\"1\" fill=\"#2E2B4F\"/><circle cx=\"12\" cy=\"16\" r=\"1.6\" fill=\"#FF9EC4\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>", "kid": "<circle cx=\"12\" cy=\"7\" r=\"4\" fill=\"#FFE3CF\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M5 21q0-8 7-8t7 8z\" fill=\"#FFB7D5\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>", "family": "<circle cx=\"8\" cy=\"7\" r=\"3.2\" fill=\"#FFE3CF\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><circle cx=\"16.5\" cy=\"10\" r=\"2.6\" fill=\"#FFE3CF\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M2.5 20q0-8 5.5-8t5.5 8z\" fill=\"#BFE6FF\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M12 20q0-6 4.5-6t4.5 6z\" fill=\"#FFC6DA\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>", "school": "<path d=\"M3 10l9-6 9 6v10H3z\" fill=\"#FFF4C9\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><rect x=\"10\" y=\"14\" width=\"4\" height=\"6\" fill=\"#FFB7D5\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><circle cx=\"12\" cy=\"10\" r=\"1.8\" fill=\"#fff\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>", "doc": "<path d=\"M6 3h8l4 4v14H6z\" fill=\"#fff\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M14 3v4h4\" fill=\"#E6D4FF\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M9 12h6M9 15.5h6\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>", "check": "<circle cx=\"12\" cy=\"12\" r=\"8.5\" fill=\"#D8F3E8\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M8 12.5l2.6 2.6L16 9.6\" fill=\"none\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>", "heart": "<path d=\"M12 20s-8-5-8-11a4.3 4.3 0 0 1 8-2 4.3 4.3 0 0 1 8 2c0 6-8 11-8 11z\" fill=\"#FF9EC4\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>", "bulb": "<path d=\"M8.5 15a6 6 0 1 1 7 0v2.5h-7z\" fill=\"#FFE070\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M9.5 20.5h5\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>", "warn": "<path d=\"M12 3.5l9 16H3z\" fill=\"#FFE070\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M12 9.5v4.5\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><circle cx=\"12\" cy=\"17\" r=\"1\" fill=\"#2E2B4F\"/>", "star": "<path d=\"M12 3l2.7 5.6 6.1.8-4.4 4.3 1 6.1L12 17l-5.4 2.8 1-6.1L3.2 9.4l6.1-.8z\" fill=\"#FFE070\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>", "web": "<circle cx=\"12\" cy=\"12\" r=\"8.5\" fill=\"#E6D4FF\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M3.5 12h17M12 3.5c-3 3-3 14 0 17M12 3.5c3 3 3 14 0 17\" fill=\"none\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>", "food": "<path d=\"M4 12h16a8 8 0 0 1-16 0z\" fill=\"#FFE3CF\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M8 9q0-3 2-4M12 9q0-3 2-4\" fill=\"none\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>", "play": "<path d=\"M4 20L12 5l8 15\" fill=\"none\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M7 15h10\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><circle cx=\"17.5\" cy=\"7\" r=\"2.5\" fill=\"#FF9EC4\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>", "toilet": "<circle cx=\"8\" cy=\"5.5\" r=\"2\" fill=\"#8FC8FF\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><circle cx=\"16\" cy=\"5.5\" r=\"2\" fill=\"#FF9EC4\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M6 20v-5H5l1.5-6h3L11 15h-1v5zM14 20V9h4v11z\" fill=\"#fff\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>", "tree": "<circle cx=\"12\" cy=\"9\" r=\"6\" fill=\"#B5E3C9\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M12 15v6\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>", "water": "<path d=\"M12 3s6 7 6 11a6 6 0 0 1-12 0c0-4 6-11 6-11z\" fill=\"#8FC8FF\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>", "home": "<path d=\"M4 11l8-7 8 7v9H4z\" fill=\"#FFE3EC\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><rect x=\"10\" y=\"14\" width=\"4\" height=\"6\" fill=\"#FFB7D5\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>", "walk": "<circle cx=\"13\" cy=\"4.5\" r=\"2\" fill=\"#FFE3CF\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M12 8l-3 5 3 2-1 6M12 8l3 4h3M9 13l-3 2\" fill=\"none\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>", "people": "<circle cx=\"7\" cy=\"8\" r=\"2.6\" fill=\"#FFE3CF\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><circle cx=\"17\" cy=\"8\" r=\"2.6\" fill=\"#FFE3CF\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><circle cx=\"12\" cy=\"7\" r=\"3\" fill=\"#FFE3CF\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M6 20q0-7 6-7t6 7z\" fill=\"#D9CCFF\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>", "moon": "<path d=\"M15 3a8 8 0 1 0 6 12A7 7 0 0 1 15 3z\" fill=\"#C9B8F2\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>", "search": "<circle cx=\"10.5\" cy=\"10.5\" r=\"6\" fill=\"#E3F4FC\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M15 15l5 5\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>", "book": "<path d=\"M12 6Q8 3 3 4v14q5-1 9 2 4-3 9-2V4q-5-1-9 2z\" fill=\"#BFD7FF\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M12 6v14\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>", "mail": "<rect x=\"3\" y=\"6\" width=\"18\" height=\"12\" rx=\"2.5\" fill=\"#fff\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M3.5 7l8.5 6 8.5-6\" fill=\"none\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>", "map": "<path d=\"M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z\" fill=\"#BFE6FF\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M9 4v14M15 6v14\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><circle cx=\"16\" cy=\"9\" r=\"2\" fill=\"#FF6FA5\"/>", "bag": "<rect x=\"5\" y=\"7\" width=\"14\" height=\"14\" rx=\"4\" fill=\"#FF8FB8\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M5 12h14\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><rect x=\"10\" y=\"13.5\" width=\"4\" height=\"3\" rx=\"1\" fill=\"#FFE070\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M8.5 7q0-4 3.5-4t3.5 4\" fill=\"none\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>", "ball": "<circle cx=\"12\" cy=\"12\" r=\"8.5\" fill=\"#fff\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M12 7.5l3 2.2-1.1 3.5h-3.8L9 9.7z\" fill=\"#2E2B4F\"/><path d=\"M12 3.5v4M15 9.7l4-1.3M13.9 13.2l2.4 3.4M10.1 13.2l-2.4 3.4M9 9.7l-4-1.3\" fill=\"none\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>", "temp": "<path d=\"M10 4a2 2 0 0 1 4 0v9a4 4 0 1 1-4 0z\" fill=\"#fff\" stroke=\"#2E2B4F\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><circle cx=\"12\" cy=\"16.5\" r=\"2.2\" fill=\"#FF6FA5\"/><path d=\"M12 9v6\" stroke=\"#FF6FA5\" stroke-width=\"2\"/>"},KW=[["tooth", "歯"], ["pill", "薬|処方"], ["shield", "予防接種|ワクチン|接種|予防"], ["temp", "熱|発熱|病気|症状|急病|病児|病後"], ["siren", "急患|救急|夜間|休日診療|119|#7119|#8000"], ["hosp", "健診|検診|診察|診療|病院|医療|医師|クリニック|小児科|内科|眼科|耳鼻|皮膚|整形"], ["phone", "電話|予約|問い合わせ|問合せ|連絡|TEL"], ["mail", "郵送|メール|ポスト"], ["car", "駐車|車で|クルマ|ドライブ"], ["train", "駅|電車|鉄道|徒歩"], ["walk", "距離|近い|近く|歩いて|お散歩"], ["pin", "住所|場所|所在地|地図|マップ|道順|区|エリア|地域"], ["clock", "時間|時刻|時から|開いている|受付|保育時間"], ["cal", "日程|曜日|曜|期間|締切|しめきり|いつ|スケジュール|カレンダー|時期|月|年度|春|夏|秋|冬"], ["yen", "料金|費用|円|お金|手当|助成|補助|無料|支給|医療費|給付|もらえる|ポイント還元"], ["baby", "赤ちゃん|乳児|乳幼児|0歳|妊婦|妊娠|出産|ママ|授乳|おむつ"], ["people", "人数|定員|学級数|人|みんな"], ["school", "学校|学級|学区|入学|小学|中学|学童|放課後|通級"], ["kid", "子ども|子供|こども|幼児|児童|お子さん|キッズ|1歳|2歳|3歳"], ["family", "親子|家族|保護者|パパ"], ["doc", "書類|申請|申込|申し込み|もちもの|持ち物|届|手続|証明|健診票|連絡書|認定"], ["check", "対象|条件|年齢|チェック|確認|ステップ|STEP|流れ"], ["heart", "相談|支援|サポート|ケア|やさしい"], ["bulb", "ポイント|コツ|ヒント|うらワザ|裏ワザ|知って"], ["warn", "注意|気をつけ|休止|ご注意|大切"], ["star", "特徴|おすすめ|人気|口コミ|スタンプ|新着|クーポン|限定"], ["web", "ホームページ|サイト|公式|リンク|くわしく|詳しく|ページ"], ["food", "給食|食事|おやつ|ごはん|ランチ|食育|レストラン|カフェ|お店"], ["toilet", "トイレ"], ["water", "プール|水あそび|水遊び|水族館"], ["play", "遊具|遊び|あそび|イベント|体験|習い事"], ["tree", "公園|自然|森|芝生|花"], ["book", "絵本|図書|本|学び|まなび|勉強"], ["home", "保育|園|預け|預か|施設|センター|家"], ["moon", "夜"], ["search", "さがす|探す|検索"]].map(function(k){return [k[0],new RegExp(k[1])]});
+  var SEL="dt,th,h2,h3,h4,h5,summary,label,button,.btn,.chip,.tag,a.b-map,a.b-web,a.b-tel,li>b:first-child,.ttl,.title";
+  var SKIP=".wi,svg,img,.maplibregl-map,.maplibregl-ctrl,.tabbar,#tabbar,.hdeco,.deco,[data-noicon],.gm,#fsT,.fs-h,.gp dt,.gp th,.gp h3,.gp h2,.gc,.gl,.gf,.cpc,.tel,.splash,#splash,input,select,textarea,canvas,.ev-card,.fc,.vac";
+  var EMO=/^[☀-➿\uD83C-\uDBFF⭐✅‼⁉Ⓜ〰©®™←-⇿⌀-⏿■-◿✀-➿★☆◎○●◆■▶►※✓✔✕×›‹＞＜]/;
+  function own(el){var t="";for(var i=0;i<el.childNodes.length;i++){var n=el.childNodes[i];if(n.nodeType===3)t+=n.textContent;else if(n.nodeType===1&&/^(B|STRONG|SPAN|MARK|EM|SMALL|I)$/.test(n.tagName)&&!n.querySelector("svg,img"))t+=n.textContent}return t.replace(/\s+/g," ").trim()}
+  function deco(root){
+    var list=(root.querySelectorAll?root:document).querySelectorAll(SEL);
+    for(var i=0;i<list.length;i++){var el=list[i];
+      if(el.dataset.wi)continue;el.dataset.wi="1";
+      if(el.closest(SKIP))continue;
+      if(el.querySelector("svg,img,canvas,.wi"))continue;
+      var t=own(el);if(t.length<2||t.length>16||EMO.test(t))continue;
+      var k=null;for(var j=0;j<KW.length;j++){if(KW[j][1].test(t)){k=KW[j][0];break}}
+      if(!k)continue;
+      var s=document.createElement("span");s.className="wi";s.setAttribute("aria-hidden","true");
+      s.innerHTML='<svg viewBox="0 0 24 24">'+IC[k]+'</svg>';
+      el.insertBefore(s,el.firstChild);
+    }
+  }
+  var st=document.createElement("style");st.textContent=".wi{display:inline-block;width:1.12em;height:1.12em;margin:0 .3em 0 0;vertical-align:-.18em;flex:0 0 auto}.wi svg{display:block;width:100%;height:100%;overflow:visible}";document.head.appendChild(st);
+  var q=false;function run(){q=false;deco(document)}
+  function later(){if(!q){q=true;requestAnimationFrame(run)}}
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",run);else run();
+  new MutationObserver(later).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script><!--/wolly-icons--></body>
+</html>
