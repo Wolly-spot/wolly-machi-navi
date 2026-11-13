@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dela+Gothic+One&family=Zen+Maru+Gothic:wght@500;700&display=swap">
 <style>
-:root{--deep:#123a2c;--turf:#123a2c;--turf2:#123a2c;--chalk:#fff;--lime:#e4ff70;--ink:#123a2c;--orange:#d9f03a;--orange-d:#123a2c;--cream:#fff;--line:#d6e6dd;--fieldbg:linear-gradient(90deg,#2b5fa8 0 8%,#3a76c4 8% 92%,#2b5fa8 92%);--phbg:#3a76c4;
+:root{--deep:#123a2c;--turf:#123a2c;--turf2:#123a2c;--chalk:#fff;--lime:#e4ff70;--ink:#123a2c;--orange:#d9f03a;--orange-d:#123a2c;--cream:#fff;--line:#d6e6dd;--fieldbg:radial-gradient(circle,#a8481f 0 .8px,transparent 1px) 0 0/7px 7px,linear-gradient(90deg,#c4572e 0 7%,transparent 7% 93%,#c4572e 93%),linear-gradient(#c4572e 0 10px,transparent 10px calc(100% - 10px),#c4572e calc(100% - 10px)),#2b6cc4;--phbg:#2b6cc4;
   --sss:#2f7d32;--club:#1f4f8f;--school:#c26b12;--girls:#c2457a;--kids:#7a5ac8;--jhs:#13788a;--gold:#b8860b}
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%}
@@ -59,6 +59,9 @@ a{color:inherit}
 .phx{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--phbg);color:var(--ink)}
 .phx span{font-size:44px;line-height:1.1}
 .phx b{font-size:22px;opacity:.75}
+.scene{background:var(--deep);padding:0 12px 14px}
+.scene svg{display:block;width:100%;height:min(74vw,330px);border-radius:16px;border:3px solid rgba(255,255,255,.22)}
+.footscene svg{display:block;width:100%;max-width:520px;height:auto;aspect-ratio:300/70;border-radius:10px;margin-bottom:10px}
 .t.park{background:#e3ecfa;color:#1d3c78}.t.near{background:#efe3fa;color:#5b2a86}
 
 .rally{position:absolute;inset:0;pointer-events:none;overflow:hidden}
@@ -67,9 +70,9 @@ a{color:inherit}
 .rally .ty{display:block;font-size:18px;animation:ty .8s cubic-bezier(.3,0,.7,1) infinite alternate}
 @keyframes tx{from{transform:translateX(0)}to{transform:translateX(calc(100vw - 70px))}}
 @keyframes ty{from{transform:translateY(0)}to{transform:translateY(-70px) rotate(180deg)}}
-.tcourt{position:absolute;inset:10px 10%;border:2px solid #fff;pointer-events:none}
-.tcourt::before{content:"";position:absolute;left:0;right:0;top:50%;border-top:3px solid #fff}
-.tcourt::after{content:"";position:absolute;left:50%;top:22%;bottom:22%;border-left:2px solid #fff}
+.tcourt{position:absolute;inset:10px 7%;border:3px solid #fff;pointer-events:none}
+.tcourt::before{content:"";position:absolute;left:9%;right:9%;top:0;bottom:0;border-left:2px solid #fff;border-right:2px solid #fff;background:linear-gradient(#fff,#fff) 50% 50%/100% 4px no-repeat,linear-gradient(transparent 25%,#fff 25% calc(25% + 2px),transparent calc(25% + 2px) calc(75% - 2px),#fff calc(75% - 2px) 75%,transparent 75%)}
+.tcourt::after{content:"";position:absolute;left:50%;top:25%;bottom:25%;border-left:2px solid #fff}
 .fdeco .tb{display:inline-block;animation:bnc3 1s cubic-bezier(.3,0,.7,1) infinite}
 @keyframes bnc3{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px) rotate(200deg)}}
 
@@ -224,6 +227,7 @@ function home(){
     <div class="score"><span>10<small>区</small></span><i></i><span>${D.length}<small>教室</small></span></div>
     <form class="search" id="sf"><input id="q" type="search" placeholder="名前・駅・町名で探す" enterkeyhint="search"><button aria-label="探す">🎾</button></form>
   </header>
+  <div class="scene"><svg viewBox="0 0 300 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="300" height="300" fill="#c4572e"/><rect x="0" y="0" width="300" height="300" fill="url(#cl)" opacity=".35"/><defs><pattern id="cl" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r=".8" fill="#8a3a1c"/></pattern></defs><rect x="40" y="30" width="220" height="250" fill="#2b6cc4" stroke="#fff" stroke-width="3"/><path d="M62 30v250M238 30v250M62 92h176M62 218h176M150 92v126" stroke="#fff" stroke-width="2.4"/><rect x="30" y="152" width="240" height="6" fill="#fff"/><defs><pattern id="tn" width="5" height="5" patternUnits="userSpaceOnUse"><path d="M0 0h5M0 0v5" stroke="#222" stroke-width=".6"/></pattern></defs><rect x="30" y="140" width="240" height="14" fill="url(#tn)"/><rect x="26" y="136" width="5" height="22" fill="#555"/><rect x="269" y="136" width="5" height="22" fill="#555"/><g transform="translate(170 74) scale(-1.0 1.0)"><animateTransform attributeName="transform" type="translate" values="20 0;-30 0;20 0" keyTimes="0;.5;1" dur="2.4s" repeatCount="indefinite" additive="sum"/><rect x="-5" y="-13" width="4.2" height="13" rx="1.6" fill="#fff" stroke="#0003" stroke-width=".6"/><rect x=".8" y="-13" width="4.2" height="13" rx="1.6" fill="#fff" stroke="#0003" stroke-width=".6"/><rect x="-6" y="-1.5" width="5.5" height="2.5" rx="1" fill="#222"/><rect x=".6" y="-1.5" width="5.5" height="2.5" rx="1" fill="#222"/><rect x="-7.5" y="-29" width="15" height="17" rx="4.5" fill="#ffcf33" stroke="#c4572e" stroke-width="1.6"/><circle cx="0" cy="-35.5" r="6.8" fill="#f3c9a2"/><circle cx="2.4" cy="-35.5" r=".9" fill="#222"/><path d="M1 -32.2q1.6 1 3 0" stroke="#a0522d" stroke-width=".8" fill="none"/><path d="M-6.8 -35a6.8 6.8 0 0 1 13.6 0z" fill="#c4572e"/><rect x="-10" y="-36.2" width="10" height="2.4" rx="1" fill="#c4572e"/><g transform="translate(0 -26)"><g><animateTransform attributeName="transform" type="rotate" values="60;-60;60" keyTimes="0;.5;1" dur="1.2s" repeatCount="indefinite" additive="sum" begin='.6s'/><rect x="-1" y="0" width="2.4" height="9" fill="#333"/><ellipse cx="0" cy="-6" rx="5" ry="7" fill="#ffffff55" stroke="#e53935" stroke-width="1.6"/></g></g></g><g><animateTransform attributeName="transform" type="translate" values="110 236;150 150;178 48;150 150;110 236" keyTimes="0;.25;.5;.75;1" dur="2.4s" repeatCount="indefinite" additive="sum"/><circle r="4" fill="#d9f03a" stroke="#7a8a00" stroke-width=".6"/></g><g transform="translate(120 270) scale(1.2 1.2)"><animateTransform attributeName="transform" type="translate" values="-20 0;30 0;-20 0" keyTimes="0;.5;1" dur="2.4s" repeatCount="indefinite" additive="sum"/><rect x="-5" y="-13" width="4.2" height="13" rx="1.6" fill="#fff" stroke="#0003" stroke-width=".6"/><rect x=".8" y="-13" width="4.2" height="13" rx="1.6" fill="#fff" stroke="#0003" stroke-width=".6"/><rect x="-6" y="-1.5" width="5.5" height="2.5" rx="1" fill="#222"/><rect x=".6" y="-1.5" width="5.5" height="2.5" rx="1" fill="#222"/><rect x="-7.5" y="-29" width="15" height="17" rx="4.5" fill="#fff" stroke="#2b6cc4" stroke-width="1.6"/><circle cx="0" cy="-35.5" r="6.8" fill="#f3c9a2"/><circle cx="2.4" cy="-35.5" r=".9" fill="#222"/><path d="M1 -32.2q1.6 1 3 0" stroke="#a0522d" stroke-width=".8" fill="none"/><path d="M-6.8 -35a6.8 6.8 0 0 1 13.6 0z" fill="#2b6cc4"/><rect x="0" y="-36.2" width="10" height="2.4" rx="1" fill="#2b6cc4"/><g transform="translate(0 -26)"><g><animateTransform attributeName="transform" type="rotate" values="60;-60;60" keyTimes="0;.5;1" dur="1.2s" repeatCount="indefinite" additive="sum"/><rect x="-1" y="0" width="2.4" height="9" fill="#333"/><ellipse cx="0" cy="-6" rx="5" ry="7" fill="#ffffff55" stroke="#e53935" stroke-width="1.6"/></g></g></g></svg></div>
   <section class="pitch"><div class="tcourt"></div><h2>区をえらんでね</h2>
     <div class="zks">${WARDS.map((w,i)=>`<button class="zk" data-w="${w}" style="${kit(w)}"><b class="num">${String(i+1).padStart(2,"0")}</b><span>${w}</span><small style="${cnt(w)?"":"opacity:.45"}">${cnt(w)}教室</small></button>`).join("")}</div>
   </section>
@@ -231,7 +235,7 @@ function home(){
   <section class="bench"><h2>ぜんぶの区から、しぼって探す</h2>
     <div class="chips"><button class="chip" data-f="all"><span class="dot" style="background:#fff;box-shadow:inset 0 0 0 2px var(--ink)"></span>すべて見る（${D.length}）</button>${FILTERS.map(f=>`<button class="chip" data-f="${f[0]}"><span class="dot" style="background:var(${f[2]})"></span>${f[1]}</button>`).join("")}</div>
   </section>
-  <footer class="foot"><span class="fdeco"><span class="tb">🎾</span></span>テニスの教室の情報は、Wollyの習い事ページ（2026年11月7日に読み取り）をもとにWollyがまとめたものです。曜日・お金・入会のしかたは変わることがあるので、かならずホームページでたしかめてね。</footer>`;
+  <footer class="foot"><div class="footscene"><svg viewBox="0 0 300 70" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="300" height="70" fill="#c4572e"/><rect x="20" y="8" width="260" height="56" fill="#2b6cc4" stroke="#fff" stroke-width="2"/><rect x="148" y="4" width="4" height="62" fill="#fff"/><g><animateTransform attributeName="transform" type="translate" values="30 40;150 14;270 40;150 14;30 40" keyTimes="0;.25;.5;.75;1" dur="2.2s" repeatCount="indefinite" additive="sum"/><circle r="4" fill="#d9f03a"/></g></svg></div>テニスの教室の情報は、Wollyの習い事ページ（2026年11月7日に読み取り）をもとにWollyがまとめたものです。曜日・お金・入会のしかたは変わることがあるので、かならずホームページでたしかめてね。</footer>`;
   window.scrollTo(0,0);
 }
 function list(){
