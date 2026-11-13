@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-13T09:45:00+09:00",
+ "updatedAt": "2026-11-13T18:55:00+09:00",
  "events": [
   {
    "id": "e-lalaport-bf",
@@ -192,8 +192,8 @@
    "area": "さいたま市桜区",
    "src": "さいたま市",
    "url": "https://www.city.saitama.lg.jp/003/002/018/sakura/p134373.html",
-   "img": "",
-   "ai": false,
+   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/e-kodomo-machi-saiden.jpg",
+   "ai": true,
    "added": "2026-11-12T19:30:00+09:00"
   },
   {
