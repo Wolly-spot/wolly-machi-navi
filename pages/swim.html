@@ -191,7 +191,7 @@ function nameLines(n){
   const KW=/(スポーツ少年団|サッカー少年団|少年団|ミニバスケットボール|ミニバス|バスケットボールクラブ|バレーボールクラブ|ソフトボール|ベースボールクラブ|少年野球|サッカースクール|フットボールクラブ|フットボール|音楽教室|ピアノ教室|サッカー|ピアノ|バイオリン|バレエ|書道|教室|スクール|クラブ|アカデミー|センター|道場|コース|U-\d+)/g;
   const cut=p=>{if(p.length<=9)return[p];for(const m of p.matchAll(KW)){if(m.index>=2)return[p.slice(0,m.index)].concat(cut(p.slice(m.index)))}
     const e=p.match(/(FC|SC|Jr\.?FC|U-?\d+)$/i);if(e&&e.index>=4)return[p.slice(0,e.index),e[0]];return[p]};
-  const out=[];for(const p of n.split(/\s+/).flatMap(cut)){if(out.length&&(out[out.length-1]+p).length<=9)out[out.length-1]+=p;else out.push(p)}
+  const out=[];for(const p of n.split(/\s+/).flatMap(x=>x.split(/(?=【)|(?<=】)/)).filter(Boolean).flatMap(cut)){if(out.length&&(out[out.length-1]+p).length<=9)out[out.length-1]+=p;else out.push(p)}
   return out.map(p=>`<span>${esc(p)}</span>`).join("");
 }
 function jersey(t,no){return `<div class="phx"><span>🏊</span><b class="num">${no}</b></div>`}
