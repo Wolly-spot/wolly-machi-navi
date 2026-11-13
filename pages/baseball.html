@@ -62,7 +62,7 @@ a{color:inherit}
 .scene{background:var(--deep);padding:0 12px 14px}
 .scene svg{display:block;width:100%;height:min(74vw,330px);border-radius:16px;border:3px solid rgba(255,255,255,.22)}
 .footscene svg{display:block;width:100%;max-width:520px;height:auto;aspect-ratio:300/70;border-radius:10px;margin-bottom:10px}
-.t.park{background:#e3ecfa;color:#1d3c78}.t.near{background:#efe3fa;color:#5b2a86}
+.t.park{background:#e3ecfa;color:#1d3c78}.t.mid{background:#13788a}.t.near{background:#efe3fa;color:#5b2a86}
 
 .hr{position:absolute;inset:0;pointer-events:none;overflow:hidden}
 .hr .bat{position:absolute;left:18px;bottom:22px;font-size:26px;transform-origin:80% 80%;animation:swing 6s infinite}
@@ -187,7 +187,7 @@ const WCOL=Object.fromEntries(Object.entries(KIT).map(([k,v])=>[k,v[0]]));
 const kit=w=>{const k=KIT[w];return k?`--wc:${k[0]};--ws:${k[1]};--wt:${k[2]};--wn:${k[3]||"#fff"}`:""};
 let CUR=[];
 const KIND={"sss": "少年団", "club": "クラブ", "school": "スクール"};
-const TAG={"girls": "女子", "kids": "幼児から", "fee": "料金がわかる", "park": "駐車場あり", "near": "駅ちかく", "strong": "強豪"};
+const TAG={"mid": "中学生から", "girls": "女子", "kids": "幼児から", "fee": "料金がわかる", "park": "駐車場あり", "near": "駅ちかく", "strong": "強豪"};
 const FILTERS=[["sss", "少年団", "--sss"], ["club", "クラブ", "--club"], ["school", "スクール", "--school"], ["near", "駅ちかく", "--club"]];
 const $=s=>document.querySelector(s);
 const esc=s=>String(s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -205,7 +205,7 @@ function nameLines(n){
 function jersey(t,no){return `<div class="phx"><span>⚾</span><b class="num">${no}</b></div>`}
 function photo(t,no){return t.ph?`<img src="baseball-img/${t.ph}" alt="" loading="lazy">`:jersey(t,no)}
 const bgStyle=t=>t.ph?` style="--bg:url('baseball-img/${t.ph}')"`:"";
-function shortDay(t){return t.dy?t.dy.replace(/（.*/,""):""}
+function shortDay(t){if(!t.dy)return"";const W="月火水木金土日祝";const d=[...new Set(t.dy.match(/[月火水木金土日祝]/g)||[])].sort((a,b)=>W.indexOf(a)-W.indexOf(b));return d.length?d.join("・"):t.dy.slice(0,6)}
 function shortFee(t){const m=(t.fee||"").match(/(?:月会費|月謝|団費|会費|毎月)\s*\/?\s*(?:月)?\s*([\d,]+円)/);return m?"月"+m[1]:""}
 function card(t,no,ci){
   const tags=[`<i class="t ${t.k}">${KIND[t.k]}</i>`];

@@ -202,7 +202,7 @@ function jersey(t,no){
 }
 function photo(t,no){return t.ph?`<img src="soccer-img/${t.ph}" alt="" loading="lazy">`:jersey(t,no)}
 const bgStyle=t=>t.ph?` style="--bg:url('soccer-img/${t.ph}')"`:"";
-function shortDay(t){return t.dy?t.dy.replace(/（.*/,""):""}
+function shortDay(t){if(!t.dy)return"";const W="月火水木金土日祝";const d=[...new Set(t.dy.match(/[月火水木金土日祝]/g)||[])].sort((a,b)=>W.indexOf(a)-W.indexOf(b));return d.length?d.join("・"):t.dy.slice(0,6)}
 function shortFee(t){const m=(t.fee||"").match(/(?:月会費|月謝|団費|会費|毎月)\s*\/?\s*(?:月)?\s*([\d,]+円)/);return m?"月"+m[1]:""}
 function card(t,no,ci){
   const tags=[`<i class="t ${t.k}">${KIND[t.k]}</i>`];
