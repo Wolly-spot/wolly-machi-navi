@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-13T18:55:00+09:00",
+ "updatedAt": "2026-11-14T07:55:00+09:00",
  "events": [
   {
    "id": "e-lalaport-bf",
@@ -11,19 +11,6 @@
    "src": "ららぽーと富士見",
    "url": "https://mitsui-shopping-park.com/lalaport/fujimi/event/3632625.html",
    "img": "https://mitsui-shopping-park.com/lalaport/fujimi/event/3632625/image1.jpg",
-   "ai": false,
-   "added": "2026-11-11T09:50:00+09:00"
-  },
-  {
-   "id": "e-lalaport-point",
-   "kind": "point",
-   "title": "ららぽーと富士見 ポイント最大10%（11/13〜15・20〜23）",
-   "desc": "メダル会員が対象のカードで払うとポイントアップ。",
-   "date": "2026-11-13",
-   "area": "富士見市",
-   "src": "ららぽーと富士見",
-   "url": "https://mitsui-shopping-park.com/lalaport/fujimi/event/3672763.html",
-   "img": "https://mitsui-shopping-park.com/lalaport/fujimi/event/3672763/image1.jpg",
    "ai": false,
    "added": "2026-11-11T09:50:00+09:00"
   },
@@ -67,19 +54,6 @@
    "added": "2026-11-11T09:50:00+09:00"
   },
   {
-   "id": "e-musashino-kairo",
-   "kind": "free",
-   "title": "武蔵野回廊文化祭（11/14〜15）入場無料",
-   "desc": "サクラタウンと東所沢公園でお祭り。アニソン盆踊りも。",
-   "date": "2026-11-14",
-   "area": "所沢市",
-   "src": "さんたつ",
-   "url": "https://san-tatsu.jp/pressrelease/541672/",
-   "img": "https://prtimes.jp/img/7006/19955/resize/d7006-19955-19063c38337dee4c807a-0.png",
-   "ai": false,
-   "added": "2026-11-11T09:50:00+09:00"
-  },
-  {
    "id": "e-thomas-skip",
    "kind": "kids",
    "title": "きかんしゃトーマスの世界展（〜12/13）",
@@ -93,17 +67,43 @@
    "added": "2026-11-11T09:50:00+09:00"
   },
   {
-   "id": "e-wako-jurin-koyo",
-   "kind": "free",
-   "title": "和光樹林公園の紅葉（〜12月上旬）入園無料",
-   "desc": "木がたくさんの広い公園で紅葉さんぽ。週末のおでかけに。",
+   "id": "e-kenmin-day",
+   "kind": "facility",
+   "title": "今日11/14は県民の日 鉄道博物館などが無料",
+   "desc": "鉄道博物館や川口市立科学館が無料に。お出かけ前に公式で確認を。",
    "date": "2026-11-14",
-   "area": "和光市",
-   "src": "ウォーカープラス",
-   "url": "https://www.walkerplus.com/event/ar0311e393046/",
-   "img": "https://ms-cache.walkerplus.com/walkertouch/wtd/event/46/l2/393046_2.jpg",
+   "area": "さいたま市大宮区／川口市",
+   "src": "いこーよ",
+   "url": "https://report.iko-yo.net/articles/35439",
+   "img": "https://d28w2qw7dtr435.cloudfront.net/uploaded/cover_images/images/35618/normal.jpg?1793925692",
    "ai": false,
-   "added": "2026-11-11T20:30:00+09:00"
+   "added": "2026-11-14T07:55:00+09:00"
+  },
+  {
+   "id": "e-wanpaku-hasuda",
+   "kind": "free",
+   "title": "蓮田「わんぱくらんど」（11/14〜15）入場無料",
+   "desc": "親子で遊べる週末イベント。ふわふわ遊具は有料です。",
+   "date": "2026-11-14",
+   "area": "蓮田市",
+   "src": "いこーよ",
+   "url": "https://iko-yo.net/events/603828",
+   "img": "https://d2goguvysdoarq.cloudfront.net/system/event_photos/photos/1762280/normal.png?1790655765",
+   "ai": false,
+   "added": "2026-11-14T07:55:00+09:00"
+  },
+  {
+   "id": "e-shiki-illumination",
+   "kind": "free",
+   "title": "志木駅東口のイルミネーション（11/14〜1/31）",
+   "desc": "夕方16:30から駅前がキラキラに。お散歩ついでに見られます。",
+   "date": "2026-11-14",
+   "area": "志木市",
+   "src": "いこーよ",
+   "url": "https://iko-yo.net/events/611658",
+   "img": "https://d2goguvysdoarq.cloudfront.net/system/event_photos/photos/1779488/normal.jpg?1793385313",
+   "ai": false,
+   "added": "2026-11-14T07:55:00+09:00"
   },
   {
    "id": "e-uchu-workshop",
@@ -171,6 +171,19 @@
    "added": "2026-11-11T09:50:00+09:00"
   },
   {
+   "id": "e-zenniku-soka",
+   "kind": "kids",
+   "title": "全肉祭 in 埼玉（11/21〜23 草加）",
+   "desc": "肉グルメ約30店と大型エアー遊具・射的など縁日コーナー。",
+   "date": "2026-11-21",
+   "area": "草加市",
+   "src": "いこーよ",
+   "url": "https://report.iko-yo.net/articles/35617",
+   "img": "https://d28w2qw7dtr435.cloudfront.net/uploaded/cover_images/images/35813/normal.jpg?1794387250",
+   "ai": false,
+   "added": "2026-11-14T07:55:00+09:00"
+  },
+  {
    "id": "e-ario-glass",
    "kind": "kids",
    "title": "ガラスにお絵かき（11/22〜23）無料",
@@ -210,19 +223,6 @@
    "added": "2026-11-11T09:50:00+09:00"
   },
   {
-   "id": "e-waza1",
-   "kind": "free",
-   "title": "技-1グランプリ ものづくり体験（11/23）無料",
-   "desc": "伊奈町で職人の技の大会と体験。予約が要る体験は〆11/13。",
-   "date": "2026-11-23",
-   "area": "伊奈町",
-   "src": "埼玉県",
-   "url": "https://www.pref.saitama.lg.jp/a0811/library-info/2026waza-1.html",
-   "img": "https://www.pref.saitama.lg.jp/shared/images/sns/logo.png",
-   "ai": false,
-   "added": "2026-11-11T09:50:00+09:00"
-  },
-  {
    "id": "e-gakudo-r9",
    "kind": "deadline",
    "title": "学童（放課後児童クラブ）4月入室 〆11/30",
@@ -237,6 +237,18 @@
   }
  ],
  "shops": [
+  {
+   "id": "s-maratan-omiya",
+   "kind": "open",
+   "title": "大宮駅東口に麻辣湯の専門店 11/16オープン",
+   "desc": "具材や辛さを選べるマーラータン。オープン記念の割引もあり。",
+   "date": "2026-11-16",
+   "src": "宮原大宮ドットコム",
+   "url": "https://miyahara-kitaku.com/rishouchi-maratan-omiya-open/",
+   "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/11/IMG_5247.jpg",
+   "ai": false,
+   "added": "2026-11-14T07:55:00+09:00"
+  },
   {
    "id": "s-motsuyaki-ban",
    "kind": "open",
@@ -258,18 +270,6 @@
    "src": "宮原大宮ドットコム",
    "url": "https://miyahara-kitaku.com/new-tomochin-ramen-omiya-open/",
    "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/11/IMG_5113.jpg",
-   "ai": false,
-   "added": "2026-11-11T09:50:00+09:00"
-  },
-  {
-   "id": "s-bocchi-nisshin",
-   "kind": "open",
-   "title": "日進にカット専門店「Bocchi」オープン（11/1）",
-   "desc": "予約なしで入れて、カットは1,500円。すきま時間に。",
-   "date": "2026-11-01",
-   "src": "宮原大宮ドットコム",
-   "url": "https://miyahara-kitaku.com/bocchi-nisshin-open/",
-   "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/11/IMG_9933.jpg",
    "ai": false,
    "added": "2026-11-11T09:50:00+09:00"
   },
