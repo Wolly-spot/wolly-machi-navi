@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>さいたま市 スカッシュ</title>
+<title>スカッシュ 教室</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dela+Gothic+One&family=Zen+Maru+Gothic:wght@500;700&display=swap">
@@ -69,6 +69,7 @@ a{color:inherit}
 @keyframes ric{0%{left:5%;top:80%}25%{left:95%;top:20%}50%{left:60%;top:85%}75%{left:95%;top:45%}100%{left:5%;top:80%}}
 .sqline{position:absolute;left:0;right:0;top:30%;border-top:4px solid #d32f2f;pointer-events:none}
 .sq2{position:absolute;font-size:12px;animation:ric 4.4s linear infinite;pointer-events:none}
+.area h3{color:#1d1d2b!important}.area h3 i{background:#1d1d2b!important;color:#fff!important}.area{border-bottom:2px dashed #c9b88f}.area:last-child{border-bottom:0}
 .fdeco .tb{display:inline-block;animation:bnc3 .8s cubic-bezier(.3,0,.7,1) infinite}
 @keyframes bnc3{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
 
@@ -118,6 +119,9 @@ a{color:inherit}
 .cb{padding:7px 8px 9px;display:flex;flex-direction:column;gap:5px;flex:1}
 .cn{font-size:13.5px;font-weight:700;line-height:1.3}
 .cn span{display:block}
+.cp{position:relative;padding-left:15px;font-size:11px;line-height:1.35;color:#5a6270;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.cp::before{content:"";position:absolute;left:1px;top:2px;width:10px;height:10px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:var(--orange);box-shadow:inset 0 0 0 3px var(--orange),inset 0 0 0 5px #fff}
+.area{padding:18px 12px 6px}.area h3{display:flex;align-items:center;gap:8px;margin:0 2px 10px;color:#fff;font-size:20px}.area h3 i{font-style:normal;font-size:11.5px;background:#fff;color:var(--ink);border-radius:999px;padding:3px 10px}.area h3 small{font-size:12px;opacity:.8;font-weight:500}
 .tg{display:flex;flex-wrap:wrap;gap:3px;margin-top:auto}
 .t{font-size:10.5px;font-weight:700;border-radius:4px;padding:1px 5px;color:#fff;white-space:nowrap}
 .t.sss{background:var(--sss)}.t.club{background:var(--club)}.t.school{background:var(--school)}.t.girls{background:var(--girls)}.t.kids{background:var(--kids)}.t.jhs,.t.hs{background:var(--jhs)}
@@ -170,7 +174,7 @@ a{color:inherit}
 <body data-noicon>
 <div class="wrap" id="app"></div>
 <script>
-const D=[{"n":"Greetings Squash saitama","d":"北区","k":"club","tg":["park","near"],"a":"北区日進町2丁目1916-8 istα!日進3F","pl":"","dy":"","i":"火〜金 10:00〜23:00 土日祝 10:00〜19:00 月曜定休 駐車場あり(宮原駅西口から徒歩10分)","fee":"","u":"https://greetingssquash.com","ph":"","sp":0,"new":0,"st2":"日進駅 歩いて7分"},{"n":"Squash magic","d":"","k":"club","tg":["park","near"],"a":"神奈川県海老名市中央2丁目9-50","pl":"","dy":"","i":"駐車場あり","fee":"","u":"https://squashmagic.com","ph":"0679a2c752d8.webp","sp":0,"new":0,"st2":"海老名駅 歩いて10分"},{"n":"Squash Root 29","d":"","k":"club","tg":["park","near"],"a":"神奈川県横浜市中区弁天通4丁目67-1 馬車道スクエアビル6F","pl":"","dy":"","i":"駐車場あり","fee":"","u":"https://www.instagram.com/squash_root29/","ph":"e4d50575ddca.webp","sp":0,"new":0,"st2":"馬車道駅 歩いて1分"},{"n":"Squash.sports.point","d":"","k":"club","tg":["park","near"],"a":"栃木県宇都宮市駅前通り1丁目4-6 10F","pl":"","dy":"","i":"駐車場あり","fee":"","u":"https://www.central.co.jp/club/utsunomiya-f/program/list.html?key_no=23","ph":"3e9d9d9aeed5.webp","sp":0,"new":0,"st2":"宇都宮駅 歩いて1分"},{"n":"Greetings Squash Yokohama","d":"","k":"club","tg":["park","near"],"a":"神奈川県横浜市港北区新羽町482","pl":"","dy":"","i":"火〜金 11:00〜22:00 土日祝 10:00〜18:30 月曜定休 駐車場あり","fee":"","u":"https://greetings-yokohama.jp","ph":"","sp":0,"new":0,"st2":"北新横浜駅 歩いて1分"}];
+const D=[{"n":"Greetings Squash saitama","d":"北区","k":"club","tg":["park","near"],"a":"北区日進町2丁目1916-8 istα!日進3F","pl":"","dy":"","i":"火〜金 10:00〜23:00 土日祝 10:00〜19:00 月曜定休 駐車場あり(宮原駅西口から徒歩10分)","fee":"","u":"https://greetingssquash.com","ph":"","sp":0,"new":0,"st2":"日進駅 歩いて7分","pf":"さいたま市北区"},{"n":"Squash magic","d":"","k":"club","tg":["park","near"],"a":"神奈川県海老名市中央2丁目9-50","pl":"","dy":"","i":"駐車場あり","fee":"","u":"https://squashmagic.com","ph":"0679a2c752d8.webp","sp":0,"new":0,"st2":"海老名駅 歩いて10分","pf":"神奈川県"},{"n":"Squash Root 29","d":"","k":"club","tg":["park","near"],"a":"神奈川県横浜市中区弁天通4丁目67-1 馬車道スクエアビル6F","pl":"","dy":"","i":"駐車場あり","fee":"","u":"https://www.instagram.com/squash_root29/","ph":"e4d50575ddca.webp","sp":0,"new":0,"st2":"馬車道駅 歩いて1分","pf":"神奈川県"},{"n":"Squash.sports.point","d":"","k":"club","tg":["park","near"],"a":"栃木県宇都宮市駅前通り1丁目4-6 10F","pl":"","dy":"","i":"駐車場あり","fee":"","u":"https://www.central.co.jp/club/utsunomiya-f/program/list.html?key_no=23","ph":"3e9d9d9aeed5.webp","sp":0,"new":0,"st2":"宇都宮駅 歩いて1分","pf":"栃木県"},{"n":"Greetings Squash Yokohama","d":"","k":"club","tg":["park","near"],"a":"神奈川県横浜市港北区新羽町482","pl":"","dy":"","i":"火〜金 11:00〜22:00 土日祝 10:00〜18:30 月曜定休 駐車場あり","fee":"","u":"https://greetings-yokohama.jp","ph":"","sp":0,"new":0,"st2":"北新横浜駅 歩いて1分","pf":"神奈川県"}];
 const WARDS=["西区", "北区", "大宮区", "見沼区", "中央区", "桜区", "浦和区", "南区", "緑区", "岩槻区"];
 const STSRC=[];
 // 区の色＝ユニフォームの色 [メイン, しま, 文字, 番号の字]
@@ -199,6 +203,8 @@ function photo(t,no){return t.ph?`<img src="squash-img/${t.ph}" alt="" loading="
 const bgStyle=t=>t.ph?` style="--bg:url('squash-img/${t.ph}')"`:"";
 function shortDay(t){if(!t.dy)return"";const W="月火水木金土日祝";const d=[...new Set(t.dy.match(/[月火水木金土日祝]/g)||[])].sort((a,b)=>W.indexOf(a)-W.indexOf(b));return d.length?d.join("・"):t.dy.slice(0,6)}
 function shortFee(t){const m=(t.fee||"").match(/(?:月会費|月謝|団費|会費|毎月)\s*\/?\s*(?:月)?\s*([\d,]+円)/);return m?"月"+m[1]:""}
+const PLACEMODE="addr",AREAS=[["さいたま市北区", "埼玉県"], ["神奈川県", "横浜市・海老名市"], ["栃木県", "宇都宮市"]];
+function placeOf(t){let p=PLACEMODE==="pl"?(t.pl||t.a):(t.a||t.pl);p=String(p||"").replace(/^埼玉県/,"").replace(/^さいたま市/,"").replace(/^(西|北|大宮|見沼|中央|桜|浦和|南|緑|岩槻)区/,"").trim();return p}
 function card(t,no,ci){
   const tags=[`<i class="t ${t.k}">${KIND[t.k]}</i>`];
   t.tg.forEach(g=>tags.push(`<i class="t ${g}">${TAG[g]}</i>`));
@@ -206,7 +212,7 @@ function card(t,no,ci){
   const f=shortFee(t);if(f)tags.push(`<i class="t fee">${esc(f)}</i>`);
   return `<button class="card" data-ci="${ci}" style="animation-delay:${Math.min(no,12)*30}ms">
    <div class="ph"${bgStyle(t)}>${photo(t,no)}<span class="no num">${no}</span>${t.new?'<span class="nw">NEW</span>':""}</div>
-   <div class="cb"><div class="cn">${nameLines(t.n)}</div>${t.st?`<div class="best">🏆 ${t.st[0][0]}年度 ${shortCup(t.st[0][1])} ${t.st[0][2]}</div>`:""}<div class="tg">${tags.slice(0,4).join("")}</div></div></button>`;
+   <div class="cb"><div class="cn">${nameLines(t.n)}</div>${placeOf(t)?`<div class="cp">${esc(placeOf(t))}</div>`:""}${t.st?`<div class="best">🏆 ${t.st[0][0]}年度 ${shortCup(t.st[0][1])} ${t.st[0][2]}</div>`:""}<div class="tg">${tags.slice(0,4).join("")}</div></div></button>`;
 }
 function shortCup(c){return c.includes("全国")?"全国大会":c.includes("リーグ S1")?"県リーグS1":c.includes("選手権大会")&&c.includes("リーグ")?"県リーグ選手権":"県大会"}
 function match(t){
@@ -217,19 +223,20 @@ function match(t){
 }
 function home(){
   const cnt=w=>D.filter(t=>t.d===w).length;
+  if(AREAS){CUR=AREAS.flatMap(a=>D.filter(t=>t.pf===a[0]))}
   $("#app").innerHTML=`
   <header class="board"><div class="kk"><div class="wall"><span class="sq">⚫</span></div></div>
-    <div class="en num">SAITAMA SQUASH</div>
-    <h1>さいたま市<br>スカッシュ</h1>
-    <div class="score"><span>10<small>区</small></span><i></i><span>${D.length}<small>教室</small></span></div>
+    <div class="en num">SAITAMA・KANAGAWA SQUASH</div>
+    <h1>スカッシュ<br>教室</h1>
+    <div class="score"><span>3<small>地域</small></span><i></i><span>${D.length}<small>教室</small></span></div>
     <form class="search" id="sf"><input id="q" type="search" placeholder="名前・駅・町名で探す" enterkeyhint="search"><button aria-label="探す">🎾</button></form>
   </header>
   <div class="scene"><svg viewBox="0 0 300 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="300" height="300" fill="#efe7d7"/><polygon points="0 0 60 40 60 190 0 300" fill="#e2d6be"/><polygon points="300 0 240 40 240 190 300 300" fill="#e2d6be"/><rect x="60" y="40" width="180" height="150" fill="#f7f1e4" stroke="#c9b897"/><rect x="60" y="172" width="180" height="10" fill="#d32f2f"/><path d="M60 110h180" stroke="#d32f2f" stroke-width="2.4"/><path d="M60 52h180" stroke="#d32f2f" stroke-width="2.4"/><polygon points="60 190 240 190 300 300 0 300" fill="#d9b882"/><path d="M30 245h240M150 245v55M84 245v55M216 245v55" stroke="#d32f2f" stroke-width="2.4"/><path d="M84 270h66M150 270h66" stroke="#d32f2f" stroke-width="2"/><path d="M0 0L60 40M300 0L240 40M60 52L0 20M240 52L300 20" stroke="#d32f2f" stroke-width="2"/><g><animateTransform attributeName="transform" type="translate" values="130 240;170 90;260 160;210 230;80 120;130 240" keyTimes="0;.25;.45;.6;.8;1" dur="3.2s" repeatCount="indefinite" additive="sum"/><circle r="3.4" fill="#111"/><circle cx="-1" cy="-1" r=".9" fill="#ffd400"/></g><g transform="translate(120 282) scale(1.3 1.3)"><animateTransform attributeName="transform" type="translate" values="0 0;40 0;-10 0;0 0" keyTimes="0;.33;.66;1" dur="3.2s" repeatCount="indefinite" additive="sum"/><rect x="-5" y="-13" width="4.2" height="13" rx="1.6" fill="#fff" stroke="#0003" stroke-width=".6"/><rect x=".8" y="-13" width="4.2" height="13" rx="1.6" fill="#fff" stroke="#0003" stroke-width=".6"/><rect x="-6" y="-1.5" width="5.5" height="2.5" rx="1" fill="#222"/><rect x=".6" y="-1.5" width="5.5" height="2.5" rx="1" fill="#222"/><rect x="-7.5" y="-29" width="15" height="17" rx="4.5" fill="#1e88e5" stroke="#fff" stroke-width="1.6"/><circle cx="0" cy="-35.5" r="6.8" fill="#f3c9a2"/><circle cx="2.4" cy="-35.5" r=".9" fill="#222"/><path d="M1 -32.2q1.6 1 3 0" stroke="#a0522d" stroke-width=".8" fill="none"/><path d="M-6.8 -34a6.8 7.5 0 0 1 13.6 0q-3-3-6.8-2.5q-4-.5-6.8 2.5z" fill="#2b1d12"/><g transform="translate(0 -26)"><g><animateTransform attributeName="transform" type="rotate" values="60;-70;60" keyTimes="0;.5;1" dur="1.6s" repeatCount="indefinite" additive="sum"/><rect x="-1" y="0" width="2.4" height="9" fill="#333"/><ellipse cx="0" cy="-6" rx="4.5" ry="6.5" fill="#ffffff55" stroke="#222" stroke-width="1.4"/></g></g></g></svg></div>
-  <section class="pitch"><div class="sqline"></div><span class="sq2">⚫</span><h2>区をえらんでね</h2>
-    <div class="zks">${WARDS.map((w,i)=>`<button class="zk" data-w="${w}" style="${kit(w)}"><b class="num">${String(i+1).padStart(2,"0")}</b><span>${w}</span><small style="${cnt(w)?"":"opacity:.45"}">${cnt(w)}教室</small></button>`).join("")}</div>
+  <section class="pitch">${AREAS?areaHtml():`<h2>区をえらんでね</h2>
+    <div class="zks">${WARDS.map((w,i)=>`<button class="zk" data-w="${w}" style="${kit(w)}"><b class="num">${String(i+1).padStart(2,"0")}</b><span>${w}</span><small style="${cnt(w)?"":"opacity:.45"}">${cnt(w)}教室</small></button>`).join("")}</div>`}
   </section>
 
-  <section class="bench"><h2>ぜんぶの区から、しぼって探す</h2>
+  <section class="bench"><h2>ぜんぶの地域から、しぼって探す</h2>
     <div class="chips"><button class="chip" data-f="all"><span class="dot" style="background:#fff;box-shadow:inset 0 0 0 2px var(--ink)"></span>すべて見る（${D.length}）</button>${FILTERS.map(f=>`<button class="chip" data-f="${f[0]}"><span class="dot" style="background:var(${f[2]})"></span>${f[1]}</button>`).join("")}</div>
   </section>
   <footer class="foot"><div class="footscene"><svg viewBox="0 0 300 70" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="300" height="70" fill="#d9b882"/><rect width="300" height="20" fill="#f7f1e4"/><rect y="14" width="300" height="4" fill="#d32f2f"/><g><animateTransform attributeName="transform" type="translate" values="20 50;120 10;200 55;280 12;200 55;120 10;20 50" keyTimes="0;.17;.33;.5;.67;.83;1" dur="3s" repeatCount="indefinite" additive="sum"/><circle r="3.4" fill="#111"/></g></svg></div>スカッシュの教室の情報は、Wollyの習い事ページ（2026年11月7日に読み取り）をもとにWollyがまとめたものです。曜日・お金・入会のしかたは変わることがあるので、かならずホームページでたしかめてね。</footer>`;
@@ -249,6 +256,8 @@ function list(){
   <div class="field">${state.f==="strong"?`<p class="best" style="font-size:12.5px;margin:0 2px 10px;padding:8px 10px">🏆 ここ2年（2024・2025年度）の埼玉県の大きな大会で、ベスト16以上か、県リーグのいちばん上（S1）に入ったさいたま市のチームです。カードをタップすると大会の結果が見られます。</p>`:""}${items.length?`<div class="grid">${items.map((t,i)=>card(t,i+1,i)).join("")}</div>`:`<p class="empty">見つかりませんでした。ことばを変えてみてね。</p>`}</div>
   <footer class="foot">写真をタップすると、くわしく出ます。入る前に、かならずホームページでたしかめてね。</footer>`;
 }
+function areaHtml(){let n=0;return AREAS.map(a=>{const L=D.filter(t=>t.pf===a[0]);return `<div class="area"><h3>${esc(a[0])}<i>${esc(a[1])}</i><small>${L.length}${UNIT}</small></h3><div class="grid">${L.map(t=>{n++;return card(t,n,n-1)}).join("")}</div></div>`}).join("")}
+const UNIT="教室";
 function render(){state.view==="home"?home():list()}
 function panelHtml(ci){
   const t=CUR[ci],no=ci+1;
@@ -260,7 +269,7 @@ function panelHtml(ci){
   if(t.fee)rows.push(["お金",t.fee]);
   else if(t.i&&t.i!==t.dy)rows.push(["メモ",t.i]);
   if(t.st2)rows.push(["最寄り駅",t.st2]);
-  rows.push(["区",t.d||"さいたま市"]);
+  rows.push(t.pf?["地域",t.pf]:["区",t.d||"さいたま市"]);
   const tags=[KIND[t.k]].concat(t.tg.map(g=>TAG[g])).join("・");
   return `<div class="big${t.ph?" hasimg":""}"${bgStyle(t)}>${t.ph?`<img src="squash-img/${t.ph}" alt="">`:jersey(t,no)}</div>
    <div class="cap"><small>${esc(tags)}</small><b>${esc(t.n)} <span class="bb">🎾</span></b>

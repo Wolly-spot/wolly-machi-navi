@@ -116,6 +116,9 @@ a{color:inherit}
 .cb{padding:7px 8px 9px;display:flex;flex-direction:column;gap:5px;flex:1}
 .cn{font-size:13.5px;font-weight:700;line-height:1.3}
 .cn span{display:block}
+.cp{position:relative;padding-left:15px;font-size:11px;line-height:1.35;color:#5a6270;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.cp::before{content:"";position:absolute;left:1px;top:2px;width:10px;height:10px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:var(--orange);box-shadow:inset 0 0 0 3px var(--orange),inset 0 0 0 5px #fff}
+.area{padding:18px 12px 6px}.area h3{display:flex;align-items:center;gap:8px;margin:0 2px 10px;color:#fff;font-size:20px}.area h3 i{font-style:normal;font-size:11.5px;background:#fff;color:var(--ink);border-radius:999px;padding:3px 10px}.area h3 small{font-size:12px;opacity:.8;font-weight:500}
 .tg{display:flex;flex-wrap:wrap;gap:3px;margin-top:auto}
 .t{font-size:10.5px;font-weight:700;border-radius:4px;padding:1px 5px;color:#fff;white-space:nowrap}
 .t.sss{background:var(--sss)}.t.club{background:var(--club)}.t.school{background:var(--school)}.t.girls{background:var(--girls)}.t.kids{background:var(--kids)}.t.jhs,.t.hs{background:var(--jhs)}
@@ -205,6 +208,8 @@ function photo(t,no){return t.ph?`<img src="soccer-img/${t.ph}" alt="" loading="
 const bgStyle=t=>t.ph?` style="--bg:url('soccer-img/${t.ph}')"`:"";
 function shortDay(t){if(!t.dy)return"";const W="月火水木金土日祝";const d=[...new Set(t.dy.match(/[月火水木金土日祝]/g)||[])].sort((a,b)=>W.indexOf(a)-W.indexOf(b));return d.length?d.join("・"):t.dy.slice(0,6)}
 function shortFee(t){const m=(t.fee||"").match(/(?:月会費|月謝|団費|会費|毎月)\s*\/?\s*(?:月)?\s*([\d,]+円)/);return m?"月"+m[1]:""}
+const PLACEMODE="pl",AREAS=null;
+function placeOf(t){let p=PLACEMODE==="pl"?(t.pl||t.a):(t.a||t.pl);p=String(p||"").replace(/^埼玉県/,"").replace(/^さいたま市/,"").replace(/^(西|北|大宮|見沼|中央|桜|浦和|南|緑|岩槻)区/,"").trim();return p}
 function card(t,no,ci){
   const tags=[`<i class="t ${t.k}">${KIND[t.k]}</i>`];
   t.tg.forEach(g=>tags.push(`<i class="t ${g}">${TAG[g]}</i>`));
@@ -212,7 +217,7 @@ function card(t,no,ci){
   const f=shortFee(t);if(f)tags.push(`<i class="t fee">${esc(f)}</i>`);
   return `<button class="card" data-ci="${ci}" style="animation-delay:${Math.min(no,12)*30}ms">
    <div class="ph"${bgStyle(t)}>${photo(t,no)}<span class="no num">${no}</span>${t.new?'<span class="nw">NEW</span>':""}</div>
-   <div class="cb"><div class="cn">${nameLines(t.n)}</div>${t.st?`<div class="best">🏆 ${t.st[0][0]}年度 ${shortCup(t.st[0][1])} ${t.st[0][2]}</div>`:""}<div class="tg">${tags.slice(0,4).join("")}</div></div></button>`;
+   <div class="cb"><div class="cn">${nameLines(t.n)}</div>${placeOf(t)?`<div class="cp">${esc(placeOf(t))}</div>`:""}${t.st?`<div class="best">🏆 ${t.st[0][0]}年度 ${shortCup(t.st[0][1])} ${t.st[0][2]}</div>`:""}<div class="tg">${tags.slice(0,4).join("")}</div></div></button>`;
 }
 function shortCup(c){return c.includes("全国")?"全国大会":c.includes("リーグ S1")?"県リーグS1":c.includes("選手権大会")&&c.includes("リーグ")?"県リーグ選手権":"県大会"}
 function match(t){
@@ -223,6 +228,7 @@ function match(t){
 }
 function home(){
   const cnt=w=>D.filter(t=>t.d===w).length;
+  if(AREAS){CUR=AREAS.flatMap(a=>D.filter(t=>t.pf===a[0]))}
   $("#app").innerHTML=`
   <header class="board"><div class="kick"><div class="trail"></div><span class="kx"><span class="ky"><i>⚽</i></span></span></div>
     <div class="en num">SAITAMA KIDS FOOTBALL</div>
@@ -230,8 +236,8 @@ function home(){
     <div class="score"><span>10<small>区</small></span><i></i><span>${D.length}<small>チーム</small></span><i></i><span>${D.filter(t=>t.k==="sss").length}<small>少年団</small></span></div>
     <form class="search" id="sf"><input id="q" type="search" placeholder="チーム名・小学校・公園で探す" enterkeyhint="search"><button aria-label="探す">⚽</button></form>
   </header>
-  <section class="pitch"><div class="ln"></div><div class="goal l"></div><div class="goal"></div><span class="shot">⚽</span><span class="goaltxt">GOAL!</span><h2>区をえらんでね</h2>
-    <div class="zks">${WARDS.map((w,i)=>`<button class="zk" data-w="${w}" style="${kit(w)}"><b class="num">${String(i+1).padStart(2,"0")}</b><span>${w}</span><small style="${cnt(w)?"":"opacity:.45"}">${cnt(w)}チーム</small></button>`).join("")}</div>
+  <section class="pitch"><div class="ln"></div><div class="goal l"></div><div class="goal"></div><span class="shot">⚽</span><span class="goaltxt">GOAL!</span>${AREAS?areaHtml():`<h2>区をえらんでね</h2>
+    <div class="zks">${WARDS.map((w,i)=>`<button class="zk" data-w="${w}" style="${kit(w)}"><b class="num">${String(i+1).padStart(2,"0")}</b><span>${w}</span><small style="${cnt(w)?"":"opacity:.45"}">${cnt(w)}チーム</small></button>`).join("")}</div>`}
   </section>
   <div style="background:var(--deep);padding-bottom:2px"><button class="goldbtn" data-f="strong"><span class="cup">🏆</span><span><b>強豪チーム</b><small>県の大会でベスト16以上・県リーグS1のチーム（結果つき）</small></span></button></div>
   <section class="bench"><h2>ぜんぶの区から、しぼって探す</h2>
@@ -254,6 +260,8 @@ function list(){
   <div class="field">${state.f==="strong"?`<p class="best" style="font-size:12.5px;margin:0 2px 10px;padding:8px 10px">🏆 ここ2年（2024・2025年度）の埼玉県の大きな大会で、ベスト16以上か、県リーグのいちばん上（S1）に入ったさいたま市のチームです。カードをタップすると大会の結果が見られます。</p>`:""}${items.length?`<div class="grid">${items.map((t,i)=>card(t,i+1,i)).join("")}</div>`:`<p class="empty">見つかりませんでした。ことばを変えてみてね。</p>`}</div>
   <footer class="foot">写真やユニフォームの絵をタップすると、くわしく出ます。入る前に、かならずチームのページでたしかめてね。</footer>`;
 }
+function areaHtml(){let n=0;return AREAS.map(a=>{const L=D.filter(t=>t.pf===a[0]);return `<div class="area"><h3>${esc(a[0])}<i>${esc(a[1])}</i><small>${L.length}${UNIT}</small></h3><div class="grid">${L.map(t=>{n++;return card(t,n,n-1)}).join("")}</div></div>`}).join("")}
+const UNIT="チーム";
 function render(){state.view==="home"?home():list()}
 function panelHtml(ci){
   const t=CUR[ci],no=ci+1;
@@ -264,7 +272,7 @@ function panelHtml(ci){
   if(t.dy)rows.push(["練習日",t.dy]);
   if(t.fee)rows.push(["お金",t.fee]);
   else if(t.i&&t.i!==t.dy)rows.push(["メモ",t.i]);
-  rows.push(["区",t.d||"さいたま市（区はチームにたしかめてね）"]);
+  rows.push(t.pf?["地域",t.pf]:["区",t.d||"さいたま市（区はチームにたしかめてね）"]);
   const tags=[KIND[t.k]].concat(t.tg.map(g=>TAG[g])).join("・");
   return `<div class="big${t.ph?" hasimg":""}"${bgStyle(t)}>${t.ph?`<img src="soccer-img/${t.ph}" alt="">`:jersey(t,no)}</div>
    <div class="cap"><small>${esc(tags)}</small><b>${esc(t.n)} <span class="bb">⚽</span></b>
