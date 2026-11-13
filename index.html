@@ -2838,7 +2838,7 @@ function sheetByouji(){
       <div><dt>持ち物</dt><dd><span class="nw">「病児保育利用連絡書」</span><br><span class="nw">（かかりつけ医が書きます）</span></dd></div></dl>
     <ol class="steps by-steps"><li>元気なうちに<br>利用登録</li><li>当日、施設に<br>電話で予約</li><li>連絡書を<br>もらって預ける</li></ol>
     <p class="secttl">病児保育室（12か所${mine?`・${esc(mine)}を先に`:""}）</p>
-    <button type="button" class="bym-btn" data-bymap><span class="bym-bi">${svg(GIC.map,40)}</span><span class="rm-bt"><b>12か所を地図で見る</b><small>Wollyの立体マップで、場所をまとめて見られるよ</small></span><span class="rm-ar">›</span></button>
+    <button type="button" class="bym-btn" data-bymap><span class="bym-bi">${svg(GIC.map,40)}</span><span class="rm-bt"><b>12か所を立体地図で見る</b><small>Wollyの立体マップで、場所をまとめて見られるよ</small></span><span class="rm-ar">›</span></button>
     <p class="by-hint">施設をタップすると、くわしい情報が出ます</p>
     <div class="byl">${list.map(r=>`<div class="by by-tap${r[1]===mine?" mine":""}" data-by="${BYOUJI.indexOf(r)}" role="button" tabindex="0"><div><b>${esc(r[0])}</b><span class="bw">${esc(r[1])}</span>${r[4]?`<span class="bx">${esc(r[4])}</span>`:""}<small>${esc(r[2])}</small></div><span class="by-more">くわしく ›</span></div>`).join("")}</div>
     <p class="note">1回につき最長7日（ようすで延長も）。定員は1日4名（ハートラちゃんのいえは5名）。空きがあれば当日の申込みもできます。連絡書の発行の手数料は市が一部補助。感染症のときは使えないことがあるので、施設にたしかめてね。</p>
@@ -2860,7 +2860,7 @@ function byInfo(i){
     <dl class="dl byi"><div><dt>${svg(GIC.map,40)}場所</dt><dd>さいたま市${esc(r[1])}${esc(addr)}${host?`<br><small>${esc(host)}</small>`:""}</dd></div>
       <div><dt>${svg(GIC.phone,40)}予約</dt><dd>${callA(r[3],"call")}${r[4]==="WEB予約"?`<br><small>この施設はWEB予約です</small>`:""}</dd></div>
       <div><dt>${svg(GIC.check,40)}定員</dt><dd>1日${r[4]==="定員5名"?5:4}名（空きがあれば当日も）</dd></div></dl>
-    <div class="byi-btns"><button type="button" class="bym-go" data-bymap="${i}">${svg(GIC.map,40)}Wollyの地図でこの場所を見る</button>
+    <div class="byi-btns"><button type="button" class="bym-go" data-bymap="${i}">${svg(GIC.map,40)}立体地図で見る</button>
     <a class="byi-g" href="${g}" target="_blank" rel="noopener">Googleマップで道順 ›</a></div>
     <p class="rm-note">利用には、前もっての登録と、かかりつけ医の「連絡書」が必要です。くわしくは施設にたしかめてね。</p>`,"病児保育室 "+r[0]);
 }
@@ -3046,7 +3046,7 @@ function ichiInfo(i){
       <div class="pl-hr"><dt>${svg(MINI.coin,40)}料金</dt><dd>${esc(r[7]).replace(/\n/g,"<br>")}</dd></div>
       ${r[3]?`<div><dt>${svg(GIC.phone,40)}予約</dt><dd>${callA(r[3],"call")}</dd></div>`:""}</dl>
     ${ichiFt(r)}
-    <div class="byi-btns">${on>=0?`<button type="button" class="bym-go" data-bymap="${on}" data-bymset="ichiji">${svg(GIC.map,40)}Wollyの地図でこの場所を見る</button>`:""}
+    <div class="byi-btns">${on>=0?`<button type="button" class="bym-go" data-bymap="${on}" data-bymset="ichiji">${svg(GIC.map,40)}立体地図で見る</button>`:""}
     <a class="byi-g" href="${g}" target="_blank" rel="noopener">Googleマップで道順 ›</a></div>
     <p class="rm-note">はじめての園は、事前の登録や面接があることが多いです。空きや料金は、園にたしかめてね。</p>`,"一時保育 "+r[0]);
 }
@@ -3063,7 +3063,7 @@ function sheetIchiji(){
       <div><dt>対象</dt><dd><span class="nw">おもに1歳〜5歳</span><br><span class="nw">（生後すぐから預かる園も）</span></dd></div></dl>
     <ol class="steps by-steps"><li>園をえらんで<br>電話で相談</li><li>登録・面接<br>（はじめてのとき）</li><li>予約した日に<br>預ける</li></ol>
     <p class="secttl">一時保育をしている園（${live.length}か所${mine?`・${esc(mine)}を先に`:""}）</p>
-    <button type="button" class="bym-btn" data-bymap data-bymset="ichiji"><span class="bym-bi">${svg(GIC.map,40)}</span><span class="rm-bt"><b>${live.length}か所を地図で見る</b><small>Wollyの立体マップで、場所をまとめて見られるよ</small></span><span class="rm-ar">›</span></button>
+    <button type="button" class="bym-btn" data-bymap data-bymset="ichiji"><span class="bym-bi">${svg(GIC.map,40)}</span><span class="rm-bt"><b>${live.length}か所を立体地図で見る</b><small>Wollyの立体マップで、場所をまとめて見られるよ</small></span><span class="rm-ar">›</span></button>
     <p class="by-hint">園をタップすると、時間・料金などくわしい情報が出ます</p>
     <div class="byl">${list.map(([r,i])=>`<div class="by by-tap${r[1]===mine?" mine":""}" data-ichi="${i}" role="button" tabindex="0"><div><b>${esc(r[0])}</b><span class="bw">${esc(r[1])}</span><span class="bx">${r[4]==="公"?"公立":"私立"}</span><small>${esc(r[2])}・${esc(r[6])}</small></div><span class="by-more">くわしく ›</span></div>`).join("")}</div>
     <p class="note">ほかに${stop}か所が、いまは一時保育を休止しています。実施状況・空き・料金は変わるので、利用する前に園にたしかめてね。リフレッシュ目的でも使えます（月1回まで）。</p>

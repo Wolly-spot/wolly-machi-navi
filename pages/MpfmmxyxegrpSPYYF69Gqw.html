@@ -685,6 +685,7 @@ b.addEventListener("click",function(){
 
 <style>.bar{top:calc(52px + env(safe-area-inset-top,0px))!important}@media (max-width:600px){.bar{top:auto!important}}</style>
 
+
 <!--wolly-totop-->
 <style>
 .wtotop{position:fixed;z-index:60;right:max(14px,env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));
@@ -712,6 +713,16 @@ b.addEventListener("click",function(){window.scrollTo({top:0,behavior:matchMedia
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
 <style>
 .nearwrap{margin-top:14px}
+.go3d{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:14px;border:3px solid #fff;border-radius:999px;padding:14px 16px;box-sizing:border-box;
+  background:linear-gradient(100deg,#FF4F9A,#B45CFF 40%,#3D9BFF 70%,#FF4F9A);background-size:250% 100%;color:#fff;font:900 15.5px/1.2 inherit;font-family:inherit;letter-spacing:.04em;text-shadow:0 1px 2px rgba(60,20,100,.35);
+  box-shadow:0 5px 0 #7B35C9,0 10px 24px rgba(180,92,255,.45);cursor:pointer;animation:go3dBg 4s linear infinite,go3dPulse 1.8s ease-in-out infinite}
+.go3d svg{width:26px;height:26px;flex:0 0 auto}
+.go3d::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.65),transparent);transform:skewX(-20deg);animation:go3dShine 2.6s ease-in-out infinite}
+.go3d:active{transform:translateY(3px);box-shadow:0 2px 0 #7B35C9}
+@keyframes go3dBg{to{background-position:-250% 0}}
+@keyframes go3dPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
+@keyframes go3dShine{0%,55%{left:-60%}100%{left:130%}}
+@media (prefers-reduced-motion:reduce){.go3d,.go3d::after{animation:none}}
 .nearbtn{display:flex;align-items:center;gap:12px;width:100%;margin:16px 0 0;padding:12px 16px;box-sizing:border-box;border:3px solid #fff;border-radius:26px;cursor:pointer;text-align:left;
   background:linear-gradient(100deg,#FFE0EC,#E7DDFF 55%,#CDEBFF);color:#2B3A7A;font:800 clamp(16px,4.4vw,19px)/1.3 var(--font-display,inherit);
   box-shadow:0 5px 0 rgba(46,43,79,.10);position:relative;z-index:1;transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
@@ -804,7 +815,7 @@ const LL={"0":[35.903896,139.587372],"1":[35.927971,139.570801],"2":[35.901653,1
 const WARD_LL={"西区":[35.9256,139.5794],"北区":[35.9305,139.6203],"大宮区":[35.9063,139.6290],"見沼区":[35.9265,139.6540],"中央区":[35.8840,139.6260],"桜区":[35.8563,139.6090],"浦和区":[35.8616,139.6457],"南区":[35.8447,139.6450],"緑区":[35.8710,139.6830],"岩槻区":[35.9497,139.6939]};
 const CITY=[35.8617,139.6455];
 const N=20;
-let prof=null,open=false,mapOpen=true,map=null,layer=null,first=true,pending=false;
+let skipCam=false,force3d=false,prof=null,open=false,mapOpen=true,map=null,layer=null,first=true,pending=false;
 const NEARMODE=/[?&]near=1\b/.test(location.search);
 try{prof=JSON.parse(localStorage.getItem("wolly.profile")||"null")}catch(e){}
 /* 街ナビの中で開いたときは、街ナビから登録内容（区・住所の位置）を受け取る */
@@ -1000,6 +1011,7 @@ function place(o,rows){
     e.addEventListener("click",ev=>{ev.stopPropagation();openPin(x,i,ll)});
     markers.push(m)});
   swing=-swing;
+  if(skipCam){skipCam=false;first=false;return}
   const cam=map.cameraForBounds(b,{padding:{top:60,bottom:20,left:24,right:24},maxZoom:16.5})||{center:[o.ll[1],o.ll[0]],zoom:14};
   const to={center:cam.center,zoom:Math.max(10,(cam.zoom||14)-.05),pitch:55,bearing:swing};
   if(RM)map.jumpTo(to);
@@ -1021,7 +1033,7 @@ function openPin(x,i,ll){
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-npo]");if(b){e.preventDefault();e.stopPropagation();popup&&popup.remove();openPop(+b.dataset.npo,null)}},true);
 
 function showMaps(){
-  const reg=!!(prof&&prof.ward);
+  const reg=!!(prof&&prof.ward)||force3d;
   document.getElementById("npTg").hidden=!reg;
   document.getElementById("npMw").hidden=!reg;
   const w=document.getElementById("npWard");w.hidden=!w.firstChild||(reg&&mapOpen);
@@ -1037,7 +1049,7 @@ function refresh(){
   document.getElementById("npList").innerHTML=rows.length?rows.map((x,i)=>{const r=x.r,c=CAT[r.c];
     return `<li tabindex="0" data-id="${r.id}" style="--cc:${c.c};--d:${i}" aria-label="${i+1}番目 ${esc(r.n)} ${kmT(x.km)}"><span class="np-n">${i+1}</span><span class="np-t"><b>${esc(r.n)}</b><span>${c.l}・${r.w}区</span></span><span class="np-km">${kmT(x.km)}<small>${carT(x.km)}</small></span></li>`}).join("")
     :`<li class="np-empty" style="cursor:default">この条件の園は見つかりませんでした。ジャンルや条件をへらしてみてね。</li>`;
-  if(o.reg&&mapOpen)drawMap(o,rows);
+  if((o.reg||force3d)&&mapOpen)drawMap(o,rows);
 }
 function toMyPage(){
   if(window.parent!==window){window.parent.postMessage({type:"wolly-mypage"},"*");return}
@@ -1053,6 +1065,30 @@ const _render=render;render=function(a){
   _render(NEARMODE?false:a);refresh();
   if(a===true&&NEARMODE&&open)setTimeout(()=>{const t=document.getElementById("npList");t&&t.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"})},120);
 };
+/* 園の小窓に「立体地図で見る」：押すと小窓をとじて、立体の地図でその園へ飛ぶ */
+const GO3D='<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 22l12 6 12-6-12-6z" fill="#fff" opacity=".55"/><path d="M9 21V9l5-3v15zM15 22V5l6 3v14zM22 20v-8l4 2v6z" fill="#fff"/><path d="M16 2l1 2.2 2.2 1-2.2 1L16 8.4l-1-2.2-2.2-1 2.2-1z" fill="#FFE45C"/></svg>';
+const _openPop=openPop;openPop=function(id,el){_openPop(id,el);
+  const pb=document.querySelector("#pp .pbtns");if(!pb||!LL[id])return;
+  const b=document.createElement("button");b.type="button";b.className="go3d";b.innerHTML=GO3D+"立体地図で見る";
+  b.onclick=()=>focus3d(id);pb.after(b)};
+function focus3d(id){
+  const ll=LL[id],r=DATA.find(x=>x.id===id);if(!ll||!r)return;
+  const x=document.querySelector("#pop .x");x&&x.click();
+  force3d=true;skipCam=true;
+  if(!open)document.getElementById("nearBtn").click();
+  if(!mapOpen)document.getElementById("npTg").click();
+  else refresh();
+  setTimeout(()=>{const m=document.getElementById("nearMap");m&&m.scrollIntoView({behavior:RM?"auto":"smooth",block:"center"});map&&map.resize()},120);
+  const t0=Date.now();
+  const fly=()=>{if(!map||!ready){if(Date.now()-t0<15000)setTimeout(fly,250);return}
+    const o=origin(),rows=nearest(o),i=rows.findIndex(q=>q.r.id===id),km=dist(o.ll,ll),c=CAT[r.c];
+    setTimeout(()=>{popup&&popup.remove();
+      popup=new maplibregl.Popup({offset:[0,-40],maxWidth:"250px"}).setLngLat([ll[1],ll[0]])
+        .setHTML(`<div class="npp"><b>${i>=0?(i+1)+". ":""}${esc(r.n)}</b><span>${c.l}・${r.w}区 ／ ${kmT(km)}（${carT(km)}）</span><div class="bt"><button type="button" data-npo="${r.id}">くわしく</button><a href="${mapURL(r)}" target="_blank" rel="noopener">Googleマップ ↗</a></div></div>`).addTo(map);
+      const t={center:[ll[1],ll[0]],zoom:16.6,pitch:62,bearing:swing};
+      RM?map.jumpTo(t):map.flyTo({...t,duration:2200,curve:1.5,essential:true})},300)};
+  setTimeout(fly,400);
+}
 /* 街ナビの「家の近くで探す」→「あずかりマップ」から開いたとき（?near=1）：タイトルの部分を出さず、「近くの園をさがす」をひらいた状態で始める */
 if(/[?&]near=1\b/.test(location.search)){hd.style.display="none";box.style.marginTop="12px";document.getElementById("nearBtn").click()}
 })();
