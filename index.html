@@ -2115,12 +2115,14 @@ function hsLoadFac(){
   const gs=Object.keys(HS_G);
   Promise.all(gs.map(g=>fetch(PAGES_BASE+"near-data/"+g+".json").then(r=>r.json()).catch(()=>[]))
     .concat(["e","j"].map(t=>fetch(PAGES_BASE+"school-data/"+t+".json").then(r=>r.json()).catch(()=>[])))
+    .concat([fetch(PAGES_BASE+"near-data/search.json").then(r=>r.json()).catch(()=>[])])
     .concat([fetch(PAGES_BASE+"near-data/yomi.json").then(r=>r.json()).catch(()=>({}))])).then(all=>{
-    YOMI=all[all.length-1]||{};
+    YOMI=all[all.length-1]||{};const EXTRA=all[all.length-2]||[];
     const L=[];
     gs.forEach((g,k)=>(all[k]||[]).forEach(x=>{if(!x.n)return;const w=x.w?(/市|町$/.test(x.w)?x.w:x.w+"区"):"";
       L.push({t:x.n,k:HS_G[g]+" "+(x.a||"")+" "+(x.s||[]).join(" ")+" "+(x.ft||[]).join(" "),sub:HS_G[g]+(w?"・"+w:""),to:"view:near?g="+g+"&q="+encodeURIComponent(x.id||x.n),c:HS_G[g],w:1})}));
     ["e","j"].forEach((t,k)=>(all[gs.length+k]||[]).forEach(x=>x.n&&L.push({t:x.n,k:(t==="e"?"小学校":"中学校")+" 学区 "+(x.a||""),sub:(t==="e"?"小学校":"中学校")+(x.w?"・"+x.w:""),to:"view:school?t="+t+"&s="+encodeURIComponent(x.n),c:"学校",w:1})));
+    EXTRA.forEach(r=>r&&r[0]&&L.push({t:r[0],k:r[1],sub:r[2],to:r[3],c:r[4],w:1}));
     HS_FAC=L.map(x=>Object.assign(x,{nt:nz(x.t),nk:nz(x.k)}));HS_FAC_LOADING=false;
     if($("#hq")&&$("#hq").value.trim())hsRender();
   });

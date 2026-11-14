@@ -686,6 +686,7 @@ b.addEventListener("click",function(){
 <style>.bar{top:calc(52px + env(safe-area-inset-top,0px))!important}@media (max-width:600px){.bar{top:auto!important}}</style>
 
 
+
 <!--wolly-totop-->
 <style>
 .wtotop{position:fixed;z-index:60;right:max(14px,env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));
@@ -1091,6 +1092,8 @@ function focus3d(id){
 }
 /* 街ナビの「家の近くで探す」→「あずかりマップ」から開いたとき（?near=1）：タイトルの部分を出さず、「近くの園をさがす」をひらいた状態で始める */
 if(/[?&]near=1\b/.test(location.search)){hd.style.display="none";box.style.marginTop="12px";document.getElementById("nearBtn").click()}
+/* 街ナビの「さがす」から園をえらんだとき（?q=園の番号）：その園の小窓をひらく */
+{const q=new URLSearchParams(location.search).get("q");if(q!==null&&q!==""&&BYID[+q])setTimeout(()=>openPop(+q,null),500)}
 })();
 </script>
 <!--/wolly-near-->
