@@ -806,6 +806,13 @@ html[data-fsz="2"] .ej b{font-size:11.5px}
 .ma-links{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
 .ma-links a{display:grid;justify-items:center;gap:3px;padding:9px 2px;border-radius:14px;background:color-mix(in srgb,var(--surface) 60%,#F4F0FF);text-decoration:none;color:var(--ink);font-size:11.5px;font-weight:700}
 .ma-links svg{width:28px;height:28px}
+.relc{margin:22px 0 6px;padding:12px;border-radius:20px;background:color-mix(in srgb,var(--surface) 70%,transparent);border:1.5px dashed var(--line)}
+.relc h4{display:flex;align-items:center;gap:6px;margin:0 0 10px;font-size:13.5px;color:var(--muted)}.relc h4 svg{width:22px;height:22px}
+.relc-g{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.relc-b{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:14px;background:var(--rb);text-decoration:none;color:var(--ink);font-size:13px;line-height:1.3;border:1px solid color-mix(in srgb,var(--ink) 8%,transparent);transition:transform .2s}
+.relc-b:active{transform:scale(.96)}
+.relc-b span{flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:#fff;display:grid;place-items:center}.relc-b span svg{width:24px;height:24px}
+.relc-b b{font-weight:800}
 .hkms{display:grid;gap:10px;margin:0 0 12px}
 .hkm{position:relative;display:flex;align-items:center;gap:12px;padding:10px 12px 10px 10px;border-radius:22px;text-decoration:none;color:var(--ink);background:linear-gradient(100deg,var(--bg),color-mix(in srgb,var(--surface) 85%,transparent) 70%);border:2px solid color-mix(in srgb,var(--c) 35%,transparent);box-shadow:0 4px 0 color-mix(in srgb,var(--c) 22%,transparent);transition:transform .25s cubic-bezier(.3,1.6,.5,1)}
 .hkm:active{transform:translateY(3px) scale(.98);box-shadow:0 1px 0 color-mix(in srgb,var(--c) 22%,transparent)}
@@ -2029,7 +2036,7 @@ function sheetHokatsuMenu(){
   const row=(h,i)=>{const g=h.guide?{c:"#FF8FB8",bg:"#FFF0F6",ic:"flag"}:GSTEPS.find(x=>x.n===h.step)||{c:"#8E6BF5",bg:"#F1ECFF",ic:"star"};
     const cv=HK_COVERS[HK_CV[h.t]];
     return `<a class="hkm" href="#h-${i}" style="--c:${g.c};--bg:${g.bg}">
-      <span class="hkm-art">${cv?`<img src="${cv}" alt="" loading="lazy">`:svg(KIC(g.ic)||MINI.star,40)}<b class="hkm-no">${h.guide?"START":h.step}</b></span>
+      <span class="hkm-art">${cv?`<img src="${cv}" alt="" loading="lazy">`:svg(KIC(g.ic)||MINI.star,40)}</span>
       <span class="hkm-t"><em>${h.guide?"はじめに":"STEP "+h.step}</em><b>${esc(h.ct||h.t)}</b><small>${esc(h.guide?"はじめての人はここから":h.sl||"")}</small></span>
       <span class="hkm-ic">${svg(KIC(g.ic)||MINI.star,40)}</span></a>`};
   return dhead(svg(CH.hokatsu),"#F1E8FF","HOKATSU","保活ナビ","保育園に入るまでの準備を、順番に")+
@@ -3256,9 +3263,35 @@ function addTalk(kind){
   const anchor=head.matches("h3")?(head.nextElementSibling||head):head;
   anchor.insertAdjacentHTML("afterend",`<div class="ch-talk"><img src="${CH_TALK[m[0]]}" alt=""><p>${esc(m[1])}</p></div>`);
 }
+/* 関連カテゴリー：ふわっと出るパネルのいちばん下に、つながりのあるカテゴリーを小さな枠で */
+const RELC={kyubyo:["子どもの急病","#kyubyo","temp","#FFE6EE"],azuke:["預け先を探す","#azuke","nursery","#FFE6F2"],okane:["もらえるお金","#okane","coin","#FFF4D6"],
+  hokatsu:["保活ナビ","#hokatsu","house","#F1E8FF"],kenshin:["乳幼児健診","#kenshin","age","#E5F4FF"],vaccine:["予防接種","#vaccine","plaster","#E8F7EE"],
+  byouji:["病児保育","#byouji","bed","#FFE6F2"],lesson:["習い事","#go-lesson","lesson","#EAF0FF"],park:["公園","view:near?g=park","park","#E5F4FF"],
+  hub:["子育て支援センター","view:near?g=hub","hand","#FCE6F5"],odekake:["おでかけ","view:near?g=odekake","bus","#E6ECFF"],school:["小学校","view:school?t=e","school","#FFE6F2"],
+  gakudo:["学童","view:near?g=gakudo","blocks","#FFE8F3"],jidou:["児童センター","view:near?g=jidou","kids","#E3F4FC"],shokudo:["こども食堂","view:near?g=shokudo","meal","#FFF0F5"],
+  ped:["近くの小児科","view:near?g=ped","kids","#FFEEF2"]};
+function relKeys(kind){
+  const k=kind.split("-")[0];
+  if(k==="h"||kind==="hokatsu"||kind==="ensearch")return ["azuke","okane","hub","kenshin"];
+  if(k==="m"||kind==="okane")return ["hokatsu","azuke","kenshin","shokudo"];
+  if(kind==="byouji"||kind==="ichiji"||kind==="azuke")return ["hokatsu","hub","kyubyo","okane"];
+  if(k==="x"||k==="dk"||["kyubyo","dent","kenshin","vaccine","hdent"].includes(kind))return ["kyubyo","ped","byouji","kenshin","vaccine"];
+  if(k==="l")return ["school","park","odekake","jidou"];
+  if(k==="p")return ["odekake","hub","jidou","lesson"];
+  if(k==="s")return ["odekake","lesson","park"];
+  return [];
+}
+const relIc=ic=>CH[ic]?svg(CH[ic]):svg(KIC(ic)||MEMO_IC[ic]||RM_IC[ic]||MINI.star,40);
+function relHtml(kind){
+  const self="#"+kind;
+  const ks=relKeys(kind).filter(k=>RELC[k]&&RELC[k][1]!==self).slice(0,4);if(!ks.length)return "";
+  return `<div class="relc"><h4>${svg(KIC("flag")||MINI.star,40)}関連カテゴリー</h4><div class="relc-g">${ks.map(k=>{const [t,to,ic,bg]=RELC[k];
+    return to.startsWith("view:")?`<a class="relc-b" href="#" data-view="${to.slice(5)}" data-vt="${esc(t)}" style="--rb:${bg}"><span>${relIc(ic)}</span><b>${esc(t)}</b></a>`
+      :`<a class="relc-b" href="${to}" style="--rb:${bg}"><span>${relIc(ic)}</span><b>${esc(t)}</b></a>`}).join("")}</div></div>`;
+}
 function openSheet(kind){
   closeViewer();sheetKind=kind;
-  if(kind==="news")fillNewsSheet();else if(kind==="near")fillNearSheet();else $("#sheetBody").innerHTML=sheetHtml(kind);
+  if(kind==="news")fillNewsSheet();else if(kind==="near")fillNearSheet();else $("#sheetBody").innerHTML=sheetHtml(kind)+relHtml(kind);
   addTalk(kind);kwDecorate(kind);requestAnimationFrame(()=>fitTitles($("#sheetBody")));
   const sh=$("#sheet");sh.scrollTop=0;
   sh.classList.remove("on");void sh.offsetWidth;
