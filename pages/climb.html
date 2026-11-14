@@ -50,7 +50,6 @@ a{color:inherit}
 .zk small{display:block;font-size:11.5px;color:#4b6b2c}
 @media(min-width:600px){.zks{grid-template-columns:repeat(5,1fr)}}
 
-.board .kk{display:none}
 .scene{background:var(--deep);padding:0 12px 14px}
 .sscene{position:relative;height:min(64vw,300px);border-radius:22px;overflow:hidden;border:3px solid rgba(255,255,255,.35);
   background:radial-gradient(120% 90% at 20% 10%,#fff 0,transparent 55%),linear-gradient(160deg,#FFF0F6,#F1ECFF 45%,#E6F4FF);display:grid;place-items:center}
@@ -81,8 +80,9 @@ a{color:inherit}
 @keyframes skFloat{0%,100%{transform:translate(0,0)}50%{transform:translate(6px,-10px)}}
 @keyframes skTw{0%,100%{opacity:.25;transform:scale(.7)}50%{opacity:1;transform:scale(1.1)}}
 @keyframes skBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-.footscene,.foot .fdeco{display:none!important}
 @media (prefers-reduced-motion:reduce){.sscene *{animation:none!important}}
+.board .kk{display:none}
+.footscene,.foot .fdeco{display:none!important}
 /* ---- climb のアニメ ---- */
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes drb{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
