@@ -223,7 +223,7 @@ function shortCup(c){return c.includes("全国")?"全国大会":c.includes("リ�
 function match(t){
   if(state.ward&&t.d!==state.ward)return false;
   if(state.f&&state.f!=="all"){if(KIND[state.f]){if(t.k!==state.f)return false}else if(!t.tg.includes(state.f))return false}
-  if(state.q){const q=norm(state.q).split(/[,、]/).filter(Boolean);const h=norm(t.n+t.d+t.a+t.pl+t.i);if(!q.every(w=>h.includes(w)))return false}
+  if(state.q){const q=norm(state.q).split(/[,、]/).filter(Boolean);const h=norm(t.n);if(!q.every(w=>h.includes(w)))return false}
   return true;
 }
 function home(){
@@ -234,7 +234,7 @@ function home(){
     <div class="en num">SAITAMA KIDS FOOTBALL</div>
     <h1>さいたま市<br>少年サッカー</h1>
     <div class="score"><span>10<small>区</small></span><i></i><span>${D.length}<small>チーム</small></span><i></i><span>${D.filter(t=>t.k==="sss").length}<small>少年団</small></span></div>
-    <form class="search" id="sf"><input id="q" type="search" placeholder="チーム名・小学校・公園で探す" enterkeyhint="search"><button aria-label="探す">⚽</button></form>
+    <form class="search" id="sf"><input id="q" type="search" placeholder="チーム名で探す" enterkeyhint="search"><button aria-label="探す">⚽</button></form>
   </header>
   <section class="pitch"><div class="ln"></div><div class="goal l"></div><div class="goal"></div><span class="shot">⚽</span><span class="goaltxt">GOAL!</span>${AREAS?areaHtml():`<h2>区をえらんでね</h2>
     <div class="zks">${WARDS.map((w,i)=>`<button class="zk" data-w="${w}" style="${kit(w)}"><b class="num">${String(i+1).padStart(2,"0")}</b><span>${w}</span><small style="${cnt(w)?"":"opacity:.45"}">${cnt(w)}チーム</small></button>`).join("")}</div>`}
