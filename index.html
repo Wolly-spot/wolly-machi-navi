@@ -844,6 +844,7 @@ html[data-fsz="2"] .ej b{font-size:11.5px}
 .kn-go{display:inline-block;padding:7px 14px;border-radius:999px;background:linear-gradient(100deg,#FF6FA5,#A68BFF);color:#fff;font-weight:800;font-size:13px;text-decoration:none}
 .kn-none,.kn-note{margin:2px 4px 0;font-size:11.5px;color:var(--muted)}
 @media (prefers-reduced-motion:reduce){.kn-bell,.kn-i{animation:none}}
+.row>.lgen,.lgen{flex:0 0 auto!important;width:auto!important;min-width:0!important;align-self:stretch;display:flex;align-items:center;margin:0 -2px 0 4px;scroll-snap-align:none}.lgen span{writing-mode:vertical-rl;font-size:12.5px;font-weight:900;letter-spacing:.12em;color:#5A5AEF;background:linear-gradient(180deg,#F1ECFF,#E5F4FF);border-radius:999px;padding:12px 6px;box-shadow:inset 0 0 0 1.5px #fff}
 .relc{margin:22px 0 6px;padding:12px;border-radius:20px;background:color-mix(in srgb,var(--surface) 70%,transparent);border:1.5px dashed var(--line)}
 .relc h4{display:flex;align-items:center;gap:6px;margin:0 0 10px;font-size:13.5px;color:var(--muted)}.relc h4 svg{width:22px;height:22px}
 .relc-g{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
@@ -1583,33 +1584,35 @@ const HEALTH=[
 ];
 /* Lessons: add a new one by appending a line. w = [[区の表示名, ページのURL末尾], ...] */
 const LESSONS=[
-  {t:"少年野球",c:"sports",ic:"baseball",u:"bay-view-baseball",w:[["大宮区・北区・西区","dahctbpxuku"],["見沼区・中央区","dahctljx79u"],["桜区・浦和区","dahctindz8y"],["南区・緑区・岩槻区","dahcvjzxxy8"]]},
-  {t:"サッカー",c:"sports",ic:"soccer",u:"saitama-fc",w:[["大宮区・北区・西区・見沼区","dahbxtnaxuy"],["中央区","dahcqalmq7c"],["桜区","dahcqffon-w"],["浦和区","dahcpglj750"],["南区","dahcqjyjg84"],["緑区・岩槻区","dahcpdss-1w"]]},
-  {t:"バスケットボール",c:"sports",ic:"basket",u:"bay-view-basketball",w:[["大宮区・北区・西区","dahcfpcrjfs"],["見沼区・中央区","dahchazqztc"],["桜区・浦和区","dahckfzu28m"],["南区・緑区・岩槻区","dahckq02fcg"]]},
-  {t:"水泳",c:"sports",ic:"swim",u:"dahcjc5k-ku",w:[["大宮区・北区・西区・中央区・見沼区","dahczpe0lls"],["桜区・浦和区・南区・緑区・岩槻区","dahczxsfxk0"]]},
-  {t:"体操",c:"sports",ic:"gym",u:"dahcnjm5pek",w:[["大宮区・北区・西区","dahdpibcz-s"],["中央区・見沼区","dahdpl4ucic"],["桜区・浦和区・南区","dahdpzsaas8"],["緑区・岩槻区","dahdsmj7nu0"]]},
-  {t:"バレーボール",c:"sports",ic:"volley",u:"bay-view-volleyball",w:[["さいたま市","dahctha6li4"]]},
-  {t:"テニス",c:"sports",ic:"tennis",u:"dahciw2gpaa",w:[["さいたま市","dahcef5l2hw"]]},
-  {t:"バドミントン",c:"sports",ic:"badminton",u:"bay-view-badminton",w:[["さいたま市","dahdgdsdizo"]]},
-  {t:"ソフトボール",c:"sports",ic:"softball",u:"bay-view-softball",w:[["さいたま市","dahcnaox5e4"]]},
-  {t:"スカッシュ",c:"sports",ic:"squash",u:"bay-view-squash",w:[["さいたま市","dahceypqlko"]]},
-  {t:"チアリーディング",c:"sports",ic:"cheer",u:"bay-view-cheerlea-ding",w:[["さいたま市","cheer-dance-studio"]]},
-  {t:"剣道",c:"sports",ic:"kendo",u:"bay-view-kendo",w:[["大宮区・西区・北区","16-00-17-30-6-000"],["見沼区・岩槻区","dahb9raxstm"]]},
-  {t:"柔道",c:"sports",ic:"judo",u:"bay-view",w:[["さいたま市","dahbxffm0fm"]]},
-  {t:"合気道",c:"sports",ic:"aikido",u:"bay-view-aikido",w:[["さいたま市","dahcltzl0-s"]]},
-  {t:"そろばん",c:"study",ic:"soroban",u:"bay-views-soroban",w:[["大宮区","dahdqhdrlvw"],["北区・西区","dahdard8xpa"],["見沼区・中央区","dahdef8kkm8"],["桜区・浦和区・南区","dahdgagwcw8"],["緑区・岩槻区",""],["オンライン","dahdgksisyw"]]},
-  {t:"囲碁",c:"study",ic:"igo",u:"bay-view-igo",w:[["さいたま市","dahdcbygyic"]]},
-  {t:"将棋",c:"study",ic:"shogi",u:"bay-view-shogi",w:[["さいたま市","dahc-ueowwq"]]},
-  {t:"ピアノ",c:"art",ic:"music",u:"bay-view-piano",w:[["大宮区","dahehelc29c"],["北区","dahfvqwgmhu"],["西区","dahgvwkhakw"],["中央区","dahg045xffk"],["見沼区","dahg2i9hkxk"],["桜区","dahhf5ziduy"],["浦和区","dahhrgmsjme"],["南区","daht6rxpyou"],["緑区・岩槻区","dahvicz3w20"]]},
-  {t:"バイオリン",c:"art",ic:"violin",u:"dahwrn91gri",w:[["さいたま市","dahwrkcojkg"]]},
-  {t:"バレエ",c:"art",ic:"ballet",u:"bay-view-bballet",w:[["大宮区・北区・西区","dahdhsrxmvo"],["中央区・見沼区","dahdixmzkrs"],["桜区・浦和区・南区","dahdj-tiqjc"],["緑区・岩槻区","dahdnkhassg"]]},
-  {t:"書道",c:"art",ic:"shodo",u:"bay-view-shodou",w:[["大宮区・北区・西区","dahb9cf3sx4"],["中央区・見沼区","dahd10jvg-0"],["桜区・浦和区・南区","dahd7-vbmca"],["緑区・岩槻区","daheekzemkg"]]},
-  {t:"卓球",c:"sports",ic:"tabletennis",u:"",w:[["さいたま市",""]]},
-  {t:"ダンス",c:"art",ic:"dance",u:"",w:[["さいたま市",""]]},
-  {t:"英会話",c:"study",ic:"english",u:"",w:[["さいたま市",""]]},
-  {t:"パソコン",c:"study",ic:"pc",u:"",w:[["さいたま市",""]]}
+  {t:"少年野球",g:"sport",c:"sports",ic:"baseball",u:"bay-view-baseball",w:[["大宮区・北区・西区","dahctbpxuku"],["見沼区・中央区","dahctljx79u"],["桜区・浦和区","dahctindz8y"],["南区・緑区・岩槻区","dahcvjzxxy8"]]},
+  {t:"サッカー",g:"sport",c:"sports",ic:"soccer",u:"saitama-fc",w:[["大宮区・北区・西区・見沼区","dahbxtnaxuy"],["中央区","dahcqalmq7c"],["桜区","dahcqffon-w"],["浦和区","dahcpglj750"],["南区","dahcqjyjg84"],["緑区・岩槻区","dahcpdss-1w"]]},
+  {t:"バスケットボール",g:"sport",c:"sports",ic:"basket",u:"bay-view-basketball",w:[["大宮区・北区・西区","dahcfpcrjfs"],["見沼区・中央区","dahchazqztc"],["桜区・浦和区","dahckfzu28m"],["南区・緑区・岩槻区","dahckq02fcg"]]},
+  {t:"バレーボール",g:"sport",c:"sports",ic:"volley",u:"bay-view-volleyball",w:[["さいたま市","dahctha6li4"]]},
+  {t:"ソフトボール",g:"sport",c:"sports",ic:"softball",u:"bay-view-softball",w:[["さいたま市","dahcnaox5e4"]]},
+  {t:"テニス",g:"sport",c:"sports",ic:"tennis",u:"dahciw2gpaa",w:[["さいたま市","dahcef5l2hw"]]},
+  {t:"卓球",g:"sport",c:"sports",ic:"tabletennis",u:"",w:[["さいたま市",""]]},
+  {t:"バドミントン",g:"sport",c:"sports",ic:"badminton",u:"bay-view-badminton",w:[["さいたま市","dahdgdsdizo"]]},
+  {t:"スカッシュ",g:"sport",c:"sports",ic:"squash",u:"bay-view-squash",w:[["さいたま市","dahceypqlko"]]},
+  {t:"水泳",g:"sport",c:"sports",ic:"swim",u:"dahcjc5k-ku",w:[["大宮区・北区・西区・中央区・見沼区","dahczpe0lls"],["桜区・浦和区・南区・緑区・岩槻区","dahczxsfxk0"]]},
+  {t:"体操",g:"sport",c:"sports",ic:"gym",u:"dahcnjm5pek",w:[["大宮区・北区・西区","dahdpibcz-s"],["中央区・見沼区","dahdpl4ucic"],["桜区・浦和区・南区","dahdpzsaas8"],["緑区・岩槻区","dahdsmj7nu0"]]},
+  {t:"剣道",g:"budo",c:"sports",ic:"kendo",u:"bay-view-kendo",w:[["大宮区・西区・北区","16-00-17-30-6-000"],["見沼区・岩槻区","dahb9raxstm"]]},
+  {t:"柔道",g:"budo",c:"sports",ic:"judo",u:"bay-view",w:[["さいたま市","dahbxffm0fm"]]},
+  {t:"合気道",g:"budo",c:"sports",ic:"aikido",u:"bay-view-aikido",w:[["さいたま市","dahcltzl0-s"]]},
+  {t:"ダンス",g:"dance",c:"art",ic:"dance",u:"",w:[["さいたま市",""]]},
+  {t:"チアリーディング",g:"dance",c:"sports",ic:"cheer",u:"bay-view-cheerlea-ding",w:[["さいたま市","cheer-dance-studio"]]},
+  {t:"バレエ",g:"dance",c:"art",ic:"ballet",u:"bay-view-bballet",w:[["大宮区・北区・西区","dahdhsrxmvo"],["中央区・見沼区","dahdixmzkrs"],["桜区・浦和区・南区","dahdj-tiqjc"],["緑区・岩槻区","dahdnkhassg"]]},
+  {t:"ピアノ",g:"music",c:"art",ic:"music",u:"bay-view-piano",w:[["大宮区","dahehelc29c"],["北区","dahfvqwgmhu"],["西区","dahgvwkhakw"],["中央区","dahg045xffk"],["見沼区","dahg2i9hkxk"],["桜区","dahhf5ziduy"],["浦和区","dahhrgmsjme"],["南区","daht6rxpyou"],["緑区・岩槻区","dahvicz3w20"]]},
+  {t:"バイオリン",g:"music",c:"art",ic:"violin",u:"dahwrn91gri",w:[["さいたま市","dahwrkcojkg"]]},
+  {t:"英会話",g:"study",c:"study",ic:"english",u:"",w:[["さいたま市",""]]},
+  {t:"パソコン",g:"study",c:"study",ic:"pc",u:"",w:[["さいたま市",""]]},
+  {t:"そろばん",g:"study",c:"study",ic:"soroban",u:"bay-views-soroban",w:[["大宮区","dahdqhdrlvw"],["北区・西区","dahdard8xpa"],["見沼区・中央区","dahdef8kkm8"],["桜区・浦和区・南区","dahdgagwcw8"],["緑区・岩槻区",""],["オンライン","dahdgksisyw"]]},
+  {t:"書道",g:"culture",c:"art",ic:"shodo",u:"bay-view-shodou",w:[["大宮区・北区・西区","dahb9cf3sx4"],["中央区・見沼区","dahd10jvg-0"],["桜区・浦和区・南区","dahd7-vbmca"],["緑区・岩槻区","daheekzemkg"]]},
+  {t:"囲碁",g:"culture",c:"study",ic:"igo",u:"bay-view-igo",w:[["さいたま市","dahdcbygyic"]]},
+  {t:"将棋",g:"culture",c:"study",ic:"shogi",u:"bay-view-shogi",w:[["さいたま市","dahc-ueowwq"]]}
 ];
 const LCAT={sports:"スポーツ",study:"まなび",art:"アート・音楽"};
+/* 習い事のジャンル（並びの順）。LESSONS の g */
+const LGEN=[["sport","運動・スポーツ"],["budo","武道"],["dance","ダンス・バレエ"],["music","音楽"],["study","勉強・まなび"],["culture","書道・囲碁・将棋"]];const LGN=Object.fromEntries(LGEN);
 /* Parks with parking: add a new park by appending one entry */
 const PARKS=[
   {t:"秋葉の森総合公園",area:"西区",p1:"113台",p2:"9:00〜17:00",p3:"BBQ・アスレチック",u:CANVA+"dahn7xxnfhe",
@@ -1982,16 +1985,16 @@ function moneyCards(){
   }).join("");
 }
 function lessonCards(){
-  const list=LESSONS.map((l,i)=>({l,i})).filter(({l})=>lessonFilter==="all"||l.c===lessonFilter);
+  const list=LESSONS.map((l,i)=>({l,i})).filter(({l})=>lessonFilter==="all"||l.g===lessonFilter);let lastG="";
   return tc(CANVA+"daha-1fvlhc",cover("study",1,`<span class="ls">${lessonSvg("list")}</span>`,"習い事アイコン一覧","SPORTS・STUDY・ART"),"アイコンから習い事をえらぶ",true)+
-    list.map(({l,i})=>{const wd=myWardGroup(l);
+    list.map(({l,i})=>{const wd=myWardGroup(l);const gl=lessonFilter==="all"&&l.g!==lastG?`<div class="lgen"><span>${esc(LGN[l.g]||"")}</span></div>`:"";lastG=l.g;
       const cl=CLASSES[l.t],my=S.profile?.ward,nMine=cl&&my?cl.filter(c=>c.d?c.d===my:(wd&&c.w===wd[0])).length:0;
       const sub=cl?(nMine?`${S.profile.ward}に ${nMine}件`:`${cl.length}件から探せる`):(wd?`${S.profile.ward}の教室あり`:(l.w.length>1?`区ごとに${l.w.length}エリア`:"さいたま市の一覧"));
-      return tc("#l-"+i,cover(l.c,i,`<span class="ls">${lessonSvg(l.ic)}</span>`,l.t,sub,wd?`<span class="ward">${esc(S.profile.ward)}</span>`:""),cl?`${LCAT[l.c]} ・ 教室リスト`:LCAT[l.c],false)}).join("");
+      return gl+tc("#l-"+i,cover(l.c,i,`<span class="ls">${lessonSvg(l.ic)}</span>`,l.t,sub,wd?`<span class="ward">${esc(S.profile.ward)}</span>`:""),cl?`${LGN[l.g]||LCAT[l.c]} ・ 教室リスト`:(LGN[l.g]||LCAT[l.c]),false)}).join("");
 }
 function renderRows(){
   const mChips=[["all","すべて"]].concat(Object.entries(MONEY_CAT).map(([k,v])=>[k,v.n]));
-  const lChips=[["all","すべて"],["sports","スポーツ"],["study","まなび"],["art","アート・音楽"]];
+  const lChips=[["all","すべて"]].concat(LGEN);
   $("#rows").innerHTML=
    `<section class="block" id="row-hokatsu">${head("hokatsu","HOKATSU","保活ナビ",`<a class="more" href="${ART}Rz9bnEsv1WzysWFn98jTMe" target="_blank" rel="noopener">表紙を見る</a>`)}
      <p class="sec-lead">締切 → 認定 → 点数 → 園さがし → 見学 → 書類 → 申込み。準備の順番にならんでいます。はじめての方は「はじめての保活ガイド」から。</p>
@@ -2578,7 +2581,7 @@ function sheetClasses(i){
   if(mine&&areas.includes(mine[0])){areas.splice(areas.indexOf(mine[0]),1);areas.unshift(mine[0])}
   const one=areas.length<=1;if(one&&clsArea!=="all")clsArea="all";
   const unit=l.c==="sports"?"チーム・教室":"教室";const lp=LPAGES[l.t];const soc=l.t==="サッカー"||!!lp;
-  return dhead(svg(LI[l.ic]),st[2]?st[0]:"#fff",LCAT[l.c],l.t,soc?(lp?`10区・全${lp.all}${lp.unit}`:`10区・全130チーム`):`${unit} ${all.length}件${one?"":` ・ ${areas.length}エリア`}${S.profile?` ・ ${esc(S.profile.ward)}から表示`:""}`)+
+  return dhead(svg(LI[l.ic]),st[2]?st[0]:"#fff",LGN[l.g]||LCAT[l.c],l.t,soc?(lp?`10区・全${lp.all}${lp.unit}`:`10区・全130チーム`):`${unit} ${all.length}件${one?"":` ・ ${areas.length}エリア`}${S.profile?` ・ ${esc(S.profile.ward)}から表示`:""}`)+
    (lp?lpBanner(lp):"")+(l.t==="サッカー"?`<a class="fcban" data-noicon href="#" data-view="soccer" data-vt="さいたま市 少年サッカー"><span class="fcb-ln"></span><span class="fcb-c"></span><span class="fcb-n">SAITAMA KIDS FOOTBALL</span><b class="fcb-t">さいたま市<br>少年サッカー</b><span class="fcb-ball">⚽</span><span class="fcb-sb"><span><em>10</em>区</span><span>全<em>130</em>チーム</span><span>スクール<em>26</em>チーム</span><span>女子サッカー<em>7</em>チーム</span></span><span class="fcb-go">一覧はこちら ›</span></a>`:"")+
    `<label class="csearch">${ico('<circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/>')}<input id="clsQ" type="search" placeholder="教室・チームの名前でさがす" value="${esc(clsQ)}" aria-label="教室をさがす"></label>
     ${one||soc?"":`<div class="filt" role="group" aria-label="エリア">${[["all","すべて"]].concat(areas.map(a=>[a,a])).map(([k,n])=>`<button class="chip${mine&&k===mine[0]?" mine":""}" type="button" data-cw="${esc(k)}" aria-pressed="${k===clsArea}">${esc(n)}</button>`).join("")}</div>`}
@@ -2608,7 +2611,7 @@ $("#sheet").addEventListener("input",e=>{if(e.target.id==="clsQ"){clsQ=e.target.
 function sheetLesson(i){const l=LESSONS[i];if(!l)return"";
   if(CLASSES[l.t])return sheetClasses(i);
   const mine=myWardGroup(l);const st=STYLE[l.c][i%STYLE[l.c].length];
-  return dhead(svg(LI[l.ic]),st[2]?st[0]:"#fff",LCAT[l.c],l.t,l.w.length>1?`区ごとに ${l.w.length} エリアに分かれています`:"さいたま市の教室・チーム一覧")+
+  return dhead(svg(LI[l.ic]),st[2]?st[0]:"#fff",LGN[l.g]||LCAT[l.c],l.t,l.w.length>1?`区ごとに ${l.w.length} エリアに分かれています`:"さいたま市の教室・チーム一覧")+
    `<p class="secttl">${l.w.length>1?"エリアをえらぶ":"一覧を見る"}</p>
     <div class="wards">${l.w.map(([lab,slug])=>`<a class="${mine&&mine[1]===slug?"mine":""}" href="${CANVA+slug}" target="_blank" rel="noopener">${esc(lab)}${mine&&mine[1]===slug?"<small>あなたの区</small>":"<small>見る ›</small>"}</a>`).join("")}</div>
     ${S.profile?"":`<p class="note">マイページで区を登録すると、あなたの区のエリアが色つきで表示されます。</p>`}
