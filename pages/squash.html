@@ -201,12 +201,13 @@ a{color:inherit}
 .note{font-size:11.5px;color:#55704a;margin-top:10px}
 .foot{color:#cfe3b5;font-size:11.5px;padding:18px 16px 40px;line-height:1.7}
 .foot a{color:#fff}
+:root{--outc:#3B4A8C}.t.out,.t.online{background:#3B4A8C;color:#fff}.t.out::before{content:'🚃 '}.t.online::before{content:'💻 '}
 </style>
 </head>
 <body data-noicon>
 <div class="wrap" id="app"></div>
 <script>
-const D=[{"n":"Greetings Squash saitama","d":"北区","k":"club","tg":["park","near"],"a":"北区日進町2丁目1916-8 istα!日進3F","pl":"","dy":"","i":"火〜金 10:00〜23:00 土日祝 10:00〜19:00 月曜定休 駐車場あり(宮原駅西口から徒歩10分)","fee":"","u":"https://greetingssquash.com","ph":"7ec5a662a61a.webp","sp":0,"new":0,"st2":"日進駅 歩いて7分","pf":"さいたま市北区"},{"n":"Greetings Squash Yokohama","d":"","k":"club","tg":["park","near"],"a":"神奈川県横浜市港北区新羽町482","pl":"","dy":"","i":"火〜金 11:00〜22:00 土日祝 10:00〜18:30 月曜定休 駐車場あり","fee":"","u":"https://greetings-yokohama.jp","ph":"688ea9ad5845.webp","sp":0,"new":0,"st2":"北新横浜駅 歩いて1分","pf":"神奈川県"},{"n":"Squash magic","d":"","k":"club","tg":["park","near"],"a":"神奈川県海老名市中央2丁目9-50","pl":"","dy":"","i":"駐車場あり","fee":"","u":"https://squashmagic.com","ph":"0679a2c752d8.webp","sp":0,"new":0,"st2":"海老名駅 歩いて10分","pf":"神奈川県"},{"n":"Squash Root 29","d":"","k":"club","tg":["park","near"],"a":"神奈川県横浜市中区弁天通4丁目67-1 馬車道スクエアビル6F","pl":"","dy":"","i":"駐車場あり","fee":"","u":"https://www.instagram.com/squash_root29/","ph":"e4d50575ddca.webp","sp":0,"new":0,"st2":"馬車道駅 歩いて1分","pf":"神奈川県"},{"n":"Squash.sports.point","d":"","k":"club","tg":["park","near"],"a":"栃木県宇都宮市駅前通り1丁目4-6 10F","pl":"","dy":"","i":"駐車場あり","fee":"","u":"https://www.central.co.jp/club/utsunomiya-f/program/list.html?key_no=23","ph":"3e9d9d9aeed5.webp","sp":0,"new":0,"st2":"宇都宮駅 歩いて1分","pf":"栃木県"}];
+const D=[{"n":"Greetings Squash saitama","d":"北区","k":"club","tg":["park","near"],"a":"北区日進町2丁目1916-8 istα!日進3F","pl":"","dy":"","i":"火〜金 10:00〜23:00 土日祝 10:00〜19:00 月曜定休 駐車場あり(宮原駅西口から徒歩10分)","fee":"","u":"https://greetingssquash.com","ph":"7ec5a662a61a.webp","sp":0,"new":0,"st2":"日進駅 歩いて7分","pf":"さいたま市北区"},{"n":"Greetings Squash Yokohama","d":"","k":"club","tg":["out","park","near"],"a":"神奈川県横浜市港北区新羽町482","pl":"","dy":"","i":"火〜金 11:00〜22:00 土日祝 10:00〜18:30 月曜定休 駐車場あり","fee":"","u":"https://greetings-yokohama.jp","ph":"688ea9ad5845.webp","sp":0,"new":0,"st2":"北新横浜駅 歩いて1分","pf":"神奈川県"},{"n":"Squash magic","d":"","k":"club","tg":["out","park","near"],"a":"神奈川県海老名市中央2丁目9-50","pl":"","dy":"","i":"駐車場あり","fee":"","u":"https://squashmagic.com","ph":"0679a2c752d8.webp","sp":0,"new":0,"st2":"海老名駅 歩いて10分","pf":"神奈川県"},{"n":"Squash Root 29","d":"","k":"club","tg":["out","park","near"],"a":"神奈川県横浜市中区弁天通4丁目67-1 馬車道スクエアビル6F","pl":"","dy":"","i":"駐車場あり","fee":"","u":"https://www.instagram.com/squash_root29/","ph":"e4d50575ddca.webp","sp":0,"new":0,"st2":"馬車道駅 歩いて1分","pf":"神奈川県"},{"n":"Squash.sports.point","d":"","k":"club","tg":["out","park","near"],"a":"栃木県宇都宮市駅前通り1丁目4-6 10F","pl":"","dy":"","i":"駐車場あり","fee":"","u":"https://www.central.co.jp/club/utsunomiya-f/program/list.html?key_no=23","ph":"3e9d9d9aeed5.webp","sp":0,"new":0,"st2":"宇都宮駅 歩いて1分","pf":"栃木県"}];
 const WARDS=["西区", "北区", "大宮区", "見沼区", "中央区", "桜区", "浦和区", "南区", "緑区", "岩槻区"];
 const STSRC=[];
 // 区の色＝ユニフォームの色 [メイン, しま, 文字, 番号の字]
@@ -215,8 +216,8 @@ const WCOL=Object.fromEntries(Object.entries(KIT).map(([k,v])=>[k,v[0]]));
 const kit=w=>{const k=KIT[w];return k?`--wc:${k[0]};--ws:${k[1]};--wt:${k[2]};--wn:${k[3]||"#fff"}`:""};
 let CUR=[];
 const KIND={"sss": "少年団", "club": "クラブ", "school": "スクール"};
-const TAG={"mid": "中学生から", "girls": "女子", "kids": "幼児から", "fee": "料金がわかる", "park": "駐車場あり", "near": "駅ちかく", "strong": "強豪"};
-const FILTERS=[["park", "駐車場あり", "--club"], ["near", "駅ちかく", "--club"]];
+const TAG={"out": "さいたま市の外", "online": "オンライン", "mid": "中学生から", "girls": "女子", "kids": "幼児から", "fee": "料金がわかる", "park": "駐車場あり", "near": "駅ちかく", "strong": "強豪"};
+const FILTERS=[["out", "さいたま市の外", "--outc"], ["park", "駐車場あり", "--club"], ["near", "駅ちかく", "--club"]];
 const $=s=>document.querySelector(s);
 const esc=s=>String(s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const norm=s=>String(s||"").normalize("NFKC").toLowerCase().replace(/[ァ-ン]/g,c=>String.fromCharCode(c.charCodeAt(0)-96)).replace(/\s/g,"");
@@ -255,7 +256,7 @@ function match(t){
 }
 function home(){
   const cnt=w=>D.filter(t=>t.d===w).length;
-  if(AREAS){CUR=AREAS.flatMap(a=>D.filter(t=>t.pf===a[0]))}
+  if(AREAS){CUR=AREAS.flatMap(a=>D.filter(t=>(t.pg||t.pf)===a[0]))}
   $("#app").innerHTML=`
   <header class="board"><div class="kk"><div class="wall"><span class="sq">⚫</span></div></div>
     <div class="en num">SAITAMA・KANAGAWA SQUASH</div>
@@ -288,7 +289,7 @@ function list(){
   <div class="field">${state.f==="strong"?`<p class="best" style="font-size:12.5px;margin:0 2px 10px;padding:8px 10px">🏆 ここ2年（2024・2025年度）の埼玉県の大きな大会で、ベスト16以上か、県リーグのいちばん上（S1）に入ったさいたま市のチームです。カードをタップすると大会の結果が見られます。</p>`:""}${items.length?`<div class="grid">${items.map((t,i)=>card(t,i+1,i)).join("")}</div>`:`<p class="empty">見つかりませんでした。ことばを変えてみてね。</p>`}</div>
   <footer class="foot">写真をタップすると、くわしく出ます。入る前に、かならずホームページでたしかめてね。</footer>`;
 }
-function areaHtml(){let n=0;return AREAS.map(a=>{const L=D.filter(t=>t.pf===a[0]);return `<div class="area"><h3>${esc(a[0])}<i>${esc(a[1])}</i><small>${L.length}${UNIT}</small></h3><div class="grid">${L.map(t=>{n++;return card(t,n,n-1)}).join("")}</div></div>`}).join("")}
+function areaHtml(){let n=0;return AREAS.map(a=>{const L=D.filter(t=>(t.pg||t.pf)===a[0]);return `<div class="area"><h3>${esc(a[0])}<i>${esc(a[1])}</i><small>${L.length}${UNIT}</small></h3><div class="grid">${L.map(t=>{n++;return card(t,n,n-1)}).join("")}</div></div>`}).join("")}
 const UNIT="教室";
 function render(){state.view==="home"?home():list()}
 function panelHtml(ci){
