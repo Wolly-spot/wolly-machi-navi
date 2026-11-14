@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dela+Gothic+One&family=Zen+Maru+Gothic:wght@500;700&display=swap">
 <style>
-:root{--deep:#16324a;--turf:#16324a;--turf2:#16324a;--chalk:#fff;--lime:#c8f0ff;--ink:#16324a;--orange:#ff8fab;--orange-d:#3a0a18;--cream:#fff;--line:#dce8f0;--fieldbg:linear-gradient(90deg,#2f8a6a 0 8%,#36a07a 8% 92%,#2f8a6a 92%);--phbg:#36a07a;
+:root{--deep:#16324a;--turf:#16324a;--turf2:#16324a;--chalk:#fff;--lime:#c8f0ff;--ink:#16324a;--orange:#ff8fab;--orange-d:#3a0a18;--cream:#fff;--line:#dce8f0;--fieldbg:linear-gradient(90deg,#3d63b8 0 8%,#4a74c9 8% 92%,#3d63b8 92%);--phbg:linear-gradient(#6f93dc,#4a74c9);
   --sss:#2f7d32;--club:#1f4f8f;--school:#c26b12;--girls:#c2457a;--kids:#7a5ac8;--jhs:#13788a;--gold:#b8860b}
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%}
@@ -49,6 +49,25 @@ a{color:inherit}
 .zk::after{content:"";position:absolute;right:-14px;bottom:-14px;width:42px;height:42px;border-radius:50%;background:var(--wc);opacity:.12}
 .zk small{display:block;font-size:11.5px;color:#4b6b2c}
 @media(min-width:600px){.zks{grid-template-columns:repeat(5,1fr)}}
+
+.board .kk{display:none}
+.scene{background:var(--deep);padding:0 12px 14px}
+.sscene{position:relative;height:min(64vw,300px);border-radius:22px;overflow:hidden;border:3px solid rgba(255,255,255,.35);
+  background:radial-gradient(120% 90% at 20% 10%,#fff 0,transparent 55%),linear-gradient(160deg,#FFF0F6,#F1ECFF 45%,#E6F4FF);display:grid;place-items:center}
+.sscene .bk{position:absolute;border-radius:50%;filter:blur(2px);opacity:.55;animation:skFloat 9s ease-in-out infinite}
+.sscene .bk.b1{width:38%;aspect-ratio:1;left:-8%;top:8%;background:radial-gradient(circle at 35% 35%,#fff,var(--orange) 160%)}
+.sscene .bk.b2{width:30%;aspect-ratio:1;right:-6%;top:-6%;background:radial-gradient(circle at 35% 35%,#fff,#A68BFF 170%);animation-delay:-3s}
+.sscene .bk.b3{width:26%;aspect-ratio:1;right:6%;bottom:-8%;background:radial-gradient(circle at 35% 35%,#fff,#5CC8FF 170%);animation-delay:-6s}
+.sscene .bk.b4{width:16%;aspect-ratio:1;left:14%;bottom:6%;background:radial-gradient(circle at 35% 35%,#fff,#FF8FB8 170%);animation-delay:-4s}
+.sscene i{position:absolute;font-style:normal;color:#fff;text-shadow:0 0 8px rgba(166,139,255,.9);font-size:18px;animation:skTw 4s ease-in-out infinite}
+.sscene i:nth-of-type(1){left:18%;top:18%}.sscene i:nth-of-type(2){left:78%;top:30%;animation-delay:-1.3s;font-size:14px}.sscene i:nth-of-type(3){left:70%;top:76%;animation-delay:-2.6s}.sscene i:nth-of-type(4){left:12%;top:62%;animation-delay:-.7s;font-size:12px}
+.sscene .sch{position:relative;height:84%;width:auto;filter:drop-shadow(0 10px 14px rgba(90,70,160,.22));animation:skBob 5s ease-in-out infinite}
+.sscene .sic{position:relative;width:42%;aspect-ratio:1;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:clamp(48px,16vw,84px);box-shadow:0 10px 24px rgba(90,70,160,.18);animation:skBob 5s ease-in-out infinite}
+@keyframes skFloat{0%,100%{transform:translate(0,0)}50%{transform:translate(6px,-10px)}}
+@keyframes skTw{0%,100%{opacity:.25;transform:scale(.7)}50%{opacity:1;transform:scale(1.1)}}
+@keyframes skBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.footscene,.foot .fdeco{display:none!important}
+@media (prefers-reduced-motion:reduce){.sscene *{animation:none!important}}
 /* ---- badminton のアニメ ---- */
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes drb{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
@@ -232,7 +251,7 @@ function home(){
     <div class="score"><span>10<small>区</small></span><i></i><span>${D.length}<small>チーム</small></span><i></i><span>${D.filter(t=>t.k==="sss").length}<small>少年団</small></span></div>
     <form class="search" id="sf"><input id="q" type="search" placeholder="教室の名前で探す" enterkeyhint="search"><button aria-label="探す">🏸</button></form>
   </header>
-  <div class="scene"><svg viewBox="0 0 300 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="300" height="300" fill="#16324a"/><rect x="36" y="40" width="228" height="240" fill="#36a07a" stroke="#fff" stroke-width="2.4"/><path d="M50 40v240M250 40v240M36 120h228M36 200h228M150 40v80M150 200v80" stroke="#fff" stroke-width="2"/><rect x="30" y="150" width="240" height="10" fill="#ffffff55"/><rect x="30" y="146" width="240" height="4" fill="#fff"/><g transform="translate(190 96) scale(-1.0 1.0)"><rect x="-5" y="-13" width="4.2" height="13" rx="1.6" fill="#fff" stroke="#0003" stroke-width=".6"/><rect x=".8" y="-13" width="4.2" height="13" rx="1.6" fill="#fff" stroke="#0003" stroke-width=".6"/><rect x="-6" y="-1.5" width="5.5" height="2.5" rx="1" fill="#222"/><rect x=".6" y="-1.5" width="5.5" height="2.5" rx="1" fill="#222"/><rect x="-7.5" y="-29" width="15" height="17" rx="4.5" fill="#c8f0ff" stroke="#16324a" stroke-width="1.6"/><circle cx="0" cy="-35.5" r="6.8" fill="#f3c9a2"/><circle cx="2.4" cy="-35.5" r=".9" fill="#222"/><path d="M1 -32.2q1.6 1 3 0" stroke="#a0522d" stroke-width=".8" fill="none"/><path d="M-6.8 -34a6.8 7.5 0 0 1 13.6 0q-3-3-6.8-2.5q-4-.5-6.8 2.5z" fill="#2b1d12"/><g transform="translate(0 -26)"><g><animateTransform attributeName="transform" type="rotate" values="60;-70;60" keyTimes="0;.5;1" dur="1.4s" repeatCount="indefinite" additive="sum" begin='.7s'/><rect x="-1" y="0" width="2.2" height="10" fill="#333"/><ellipse cx="0" cy="-8" rx="4.5" ry="7" fill="#ffffff66" stroke="#ff8fab" stroke-width="1.4"/></g></g></g><g><animateTransform attributeName="transform" type="translate" values="112 228;150 40;188 70;150 40;112 228" keyTimes="0;.25;.5;.75;1" dur="2.8s" repeatCount="indefinite" additive="sum"/><animateTransform attributeName="transform" type="rotate" values="200;160;20;-20;200" keyTimes="0;.25;.5;.75;1" dur="2.8s" repeatCount="indefinite" additive="sum"/><path d="M0 0l-5 -9h10z" fill="#fff"/><circle cx="0" cy="1" r="2.4" fill="#ff8fab"/></g><g transform="translate(110 268) scale(1.2 1.2)"><rect x="-5" y="-13" width="4.2" height="13" rx="1.6" fill="#fff" stroke="#0003" stroke-width=".6"/><rect x=".8" y="-13" width="4.2" height="13" rx="1.6" fill="#fff" stroke="#0003" stroke-width=".6"/><rect x="-6" y="-1.5" width="5.5" height="2.5" rx="1" fill="#222"/><rect x=".6" y="-1.5" width="5.5" height="2.5" rx="1" fill="#222"/><rect x="-7.5" y="-29" width="15" height="17" rx="4.5" fill="#ff8fab" stroke="#16324a" stroke-width="1.6"/><circle cx="0" cy="-35.5" r="6.8" fill="#f3c9a2"/><circle cx="2.4" cy="-35.5" r=".9" fill="#222"/><path d="M1 -32.2q1.6 1 3 0" stroke="#a0522d" stroke-width=".8" fill="none"/><path d="M-6.8 -34a6.8 7.5 0 0 1 13.6 0q-3-3-6.8-2.5q-4-.5-6.8 2.5z" fill="#2b1d12"/><g transform="translate(0 -26)"><g><animateTransform attributeName="transform" type="rotate" values="60;-70;60" keyTimes="0;.5;1" dur="1.4s" repeatCount="indefinite" additive="sum"/><rect x="-1" y="0" width="2.2" height="10" fill="#333"/><ellipse cx="0" cy="-8" rx="4.5" ry="7" fill="#ffffff66" stroke="#ff8fab" stroke-width="1.4"/></g></g></g></svg></div>
+  <div class="scene"><div class="sscene" aria-hidden="true"><span class="bk b1"></span><span class="bk b2"></span><span class="bk b3"></span><span class="bk b4"></span><i>✦</i><i>✧</i><i>✦</i><i>✧</i><img class="sch" src="badminton-img/char.webp" alt=""></div></div>
   <section class="pitch"><div class="tcourt"></div>${AREAS?areaHtml():`<h2>区をえらんでね</h2>
     <div class="zks">${WARDS.map((w,i)=>`<button class="zk" data-w="${w}" style="${kit(w)}"><b class="num">${String(i+1).padStart(2,"0")}</b><span>${w}</span><small style="${cnt(w)?"":"opacity:.45"}">${cnt(w)}チーム</small></button>`).join("")}</div>`}
   </section>
