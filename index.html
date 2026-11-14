@@ -1270,6 +1270,21 @@ svg .a-ring{animation:ring 2.4s ease-in-out infinite;transform-box:fill-box;tran
 .orig summary{cursor:pointer;font-weight:700;font-size:13.5px;color:var(--accent);padding:6px 0}
 .orig .wards{margin-top:8px}
 .more-dent{display:block;margin:10px auto 0;border:1px solid var(--line);background:none;border-radius:999px;padding:8px 18px;font-weight:700;cursor:pointer}
+
+/* 現在の習い事一覧 */
+.cv .lmos{position:absolute;left:50%;top:42%;translate:-50% -50%;width:74%;aspect-ratio:1;display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.cv .lmos i{background:var(--lg);border-radius:12px;display:grid;place-items:center;box-shadow:0 6px 12px -8px rgba(20,20,70,.5),inset 0 0 0 2px rgba(255,255,255,.7);animation:lmPop 3.6s ease-in-out infinite}
+.cv .lmos i:nth-child(2n){animation-delay:.4s}.cv .lmos i:nth-child(3n){animation-delay:.8s}
+.cv .lmos svg{width:72%;height:72%}
+@keyframes lmPop{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+.lgwrap{padding:4px 2px 6px}.lgtop{text-align:center;margin:4px 0 10px}.lgtop h3{margin:2px 0 4px;font-size:20px}.lgtop p{margin:0;font-size:12.5px;color:var(--muted)}.lgsp{font-size:22px}
+.lgh{margin:16px 2px 8px;font-size:13px;color:#5A5AEF;letter-spacing:.06em}
+.lgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.lgi{border:0;background:var(--lg);border-radius:18px;padding:10px 4px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;font:inherit;color:#2a2550;box-shadow:0 8px 16px -12px rgba(30,20,90,.6),inset 0 0 0 2px rgba(255,255,255,.75);animation:lgIn .5s cubic-bezier(.2,.8,.3,1.2) both;transition:transform .2s}
+.lgi:active{transform:scale(.94)}
+.lgi span{width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,.92);display:grid;place-items:center}.lgi span svg{width:78%;height:78%}
+.lgi b{font-size:11.5px;line-height:1.25;font-weight:800;min-height:2.5em;display:flex;align-items:center;text-align:center}
+@keyframes lgIn{from{opacity:0;transform:translateY(10px) scale(.9)}to{opacity:1;transform:none}}
 </style>
 
 <!-- ============ SPLASH ============ -->
@@ -2028,9 +2043,17 @@ function moneyCards(){
     return tc("#m-"+i,`<div class="cv light" style="--g:${c.bg};--pat:${PAT.ticket}"><span class="tag">${esc(m.k)}</span><span class="mini">${svg(MINI[c.ic],40)}</span><span class="big">${esc(big)}<small>${esc(c.n)}</small></span><strong>${esc(m.t.length>14?m.one:m.t)}</strong>${m.wait?'<span class="state">次回募集待ち</span>':""}</div>`,m.one,false);
   }).join("");
 }
+/* 現在の習い事一覧：いま載せている習い事のアイコンをカラフルに並べる。タップでその習い事へ（11/14） */
+const LGRAD=["linear-gradient(140deg,#FFD3E4,#FF9EC4)","linear-gradient(140deg,#E3DAFF,#B9A6FF)","linear-gradient(140deg,#D3E6FF,#93BDFF)","linear-gradient(140deg,#D2F3FF,#86D6F5)","linear-gradient(140deg,#FFF1BD,#FFD86B)","linear-gradient(140deg,#F6D8FF,#D99BF5)","linear-gradient(140deg,#FFDCDC,#FF9FA8)","linear-gradient(140deg,#D9DEFF,#9AA6F5)"];
+function openLessonGrid(){
+  let k=0;
+  const body=LGEN.map(([g,n])=>{const L=LESSONS.map((l,i)=>({l,i})).filter(x=>x.l.g===g);if(!L.length)return"";
+    return `<h4 class="lgh">${esc(n)}</h4><div class="lgrid">${L.map(({l,i})=>`<button type="button" class="lgi" data-lgo="${i}" style="--lg:${LGRAD[(k++)%LGRAD.length]};animation-delay:${Math.min(k,30)*22}ms"><span>${lessonSvg(l.ic)}</span><b>${esc(l.t)}</b></button>`).join("")}</div>`}).join("");
+  openPop(`<div class="lgwrap"><div class="lgtop"><span class="lgsp">✨</span><h3>現在の習い事一覧</h3><p>いま載せている ${LESSONS.length}種類。アイコンをタップすると、その習い事へ。</p></div>${body}</div>`,"現在の習い事一覧","holo");
+}
 function lessonCards(){
   const list=LESSONS.map((l,i)=>({l,i})).filter(({l})=>lessonFilter==="all"||l.g===lessonFilter);let lastG="";
-  return tc(CANVA+"daha-1fvlhc",cover("study",1,`<span class="ls">${lessonSvg("list")}</span>`,"習い事アイコン一覧","SPORTS・STUDY・ART"),"アイコンから習い事をえらぶ",true)+
+  return `<a class="tc" href="#" data-lgrid>${cover("study",1,`<span class="lmos">${LESSONS.slice(0,9).map((l,k)=>`<i style="--lg:${LGRAD[k%LGRAD.length]}">${lessonSvg(l.ic)}</i>`).join("")}</span>`,"現在の習い事一覧",LESSONS.length+"種類")}<small>アイコンをタップして、習い事へ</small></a>`+
     list.map(({l,i})=>{const wd=myWardGroup(l);const gl=lessonFilter==="all"&&l.g!==lastG?`<div class="lgen"><span>${esc(LGN[l.g]||"")}</span></div>`:"";lastG=l.g;
       const cl=CLASSES[l.t],my=S.profile?.ward,nMine=cl&&my?cl.filter(c=>c.d?c.d===my:(wd&&c.w===wd[0])).length:0;
       const sub=cl?(nMine?`${S.profile.ward}に ${nMine}件`:`${cl.length}件から探せる`):(wd?`${S.profile.ward}の教室あり`:(l.w.length>1?`区ごとに${l.w.length}エリア`:"さいたま市の一覧"));
@@ -2978,6 +3001,8 @@ function openRoom(){
 function closeRoom(now){const el=$("#rmOv");if(!el)return;document.body.classList.remove("rm-open");if(now){el.remove();return}el.classList.remove("on");setTimeout(()=>el.remove(),380)}
 document.addEventListener("click",e=>{
   if(e.target.closest("[data-room]")){e.preventDefault();openRoom();return}
+  if(e.target.closest("[data-lgrid]")){e.preventDefault();openLessonGrid();return}
+  {const lg=e.target.closest("[data-lgo]");if(lg){e.preventDefault();const i=lg.dataset.lgo;closeRoom(true);setTimeout(()=>{location.hash="#l-"+i},40);return}}
   {const pm=e.target.closest("[data-ptmore]");if(pm){e.preventDefault();const [i,j]=pm.dataset.ptmore.split(":").map(Number);openPtMore(i,j);return}}
   const ov=$("#rmOv");if(!ov)return;
   if(e.target.closest("[data-rmx]")||e.target===ov){closeRoom();return}
