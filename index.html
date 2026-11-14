@@ -806,6 +806,26 @@ html[data-fsz="2"] .ej b{font-size:11.5px}
 .ma-links{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
 .ma-links a{display:grid;justify-items:center;gap:3px;padding:9px 2px;border-radius:14px;background:color-mix(in srgb,var(--surface) 60%,#F4F0FF);text-decoration:none;color:var(--ink);font-size:11.5px;font-weight:700}
 .ma-links svg{width:28px;height:28px}
+/* Wollyからのお知らせ */
+.kn{margin:6px 0 14px;border-radius:24px;background:linear-gradient(135deg,#FFF0F6,#F1ECFF 60%,#E8F4FF);border:2px solid #fff;box-shadow:0 6px 18px rgba(90,90,239,.12);overflow:hidden}
+.kn-h,.kn-inv{display:flex;align-items:center;gap:12px;width:100%;padding:12px 14px;border:0;background:transparent;font:inherit;color:var(--ink);text-align:left;cursor:pointer;text-decoration:none}
+.kn-h>span:nth-child(2),.kn-inv>span:nth-child(2){flex:1;display:grid;gap:2px;min-width:0}.kn-h b,.kn-inv b{font-size:16px}.kn-h small,.kn-inv small{font-size:12px;color:var(--muted);line-height:1.5}
+.kn-bell{position:relative;flex:0 0 auto;width:46px;height:46px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 3px 8px rgba(90,90,239,.18);animation:knRing 3s ease-in-out infinite}.kn-bell svg{width:32px;height:32px}
+.kn-bell em{position:absolute;top:-4px;right:-4px;min-width:20px;height:20px;padding:0 5px;border-radius:999px;background:#FF4F8B;color:#fff;font:900 12px/20px var(--font-display,inherit);font-style:normal;text-align:center;border:2px solid #fff}
+@keyframes knRing{0%,88%,100%{transform:rotate(0)}91%{transform:rotate(-12deg)}94%{transform:rotate(10deg)}97%{transform:rotate(-6deg)}}
+.kn-chev{flex:0 0 auto;font-style:normal;font-size:12px;font-weight:800;color:#8E6BF5;background:#fff;border-radius:999px;padding:5px 10px}
+.kn-inv i{font-style:normal;font-size:22px;color:#A68BFF}
+.kn-b{display:none;padding:0 12px 12px}.kn.open .kn-b{display:grid;gap:8px}
+.kn-i{border-radius:18px;background:rgba(255,255,255,.85);border:1px solid #fff;box-shadow:0 2px 6px rgba(46,43,79,.06);animation:gUp .45s both;animation-delay:calc(var(--n)*60ms)}
+.kn-i summary{list-style:none;display:flex;align-items:center;gap:10px;padding:10px 12px;cursor:pointer}.kn-i summary::-webkit-details-marker{display:none}
+.kn-ic{flex:0 0 auto;width:38px;height:38px;border-radius:50%;background:#F4F0FF;display:grid;place-items:center}.kn-ic svg{width:28px;height:28px}
+.kn-st{flex:1;min-width:0;display:grid;gap:2px}.kn-st b{font-size:14.5px;line-height:1.4}.kn-st small{font-size:11.5px;color:var(--muted)}
+.kn-tag{justify-self:start;font-style:normal;font-size:11px;font-weight:900;padding:2px 8px;border-radius:999px;background:#E8F4FF;color:#2F7FC0}.kn-tag.hot{background:#FFE3EE;color:#D0457F}
+.kn-ar{font-style:normal;color:#A68BFF;transition:transform .25s}.kn-i[open] .kn-ar{transform:rotate(180deg)}
+.kn-d{padding:0 12px 12px 60px;font-size:13.5px;line-height:1.7}.kn-d p{margin:0 0 8px}
+.kn-go{display:inline-block;padding:7px 14px;border-radius:999px;background:linear-gradient(100deg,#FF6FA5,#A68BFF);color:#fff;font-weight:800;font-size:13px;text-decoration:none}
+.kn-none,.kn-note{margin:2px 4px 0;font-size:11.5px;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.kn-bell,.kn-i{animation:none}}
 .relc{margin:22px 0 6px;padding:12px;border-radius:20px;background:color-mix(in srgb,var(--surface) 70%,transparent);border:1.5px dashed var(--line)}
 .relc h4{display:flex;align-items:center;gap:6px;margin:0 0 10px;font-size:13.5px;color:var(--muted)}.relc h4 svg{width:22px;height:22px}
 .relc-g{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
@@ -1241,6 +1261,7 @@ svg .a-ring{animation:ring 2.4s ease-in-out infinite;transform-box:fill-box;tran
         <div><h1 id="helloTitle">こんにちは</h1><p id="helloSub">さいたま市の暮らしを、近くから。</p></div>
         <div class="members" id="membersStrip"></div>
       </div>
+      <section class="kn" id="kidNotice" hidden></section>
 
       <!-- いちばん上：Wolly spot ＋ さがす -->
       <section class="hero2">
@@ -1891,7 +1912,7 @@ document.addEventListener("click",e=>{
   const a=e.target.closest("[data-sk]");if(a){shopKind=a.dataset.sk;renderFeed();$("#shopRow").scrollLeft=0;return}
   const b=e.target.closest("[data-nk]");if(b){newsKind=b.dataset.nk;renderFeed();$("#newsRow").scrollLeft=0}
 });
-function loadFeed(){fetch(FEED_URL,{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(d=>{if(d&&(d.shops||d.news)){FEED=d;renderFeed();renderEvents();if(sheetKind==="news")fillNewsSheet(false)}}).catch(()=>{})}
+function loadFeed(){fetch(FEED_URL,{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(d=>{if(d&&(d.shops||d.news)){FEED=d;renderFeed();renderEvents();renderKidNotice();if(sheetKind==="news")fillNewsSheet(false)}}).catch(()=>{})}
 
 /* ===== Wolly限定クーポン：Wolly の業務システムで「掲載中」になった広告（お店の紹介・クーポン・イベント） ===== */
 let COUPONS=null;
@@ -2766,7 +2787,7 @@ const HC_URL={kenshin:"https://www.city.saitama.lg.jp/kosodate/shiritai/category
 /* 生まれた年月（この端末だけに覚える） */
 /* 子どもの生まれた年月（何人でも。この端末の localStorage wolly.kids）。ページには出さず、並び順・「いまの時期」だけに使う */
 function getKids(){let k=LS.get("wolly.kids");if(!Array.isArray(k)){k=[];const o=LS.get("wolly.kidbirth");if(/^\d{4}-\d{2}$/.test(o||""))k=[o];LS.set("wolly.kids",k)}return k.filter(v=>/^\d{4}-\d{2}$/.test(v))}
-function setKids(k){LS.set("wolly.kids",k.filter(v=>/^\d{4}-\d{2}$/.test(v)).sort())}
+function setKids(k){LS.set("wolly.kids",k.filter(v=>/^\d{4}-\d{2}$/.test(v)).sort());typeof renderKidNotice==="function"&&renderKidNotice()}
 const monthsOf=b=>{const [y,m]=b.split("-").map(Number);const d=new Date();return (d.getFullYear()-y)*12+(d.getMonth()+1-m)};
 let kidSel=0;
 const kidBirth=()=>{const k=getKids();return k[Math.min(kidSel,k.length-1)]||""};
@@ -3410,7 +3431,54 @@ if(/\bLine\//i.test(navigator.userAgent)&&!window.claude){
 }
 $("#back").addEventListener("click",goBack);
 
-function renderAll(){renderMe();renderNews();renderCats();renderHome2();renderRows();foldRows();applyAgeOrder();renderFeed();renderEvents();window.__wollyWatch&&window.__wollyWatch();requestAnimationFrame(()=>fitTitles())}
+/* ===== Wollyからのお知らせ：マイページに登録したお子さんの生まれた年月から、いまの時期に合うものを（予防接種・健診・入学準備・申込み・締切）。
+   年齢そのものはページに出さない。開く／とじるは、この端末に覚える（wolly.knopen） ===== */
+const SG=(t,gi)=>"view:school?t="+t+"&gi="+gi;
+function schoolAge(b){/* 4月1日の時点の年齢（学年を決める年齢）のめやす */const [y,m]=b.split("-").map(Number);const d=new Date();const fy=d.getMonth()>=3?d.getFullYear():d.getFullYear()-1;return fy-y-(m>=4?1:0)}
+function kidNotices(){
+  const kids=getKids(),M=new Date().getMonth()+1,out=[];
+  kids.forEach((b,n)=>{
+    const who=kids.length>1?(n+1)+"人目のお子さん":"お子さん",mo=monthsOf(b),a=schoolAge(b);
+    const add=(o)=>out.push(Object.assign({who},o));
+    /* 予防接種は1つにまとめる（いまの時期の種類／来月からの種類） */
+    const vNow=VACCINES.filter(([,,f,t])=>mo>=f&&mo<t),vNext=VACCINES.filter(([,,f])=>mo===f-1);
+    if(vNow.length)add({ic:"plaster",tag:"いまの時期",pr:2,t:"予防接種（"+vNow.length+"種類）",d:vNow.map(([nm,d])=>"・"+nm+"："+d).join("\n"),to:"#vaccine",go:"予防接種のスケジュール"});
+    if(vNext.length)add({ic:"plaster",tag:"もうすぐ",pr:3,t:"来月からの予防接種（"+vNext.length+"種類）",d:vNext.map(([nm,d])=>"・"+nm+"："+d).join("\n"),to:"#vaccine",go:"予防接種のスケジュール"});
+    KENSHIN.forEach(([nm,d,f,t,x])=>{if(mo>=f&&mo<t)add({ic:"age",tag:"いまの時期",pr:2,t:nm,d:d+"。"+x+" 実施している病院に電話で予約します（無料）。",to:"#kenshin",go:"乳幼児健診"});
+      else if(mo===f-1)add({ic:"age",tag:"もうすぐ",pr:3,t:"来月から"+nm,d:d+"。市から案内が届きます。",to:"#kenshin",go:"乳幼児健診"})});
+    if(a<=5&&M>=8&&M<=10)add({ic:"house",tag:"申込み",pr:1,t:"保育園の4月入園の申込み",d:"例年10月ごろが一次申込みの受付です。締切と点数を先にチェックしておこう。",to:"#h-1",go:"ほかつのカレンダー"});
+    if(a===5){
+      if(M>=7&&M<=9)add({ic:"kids",tag:"もうすぐ",pr:3,t:"入学前のけんこうしんだん（就学時健診）",d:"お知らせは9月上旬に家に届きます。10月中旬〜11月中旬に、通う予定の小学校で受けます。",to:SG("e","prep/kenshin"),go:"入学前の健康診断"});
+      if(M>=10&&M<=11)add({ic:"kids",tag:"いまの時期",pr:1,t:"入学前のけんこうしんだん（就学時健診）",d:"10月中旬〜11月中旬に、通う予定の小学校で。届いたお知らせの日にちを確かめてね。",to:SG("e","prep/kenshin"),go:"入学前の健康診断"});
+      if(M>=11||M<=1)add({ic:"coin",tag:"申込み",pr:1,t:"入学のじゅんびのお金（入学準備金）",d:"11月から申しこみが始まります。対象になるか、しめきりも確かめてね。",to:SG("e","money/nyugaku"),go:"入学前にもらえるお金"});
+      if(M>=11||M<=1)add({ic:"blocks",tag:"申込み",pr:1,t:"学童（放課後児童クラブ）の申しこみ",d:"4月から入る学童は、11月ごろに申しこみが始まります。",to:SG("e","after/kousetsu"),go:"市の学童（公設）"});
+      if(M>=1&&M<=3)add({ic:"mail",tag:"いまの時期",pr:2,t:"通う学校のお知らせ（入学通知書）と説明会",d:"1月下旬にお知らせが届き、1〜2月に学校ごとの説明会があります。",to:SG("e","prep/notice"),go:"通う学校のお知らせ"});
+      if(M>=2&&M<=3)add({ic:"check",tag:"じゅんび",pr:3,t:"入学までに用意するもの",d:"説明会で聞いたものを、チェックしながらそろえよう。",to:SG("e","prep/items"),go:"用意するものリスト"});
+    }
+    if(a===11){
+      if(M>=10&&M<=12)add({ic:"school",tag:"もうすぐ",pr:3,t:"中学校への進学",d:"通う中学校のお知らせや説明会が、冬から春にかけてあります。",to:SG("j","prep/flow"),go:"中学校入学までの流れ"});
+      if(M>=1&&M<=3)add({ic:"school",tag:"じゅんび",pr:2,t:"中学校の制服・体操着",d:"説明会のあと、指定のお店で注文します。早めに確かめてね。",to:SG("j","prep/uniform"),go:"制服・体操着・指定のもの"});
+    }
+    if(a===14&&(M>=9||M<=2))add({ic:"pencil",tag:"いまの時期",pr:2,t:"高校受験のスケジュール",d:"学校説明会・出願・試験の時期を確かめておこう。",to:SG("j","exam/schedule"),go:"受験のスケジュール"});
+  });
+  soonDeadlines().forEach(x=>out.push({who:"",ic:"clock",tag:x.left===0?"きょう締切":"締切まであと"+x.left+"日",pr:0,t:x.title,d:x.desc||"",url:x.url||"",go:"くわしく見る"}));
+  const seen=new Set();return out.filter(o=>{const k=o.t+"|"+o.who;if(seen.has(k))return false;seen.add(k);return true}).sort((p,q)=>p.pr-q.pr).slice(0,10);
+}
+function renderKidNotice(){
+  const el=$("#kidNotice");if(!el)return;
+  const kids=getKids();
+  if(!kids.length){el.hidden=false;el.className="kn kn-off";
+    el.innerHTML=`<a class="kn-inv" href="#mypage"><span class="kn-bell">${svg(KIC("cal")||MINI.star,40)}</span><span><b>Wollyからのお知らせ</b><small>マイページでお子さんの生まれた年月を登録すると、予防接種や申込みの時期をお知らせします</small></span><i>›</i></a>`;return}
+  const L=kidNotices(),open=LS.get("wolly.knopen")!==false;
+  el.hidden=false;el.className="kn"+(open?" open":"");
+  el.innerHTML=`<button type="button" class="kn-h" aria-expanded="${open}"><span class="kn-bell">${svg(KIC("cal")||MINI.star,40)}${L.length?`<em>${L.length}</em>`:""}</span><span><b>Wollyからのお知らせ</b><small>${L.length?"お子さんの、いまの時期にあうこと":"いまのお知らせはありません"}</small></span><i class="kn-chev">${open?"とじる ▴":"ひらく ▾"}</i></button>
+   <div class="kn-b">${L.length?L.map((o,i)=>`<details class="kn-i" style="--n:${i}"><summary><span class="kn-ic">${relIc(o.ic)}</span><span class="kn-st"><em class="kn-tag${o.pr<=1?" hot":""}">${esc(o.tag)}</em><b>${esc(o.t)}</b>${o.who?`<small>${esc(o.who)}</small>`:""}</span><i class="kn-ar">▾</i></summary>
+     <div class="kn-d"><p>${esc(o.d).replace(/\n/g,"<br>")}</p>${o.to?(o.to.startsWith("view:")?`<a class="kn-go" href="#" data-view="${o.to.slice(5)}" data-vt="${esc(o.go)}">${esc(o.go)}を見る ›</a>`:`<a class="kn-go" href="${o.to}">${esc(o.go)}を見る ›</a>`):o.url?`<a class="kn-go" href="${esc(o.url)}" target="_blank" rel="noopener">${esc(o.go)} ↗</a>`:""}</div></details>`).join(""):`<p class="kn-none">また時期が来たら、ここでお知らせします。</p>`}
+     <p class="kn-note">時期は国や市のめやすです。正しい日にちは、市から届くお知らせで確かめてね。</p></div>`;
+}
+document.addEventListener("click",e=>{const h=e.target.closest(".kn-h");if(!h)return;const el=$("#kidNotice"),open=!el.classList.contains("open");LS.set("wolly.knopen",open);renderKidNotice()});
+document.addEventListener("click",e=>{const b=e.target.closest("#kidNotice [data-view]");if(b){e.preventDefault();openViewer(b.dataset.view,b.dataset.vt)}});
+function renderAll(){renderMe();renderKidNotice();renderNews();renderCats();renderHome2();renderRows();foldRows();applyAgeOrder();renderFeed();renderEvents();window.__wollyWatch&&window.__wollyWatch();requestAnimationFrame(()=>fitTitles())}
 document.addEventListener("click",e=>{if(e.target.closest(".fbar"))requestAnimationFrame(()=>fitTitles())});
 
 
