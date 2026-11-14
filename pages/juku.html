@@ -97,7 +97,7 @@ a{color:inherit}
 .scene svg{display:block;width:100%;height:min(74vw,330px);border-radius:16px;border:3px solid rgba(255,255,255,.22)}
 .footscene svg{display:block;width:100%;max-width:520px;height:auto;aspect-ratio:300/70;border-radius:10px;margin-bottom:10px}
 .t.park{background:#e3ecfa;color:#1d3c78}.t.mid{background:#13788a}.t.near{background:#efe3fa;color:#5b2a86}
-
+.pitch h2,.field .empty{color:#1e2f5c!important;text-shadow:none!important}
 .zk:active b,.card:active .no{animation:spin .4s linear}
 .cup{display:inline-block;animation:cup 2.4s ease-in-out infinite}
 @keyframes cup{0%,70%,100%{transform:rotate(0)}76%{transform:rotate(-14deg) scale(1.1)}84%{transform:rotate(12deg) scale(1.1)}}
@@ -256,7 +256,7 @@ function home(){
     <div class="score"><span>10<small>区</small></span><i></i><span>${D.length}<small>教室</small></span></div>
     <form class="search" id="sf"><input id="q" type="search" placeholder="教室の名前で探す" enterkeyhint="search"><button aria-label="探す">✏️</button></form>
   </header>
-  <div class="scene"><div class="sscene" aria-hidden="true"><span class="bk b1"></span><span class="bk b2"></span><span class="bk b3"></span><span class="bk b4"></span><span class="sic">✏️</span><span class="ray"></span><i>✦</i><i>✧</i><i>✦</i><i>✧</i></div></div>
+  <div class="scene"><div class="sscene" aria-hidden="true"><span class="bk b1"></span><span class="bk b2"></span><span class="bk b3"></span><span class="bk b4"></span><span class="sic big"><svg viewBox="0 0 64 64" aria-hidden="true"><rect x="10" y="12" width="36" height="42" rx="4" fill="#fff" stroke="#1F2140" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M16 22h22M16 30h22M16 38h14" stroke="#A68BFF" stroke-width="2.4" stroke-linecap="round"/><g class="a-swing" style="--o:46px 50px"><path d="M40 50l14-28 5 3-14 28-6 3z" fill="#FFD23F" stroke="#1F2140" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/></g></svg></span><span class="ray"></span><i>✦</i><i>✧</i><i>✦</i><i>✧</i></div></div>
   <section class="pitch">${AREAS?areaHtml():`<h2>区をえらんでね</h2>
     <div class="zks">${WARDS.map((w,i)=>`<button class="zk" data-w="${w}" style="${kit(w)}"><b class="num">${String(i+1).padStart(2,"0")}</b><span>${w}</span><small style="${cnt(w)?"":"opacity:.45"}">${cnt(w)}教室</small></button>`).join("")}</div>`}
   </section>
@@ -264,7 +264,7 @@ function home(){
   <section class="bench"><h2>ぜんぶの区から、しぼって探す</h2>
     <div class="chips"><button class="chip" data-f="all"><span class="dot" style="background:#fff;box-shadow:inset 0 0 0 2px var(--ink)"></span>すべて見る（${D.length}）</button>${FILTERS.map(f=>`<button class="chip" data-f="${f[0]}"><span class="dot" style="background:var(${f[2]})"></span>${f[1]}</button>`).join("")}</div>
   </section>
-  <footer class="foot">学習塾の教室の情報は、Wollyの習い事ページ（2026年11月7日に読み取り）をもとにWollyがまとめたものです。曜日・お金・入会のしかたは変わることがあるので、かならずホームページでたしかめてね。</footer>`;
+  <footer class="foot">学習塾の教室の情報は、Wollyがまとめた教室リスト（2026年11月14日）をもとにWollyがまとめたものです。曜日・お金・入会のしかたは変わることがあるので、かならずホームページでたしかめてね。</footer>`;
   window.scrollTo(0,0);
 }
 function list(){
