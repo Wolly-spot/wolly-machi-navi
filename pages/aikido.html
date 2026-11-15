@@ -199,6 +199,7 @@ a{color:inherit}
 .note{font-size:11.5px;color:#55704a;margin-top:10px}
 .foot{color:#cfe3b5;font-size:11.5px;padding:18px 16px 40px;line-height:1.7}
 .foot a{color:#fff}
+.card.hlt{outline:4px solid #ff8fc0;outline-offset:2px;box-shadow:0 0 0 8px rgba(255,143,192,.3),0 0 24px rgba(155,123,255,.5)}
 :root{--outc:#3B4A8C}.t.out,.t.online{background:#3B4A8C;color:#fff}.t.out::before{content:'🚃 '}.t.online::before{content:'💻 '}
 </style>
 </head>
@@ -358,8 +359,13 @@ document.addEventListener("click",e=>{
   else if(b.dataset.ci){openTeam(+b.dataset.ci)}
   else if(b.dataset.nw){const i=WARDS.indexOf(state.ward),j=WARDS.indexOf(b.dataset.nw);goWard(b.dataset.nw,(j-i+10)%10===1?1:-1)}
 });
-document.addEventListener("submit",e=>{if(e.target.id==="sf"){e.preventDefault();const q=$("#q").value.trim();if(q){state={view:"list",ward:"",f:"",q};render();scrollTo(0,0)}}});
+document.addEventListener("submit",e=>{if(e.target.id==="sf"){e.preventDefault();const q=$("#q").value.trim();if(q){state={view:"list",ward:"",f:"",q};render();scrollTo(0,0)}else $("#q").focus()}});
 render();
+/* さがすから来たとき（?t=教室の名前）：その教室の区の一覧を出して、カードを光らせてパネルをひらく */
+{const pt=new URLSearchParams(location.search).get("t");const tt=pt&&D.find(t=>t.n===pt);
+  if(tt){state={view:"list",ward:WARDS.includes(tt.d)&&!AREAS?tt.d:"",f:"",q:WARDS.includes(tt.d)&&!AREAS?"":pt};render();
+    const ci=CUR.findIndex(t=>t===tt);
+    if(ci>=0)setTimeout(()=>{const c=document.querySelector(`[data-ci="${ci}"]`);if(c){c.scrollIntoView({block:"center"});c.classList.add("hlt")}setTimeout(()=>openTeam(ci),350)},300)}}
 </script>
 <!--wolly-totop-->
 <style>

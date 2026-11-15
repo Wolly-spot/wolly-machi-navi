@@ -261,6 +261,7 @@ body{text-wrap:pretty}
 .hl-full{width:40px!important;height:104px!important;cursor:pointer;background:none!important;border:0!important;box-shadow:none!important}
 .hl-full>*:not(.hl-x){display:none!important}
 .hl-x{pointer-events:none}
+.hl-full .hl-num{pointer-events:auto}
 .hl-full .hl-x,.hl-add .hl-x{rotate:none;font-style:normal}.hl-full .hl-dot{transform:none!important}
 .hl-beam{position:absolute;left:50%;bottom:8px;width:12px;height:92px;margin-left:-6px;border-radius:8px;z-index:-1;
   background:linear-gradient(to top,var(--hc,#9b7bff) 0,color-mix(in srgb,var(--hc,#9b7bff) 55%,#7fe9ff) 45%,transparent);opacity:.9;filter:blur(.6px);
@@ -275,10 +276,19 @@ body{text-wrap:pretty}
 @keyframes hlRing{0%{transform:scale(.4);opacity:1}100%{transform:scale(2.1);opacity:0}}
 .hl-dot{position:absolute;left:50%;bottom:0;width:16px;height:16px;margin-left:-8px;border-radius:50%;background:radial-gradient(#fff 0,var(--hc,#9b7bff) 70%);
   box-shadow:0 0 10px var(--hc,#9b7bff),0 0 22px #7fe9ff}
-.hl-num{position:absolute;left:50%;top:0;margin-left:-14px;min-width:28px;height:28px;padding:0 4px;border-radius:999px;display:grid;place-items:center;
-  background:linear-gradient(135deg,color-mix(in srgb,var(--hc,#9b7bff) 70%,#fff),var(--hc,#9b7bff));color:#fff;font:900 13px/1 system-ui,sans-serif;
+.hl-num{position:absolute;left:50%;top:0;translate:-50% 0;min-width:28px;height:30px;padding:0 8px 0 4px;border-radius:999px;display:flex;align-items:center;gap:3px;white-space:nowrap;
+  background:linear-gradient(135deg,color-mix(in srgb,var(--hc,#9b7bff) 70%,#fff),var(--hc,#9b7bff));color:#fff;font:900 13px/1 system-ui,sans-serif;pointer-events:auto;
   border:2px solid #fff;box-shadow:0 3px 10px rgba(60,40,140,.45),0 0 10px color-mix(in srgb,var(--hc,#9b7bff) 60%,transparent);animation:hlNum .5s both;animation-delay:calc(var(--hd,0s) + .3s)}
-@keyframes hlNum{from{opacity:0;translate:0 10px;scale:.6}}
+.hl-num:not(:has(.hl-ic)){padding:0 4px;justify-content:center}
+@keyframes hlNum{from{opacity:0;scale:.6}}
+.hl-ic{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:#fff;flex:none;font-style:normal}
+.hl-ic svg{width:17px!important;height:17px!important;display:block}
+.hl-badge{position:absolute;right:-12px;top:-10px;width:22px;height:22px;border-radius:50%;background:#fff;display:grid;place-items:center;border:2px solid var(--hc,#9b7bff);box-shadow:0 2px 6px rgba(60,40,140,.35);font-style:normal;z-index:2}
+.hl-badge svg{width:15px!important;height:15px!important;display:block}
+.far .hl-badge{display:none}
+.hl-full{pointer-events:none}.hl-full .hl-dot{pointer-events:auto}
+.hl-tic{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:#fff;vertical-align:-5px;margin-right:5px;font-style:normal}
+.hl-tic svg{width:17px!important;height:17px!important;display:block}
 .hl-full.hl-on .hl-beam{background:linear-gradient(to top,#ff8fc0,#7fe9ff 55%,transparent);opacity:1}
 .hl-full.hl-on .hl-num{background:linear-gradient(135deg,#ff8fc0,#9b7bff)}
 .hl-full.out .hl-x{animation:hlOut .25s forwards}
@@ -333,12 +343,13 @@ body{text-wrap:pretty}
 <button type="button" class="totop" id="tt" aria-label="上にもどる"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><path d="M6 14l6-6 6 6"/><path d="M12 8v12"/></svg>上に</button>
 <script>
 /* ==== holo-map ==== */
-function holoPin(el,color,num,i){
+const SCH_IC=`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10l9-6 9 6" fill="none" stroke="#5A4FCF" stroke-width="2" stroke-linejoin="round"/><rect x="5" y="10" width="14" height="10" rx="1.5" fill="#FFE3EC" stroke="#5A4FCF" stroke-width="2"/><rect x="10" y="14" width="4" height="6" fill="#5A4FCF"/><circle cx="12" cy="8.6" r="1.6" fill="#FF6FA5"/></svg>`;
+function holoPin(el,color,num,i,ic){
   if(!el||el.dataset.hl)return el;el.dataset.hl="1";
   el.style.setProperty("--hc",color||"#9b7bff");el.style.setProperty("--hd",((i||0)*.08)+"s");
-  if(num!=null){el.classList.add("hl-full");el.insertAdjacentHTML("beforeend",`<i class="hl-x hl-ring"></i><i class="hl-x hl-ring b"></i><i class="hl-x hl-beam"></i><i class="hl-x hl-dot"></i><b class="hl-x hl-num">${num}</b>`);
+  if(num!=null){el.classList.add("hl-full");el.insertAdjacentHTML("beforeend",`<i class="hl-x hl-ring"></i><i class="hl-x hl-ring b"></i><i class="hl-x hl-beam"></i><i class="hl-x hl-dot"></i><b class="hl-x hl-num">${ic?`<em class="hl-ic">${ic}</em>`:""}${num}</b>`);
     el.addEventListener("click",()=>{document.querySelectorAll(".hl-full.hl-on").forEach(x=>x.classList.remove("hl-on"));el.classList.add("hl-on")});}
-  else{el.classList.add("hl-add");if(getComputedStyle(el).position==="static")el.style.position="relative";el.insertAdjacentHTML("afterbegin",`<i class="hl-x hl-ring"></i><i class="hl-x hl-ring b"></i><i class="hl-x hl-beam"></i>`)}
+  else{el.classList.add("hl-add");if(getComputedStyle(el).position==="static")el.style.position="relative";el.insertAdjacentHTML("afterbegin",`<i class="hl-x hl-ring"></i><i class="hl-x hl-ring b"></i><i class="hl-x hl-beam"></i>`);if(ic)el.insertAdjacentHTML("beforeend",`<em class="hl-x hl-badge">${ic}</em>`)}
   return el;
 }
 function holoOpen(box){
@@ -480,8 +491,8 @@ function initMap(){
     map.on("load",()=>{paint(map);$("#mload")?.remove();holoOpen(document.getElementById("map"));
       const first=map.getStyle().layers.find(l=>l.type==="symbol")?.id;
       if(T==="s"){
-        S.forEach((s,i)=>{const d=document.createElement("button");d.type="button";d.className="pin sp";d.setAttribute("aria-label",s.n);d.innerHTML=`<span style="background:${s.kk==="e"?"#FF6FA5":"#5A7BF0"}"><i>${s.sp}</i></span>`;holoPin(d,s.kk==="e"?"#FF6FA5":"#5A7BF0");d.onclick=ev=>{ev.stopPropagation();openSchool(i,true)};mk.push(new maplibregl.Marker({element:d,anchor:"bottom"}).setLngLat([s.lo,s.la]).addTo(map))});
-        SP.forEach((s,i)=>{const d=document.createElement("button");d.type="button";d.className="pin star";d.setAttribute("aria-label",s.n);d.innerHTML=`<span><i>★</i></span>`;holoPin(d,"#F5B82E");d.onclick=ev=>{ev.stopPropagation();openSpecial(i)};spk.push(new maplibregl.Marker({element:d,anchor:"bottom"}).setLngLat([s.lo,s.la]).addTo(map))});
+        S.forEach((s,i)=>{const d=document.createElement("button");d.type="button";d.className="pin sp";d.setAttribute("aria-label",s.n);d.innerHTML=`<span style="background:${s.kk==="e"?"#FF6FA5":"#5A7BF0"}"><i>${s.sp}</i></span>`;holoPin(d,s.kk==="e"?"#FF6FA5":"#5A7BF0",null,0,SCH_IC);d.onclick=ev=>{ev.stopPropagation();openSchool(i,true)};mk.push(new maplibregl.Marker({element:d,anchor:"bottom"}).setLngLat([s.lo,s.la]).addTo(map))});
+        SP.forEach((s,i)=>{const d=document.createElement("button");d.type="button";d.className="pin star";d.setAttribute("aria-label",s.n);d.innerHTML=`<span><i>★</i></span>`;holoPin(d,"#F5B82E",null,0,SCH_IC);d.onclick=ev=>{ev.stopPropagation();openSpecial(i)};spk.push(new maplibregl.Marker({element:d,anchor:"bottom"}).setLngLat([s.lo,s.la]).addTo(map))});
         WARDS.forEach(w=>{const l=S.filter(s=>s.w===w);if(!l.length)return;const la=l.reduce((a,s)=>a+s.la,0)/l.length,lo=l.reduce((a,s)=>a+s.lo,0)/l.length;
           const d=document.createElement("button");d.type="button";d.className="wb";d.innerHTML=`<span><b>${w}</b><i>${l.length}校 ›</i></span>`;d.onclick=ev=>{ev.stopPropagation();ward=w;smode="cls";applyS(true)};wbk.push(new maplibregl.Marker({element:d}).setLngLat([lo,la]).addTo(map))});
         map.addSource("names",{type:"geojson",data:{type:"FeatureCollection",features:[]}});
@@ -498,7 +509,7 @@ function initMap(){
       map.addLayer({id:"d-line",type:"line",source:"d",paint:{"line-color":["case",["boolean",["feature-state","sel"],false],"#FF5FA2","#ffffff"],"line-width":["case",["boolean",["feature-state","sel"],false],4,1.6]}},first);
       map.on("click","d-fill",e=>{const f=e.features[0];if(f)openSchool(f.properties.i,true)});
       map.on("mouseenter","d-fill",()=>map.getCanvas().style.cursor="pointer");map.on("mouseleave","d-fill",()=>map.getCanvas().style.cursor="");
-      S.forEach((s,i)=>{const d=document.createElement("button");d.type="button";d.className="pin";d.setAttribute("aria-label",s.n);d.innerHTML=`<span><i>${T==="e"?"小":"中"}</i></span>`;holoPin(d,T==="e"?"#FF6FA5":"#5A7BF0",null,i);d.onclick=ev=>{ev.stopPropagation();openSchool(i,true)};mk.push(new maplibregl.Marker({element:d,anchor:"bottom"}).setLngLat([s.lo,s.la]).addTo(map))});
+      S.forEach((s,i)=>{const d=document.createElement("button");d.type="button";d.className="pin";d.setAttribute("aria-label",s.n);d.innerHTML=`<span><i>${T==="e"?"小":"中"}</i></span>`;holoPin(d,T==="e"?"#FF6FA5":"#5A7BF0",null,i,SCH_IC);d.onclick=ev=>{ev.stopPropagation();openSchool(i,true)};mk.push(new maplibregl.Marker({element:d,anchor:"bottom"}).setLngLat([s.lo,s.la]).addTo(map))});
       const far=()=>$("#map").classList.toggle("far",map.getZoom()<12.6);map.on("zoom",far);far();
       /* アップすると学校の名前 */
       map.addSource("names",{type:"geojson",data:{type:"FeatureCollection",features:S.map((s,i)=>({type:"Feature",properties:{n:s.n.replace(/学校$/,"").replace("さいたま市立",""),i},geometry:{type:"Point",coordinates:[s.lo,s.la]}}))}});
@@ -774,7 +785,7 @@ function renderLessons(){
     if(lmap){try{lmap.remove()}catch(e){}lmap=null}
     lmap=new maplibregl.Map({container:el,style:"https://tiles.openfreemap.org/styles/liberty",center:[s.lo,s.la],zoom:13.6,pitch:40,cooperativeGestures:true,pitchWithRotate:true,attributionControl:{compact:true}});
     lmap.on("load",()=>{paint(lmap);const at=el.querySelector(".maplibregl-ctrl-attrib");at&&at.classList.remove("maplibregl-compact-show");
-      const d=document.createElement("div");d.className="pin on";d.innerHTML=`<span><i>${T==="e"?"小":"中"}</i></span>`;holoPin(d,T==="e"?"#FF6FA5":"#5A7BF0");new maplibregl.Marker({element:d,anchor:"bottom"}).setLngLat([s.lo,s.la]).addTo(lmap);
+      const d=document.createElement("div");d.className="pin on";d.innerHTML=`<span><i>${T==="e"?"小":"中"}</i></span>`;holoPin(d,T==="e"?"#FF6FA5":"#5A7BF0",null,0,SCH_IC);new maplibregl.Marker({element:d,anchor:"bottom"}).setLngLat([s.lo,s.la]).addTo(lmap);
       const b=new maplibregl.LngLatBounds();b.extend([s.lo,s.la]);
       l.forEach(x=>{const p=document.createElement("div");p.className="lpin";p.style.setProperty("--c",GENRE_C[x.g]||"#8E6BF5");p.title=x.n;new maplibregl.Marker({element:p}).setLngLat([x.lo,x.la]).addTo(lmap);b.extend([x.lo,x.la])});
       lmap.fitBounds(b,{padding:30,maxZoom:15.5,duration:0})});
