@@ -314,6 +314,10 @@ body{text-wrap:pretty}
 .road li.rhere{align-items:center;margin:2px 0 12px}.road li.rhere .rn{width:46px;height:32px;background:none;box-shadow:none}.road li.rhere .rn i{font-style:normal;font-size:22px;color:#FF6FA5;line-height:1}
 .road .rhc{font-size:14px;font-weight:900;color:#FF6FA5;background:#FFF1F7;border:2px dashed #FF9EC4;border-radius:999px;padding:4px 12px}.road .rhc small{margin-left:6px;font-size:11px;color:#c06a8f}
 
+.hroad .rn em{font-style:normal;font-size:20px;font-weight:900;color:#2E2B4F}
+.hroad .rd{color:#3d86b8}
+.hroad li.hdone{align-items:center}.hroad li.hdone .rc{background:linear-gradient(120deg,#FFF1F7,#F3EEFF);box-shadow:0 0 0 2px #FFC6DA;padding:10px 12px}.hroad li.hdone .rc span{font-weight:900;color:#c0558a}
+
 .hdeco{position:absolute;inset:0;pointer-events:none;z-index:0}
 .hdeco span{position:absolute;display:block;opacity:.9;filter:drop-shadow(0 4px 6px rgba(90,60,140,.18));animation:hdf 5.5s ease-in-out infinite}
 .hdeco span svg{display:block;width:100%;height:100%}
@@ -801,6 +805,9 @@ function roadHtml(steps){
     const here=(!hasNow&&k===firstNext&&k>0)?`<li class="rhere"><span class="rn"><i>★</i></span><span class="rhc">いまここ！<small>${now.getMonth()+1}月${now.getDate()}日</small></span></li>`:"";
     return here+`<li class="${st[k]}${goal?" goal":""}"><span class="rn" style="--sc:${SEAC[sea]||"#E6D4FF"}">${gi(goal?"sakura":sea)}<b>${k+1}</b></span><div class="rc"><span class="rd">${esc(a)}${st[k]==="now"?'<em class="rnw">いまここ！</em>':st[k]==="past"?'<em class="rpw">おわったよ</em>':""}</span><span class="lrow">${goal?`<span class="lic">${gi("flag")}</span>`:lIcP(b,"star")}<span>${esc(b)}</span></span></div></li>`}).join("");
   return bar+`<ol class="road">${items}</ol>`}
+/* 手つづきも、すごろくの形（番号の丸を点線でつなぐ。さいごは「できた！」） */
+function howRoad(l){_prevIc="";const C=["#BFE6FF","#D9CCFF","#FFC6DA","#FFE3A0","#B8E8F0","#E6D4FF"];
+  return `<ol class="road hroad">${l.map((x,k)=>`<li><span class="rn" style="--sc:${C[k%C.length]}"><em>${k+1}</em></span><div class="rc"><span class="rd">ステップ${k+1}</span><span class="lrow">${lIcP(x,"doc")}<span>${esc(x)}</span></span></div></li>`).join("")}<li class="hdone"><span class="rn" style="--sc:#FFC6DA">${gi("check")}</span><div class="rc"><span class="lrow"><span>できたら、おしまい！</span></span></div></li></ol>`}
 let _prevIc="";
 const lIcP=(t,d)=>{const c=ptIcs(t);let k=c.find(x=>x!==_prevIc)||c[0]||d;_prevIc=k;return `<span class="lic">${gi(k)}</span>`};
 const lIc=(t,d)=>`<span class="lic">${gi(kwOr(t,d))}</span>`;
@@ -853,7 +860,7 @@ function showItem(path,push=true){
   if(it.calendar&&it.deadlines){const l=it.deadlines.map(d=>[d,dleft(d[1],d[2])]).sort((a,b)=>a[1][1]-b[1][1]||a[0][1].localeCompare(b[0][1]));
     body+=sec("しめきりの一らん","cal",`<div class="dlv">${l.map(([[t,a,b,p],[st]])=>`<div class="dlr"><div class="dlm">${st}<b>${esc(t)}</b><a href="${gcal(t,a,b)}" target="_blank" rel="noopener">Googleカレンダーに入れる</a>${p?`<button type="button" data-gi="${esc(p)}">くわしく</button>`:""}</div>${pcalD(a,b)}</div>`).join("")}</div>`)}
   if(it.faq)body+=sec("よくきかれること","bulb",it.faq.map(([q,a])=>`<details><summary data-noicon>${gi(kwOr(q,"bulb"))}${esc(q)}</summary><p>${esc(a)}</p></details>`).join(""));
-  if(it.how)body+=sec("手つづきのしかた","doc",`<ol class="how">${(_prevIc="",it.how).map(x=>`<li><span class="lrow">${lIcP(x,"doc")}<span>${esc(x)}</span></span></li>`).join("")}</ol>`);
+  if(it.how)body+=sec("手つづきのしかた","doc",howRoad(it.how));
   if(it.note)body+=sec("気をつけること","warn",`<ul class="notes">${(_prevIc="",it.note).map(x=>`<li class="lrow">${lIcP(x,"warn")}<span>${esc(x)}</span></li>`).join("")}</ul>`);
   body+=`<div class="chk-last"><span class="clk">${gi("check")}</span><p><b>さいごは、まどぐちでたしかめてね</b>このページは、わかりやすくまとめた「めやす」だよ。申しこむ前や、手つづきの前は、区役所・学校・市の係でたしかめてね。${it.contact?"下の「電話できるところ」から電話できるよ。":""}</p></div>`;
   if(it.contact)body+=sec("電話できるところ","phone",`<div class="tel">${it.contact.map(([n,t,inf],ci)=>`<div${inf?' class="has-ci"':""}><span>${esc(n)}</span><span class="tbtn">${inf?`<button type="button" class="cib" data-ci="${esc(path)}|${ci}">どんなところ？</button>`:""}${t?`<a href="tel:${esc(t.replace(/[^0-9]/g,""))}">${esc(t)}</a>`:""}</span></div>`).join("")}</div>`);
