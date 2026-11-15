@@ -167,6 +167,59 @@ a{color:inherit}
 .foot{color:#cfe3b5;font-size:11.5px;padding:18px 16px 40px;line-height:1.7}
 .foot a{color:#fff}
 .card.hlt{outline:4px solid #ff8fc0;outline-offset:2px;box-shadow:0 0 0 8px rgba(255,143,192,.3),0 0 24px rgba(155,123,255,.5)}
+
+/* ---- この習い事ってどんなもの？（lesson_features.py） ---- */
+.ft{margin:0 0 4px;padding:16px 14px 14px;border-radius:22px;background:rgba(255,255,255,.96);color:#1F2140;box-shadow:0 14px 30px -18px rgba(0,0,0,.6)}
+.ft h2{margin:0;display:flex;align-items:center;gap:8px;font-size:18px;line-height:1.35}
+.ft h2 svg{flex:0 0 auto}
+.ft .ftl{margin:6px 0 10px;font-size:12.5px;line-height:1.7;color:#4a4870}
+.ftd{position:relative;width:100%;max-width:330px;aspect-ratio:1.45;margin:0 auto 6px}
+.ftd svg.fld{position:absolute;inset:0;width:100%;height:100%}
+.ftb{position:absolute;transform:translate(-50%,-50%);border:0;background:none;padding:0;cursor:pointer;font:inherit;display:flex;flex-direction:column;align-items:center;gap:2px;width:100px}
+.ftb i{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:#fff;box-shadow:0 0 0 2.5px #E3E4F0,0 6px 12px -6px rgba(0,0,0,.4);transition:box-shadow .3s,transform .3s cubic-bezier(.3,1.6,.5,1)}
+.ftb i svg{width:32px;height:32px}
+.ftb b{font-size:10px;letter-spacing:.08em;color:#8a89a8}
+.ftb span{white-space:nowrap;font-size:11px;font-weight:800;line-height:1.25;text-align:center;color:#1F2140;background:rgba(255,255,255,.92);border-radius:8px;padding:1px 5px}
+.ftb.on i{box-shadow:0 0 0 3px var(--fc),0 0 16px var(--fc);transform:scale(1.1)}
+.ftb.on span{color:#fff;background:var(--fc)}
+.ftball{position:absolute;width:24px;height:24px;margin:-12px 0 0 -12px;pointer-events:none;transition:left .32s linear,top .32s linear;z-index:3;filter:drop-shadow(0 3px 3px rgba(0,0,0,.3))}
+.ftball svg{width:24px;height:24px;animation:ftSpin .5s linear infinite}
+@keyframes ftSpin{to{transform:rotate(360deg)}}
+.ftball.stop svg{animation:none}
+.ftc{border-radius:18px;padding:12px 12px 10px;background:color-mix(in srgb,var(--fc) 12%,#fff);box-shadow:inset 0 0 0 2px color-mix(in srgb,var(--fc) 45%,#fff)}
+.ftc h3{margin:0 0 8px;font-size:15px;display:flex;align-items:center;gap:6px}
+.ftc h3 em{font-style:normal;font-size:11px;color:#fff;background:var(--fc);border-radius:999px;padding:2px 9px}
+.ftc ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.ftc li{display:flex;gap:9px;align-items:flex-start;font-size:13px;line-height:1.65}
+.ftc li svg{flex:0 0 auto;width:30px;height:30px;background:#fff;border-radius:10px;padding:2px}
+.ftc .src{margin:8px 0 0;font-size:10.5px;line-height:1.6;color:#6b6a8a}
+.ftc .src a{color:#5A5AEF}
+.ftc.in{animation:ftIn .45s cubic-bezier(.2,.8,.3,1)}
+@keyframes ftIn{from{opacity:0;transform:translateY(8px)}}
+/* ページ側の .scene svg{width:100%…} を打ち消す */
+.scene .ft svg{display:inline-block;border:0;border-radius:0;flex:0 0 auto}
+.scene .ft h2 svg{width:30px;height:30px}
+.scene .ft .ftb i svg{width:32px;height:32px}
+.scene .ft .ftball svg{width:24px;height:24px}
+.scene .ft .ftc li svg{width:30px;height:30px;border-radius:10px;background:#fff}
+.scene .ft svg.fld{display:block;width:100%;height:100%}
+.scene .ft h2{color:#1F2140;text-shadow:none;text-align:left;justify-content:flex-start}
+@media (prefers-reduced-motion:reduce){.ftball{transition:none}.ftball svg,.ftc.in{animation:none}}
+
+.ftball.hop svg{animation:ftHop .33s ease-in-out infinite alternate}
+@keyframes ftHop{from{transform:translateY(0) rotate(-8deg)}to{transform:translateY(-6px) rotate(8deg)}}
+.ftball.sp svg{animation:ftSpin .5s linear infinite}
+.ftball.stop svg{animation:none}
+.ft[data-mo="tatami"]{background:#FFFDF6}.ft[data-mo="washi"]{background:#FFFCF5}
+.ft[data-mo="stage"]{background:#FFF7FC}.ft[data-mo="staff"]{background:#FFFDF8}
+.ft[data-mo="pool"]{background:#F6FBFF}.ft[data-mo="notebook"]{background:#FBFCFF}
+.ft[data-mo="stage"] .ftb b{color:#fff}
+/* ページの外（サッカー）でも同じ見た目に */
+.ftwrap{padding:0 12px 14px}
+.ftwrap .ft svg{display:inline-block;border:0;border-radius:0;flex:0 0 auto}
+.ftwrap .ft h2 svg{width:30px;height:30px}.ftwrap .ft .ftb i svg{width:32px;height:32px}.ftwrap .ft .ftball svg{width:24px;height:24px}
+.ftwrap .ft .ftc li svg{width:30px;height:30px;border-radius:10px;background:#fff}.ftwrap .ft svg.fld{display:block;width:100%;height:100%}
+.ftwrap .ft h2{color:#1F2140;text-shadow:none;text-align:left;justify-content:flex-start;margin:0}
 </style>
 </head>
 <body data-noicon>
@@ -237,6 +290,7 @@ function home(){
     <div class="score"><span>10<small>区</small></span><i></i><span>${D.length}<small>チーム</small></span><i></i><span>${D.filter(t=>t.k==="sss").length}<small>少年団</small></span></div>
     <form class="search" id="sf"><input id="q" type="search" placeholder="チーム名で探す" enterkeyhint="search"><button aria-label="探す">⚽</button></form>
   </header>
+  <div class="ftwrap"><div class="ft" data-mo="pitch" data-pos="20,26;80,26;80,76;20,76"><h2><svg viewBox="0 0 40 40" width="30" height="30" aria-hidden="true"><circle cx="20" cy="20" r="14" fill="#fff" stroke="#1F2140" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><path d="M20 13l6 4-2 7h-8l-2-7z" fill="#1F2140"/><path d="M20 13V6M26 17l7-2M24 24l4 6M16 24l-4 6M14 17l-7-2" fill="none" stroke="#1F2140" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg>サッカーってどんな習い事？</h2><p class="ftl">ボールを足でつなぎ、ゴールをめざすチームスポーツ。走る量が多く、外で元気に体を動かせます。</p><div class="ftd"><svg class="fld" viewBox="0 0 100 69" preserveAspectRatio="none" aria-hidden="true"><rect x="3" y="3" width="94" height="63" rx="4" fill="#7CC97A"/><path d="M3 3h12v63H3zM27 3h12v63H27zM51 3h12v63H51zM75 3h12v63H75z" fill="#8AD487"/><rect x="5" y="5" width="90" height="59" fill="none" stroke="#fff" stroke-width="1"/><path d="M50 5v59" stroke="#fff" stroke-width="1"/><circle cx="50" cy="34.5" r="9" fill="none" stroke="#fff" stroke-width="1"/><rect x="5" y="22" width="9" height="25" fill="none" stroke="#fff" stroke-width="1"/><rect x="86" y="22" width="9" height="25" fill="none" stroke="#fff" stroke-width="1"/></svg><button type="button" class="ftb on" data-fb="0" style="left:20%;top:26%;--fc:#FF7FAE"><i><svg viewBox="0 0 40 40" width="40" height="40" aria-hidden="true"><path d="M20 4l4.6 9.6 10.4 1.4-7.6 7.2 1.9 10.3L20 27.4l-9.3 5.1 1.9-10.3L5 15l10.4-1.4z" fill="#FFE27A" stroke="#1F2140" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg></i><b>キックオフ</b><span>身につく力</span></button><button type="button" class="ftb" data-fb="1" style="left:80%;top:26%;--fc:#9B7BFF"><i><svg viewBox="0 0 40 40" width="40" height="40" aria-hidden="true"><circle cx="13" cy="15" r="6" fill="#FFE0C8" stroke="#1F2140" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="27" cy="15" r="6" fill="#FFE0C8" stroke="#1F2140" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><path d="M3 34q0-10 10-10t10 10M17 34q0-10 10-10t10 10" fill="#C9B8FF" stroke="#1F2140" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg></i><b>ドリブル</b><span>チームのよさ</span></button><button type="button" class="ftb" data-fb="2" style="left:80%;top:76%;--fc:#4FA3F7"><i><svg viewBox="0 0 40 40" width="40" height="40" aria-hidden="true"><path d="M20 5l16 28H4z" fill="#FFE27A" stroke="#1F2140" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><path d="M20 15v8" stroke="#1F2140" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="20" cy="28" r="1.6" fill="#1F2140"/></svg></i><b>パス</b><span>気をつけること</span></button><button type="button" class="ftb" data-fb="3" style="left:20%;top:76%;--fc:#2BB3C9"><i><svg viewBox="0 0 40 40" width="40" height="40" aria-hidden="true"><path d="M4 27v-6l5-9h18l8 9v6z" fill="#B9D4FF" stroke="#1F2140" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><path d="M12 15h6v6h-9zM21 15h5l4 6h-9z" fill="#fff" stroke="#1F2140" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="12" cy="28" r="4.5" fill="#fff" stroke="#1F2140" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="28" cy="28" r="4.5" fill="#fff" stroke="#1F2140" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg></i><b>ゴール</b><span>送り迎え・お手伝い</span></button><span class="ftball sp"><svg viewBox="0 0 40 40" width="24" height="24" aria-hidden="true"><circle cx="20" cy="20" r="14" fill="#fff" stroke="#1F2140" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><path d="M20 13l6 4-2 7h-8l-2-7z" fill="#1F2140"/><path d="M20 13V6M26 17l7-2M24 24l4 6M16 24l-4 6M14 17l-7-2" fill="none" stroke="#1F2140" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg></span></div><div class="ftc" data-fc="0" style="--fc:#FF7FAE"><h3><em>キックオフ</em>身につく力</h3><ul><li><svg viewBox="0 0 40 40" width="30" height="30" aria-hidden="true"><circle cx="20" cy="20" r="14" fill="#fff" stroke="#1F2140" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><path d="M20 13l6 4-2 7h-8l-2-7z" fill="#1F2140"/><path d="M20 13V6M26 17l7-2M24 24l4 6M16 24l-4 6M14 17l-7-2" fill="none" stroke="#1F2140" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg><span>走る・止まる・けるなど、足を使ったすばやい動き</span></li><li><svg viewBox="0 0 40 40" width="30" height="30" aria-hidden="true"><path d="M14 8a6 6 0 0 0-6 6 6 6 0 0 0-2 10 6 6 0 0 0 6 8h16a6 6 0 0 0 6-8 6 6 0 0 0-2-10 6 6 0 0 0-6-6 6 6 0 0 0-6 3 6 6 0 0 0-6-3z" fill="#FFC6DA" stroke="#1F2140" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><path d="M20 11v21" fill="none" stroke="#1F2140" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg><span>空いている場所を見つけて動く力</span></li><li><svg viewBox="0 0 40 40" width="30" height="30" aria-hidden="true"><circle cx="13" cy="15" r="6" fill="#FFE0C8" stroke="#1F2140" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="27" cy="15" r="6" fill="#FFE0C8" stroke="#1F2140" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><path d="M3 34q0-10 10-10t10 10M17 34q0-10 10-10t10 10" fill="#C9B8FF" stroke="#1F2140" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg><span>パスで仲間とつながる力</span></li></ul></div><div class="ftc" data-fc="1" style="--fc:#9B7BFF" hidden><h3><em>ドリブル</em>チームのよさ</h3><ul><li><svg viewBox="0 0 40 40" width="30" height="30" aria-hidden="true"><path d="M3 11q9-4 17 2q8-6 17-2v21q-9-4-17 2q-8-6-17-2z" fill="#E3DAFF" stroke="#1F2140" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><path d="M20 13v21" stroke="#1F2140" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg><span>30本の研究をまとめた報告では、スポーツをする子は「自分を大切に思う気持ち」や「人とのかかわり」がよい傾向でした。チームのスポーツは、ひとりの運動より、よい結果とむすびついていました。</span></li><li><svg viewBox="0 0 40 40" width="30" height="30" aria-hidden="true"><path d="M5 8h30v19H17l-8 7v-7H5z" fill="#fff" stroke="#1F2140" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><path d="M16 14q0-4 4-4t4 4-4 4v2" fill="none" stroke="#1F2140" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="20" cy="23.5" r="1.4" fill="#1F2140"/></svg><span>研究は「関係がある」ことを示したもので、やれば必ずそうなる、という意味ではありません。</span></li></ul><p class="src">出典：<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3751802/" target="_blank" rel="noopener">Eime ほか（2013）スポーツ参加と子どもの心・人づきあいの研究のまとめ</a></p></div><div class="ftc" data-fc="2" style="--fc:#4FA3F7" hidden><h3><em>パス</em>気をつけること</h3><ul><li><svg viewBox="0 0 40 40" width="30" height="30" aria-hidden="true"><g transform="rotate(-35 20 20)"><rect x="3" y="13" width="34" height="14" rx="7" fill="#FFD9E2" stroke="#1F2140" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><rect x="14" y="13" width="12" height="14" fill="#fff" stroke="#1F2140" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></g></svg><span>ヘディング：日本サッカー協会は、子どもは年れいに合わせて回数や方法に気をつけて練習するよう、ガイドラインを出しています。</span></li><li><svg viewBox="0 0 40 40" width="30" height="30" aria-hidden="true"><g stroke="#FFC83D" stroke-width="2.6" stroke-linecap="round"><path d="M20 3v4M20 33v4M3 20h4M33 20h4M8 8l3 3M29 29l3 3M8 32l3-3M29 11l3-3"/></g><circle cx="20" cy="20" r="9" fill="#FFE27A" stroke="#1F2140" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg><span>夏の暑さに注意。休けいと水分の時間があるか</span></li><li><svg viewBox="0 0 40 40" width="30" height="30" aria-hidden="true"><circle cx="20" cy="20" r="14" fill="#D2F3FF" stroke="#1F2140" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><path d="M20 11v9l6 4" fill="none" stroke="#1F2140" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg><span>土日の練習や試合が多め</span></li></ul><p class="src">出典：<a href="https://www.jfa.jp/news/00026917/" target="_blank" rel="noopener">日本サッカー協会「育成年代でのヘディング習得のためのガイドライン」（2021年）</a></p></div><div class="ftc" data-fc="3" style="--fc:#2BB3C9" hidden><h3><em>ゴール</em>送り迎え・お手伝い</h3><ul><li><svg viewBox="0 0 40 40" width="30" height="30" aria-hidden="true"><path d="M4 27v-6l5-9h18l8 9v6z" fill="#B9D4FF" stroke="#1F2140" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><path d="M12 15h6v6h-9zM21 15h5l4 6h-9z" fill="#fff" stroke="#1F2140" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="12" cy="28" r="4.5" fill="#fff" stroke="#1F2140" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="28" cy="28" r="4.5" fill="#fff" stroke="#1F2140" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg><span>試合が遠くの会場のときは、車出しをたのまれるチームも</span></li><li><svg viewBox="0 0 40 40" width="30" height="30" aria-hidden="true"><path d="M8 15h22v8q0 11-11 11T8 23z" fill="#FFD3E4" stroke="#1F2140" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><path d="M30 18q6 0 6 5t-6 5" fill="none" stroke="#1F2140" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><path d="M14 4q-2 3 0 6M20 4q-2 3 0 6" fill="none" stroke="#B9A6FF" stroke-width="2" stroke-linecap="round"/></svg><span>当番があるかはチームによってちがいます。体験のときに聞こう</span></li></ul></div></div></div>
   <section class="pitch"><div class="ln"></div><div class="goal l"></div><div class="goal"></div><span class="shot">⚽</span><span class="goaltxt">GOAL!</span>${AREAS?areaHtml():`<h2>区をえらんでね</h2>
     <div class="zks">${WARDS.map((w,i)=>`<button class="zk" data-w="${w}" style="${kit(w)}"><b class="num">${String(i+1).padStart(2,"0")}</b><span>${w}</span><small style="${cnt(w)?"":"opacity:.45"}">${cnt(w)}チーム</small></button>`).join("")}</div>`}
   </section>
@@ -339,6 +393,16 @@ render();
     const ci=CUR.findIndex(t=>t===tt);
     if(ci>=0)setTimeout(()=>{const c=document.querySelector(`[data-ci="${ci}"]`);if(c){c.scrollIntoView({block:"center"});c.classList.add("hlt")}setTimeout(()=>openTeam(ci),350)},300)}}
 </script>
+<script>(function(){
+function P(r){return r.dataset.pos.split(';').map(function(s){return s.split(',').map(Number)})}
+function put(r,k){var b=r.querySelector('.ftball'),p=P(r)[k];b.style.left=p[0]+'%';b.style.top=p[1]+'%'}
+function show(r,k){r.querySelectorAll('.ftb').forEach(function(b){b.classList.toggle('on',+b.dataset.fb===k)});
+ r.querySelectorAll('.ftc').forEach(function(c){var on=+c.dataset.fc===k;c.hidden=!on;if(on){c.classList.remove('in');void c.offsetWidth;c.classList.add('in')}})}
+function run(r,k){var ball=r.querySelector('.ftball'),cur=+r.dataset.cur;if(k===cur)return show(r,k);ball.classList.remove('stop');
+ var go=function(){cur=(cur+1)%4;r.dataset.cur=cur;put(r,cur);if(cur!==k)setTimeout(go,330);else setTimeout(function(){ball.classList.add('stop');show(r,k)},330)};go()}
+function init(){document.querySelectorAll('.ft:not([data-cur])').forEach(function(r){r.dataset.cur=3;put(r,3);setTimeout(function(){run(r,0)},500)})}
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.ftb');if(b)run(b.closest('.ft'),+b.dataset.fb)});
+new MutationObserver(init).observe(document.documentElement,{childList:true,subtree:true});init()})();</script>
 <!--wolly-totop-->
 <style>
 .wtotop{position:fixed;z-index:60;right:max(14px,env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));
