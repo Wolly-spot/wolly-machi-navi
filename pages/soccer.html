@@ -387,6 +387,10 @@ document.addEventListener("click",e=>{
 });
 document.addEventListener("submit",e=>{if(e.target.id==="sf"){e.preventDefault();const q=$("#q").value.trim();if(q){state={view:"list",ward:"",f:"",q};render();scrollTo(0,0)}else $("#q").focus()}});
 render();
+/* 街ナビのシートで区をえらんで来たとき（?w=区／地域）：その区の一覧をひらく（11/15） */
+{const pw=new URLSearchParams(location.search).get("w");
+  if(pw&&!AREAS&&WARDS.includes(pw)){state={view:"list",ward:pw,f:"",q:""};render();scrollTo(0,0)}
+  else if(pw&&AREAS){const h=[...document.querySelectorAll(".area h3")].find(x=>x.firstChild&&x.firstChild.textContent===pw);h&&setTimeout(()=>h.scrollIntoView({block:"start"}),60)}}
 /* さがすから来たとき（?t=教室の名前）：その教室の区の一覧を出して、カードを光らせてパネルをひらく */
 {const pt=new URLSearchParams(location.search).get("t");const tt=pt&&D.find(t=>t.n===pt);
   if(tt){state={view:"list",ward:WARDS.includes(tt.d)&&!AREAS?tt.d:"",f:"",q:WARDS.includes(tt.d)&&!AREAS?"":pt};render();
