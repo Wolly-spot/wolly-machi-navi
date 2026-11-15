@@ -625,6 +625,14 @@ svg .a-strike{animation:a-strike 1.3s cubic-bezier(.7,0,.3,1) infinite;transform
 @keyframes tapPop{0%{transform:scale(1)}35%{transform:scale(.94)}100%{transform:scale(1) translateY(-2px)}}
 .hp .ci svg,.ej .ci svg{transition:transform .4s cubic-bezier(.3,1.6,.5,1)}
 @media (hover:hover){.hp:hover .ci svg,.ej:hover .ci svg{transform:rotate(-8deg) scale(1.08)}}
+/* トップのアイコン：オルゴールの人形みたいに、となり同士が反対に左右へゆれて、まん中でぴょんとはねる */
+.hp .ci svg,.ej .ci svg,.sch .ci svg{transform-origin:50% 90%;animation:dollRock 2.4s ease-in-out infinite}
+.hp:nth-child(even) .ci svg,.ej:nth-child(even) .ci svg,.sch:nth-child(even) .ci svg{animation-delay:-1.2s}
+.hp .ci,.ej .ci,.sch .ci{animation:dollStep 1.2s ease-in-out infinite}
+.hp:nth-child(even) .ci,.ej:nth-child(even) .ci,.sch:nth-child(even) .ci{animation-delay:-.6s}
+@keyframes dollRock{0%,100%{rotate:-7deg;translate:0 0}25%{rotate:0deg;translate:0 -4px}50%{rotate:7deg;translate:0 0}75%{rotate:0deg;translate:0 -4px}}
+@keyframes dollStep{0%,100%{scale:1 1}50%{scale:1.04 .97}}
+@media (prefers-reduced-motion:reduce){.hp .ci,.ej .ci,.sch .ci,.hp .ci svg,.ej .ci svg,.sch .ci svg{animation:none}}
 @media (prefers-reduced-motion:reduce){.tapped{animation:none}.hp,.ej{transition:none}}
 
 
