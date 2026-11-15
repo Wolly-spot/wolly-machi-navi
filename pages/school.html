@@ -290,6 +290,30 @@ body{text-wrap:pretty}
 .mgs{padding-bottom:6px}.mgsw{display:block;font-size:12px;font-weight:900;text-align:center;padding:6px 4px 0;color:#2E2B4F}
 .gp .dlv .pcal span,.gp .dlv .pcal i{border:0;margin:0}.gp .dlv .mgc{display:block;font-size:11px;color:#5a4fa0;margin:0}.gp .dlv .mgh b{display:inline;font-size:12px}
 
+.rbar{position:relative;margin:4px 2px 26px;padding-top:2px}
+.rbm{display:flex;border-radius:10px;overflow:hidden;box-shadow:0 0 0 1.5px #E3E4F0}
+.rbm span{display:flex;flex-direction:column;align-items:center;background:color-mix(in srgb,var(--sc) 45%,#fff);padding:3px 0 2px;border-right:1px solid #fff}
+.rbm i svg{width:14px;height:14px;display:block}.rbm b{font-size:10.5px;font-weight:900;color:#2E2B4F;line-height:1.2}
+.rbs{position:relative;height:20px;margin-top:4px}
+.rbs em{position:absolute;top:0;height:18px;border-radius:9px;background:linear-gradient(120deg,#5AB4E8,#8E6BF5);color:#fff;font-style:normal;font-size:10px;font-weight:900;display:grid;place-items:center;min-width:14px;box-sizing:border-box}
+.rbs em.past{background:#C9C8DA}.rbs em.now{background:linear-gradient(120deg,#FF7FAE,#9B7BFF);box-shadow:0 0 0 2px #fff,0 0 10px #FF7FAE}
+.rnow{position:absolute;top:-2px;bottom:-6px;width:0;border-left:2px dashed #FF6FA5}.rnow b{position:absolute;bottom:-14px;left:-14px;width:28px;text-align:center;font-size:9.5px;font-weight:900;color:#FF6FA5}
+.gp ol.road{list-style:none;margin:0;padding:0;position:relative}
+.gp ol.road::before{content:"";position:absolute;left:21px;top:20px;bottom:20px;border-left:4px dotted #C9B8F2}
+.gp ol.road li{position:relative;display:flex;gap:10px;align-items:flex-start;margin:0 0 10px;padding:0;background:none;counter-increment:none}
+.gp ol.road li::before{content:none}
+.road .rn{position:relative;flex:0 0 auto;width:46px;height:46px;border-radius:50%;background:var(--sc);display:grid;place-items:center;box-shadow:0 0 0 3px #fff,0 4px 10px -5px rgba(40,30,80,.4);z-index:1}
+.road .rn svg{width:26px;height:26px}.road .rn b{position:absolute;right:-4px;bottom:-4px;width:20px;height:20px;border-radius:50%;background:#8E6BF5;color:#fff;font-size:11px;font-weight:900;display:grid;place-items:center;box-shadow:0 0 0 2px #fff}
+.road .rc{flex:1;min-width:0;padding:8px 12px 10px;border-radius:16px;background:#F6FBFF;box-shadow:0 0 0 1.5px #E3F4FC}
+.road .rd{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:13px;font-weight:900;color:#5a4fa0;margin-bottom:4px}
+.road .rd em{font-style:normal;font-size:10.5px;font-weight:900;border-radius:999px;padding:1px 8px}
+.road .rnw{background:#FF6FA5;color:#fff}.road .rpw{background:#E3E4F0;color:#8a89a8}
+.road li.past .rc{opacity:.6}.road li.past .rn{filter:grayscale(.6);opacity:.75}
+.road li.now .rc{background:#FFF1F7;box-shadow:0 0 0 2px #FF9EC4}
+.road li.goal .rn{width:54px;height:54px;margin-left:-4px;background:#FFC6DA}.road li.goal .rn svg{width:32px;height:32px}.road li.goal .rc{background:linear-gradient(120deg,#FFF1F7,#F3EEFF);box-shadow:0 0 0 2px #FFC6DA}.road li.goal .lrow span:last-child{font-weight:900;font-size:15px}
+.road li.rhere{align-items:center;margin:2px 0 12px}.road li.rhere .rn{width:46px;height:32px;background:none;box-shadow:none}.road li.rhere .rn i{font-style:normal;font-size:22px;color:#FF6FA5;line-height:1}
+.road .rhc{font-size:14px;font-weight:900;color:#FF6FA5;background:#FFF1F7;border:2px dashed #FF9EC4;border-radius:999px;padding:4px 12px}.road .rhc small{margin-left:6px;font-size:11px;color:#c06a8f}
+
 .hdeco{position:absolute;inset:0;pointer-events:none;z-index:0}
 .hdeco span{position:absolute;display:block;opacity:.9;filter:drop-shadow(0 4px 6px rgba(90,60,140,.18));animation:hdf 5.5s ease-in-out infinite}
 .hdeco span svg{display:block;width:100%;height:100%}
@@ -747,6 +771,36 @@ const PRE=PKW.map(([k,r])=>[k,new RegExp(r,"g")]);
 function ptIcs(t){const hits=[];for(const [k,re] of PRE){re.lastIndex=0;let m,last=-1;while((m=re.exec(t)))last=m.index;if(last>=0)hits.push([last,k])}
   for(const [k,re] of GKW){const m=t.search(re);if(m>=0&&!hits.some(h=>h[1]===k))hits.push([m-100,k])}
   return hits.sort((a,b)=>b[0]-a[0]).map(h=>h[1])}
+/* 11/15：「いつ・なにがある？」は、すごろくの年表（上に1年のものさし、今日の「いまここ」） */
+function stepSpan(t){/* [はじめの月,日, おわりの月,日]（年はあとで） */
+  const S={"春":[3,1,5,31],"夏":[6,1,8,31],"秋":[9,1,11,30],"冬":[12,1,2,28]};
+  const parts=String(t).split(/〜|～|・/).filter(Boolean);let lm=0;const pts=[];
+  for(const p of parts){const m=p.match(/(\d{1,2})月/),d=p.match(/(\d{1,2})日/),j=p.match(/上旬|中旬|下旬|末|終わり|はじめ/);const mm=m?+m[1]:lm;if(!mm)continue;lm=mm;
+    const r=d?[+d[1],+d[1]]:j?({"上旬":[1,10],"はじめ":[1,10],"中旬":[11,20],"下旬":[21,31],"末":[25,31],"終わり":[25,31]})[j[0]]:[1,31];pts.push([mm,r])}
+  if(!pts.length){const w=String(t).match(/[春夏秋冬]/);return w?S[w[0]]:null}
+  const A=pts[0],B=pts[pts.length-1];return [A[0],A[1][0],B[0],B[1][1]]}
+function roadHtml(steps){
+  const sp=steps.map(([a])=>stepSpan(a));
+  /* 年をつける：月がもどったら次の年。いちばん最後が今日より後になる、いちばん早い年から */
+  const rel=[];let y=0,pm=0;sp.forEach(x=>{if(!x){rel.push(null);return}let y1=y;if(pm&&x[0]<pm)y1=++y;pm=x[0];let y2=y1;if(x[2]<x[0])y2=y1+1;if(x[2]>pm||y2>y1)pm=x[2];if(y2>y)y=y2;rel.push([y1,x[0],x[1],y2,x[2],x[3]])});
+  const now=new Date(),today=ymd(now),last=(yy,m)=>new Date(yy,m,0).getDate();
+  const mk=Y=>rel.map(r=>r&&[new Date(Y+r[0],r[1]-1,r[2]),new Date(Y+r[3],r[4]-1,Math.min(r[5],last(Y+r[3],r[4])))]);
+  let Y=now.getFullYear()-2,R;for(;Y<now.getFullYear()+2;Y++){R=mk(Y);const ends=R.filter(Boolean).map(x=>ymd(x[1]));if(ends.length&&Math.max(...ends)>=today)break}
+  const st=R.map(r=>!r?"":ymd(r[1])<today?"past":ymd(r[0])<=today?"now":"next");
+  const firstNext=st.indexOf("next"),hasNow=st.includes("now");
+  /* 1年のものさし */
+  const D=R.filter(Boolean);let bar="";
+  if(D.length>1){const s0=new Date(D[0][0].getFullYear(),D[0][0].getMonth(),1),e0=D.reduce((a,x)=>x[1]>a?x[1]:a,D[0][1]);const e1=new Date(e0.getFullYear(),e0.getMonth()+1,0);
+    const span=e1-s0,pc=d=>Math.max(0,Math.min(100,(d-s0)/span*100));const months=[];for(let d=new Date(s0);d<=e1;d=new Date(d.getFullYear(),d.getMonth()+1,1))months.push(new Date(d));
+    bar=`<div class="rbar" aria-hidden="true"><div class="rbm">${months.map(m=>`<span style="--sc:${SEAC[mSea(m.getMonth()+1)]};width:${100/months.length}%"><i>${gi(mSea(m.getMonth()+1))}</i><b>${m.getMonth()+1}</b></span>`).join("")}</div>
+      ${(()=>{const ends=[];const ch=R.map((r,k)=>{if(!r)return"";const l=pc(r[0]),w=Math.max(6,pc(r[1])-pc(r[0]));let row=ends.findIndex(e=>l>=e+1);if(row<0){row=ends.length;ends.push(0)}ends[row]=l+w;
+        return `<em class="${st[k]}" style="left:${l}%;width:${w}%;top:${row*21}px">${k+1}</em>`}).join("");return `<div class="rbs" style="height:${ends.length*21}px">${ch}</div>`})()}
+      ${today>=ymd(s0)&&today<=ymd(e1)?`<span class="rnow" style="left:${pc(now)}%"><b>いま</b></span>`:""}</div>`}
+  _prevIc="";
+  const items=steps.map(([a,b],k)=>{const s=sp[k],sea=s?mSea(s[0]):seaIc(a)||"star",goal=k===steps.length-1&&/入学式|卒業式/.test(b);
+    const here=(!hasNow&&k===firstNext&&k>0)?`<li class="rhere"><span class="rn"><i>★</i></span><span class="rhc">いまここ！<small>${now.getMonth()+1}月${now.getDate()}日</small></span></li>`:"";
+    return here+`<li class="${st[k]}${goal?" goal":""}"><span class="rn" style="--sc:${SEAC[sea]||"#E6D4FF"}">${gi(goal?"sakura":sea)}<b>${k+1}</b></span><div class="rc"><span class="rd">${esc(a)}${st[k]==="now"?'<em class="rnw">いまここ！</em>':st[k]==="past"?'<em class="rpw">おわったよ</em>':""}</span><span class="lrow">${goal?`<span class="lic">${gi("flag")}</span>`:lIcP(b,"star")}<span>${esc(b)}</span></span></div></li>`}).join("");
+  return bar+`<ol class="road">${items}</ol>`}
 let _prevIc="";
 const lIcP=(t,d)=>{const c=ptIcs(t);let k=c.find(x=>x!==_prevIc)||c[0]||d;_prevIc=k;return `<span class="lic">${gi(k)}</span>`};
 const lIc=(t,d)=>`<span class="lic">${gi(kwOr(t,d))}</span>`;
@@ -790,7 +844,7 @@ function showItem(path,push=true){
   if(push)gstack.push(["i",path]);openGd();$("#gdT").textContent=it.t;
   const key="item:"+path,fav=favSet().has(key);
   let body="";
-  if(it.steps)body+=sec("いつ・なにがある？","cal",(_prevIc="",`<ul class="tl tl2">${it.steps.map(([a,b])=>`<li><span class="lrow">${lIcP(b,"star")}<span>${esc(b)}</span></span>${pcalT(a)}</li>`).join("")}</ul>`));
+  if(it.steps)body+=sec("いつ・なにがある？","cal",roadHtml(it.steps));
   if(it.why)body+=sec("どうしてこんなにあるの？","bulb",`<div class="why">${(_prevIc="",it.why).map(x=>`<p class="lrow">${lIcP(x,"bulb")}<span>${esc(x)}</span></p>`).join("")}</div>`);
   if(it.table)body+=sec(it.table_t||"くらべてみよう","check",`<div class="tbl"><table class="c${it.table.head.length}"><thead><tr>${it.table.head.map(h=>`<th>${esc(h)}</th>`).join("")}</tr></thead><tbody>${it.table.rows.map(r=>`<tr>${r.map((c,k)=>k?`<td>${esc(c)}</td>`:`<th>${esc(c)}</th>`).join("")}</tr>`).join("")}</tbody></table></div>`);
   if(it.info)body+=sec("知っておきたいこと","bulb",`<dl>${it.info.map(([a,b])=>`<div><dt>${gi(kwIc(a))}<span>${esc(a)}</span></dt><dd>${esc(b)}</dd></div>`).join("")}</dl>`);
