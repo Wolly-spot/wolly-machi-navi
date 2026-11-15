@@ -270,7 +270,7 @@ function home(){
   <section class="bench"><h2>ぜんぶの区から、しぼって探す</h2>
     <div class="chips"><button class="chip" data-f="all"><span class="dot" style="background:#fff;box-shadow:inset 0 0 0 2px var(--ink)"></span>すべて見る（${D.length}）</button>${FILTERS.map(f=>`<button class="chip" data-f="${f[0]}"><span class="dot" style="background:var(${f[2]})"></span>${f[1]}</button>`).join("")}</div>
   </section>
-  <footer class="foot"><div class="footscene"><svg viewBox="0 0 300 70" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="300" height="70" fill="#d4cd86"/><circle cx="150" cy="35" r="26" fill="none" stroke="#1a2440" stroke-width="4" stroke-dasharray="140 30"><animateTransform attributeName="transform" type="rotate" values="0 150 35;360 150 35" keyTimes="0;1" dur="3s" repeatCount="indefinite" additive="sum"/></circle></svg></div>合気道の道場の情報は、Wollyの習い事ページ（2026年11月7日に読み取り）と、埼玉県合気道連盟「道場一覧」（2026年11月13日確認）をもとにWollyがまとめたものです。曜日・お金・入会のしかたは変わることがあるので、かならずホームページでたしかめてね。</footer>`;
+  <footer class="foot"><div class="footscene"><svg viewBox="0 0 300 70" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="300" height="70" fill="#d4cd86"/><circle cx="150" cy="35" r="26" fill="none" stroke="#1a2440" stroke-width="4" stroke-dasharray="140 30"><animateTransform attributeName="transform" type="rotate" values="0 150 35;360 150 35" keyTimes="0;1" dur="3s" repeatCount="indefinite" additive="sum"/></circle></svg></div>合気道の道場の情報は、Wollyの習い事ページ（2026年11月7日に読み取り）と、埼玉県合気道連盟「道場一覧」（2026年11月13日確認）をもとにWollyがまとめたものだよ。曜日・お金・入会のしかたは変わることがあるので、かならずホームページでたしかめてね。</footer>`;
   window.scrollTo(0,0);
 }
 function list(){
@@ -284,8 +284,8 @@ function list(){
   <div class="bar" style="${wi>=0?kit(state.ward):""}"><button class="back" id="back">‹ もどる</button>${wi>=0?`<span class="bn num">${String(wi+1).padStart(2,"0")}</span>`:""}<span class="bt">${title}<span class="dribble">☯️</span></span><span class="bc">${items.length}道場</span></div>
   ${wi>=0?`<div class="nbw"><button data-nw="${pw}" style="--wc:${WCOL[pw]}">‹ ${pw}</button><span class="swipehint">よこにスライドでとなりの区へ</span><button class="r" data-nw="${nw}" style="--wc:${WCOL[nw]}">${nw} ›</button></div>`:""}
   ${state.q?"":`<div class="lchips">${lch.map(c=>`<button class="chip${state.f===c[0]?" on":""}" data-lf="${c[0]}">${c[1]}</button>`).join("")}</div>`}
-  <div class="field">${state.f==="strong"?`<p class="best" style="font-size:12.5px;margin:0 2px 10px;padding:8px 10px">🏆 ここ2年（2024・2025年度）の埼玉県の大きな大会で、ベスト16以上か、県リーグのいちばん上（S1）に入ったさいたま市のチームです。カードをタップすると大会の結果が見られます。</p>`:""}${items.length?`<div class="grid">${items.map((t,i)=>card(t,i+1,i)).join("")}</div>`:`<p class="empty">見つかりませんでした。ことばを変えてみてね。</p>`}</div>
-  <footer class="foot">写真をタップすると、くわしく出ます。入る前に、かならずホームページでたしかめてね。</footer>`;
+  <div class="field">${state.f==="strong"?`<p class="best" style="font-size:12.5px;margin:0 2px 10px;padding:8px 10px">🏆 ここ2年（2024・2025年度）の埼玉県の大きな大会で、ベスト16以上か、県リーグのいちばん上（S1）に入ったさいたま市のチームだよ。カードをタップすると大会の結果が見られるんだ。</p>`:""}${items.length?`<div class="grid">${items.map((t,i)=>card(t,i+1,i)).join("")}</div>`:`<p class="empty">見つからなかったよ。ことばを変えてみてね。</p>`}</div>
+  <footer class="foot">写真をタップすると、くわしく出るよ。入る前に、かならずホームページでたしかめてね。</footer>`;
 }
 function areaHtml(){let n=0;return AREAS.map(a=>{const L=D.filter(t=>t.pf===a[0]);return `<div class="area"><h3>${esc(a[0])}<i>${esc(a[1])}</i><small>${L.length}${UNIT}</small></h3><div class="grid">${L.map(t=>{n++;return card(t,n,n-1)}).join("")}</div></div>`}).join("")}
 const UNIT="道場";

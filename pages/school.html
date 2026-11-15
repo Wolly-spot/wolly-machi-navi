@@ -595,8 +595,8 @@ function applyS(fly,first){
   document.querySelectorAll("#smode [data-m]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.m===smode));
   $("#swards").hidden=!cls;
   $("#swards").innerHTML=WARDS.map(w=>`<button type="button" data-sw="${w}" aria-pressed="${ward===w}">${w}<small>${S.filter(s=>s.w===w).length}</small></button>`).join("");
-  $(".hint").textContent=!cls?"★＝特別支援学校（市外の学校もあります）。★をタップすると、種類・学部・通う地域が出ます。2本の指で動かす・回す・かたむけられます。"
-    :ward?`${ward}の、特別支援学級のある小・中学校です。ピンの数字＝特別支援学級の数（ピンク＝小学校、青＝中学校）。`:"区の名前をタップすると、その区の学校が出ます。";
+  $(".hint").textContent=!cls?"★＝特別支援学校（市外の学校もあります）。★をタップすると、種類・学部・通う地域が出るよ。2本の指で動かす・回す・かたむけられるんだ。"
+    :ward?`${ward}の、特別支援学級のある小・中学校だよ。ピンの数字＝特別支援学級の数（ピンク＝小学校、青＝中学校）。`:"区の名前をタップすると、その区の学校が出るよ。";
   if(map){
     mk.forEach((m,k)=>{m.getElement().style.display=cls&&ward&&S[k].w===ward?"":"none"});
     spk.forEach(m=>m.getElement().style.display=cls?"none":"");
@@ -632,7 +632,7 @@ function renderList(){
     if(smode==="cls"){
       const l=S.map((s,i)=>[s,i]).filter(([s])=>(q?true:ward&&s.w===ward)&&(!q||(s.n+s.a).includes(q)));
       $("#lh").textContent=q?`特別支援学級のある学校（${l.length}校）`:ward?`${ward}の特別支援学級のある学校（${l.length}校）`:"特別支援学級のある学校";
-      $("#list").innerHTML=!q&&!ward?`<li class="sc" style="cursor:default;display:block"><b>区をえらんでね</b><small>地図の上の区のボタンか、地図の中の区の名前をタップすると、その区の学校が並びます。学校名で検索もできます。</small></li>`
+      $("#list").innerHTML=!q&&!ward?`<li class="sc" style="cursor:default;display:block"><b>区をえらんでね</b><small>地図の上の区のボタンか、地図の中の区の名前をタップすると、その区の学校が並ぶよ。学校名で検索もできるんだ。</small></li>`
         :l.map(([s,i])=>`<li class="sc" data-i="${i}" role="button" tabindex="0"><span class="sw" style="--c:${s.kk==="e"?"#FFC6DA":"#BFD7FF"}"></span><div><b>${esc(s.n)}</b><small>${s.kk==="e"?"小学校":"中学校"}・${esc(s.a)}</small></div><span class="num"><b>${s.sp}</b>学級</span></li>`).join("");
       return;
     }
@@ -701,7 +701,7 @@ function closeGd(){const g=$("#gd");g.classList.remove("on");document.body.style
 function showGenre(id,push=true){
   const g=GUIDE.genres.find(x=>x.id===id);if(!g)return;
   if(g.action==="map"){closeGd();$("#mapAnchor").scrollIntoView({behavior:RM?"auto":"smooth",block:"start"});return}
-  if(g.soon){toast("「"+g.t+"」は準備中です。次の更新で追加します");return}
+  if(g.soon){toast("「"+g.t+"」は準備中だよ。次の更新で追加するんだ");return}
   if(push)gstack.push(["g",id]);openGd();$("#gdT").textContent=g.t;
   const ch=GCHAR[g.id]||[],im=TALK[ch[0]];
   $("#gdB").innerHTML=`<div class="gp"><h2>${gi(g.ic)}${esc(g.t)}</h2>${ch[1]?`<p class="lead">${esc(ch[1])}</p>`:""}
@@ -801,14 +801,14 @@ function showItem(path,push=true){
   if(it.faq)body+=sec("よくきかれること","bulb",it.faq.map(([q,a])=>`<details><summary data-noicon>${gi(kwOr(q,"bulb"))}${esc(q)}</summary><p>${esc(a)}</p></details>`).join(""));
   if(it.how)body+=sec("手つづきのしかた","doc",`<ol class="how">${(_prevIc="",it.how).map(x=>`<li><span class="lrow">${lIcP(x,"doc")}<span>${esc(x)}</span></span></li>`).join("")}</ol>`);
   if(it.note)body+=sec("気をつけること","warn",`<ul class="notes">${(_prevIc="",it.note).map(x=>`<li class="lrow">${lIcP(x,"warn")}<span>${esc(x)}</span></li>`).join("")}</ul>`);
-  body+=`<div class="chk-last"><span class="clk">${gi("check")}</span><p><b>さいごは、まどぐちでたしかめてね</b>このページは、わかりやすくまとめた「めやす」です。申しこむ前や、手つづきの前は、区役所・学校・市の係でたしかめてください。${it.contact?"下の「電話できるところ」から電話できます。":""}</p></div>`;
+  body+=`<div class="chk-last"><span class="clk">${gi("check")}</span><p><b>さいごは、まどぐちでたしかめてね</b>このページは、わかりやすくまとめた「めやす」だよ。申しこむ前や、手つづきの前は、区役所・学校・市の係でたしかめてね。${it.contact?"下の「電話できるところ」から電話できるよ。":""}</p></div>`;
   if(it.contact)body+=sec("電話できるところ","phone",`<div class="tel">${it.contact.map(([n,t,inf],ci)=>`<div${inf?' class="has-ci"':""}><span>${esc(n)}</span><span class="tbtn">${inf?`<button type="button" class="cib" data-ci="${esc(path)}|${ci}">どんなところ？</button>`:""}${t?`<a href="tel:${esc(t.replace(/[^0-9]/g,""))}">${esc(t)}</a>`:""}</span></div>`).join("")}</div>`);
   const rel=(it.rel||[]).map(relBtn).join("")+`<button type="button" class="soonb" data-chat>${gi("people")}地域の人に聞く（準備中）</button>`;
   body+=sec("Wollyのほかのページ","star",`<div class="rel">${rel}</div>`);
   if(it.src)body+=sec("市のページ（もとの情報）","web",`<div class="src">${it.src.map(x=>x.u?`<a href="${esc(x.u)}" target="_blank" rel="noopener">${esc(x.t)} ›</a>`:`<span>${esc(x.t)}</span>`).join("")}</div>`);
   $("#gdB").innerHTML=`<div class="gp"><h2>${gi(it.ic)}${esc(it.t)}</h2><div class="meta"><span>${esc(g.t)}</span>${it.year?`<span>対象：${esc(it.year)}</span>`:""}</div>
     ${(()=>{const ch=GCHAR[g.id]||[],im=it.ch||"";return im?`<div class="say"><img src="${im}" alt=""><p>${esc(it.lead||"")}</p></div>`:`<p class="lead">${esc(it.lead||"")}</p>`})()}${body}
-    <div class="foot">対象年度：${esc(it.year||"-")}／最終確認日：${esc(it.checked||"-")}<br>公式の情報をもとに、Wollyがわかりやすくまとめたものです。変わることがあるので、手続きの前に公式ページでたしかめてね。</div>
+    <div class="foot">対象年度：${esc(it.year||"-")}／最終確認日：${esc(it.checked||"-")}<br>公式の情報をもとに、Wollyがわかりやすくまとめたものだよ。変わることがあるので、手続きの前に公式ページでたしかめてね。</div>
     <button type="button" class="favb" data-fav="${esc(key)}" aria-pressed="${fav}">${fav?"★ 保存しました":"☆ このページを保存"}</button></div>`;
   $("#gdB").scrollTop=0;
 }
@@ -823,7 +823,7 @@ document.addEventListener("click",e=>{
   const gI=e.target.closest("[data-gi]");if(gI){showItem(gI.dataset.gi);return}
   const sc=e.target.closest("[data-sch]");if(sc){openSchool(+sc.dataset.sch,false);return}
   const fv=e.target.closest("[data-fav]");if(fv){const on=toggleFav(fv.dataset.fav);fv.setAttribute("aria-pressed",on);fv.textContent=on?"★ 保存しました":"☆ "+(fv.dataset.fav.startsWith("school:")?"この学校を保存":"このページを保存");toast(on?"保存しました（ジャンルの下に出ます）":"保存をやめました");return}
-  if(e.target.closest("[data-chat]")){toast("Wollyチャットは準備中です。できたらここから地域の人に聞けるようになります");return}
+  if(e.target.closest("[data-chat]")){toast("Wollyチャットは準備中だよ。できたらここから地域の人に聞けるようになるんだ");return}
   const wv=e.target.closest("[data-wview]");if(wv){if(!wollyGo({type:"wolly-view",view:wv.dataset.wview,vt:wv.dataset.vt}))location.href=wv.dataset.wview.replace(/^([^?]+)/,"$1.html");return}
   const wg=e.target.closest("[data-wgo]");if(wg){if(!wollyGo({type:"wolly-go",hash:wg.dataset.wgo}))location.href="https://liff.line.me/2007823365-Ckc0dnQW"+wg.dataset.wgo;return}
   const wl=e.target.closest("[data-wlesson]");if(wl){if(!wollyGo({type:"wolly-go",lesson:wl.dataset.wlesson}))toast("街ナビの習い事で見られます");return}
@@ -852,8 +852,8 @@ function renderAround(s){
   Promise.all([loadNear(G2[0]),loadNear("park")]).then(()=>{
     const el=$("#around");if(!el)return;
     const one=(g,lab)=>`<ul class="near3">${nearList(s,g,4).map(([d,x])=>`<li><button type="button" data-wview="near?g=${g}&q=${encodeURIComponent(x.id)}" data-vt="${lab}"><span><b>${esc(x.n)}</b><small>${g==="gakudo"?((x.s||[]).includes("kousetsu")?"公設":"民設")+"・":""}${esc(x.a||"")}</small></span><span class="km">${d<.1?"すぐ近く":d.toFixed(1)+"km"}</span></button></li>`).join("")}</ul>`;
-    el.innerHTML=`<p class="sub">${gi("home")}この学校の近くの${T==="j"?"児童センター・ひろば":"学童"}</p>${one(G2[0],G2[1])}${s.hiroba?`<p class="ad">この学校は令和9年度「放課後みんなのひろば」の実施校です。</p>`:""}
-      <p class="sub">${gi("tree")}この学校の近くの公園</p>${one("park","公園マップ")}<p class="ad">学校からのまっすぐの距離です。タップすると、Wollyの地図でくわしく見られます。</p>`;
+    el.innerHTML=`<p class="sub">${gi("home")}この学校の近くの${T==="j"?"児童センター・ひろば":"学童"}</p>${one(G2[0],G2[1])}${s.hiroba?`<p class="ad">この学校は令和9年度「放課後みんなのひろば」の実施校だよ。</p>`:""}
+      <p class="sub">${gi("tree")}この学校の近くの公園</p>${one("park","公園マップ")}<p class="ad">学校からのまっすぐの距離だよ。タップすると、Wollyの地図でくわしく見られるんだ。</p>`;
   });
 }
 function openSchool(i,fromMap){
@@ -863,7 +863,7 @@ function openSchool(i,fromMap){
   const ov=document.createElement("div");ov.className="ov";ov.id="ov";
   ov.innerHTML=`<div class="pc" role="dialog" aria-modal="true" aria-label="${esc(s.n)}"><button type="button" class="px" data-x aria-label="閉じる">×</button>
     <p class="eb">${T==="e"?"ELEMENTARY SCHOOL":"JUNIOR HIGH SCHOOL"}</p><h3>${esc(s.n)}</h3><p class="ad">さいたま市${esc(s.a)}</p>
-    ${T==="s"?`<div class="stats"><div><b>${s.sp??"-"}</b><small>特別支援学級</small></div><div><b>${s.st??"-"}</b><small>全校の人数</small></div><div><b>${s.cl??"-"}</b><small>学級の合計</small></div></div><p class="ad">特別支援学級の種類（知的・自閉症／情緒など）は学校ごとにちがいます。見学や就学相談でたしかめてね。</p>`:""}
+    ${T==="s"?`<div class="stats"><div><b>${s.sp??"-"}</b><small>特別支援学級</small></div><div><b>${s.st??"-"}</b><small>全校の人数</small></div><div><b>${s.cl??"-"}</b><small>学級の合計</small></div></div><p class="ad">特別支援学級の種類（知的・自閉症／情緒など）は学校ごとにちがうよ。見学や就学相談でたしかめてね。</p>`:""}
     <div class="stats"${T==="s"?" hidden":""}><div><b>${s.st??"-"}</b><small>全校${C.word}（人）</small></div><div><b>${s.cl??"-"}</b><small>学級（クラス）</small></div><div><b>${s.st&&s.cl?Math.round(s.st/s.cl):"-"}</b><small>1学級あたり（人）</small></div></div>
     ${s.gr&&T!=="s"?`<div class="bars">${s.gr.map((n,k)=>`<div><b>${n}</b><i style="height:${Math.max(6,n/mx*56)}px"></i>${C.gr[k]}</div>`).join("")}</div><p class="ad">学年ごとの${C.word}数（令和8年5月1日現在。特別支援学級の${C.word}は全校の数にふくみます）</p>`:""}
     ${T!=="s"?`<div class="sbadge">${s.hiroba?`<span class="hb">放課後みんなのひろば 実施校（令和9年度）</span>`:""}${(s.jhs||[]).length?`<span>この場所がふくまれる中学校区：${esc(s.jhs.join("・"))}（目安）</span>`:""}</div>
@@ -871,12 +871,12 @@ function openSchool(i,fromMap){
     <button type="button" class="pbtn" data-showd>学区（通学区域）を地図で見る ›</button>
     ${T!=="s"?`<a class="pbtn" style="text-decoration:none;background:linear-gradient(110deg,#35B3EE,#5A7BF0)" href="${s.hp?esc(s.hp):"https://www.google.com/search?q="+encodeURIComponent("さいたま市立"+s.n+" ホームページ")}" target="_blank" rel="noopener">${s.hp?"学校の公式ホームページ ›":"学校の公式ホームページをさがす ›"}</a><div id="around"></div>`:""}
     <p class="sub"><svg viewBox="0 0 40 40"><path d="M14 6l-9 6 4 7 4-2v17h14V17l4 2 4-7-9-6q-3 4-6 4t-6-4z" fill="#BFD7FF" stroke="#2E2B4F" stroke-width="2.2" stroke-linejoin="round"/><path d="M17 14h6" stroke="#2E2B4F" stroke-width="2" stroke-linecap="round"/></svg>制服・体操着はどこで買う？</p>
-    <div class="uni">${T==="e"?"小学校の体操着・帽子・上ばきなどは、入学説明会で学校から販売店や購入方法の案内があります。":"中学校の制服・ジャージは、学校ごとに指定の取扱店があります。入学説明会（例年1〜2月ごろ）の案内で確かめてください。"}<br>
+    <div class="uni">${T==="e"?"小学校の体操着・帽子・上ばきなどは、入学説明会で学校から販売店や購入方法の案内があるよ。":"中学校の制服・ジャージは、学校ごとに指定の取扱店があるよ。入学説明会（例年1〜2月ごろ）の案内で確かめてね。"}<br>
       <a href="https://www.google.com/search?q=${encodeURIComponent(s.n+" "+(T==="e"?"体操着 販売":"制服 取扱店"))}" target="_blank" rel="noopener">「${esc(s.n)}」の${T==="e"?"体操着":"制服"}の取扱店をさがす ›</a></div>
     <p class="sub"><svg viewBox="0 0 40 40"><path d="M20 5l4.4 9 9.8 1.4-7.1 6.9 1.7 9.8L20 27.4 11.2 32.1l1.7-9.8-7.1-6.9 9.8-1.4z" fill="#FFE070" stroke="#2E2B4F" stroke-width="2.2" stroke-linejoin="round"/><circle cx="17" cy="19" r="1.3" fill="#2E2B4F"/><circle cx="23" cy="19" r="1.3" fill="#2E2B4F"/><path d="M17.5 23q2.5 2 5 0" stroke="#2E2B4F" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>この学校の近くの習い事</p>
     <div class="gch" id="gch"><button type="button" data-g="" aria-pressed="true">すべて</button>${genres.map(g=>`<button type="button" data-g="${esc(g)}" aria-pressed="false">${esc(g)}</button>`).join("")}</div>
     <div id="lmap"></div><ul class="lsn" id="lsn"></ul>
-    <p class="ad">学校からのまっすぐの距離です。活動場所が学校の体育館などの教室もあります。くわしくは各教室のページで。</p>
+    <p class="ad">学校からのまっすぐの距離だよ。活動場所が学校の体育館などの教室もあるんだ。くわしくは各教室のページで。</p>
     <a class="pbtn" style="text-decoration:none" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(s.n+" さいたま市")}" target="_blank" rel="noopener">Googleマップで道順 ›</a>
     ${T!=="s"&&s.id?`<button type="button" class="pbtn" style="background:#FFF8E1;color:#4a3f3a;border-color:#FFE07A;box-shadow:0 5px 0 #FFE07A" data-fav="school:${esc(s.id)}" aria-pressed="${favSet().has("school:"+s.id)}">${favSet().has("school:"+s.id)?"★ 保存しました":"☆ この学校を保存"}</button>`:""}
     <button type="button" class="pclose" data-x>とじて、もどる</button></div>`;
@@ -931,18 +931,18 @@ function renderLearn(){
     ["cls","特別支援学級","学校の中の少人数のクラス。市立の小・中学校のほとんどにあります（知的・自閉症／情緒・難聴・弱視など）","#FFF4C9"],
     ["sch","特別支援学校","障害の種類ごとの学校。小学部・中学部・高等部など。通う学校は住んでいる場所で決まります","#D9CCFF"]];
   $("#learn").innerHTML=`<h2><mark>4つの学びの場</mark></h2><div class="l4">${L4.map(([ic,t,d,c])=>`<div class="l4c" style="--lc:${c}"><span class="l4i">${LI_IC[ic]}</span><div><b>${t}</b><small>${d}</small></div></div>`).join("")}</div>
-    <div class="l4c l4t" style="--lc:#E3F0FF"><span class="l4i">${LI_IC.talk}</span><div><b>まずは「就学相談」</b><small>どの学びの場がいいかは、お子さんの様子を見ながら市の教育委員会（特別支援教育室）といっしょに考えます。入学の前の年の春〜夏ごろから相談できます。</small>
+    <div class="l4c l4t" style="--lc:#E3F0FF"><span class="l4i">${LI_IC.talk}</span><div><b>まずは「就学相談」</b><small>どの学びの場がいいかは、お子さんの様子を見ながら市の教育委員会（特別支援教育室）といっしょに考えるよ。入学の前の年の春〜夏ごろから相談できるんだ。</small>
       <a href="https://www.city.saitama.lg.jp/003/002/017/index.html" target="_blank" rel="noopener">市の特別支援教育・就学相談のページ ›</a></div></div>`;
 }
 /* はじめる */
 $("#ttl").textContent=C.t;$("#otherL").textContent=C.other;
 {const t=C.talk;const im=TALK[t[0]];$("#talk").innerHTML=(im?`<img src="${im}" alt="">`:"")+`<p>${esc(t[1])}</p>`}
-$("#note").innerHTML=T==="s"?"特別支援学校の種類・学部・通学区域は さいたま市「さいたま市における特別支援学校の通学区域等一覧」（令和6年9月）、特別支援学級の数は「市立学校 児童・生徒数」（令和8年5月1日現在）より。学校の位置は OpenStreetMap。最新の情報や、どの学びの場が合うかは、市の教育委員会（特別支援教育室）の就学相談でたしかめてください。":"学区の形は国土数値情報「小学校区・中学校区データ」（国土交通省、令和5年度）をもとにしています。その後の変更（新しい学校・学区の見直し）は入っていないことがあるので、正しい学区は区役所の区民課・学校でたしかめてください。"+C.word+"数・学級数は、さいたま市「市立学校 児童・生徒数」（令和8年5月1日現在）。習い事はWollyの習い事リストから、住所や活動場所をもとに位置を出しています。";
+$("#note").innerHTML=T==="s"?"特別支援学校の種類・学部・通学区域は さいたま市「さいたま市における特別支援学校の通学区域等一覧」（令和6年9月）、特別支援学級の数は「市立学校 児童・生徒数」（令和8年5月1日現在）より。学校の位置は OpenStreetMap。最新の情報や、どの学びの場が合うかは、市の教育委員会（特別支援教育室）の就学相談でたしかめてね。":"学区の形は国土数値情報「小学校区・中学校区データ」（国土交通省、令和5年度）をもとにしているよ。その後の変更（新しい学校・学区の見直し）は入っていないことがあるので、正しい学区は区役所の区民課・学校でたしかめてね。"+C.word+"数・学級数は、さいたま市「市立学校 児童・生徒数」（令和8年5月1日現在）。習い事はWollyの習い事リストから、住所や活動場所をもとに位置を出しているよ。";
 let SP=[];
 Promise.all([fetch("school-data/"+(T==="s"?"e":T)+".json").then(r=>r.json()),fetch("school-data/"+(T==="e"?"j":T==="j"?"e":"j")+".json").then(r=>r.json()),fetch("school-data/lessons.json").then(r=>r.json()),T==="s"?fetch("school-data/special.json").then(r=>r.json()):Promise.resolve([])]).then(([a,b,c,d])=>{
   if(T==="s"){S=a.map(x=>Object.assign({kk:"e"},x)).concat(b.map(x=>Object.assign({kk:"j"},x))).filter(x=>x.sp);O=[];SP=d;$("#other").hidden=true;$("#smode").hidden=false;$("#q").placeholder="学校名・地域でさがす"}else{S=a;O=b}L=c;renderLearn();$("#lead").textContent=C.l.replace("{n}",T==="s"?SP.length:S.length);renderWards();renderList();initMap();if(T!=="s")renderMyNear();
   const pre=new URLSearchParams(location.search).get("s");if(pre){const i=S.findIndex(x=>x.n.includes(pre));if(i>=0)setTimeout(()=>openSchool(i,false),800)}
-}).catch(()=>{$("#list").innerHTML="<li>データを読みこめませんでした。時間をおいて開きなおしてください。</li>"});
+}).catch(()=>{$("#list").innerHTML="<li>データを読みこめなかったよ。時間をおいて開きなおしてね。</li>"});
 </script>
 <script>/* 外へのリンクは新しい画面で開く（街ナビの中で開いたとき） */document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a[href]");if(!a)return;var h=a.getAttribute("href")||"";if(h.charAt(0)==="#"||h.charAt(0)==="?"||/^(javascript|tel|mailto):/i.test(h))return;a.target="_blank";a.rel="noopener"},true);</script>
 <!--wolly-totop-->
