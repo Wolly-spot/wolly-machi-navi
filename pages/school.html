@@ -259,6 +259,37 @@ body{text-wrap:pretty}
 .gp details summary svg{width:20px;height:20px;vertical-align:-.3em;margin-right:6px}
 .sqs svg,.gl small .sqs svg{width:17px;height:17px;vertical-align:-.3em;margin-right:3px}
 
+.gp .tl2 li{display:flex;align-items:flex-start;gap:10px;padding:10px 10px 10px 12px;margin-bottom:8px;border-radius:16px;background:#F6FBFF}
+.gp .tl2 .tlt{flex:1;min-width:0;display:grid;gap:5px}
+.gp .tl2 .tld{justify-self:start;font-size:12px;color:#fff;background:linear-gradient(120deg,#5AB4E8,#8E6BF5);border-radius:999px;padding:2px 10px;display:inline-block;text-align:left}
+.pcal{flex:0 0 auto;display:flex;align-items:center;gap:2px}
+.pga{font-weight:900;color:#8E6BF5;font-size:16px;margin:0 1px}
+.pg{display:flex;flex-direction:column;align-items:center;width:50px;border-radius:10px;background:#fff;box-shadow:0 0 0 1.5px #E3E4F0,0 4px 8px -5px rgba(40,30,80,.35);overflow:hidden;position:relative}
+.pg::before,.pg::after{content:"";position:absolute;top:-3px;width:4px;height:8px;border-radius:2px;background:#2E2B4F;opacity:.55}.pg::before{left:13px}.pg::after{right:13px}
+.pg i{display:flex;align-items:center;justify-content:center;gap:1px;width:100%;height:20px;background:var(--sc);font-style:normal}
+.pg i svg{width:15px;height:15px}.pg i em{font-style:normal;font-size:10.5px;font-weight:900;color:#2E2B4F}
+.pg b{font-size:19px;font-weight:900;line-height:1.15;color:#2E2B4F;padding:3px 0 0}.pg b.w{font-size:12px;padding:6px 2px 2px;text-align:center;line-height:1.2}
+.pg small{font-size:9.5px;font-weight:800;color:#8a89a8;padding:0 0 4px;line-height:1.2}.pg b.n:last-child,.pg b.w:last-child{padding-bottom:6px}
+.gp .tl2 li .pg b{background:none;color:#2E2B4F;border-radius:0;align-self:auto;text-align:center;font-size:19px;padding:3px 0 0}.gp .tl2 li .pg b.w{font-size:12px;padding:6px 2px 6px}.gp .tl2 li .pg b:last-child{padding-bottom:6px}
+.gp .dlv .dlm{padding:0;border:0;border-radius:0}.gp .dlv .pcal span{padding:0;border:0}
+.gp .dlv .pg b{display:block;font-size:19px;line-height:1.15;padding:3px 0 0;margin:0}.gp .dlv .pg small{display:block;font-size:9.5px;font-weight:800;color:#8a89a8;margin:0;padding:0 0 4px;line-height:1.2}
+.gp .dlr{display:flex;align-items:center;gap:8px}.gp .dlr .dlm{flex:1;min-width:0}
+
+.gp .tl2 li{align-items:flex-start}.gp .tl2 li>.lrow{flex:1;min-width:0;padding-top:4px}
+.pcal{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:3px;width:118px}
+.mg{display:block;width:118px;border-radius:12px;background:#fff;box-shadow:0 0 0 1.5px #E3E4F0,0 4px 10px -6px rgba(40,30,80,.35);overflow:hidden}
+.mgh{display:flex;align-items:center;justify-content:center;gap:4px;height:22px;background:var(--sc)}.mgh svg{width:16px;height:16px}.mgh b{font-size:12px;font-weight:900;color:#2E2B4F}
+.mgw,.mgd{display:grid;grid-template-columns:repeat(7,1fr);padding:0 3px}.mgw{padding-top:2px}
+.mgw i{font-style:normal;font-size:7.5px;font-weight:800;color:#a3a2bd;text-align:center}.mgw i:first-child{color:#F07A9A}.mgw i:last-child{color:#6FA8E8}
+.mgd{padding-bottom:4px}.mgd i{font-style:normal;font-size:8.5px;line-height:14px;height:14px;text-align:center;color:#6b6a8a;font-weight:700}
+.mgd i.on{background:color-mix(in srgb,var(--sc) 70%,#fff);color:#2E2B4F;font-weight:900}
+.mgd i.d0,.mgd i.d1{background:linear-gradient(135deg,#FF7FAE,#9B7BFF);color:#fff}.mgd i.d0{border-radius:7px 0 0 7px}.mgd i.d1{border-radius:0 7px 7px 0}.mgd i.d0.d1{border-radius:7px}
+.gp .tl2 .mg b{background:none;padding:0;border-radius:0;color:#2E2B4F;font-size:12px;align-self:auto}.gp .tl2 .mgsw{padding:6px 4px 0}
+.mgdot{font-size:12px;line-height:1;color:#9B7BFF;font-weight:900}
+.mgc{font-size:11px;font-weight:900;color:#5a4fa0;text-align:center;line-height:1.3}
+.mgs{padding-bottom:6px}.mgsw{display:block;font-size:12px;font-weight:900;text-align:center;padding:6px 4px 0;color:#2E2B4F}
+.gp .dlv .pcal span,.gp .dlv .pcal i{border:0;margin:0}.gp .dlv .mgc{display:block;font-size:11px;color:#5a4fa0;margin:0}.gp .dlv .mgh b{display:inline;font-size:12px}
+
 .hdeco{position:absolute;inset:0;pointer-events:none;z-index:0}
 .hdeco span{position:absolute;display:block;opacity:.9;filter:drop-shadow(0 4px 6px rgba(90,60,140,.18));animation:hdf 5.5s ease-in-out infinite}
 .hdeco span svg{display:block;width:100%;height:100%}
@@ -685,6 +716,39 @@ const kwOr=(t,d)=>{for(const [k,re] of GKW)if(re.test(t))return k;return d};
 const seaIc=t=>{const m=String(t).match(/(\d{1,2})月|[春夏秋冬]/);if(!m)return "";if(!m[1])return {"春":"sakura","夏":"sunflower","秋":"momiji","冬":"snowman"}[m[0]];
   const n=+m[1];return n>=3&&n<=5?"sakura":n>=6&&n<=8?"sunflower":n>=9&&n<=11?"momiji":"snowman"};
 const dIc=t=>{const s=seaIc(t);return `<span class="dic2">${gi("cal")}${s?gi(s):""}</span>`};
+/* 11/15：期間のカレンダー（マス目のカレンダーに「何日〜何日」の色をぬる）。行の右に出す */
+const SEAC={sakura:"#FFB3CF",sunflower:"#FFE070",momiji:"#F7A1B0",snowman:"#A9D4FF"};
+const mSea=m=>m>=3&&m<=5?"sakura":m>=6&&m<=8?"sunflower":m>=9&&m<=11?"momiji":"snowman";
+const WD="日月火水木金土";
+const ymd=d=>d.getFullYear()*10000+(d.getMonth()+1)*100+d.getDate();
+/* 1か月分のマス目。from〜to（Date）の日に色。capで下にひとこと */
+function mgrid(y,m,from,to){const f=new Date(y,m-1,1),n=new Date(y,m,0).getDate(),s=mSea(m),a=ymd(from),b=ymd(to);
+  let c="";for(let k=0;k<f.getDay();k++)c+="<i></i>";
+  for(let d=1;d<=n;d++){const v=y*10000+m*100+d,on=v>=a&&v<=b;c+=`<i class="${on?"on":""}${v===a?" d0":""}${v===b?" d1":""}">${d}</i>`}
+  return `<span class="mg" style="--sc:${SEAC[s]}"><span class="mgh">${gi(s)}<b>${m}月</b></span><span class="mgw">${[...WD].map(w=>`<i>${w}</i>`).join("")}</span><span class="mgd">${c}</span></span>`}
+function pcal(from,to,cap){const g=[mgrid(from.getFullYear(),from.getMonth()+1,from,to)];
+  const mm=(to.getFullYear()-from.getFullYear())*12+to.getMonth()-from.getMonth();
+  if(mm>=1){if(mm>1)g.push('<span class="mgdot">⋮</span>');g.push(mgrid(to.getFullYear(),to.getMonth()+1,from,to))}
+  return `<span class="pcal">${g.join("")}<span class="mgc">${cap}</span></span>`}
+const pcalD=(a,b)=>{const d=x=>new Date(x+"T00:00:00"),A=d(a),B=b?d(b):A,f=x=>`${x.getMonth()+1}/${x.getDate()}(${WD[x.getDay()]})`;return pcal(A,B,f(A)+(b?"〜"+f(B):""))};
+/* 「10月中旬〜11月中旬」などの言葉から期間を出す（上旬1〜10日・中旬11〜20日・下旬21日〜・末25日〜）。年は、これから来る月で */
+const pcalT=t=>{const parts=String(t).split(/〜|～|・/).filter(Boolean);let lm=0;const pts=[];
+  for(const p of parts){const m=p.match(/(\d{1,2})月/),d=p.match(/(\d{1,2})日/),j=p.match(/上旬|中旬|下旬|末|終わり|はじめ/);const mm=m?+m[1]:lm;if(!mm)continue;lm=mm;
+    const r=d?[+d[1],+d[1]]:j?({"上旬":[1,10],"はじめ":[1,10],"中旬":[11,20],"下旬":[21,31],"末":[25,31],"終わり":[25,31]})[j[0]]:[1,31];pts.push([mm,r])}
+  if(!pts.length){const s=seaIc(t);return s?`<span class="pcal"><span class="mg mgs" style="--sc:${SEAC[s]}"><span class="mgh">${gi(s)}</span><b class="mgsw">${esc(t)}</b></span></span>`:""}
+  const now=new Date(),y0=now.getFullYear(),m0=now.getMonth()+1;const y1=pts[0][0]>=m0?y0:y0+1;
+  const A=pts[0],B=pts[pts.length-1];const yB=B[0]>=A[0]?y1:y1+1;
+  const last=(y,m)=>new Date(y,m,0).getDate();
+  const from=new Date(y1,A[0]-1,A[1][0]);const to=new Date(yB,B[0]-1,Math.min(B[1][1],last(yB,B[0])));
+  return pcal(from,to,esc(t))};
+/* 文のポイントに合うアイコン：文のおわりに近いことばを優先（「〜がとどく」「〜に出る」）。となりの行と同じにしない */
+const PKW=[["mail","とどく|届く|郵送|送られ"],["web","ホームページ|サイト|インターネット|ネット"],["megaphone","お知らせ|おしらせ|説明会|せつめい会|発表"],["flag","入学式|卒業式|式"],["yen","お金|準備金|円|手当|支援金"],["doc","申しこ|申込|手つづき|手続|書類|紙"],["school","小学校|中学校|高校|学校"],["hosp","けんこうしんだん|健康診断|健診"],["pencil","テスト|面接|検査|勉強"],["bag","買う|そろえ|用意"],["people","学童|ひろば|友だち|先生"],["home","家|引っこし|引越"]];
+const PRE=PKW.map(([k,r])=>[k,new RegExp(r,"g")]);
+function ptIcs(t){const hits=[];for(const [k,re] of PRE){re.lastIndex=0;let m,last=-1;while((m=re.exec(t)))last=m.index;if(last>=0)hits.push([last,k])}
+  for(const [k,re] of GKW){const m=t.search(re);if(m>=0&&!hits.some(h=>h[1]===k))hits.push([m-100,k])}
+  return hits.sort((a,b)=>b[0]-a[0]).map(h=>h[1])}
+let _prevIc="";
+const lIcP=(t,d)=>{const c=ptIcs(t);let k=c.find(x=>x!==_prevIc)||c[0]||d;_prevIc=k;return `<span class="lic">${gi(k)}</span>`};
 const lIc=(t,d)=>`<span class="lic">${gi(kwOr(t,d))}</span>`;
 function dleft(a,b){const t=new Date();t.setHours(0,0,0,0);const A=new Date(a+"T00:00:00"),B=b?new Date(b+"T00:00:00"):A;
   if(t<A){const d=Math.round((A-t)/864e5);return [`<span class="st soon">あと${d}日ではじまる</span>`,0]}
@@ -726,17 +790,17 @@ function showItem(path,push=true){
   if(push)gstack.push(["i",path]);openGd();$("#gdT").textContent=it.t;
   const key="item:"+path,fav=favSet().has(key);
   let body="";
-  if(it.steps)body+=sec("いつ・なにがある？","cal",`<ul class="tl">${it.steps.map(([a,b])=>`<li><b data-noicon>${dIc(a)}${esc(a)}</b><span class="lrow">${lIc(b,"star")}<span>${esc(b)}</span></span></li>`).join("")}</ul>`);
-  if(it.why)body+=sec("どうしてこんなにあるの？","bulb",`<div class="why">${it.why.map(x=>`<p class="lrow">${lIc(x,"bulb")}<span>${esc(x)}</span></p>`).join("")}</div>`);
+  if(it.steps)body+=sec("いつ・なにがある？","cal",(_prevIc="",`<ul class="tl tl2">${it.steps.map(([a,b])=>`<li><span class="lrow">${lIcP(b,"star")}<span>${esc(b)}</span></span>${pcalT(a)}</li>`).join("")}</ul>`));
+  if(it.why)body+=sec("どうしてこんなにあるの？","bulb",`<div class="why">${(_prevIc="",it.why).map(x=>`<p class="lrow">${lIcP(x,"bulb")}<span>${esc(x)}</span></p>`).join("")}</div>`);
   if(it.table)body+=sec(it.table_t||"くらべてみよう","check",`<div class="tbl"><table class="c${it.table.head.length}"><thead><tr>${it.table.head.map(h=>`<th>${esc(h)}</th>`).join("")}</tr></thead><tbody>${it.table.rows.map(r=>`<tr>${r.map((c,k)=>k?`<td>${esc(c)}</td>`:`<th>${esc(c)}</th>`).join("")}</tr>`).join("")}</tbody></table></div>`);
   if(it.info)body+=sec("知っておきたいこと","bulb",`<dl>${it.info.map(([a,b])=>`<div><dt>${gi(kwIc(a))}<span>${esc(a)}</span></dt><dd>${esc(b)}</dd></div>`).join("")}</dl>`);
   if(it.checklist&&it.groups){const st=LS("wolly.prepcheck")||{};const all=it.groups.reduce((n,[,l])=>n+l.length,0),done=Object.values(st).filter(Boolean).length;
     body+=sec("チェックリスト","check",`<div class="ckbar"><i style="width:${Math.round(done/all*100)}%"></i></div><p class="meta"><span>${done} / ${all} できた</span></p>`+it.groups.map(([h,l])=>`<p style="margin:12px 0 6px;font-weight:900;font-size:13.5px">${esc(h)}</p><div class="ck">${l.map(x=>`<label><input type="checkbox" data-ck="${esc(x)}"${st[x]?" checked":""}>${esc(x)}</label>`).join("")}</div>`).join(""))}
   if(it.calendar&&it.deadlines){const l=it.deadlines.map(d=>[d,dleft(d[1],d[2])]).sort((a,b)=>a[1][1]-b[1][1]||a[0][1].localeCompare(b[0][1]));
-    body+=sec("しめきりの一らん","cal",`<div class="dlv">${l.map(([[t,a,b,p],[st]])=>`<div>${st}<b>${esc(t)}</b><small class="lrow">${dIc(a)}<span>${jd(a)}${b?"〜"+jd(b):""}</span></small><a href="${gcal(t,a,b)}" target="_blank" rel="noopener">Googleカレンダーに入れる</a>${p?`<button type="button" data-gi="${esc(p)}">くわしく</button>`:""}</div>`).join("")}</div>`)}
+    body+=sec("しめきりの一らん","cal",`<div class="dlv">${l.map(([[t,a,b,p],[st]])=>`<div class="dlr"><div class="dlm">${st}<b>${esc(t)}</b><a href="${gcal(t,a,b)}" target="_blank" rel="noopener">Googleカレンダーに入れる</a>${p?`<button type="button" data-gi="${esc(p)}">くわしく</button>`:""}</div>${pcalD(a,b)}</div>`).join("")}</div>`)}
   if(it.faq)body+=sec("よくきかれること","bulb",it.faq.map(([q,a])=>`<details><summary data-noicon>${gi(kwOr(q,"bulb"))}${esc(q)}</summary><p>${esc(a)}</p></details>`).join(""));
-  if(it.how)body+=sec("手つづきのしかた","doc",`<ol class="how">${it.how.map(x=>`<li><span class="lrow">${lIc(x,"doc")}<span>${esc(x)}</span></span></li>`).join("")}</ol>`);
-  if(it.note)body+=sec("気をつけること","warn",`<ul class="notes">${it.note.map(x=>`<li class="lrow">${lIc(x,"warn")}<span>${esc(x)}</span></li>`).join("")}</ul>`);
+  if(it.how)body+=sec("手つづきのしかた","doc",`<ol class="how">${(_prevIc="",it.how).map(x=>`<li><span class="lrow">${lIcP(x,"doc")}<span>${esc(x)}</span></span></li>`).join("")}</ol>`);
+  if(it.note)body+=sec("気をつけること","warn",`<ul class="notes">${(_prevIc="",it.note).map(x=>`<li class="lrow">${lIcP(x,"warn")}<span>${esc(x)}</span></li>`).join("")}</ul>`);
   body+=`<div class="chk-last"><span class="clk">${gi("check")}</span><p><b>さいごは、まどぐちでたしかめてね</b>このページは、わかりやすくまとめた「めやす」です。申しこむ前や、手つづきの前は、区役所・学校・市の係でたしかめてください。${it.contact?"下の「電話できるところ」から電話できます。":""}</p></div>`;
   if(it.contact)body+=sec("電話できるところ","phone",`<div class="tel">${it.contact.map(([n,t,inf],ci)=>`<div${inf?' class="has-ci"':""}><span>${esc(n)}</span><span class="tbtn">${inf?`<button type="button" class="cib" data-ci="${esc(path)}|${ci}">どんなところ？</button>`:""}${t?`<a href="tel:${esc(t.replace(/[^0-9]/g,""))}">${esc(t)}</a>`:""}</span></div>`).join("")}</div>`);
   const rel=(it.rel||[]).map(relBtn).join("")+`<button type="button" class="soonb" data-chat>${gi("people")}地域の人に聞く（準備中）</button>`;
