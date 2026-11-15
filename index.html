@@ -1318,48 +1318,58 @@ svg .a-ring{animation:ring 2.4s ease-in-out infinite;transform-box:fill-box;tran
 .cv .lmos i:nth-child(2n){animation-delay:.4s}.cv .lmos i:nth-child(3n){animation-delay:.8s}
 .cv .lmos svg{width:72%;height:72%}
 @keyframes lmPop{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
-/* うちの子に合う習い事は？（あみだくじ・ホログラム）11/15 */
-.kj{margin:0 0 14px;border-radius:20px;background:radial-gradient(120% 90% at 50% 0%,#1d2a63 0,#0d1340 60%,#070b26 100%);color:#e8f6ff;box-shadow:0 0 0 1.5px rgba(127,233,255,.55),0 0 22px -4px rgba(127,233,255,.55),0 14px 30px -18px rgba(10,10,60,.9);overflow:hidden;position:relative}
-.kj::after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(to bottom,rgba(127,233,255,.07) 0 1px,transparent 1px 4px);border-radius:inherit}
-.kj>summary{list-style:none;cursor:pointer;padding:14px 16px 12px;display:flex;gap:10px;align-items:center}
+/* うちの子に合う習い事は？（あみだくじ。半透明でかわいく、上から下へ）11/15 */
+.kj{margin:0 0 14px;border-radius:24px;position:relative;
+  background:linear-gradient(160deg,rgba(255,236,246,.78),rgba(238,232,255,.74) 50%,rgba(224,244,255,.76));
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+  box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.95),0 14px 30px -18px rgba(120,90,200,.55)}
+.kj>summary{list-style:none;cursor:pointer;padding:14px 14px 12px;display:flex;gap:10px;align-items:center}
 .kj>summary::-webkit-details-marker{display:none}
-.kj>summary .kjic{flex:0 0 auto;width:44px;height:44px;border-radius:14px;display:grid;place-items:center;font-size:24px;background:linear-gradient(140deg,rgba(127,233,255,.25),rgba(182,155,255,.3));box-shadow:inset 0 0 0 1px rgba(127,233,255,.6),0 0 12px rgba(127,233,255,.45)}
-.kj>summary b{display:block;font-size:16px;letter-spacing:.04em;text-shadow:0 0 8px rgba(127,233,255,.6)}
-.kj>summary small{display:block;font-size:11.5px;opacity:.8;margin-top:2px}
-.kj>summary .kjtg{margin-left:auto;flex:0 0 auto;font-size:11px;font-weight:800;border:1px solid rgba(127,233,255,.7);border-radius:999px;padding:5px 10px;color:#bff4ff}
+.kj>summary .kjic{flex:0 0 auto;width:48px;height:48px;border-radius:16px;display:grid;place-items:center;background:rgba(255,255,255,.85);box-shadow:0 6px 14px -8px rgba(120,90,200,.6)}
+.kj>summary .kjic svg{width:38px;height:38px}
+.kj>summary b{display:block;font-size:16px;color:#3a2f73}
+.kj>summary small{display:block;font-size:11.5px;color:#6b6496;margin-top:2px}
+.kj>summary .kjtg{margin-left:auto;flex:0 0 auto;font-size:11px;font-weight:800;color:#7a5cf0;background:rgba(255,255,255,.85);border-radius:999px;padding:6px 11px;box-shadow:0 4px 10px -6px rgba(120,90,200,.6)}
 .kj[open]>summary .kjtg::before{content:"とじる"}.kj:not([open])>summary .kjtg::before{content:"ひらく"}
-.kjin{padding:0 0 14px;position:relative;z-index:1}
-.kjsc{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scroll-behavior:smooth;padding:4px 0 8px;scrollbar-width:thin}
-.kjtr{position:relative;display:flex;gap:46px;padding:4px 16px 6px;width:max-content;align-items:flex-start}
-.kjtr svg{position:absolute;inset:0;pointer-events:none;overflow:visible}
-.kjcol{width:150px;flex:0 0 auto;display:flex;flex-direction:column;gap:8px;animation:kjIn .6s cubic-bezier(.2,.8,.3,1) both}
-@keyframes kjIn{from{opacity:0;transform:translateX(18px) scale(.96);filter:blur(4px) brightness(2)}}
-.kjq{font-size:13px;font-weight:800;line-height:1.45;padding:9px 10px;border-radius:14px;background:rgba(127,233,255,.1);border:1px solid rgba(127,233,255,.45);min-height:58px}
-.kjq em{display:block;font-style:normal;font-size:10px;letter-spacing:.2em;color:var(--kc);text-shadow:0 0 6px var(--kc)}
-.kjo{font:inherit;font-size:12.5px;font-weight:700;color:#e8f6ff;text-align:left;padding:9px 10px;border-radius:12px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.06);cursor:pointer;display:flex;gap:7px;align-items:center;transition:all .25s}
-.kjo i{font-style:normal;font-size:17px}
-.kjo:hover{border-color:var(--kc)}
-.kjo.on{border-color:var(--kc);background:color-mix(in srgb,var(--kc) 28%,transparent);box-shadow:0 0 0 1px var(--kc),0 0 14px var(--kc);color:#fff}
-.kjcol.done .kjo:not(.on){opacity:.35}
-.kjpath{fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 4px currentColor);stroke-dasharray:var(--len);stroke-dashoffset:var(--len);animation:kjDraw .7s ease-out forwards}
+.kjin{padding:0 12px 12px}
+.kjtr{position:relative;display:flex;flex-direction:column;gap:30px;padding:4px 0 8px}
+.kjtr>svg{position:absolute;left:0;top:0;pointer-events:none;overflow:visible;z-index:0}
+.kjrow{position:relative;z-index:1;animation:kjIn .55s cubic-bezier(.2,.8,.3,1.2) both}
+@keyframes kjIn{from{opacity:0;transform:translateY(-10px) scale(.96)}}
+.kjq{width:max-content;max-width:92%;margin:0 auto 10px;text-align:center;font-size:14px;font-weight:800;color:#3a2f73;line-height:1.45;padding:8px 16px;border-radius:999px;background:rgba(255,255,255,.92);box-shadow:0 6px 14px -9px rgba(120,90,200,.7),inset 0 0 0 2px var(--kc)}
+.kjq em{display:inline-block;font-style:normal;font-size:10.5px;font-weight:800;color:#fff;background:var(--kc);border-radius:999px;padding:1px 8px;margin-right:6px;vertical-align:1px}
+.kjq small{display:block;font-size:10.5px;font-weight:600;color:#8a83b5}
+.kjos{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.kjo{font:inherit;font-size:11.5px;font-weight:800;color:#3a2f73;line-height:1.3;padding:9px 4px 8px;border-radius:18px;border:0;cursor:pointer;
+  background:rgba(255,255,255,.6);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.95),0 6px 12px -10px rgba(90,70,170,.7);
+  display:flex;flex-direction:column;align-items:center;gap:5px;transition:transform .3s cubic-bezier(.3,1.6,.5,1),opacity .3s,box-shadow .3s,background .3s}
+.kjo span{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--lg);box-shadow:inset 0 0 0 2px rgba(255,255,255,.9)}
+.kjo span svg{width:34px;height:34px}
+.kjo:active{transform:scale(.94)}
+.kjo.on{background:#fff;box-shadow:inset 0 0 0 2.5px var(--kc),0 8px 18px -8px var(--kc)}
+.kjo.on span{animation:kjHop .6s cubic-bezier(.3,1.6,.5,1)}
+@keyframes kjHop{40%{transform:translateY(-6px) scale(1.1)}}
+.kjrow.done .kjo:not(.on){opacity:.38}
+.kjpath{fill:none;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:var(--len);stroke-dashoffset:var(--len);animation:kjDraw .6s ease-out forwards}
+.kjdot{animation:kjDot .3s .55s both}
 @keyframes kjDraw{to{stroke-dashoffset:0}}
-.kjca{margin:6px 12px 0;padding:10px 10px 8px;border-radius:16px;background:rgba(127,233,255,.07);border:1px dashed rgba(127,233,255,.45)}
-.kjca h5{margin:0 2px 8px;font-size:12.5px;display:flex;align-items:center;gap:6px}
-.kjca h5 b{font-size:20px;background:linear-gradient(90deg,#ff9ec4,#b9a6ff,#7fe9ff,#ffe27a);-webkit-background-clip:text;background-clip:text;color:transparent}
-.kjca h5 span{margin-left:auto;font-size:10.5px;opacity:.75;font-weight:500}
-.kjls{display:flex;flex-wrap:wrap;gap:6px}
-.kjc{border:0;font:inherit;font-size:11.5px;font-weight:800;color:#2a2550;background:var(--lg);border-radius:12px;padding:4px 9px 4px 4px;display:flex;align-items:center;gap:4px;cursor:pointer;transition:transform .45s cubic-bezier(.3,1.4,.5,1),opacity .45s,filter .45s;box-shadow:0 0 10px rgba(127,233,255,.35)}
-.kjc svg{width:26px;height:26px}
-.kjc.out{transform:scale(.3) translateY(-10px);opacity:0;filter:blur(3px);pointer-events:none}
-.kjc.gone{display:none}
-.kjc.pop{animation:kjPop .8s cubic-bezier(.2,.8,.3,1.4)}
-@keyframes kjPop{0%{transform:scale(.8);filter:brightness(1.8)}100%{transform:none;filter:none}}
-.kjnote{margin:8px 2px 0;font-size:11px;opacity:.8}
-.kjrs{display:block;margin:10px auto 0;font:inherit;font-size:12px;font-weight:800;color:#bff4ff;background:none;border:1px solid rgba(127,233,255,.6);border-radius:999px;padding:7px 16px;cursor:pointer}
-.kjzm{display:block;margin:0 12px 4px auto;position:relative;z-index:2;font:inherit;font-size:11px;font-weight:800;color:#bff4ff;background:rgba(13,19,64,.85);border:1px solid rgba(127,233,255,.6);border-radius:999px;padding:5px 11px;cursor:pointer}
-.kjsc.fit{overflow:hidden}.kjsc.fit .kjtr{transform-origin:0 0;transition:transform .6s cubic-bezier(.2,.8,.3,1)}
-.kjfin{font-size:12px;margin:0 2px 8px;color:#fff;text-shadow:0 0 8px rgba(127,233,255,.7)}
-@media (prefers-reduced-motion:reduce){.kjcol,.kjc.pop{animation:none}.kjpath{animation:none;stroke-dashoffset:0}}
+@keyframes kjDot{from{opacity:0;transform:scale(0)}}
+.kjca{position:sticky;bottom:8px;z-index:3;margin-top:6px;padding:9px 10px 8px;border-radius:18px;background:rgba(255,255,255,.82);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 10px 24px -12px rgba(90,70,170,.6),inset 0 0 0 1.5px #fff}
+.kjca h5{margin:0 2px 6px;font-size:12px;color:#3a2f73;display:flex;align-items:center;gap:6px}
+.kjca h5 b{font-size:19px;background:linear-gradient(90deg,#ff8fc0,#a98bff,#6fb6ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.kjca h5 span{margin-left:auto;font-size:10.5px;color:#8a83b5;font-weight:600}
+.kjls{display:flex;gap:6px;overflow-x:auto;padding:2px 2px 4px;scrollbar-width:none}
+.kjls::-webkit-scrollbar{display:none}
+.kjc{flex:0 0 auto;border:0;font:inherit;font-size:11px;font-weight:800;color:#2a2550;background:var(--lg);border-radius:14px;padding:3px 9px 3px 3px;display:flex;align-items:center;gap:3px;cursor:pointer;white-space:nowrap;
+  box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.85);transition:transform .45s cubic-bezier(.3,1.4,.5,1),opacity .45s,max-width .45s,padding .45s,margin .45s;max-width:200px}
+.kjc svg{width:26px;height:26px;background:rgba(255,255,255,.85);border-radius:50%}
+.kjc.out{transform:scale(.2) translateY(-8px);opacity:0;max-width:0;padding:0;margin-right:-6px;pointer-events:none}
+.kjc.pop{animation:kjPop .7s cubic-bezier(.2,.8,.3,1.4)}
+@keyframes kjPop{0%{transform:scale(.85)}60%{transform:scale(1.06)}}
+.kjfin{font-size:12px;margin:0 2px 6px;color:#7a5cf0;font-weight:800}
+.kjnote{margin:6px 2px 0;font-size:10.5px;color:#8a83b5}
+.kjrs{display:block;margin:12px auto 0;font:inherit;font-size:12px;font-weight:800;color:#7a5cf0;background:rgba(255,255,255,.85);border:0;border-radius:999px;padding:8px 18px;cursor:pointer;box-shadow:0 4px 10px -6px rgba(120,90,200,.6)}
+@media (prefers-reduced-motion:reduce){.kjrow,.kjc.pop,.kjo.on span{animation:none}.kjpath{animation:none;stroke-dashoffset:0}.kjdot{animation:none}}
 .lgwrap{padding:4px 2px 6px}.lgtop{text-align:center;margin:4px 0 10px}.lgtop h3{margin:2px 0 4px;font-size:20px}.lgtop p{margin:0;font-size:12.5px;color:var(--muted)}.lgsp{font-size:22px}
 .lgh{margin:16px 2px 8px;font-size:13px;color:#5A5AEF;letter-spacing:.06em}
 .lgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
@@ -2236,7 +2246,7 @@ function moneyCards(){
 }
 /* 現在の習い事一覧：いま載せている習い事のアイコンをカラフルに並べる。タップでその習い事へ（11/14） */
 const LGRAD=["linear-gradient(140deg,#FFD3E4,#FF9EC4)","linear-gradient(140deg,#E3DAFF,#B9A6FF)","linear-gradient(140deg,#D3E6FF,#93BDFF)","linear-gradient(140deg,#D2F3FF,#86D6F5)","linear-gradient(140deg,#FFF1BD,#FFD86B)","linear-gradient(140deg,#F6D8FF,#D99BF5)","linear-gradient(140deg,#FFDCDC,#FF9FA8)","linear-gradient(140deg,#D9DEFF,#9AA6F5)"];
-/* うちの子に合う習い事は？：答えるたびに候補がしぼられる、あみだくじ（11/15） */
+/* うちの子に合う習い事は？：答えるたびに候補がしぼられる、あみだくじ（11/15。上から下へ） */
 const KJT={/* m:体を動かす(0-2) s:t=みんな o=ひとり b=どちらも k:好き p:送迎・当番(0-2) n:のばす力 */
   "少年野球":{m:2,s:"t",k:"ball",p:2,n:"体力 協調 礼儀"},"サッカー":{m:2,s:"t",k:"ball",p:2,n:"体力 協調"},"バスケットボール":{m:2,s:"t",k:"ball",p:1,n:"体力 協調"},
   "バレーボール":{m:2,s:"t",k:"ball",p:1,n:"体力 協調"},"ソフトボール":{m:2,s:"t",k:"ball",p:2,n:"体力 協調"},"テニス":{m:2,s:"b",k:"ball",p:1,n:"体力 集中"},
@@ -2249,53 +2259,65 @@ const KJT={/* m:体を動かす(0-2) s:t=みんな o=ひとり b=どちらも k:
   "eスポーツ":{m:0,s:"b",k:"think",p:0,n:"集中 協調"},"そろばん":{m:0,s:"o",k:"think",p:0,n:"学力 集中"},"学習塾":{m:0,s:"b",k:"think",p:0,n:"学力"},
   "書道":{m:0,s:"o",k:"art",p:0,n:"集中 礼儀"},"囲碁":{m:0,s:"o",k:"think",p:0,n:"集中 学力"},"将棋":{m:0,s:"o",k:"think",p:0,n:"集中 礼儀"},
   "華道":{m:0,s:"o",k:"art",p:0,n:"表現 礼儀"},"茶道":{m:0,s:"o",k:"art",p:0,n:"礼儀 集中"},"自然・農業体験":{m:1,s:"t",k:"out",p:1,n:"体力 協調"}};
+const KJI={
+  run:`<circle cx="23" cy="13" r="8" fill="#FFE0C8" ${NO}/>${NF(23,14)}<path d="M20 22l-3 7-6 2M25 22l3 6 5 3M19 24l-6-2M27 24l5-4" fill="none" ${NO}/><path d="M3 12h6M2 18h7M4 24h5" stroke="#7FB2FF" stroke-width="2.4" stroke-linecap="round"/>`,
+  sun:`<g stroke="#FFC83D" stroke-width="2.6" stroke-linecap="round"><path d="M20 2v4M20 34v4M2 20h4M34 20h4M7 7l3 3M30 30l3 3M7 33l3-3M30 10l3-3"/></g><circle cx="20" cy="20" r="11" fill="#FFE27A" ${NO}/>${NF(20,20)}`,
+  book:`<path d="M3 11q9-4 17 2q8-6 17-2v21q-9-4-17 2q-8-6-17-2z" fill="#FFD3E4" ${NO}/><path d="M20 13v21" ${NO}/><path d="M8 17q4-1 8 1M8 22q4-1 8 1M24 18q4-2 8-1M24 23q4-2 8-1" stroke="#FF8FB8" stroke-width="1.6" stroke-linecap="round" fill="none"/>`,
+  puzzle:`<path d="M8 12h8a4 4 0 1 1 8 0h8v8a4 4 0 1 0 0 8v8H8v-8a4 4 0 1 1 0-8z" fill="#C9B8FF" ${NO}/>${NF(19,25)}`,
+  rainbow:`<path d="M4 28a16 16 0 0 1 32 0" fill="none" stroke="#FF9EC4" stroke-width="4.5" stroke-linecap="round"/><path d="M10 28a10 10 0 0 1 20 0" fill="none" stroke="#B9A6FF" stroke-width="4.5" stroke-linecap="round"/><path d="M16 28a4 4 0 0 1 8 0" fill="none" stroke="#7FE9FF" stroke-width="4.5" stroke-linecap="round"/><ellipse cx="7" cy="30" rx="6" ry="4.5" fill="#fff" ${NO}/><ellipse cx="33" cy="30" rx="6" ry="4.5" fill="#fff" ${NO}/>`,
+  heart:`<path d="M20 35S4 25.5 4 15a8 8 0 0 1 16-2 8 8 0 0 1 16 2c0 10.5-16 20-16 20z" fill="#FF9EC4" ${NO}/>${NF(20,19)}`,
+  car:`<path d="M4 27v-6l5-9h18l8 9v6z" fill="#B9D4FF" ${NO}/><path d="M12 15h6v6h-9zM21 15h5l4 6h-9z" fill="#fff" ${NO}/><circle cx="12" cy="28" r="4.5" fill="#fff" ${NO}/><circle cx="28" cy="28" r="4.5" fill="#fff" ${NO}/>`,
+  clock:`<path d="M10 6l-5 5M30 6l5 5" ${NO}/><circle cx="20" cy="22" r="13" fill="#D2F3FF" ${NO}/>${NF(20,25)}<path d="M20 11v5M20 16l4-2" fill="none" ${NO}/>`,
+  sparkle:`<path d="M20 3l4 11 11 4-11 4-4 11-4-11-11-4 11-4z" fill="#FFE27A" ${NO}/><circle cx="33" cy="8" r="3" fill="#FF9EC4"/><circle cx="8" cy="32" r="2.5" fill="#B9A6FF"/>`};
+const kjIc=k=>KJI[k]?svg(KJI[k],40):lessonSvg(k);
 const KJQ=[
-  {q:"体を動かすのは、すき？",who:"お子さんに",o:[["🏃","だいすき！",t=>t.m===2],["🙂","ほどほど",t=>t.m>=1],["🪑","すわってじっくりがすき",t=>t.m<=1]]},
-  {q:"どっちが楽しい？",who:"お子さんに",o:[["🤝","みんなでいっしょに",t=>t.s!=="o"],["🧩","ひとりでコツコツ",t=>t.s!=="t"],["🌈","どっちも楽しい",t=>true]]},
-  {q:"わくわくするのは？",who:"お子さんに",o:[["⚽","ボールで遊ぶ",t=>/ball/.test(t.k)],["🥋","かっこいい技や型",t=>/fight|body/.test(t.k)],["🎵","音やリズム",t=>/music/.test(t.k)],["🖌️","書く・つくる",t=>/art/.test(t.k)],["🧠","考える・頭をつかう",t=>/think/.test(t.k)],["🌳","外や生きもの",t=>/out/.test(t.k)]]},
-  {q:"送り迎えや当番は？",who:"おうちの人が",o:[["🙆","当番もOK",t=>true],["🚗","送り迎えくらいなら",t=>t.p<=1],["⏳","できるだけ少なく",t=>t.p===0]]},
-  {q:"いちばんのばしたい力は？",who:"おうちの人が",o:[["💪","体力",t=>/体力/.test(t.n)],["🎯","集中力",t=>/集中/.test(t.n)],["🎨","表現する力",t=>/表現/.test(t.n)],["🙇","礼儀",t=>/礼儀/.test(t.n)],["📚","学ぶ力",t=>/学力/.test(t.n)],["🤝","なかまと協力",t=>/協調/.test(t.n)]]}];
-const KJC=["#ff8fc0","#c39bff","#7fb2ff","#7fe9ff","#ffe27a"];
+  {q:"体を動かすのは、すき？",who:"お子さんに",o:[["run","だいすき！",t=>t.m===2],["sun","ほどほど",t=>t.m>=1],["book","すわって じっくり",t=>t.m<=1]]},
+  {q:"どっちが楽しい？",who:"お子さんに",o:[["kids","みんなで いっしょ",t=>t.s!=="o"],["puzzle","ひとりで コツコツ",t=>t.s!=="t"],["rainbow","どっちも 楽しい",t=>true]]},
+  {q:"わくわくするのは？",who:"お子さんに",o:[["soccer","ボールあそび",t=>/ball/.test(t.k)],["karate","かっこいい 技や型",t=>/fight|body/.test(t.k)],["music","音や リズム",t=>/music/.test(t.k)],["shodo","書く・つくる",t=>/art/.test(t.k)],["shogi","考える・ 頭をつかう",t=>/think/.test(t.k)],["nature","外や 生きもの",t=>/out/.test(t.k)]]},
+  {q:"送り迎えや当番は？",who:"おうちの人が",o:[["heart","当番も OK",t=>true],["car","送り迎え くらいなら",t=>t.p<=1],["clock","できるだけ 少なく",t=>t.p===0]]},
+  {q:"いちばん のばしたい力は？",who:"おうちの人が",o:[["gym","体力",t=>/体力/.test(t.n)],["igo","集中力",t=>/集中/.test(t.n)],["ballet","表現する力",t=>/表現/.test(t.n)],["sado","礼儀",t=>/礼儀/.test(t.n)],["juku","学ぶ力",t=>/学力/.test(t.n)],["cheer","なかまと 協力",t=>/協調/.test(t.n)]]}];
+const KJC=["#FF8FC0","#B48BFF","#7FA8FF","#5CC8F0","#F5B93D"];
 function kjHTML(){
   const chips=LESSONS.map((l,i)=>KJT[l.t]?`<button type="button" class="kjc" data-lgo="${i}" data-kt="${esc(l.t)}" style="--lg:${LGRAD[i%LGRAD.length]}">${lessonSvg(l.ic)}${esc(l.t)}</button>`:"").join("");
-  return `<details class="kj" id="kj"><summary><span class="kjic">🧭</span><span><b>うちの子には、なにが合う？</b><small>お子さんといっしょに、えらんで進もう</small></span><span class="kjtg"></span></summary>
-  <div class="kjin"><button type="button" class="kjzm" id="kjzm">🔍 全体を見る</button><div class="kjsc" id="kjsc"><div class="kjtr" id="kjtr"><svg id="kjsv"></svg></div></div>
+  return `<details class="kj" id="kj"><summary><span class="kjic">${svg(KJI.sparkle,40)}</span><span><b>うちの子には、なにが合う？</b><small>お子さんといっしょに、えらんで進もう</small></span><span class="kjtg"></span></summary>
+  <div class="kjin"><div class="kjtr" id="kjtr"><svg id="kjsv"></svg></div>
   <div class="kjca"><p class="kjfin" id="kjfin" hidden></p><h5>候補 <b id="kjn">${Object.keys(KJT).length}</b><span>答えるほど、しぼられるよ</span></h5><div class="kjls" id="kjls">${chips}</div><p class="kjnote" id="kjnote" hidden></p></div>
   <button type="button" class="kjrs" id="kjrs">↺ はじめから</button></div></details>`;
 }
 function kjInit(root){
-  const tr=root.querySelector("#kjtr"),sv=root.querySelector("#kjsv"),sc=root.querySelector("#kjsc");if(!tr)return;
+  const tr=root.querySelector("#kjtr"),sv=root.querySelector("#kjsv");if(!tr)return;
   let pick=[];
-  const alive=()=>{let set=Object.keys(KJT);pick.forEach((oi,qi)=>{const f=KJQ[qi].o[oi][2];const nx=set.filter(t=>f(KJT[t]));set=nx.length?nx:set});return set};
+  const alive=()=>{let set=Object.keys(KJT);pick.forEach((oi,qi)=>{const nx=set.filter(t=>KJQ[qi].o[oi][2](KJT[t]));if(nx.length)set=nx});return set};
   function chips(){const set=new Set(alive());root.querySelector("#kjn").textContent=set.size;
-    root.querySelectorAll(".kjc").forEach(c=>{const on=set.has(c.dataset.kt);if(on&&c.classList.contains("gone")){c.classList.remove("gone");requestAnimationFrame(()=>c.classList.remove("out"))}
-      else if(!on&&!c.classList.contains("out")){c.classList.add("out");setTimeout(()=>c.classList.contains("out")&&c.classList.add("gone"),460)}
-      else if(on){c.classList.remove("pop");void c.offsetWidth;c.classList.add("pop")}});
-    const fin=root.querySelector("#kjfin");fin.hidden=pick.length<KJQ.length;fin.textContent="✨ この中から、体験に行ってみよう！ タップで習い事のページへ";}
-  function col(qi){const Q=KJQ[qi],c=KJC[qi%KJC.length];const d=document.createElement("div");d.className="kjcol";d.style.setProperty("--kc",c);d.dataset.q=qi;
-    d.innerHTML=`<div class="kjq"><em>Q${qi+1}・${Q.who}</em>${esc(Q.q)}</div>`+Q.o.map((o,oi)=>`<button type="button" class="kjo" data-oi="${oi}"><i>${o[0]}</i>${esc(o[1])}</button>`).join("");tr.appendChild(d);return d}
-  function line(a,b,color){const T=tr.getBoundingClientRect(),A=a.getBoundingClientRect(),B=b.getBoundingClientRect();
-    const x1=A.right-T.left,y1=A.top+A.height/2-T.top,x2=B.left-T.left,y2=B.top+B.height/2-T.top,mx=x1+(x2-x1)/2;
-    const p=document.createElementNS("http://www.w3.org/2000/svg","path");p.setAttribute("d",`M${x1} ${y1}H${mx}V${y2}H${x2}`);p.setAttribute("class","kjpath");p.style.color=color;p.setAttribute("stroke",color);
-    sv.appendChild(p);const L=p.getTotalLength();p.style.setProperty("--len",L)}
-  function redraw(){sv.innerHTML="";sv.setAttribute("width",tr.scrollWidth);sv.setAttribute("height",tr.scrollHeight);
-    const cols=[...tr.querySelectorAll(".kjcol")];cols.forEach((cl,qi)=>{const on=cl.querySelector(".kjo.on"),nx=cols[qi+1];if(on&&nx)line(on,nx.querySelector(".kjq"),KJC[qi%KJC.length])})}
-  function reset(){pick=[];tr.querySelectorAll(".kjcol").forEach(x=>x.remove());sv.innerHTML="";col(0);root.querySelectorAll(".kjc").forEach(c=>c.classList.remove("out","gone"));chips();root.querySelector("#kjnote").hidden=true;sc.scrollLeft=0}
-  tr.addEventListener("click",e=>{const b=e.target.closest(".kjo");if(!b)return;const cl=b.closest(".kjcol"),qi=+cl.dataset.q;
-    pick=pick.slice(0,qi);pick[qi]=+b.dataset.oi;cl.querySelectorAll(".kjo").forEach(x=>x.classList.toggle("on",x===b));cl.classList.add("done");
-    [...tr.querySelectorAll(".kjcol")].filter(x=>+x.dataset.q>qi).forEach(x=>x.remove());
-    if(qi+1<KJQ.length)col(qi+1);
-    /* しぼりすぎたとき */
+    root.querySelectorAll(".kjc").forEach(c=>{const on=set.has(c.dataset.kt);
+      if(!on)c.classList.add("out");else if(c.classList.contains("out"))c.classList.remove("out");else{c.classList.remove("pop");void c.offsetWidth;c.classList.add("pop")}});
+    const ls=root.querySelector("#kjls");ls.scrollTo({left:0,behavior:"smooth"});
+    const fin=root.querySelector("#kjfin");fin.hidden=pick.length<KJQ.length;fin.textContent="✨ 気になるものから、体験に行ってみよう！ タップで習い事のページへ"}
+  function row(qi){const Q=KJQ[qi],c=KJC[qi%KJC.length];const d=document.createElement("div");d.className="kjrow";d.style.setProperty("--kc",c);d.dataset.q=qi;
+    d.innerHTML=`<div class="kjq"><em>Q${qi+1}</em>${esc(Q.q)}<small>${esc(Q.who)}きいてね</small></div><div class="kjos">`+
+      Q.o.map((o,oi)=>`<button type="button" class="kjo" data-oi="${oi}" style="--lg:${LGRAD[(qi*3+oi)%LGRAD.length]}"><span>${kjIc(o[0])}</span>${esc(o[1]).replace(" ","<br>")}</button>`).join("")+`</div>`;
+    tr.appendChild(d);return d}
+  /* 位置は offsetLeft/Top で取る（ふわっと出る動きの途中でも、線がずれない） */
+  const at=el=>{let x=0,y=0;while(el&&el!==tr){x+=el.offsetLeft;y+=el.offsetTop;el=el.offsetParent}return{x,y}};
+  function redraw(){sv.innerHTML="";sv.setAttribute("width",tr.offsetWidth);sv.setAttribute("height",tr.offsetHeight);
+    const rows=[...tr.querySelectorAll(".kjrow")];rows.forEach((r,qi)=>{const on=r.querySelector(".kjo.on"),nx=rows[qi+1];if(!on||!nx)return;
+      const q=nx.querySelector(".kjq"),A=at(on),B=at(q),color=KJC[qi%KJC.length];
+      const x1=A.x+on.offsetWidth/2,y1=A.y+on.offsetHeight,x2=B.x+q.offsetWidth/2,y2=B.y,my=y1+(y2-y1)/2;
+      const ns="http://www.w3.org/2000/svg",p=document.createElementNS(ns,"path");
+      p.setAttribute("d",Math.abs(x1-x2)<1?`M${x1} ${y1}V${y2}`:`M${x1} ${y1}V${my-8}Q${x1} ${my} ${x1+(x2>x1?8:-8)} ${my}H${x2+(x2>x1?-8:8)}Q${x2} ${my} ${x2} ${my+8}V${y2}`);
+      p.setAttribute("class","kjpath");p.setAttribute("stroke",color);sv.appendChild(p);p.style.setProperty("--len",p.getTotalLength());
+      [[x1,y1],[x2,y2]].forEach(([x,y])=>{const d=document.createElementNS(ns,"circle");d.setAttribute("cx",x);d.setAttribute("cy",y);d.setAttribute("r",4.5);d.setAttribute("fill",color);d.setAttribute("stroke","#fff");d.setAttribute("stroke-width",2);d.setAttribute("class","kjdot");d.style.transformOrigin=`${x}px ${y}px`;sv.appendChild(d)})})}
+  function reset(){pick=[];tr.querySelectorAll(".kjrow").forEach(x=>x.remove());sv.innerHTML="";row(0);chips();root.querySelector("#kjnote").hidden=true}
+  tr.addEventListener("click",e=>{const b=e.target.closest(".kjo");if(!b)return;const r=b.closest(".kjrow"),qi=+r.dataset.q;
+    pick=pick.slice(0,qi);pick[qi]=+b.dataset.oi;r.querySelectorAll(".kjo").forEach(x=>x.classList.toggle("on",x===b));r.classList.add("done");
+    [...tr.querySelectorAll(".kjrow")].filter(x=>+x.dataset.q>qi).forEach(x=>x.remove());
+    let nr=null;if(qi+1<KJQ.length)nr=row(qi+1);
     let set=Object.keys(KJT),miss=false;pick.forEach((oi,k)=>{const nx=set.filter(t=>KJQ[k].o[oi][2](KJT[t]));if(nx.length)set=nx;else miss=true});
     const nt=root.querySelector("#kjnote");nt.hidden=!miss;nt.textContent="ぴったりの組み合わせがない答えは、とばして近いものを残しています。";
-    chips();if(sc.classList.contains("fit"))fit(false);requestAnimationFrame(()=>{redraw();sc.scrollTo({left:tr.scrollWidth,behavior:"smooth"})});if(pick.length===KJQ.length)setTimeout(()=>fit(true),900)});
-  const zm=root.querySelector("#kjzm");
-  function fit(on){sc.classList.toggle("fit",on);zm.textContent=on?"🔎 大きく見る":"🔍 全体を見る";
-    if(on){sc.scrollLeft=0;const k=Math.min(1,(sc.clientWidth-4)/tr.scrollWidth);tr.style.transform=`scale(${k})`;sc.style.height=Math.ceil(tr.offsetHeight*k+10)+"px"}
-    else{tr.style.transform="";sc.style.height="";requestAnimationFrame(()=>sc.scrollTo({left:tr.scrollWidth}))}}
-  zm.addEventListener("click",()=>fit(!sc.classList.contains("fit")));
-  root.querySelector("#kjrs").addEventListener("click",()=>{fit(false);reset()});
+    chips();requestAnimationFrame(()=>{redraw();nr&&nr.scrollIntoView({block:"center",behavior:"smooth"})})});
+  root.querySelector("#kjrs").addEventListener("click",()=>{reset();root.querySelector("#kj").scrollIntoView({block:"start",behavior:"smooth"})});
   root.querySelector("#kj").addEventListener("toggle",()=>requestAnimationFrame(redraw));
+  addEventListener("resize",()=>requestAnimationFrame(redraw));
   reset();
 }
 function openLessonGrid(){
