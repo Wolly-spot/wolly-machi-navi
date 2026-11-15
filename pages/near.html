@@ -388,6 +388,16 @@ body.fs-open{overflow:hidden}
 .maplibregl-popup .maplibregl-popup-content span{color:#cfe9ff!important}
 .maplibregl-popup .maplibregl-popup-close-button{color:#cfefff!important;z-index:2}
 .maplibregl-popup .maplibregl-popup-tip{border-top-color:rgba(127,233,255,.9)!important;border-bottom-color:rgba(127,233,255,.9)!important;filter:drop-shadow(0 0 4px #7fe9ff)}
+.hl-later{display:none!important}
+.hl-more{position:absolute;left:50%;bottom:16px;translate:-50% 0;z-index:8;display:flex;align-items:center;gap:6px;border:2px solid #fff;border-radius:999px;padding:9px 18px 9px 12px;font:800 13.5px/1 inherit;color:#fff;cursor:pointer;background:linear-gradient(135deg,#ff8fc0,#9b7bff);box-shadow:0 8px 18px -6px rgba(90,60,180,.65),0 0 14px rgba(127,233,255,.45);white-space:nowrap}
+.hl-more b{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.3);font-size:15px}
+.hl-more[hidden]{display:none}
+/* 地図の下などに出す紹介カード（MapLibre の Popup でないもの） */
+.hl-card{position:relative;overflow:hidden;color:#eaf8ff!important;background:linear-gradient(160deg,rgba(24,40,96,.9),rgba(64,42,124,.86))!important;border:1.5px solid rgba(127,233,255,.9)!important;
+  box-shadow:0 0 18px rgba(127,233,255,.45),inset 0 0 18px rgba(127,233,255,.2)!important}
+.hl-card.hl-in{animation:hlCardIn .6s cubic-bezier(.2,.8,.3,1) both}
+.hl-card::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(to bottom,rgba(127,233,255,.12) 0 1px,transparent 1px 4px);pointer-events:none}
+.hl-card b{color:#fff!important}.hl-card small{color:#cfe9ff!important}
 /* 地図をひらいたとき */
 .hl-open{animation:hlMapIn 1.3s cubic-bezier(.2,.8,.3,1)}
 @keyframes hlMapIn{0%{opacity:0;clip-path:inset(50% 0 50% 0);filter:brightness(1.5) saturate(.3)}45%{opacity:1;clip-path:inset(0);filter:brightness(1.25) saturate(.6)}100%{opacity:1}}
@@ -424,11 +434,25 @@ body.fs-open{overflow:hidden}
 const SCH_IC=`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10l9-6 9 6" fill="none" stroke="#5A4FCF" stroke-width="2" stroke-linejoin="round"/><rect x="5" y="10" width="14" height="10" rx="1.5" fill="#FFE3EC" stroke="#5A4FCF" stroke-width="2"/><rect x="10" y="14" width="4" height="6" fill="#5A4FCF"/><circle cx="12" cy="8.6" r="1.6" fill="#FF6FA5"/></svg>`;
 function holoPin(el,color,num,i,ic){
   if(!el||el.dataset.hl)return el;el.dataset.hl="1";
+  if(num!=null&&(i||0)>=(window.HOLO_FIRST||1e9))el.classList.add("hl-later");
   el.style.setProperty("--hc",color||"#9b7bff");el.style.setProperty("--hd",((i||0)*.08)+"s");
   if(num!=null){el.classList.add("hl-full");el.insertAdjacentHTML("beforeend",`<i class="hl-x hl-ring"></i><i class="hl-x hl-ring b"></i><i class="hl-x hl-beam"></i><i class="hl-x hl-dot"></i><b class="hl-x hl-num">${ic?`<em class="hl-ic">${ic}</em>`:""}${num}</b>`);
     el.addEventListener("click",()=>{document.querySelectorAll(".hl-full.hl-on").forEach(x=>x.classList.remove("hl-on"));el.classList.add("hl-on")});}
   else{el.classList.add("hl-add");if(getComputedStyle(el).position==="static")el.style.position="relative";el.insertAdjacentHTML("afterbegin",`<i class="hl-x hl-ring"></i><i class="hl-x hl-ring b"></i><i class="hl-x hl-beam"></i>`);if(ic)el.insertAdjacentHTML("beforeend",`<em class="hl-x hl-badge">${ic}</em>`)}
   return el;
+}
+/* 近い順のピンは最初 HOLO_FIRST（10）か所だけ。地図の下の「地図に あと10か所」で増やして、見えるピンが全部入るように引く */
+function holoMore(map,box){
+  if(!box)return;const host=box.parentElement;if(getComputedStyle(host).position==="static")host.style.position="relative";
+  let btn=host.querySelector(".hl-more");
+  const later=()=>[...box.querySelectorAll(".hl-full.hl-later:not(.out)")];
+  if(!btn){btn=document.createElement("button");btn.type="button";btn.className="hl-more";host.appendChild(btn);
+    btn.addEventListener("click",e=>{e.stopPropagation();const L=later().slice(0,10);
+      L.forEach((el,k)=>{el.style.setProperty("--hd",(k*.08)+"s");el.classList.remove("hl-later")});
+      const b=new maplibregl.LngLatBounds();box.querySelectorAll(".hl-full:not(.hl-later):not(.out)").forEach(el=>{const v=(el.dataset.ll||"").split(",").map(Number);if(v[0])b.extend(v)});
+      if(!b.isEmpty())map.fitBounds(b,{padding:{top:80,bottom:70,left:30,right:30},maxZoom:16.5,duration:1300});btn._upd()})}
+  btn._upd=()=>{const n=later().length;btn.hidden=!n;btn.innerHTML=`<b>＋</b>地図に あと${Math.min(10,n)}か所`};
+  btn._upd();
 }
 function holoOpen(box){
   if(!box||matchMedia("(prefers-reduced-motion: reduce)").matches)return;
@@ -543,7 +567,7 @@ document.title=G.t+"マップ｜家の近くで探す";
 const WARDS=["西","北","大宮","見沼","中央","桜","浦和","南","緑","岩槻"];
 const WARD_LL={"西区":[35.9256,139.5794],"北区":[35.9305,139.6203],"大宮区":[35.9063,139.6290],"見沼区":[35.9265,139.6540],"中央区":[35.8840,139.6260],"桜区":[35.8563,139.6090],"浦和区":[35.8616,139.6457],"南区":[35.8447,139.6450],"緑区":[35.8710,139.6830],"岩槻区":[35.9497,139.6939]};
 const CITY=[35.8617,139.6455];
-const N=20;
+const N=10;
 const RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
 const S={area:null,subs:new Set(),sat:false,sun:false,night:false,shown:N};
 let DATA=[],prof=null,map=null,ready=false,queued=null,markers=[],popup=null,photo=false,swing=18,first=true,pending=false,afterLoad=null,mapOpen=true;
@@ -718,7 +742,7 @@ function refresh(move){
   $("#more").innerHTML=all.length>rows.length?`<button type="button" id="moreBtn">もっと見る（次の${Math.min(N,all.length-rows.length)}か所）</button>`:"";
   const mb=$("#moreBtn");if(mb)mb.onclick=()=>{S.shown+=N;refresh(false)};
   showMaps();renderWardMap();
-  if(o.reg&&mapOpen&&move!==false)drawMap(o,all.slice(0,N));
+  if(o.reg&&mapOpen&&move!==false)drawMap(o,all.slice(0,30));
 }
 $("#list").addEventListener("click",e=>{if(e.target.closest("a"))return;const li=e.target.closest(".card");if(!li)return;openFs(+li.dataset.i,li)});
 $("#list").addEventListener("keydown",e=>{const li=e.target.closest(".card");if(li&&(e.key==="Enter"||e.key===" ")&&!e.target.closest("a")){e.preventDefault();openFs(+li.dataset.i,li)}});
@@ -961,12 +985,14 @@ function place(o,rows){
   const hm=document.createElement("div");hm.innerHTML=`<div class="home${o.home?"":" guest"}">${I(o.home?IC.house:IC.star)}<i class="ring"></i></div>`;hm.style.zIndex=200;hm.title=o.home?"登録した住所":"さがす中心";
   if(!o.tg)markers.push(new maplibregl.Marker({element:hm}).setLngLat([o.ll[1],o.ll[0]]).addTo(map));
   const b=new maplibregl.LngLatBounds([o.ll[1],o.ll[0]],[o.ll[1],o.ll[0]]);
-  rows.forEach((x,i)=>{const r=x.r,c=pc(r,i);b.extend([r.lo,r.la]);
+  window.HOLO_FIRST=10;
+  rows.forEach((x,i)=>{const r=x.r,c=pc(r,i);if(i<10)b.extend([r.lo,r.la]);
     const c2=pc(r,i);const e=document.createElement("div");e.className="pw";e.style.zIndex=100-i;e.style.setProperty("--b",delay);
-    e.innerHTML=`<div class="pin" style="--pc:${c};--d:${i}">${pinSvg(c)}<b>${i+1}</b></div><i class="sh" style="--d:${i}"></i>`;holoPin(e,c,i+1,i,svg(NIC[cardIc(r)]||NIC[G.ic],40));
+    e.innerHTML=`<div class="pin" style="--pc:${c};--d:${i}">${pinSvg(c)}<b>${i+1}</b></div><i class="sh" style="--d:${i}"></i>`;e.dataset.ll=r.lo+","+r.la;holoPin(e,c,i+1,i);
     e.setAttribute("role","button");e.setAttribute("aria-label",(i+1)+"番 "+r.n);e.title=(i+1)+". "+r.n;
     e.addEventListener("click",ev=>{ev.stopPropagation();openPin(x,i)});
     markers.push(new maplibregl.Marker({element:e,anchor:"bottom"}).setLngLat([r.lo,r.la]).addTo(map))});
+  setTimeout(()=>holoMore(map,$("#map")),320);
   swing=-swing;
   const cam=map.cameraForBounds(b,{padding:{top:60,bottom:20,left:24,right:24},maxZoom:16.5})||{center:[o.ll[1],o.ll[0]],zoom:14};
   const to={center:cam.center,zoom:Math.max(10,(cam.zoom||14)-.05),pitch:55,bearing:swing};

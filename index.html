@@ -1339,6 +1339,16 @@ svg .a-ring{animation:ring 2.4s ease-in-out infinite;transform-box:fill-box;tran
 .maplibregl-popup .maplibregl-popup-content span{color:#cfe9ff!important}
 .maplibregl-popup .maplibregl-popup-close-button{color:#cfefff!important;z-index:2}
 .maplibregl-popup .maplibregl-popup-tip{border-top-color:rgba(127,233,255,.9)!important;border-bottom-color:rgba(127,233,255,.9)!important;filter:drop-shadow(0 0 4px #7fe9ff)}
+.hl-later{display:none!important}
+.hl-more{position:absolute;left:50%;bottom:16px;translate:-50% 0;z-index:8;display:flex;align-items:center;gap:6px;border:2px solid #fff;border-radius:999px;padding:9px 18px 9px 12px;font:800 13.5px/1 inherit;color:#fff;cursor:pointer;background:linear-gradient(135deg,#ff8fc0,#9b7bff);box-shadow:0 8px 18px -6px rgba(90,60,180,.65),0 0 14px rgba(127,233,255,.45);white-space:nowrap}
+.hl-more b{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.3);font-size:15px}
+.hl-more[hidden]{display:none}
+/* 地図の下などに出す紹介カード（MapLibre の Popup でないもの） */
+.hl-card{position:relative;overflow:hidden;color:#eaf8ff!important;background:linear-gradient(160deg,rgba(24,40,96,.9),rgba(64,42,124,.86))!important;border:1.5px solid rgba(127,233,255,.9)!important;
+  box-shadow:0 0 18px rgba(127,233,255,.45),inset 0 0 18px rgba(127,233,255,.2)!important}
+.hl-card.hl-in{animation:hlCardIn .6s cubic-bezier(.2,.8,.3,1) both}
+.hl-card::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(to bottom,rgba(127,233,255,.12) 0 1px,transparent 1px 4px);pointer-events:none}
+.hl-card b{color:#fff!important}.hl-card small{color:#cfe9ff!important}
 /* 地図をひらいたとき */
 .hl-open{animation:hlMapIn 1.3s cubic-bezier(.2,.8,.3,1)}
 @keyframes hlMapIn{0%{opacity:0;clip-path:inset(50% 0 50% 0);filter:brightness(1.5) saturate(.3)}45%{opacity:1;clip-path:inset(0);filter:brightness(1.25) saturate(.6)}100%{opacity:1}}
@@ -1509,11 +1519,25 @@ svg .a-ring{animation:ring 2.4s ease-in-out infinite;transform-box:fill-box;tran
 const SCH_IC=`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10l9-6 9 6" fill="none" stroke="#5A4FCF" stroke-width="2" stroke-linejoin="round"/><rect x="5" y="10" width="14" height="10" rx="1.5" fill="#FFE3EC" stroke="#5A4FCF" stroke-width="2"/><rect x="10" y="14" width="4" height="6" fill="#5A4FCF"/><circle cx="12" cy="8.6" r="1.6" fill="#FF6FA5"/></svg>`;
 function holoPin(el,color,num,i,ic){
   if(!el||el.dataset.hl)return el;el.dataset.hl="1";
+  if(num!=null&&(i||0)>=(window.HOLO_FIRST||1e9))el.classList.add("hl-later");
   el.style.setProperty("--hc",color||"#9b7bff");el.style.setProperty("--hd",((i||0)*.08)+"s");
   if(num!=null){el.classList.add("hl-full");el.insertAdjacentHTML("beforeend",`<i class="hl-x hl-ring"></i><i class="hl-x hl-ring b"></i><i class="hl-x hl-beam"></i><i class="hl-x hl-dot"></i><b class="hl-x hl-num">${ic?`<em class="hl-ic">${ic}</em>`:""}${num}</b>`);
     el.addEventListener("click",()=>{document.querySelectorAll(".hl-full.hl-on").forEach(x=>x.classList.remove("hl-on"));el.classList.add("hl-on")});}
   else{el.classList.add("hl-add");if(getComputedStyle(el).position==="static")el.style.position="relative";el.insertAdjacentHTML("afterbegin",`<i class="hl-x hl-ring"></i><i class="hl-x hl-ring b"></i><i class="hl-x hl-beam"></i>`);if(ic)el.insertAdjacentHTML("beforeend",`<em class="hl-x hl-badge">${ic}</em>`)}
   return el;
+}
+/* 近い順のピンは最初 HOLO_FIRST（10）か所だけ。地図の下の「地図に あと10か所」で増やして、見えるピンが全部入るように引く */
+function holoMore(map,box){
+  if(!box)return;const host=box.parentElement;if(getComputedStyle(host).position==="static")host.style.position="relative";
+  let btn=host.querySelector(".hl-more");
+  const later=()=>[...box.querySelectorAll(".hl-full.hl-later:not(.out)")];
+  if(!btn){btn=document.createElement("button");btn.type="button";btn.className="hl-more";host.appendChild(btn);
+    btn.addEventListener("click",e=>{e.stopPropagation();const L=later().slice(0,10);
+      L.forEach((el,k)=>{el.style.setProperty("--hd",(k*.08)+"s");el.classList.remove("hl-later")});
+      const b=new maplibregl.LngLatBounds();box.querySelectorAll(".hl-full:not(.hl-later):not(.out)").forEach(el=>{const v=(el.dataset.ll||"").split(",").map(Number);if(v[0])b.extend(v)});
+      if(!b.isEmpty())map.fitBounds(b,{padding:{top:80,bottom:70,left:30,right:30},maxZoom:16.5,duration:1300});btn._upd()})}
+  btn._upd=()=>{const n=later().length;btn.hidden=!n;btn.innerHTML=`<b>＋</b>地図に あと${Math.min(10,n)}か所`};
+  btn._upd();
 }
 function holoOpen(box){
   if(!box||matchMedia("(prefers-reduced-motion: reduce)").matches)return;
@@ -3261,7 +3285,7 @@ function openByMap(focus,set){
     bym=new maplibregl.Map({container:"bymMap",style:"https://tiles.openfreemap.org/styles/liberty",bounds:b,fitBoundsOptions:{padding:{top:40,bottom:40,left:30,right:30}},pitch:0,cooperativeGestures:true,attributionControl:{compact:true},maxPitch:70});
     bym.addControl(new maplibregl.NavigationControl({visualizePitch:true}),"top-right");
     bym.on("load",()=>{byPaint(bym);const m=$("#bymMsg");m&&m.remove();holoOpen(document.getElementById("bymMap"));
-      MS.items.forEach((r,i)=>{const p=r.ll;if(!p)return;const d=document.createElement("button");d.type="button";d.className="bym-pin";d.innerHTML=`<span><i>${i+1}</i></span>`;holoPin(d,"#9b7bff",i+1,i,svg(MS.ic||MINI.cross,40));d.setAttribute("aria-label",r.n);d.style.setProperty("--dl",Math.min(i*0.04,1.5)+"s");
+      MS.items.forEach((r,i)=>{const p=r.ll;if(!p)return;const d=document.createElement("button");d.type="button";d.className="bym-pin";d.innerHTML=`<span><i>${i+1}</i></span>`;holoPin(d,"#9b7bff",i+1,i);d.setAttribute("aria-label",r.n);d.style.setProperty("--dl",Math.min(i*0.04,1.5)+"s");
         d.addEventListener("click",ev=>{ev.stopPropagation();byFocus(i)});bymMk.push(new maplibregl.Marker({element:d,anchor:"bottom"}).setLngLat([p[1],p[0]]).addTo(bym))});
       bym.easeTo({pitch:45,duration:1400});
       if(focus!=null)setTimeout(()=>byFocus(focus),900);
@@ -3270,12 +3294,12 @@ function openByMap(focus,set){
 }
 function byFocus(i){
   const r=MS.items[i],p=r&&r.ll;if(!bym||!p)return;
-  bymMk.forEach((m,k)=>m.getElement().classList.toggle("on",k===i));
+  bymMk.forEach((m,k)=>{m.getElement().classList.toggle("on",k===i);m.getElement().classList.toggle("hl-on",k===i)});
   document.querySelectorAll(".bym-chips button").forEach(b=>b.classList.toggle("on",+b.dataset.bymi===i));
   const c=document.querySelector(`.bym-chips [data-bymi="${i}"]`);c&&c.scrollIntoView({inline:"center",block:"nearest",behavior:"smooth"});
   bym.flyTo({center:[p[1],p[0]],zoom:16.6,pitch:58,bearing:-20,speed:.9,curve:1.5,essential:true});
-  const card=$("#bymCard");card.hidden=false;
-  card.innerHTML=`<b>${i+1}. ${esc(r.n)}</b><small>${esc(r.a)}</small><div class="row2">${r.tel?callA(r.tel,"call"):""}<button type="button" class="bym-more" data-bymore="${i}">くわしく ›</button><button type="button" class="bym-all" data-bymall>全体にもどる</button></div>`;
+  const card=$("#bymCard");card.hidden=false;card.classList.add("hl-card");card.classList.remove("hl-in");void card.offsetWidth;card.classList.add("hl-in");
+  card.innerHTML=`<b><i class="hl-tic">${svg(MS.ic||MINI.cross,40)}</i>${i+1}. ${esc(r.n)}</b><small>${esc(r.a)}</small><div class="row2">${r.tel?callA(r.tel,"call"):""}<button type="button" class="bym-more" data-bymore="${i}">くわしく ›</button><button type="button" class="bym-all" data-bymall>全体にもどる</button></div>`;
 }
 function closeByMap(now){const el=$("#bymOv");if(!el)return;document.body.classList.remove("rm-open");if(bym){try{bym.remove()}catch(e){}bym=null;bymMk=[]}if(now){el.remove();return}el.classList.remove("on");setTimeout(()=>el.remove(),350)}
 document.addEventListener("click",e=>{
