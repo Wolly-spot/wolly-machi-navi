@@ -1141,7 +1141,7 @@ if(/[?&]near=1\b/.test(location.search)){hd.style.display="none";box.style.margi
 .hl-tic svg{width:17px!important;height:17px!important;display:block}
 .hl-full.hl-on .hl-beam{background:linear-gradient(to top,#ff8fc0,#7fe9ff 55%,transparent);opacity:1}
 /* 地図が画面の外にあるときは動きを止める（電池の節約） */
-.hl-paused .hl-x,.hl-paused .maplibregl-popup-content,.hl-paused .maplibregl-popup-content::before{animation-play-state:paused!important}
+.hl-paused .hl-x,.hl-paused .hl-x *,.hl-paused .maplibregl-popup-content,.hl-paused .maplibregl-popup-content::before{animation-play-state:paused!important}
 .hl-full.hl-on .hl-num{background:linear-gradient(135deg,#ff8fc0,#9b7bff)}
 .hl-full.out .hl-x{animation:hlOut .25s forwards}
 @keyframes hlOut{to{opacity:0}}
