@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-14T19:30:00+09:00",
+ "updatedAt": "2026-11-15T09:40:00+09:00",
  "events": [
   {
    "id": "e-lalaport-bf",
@@ -13,19 +13,6 @@
    "img": "https://mitsui-shopping-park.com/lalaport/fujimi/event/3632625/image1.jpg",
    "ai": false,
    "added": "2026-11-11T09:50:00+09:00"
-  },
-  {
-   "id": "e-aeon-ageo-english",
-   "kind": "mall",
-   "title": "イオンモール上尾 親子の英語あそび（〜11/15）無料",
-   "desc": "外国人の先生と英語の歌やダンス。予約不要、10時〜17時。",
-   "date": "2026-11-13",
-   "area": "上尾市",
-   "src": "いこーよ",
-   "url": "https://iko-yo.net/events/612512",
-   "img": "https://d2goguvysdoarq.cloudfront.net/system/event_photos/photos/1781758/normal.png?1793854462",
-   "ai": false,
-   "added": "2026-11-13T09:45:00+09:00"
   },
   {
    "id": "e-thomas-skip",
@@ -195,6 +182,19 @@
    "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/e-kodomo-machi-saiden.jpg",
    "ai": true,
    "added": "2026-11-12T19:30:00+09:00"
+  },
+  {
+   "id": "e-kawagoe-winefesta",
+   "kind": "free",
+   "title": "川越駅西口でワインフェスタ（11/22）入場無料",
+   "desc": "キッチンカーも出る屋外の広場イベント。子連れもOK、雨天中止。",
+   "date": "2026-11-22",
+   "area": "川越市",
+   "src": "いこーよ",
+   "url": "https://iko-yo.net/events/609329",
+   "img": "https://d2goguvysdoarq.cloudfront.net/system/event_photos/photos/1773701/normal.jpg?1792465743",
+   "ai": false,
+   "added": "2026-11-15T09:40:00+09:00"
   },
   {
    "id": "e-planetarium-day",
@@ -583,8 +583,8 @@
    "date": "2026-11",
    "src": "さいたま市",
    "url": "https://www.city.saitama.lg.jp/kosodate/oshirase/p134549.html",
-   "img": "",
-   "ai": false,
+   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-kamikizaki-nobinobi.jpg",
+   "ai": true,
    "important": false,
    "added": "2026-11-13T09:45:00+09:00"
   },
