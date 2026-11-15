@@ -107,12 +107,11 @@ svg.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stro
   background:radial-gradient(closest-side,rgba(139,92,246,.5),rgba(139,92,246,0));opacity:0;animation:haloIn 2.8s ease-out 1.4s forwards}
 @keyframes haloIn{0%{opacity:0;transform:scaleX(.5)}30%{opacity:1;transform:scaleX(1)}100%{opacity:0;transform:scaleX(1.15)}}
 @media (prefers-reduced-motion:reduce){.l-shine,.l-halo{display:none}}
-/* クリスマス（12/1〜12/25）：紫のかわりに、赤と金と白の光沢 */
-.xmas .l-shine{background:linear-gradient(to top,#5c0716 0%,#8e0d24 12%,#b3122e 22%,#d81f3c 31%,#e8455f 35%,#fff6dc 36.5%,#f5d27a 37.5%,#fffaf0 38.5%,var(--shine-off,#000) 42%,var(--shine-off,#000) 100%);background-size:100% 300%}
-.xmas .l-halo{background:radial-gradient(closest-side,rgba(216,31,60,.4),rgba(216,31,60,0))}
+/* クリスマス（12/1〜12/25）：サンタの服みたいに、赤と白（ふわふわの白い帯）のグラデーション */
+.xmas .l-shine{background:linear-gradient(to top,#7a0a1e 0%,#a50f29 10%,#c8102e 20%,#e0233f 29%,#c8102e 32.5%,#e4d3d6 34.5%,#d9cccf 36.5%,#e8dcde 38.5%,var(--shine-off,#000) 42%,var(--shine-off,#000) 100%);background-size:100% 300%}
+.xmas .l-halo{background:radial-gradient(closest-side,rgba(255,255,255,.9),rgba(216,31,60,.25) 60%,rgba(216,31,60,0))}
 .xmas .drift i.pp{background-color:#b3122e;background-image:linear-gradient(135deg,#f0566f 0%,#d81f3c 30%,#9e0f26 65%,#5c0716 100%)}
-.xmas .drift i.pp:nth-child(3n){background-image:linear-gradient(135deg,#fffbea 0%,#f5d27a 45%,#c9a13b 100%)}
-.xmas .drift i.pp:nth-child(4n){background-image:linear-gradient(135deg,#ffffff 0%,#f4f1ff 100%)}
+.xmas .drift i.pp:nth-child(2n){background-image:linear-gradient(135deg,#ffffff 0%,#ffffff 45%,#e9e4e6 100%);box-shadow:0 0 0 1px rgba(200,16,46,.25)}
 
 .loader{display:grid;justify-items:center;gap:8px;opacity:0;animation:fade-up .7s ease-out 1.2s forwards}
 .bar{width:min(42vw,160px);height:2px;background:color-mix(in srgb,var(--ink) 12%,transparent);border-radius:2px;overflow:hidden}
