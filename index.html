@@ -3066,7 +3066,7 @@ function openRoom(){
   closeRoom(true);
   const g=CH_TALK["c_guide"];
   const el=document.createElement("div");el.className="rm-ov";el.id="rmOv";el.setAttribute("role","dialog");el.setAttribute("aria-modal","true");el.setAttribute("aria-label","病児保育室のイメージ図");
-  el.innerHTML=`<div class="rm-card${cls?" "+cls:""}"><button type="button" class="rm-x" data-rmx aria-label="閉じる">×</button>
+  el.innerHTML=`<div class="rm-card"><button type="button" class="rm-x" data-rmx aria-label="閉じる">×</button>
     <p class="rm-eb">IMAGE</p><h3>病児保育室は、こんなかんじ</h3>
     ${g?`<div class="ch-talk rm-talk"><img src="${g}" alt=""><p>お熱の日も、ここなら安心！番号をタップすると説明が光るよ。</p></div>`:""}
     <div class="rm-stage">${ROOM_SVG}</div>
@@ -3380,6 +3380,7 @@ function sheetHtml(kind){
   if(kind==="ensearch")return sheetEnSearch();
   if(k==="m")return sheetMoney(i);
   if(k==="h"&&HOKATSU[i])return HOKATSU[i].guide?sheetHokatsuGuide():sheetHokatsuItem(i);
+  if(k==="x"&&HEALTH[i]&&HEALTH[i].kind&&!HEALTH[i].f){const kd=HEALTH[i].kind;setTimeout(()=>location.replace("#"+kd),0);return ""}
   if(k==="x"&&HEALTH[i])return HEALTH[i].kyu?sheetKyukan(i):sheetInfo(HEALTH[i],"health",i);
   if(k==="s"&&SHOPS[i])return sheetInfo(SHOPS[i],"shop",i);
   if(k==="l")return sheetLesson(i);
