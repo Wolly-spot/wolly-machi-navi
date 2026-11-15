@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-15T09:40:00+09:00",
+ "updatedAt": "2026-11-15T19:10:00+09:00",
  "events": [
   {
    "id": "e-lalaport-bf",
@@ -28,19 +28,6 @@
    "added": "2026-11-11T09:50:00+09:00"
   },
   {
-   "id": "e-wanpaku-hasuda",
-   "kind": "free",
-   "title": "蓮田「わんぱくらんど」（11/14〜15）入場無料",
-   "desc": "親子で遊べる週末イベント。ふわふわ遊具は有料です。",
-   "date": "2026-11-14",
-   "area": "蓮田市",
-   "src": "いこーよ",
-   "url": "https://iko-yo.net/events/603828",
-   "img": "https://d2goguvysdoarq.cloudfront.net/system/event_photos/photos/1762280/normal.png?1790655765",
-   "ai": false,
-   "added": "2026-11-14T07:55:00+09:00"
-  },
-  {
    "id": "e-shiki-illumination",
    "kind": "free",
    "title": "志木駅東口のイルミネーション（11/14〜1/31）",
@@ -52,32 +39,6 @@
    "img": "https://d2goguvysdoarq.cloudfront.net/system/event_photos/photos/1779488/normal.jpg?1793385313",
    "ai": false,
    "added": "2026-11-14T07:55:00+09:00"
-  },
-  {
-   "id": "e-uchu-workshop",
-   "kind": "facility",
-   "title": "宇宙科学館 無料ワークショップ（11/15）",
-   "desc": "水ロケットやVRゲームを体験。申込不要、無料。",
-   "date": "2026-11-15",
-   "area": "さいたま市浦和区",
-   "src": "さいたま市",
-   "url": "https://www.city.saitama.lg.jp/kagakukan/category/006/p133558.html",
-   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/e-uchu-workshop.jpg",
-   "ai": true,
-   "added": "2026-11-11T09:50:00+09:00"
-  },
-  {
-   "id": "e-playpark-misono",
-   "kind": "free",
-   "title": "浦和美園で1日プレーパーク（11/15）無料",
-   "desc": "公園で泥んこ・木登りなど自由に外あそび。赤ちゃんから参加OK。",
-   "date": "2026-11-15",
-   "area": "さいたま市緑区",
-   "src": "さいたま市",
-   "url": "https://www.city.saitama.lg.jp/003/001/016/005/p133353.html",
-   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/e-playpark-misono.jpg",
-   "ai": true,
-   "added": "2026-11-13T09:45:00+09:00"
   },
   {
    "id": "e-ario-happyday",
@@ -210,6 +171,19 @@
    "added": "2026-11-11T09:50:00+09:00"
   },
   {
+   "id": "e-uchu-mission-ten",
+   "kind": "facility",
+   "title": "宇宙科学館「宇宙ミッションに挑戦」展（〜11/23）無料",
+   "desc": "見て体験する宇宙の企画展。館内でミッションカードを配布。",
+   "date": "2026-11-23",
+   "area": "さいたま市浦和区",
+   "src": "さいたま市",
+   "url": "https://www.city.saitama.lg.jp/kagakukan/category/006/p133558.html",
+   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/e-uchu-mission-ten.jpg",
+   "ai": true,
+   "added": "2026-11-15T19:10:00+09:00"
+  },
+  {
    "id": "e-minuma-kosodate-fair",
    "kind": "free",
    "title": "第1回 見沼区子育てフェア（11/29）入場無料",
@@ -329,29 +303,6 @@
    "added": "2026-11-11T09:50:00+09:00"
   },
   {
-   "id": "s-saitamarche",
-   "kind": "event",
-   "title": "サイクルフェスタ・さいたマルシェ（11/14〜15）",
-   "desc": "自転車のイベントと、さいたまのおいしいものが集まるマルシェ。",
-   "date": "2026-11-14",
-   "src": "さいたま市",
-   "url": "https://www.city.saitama.lg.jp/001/010/018/001/001/p133136.html",
-   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/s-saitamarche.jpg",
-   "ai": true,
-   "added": "2026-11-11T09:50:00+09:00"
-  },
-  {
-   "id": "s-yume-marche",
-   "kind": "event",
-   "title": "市民活動夢マルシェ（11/15 浦和駅東口）",
-   "desc": "手づくり品の販売やワークショップ。子ども向けの工作もあります。",
-   "date": "2026-11-15",
-   "src": "ウォーカープラス",
-   "url": "https://www.walkerplus.com/event/ar0311e616364/",
-   "img": "https://ms-cache.walkerplus.com/walkertouch/wtd/event/64/l2/616364.jpg",
-   "added": "2026-11-11T09:50:00+09:00"
-  },
-  {
    "id": "s-minna-app",
    "kind": "coupon",
    "title": "みんなのアプリ よんよん感謝キャンペーン（〜1/15）",
@@ -422,6 +373,18 @@
    "img": "https://d28w2qw7dtr435.cloudfront.net/uploaded/cover_images/images/33837/normal.jpg?1790803287",
    "ai": false,
    "added": "2026-11-11T09:50:00+09:00"
+  },
+  {
+   "id": "s-yaoko-omiyaichiba",
+   "kind": "open",
+   "title": "「ヤオコー大宮市場店」11/17オープン",
+   "desc": "大宮市場の中、国道17号沿い。焼きたてピザや店内で握るお寿司も。",
+   "date": "2026-11-17",
+   "src": "宮原大宮ドットコム",
+   "url": "https://miyahara-kitaku.com/yaoko-omiyaichiba/",
+   "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/07/IMG_4851.jpg",
+   "ai": false,
+   "added": "2026-11-15T19:10:00+09:00"
   }
  ],
  "news": [
@@ -502,17 +465,6 @@
    "added": "2026-11-11T09:50:00+09:00"
   },
   {
-   "id": "n-tour-de-france",
-   "kind": "kids",
-   "title": "ツール・ド・フランス さいたまクリテリウム（11/15）",
-   "desc": "世界のトップ選手がさいたま新都心を走る自転車レース。交通規制にも注意。",
-   "date": "2026-11-15",
-   "src": "PR TIMES",
-   "url": "https://prtimes.jp/main/html/rd/p/000000308.000140218.html",
-   "img": "https://prcdn.freetls.fastly.net/release_image/140218/308/140218-308-d66f6cc560dfb847e444122d67b0211b-1920x1080.jpg?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
-   "added": "2026-11-11T09:50:00+09:00"
-  },
-  {
    "id": "n-minuma-akifes",
    "kind": "kids",
    "title": "みぬま秋フェス2026 inさぎ山（11/21〜22）",
@@ -565,9 +517,9 @@
   {
    "id": "n-kousaku-hiroba",
    "kind": "kids",
-   "title": "浦和住宅公園の工作ひろば（11/14・23）",
+   "title": "浦和住宅公園の工作ひろば（11/23）",
    "desc": "小学生以下が無料で工作できます。予約不要、各日先着15名。",
-   "date": "2026-11-14",
+   "date": "2026-11-23",
    "src": "いこーよ",
    "url": "https://iko-yo.net/events/612142",
    "img": "https://d2goguvysdoarq.cloudfront.net/system/event_photos/photos/1780842/normal.jpg?1793755283",
@@ -600,6 +552,19 @@
    "ai": false,
    "important": false,
    "added": "2026-11-14T19:30:00+09:00"
+  },
+  {
+   "id": "n-orange-ribbon-2026",
+   "kind": "kosodate",
+   "title": "11月はオレンジリボン（児童虐待防止）月間",
+   "desc": "区役所や図書館でリーフレット配布。心配なときは189（いちはやく）へ。",
+   "date": "2026-11-01",
+   "src": "さいたま市",
+   "url": "https://www.city.saitama.lg.jp/006/014/008/003/015/007/p133510.html",
+   "img": "",
+   "ai": false,
+   "important": false,
+   "added": "2026-11-15T19:10:00+09:00"
   }
  ]
 }
