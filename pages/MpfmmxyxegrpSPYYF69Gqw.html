@@ -688,6 +688,7 @@ b.addEventListener("click",function(){
 
 
 
+
 <!--wolly-totop-->
 <style>
 .wtotop{position:fixed;z-index:60;right:max(14px,env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));
@@ -1029,7 +1030,7 @@ function openPin(x,i,ll){
   const r=x.r,c=CAT[r.c];popup&&popup.remove();
   popup=new maplibregl.Popup({offset:[0,-108],anchor:"bottom",maxWidth:"250px"}).setLngLat([ll[1],ll[0]])
     .setHTML(`<div class="npp"><b>${i+1}. ${esc(r.n)}</b><span>${c.l}・${r.w}区 ／ ${kmT(x.km)}（${carT(x.km)}）</span><div class="bt"><button type="button" data-npo="${r.id}">くわしく</button><a href="${mapURL(r)}" target="_blank" rel="noopener">Googleマップ ↗</a></div></div>`).addTo(map);
-  const t={center:[ll[1],ll[0]],zoom:Math.max(map.getZoom(),16),pitch:62};
+  const t={center:[ll[1],ll[0]],zoom:Math.max(map.getZoom(),16),pitch:62,offset:[0,110]};
   RM?map.jumpTo(t):map.easeTo({...t,duration:1100});
 }
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-npo]");if(b){e.preventDefault();e.stopPropagation();popup&&popup.remove();openPop(+b.dataset.npo,null)}},true);
@@ -1088,7 +1089,7 @@ function focus3d(id){
       if(i<0){window._fmk&&window._fmk.remove();const fe=document.createElement("div");fe.style.zIndex=150;holoPin(fe,c.c,"★",0);window._fmk=new maplibregl.Marker({element:fe,anchor:"bottom"}).setLngLat([ll[1],ll[0]]).addTo(map)}
       popup=new maplibregl.Popup({offset:[0,-108],anchor:"bottom",maxWidth:"250px"}).setLngLat([ll[1],ll[0]])
         .setHTML(`<div class="npp"><b>${i>=0?(i+1)+". ":""}${esc(r.n)}</b><span>${c.l}・${r.w}区 ／ ${kmT(km)}（${carT(km)}）</span><div class="bt"><button type="button" data-npo="${r.id}">くわしく</button><a href="${mapURL(r)}" target="_blank" rel="noopener">Googleマップ ↗</a></div></div>`).addTo(map);
-      const t={center:[ll[1],ll[0]],zoom:16.6,pitch:62,bearing:swing};
+      const t={center:[ll[1],ll[0]],zoom:16.6,pitch:62,bearing:swing,offset:[0,110]};
       RM?map.jumpTo(t):map.flyTo({...t,duration:2200,curve:1.5,essential:true})},300)};
   setTimeout(fly,400);
 }
@@ -1102,13 +1103,15 @@ if(/[?&]near=1\b/.test(location.search)){hd.style.display="none";box.style.margi
 <!--wolly-holo-->
 <style>
 /* ==== holo-map ==== */
-.hl-full{width:40px!important;height:104px!important;position:relative;cursor:pointer;background:none!important;border:0!important;box-shadow:none!important}
+.hl-full{width:40px!important;height:104px!important;cursor:pointer;background:none!important;border:0!important;box-shadow:none!important}
 .hl-full>*:not(.hl-x){display:none!important}
 .hl-x{pointer-events:none}
+.hl-full .hl-x,.hl-add .hl-x{rotate:none;font-style:normal}.hl-full .hl-dot{transform:none!important}
 .hl-beam{position:absolute;left:50%;bottom:8px;width:12px;height:92px;margin-left:-6px;border-radius:8px;z-index:-1;
   background:linear-gradient(to top,var(--hc,#9b7bff) 0,color-mix(in srgb,var(--hc,#9b7bff) 55%,#7fe9ff) 45%,transparent);opacity:.9;filter:blur(.6px);
   transform-origin:bottom;animation:hlUp .9s cubic-bezier(.2,.8,.3,1.2) both,hlGlow 2.6s ease-in-out infinite;animation-delay:var(--hd,0s),calc(var(--hd,0s) + 1s)}
-.hl-add .hl-beam{bottom:2px;height:70px;width:10px;margin-left:-5px;opacity:.75}
+.hl-add .hl-beam{bottom:2px;height:56px;width:9px;margin-left:-4.5px;opacity:.6}
+.far .hl-add .hl-beam,.far .hl-add .hl-ring{display:none}
 @keyframes hlUp{from{transform:scaleY(0)}to{transform:scaleY(1)}}
 @keyframes hlGlow{50%{opacity:.5}}
 .hl-ring{position:absolute;left:50%;bottom:-4px;width:38px;height:14px;margin-left:-19px;border-radius:50%;z-index:-1;border:2px solid var(--hc,#9b7bff);
@@ -1152,7 +1155,7 @@ if(/[?&]near=1\b/.test(location.search)){hd.style.display="none";box.style.margi
 function holoPin(el,color,num,i){
   if(!el||el.dataset.hl)return el;el.dataset.hl="1";
   el.style.setProperty("--hc",color||"#9b7bff");el.style.setProperty("--hd",((i||0)*.08)+"s");
-  if(num!=null){el.classList.add("hl-full");el.insertAdjacentHTML("beforeend",`<i class="hl-x hl-ring"></i><i class="hl-x hl-ring b"></i><i class="hl-x hl-beam"></i><i class="hl-x hl-dot"></i><span class="hl-x hl-num">${num}</span>`);
+  if(num!=null){el.classList.add("hl-full");el.insertAdjacentHTML("beforeend",`<i class="hl-x hl-ring"></i><i class="hl-x hl-ring b"></i><i class="hl-x hl-beam"></i><i class="hl-x hl-dot"></i><b class="hl-x hl-num">${num}</b>`);
     el.addEventListener("click",()=>{document.querySelectorAll(".hl-full.hl-on").forEach(x=>x.classList.remove("hl-on"));el.classList.add("hl-on")});}
   else{el.classList.add("hl-add");if(getComputedStyle(el).position==="static")el.style.position="relative";el.insertAdjacentHTML("afterbegin",`<i class="hl-x hl-ring"></i><i class="hl-x hl-ring b"></i><i class="hl-x hl-beam"></i>`)}
   return el;

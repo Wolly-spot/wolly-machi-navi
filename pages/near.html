@@ -338,13 +338,15 @@ body.fs-open{overflow:hidden}
 @media (prefers-reduced-motion:reduce){.hdeco span{animation:none}}
 
 /* ==== holo-map ==== */
-.hl-full{width:40px!important;height:104px!important;position:relative;cursor:pointer;background:none!important;border:0!important;box-shadow:none!important}
+.hl-full{width:40px!important;height:104px!important;cursor:pointer;background:none!important;border:0!important;box-shadow:none!important}
 .hl-full>*:not(.hl-x){display:none!important}
 .hl-x{pointer-events:none}
+.hl-full .hl-x,.hl-add .hl-x{rotate:none;font-style:normal}.hl-full .hl-dot{transform:none!important}
 .hl-beam{position:absolute;left:50%;bottom:8px;width:12px;height:92px;margin-left:-6px;border-radius:8px;z-index:-1;
   background:linear-gradient(to top,var(--hc,#9b7bff) 0,color-mix(in srgb,var(--hc,#9b7bff) 55%,#7fe9ff) 45%,transparent);opacity:.9;filter:blur(.6px);
   transform-origin:bottom;animation:hlUp .9s cubic-bezier(.2,.8,.3,1.2) both,hlGlow 2.6s ease-in-out infinite;animation-delay:var(--hd,0s),calc(var(--hd,0s) + 1s)}
-.hl-add .hl-beam{bottom:2px;height:70px;width:10px;margin-left:-5px;opacity:.75}
+.hl-add .hl-beam{bottom:2px;height:56px;width:9px;margin-left:-4.5px;opacity:.6}
+.far .hl-add .hl-beam,.far .hl-add .hl-ring{display:none}
 @keyframes hlUp{from{transform:scaleY(0)}to{transform:scaleY(1)}}
 @keyframes hlGlow{50%{opacity:.5}}
 .hl-ring{position:absolute;left:50%;bottom:-4px;width:38px;height:14px;margin-left:-19px;border-radius:50%;z-index:-1;border:2px solid var(--hc,#9b7bff);
@@ -412,7 +414,7 @@ body.fs-open{overflow:hidden}
 function holoPin(el,color,num,i){
   if(!el||el.dataset.hl)return el;el.dataset.hl="1";
   el.style.setProperty("--hc",color||"#9b7bff");el.style.setProperty("--hd",((i||0)*.08)+"s");
-  if(num!=null){el.classList.add("hl-full");el.insertAdjacentHTML("beforeend",`<i class="hl-x hl-ring"></i><i class="hl-x hl-ring b"></i><i class="hl-x hl-beam"></i><i class="hl-x hl-dot"></i><span class="hl-x hl-num">${num}</span>`);
+  if(num!=null){el.classList.add("hl-full");el.insertAdjacentHTML("beforeend",`<i class="hl-x hl-ring"></i><i class="hl-x hl-ring b"></i><i class="hl-x hl-beam"></i><i class="hl-x hl-dot"></i><b class="hl-x hl-num">${num}</b>`);
     el.addEventListener("click",()=>{document.querySelectorAll(".hl-full.hl-on").forEach(x=>x.classList.remove("hl-on"));el.classList.add("hl-on")});}
   else{el.classList.add("hl-add");if(getComputedStyle(el).position==="static")el.style.position="relative";el.insertAdjacentHTML("afterbegin",`<i class="hl-x hl-ring"></i><i class="hl-x hl-ring b"></i><i class="hl-x hl-beam"></i>`)}
   return el;
@@ -965,7 +967,7 @@ function openPin(x,i){
   if(!map)return;const r=x.r;popup&&popup.remove();
   popup=new maplibregl.Popup({offset:[0,-108],anchor:"bottom",maxWidth:"260px"}).setLngLat([r.lo,r.la])
     .setHTML(`<div class="pp"><b>${i+1}. ${esc(r.n)}</b><span>${esc(wn(r.w))} ／ ${kmT(x.km)}（${moveT(x.km)}）${r.h?"<br>"+esc(r.h):""}</span><div class="bt"><button type="button" data-fsopen="${i}">くわしく</button><a class="b-map" href="${gmap(r)}" target="_blank" rel="noopener">地図・道順 ↗</a>${r.u?`<a class="b-web" href="${esc(url(r.u))}" target="_blank" rel="noopener">HP ↗</a>`:""}</div></div>`).addTo(map);
-  const t={center:[r.lo,r.la],zoom:Math.max(map.getZoom(),16),pitch:62};
+  const t={center:[r.lo,r.la],zoom:Math.max(map.getZoom(),16),pitch:62,offset:[0,110]};
   RM?map.jumpTo(t):map.easeTo({...t,duration:1100});
 }
 function toggleMap(){
