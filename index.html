@@ -29,13 +29,13 @@
   --bg:#121328; --surface:#1C1E38; --ink:#EEEFFC; --muted:#A4A7C8; --line:#2E3154;
   --accent:#8F8FFF; --accent-ink:#121328; --accent-soft:#272A50; --pink:#FF86BC; --sky:#5FC4F5; --lemon:#FFD95E; --lav:#B9A3FF; --alert:#FF6B7E;
   --glass:rgba(28,30,56,.58); --glass-line:rgba(255,255,255,.09); --scrim:rgba(0,0,0,.2);
-  --splash-bg:#111226; --splash-glow:rgba(140,130,255,.16); --petal:#FF86BC; --logo-filter:invert(.94); --shine-blend:multiply; --shine-off:#fff; --bs1:#271850; --bs2:#1f1644; --bs3:#18132f; --bs4:#33276a;
+  --splash-bg:#111226; --splash-glow:rgba(140,130,255,.16); --petal:#FF86BC; --logo-filter:invert(.94); --shine-blend:multiply; --shine-off:#fff;
   --shadow:0 18px 40px -24px rgba(0,0,0,.85); color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#121328; --surface:#1C1E38; --ink:#EEEFFC; --muted:#A4A7C8; --line:#2E3154;
   --accent:#8F8FFF; --accent-ink:#121328; --accent-soft:#272A50; --pink:#FF86BC; --sky:#5FC4F5; --lemon:#FFD95E; --lav:#B9A3FF; --alert:#FF6B7E;
   --glass:rgba(28,30,56,.58); --glass-line:rgba(255,255,255,.09); --scrim:rgba(0,0,0,.2);
-  --splash-bg:#111226; --splash-glow:rgba(140,130,255,.16); --petal:#FF86BC; --logo-filter:invert(.94); --shine-blend:multiply; --shine-off:#fff; --bs1:#271850; --bs2:#1f1644; --bs3:#18132f; --bs4:#33276a;
+  --splash-bg:#111226; --splash-glow:rgba(140,130,255,.16); --petal:#FF86BC; --logo-filter:invert(.94); --shine-blend:multiply; --shine-off:#fff;
   --shadow:0 18px 40px -24px rgba(0,0,0,.85); color-scheme:dark}
 
 [hidden]{display:none!important}
@@ -59,7 +59,9 @@ svg.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stro
 @keyframes glow{from{opacity:0;transform:scale(.75)}to{opacity:1;transform:scale(1)}}
 .drift{position:absolute;inset:0;pointer-events:none}
 .drift i{position:absolute;bottom:-40px;width:var(--s);height:calc(var(--s)*1.6);background:var(--petal);opacity:0;
-  border-radius:0 100% 0 100%;animation:rise var(--d) linear var(--delay) infinite}
+  border-radius:0 100% 0 100%;animation:rise var(--d) linear var(--delay) infinite;transition:background-color .6s ease,box-shadow .6s ease}
+/* ロゴが光るあいだ、葉っぱも下から順に紫の光沢へ。あとで元の色にもどる */
+.drift i.pp{background-color:#8b5cf6;background-image:linear-gradient(135deg,rgba(255,255,255,.55),transparent 55%);box-shadow:0 0 8px rgba(139,92,246,.8)}
 @keyframes rise{0%{opacity:0;transform:translate3d(0,0,0) rotate(var(--r))}15%{opacity:.35}85%{opacity:.25}
   100%{opacity:0;transform:translate3d(var(--x),-115vh,0) rotate(calc(var(--r) + 140deg))}}
 
@@ -104,12 +106,7 @@ svg.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stro
 .l-halo{position:absolute;left:8%;right:8%;bottom:-5%;height:15%;border-radius:50%;pointer-events:none;
   background:radial-gradient(closest-side,rgba(139,92,246,.5),rgba(139,92,246,0));opacity:0;animation:haloIn 2.8s ease-out 1.4s forwards}
 @keyframes haloIn{0%{opacity:0;transform:scaleX(.5)}30%{opacity:1;transform:scaleX(1)}100%{opacity:0;transform:scaleX(1.15)}}
-/* 背景も同じ動き：下から紫がのぼって、最後にもとの色へもどる（ロゴが読めるよう、うすい紫） */
-.bgshine{position:absolute;inset:0;pointer-events:none;opacity:0;
-  background:linear-gradient(to top,var(--bs1,#cbb5ff) 0%,var(--bs2,#ddccff) 12%,var(--bs3,#ebe2ff) 24%,var(--bs4,#fbf8ff) 31%,var(--bs3,#ebe2ff) 33%,transparent 40%,transparent 100%);
-  background-size:100% 300%;background-position:0 0;
-  animation:shineUp 1.7s cubic-bezier(.4,.05,.3,1) 1.5s forwards,shineOut .7s ease-in 3.75s forwards}
-@media (prefers-reduced-motion:reduce){.l-shine,.l-halo,.bgshine{display:none}}
+@media (prefers-reduced-motion:reduce){.l-shine,.l-halo{display:none}}
 
 .loader{display:grid;justify-items:center;gap:8px;opacity:0;animation:fade-up .7s ease-out 1.2s forwards}
 .bar{width:min(42vw,160px);height:2px;background:color-mix(in srgb,var(--ink) 12%,transparent);border-radius:2px;overflow:hidden}
@@ -1392,7 +1389,6 @@ svg .a-ring{animation:ring 2.4s ease-in-out infinite;transform-box:fill-box;tran
 
 <!-- ============ SPLASH ============ -->
 <div class="splash" id="splash" role="status" aria-label="読み込み中">
-  <div class="bgshine" aria-hidden="true"></div>
   <div class="drift" id="drift" aria-hidden="true"></div>
   <button class="skip" id="skip" type="button">スキップ</button>
   <div class="stage" id="stage">
@@ -3762,6 +3758,10 @@ const MIN=reduce?600:4300;
 let start=0,done=false,loaded=document.readyState==="complete",raf;
 for(let i=0;i<14;i++){const el=document.createElement("i");
   el.style.cssText=`left:${Math.random()*100}%;--s:${6+Math.random()*10}px;--r:${Math.random()*360}deg;--x:${(Math.random()-.5)*120}px;--d:${8+Math.random()*7}s;--delay:${-Math.random()*8}s`;drift.appendChild(el)}
+/* 葉っぱ：下にあるものから順に紫へ（ロゴの光と同じ 1.5秒から）、3.7秒から上のものから元の色へ */
+function leafShine(){if(reduce)return;const H=innerHeight;
+  setTimeout(()=>drift.querySelectorAll("i").forEach(el=>{const y=el.getBoundingClientRect().top/H;setTimeout(()=>el.classList.add("pp"),Math.max(0,Math.min(1,1-y))*1400)}),1500);
+  setTimeout(()=>drift.querySelectorAll("i").forEach(el=>{const y=el.getBoundingClientRect().top/H;setTimeout(()=>el.classList.remove("pp"),Math.max(0,Math.min(1,y))*500)}),3700)}
 function tick(t){
   if(!start)start=t;const el=t-start;
   let p=Math.min(1,el/MIN);p=1-Math.pow(1-p,2);if(!loaded)p=Math.min(p,.9);
@@ -3777,8 +3777,8 @@ function finish(){
 function play(){
   done=false;start=0;splash.hidden=false;splash.classList.remove("is-out");stage.classList.remove("is-leaving");
   document.body.classList.add("is-loading");document.body.classList.remove("is-ready");
-  splash.querySelectorAll(".l-emblem,.l-text,.l-swash,.loader,.skip").forEach(el=>{el.style.animation="none";void el.offsetWidth;el.style.animation=""});
-  window.scrollTo(0,0);raf=requestAnimationFrame(tick);
+  splash.querySelectorAll(".l-emblem,.l-text,.l-swash,.l-shine,.l-halo,.loader,.skip").forEach(el=>{el.style.animation="none";void el.offsetWidth;el.style.animation=""});
+  window.scrollTo(0,0);leafShine();raf=requestAnimationFrame(tick);
 }
 window.addEventListener("load",()=>{loaded=true});
 $("#skip").addEventListener("click",()=>{loaded=true;finish()});
@@ -3786,7 +3786,7 @@ $("#replay").addEventListener("click",()=>{loaded=true;play()});
 const SPL_KEY="wolly.splashday",today=new Date().toDateString();
 let seen=false;try{seen=localStorage.getItem(SPL_KEY)===today;localStorage.setItem(SPL_KEY,today)}catch(e){}
 if(seen&&!location.hash.includes("splash")){done=true;splash.hidden=true;document.body.classList.add("is-ready")}
-else{document.body.classList.add("is-loading");raf=requestAnimationFrame(tick)}
+else{document.body.classList.add("is-loading");leafShine();raf=requestAnimationFrame(tick)}
 })();
 </script>
 
