@@ -250,7 +250,7 @@ body{padding-bottom:calc(70px + env(safe-area-inset-bottom,0px))}
   </header>
 
   <section>
-    <div class="sec-head"><span class="ico" data-icon="clock"></span><div class="h"><h2><span class="nb">いつまでに</span><span class="nb">出すの？</span></h2><p>締切の表示は、きょうの日付で自動で変わります</p></div></div>
+    <div class="sec-head"><span class="ico" data-icon="clock"></span><div class="h"><h2><span class="nb">いつまでに</span><span class="nb">出すの？</span></h2><p>締切の表示は、きょうの日付で自動で変わるよ</p></div></div>
     <div class="dls" id="dls"></div>
   </section>
 
@@ -259,37 +259,37 @@ body{padding-bottom:calc(70px + env(safe-area-inset-bottom,0px))}
     <div class="pick">
       <h3><span class="ico" data-icon="bear"></span>パパの理由</h3><div class="chips" id="pf"></div>
       <h3><span class="ico" data-icon="bunny"></span>ママの理由</h3><div class="chips" id="pm"></div>
-      <h3><span class="ico" data-icon="house"></span>あてはまるものがあれば</h3><p class="note" style="margin:-4px 0 8px">「？」の付いたボタンは、さわると説明が出ます。</p><div class="chips" id="hh"></div>
-      <p class="note">同居している65歳未満のおじいちゃん・おばあちゃんがいる場合は、その人の「保育ができない理由」の書類も必要です（下のリストに出ます）。</p>
+      <h3><span class="ico" data-icon="house"></span>あてはまるものがあれば</h3><p class="note" style="margin:-4px 0 8px">「？」の付いたボタンは、さわると説明が出るよ。</p><div class="chips" id="hh"></div>
+      <p class="note">同居している65歳未満のおじいちゃん・おばあちゃんがいる場合は、その人の「保育ができない理由」の書類も必要だよ（下のリストに出るよ）。</p>
     </div>
   </section>
 
   <section>
-    <div class="sec-head"><span class="ico" data-icon="paper"></span><div class="h"><h2><span class="nb">もちもの</span><span class="nb">チェックリスト</span></h2><p>そろったらタップしてチェック。「？」をさわると書き方のヒントが出ます。このブラウザに保存されます</p></div></div>
+    <div class="sec-head"><span class="ico" data-icon="paper"></span><div class="h"><h2><span class="nb">もちもの</span><span class="nb">チェックリスト</span></h2><p>そろったらタップしてチェック。「？」をさわると書き方のヒントが出るよ。このブラウザに保存されるんだ</p></div></div>
     <div class="prog" id="prog"><span class="ico" data-icon="crown"></span><span class="bar"><i id="pbar"></i></span><b class="num" id="pnum">0/0</b><span class="msg" id="pmsg"></span></div>
     <div id="checklist"></div>
   </section>
 
   <section>
-    <div class="sec-head"><span class="ico" data-icon="pen"></span><div class="h"><h2><span class="nb">書き方の</span><span class="nb">コツ</span></h2><p>ここを守ると、書類のやり直しがへります</p></div></div>
+    <div class="sec-head"><span class="ico" data-icon="pen"></span><div class="h"><h2><span class="nb">書き方の</span><span class="nb">コツ</span></h2><p>ここを守ると、書類のやり直しがへるよ</p></div></div>
     <div class="cards">
       <div class="card" style="--cc:var(--blue)"><span class="ico" data-icon="pen"></span><h3><span class="nb">かならず</span><span class="nb">ボールペンで</span></h3><p>鉛筆・シャープペン・<b>消せるボールペン</b>で書いたものは無効になります。</p></div>
-      <div class="card" style="--cc:var(--pink)"><span class="ico" data-icon="scale"></span><h3>まちがえたら二重線</h3><p>まちがえたところに二重線を引いて、余白に正しく書きます。修正液・修正テープは使わないで。</p></div>
-      <div class="card" style="--cc:var(--orange)"><span class="ico" data-icon="family"></span><h3><span class="nb">申請者は</span><span class="nb">「生計中心者」</span></h3><p>申請書の申請者の欄には、おうちの家計を主に支えている人を書きます。「世帯の状況」の1段目も同じ人に。</p></div>
-      <div class="card" style="--cc:var(--green)"><span class="ico" data-icon="house"></span><h3><span class="nb">希望園は</span><span class="nb">名前とコード</span></h3><p>希望の保育園は、園の名前と「施設コード」をセットで書きます。10か所以上なら別紙に。いくつ書いても点数は変わりません。</p></div>
-      <div class="card" style="--cc:var(--purple)"><span class="ico" data-icon="school"></span><h3><span class="nb">きょうだいの学年は</span><span class="nb">4月時点</span></h3><p>「世帯の状況」のきょうだいの学年・クラスは、令和9年4月時点のものを書きます。同居している人は全員書きます。</p></div>
-      <div class="card" style="--cc:var(--mint)"><span class="ico" data-icon="clock"></span><h3><span class="nb">育休・産休の期間を</span><span class="nb">忘れずに</span></h3><p>利用開始のときに育休・産休中なら、期間を書き忘れないように。入園から2か月以内（産休は産後8週＋2か月以内）の復職が必要です。</p></div>
-      <div class="card" style="--cc:var(--yellow)"><span class="ico" data-icon="paper"></span><h3>出す前にコピーをとる</h3><p>申込書はコピーをとっておくと安心。育休を延長するとき、会社やハローワークで「申し込んだ証明」を求められることがあります。</p></div>
-      <div class="card" style="--cc:var(--red)"><span class="ico" data-icon="heart"></span><h3>ほんとうのことを書く</h3><p>内容にうそがあると、内定が取り消されます。わからないところは区役所の支援課に聞いてね。</p></div>
-      <div class="card" style="--cc:var(--blue)"><span class="ico" data-icon="mail"></span><h3><span class="nb">郵送は記録が</span><span class="nb">残る方法で</span></h3><p>簡易書留などがおすすめ。届いてから1週間ほどで受付票が来ます。10日たっても来なければ区の支援課に確認を。</p></div>
+      <div class="card" style="--cc:var(--pink)"><span class="ico" data-icon="scale"></span><h3>まちがえたら二重線</h3><p>まちがえたところに二重線を引いて、余白に正しく書くよ。修正液・修正テープは使わないで。</p></div>
+      <div class="card" style="--cc:var(--orange)"><span class="ico" data-icon="family"></span><h3><span class="nb">申請者は</span><span class="nb">「生計中心者」</span></h3><p>申請書の申請者の欄には、おうちの家計を主に支えている人を書くよ。「世帯の状況」の1段目も同じ人に。</p></div>
+      <div class="card" style="--cc:var(--green)"><span class="ico" data-icon="house"></span><h3><span class="nb">希望園は</span><span class="nb">名前とコード</span></h3><p>希望の保育園は、園の名前と「施設コード」をセットで書くよ。10か所以上なら別紙に。いくつ書いても点数は変わらないよ。</p></div>
+      <div class="card" style="--cc:var(--purple)"><span class="ico" data-icon="school"></span><h3><span class="nb">きょうだいの学年は</span><span class="nb">4月時点</span></h3><p>「世帯の状況」のきょうだいの学年・クラスは、令和9年4月時点のものを書くよ。同居している人は全員書くんだ。</p></div>
+      <div class="card" style="--cc:var(--mint)"><span class="ico" data-icon="clock"></span><h3><span class="nb">育休・産休の期間を</span><span class="nb">忘れずに</span></h3><p>利用開始のときに育休・産休中なら、期間を書き忘れないように。入園から2か月以内（産休は産後8週＋2か月以内）の復職が必要だよ。</p></div>
+      <div class="card" style="--cc:var(--yellow)"><span class="ico" data-icon="paper"></span><h3>出す前にコピーをとる</h3><p>申込書はコピーをとっておくと安心。育休を延長するとき、会社やハローワークで「申し込んだ証明」を求められることがあるよ。</p></div>
+      <div class="card" style="--cc:var(--red)"><span class="ico" data-icon="heart"></span><h3>ほんとうのことを書く</h3><p>内容にうそがあると、内定が取り消されるよ。わからないところは区役所の支援課に聞いてね。</p></div>
+      <div class="card" style="--cc:var(--blue)"><span class="ico" data-icon="mail"></span><h3><span class="nb">郵送は記録が</span><span class="nb">残る方法で</span></h3><p>簡易書留などがおすすめ。届いてから1週間ほどで受付票が来るよ。10日たっても来なければ区の支援課に確認を。</p></div>
       <div class="card" style="--cc:var(--orange)"><span class="ico" data-icon="phone"></span><h3><span class="nb">電子申請なら</span><span class="nb">これを用意</span></h3><p>パソコンかスマホ、メールアドレス、署名用電子証明書が入ったマイナンバーカード、カードを読み取れるスマホ（またはICカードリーダー）。</p></div>
-      <div class="card" style="--cc:var(--pink)"><span class="ico" data-icon="bulb"></span><h3><span class="nb">市民税の申告を</span><span class="nb">すませておく</span></h3><p>令和8年度の市民税を申告していないと、選考で不利になることがあります。早めに手続きを。</p></div>
-      <div class="card" style="--cc:var(--green)"><span class="ico" data-icon="family"></span><h3><span class="nb">きょうだいで</span><span class="nb">申し込むとき</span></h3><p>原本は1部だけで、ほかのきょうだいの分は写し（コピー）でOK。申込書は子ども1人につき1部です。</p></div>
+      <div class="card" style="--cc:var(--pink)"><span class="ico" data-icon="bulb"></span><h3><span class="nb">市民税の申告を</span><span class="nb">すませておく</span></h3><p>令和8年度の市民税を申告していないと、選考で不利になることがあるよ。早めに手続きを。</p></div>
+      <div class="card" style="--cc:var(--green)"><span class="ico" data-icon="family"></span><h3><span class="nb">きょうだいで</span><span class="nb">申し込むとき</span></h3><p>原本は1部だけで、ほかのきょうだいの分は写し（コピー）でOK。申込書は子ども1人につき1部だよ。</p></div>
     </div>
   </section>
 
   <section>
-    <div class="sec-head"><span class="ico" data-icon="rocket"></span><div class="h"><h2><span class="nb">出したあとに</span><span class="nb">変わったら</span></h2><p>「申込内容変更届」を出します。さわると必要な書類が出ます</p></div></div>
+    <div class="sec-head"><span class="ico" data-icon="rocket"></span><div class="h"><h2><span class="nb">出したあとに</span><span class="nb">変わったら</span></h2><p>「申込内容変更届」を出すよ。さわると必要な書類が出るんだ</p></div></div>
     <div class="change" id="change"></div>
   </section>
 
