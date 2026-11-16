@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-16T09:45:00+09:00",
+ "updatedAt": "2026-11-16T19:15:00+09:00",
  "events": [
   {
    "id": "e-lalaport-bf",
@@ -364,18 +364,6 @@
    "added": "2026-11-11T09:50:00+09:00"
   },
   {
-   "id": "s-rikyu-afternoon",
-   "kind": "info",
-   "title": "大宮璃宮 秋のくまアフタヌーンティー（〜11/16）",
-   "desc": "マスカットや洋梨を使ったくまのスイーツ。火曜休み、120分制。",
-   "date": "2026-11-16",
-   "src": "ウォーカープラス",
-   "url": "https://www.walkerplus.com/event/ar0311e611530/",
-   "img": "https://ms-cache.walkerplus.com/walkertouch/wtd/event/30/l2/611530.jpg",
-   "ai": false,
-   "added": "2026-11-11T09:50:00+09:00"
-  },
-  {
    "id": "s-randoseru-keyholder",
    "kind": "event",
    "title": "ランドセルの端材でキーホルダー作り（〜1/31）",
@@ -398,6 +386,18 @@
    "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/07/IMG_4851.jpg",
    "ai": false,
    "added": "2026-11-15T19:10:00+09:00"
+  },
+  {
+   "id": "s-bocchi-nisshin",
+   "kind": "open",
+   "title": "日進にカット専門店「Bocchi」オープン",
+   "desc": "予約なしで行けるカット専門店。カットは1,500円だよ。",
+   "date": "2026-11-01",
+   "src": "宮原大宮ドットコム",
+   "url": "https://miyahara-kitaku.com/bocchi-nisshin-open/",
+   "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/11/IMG_9933.jpg",
+   "ai": false,
+   "added": "2026-11-16T19:15:00+09:00"
   }
  ],
  "news": [
@@ -574,8 +574,8 @@
    "date": "2026-11-01",
    "src": "さいたま市",
    "url": "https://www.city.saitama.lg.jp/006/014/008/003/015/007/p133510.html",
-   "img": "",
-   "ai": false,
+   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-orange-ribbon-2026.jpg",
+   "ai": true,
    "important": false,
    "added": "2026-11-15T19:10:00+09:00"
   }
