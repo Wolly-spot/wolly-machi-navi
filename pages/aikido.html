@@ -206,7 +206,7 @@ a{color:inherit}
 <body data-noicon>
 <div class="wrap" id="app"></div>
 <script>
-const D=[{"n":"大成合気道会","d":"大宮区","k":"club","tg":[],"a":"大宮区(大成)2丁目379 さいたま市立大成中学校武道館","pl":"","dy":"","i":"土 14:00〜16:00 日 14:00〜17:00","fee":"","u":"https://sainoaiki.com/doc-dojonavi/2024081000573/","ph":"b4a70ad2ea1a.webp","sp":0,"new":0,"st2":""},{"n":"大宮氷川合気会","d":"大宮区","k":"club","tg":[],"a":"大宮区宮町3丁目113-3 大宮北公民館","pl":"","dy":"","i":"日(9:00-11:30)","fee":"","u":"https://www.hikawaaikido.info","ph":"9368348e3c30.webp","sp":0,"new":0,"st2":""},{"n":"ビターズ 合気道クラブ","d":"見沼区","k":"club","tg":[],"a":"見沼区島町1075-20","pl":"","dy":"","i":"","fee":"","u":"https://sainoaiki.com/doc-dojonavi/2024081000535/","ph":"502addc69070.webp","sp":0,"new":0,"st2":""},{"n":"合気道 大宮道場","d":"見沼区","k":"school","tg":[],"a":"見沼区島町1158","pl":"","dy":"","i":"","fee":"","u":"https://sainoaiki.com/doc-dojonavi/2024081000627/","ph":"bcaec0ee867b.webp","sp":0,"new":0,"st2":""},{"n":"浦和合気会","d":"桜区","k":"club","tg":[],"a":"桜区栄和5-3-18","pl":"","dy":"","i":"","fee":"","u":"https://urawa-aikikai.jimdofree.com","ph":"77a324caf134.webp","sp":0,"new":0,"st2":""},{"n":"合気道 桜道場","d":"桜区","k":"school","tg":[],"a":"桜区五関201-1","pl":"","dy":"","i":"","fee":"","u":"http://sakura-dojo.org","ph":"85ad5a387f48.webp","sp":0,"new":0,"st2":""},{"n":"A&P合気道 石垣道場","d":"浦和区","k":"school","tg":[],"a":"浦和区常盤9-8-15 松本ビル3階","pl":"","dy":"","i":"","fee":"","u":"https://ishigaki-dojo.com","ph":"3fedb6c8affd.webp","sp":0,"new":0,"st2":""},{"n":"合気道 浦和尾又道場","d":"南区","k":"school","tg":[],"a":"南区大谷場2-3-22","pl":"","dy":"","i":"","fee":"","u":"http://urawaomata.com","ph":"8e808cddf4db.webp","sp":0,"new":0,"st2":""}];
+const D=[{"n":"大成合気道会","d":"大宮区","k":"club","tg":[],"a":"大宮区(大成)2丁目379 さいたま市立大成中学校武道館","pl":"","dy":"","i":"土 14:00〜16:00 日 14:00〜17:00","fee":"","u":"https://sainoaiki.com/doc-dojonavi/2024081000573/","ph":"","sp":0,"new":0,"st2":""},{"n":"大宮氷川合気会","d":"大宮区","k":"club","tg":[],"a":"大宮区宮町3丁目113-3 大宮北公民館","pl":"","dy":"","i":"日(9:00-11:30)","fee":"","u":"https://www.hikawaaikido.info","ph":"","sp":0,"new":0,"st2":""},{"n":"ビターズ 合気道クラブ","d":"見沼区","k":"club","tg":[],"a":"見沼区島町1075-20","pl":"","dy":"","i":"","fee":"","u":"https://sainoaiki.com/doc-dojonavi/2024081000535/","ph":"","sp":0,"new":0,"st2":""},{"n":"合気道 大宮道場","d":"見沼区","k":"school","tg":[],"a":"見沼区島町1158","pl":"","dy":"","i":"","fee":"","u":"https://sainoaiki.com/doc-dojonavi/2024081000627/","ph":"","sp":0,"new":0,"st2":""},{"n":"浦和合気会","d":"桜区","k":"club","tg":[],"a":"桜区栄和5-3-18","pl":"","dy":"","i":"","fee":"","u":"https://urawa-aikikai.jimdofree.com","ph":"","sp":0,"new":0,"st2":""},{"n":"合気道 桜道場","d":"桜区","k":"school","tg":[],"a":"桜区五関201-1","pl":"","dy":"","i":"","fee":"","u":"http://sakura-dojo.org","ph":"","sp":0,"new":0,"st2":""},{"n":"A&P合気道 石垣道場","d":"浦和区","k":"school","tg":[],"a":"浦和区常盤9-8-15 松本ビル3階","pl":"","dy":"","i":"","fee":"","u":"https://ishigaki-dojo.com","ph":"","sp":0,"new":0,"st2":""},{"n":"合気道 浦和尾又道場","d":"南区","k":"school","tg":[],"a":"南区大谷場2-3-22","pl":"","dy":"","i":"","fee":"","u":"http://urawaomata.com","ph":"","sp":0,"new":0,"st2":""}];
 const WARDS=["西区", "北区", "大宮区", "見沼区", "中央区", "桜区", "浦和区", "南区", "緑区", "岩槻区"];
 const STSRC=[];
 // 区の色＝ユニフォームの色 [メイン, しま, 文字, 番号の字]
@@ -285,7 +285,7 @@ function list(){
   ${wi>=0?`<div class="nbw"><button data-nw="${pw}" style="--wc:${WCOL[pw]}">‹ ${pw}</button><span class="swipehint">よこにスライドでとなりの区へ</span><button class="r" data-nw="${nw}" style="--wc:${WCOL[nw]}">${nw} ›</button></div>`:""}
   ${state.q?"":`<div class="lchips">${lch.map(c=>`<button class="chip${state.f===c[0]?" on":""}" data-lf="${c[0]}">${c[1]}</button>`).join("")}</div>`}
   <div class="field">${state.f==="strong"?`<p class="best" style="font-size:12.5px;margin:0 2px 10px;padding:8px 10px">🏆 ここ2年（2024・2025年度）の埼玉県の大きな大会で、ベスト16以上か、県リーグのいちばん上（S1）に入ったさいたま市のチームだよ。カードをタップすると大会の結果が見られるんだ。</p>`:""}${items.length?`<div class="grid">${items.map((t,i)=>card(t,i+1,i)).join("")}</div>`:`<p class="empty">見つからなかったよ。ことばを変えてみてね。</p>`}</div>
-  <footer class="foot">写真をタップすると、くわしく出るよ。入る前に、かならずホームページでたしかめてね。</footer>`;
+  <footer class="foot">カードをタップすると、公式のページや動画がホログラムでふわっと出るよ。入る前に、かならずホームページでたしかめてね。</footer>`;
 }
 function areaHtml(){let n=0;return AREAS.map(a=>{const L=D.filter(t=>t.pf===a[0]);return `<div class="area"><h3>${esc(a[0])}<i>${esc(a[1])}</i><small>${L.length}${UNIT}</small></h3><div class="grid">${L.map(t=>{n++;return card(t,n,n-1)}).join("")}</div></div>`}).join("")}
 const UNIT="道場";
@@ -369,6 +369,177 @@ render();
   if(tt){state={view:"list",ward:WARDS.includes(tt.d)&&!AREAS?tt.d:"",f:"",q:WARDS.includes(tt.d)&&!AREAS?"":pt};render();
     const ci=CUR.findIndex(t=>t===tt);
     if(ci>=0)setTimeout(()=>{const c=document.querySelector(`[data-ci="${ci}"]`);if(c){c.scrollIntoView({block:"center"});c.classList.add("hlt")}setTimeout(()=>openTeam(ci),350)},300)}}
+</script>
+<style>
+body.holo-on .ph{aspect-ratio:2/1}
+.ph.pv .no{z-index:2;font-size:18px!important;top:4px!important;left:4px!important;min-width:24px;text-align:center;padding:1px 5px;border-radius:8px;background:rgba(255,255,255,.88);-webkit-text-stroke:0!important;color:#1f6fa8!important;box-shadow:0 0 8px rgba(80,190,255,.5)}
+.ph.pv .nw{z-index:2}
+.ph.pv{background:linear-gradient(150deg,#dff4ff,#c6e6ff 55%,#dcd8ff)}
+.ph.pv::after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 0 1px rgba(255,255,255,.7),inset 0 -14px 20px -12px rgba(60,150,230,.35)}
+.pvf{position:absolute;left:0;top:0;transform-origin:0 0;border:0;pointer-events:none;background:#fff}
+.pvk{position:absolute;right:5px;bottom:5px;z-index:2;display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:800;color:#fff;border-radius:999px;padding:2px 7px;background:rgba(20,90,160,.78);box-shadow:0 0 8px rgba(80,190,255,.6)}
+.pvk svg{width:12px!important;height:12px!important}
+.pvk.yt{background:#e62117}.pvk.ig{background:linear-gradient(110deg,#f58529,#dd2a7b,#8134af)}.pvk.sn{background:#3b5998}
+.pvy{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pvp{position:absolute;left:50%;top:50%;width:38px;height:27px;margin:-13px 0 0 -19px;border-radius:8px;background:#e62117;box-shadow:0 2px 8px rgba(0,0,0,.35)}.pvp::after{content:"";position:absolute;left:15px;top:7px;border-left:11px solid #fff;border-top:6.5px solid transparent;border-bottom:6.5px solid transparent}
+.pvw{position:absolute;inset:0;transition:opacity .4s;z-index:1;display:grid;place-items:center;align-content:center;gap:2px;color:#2a6fa8;font-size:10.5px;font-weight:800;text-align:center}
+.pvw svg{width:30px!important;height:30px!important;filter:drop-shadow(0 0 6px rgba(80,190,255,.7))}
+.pvw.sns svg{width:28px!important;height:28px!important}
+body.holo-on .ph .no{font-size:22px}
+.ci{display:grid;gap:2px;margin:1px 0 2px}
+.ci span{display:flex;align-items:center;gap:4px;font-size:11px;line-height:1.35;color:#3a4a5c;font-weight:600;min-width:0}
+.ci span b{font-weight:800;color:#1f6fa8}.ci span em{font-style:normal;color:#98a2ad;font-weight:600}
+.ci svg{flex:0 0 auto;width:14px;height:14px}
+.ci .wk{color:#0f7fc0;font-weight:800}
+.hvtap{display:inline-flex;align-items:center;gap:3px;align-self:flex-start;margin-top:2px;font-size:10.5px;font-weight:800;color:#fff;background:linear-gradient(110deg,#4cc3ff,#7aa8ff);border-radius:999px;padding:2px 8px;box-shadow:0 0 8px rgba(80,190,255,.6)}
+.hvtap svg{width:14px!important;height:14px!important;flex:0 0 auto}
+/* ホログラムの窓 */
+.hov{position:fixed;inset:0;z-index:200;display:grid;place-items:center;padding:max(12px,env(safe-area-inset-top)) 10px max(12px,env(safe-area-inset-bottom));background:rgba(6,28,58,.3);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);opacity:0;transition:opacity .3s}
+.hov.show{opacity:1}
+.hpn{position:relative;width:min(100%,560px);height:min(88vh,860px);display:flex;flex-direction:column;border-radius:26px;overflow:hidden;
+  background:linear-gradient(160deg,rgba(232,249,255,.5),rgba(196,236,255,.32) 55%,rgba(214,228,255,.42));-webkit-backdrop-filter:blur(12px) saturate(1.5);backdrop-filter:blur(12px) saturate(1.5);
+  border:1.5px solid rgba(255,255,255,.85);box-shadow:0 0 0 1px rgba(110,205,255,.55),0 0 34px rgba(90,200,255,.55),0 0 90px rgba(120,170,255,.35),0 34px 60px -24px rgba(10,50,100,.65);
+  transform:translateY(46px) scale(.94);opacity:0;transition:transform .42s cubic-bezier(.2,.95,.3,1.12),opacity .32s}
+.hov.show .hpn{transform:none;opacity:1}
+.hpn::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:1;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.55) 45%,transparent 60%);background-size:250% 100%;animation:hsh 3.2s ease-in-out infinite;mix-blend-mode:soft-light}
+.hpn::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;background:repeating-linear-gradient(180deg,rgba(255,255,255,.07) 0 2px,transparent 2px 5px);opacity:.6}
+@keyframes hsh{0%{background-position:120% 0}60%,100%{background-position:-60% 0}}
+.hhd{position:relative;z-index:4;display:flex;align-items:center;gap:8px;padding:12px 12px 8px 16px}
+.hhd b{flex:1;min-width:0;font-size:16px;line-height:1.3;color:#0d3b66}
+.hhd small{display:block;font-size:11px;font-weight:700;color:#3b7fb3}
+.hx{flex:0 0 auto;width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.85);color:#1f6fa8;font-size:22px;font-weight:700;box-shadow:0 0 0 1.5px rgba(110,205,255,.6),0 0 12px rgba(90,200,255,.5);cursor:pointer}
+.hbd{position:relative;z-index:2;flex:1;overflow:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding:0 12px 12px}
+.hmd{position:relative;height:56vh;max-height:560px;border-radius:18px;overflow:hidden;background:#fff;box-shadow:0 0 0 1.5px rgba(110,205,255,.6),0 0 20px rgba(90,200,255,.35)}
+.hmd iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#fff}
+.hmd.vid{height:auto;aspect-ratio:16/9}.hmd.vid iframe{position:absolute}
+.hmd.ig{height:62vh}
+.hld{position:absolute;inset:0;display:grid;place-items:center;align-content:center;gap:10px;background:linear-gradient(160deg,#eaf8ff,#dceeff);color:#3b7fb3;font-size:13px;font-weight:800;z-index:1;transition:opacity .4s}
+.hld i{width:44px;height:44px;border-radius:50%;border:4px solid rgba(110,205,255,.35);border-top-color:#4cc3ff;animation:hsp 1s linear infinite}
+@keyframes hsp{to{transform:rotate(360deg)}}
+.hmd.ld .hld{opacity:0;pointer-events:none}
+.hsrc{display:flex;align-items:center;gap:6px;margin:8px 2px 0;font-size:11.5px;font-weight:700;color:#3b7fb3}
+.hsrc svg{width:16px;height:16px}
+.hnote{margin:6px 2px 0;font-size:11.5px;color:#55708a;font-weight:600;line-height:1.6}
+/* Wolly のプレビュー */
+.hwp{border-radius:18px;padding:16px;background:linear-gradient(160deg,rgba(255,255,255,.6),rgba(234,248,255,.48));box-shadow:0 0 0 1.5px rgba(110,205,255,.6),0 0 20px rgba(90,200,255,.3)}
+.hwp .hwi{display:grid;place-items:center;width:64px;height:64px;margin:0 auto 6px;border-radius:20px;background:linear-gradient(150deg,#c9efff,#a9d6ff);box-shadow:0 0 16px rgba(90,200,255,.6)}
+.hwp .hwi svg{width:40px;height:40px}
+.hwp h3{margin:0 0 2px;text-align:center;font-size:17px;color:#0d3b66}
+.hwp p.hws{margin:0 0 10px;text-align:center;font-size:12px;color:#3b7fb3;font-weight:700}
+.hif{display:grid;gap:6px;margin:10px 0 0}
+.hif div{display:grid;grid-template-columns:24px 5.2em 1fr;align-items:start;gap:6px;padding:7px 9px;border-radius:12px;background:rgba(255,255,255,.62);font-size:12.5px;line-height:1.55}
+.hif svg{width:22px;height:22px}.hif dt{font-weight:800;color:#1f6fa8}.hif dd{margin:0;color:#24384d;font-weight:600;word-break:break-word}
+.hif dd em{font-style:normal;color:#98a2ad}
+.htg{display:flex;flex-wrap:wrap;gap:4px;margin:8px 0 0}
+.hft{position:relative;z-index:4;padding:10px 12px max(12px,env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(232,249,255,0),rgba(232,249,255,.7) 35%)}
+.hgo{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;padding:14px;border-radius:999px;font-size:15px;font-weight:900;color:#fff;text-decoration:none;background:linear-gradient(110deg,#2fb5ff,#6c8cff);box-shadow:0 0 18px rgba(80,190,255,.7),0 6px 14px -6px rgba(20,60,120,.6)}
+.hgo.none{background:#c9d6e3;box-shadow:none;color:#5b6b7b}
+.hgo svg{width:20px;height:20px}
+.hnav{position:absolute;top:50%;z-index:5;width:34px;height:52px;border:0;border-radius:12px;background:rgba(255,255,255,.75);color:#1f6fa8;font-size:24px;font-weight:700;box-shadow:0 0 10px rgba(90,200,255,.5);cursor:pointer}
+.hnav.p{left:-2px}.hnav.n{right:-2px}
+@media (prefers-reduced-motion:reduce){.hpn,.hov{transition:none}.hpn::before{animation:none}}
+</style>
+<script>
+(function(){
+const HX={"大成合気道会":{"ll":[35.908863,139.614594],"em":{"s":"ng","t":"2026-11-17"},"ag":"","ls":""},"大宮氷川合気会":{"ll":[35.911427,139.627853],"em":{"s":"ok","t":"2026-11-17","u":"https://www.hikawaaikido.info"},"ag":"","ls":""},"ビターズ 合気道クラブ":{"ll":[35.942989,139.660736],"em":{"s":"ng","t":"2026-11-17"},"ag":"","ls":""},"合気道 大宮道場":{"ll":[35.940376,139.660126],"em":{"s":"ng","t":"2026-11-17"},"ag":"","ls":""},"浦和合気会":{"ll":[35.863033,139.612381],"em":{"s":"ok","t":"2026-11-17","u":"https://urawa-aikikai.jimdofree.com"},"ag":"","ls":""},"合気道 桜道場":{"ll":[35.864857,139.599503],"em":{"s":"ok","t":"2026-11-17","u":"https://sakura-dojo.org/","yt":["cNHQrrEzyzw","6opMlhTSwEw"]},"ag":"","ls":""},"A&P合気道 石垣道場":{"ll":[35.868488,139.647598],"em":{"s":"ok","t":"2026-11-17","u":"https://ishigaki-dojo.com","yt":["m82YOxnvRtk","eIxd8A7M5kc"]},"ag":"","ls":""},"合気道 浦和尾又道場":{"ll":[35.854645,139.670898],"em":{"s":"http","t":"2026-11-17","yt":["9cYChAL5uto","0CvA5Qg5gaI","bgGD4hTRZqo"]},"ag":"","ls":""}};
+document.body.classList.add("holo-on");
+const O='stroke="#1f6fa8" stroke-width="1.9" fill="none" stroke-linecap="round" stroke-linejoin="round"';
+const SV=(p,c)=>`<svg viewBox="0 0 24 24" aria-hidden="true"${c?` class="${c}"`:""}>${p}</svg>`;
+const I={pin:SV(`<path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z" fill="#ff8fc0" stroke="#1f2140" stroke-width="1.5"/><circle cx="12" cy="10" r="2.3" fill="#fff"/>`),
+ walk:SV(`<circle cx="13" cy="4.5" r="2" fill="#4cc3ff"/><path d="M10 21l2-6 3 3v3M9 12l2-4 4 2 2 3M12 15l-1-4" ${O}/>`),
+ age:SV(`<circle cx="12" cy="8" r="4" fill="#ffe3cf" stroke="#1f2140" stroke-width="1.5"/><path d="M5 21a7 7 0 0 1 14 0" fill="#bfe6ff" stroke="#1f2140" stroke-width="1.5"/>`),
+ yen:SV(`<circle cx="12" cy="12" r="9" fill="#ffe59a" stroke="#1f2140" stroke-width="1.5"/><path d="M8.5 7l3.5 5 3.5-5M12 12v6M9 13h6M9 16h6" stroke="#1f2140" stroke-width="1.5" fill="none" stroke-linecap="round"/>`),
+ ppl:SV(`<circle cx="8" cy="8" r="3" fill="#ffe3cf" stroke="#1f2140" stroke-width="1.4"/><circle cx="16.5" cy="9" r="2.6" fill="#ffe3cf" stroke="#1f2140" stroke-width="1.4"/><path d="M2.5 20a5.5 5.5 0 0 1 11 0M12 20a4.5 4.5 0 0 1 9 0" fill="#c9b6ff" stroke="#1f2140" stroke-width="1.4"/>`),
+ cal:SV(`<rect x="3.5" y="5" width="17" height="15" rx="3" fill="#fff" stroke="#1f2140" stroke-width="1.5"/><path d="M3.5 9.5h17" stroke="#1f2140" stroke-width="1.5"/><rect x="3.5" y="5" width="17" height="4.5" rx="2" fill="#ff8fc0" stroke="#1f2140" stroke-width="1.5"/><path d="M8 3v4M16 3v4" stroke="#1f2140" stroke-width="1.5" stroke-linecap="round"/>`),
+ star:SV(`<path d="M12 3l2.6 5.6 6 .7-4.5 4 1.2 6L12 16.4 6.7 19.3l1.2-6-4.5-4 6-.7z" fill="#ffe59a" stroke="#1f2140" stroke-width="1.4" stroke-linejoin="round"/>`),
+ web:SV(`<circle cx="12" cy="12" r="9" fill="#e3f4fc" stroke="#1f2140" stroke-width="1.5"/><path d="M3 12h18M12 3q-5 9 0 18M12 3q5 9 0 18" stroke="#1f2140" stroke-width="1.3" fill="none"/>`),
+ film:SV(`<rect x="3" y="5" width="18" height="14" rx="3" fill="#ff8fc0" stroke="#1f2140" stroke-width="1.5"/><path d="M10 9l5 3-5 3z" fill="#fff"/>`),
+ cam:SV(`<rect x="3" y="5" width="18" height="15" rx="5" fill="#c9b6ff" stroke="#1f2140" stroke-width="1.5"/><circle cx="12" cy="12.5" r="3.6" fill="#fff" stroke="#1f2140" stroke-width="1.5"/><circle cx="17" cy="8.5" r="1" fill="#1f2140"/>`),
+ holo:SV(`<path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z" fill="#bfe6ff" stroke="#1f2140" stroke-width="1.5"/><path d="M4 7.5l8 4.5 8-4.5M12 12v9" stroke="#1f2140" stroke-width="1.3" fill="none"/>`),
+ go:SV(`<path d="M7 17L17 7M9 7h8v8" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`)};
+/* 家の位置（街ナビから。この端末に覚える）。?home=緯度,経度 でもためせる */
+let HOME=null;try{HOME=JSON.parse(localStorage.getItem("wolly.home.ll")||"null")}catch(e){}
+{const q=new URLSearchParams(location.search).get("home");if(q){const [a,b]=q.split(",").map(Number);if(a&&b)HOME=[a,b]}}
+addEventListener("message",e=>{const d=e.data;if(e.source!==window.parent||!d||d.type!=="wolly-home")return;const g=d.geo;
+  const v=g&&g.ok&&g.lat?[g.lat,g.lon]:null;if(JSON.stringify(v)===JSON.stringify(HOME))return;HOME=v;try{localStorage.setItem("wolly.home.ll",JSON.stringify(v))}catch(_){}
+  if(typeof render==="function"&&state.view!=="home")render()});
+const hv=(a,b)=>{const R=6371e3,r=x=>x*Math.PI/180,dl=r(b[0]-a[0]),dn=r(b[1]-a[1]);const s=Math.sin(dl/2)**2+Math.cos(r(a[0]))*Math.cos(r(b[0]))*Math.sin(dn/2)**2;return 2*R*Math.asin(Math.sqrt(s))};
+function walk(t){const x=HX[t.n];if(!HOME||!x||!x.ll)return "";const m=Math.max(1,Math.round(hv(HOME,x.ll)*1.3/80));return m>60?"歩くと60分より長いよ（車・自転車で）":`家から歩いて約${m}分`}
+const X=t=>HX[t.n]||{em:{s:"none"}};
+/* 月謝：いまの料金の文から、月のお金だけを短く */
+function fee(t){const s=(t.fee||t.i||"").replace(/,/g,",");const m=s.match(/(?:月額|月会費|月謝|団費|会費|毎月)\s*[:：/]?\s*(?:月)?\s*([\d,]+(?:\s*[〜~-]\s*[\d,]+)?\s*円)/)||s.match(/(年会費)\s*([\d,]+円)/);if(!m)return "";return m[2]?"年"+m[2]:"月"+m[1].replace(/\s/g,"")}
+/* カード：いまの中身はそのまま、写真の枠を低くして情報を足す */
+const _card=card;
+card=function(t,no,ci){
+  const h=_card(t,no,ci),x=X(t),w=walk(t),f=fee(t),d=shortDay(t);
+  const rows=[w?`<span class="wk">${I.walk}${esc(w)}</span>`:"",
+    `<span>${I.age}<b>対象</b>${x.ag?esc(x.ag.length>16?x.ag.slice(0,16)+"…":x.ag):"<em>教室にきいてね</em>"}</span>`,
+    `<span>${I.yen}<b>${f.startsWith("年")?"会費":"月謝"}</b>${f?esc(f):"<em>教室にきいてね</em>"}</span>`,
+    x.ls?`<span>${I.ppl}<b>レッスン</b>${esc(x.ls)}</span>`:"",
+    d?`<span>${I.cal}<b>練習日</b>${esc(d)}</span>`:""].join("");
+  const tap=`<span class="hvtap">${I.holo}タップでプレビュー</span>`;
+  const nb=`<span class="no num">${no}</span>${t.new?'<span class="nw">NEW</span>':""}`;
+  const h2=t.ph?h:h.replace(/<div class="ph"[^>]*>[\s\S]*?<\/div>\s*<div class="cb">/,`<div class="ph pv" data-pv="${ci}">${pvInner(t)}${nb}</div><div class="cb">`);
+  return h2.replace('<div class="tg">',`<div class="ci">${rows}</div><div class="tg">`).replace(/<\/div><\/button>\s*$/,tap+"</div></button>");
+};
+/* カードの画像の場所に出すもの（写真は使わない。出してよい公式のものだけ） */
+const host=u=>{try{return new URL(u).hostname.replace(/^www\./,"")}catch(e){return ""}};
+function pvInner(t){const e=X(t).em||{};
+  if(e.s==="ok"&&(e.u||t.u))return `<span class="pvw">${I.web}${esc(host(e.u||t.u))}</span><span class="pvk">${I.web}公式HP</span>`;
+  if(e.yt&&e.yt.length)return `<img class="pvy" src="https://i.ytimg.com/vi/${esc(e.yt[0])}/mqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><span class="pvp"></span><span class="pvk yt">YouTube</span>`;
+  if(e.ig&&e.ig.length)return `<span class="pvw sns">${I.cam}公式インスタグラム</span><span class="pvk ig">Instagram</span>`;
+  if(t.u&&/instagram\.com/.test(t.u))return `<span class="pvw sns">${I.cam}公式インスタグラム</span><span class="pvk ig">Instagram</span>`;
+  if(t.u&&/facebook\.com/.test(t.u))return `<span class="pvw sns">${I.web}公式フェイスブック</span><span class="pvk sn">Facebook</span>`;
+  if(t.u&&/(x|twitter)\.com/.test(t.u))return `<span class="pvw sns">${I.web}公式X</span><span class="pvk sn">X</span>`;
+  return `<span class="pvw">${I.holo}Wollyのプレビュー</span>`}
+/* 公式HPの小さなプレビュー：画面に入ったときだけ読みこむ（重くならないように）。さわれない（タップはカードへ） */
+const pvIO="IntersectionObserver" in window?new IntersectionObserver(es=>es.forEach(en=>{if(!en.isIntersecting)return;const ph=en.target;pvIO.unobserve(ph);
+  const t=CUR[+ph.dataset.pv],e=t&&(X(t).em||{});if(!t||e.s!=="ok")return;const W=390,sc=ph.clientWidth/W,f=document.createElement("iframe");
+  f.className="pvf";f.src=e.u||t.u;f.title="";f.tabIndex=-1;f.setAttribute("aria-hidden","true");f.setAttribute("loading","lazy");f.setAttribute("referrerpolicy","no-referrer");f.setAttribute("sandbox","allow-scripts allow-same-origin");
+  f.style.width=W+"px";f.style.height=Math.ceil(ph.clientHeight/sc)+"px";f.style.transform=`scale(${sc})`;ph.insertBefore(f,ph.firstChild);
+  const hide=()=>{const w=ph.querySelector(".pvw");w&&(w.style.opacity="0")};f.addEventListener("load",()=>setTimeout(hide,300),{once:true});setTimeout(hide,3000)}),{rootMargin:"200px 0px"}):null;
+const pvWatch=()=>{if(pvIO)document.querySelectorAll(".ph.pv[data-pv]:not([data-io])").forEach(p=>{p.dataset.io=1;pvIO.observe(p)})};
+new MutationObserver(pvWatch).observe(document.getElementById("app"),{childList:true,subtree:true});
+/* ホログラムの中身 */
+function media(t){const x=X(t),e=x.em||{};
+  if(e.s==="ok"&&(e.u||t.u))return {k:"hp",h:`<div class="hmd" data-ld><div class="hld"><i></i>公式ホームページをよみこみ中…</div><iframe src="${esc(e.u||t.u)}" title="${esc(t.n)}の公式ホームページ" loading="lazy" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-forms"></iframe></div><p class="hsrc">${I.web}公式ホームページ（このまま中をスクロールできるよ）</p>`+(e.yt&&e.yt.length?`<div class="hmd vid" style="margin-top:10px" data-ld2><iframe src="https://www.youtube-nocookie.com/embed/${esc(e.yt[0])}?rel=0" title="${esc(t.n)}の公式動画" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin"></iframe></div><p class="hsrc">${I.film}公式ホームページにのっている動画（YouTube）</p>`:"")};
+  if(e.yt&&e.yt.length)return {k:"yt",h:`<div class="hmd vid" data-ld><div class="hld"><i></i>動画をよみこみ中…</div><iframe src="https://www.youtube-nocookie.com/embed/${esc(e.yt[0])}?rel=0" title="${esc(t.n)}の公式動画" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin"></iframe></div><p class="hsrc">${I.film}公式ホームページにのっている動画（YouTube）</p>`};
+  if(e.ig&&e.ig.length)return {k:"ig",h:`<div class="hmd ig" data-ld><div class="hld"><i></i>投稿をよみこみ中…</div><iframe src="${esc(e.ig[0])}embed" title="${esc(t.n)}の公式インスタグラム" loading="lazy" referrerpolicy="no-referrer"></iframe></div><p class="hsrc">${I.cam}公式のインスタグラムの投稿</p>`};
+  return null}
+function infoRows(t){const x=X(t),w=walk(t),f=t.fee||"",place=t.a||t.pl;
+  const r=(ic,k,v)=>`<div>${ic}<dt>${k}</dt><dd>${v}</dd></div>`,ask="<em>教室にきいてね</em>";
+  return `<dl class="hif">${place?r(I.pin,"場所",esc(place)+(t.pl&&t.a&&t.pl!==t.a?`<br><small>${esc(t.pl)}</small>`:"")):""}
+    ${r(I.pin,"区",esc(t.pf||t.d||"さいたま市"))}${w?r(I.walk,"家から",esc(w)+"<br><small>まっすぐの距離から計算した、めやすだよ</small>"):""}
+    ${r(I.age,"対象",x.ag?esc(x.ag):ask)}${r(I.yen,"月謝・料金",f?esc(f):ask)}${r(I.ppl,"レッスン",x.ls?esc(x.ls):ask)}
+    ${t.dy?r(I.cal,"練習日",esc(t.dy)):""}${t.i&&t.i!==t.dy&&t.i!==t.fee?r(I.star,"メモ",esc(t.i)):""}</dl>
+    <div class="htg"><i class="t ${t.k}">${KIND[t.k]}</i>${t.tg.map(g=>`<i class="t ${g}">${TAG[g]}</i>`).join("")}</div>`}
+function wolly(t){return `<div class="hwp"><div class="hwi">${I.holo}</div><h3>${esc(t.n)}</h3><p class="hws">Wollyのプレビュー</p>${infoRows(t)}
+  <p class="hnote">公式ホームページを、この中に出すことができない教室だよ。くわしくは、下のボタンから公式のページを見てね。</p></div>`}
+function goBtn(t){const x=X(t),e=x.em||{};if(!t.u)return `<span class="hgo none">公式ホームページはまだ見つかっていないよ</span>`;
+  const sns=/instagram|facebook|x\.com|twitter|tiktok|ameblo|line\.me/.test(t.u),dir=e.s==="dir";
+  return `<a class="hgo" href="${esc(t.u)}" target="_blank" rel="noopener">${dir?"くわしいページ（連盟など）で見る":sns?"公式SNSで詳しく見る":"公式ホームページで詳しく見る"}${I.go}</a>`}
+openTeam=function(ci){
+  let cur=ci;
+  const ov=document.createElement("div");ov.className="hov";
+  ov.innerHTML=`<div class="hpn" role="dialog" aria-modal="true"><div class="hhd"><b></b><button class="hx" aria-label="とじる">×</button></div><div class="hbd"></div><div class="hft"></div>${CUR.length>1?`<button class="hnav p" aria-label="前の教室">‹</button><button class="hnav n" aria-label="次の教室">›</button>`:""}</div>`;
+  const pn=ov.querySelector(".hpn"),hd=ov.querySelector(".hhd b"),bd=ov.querySelector(".hbd"),ft=ov.querySelector(".hft");
+  const show=()=>{const t=CUR[cur],m=media(t);pn.setAttribute("aria-label",t.n);
+    hd.innerHTML=`${esc(t.n)}<small>${esc(t.pf||t.d||"さいたま市")}・${cur+1} / ${CUR.length}</small>`;
+    bd.innerHTML=m?m.h+`<div class="hwp" style="margin-top:10px">${infoRows(t)}</div>`:wolly(t);bd.scrollTop=0;
+    ft.innerHTML=goBtn(t)+`<p class="hnote" style="text-align:center">入る前に、かならず教室にたしかめてね。</p>`;
+    const md=bd.querySelector("[data-ld]");if(md){const f=md.querySelector("iframe");f.addEventListener("load",()=>md.classList.add("ld"),{once:true});
+      setTimeout(()=>{if(!md.classList.contains("ld")){md.querySelector(".hld").innerHTML="<i></i>よみこみに時間がかかっているよ。<br>下のボタンから公式のページを見てね"}},9000)}};
+  show();document.body.appendChild(ov);document.body.style.overflow="hidden";
+  requestAnimationFrame(()=>requestAnimationFrame(()=>ov.classList.add("show")));
+  const close=()=>{ov.classList.remove("show");document.body.style.overflow="";setTimeout(()=>ov.remove(),350);document.removeEventListener("keydown",key)};
+  const go=d=>{cur=(cur+d+CUR.length)%CUR.length;show()};
+  const key=e=>{if(e.key==="Escape")close();else if(e.key==="ArrowRight")go(1);else if(e.key==="ArrowLeft")go(-1)};
+  document.addEventListener("keydown",key);
+  ov.addEventListener("click",e=>{if(e.target===ov||e.target.closest(".hx"))close();else if(e.target.closest(".hnav.n"))go(1);else if(e.target.closest(".hnav.p"))go(-1)});
+  setTimeout(()=>ov.querySelector(".hx").focus({preventScroll:true}),80);
+};
+if(state.view!=="home")render();
+})();
 </script>
 <!--wolly-totop-->
 <style>
