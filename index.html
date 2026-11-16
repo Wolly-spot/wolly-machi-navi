@@ -1216,7 +1216,8 @@ svg .a-ring{animation:ring 2.4s ease-in-out infinite;transform-box:fill-box;tran
   border:1px solid var(--glass-line);box-shadow:0 30px 70px -30px rgba(20,20,80,.6);
   transform:translate(-50%,40px) scale(.95);opacity:0;filter:blur(8px);transition:transform .6s cubic-bezier(.16,1,.3,1),opacity .4s ease,filter .45s ease}
 .viewer.on{transform:translate(-50%,0) scale(1);opacity:1;filter:none}
-.viewer .vbar{display:flex;align-items:center;gap:8px;padding:8px 8px 8px 18px;border-bottom:1px solid var(--glass-line)}
+.viewer .vbar{display:flex;align-items:center;gap:8px;padding:10px 16px 10px 20px;border-bottom:1px solid var(--glass-line)}
+#vClose{width:46px;height:46px;flex:0 0 auto;background:#F1ECFF;color:#5A5AEF;box-shadow:0 2px 8px rgba(90,90,239,.15)}#vClose svg{width:22px;height:22px;stroke-width:2.6}#vClose:focus{outline:none}#vClose:focus-visible{outline:2px solid #C9B6FF;outline-offset:2px}#vClose:active{transform:scale(.92)}
 .viewer .vbar b{flex:1;min-width:0;font:500 15px/1.4 var(--f-display);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .viewer .vbody{position:relative;flex:1;background:var(--surface)}
 .viewer iframe{position:absolute;inset:0;width:100%;height:100%;border:0;opacity:0;transition:opacity .35s}

@@ -692,10 +692,11 @@ b.addEventListener("click",function(){
 
 
 
+
 <!--wolly-totop-->
 <style>
-.wtotop{position:fixed;z-index:60;right:max(14px,env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));
-  display:grid;justify-items:center;align-content:center;width:58px;height:58px;padding:0;border-radius:50%;border:3px solid #fff;cursor:pointer;
+.wtotop{position:fixed;z-index:60;right:max(22px,env(safe-area-inset-right,0px));bottom:calc(var(--wtb,24px) + env(safe-area-inset-bottom,0px));
+  display:grid;justify-items:center;align-content:center;width:60px;height:60px;padding:0;border-radius:50%;border:3px solid #fff;cursor:pointer;
   background:linear-gradient(150deg,#FF5FA2,#8E6BF5);color:#fff;font:800 10px/1.1 "Zen Maru Gothic","Hiragino Maru Gothic ProN",system-ui,sans-serif;
   box-shadow:0 6px 16px rgba(46,43,79,.25);opacity:0;transform:translateY(14px) scale(.85);pointer-events:none;
   transition:opacity .3s,transform .45s cubic-bezier(.3,1.6,.5,1)}
@@ -711,10 +712,27 @@ b.addEventListener("click",function(){
 (function(){var b=document.getElementById("wtotop");if(!b)return;
 function on(){b.classList.toggle("on",window.scrollY>400&&document.body.style.overflow!=="hidden")}
 addEventListener("scroll",on,{passive:true});on();
+/* 下にはりついた帯（点数のバーなど）があれば、その上に出す（11/16 押しやすく） */
+function lift(){var h=0;document.querySelectorAll("body *").forEach(function(e){if(e===b||b.contains(e))return;var c=getComputedStyle(e);if(c.position!=="fixed"&&c.position!=="sticky")return;var r=e.getBoundingClientRect();if(r.height>0&&r.height<220&&r.width>innerWidth*.5&&Math.abs(r.bottom-innerHeight)<4)h=Math.max(h,r.height)});document.documentElement.style.setProperty("--wtb",(h?h+14:24)+"px")}
+addEventListener("load",function(){setTimeout(lift,600)});addEventListener("resize",function(){clearTimeout(lift.t);lift.t=setTimeout(lift,300)});setTimeout(lift,1500);
 b.addEventListener("click",function(){window.scrollTo({top:0,behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"})});
 })();
 </script>
 <!--/wolly-totop-->
+<!--wolly-aztitle-->
+<style>
+#bigt{display:flex;flex-direction:column;align-items:center;gap:2px}
+#bigt .row{display:flex;justify-content:center;white-space:nowrap;line-height:1.08}
+#bigt .r1,#bigt .r2{font-size:clamp(40px,10.5vw,76px)}
+</style>
+<script>
+(function(){var t=document.getElementById("bigt");if(!t)return;
+var C1=["#FF6FA5","#FFB020","#22C3B5","#9C7BFF"],C2=["#3DB2F2","#2ECC85","#FF9A3D"];
+function row(cls,s,C,d0){return '<span class="row '+cls+'">'+s.split("").map(function(c,i){return '<i style="--cc:'+C[i]+';--d:'+(i+d0)+'">'+c+'</i>'}).join("")+'</span>'}
+t.innerHTML=row("r1","あずかり",C1,0)+row("r2","マップ",C2,4);t.setAttribute("aria-label","あずかりマップ");
+})();
+</script>
+<!--/wolly-aztitle-->
 <!--wolly-near-->
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
 <style>
