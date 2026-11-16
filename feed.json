@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-15T19:10:00+09:00",
+ "updatedAt": "2026-11-16T09:45:00+09:00",
  "events": [
   {
    "id": "e-lalaport-bf",
@@ -182,6 +182,19 @@
    "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/e-uchu-mission-ten.jpg",
    "ai": true,
    "added": "2026-11-15T19:10:00+09:00"
+  },
+  {
+   "id": "e-pashalico-urawa",
+   "kind": "kids",
+   "title": "家族写真の無料撮影会（11/28 埼玉会館）",
+   "desc": "赤ちゃん〜小学生とマタニティOK。予約制で家計相談とセット、〆11/27",
+   "date": "2026-11-28",
+   "area": "さいたま市浦和区",
+   "src": "いこーよ",
+   "url": "https://iko-yo.net/events/603813",
+   "img": "https://d2goguvysdoarq.cloudfront.net/system/event_photos/photos/1762247/normal.png?1790653250",
+   "ai": false,
+   "added": "2026-11-16T09:45:00+09:00"
   },
   {
    "id": "e-minuma-kosodate-fair",
@@ -548,8 +561,8 @@
    "date": "2026-11",
    "src": "さいたま市",
    "url": "https://www.city.saitama.lg.jp/kosodate/shiritai/category8/p105052.html",
-   "img": "",
-   "ai": false,
+   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-nursery-aki-1101.jpg",
+   "ai": true,
    "important": false,
    "added": "2026-11-14T19:30:00+09:00"
   },
