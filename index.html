@@ -3861,28 +3861,56 @@ const RELC={kyubyo:["子どもの急病","#kyubyo","temp","#FFE6EE"],azuke:["預
   hub:["子育て支援センター","view:near?g=hub","hand","#FCE6F5"],odekake:["おでかけ","view:near?g=odekake","bus","#E6ECFF"],school:["小学校","view:school?t=e","school","#FFE6F2"],
   gakudo:["学童","view:near?g=gakudo","blocks","#FFE8F3"],jidou:["児童センター","view:near?g=jidou","kids","#E3F4FC"],shokudo:["こども食堂","view:near?g=shokudo","meal","#FFF0F5"],
   ped:["近くの小児科","view:near?g=ped","kids","#FFEEF2"]};
+/* 11/16 見直し：いまのページと同じもの・重なるもの・そのページの中でさがせるものは出さない（下の relHtml でもページの中のリンクを自動で外す） */
+Object.assign(RELC,{dent:["歯医者さん","view:near?g=dent","tooth","#E5F4FF"],hdent:["休日の歯医者さん","#hdent","tooth","#E8F0FF"],dkkid:["幼児の歯科健診","#dk-kid","tooth","#FFF0F6"],dkmom:["妊婦の歯科健診","#dk-mom","tooth","#FFF0F6"],
+  pharm:["夜もあいている薬局","view:near?g=pharm","pill","#F1E8FF"],ichiji:["一時保育","#ichiji","bus","#FFE6F2"],ensearch:["園をさがす","#ensearch","map","#E5F4FF"],kyukan:["急患電話マップ","#x-5","temp","#FFE6EE"],
+  iryo:["子どもの医療費","#m-3","coin","#FFF4D6"],ninpu:["妊婦健診の助成","#m-5","heart","#FFF0F6"],ninkyu:["妊婦のための給付","#m-2","heart","#FFF4D6"],sango:["産後ケア","#m-15","hand","#FCE6F5"],
+  helper:["子育てヘルパー","#m-16","hand","#FCE6F5"],famisapo:["ファミサポ","#m-17","hand","#FFE6F2"],youchien:["幼稚園の入園料補助","#m-10","nursery","#FFF4D6"],azukari:["幼稚園の預かり保育","#m-11","nursery","#FFF4D6"],
+  fuyou:["児童扶養手当","#m-1","docs","#FFF4D6"],hitori:["ひとり親の医療費","#m-4","coin","#FFF4D6"],youiku:["養育費の補助","#m-14","docs","#FFF4D6"],tatai:["多胎児家庭サポート","#m-18","hand","#FCE6F5"],
+  shingaku:["進学支援金","#m-12","school","#FFF4D6"],jhs:["中学校","view:school?t=j","school","#E1EFFF"],special:["特別支援教育","view:school?t=s","heart","#EFE8FF"],event:["イベント","#go-event","bus","#E6ECFF"]});
+const REL_MAP={
+  kyubyo:["iryo","vaccine","kenshin","hub"],kyukan:["pharm","hdent","iryo","vaccine"],
+  hdent:["kyubyo","dent","dkkid","iryo"],dent:["dkkid","hdent","kenshin","iryo"],
+  dkkid:["kenshin","vaccine","hdent","iryo"],dkmom:["ninpu","ninkyu","sango","kenshin"],
+  kenshin:["vaccine","dkkid","hub","iryo"],vaccine:["kenshin","ped","iryo","kyubyo"],
+  byouji:["ped","ichiji","famisapo","kyubyo"],ichiji:["byouji","famisapo","hub","helper"],
+  azuke:["famisapo","helper","azukari","gakudo"],ensearch:["ichiji","youchien","azukari","byouji"],
+  hokatsu:["ichiji","byouji","okane","gakudo"],okane:["hokatsu","azuke","shokudo","school"],
+  lesson:["school","park","odekake","jidou"],park:["odekake","hub","jidou","event"],shop:["odekake","event","park"],
+  m0:["fuyou","iryo","okane"],m1:["hitori","youiku","shokudo","okane"],m2:["ninpu","dkmom","sango","kenshin"],m3:["kyubyo","ped","hitori","vaccine"],
+  m4:["fuyou","youiku","iryo","shokudo"],m5:["ninkyu","dkmom","sango","kenshin"],m6:["hokatsu","park","odekake","okane"],
+  m7:["kenshin","special","iryo","okane"],m8:["special","iryo","kenshin","okane"],m9:["kenshin","iryo","special","okane"],
+  m10:["azukari","ensearch","hokatsu","okane"],m11:["youchien","ensearch","ichiji","okane"],m12:["school","jhs","fuyou","shokudo"],
+  m13:["youiku","fuyou","hitori","okane"],m14:["fuyou","hitori","shokudo","okane"],m15:["helper","famisapo","hub","ninkyu"],
+  m16:["sango","famisapo","tatai","hub"],m17:["ichiji","helper","azuke","hub"],m18:["helper","famisapo","sango","hub"]};
 function relKeys(kind){
-  const k=kind.split("-")[0];
-  if(k==="h"||kind==="hokatsu"||kind==="ensearch")return ["azuke","okane","hub","kenshin"];
-  if(k==="m"||kind==="okane")return ["hokatsu","azuke","kenshin","shokudo"];
-  if(kind==="byouji"||kind==="ichiji"||kind==="azuke")return ["hokatsu","hub","kyubyo","okane"];
-  if(k==="x"||k==="dk"||["kyubyo","dent","kenshin","vaccine","hdent"].includes(kind))return ["kyubyo","ped","byouji","kenshin","vaccine"];
-  if(k==="l")return ["school","park","odekake","jidou"];
-  if(k==="p")return ["odekake","hub","jidou","lesson"];
-  if(k==="s")return ["odekake","lesson","park"];
-  return [];
+  const k=kind.split("-")[0],n=kind.split("-")[1];
+  if(k==="m")return REL_MAP["m"+n]||["okane","hokatsu","azuke"];
+  if(k==="h")return REL_MAP.hokatsu;
+  if(kind==="dk-kid"||kind==="x-0")return REL_MAP.dkkid;
+  if(kind==="dk-mom"||kind==="x-1")return REL_MAP.dkmom;
+  const X={"x-2":"kenshin","x-3":"vaccine","x-4":"byouji","x-5":"kyukan","x-6":"hdent"};
+  if(X[kind])return REL_MAP[X[kind]];
+  if(k==="x")return REL_MAP.kyubyo;
+  if(k==="l")return REL_MAP.lesson;
+  if(k==="p")return REL_MAP.park;
+  if(k==="s")return REL_MAP.shop;
+  return REL_MAP[kind]||[];
 }
 const relIc=ic=>CH[ic]?svg(CH[ic]):svg(KIC(ic)||MEMO_IC[ic]||RM_IC[ic]||MINI.star,40);
-function relHtml(kind){
+function relHtml(kind,html){
   const self="#"+kind;
-  const ks=relKeys(kind).filter(k=>RELC[k]&&RELC[k][1]!==self).slice(0,4);if(!ks.length)return "";
+  /* そのページの中にもうあるリンク（同じ行き先）は出さない */
+  const inPage=to=>html&&(to.startsWith("view:")?html.includes('data-view="'+to.slice(5)+'"')||html.includes('data-view="'+to.slice(5).replace(/&/g,"&amp;")+'"'):html.includes('href="'+to+'"'));
+  const SAME={kyubyo:["#x-5","#go-kyukan"],"x-5":["#kyubyo"],byouji:["#x-4"],"x-4":["#byouji"],hdent:["#x-6"],"x-6":["#hdent"],kenshin:["#x-2"],"x-2":["#kenshin"],vaccine:["#x-3"],"x-3":["#vaccine"],"dk-kid":["#x-0"],"x-0":["#dk-kid"],"dk-mom":["#x-1"],"x-1":["#dk-mom"]};
+  const ks=relKeys(kind).filter(k=>RELC[k]&&RELC[k][1]!==self&&!(SAME[kind]||[]).includes(RELC[k][1])&&!inPage(RELC[k][1])).slice(0,4);if(!ks.length)return "";
   return `<div class="relc"><h4>${svg(KIC("flag")||MINI.star,40)}関連カテゴリー</h4><div class="relc-g">${ks.map(k=>{const [t,to,ic,bg]=RELC[k];
     return to.startsWith("view:")?`<a class="relc-b" href="#" data-view="${to.slice(5)}" data-vt="${esc(t)}" style="--rb:${bg}"><span>${relIc(ic)}</span><b>${esc(t)}</b></a>`
       :`<a class="relc-b" href="${to}" style="--rb:${bg}"><span>${relIc(ic)}</span><b>${esc(t)}</b></a>`}).join("")}</div></div>`;
 }
 function openSheet(kind){
   closeViewer();sheetKind=kind;
-  if(kind==="news")fillNewsSheet();else if(kind==="near")fillNearSheet();else $("#sheetBody").innerHTML=sheetHtml(kind)+relHtml(kind);
+  if(kind==="news")fillNewsSheet();else if(kind==="near")fillNearSheet();else{const h=sheetHtml(kind);$("#sheetBody").innerHTML=h+relHtml(kind,h)}
   addTalk(kind);kwDecorate(kind);requestAnimationFrame(()=>fitTitles($("#sheetBody")));
   const sh=$("#sheet");sh.scrollTop=0;
   sh.classList.remove("on");void sh.offsetWidth;
