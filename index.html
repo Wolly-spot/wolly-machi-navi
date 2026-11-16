@@ -715,6 +715,17 @@ h2,h3,.sec-lead,.sub,.note,p{line-break:strict}
 .hsp-cat i{font-style:normal;font-size:11.5px;font-weight:800;color:#fff;background:linear-gradient(110deg,#FF5FA2,#8E6BF5);padding:5px 10px;border-radius:999px;white-space:nowrap}
 .hsp-items{display:flex;flex-wrap:wrap;gap:5px;align-items:center}.hsp-items small{width:100%;font-size:10.5px;color:var(--muted);font-weight:700}
 .hsp-it{display:inline-block;padding:5px 10px;border-radius:999px;background:#fff;border:1.5px solid #E3D7FF;font-size:12.5px;font-weight:700;color:#5A5AEF;text-decoration:none}
+.hsp-g>summary{list-style:none;cursor:pointer}.hsp-g>summary::-webkit-details-marker,.hsp-mo>summary::-webkit-details-marker,.hsp-weak>summary::-webkit-details-marker{display:none}
+.hsp-cat em{font-style:normal;font-size:12px;font-weight:900;color:#8E6BF5;background:#F3EEFF;padding:4px 9px;border-radius:999px;white-space:nowrap}
+.hsp-ar{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:#fff;color:#8E6BF5;transition:transform .25s}.hsp-ar .i{width:16px;height:16px}
+details[open]>summary .hsp-ar{transform:rotate(180deg)}
+.hsp-g[open]{background:rgba(255,255,255,.9)}
+.hsp-go{justify-self:start;font-size:12px;font-weight:800;color:#fff;background:linear-gradient(110deg,#FF5FA2,#8E6BF5);padding:6px 12px;border-radius:999px;text-decoration:none}
+.hsp-mo{width:100%}.hsp-mo>summary{list-style:none;cursor:pointer;display:inline-block;margin-top:2px;font-size:12px;font-weight:800;color:#5A5AEF;padding:5px 10px;border-radius:999px;background:#F3EEFF}
+.hsp-mo[open]>summary{display:none}.hsp-mo>.hsp-items{margin-top:2px}
+.hsp-weak{display:grid;gap:8px}.hsp-weak>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 12px;border-radius:16px;background:rgba(255,255,255,.55);border:1.5px dashed #C9B8F2;font-size:12.5px;font-weight:800;color:#6A5AA8}
+.hsp-weak>summary small{font-size:11px;color:#8E6BF5;white-space:nowrap}.hsp-weak[open]>summary small{visibility:hidden}.hsp-weak>.hsp-g{margin-top:8px}
+.hsp-tip{display:flex;align-items:center;gap:4px;margin:0;font-size:11.5px;font-weight:700;color:var(--muted)}.hsp-tip .i{width:14px;height:14px}
 /* パネルの中の上にもどる */
 .totop.sheettop{z-index:70;bottom:calc(18px + env(safe-area-inset-bottom,0px))}
 body:not(.sheet-open) .totop.sheettop{display:none}
@@ -2571,7 +2582,7 @@ const SYN=[
   ["小学校 学区 通学区域 ランドセル 入学","小学校マップ","view:school?t=e","学校"],["中学校 学区 制服 部活","中学校マップ","view:school?t=j","学校"],
   ["特別支援 支援学級 支援学校 通級 発達 就学相談","特別支援教育マップ","view:school?t=s","学校"],["学童 放課後児童クラブ 放課後 共働き","学童（放課後児童クラブ）","view:near?g=gakudo","学校"],["こども食堂 子ども食堂 子供食堂 食堂 ごはん 夕ごはん 地域食堂 フードパントリー","こども食堂マップ","view:near?g=shokudo","学校"],["児童センター 放課後 ひろば 遊び場","児童センター・放課後ひろば","view:near?g=jidou","学校"]];
 const HS_TAGS=["熱が出た","預けたい","支援センター","公園","歯医者","児童手当","予防接種"];
-const nz=t=>String(t||"").normalize("NFKC").toLowerCase().replace(/[\s　・･、。,.\-ー－〜~（）()「」]/g,"").replace(/[ァ-ン]/g,c=>String.fromCharCode(c.charCodeAt(0)-96)).replace(/さん$/,"");
+const nz=t=>String(t||"").normalize("NFKC").toLowerCase().replace(/子(ども|供)/g,"こども").replace(/[\s　・･、。,.\-ー－〜~（）()「」]/g,"").replace(/[ァ-ン]/g,c=>String.fromCharCode(c.charCodeAt(0)-96)).replace(/さん$/,"");
 /* ひらがなで打っても見つかるように（よみ → 漢字） */
 const READ=[["しょうにか","小児科"],["はいしゃ","歯医者"],["しか","歯科"],["じびか","耳鼻科"],["がんか","眼科"],["ひふか","皮膚科"],["せいけいげか","整形外科"],["けいせいげか","形成外科"],["やっきょく","薬局"],["くすり","薬"],["ないか","内科"],["びょういん","病院"],
   ["こうえん","公園"],["ほいくえん","保育園"],["ほいくしょ","保育所"],["ようちえん","幼稚園"],["こどもえん","こども園"],["がくどう","学童"],["じどうせんたー","児童センター"],["しえんせんたー","支援センター"],["よぼうせっしゅ","予防接種"],["けんしん","健診"],
@@ -2618,33 +2629,76 @@ function hsLoadFac(){
   });
 }
 const bigr=s=>{const o=new Set();for(let i=0;i<s.length-1;i++)o.add(s.slice(i,i+2));return o};
+/* ことばの言いかえ（お悩みのことば → ページにあることば）。左のどれかが入っていたら、右のことばでもさがす */
+const ALIAS=[
+  ["熱 ねつ 発熱 高熱 微熱","発熱 急病 急患 小児科 病児"],["吐 はいた もどした おうと 嘔吐 下痢 げり おなか 腹痛","急病 急患 小児科"],
+  ["咳 せき 鼻水 はなみず 風邪 かぜ","小児科 内科 耳鼻科"],["けいれん ひきつけ 意識","急病 急患 #8000"],
+  ["怪我 けが 転んだ ころんだ 骨折 ねんざ 打った","整形外科 急患 けが"],["やけど 火傷","皮膚科 急患"],
+  ["夜 夜中 夜間 深夜 休日 日曜 祝日","急患 夜間 休日"],["救急 救急車 119","急病 急患 #8000"],
+  ["歯 虫歯 むしば はいしゃ","歯医者 歯科"],["目 まぶた","眼科"],["耳 みみ","耳鼻科"],["肌 はだ 湿疹 かゆい 発疹","皮膚科"],
+  ["預 あずけ あずか 託児 シッター みてほしい","預け先 一時保育 一時預かり 病児保育 ファミリー・サポート 預かり保育"],
+  ["仕事 しごと 共働き 働く はたらく 復職","保育園 学童 一時保育 保活"],
+  ["遊 あそび あそぶ あそべ ひま","公園 支援センター 児童センター おでかけ"],["雨 あめのひ","室内 支援センター 児童センター おでかけ"],
+  ["友 ともだち ママ友 パパ友 仲間 さみしい 孤独","支援センター 交流 ひろば"],["相談 そうだん なやみ 悩み 不安","相談 支援センター"],
+  ["お金 おかね もらえる もらう 給付金 補助金 助成金 手当金 支援金 安く 無料","手当 給付 助成 補助 お金"],
+  ["赤ちゃん あかちゃん 新生児 乳児 ベビー","健診 予防接種 乳児"],["妊娠 にんしん 妊婦 にんぷ 出産 しゅっさん 産後","妊婦 出産 産後"],
+  ["入学 にゅうがく 新一年生 1年生 一年生","入学 入学準備 ランドセル 小学校"],["ランドセル","ランドセル 入学準備"],
+  ["学校 がっこう","小学校 中学校"],["放課後 ほうかご 留守番","学童 児童センター 放課後"],
+  ["ごはん ご飯 食事 夕飯 食べ","こども食堂 フードパントリー"],["習 ならい 教室 スクール","習い事"],
+  ["保育 ほいく 入園 にゅうえん 保活 ほかつ 待機","保育園 保活 入園"],["幼稚園 ようちえん","幼稚園 預かり保育"],
+  ["予防 注射 ちゅうしゃ ワクチン","予防接種"],["健診 検診 けんしん 健康診断","健診"],["薬 くすり","薬局"],
+  ["発達 ことば 言葉 おくれ 遅れ","発達 相談 特別支援"],["ひとり親 シングル 母子 父子","ひとり親"],
+  ["出かけ でかけ 行楽 週末","おでかけ イベント 公園"],["プール 水遊び","プール 水泳"],
+  ["クーポン 割引 わりびき おトク お得","クーポン"],["引っ越し 引越 転入","区役所 手当 保育園"]];
+/* 文の終わり（〜が出た・〜たい・〜したい など）をはずして、さがすことばだけにする */
+const HS_END=/(について|のこと|させたい|してほしい|てほしい|ほしい|欲しい|したい|しりたい|知りたい|さがしたい|探したい|さがす|探す|みたい|見たい|いきたい|行きたい|できる|できない|こまった|困った|こまる|困る|でした|ました|ます|ですか|です|かな|って|どこ|どうする|どうしたら|とき|ときは|時は|が出た|がでた|が出る|がでる|を出した|がある|がない|になった|になる|がいたい|が痛い|した|する|たい|ない|た|て|る|い|の|を|は|が|に|で|へ|も|と|や|よ|ね|か|[?？!！])$/;
+const HS_STOP=new Set("子市区町所的方時事人者物円年月日中大小上下出来行見入用分前後内外新本".split(""));
+const isHira=s=>/^[ぁ-ゖー]+$/.test(s);
+/* 打ったことば → さがすことばのリスト [ことば, おもさ] */
+function hsTerms(q){
+  const raw=String(q||"").normalize("NFKC").trim();if(!raw)return [];
+  const T=new Map();const add=(t,w)=>{t=nz(t);if(!t)return;if((T.get(t)||0)<w)T.set(t,w)};
+  const Q=nz(raw);add(Q,1);
+  let s=Q;for(let i=0;i<4;i++){const m=s.replace(HS_END,"");if(m===s||!m)break;s=m;add(s,.95)}
+  /* 漢字・カタカナ・英数のかたまり（「子どもが熱を出した」→ 熱） */
+  raw.split(/[\s　、,。]+/).forEach(w=>{add(w,.95);(w.match(/[一-龥々〆ヶァ-ヴーa-zA-Z0-9#]+[ぁ-ゖ]{0,2}/g)||[]).forEach(c=>{add(c,.85);let c2=c;while(/[ぁ-ゖ]$/.test(c2)){c2=c2.slice(0,-1);add(c2,.85)}})});
+  /* よみ → 漢字 */
+  [...T.entries()].forEach(([t,w])=>READ.forEach(([r,k])=>{if(t.includes(r))add(t.split(r).join(k),w*.95)}));
+  /* 言いかえ */
+  const now=[...T.keys()];
+  ALIAS.forEach(([a,b])=>{const A=a.split(" ").map(nz).filter(Boolean);if(now.some(t=>A.some(x=>t===x||(x.length>1||!isHira(x))&&t.includes(x))))b.split(" ").forEach(x=>add(x,.7))});
+  /* 「子ども」「さいたま」など、どこにでもあることばは、それだけではさがさない */
+  const GEN=new Set(["こども","こどもの","子育て","さいたま","さいたま市","ママ","パパ","親子","うち","うちの子"].map(nz));
+  return [...T.entries()].filter(([t])=>(t===Q||!GEN.has(t))&&(t.length>1||!isHira(t)&&!HS_STOP.has(t)));
+}
 function hsSearch(q){
-  const Q=nz(q);if(!Q)return [];
-  /* よみ → 漢字にした言いかえも一緒にさがす */
-  const qs=new Set([Q]);READ.forEach(([r,k])=>{[...qs].forEach(x=>{if(x.includes(r))qs.add(x.split(r).join(nz(k)))})});
-  const toks=String(q).normalize("NFKC").split(/[\s　、,]+/).map(nz).filter(Boolean);
-  const tokAlt=toks.map(k=>{const a=[k];READ.forEach(([r,kj])=>{if(k.includes(r))a.push(k.split(r).join(nz(kj)))});return a});
-  const QB=bigr(Q);
+  const terms=hsTerms(q);if(!terms.length)return [];
+  /* 一部だけ合う用：ことばの切れはし（長い順）。1文字は漢字・カタカナ・英数だけ（ひらがな1文字は「が」「の」などが多いので使わない） */
+  const subs=new Map();
+  terms.forEach(([t,w])=>{for(let L=t.length-1;L>=1;L--)for(let i=0;i+L<=t.length;i++){const p=t.slice(i,i+L);if(L===1&&(isHira(p)||HS_STOP.has(p)))continue;if(L===2&&isHira(p)&&HS_END.test(p))continue;const v=L*w;if((subs.get(p)||0)<v)subs.set(p,v)}});
+  const SUB=[...subs.entries()].sort((a,b)=>b[0].length-a[0].length);
   const L=hsIndex().concat(HS_FAC||[]);
   const out=[];
   for(const x of L){
-    let sc=0;
-    for(const v of qs){
-      const y=yomiOf(x);
-      if(x.nt===v||y===v)sc=Math.max(sc,100);else if(x.nt.startsWith(v)||(y&&y.startsWith(v)))sc=Math.max(sc,70);else if(x.nt.includes(v)||(y&&y.includes(v)))sc=Math.max(sc,50);else if(x.nk.includes(v))sc=Math.max(sc,30);
+    const y=yomiOf(x);let sc=0;
+    for(const [v,w] of terms){
+      let s=0;
+      if(x.nt===v||y===v)s=100;else if(x.nt.startsWith(v)||(y&&y.startsWith(v)))s=75;else if(x.nt.includes(v))s=55;else if((x.kt||(x.kt=new Set(String(x.k||"").split(/\s+/).map(nz)))).has(v))s=70;else if(y&&y.includes(v))s=40;else if(x.nk.includes(v))s=v.length>1?38:26;
+      if(s*w>sc)sc=s*w;
     }
-    if(toks.length>1){const y=yomiOf(x);const hit=tokAlt.every(a=>a.some(k=>x.nt.includes(k)||x.nk.includes(k)||(y&&y.includes(k))));sc=hit?Math.max(sc,45):0}
-    if(!sc&&toks.length<2&&x.c!=="地域"&&x.k){const kk=x.k.split(/\s+/).map(nz);if(kk.some(w=>w&&w.length>1&&[...qs].some(v=>v.includes(w))))sc=25}
-    /* 1文字ちがい・打ちまちがいも、にていれば */
-    if(!sc&&toks.length<2&&Q.length>=3&&x.nt.length<=24){const B=bigr(x.nt);let n=0;QB.forEach(b=>{if(B.has(b))n++});const d=2*n/(QB.size+B.size||1);if(d>=.6)sc=20*d}
+    /* 一部だけ合う（1文字でも） */
+    if(sc<20)for(const [p,v] of SUB){
+      const inT=x.nt.includes(p)||(y&&y.includes(p)),inK=!inT&&x.nk.includes(p);
+      if(inT||inK){sc=Math.max(sc,Math.min(17,(inT?5:3.5)*v)+(p.length>1?2:0));break}
+    }
     if(sc)out.push([sc+(x.w||1)*2,x]);
   }
   out.sort((a,b)=>b[0]-a[0]);
-  const seen=new Set();return out.map(([,x])=>x).filter(x=>{const k=x.to+"|"+x.t;if(seen.has(k))return false;seen.add(k);return true}).slice(0,60);
+  const seen=new Set();return out.filter(([,x])=>{const k=x.to+"|"+x.t;if(seen.has(k))return false;seen.add(k);return true}).slice(0,600).map(([s,x])=>Object.assign({},x,{_s:s}));
 }
 
 function renderSearchTags(){const top=hsTop();const list=top.concat(HS_TAGS.filter(t=>!top.includes(t))).slice(0,8);$("#hsTags").innerHTML=list.map(t=>`<button type="button" data-hq="${esc(t)}"${top.includes(t)?' class="mine"':""}>${top.includes(t)?ico('<circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/>'):""}${esc(t)}</button>`).join("")}
-document.addEventListener("input",e=>{if(e.target.id==="hq")hsRender()});
+let hsT=0;document.addEventListener("input",e=>{if(e.target.id==="hq"){clearTimeout(hsT);hsT=setTimeout(hsRender,120)}});
 document.addEventListener("focusin",e=>{if(e.target.id==="hq")hsLoadFac()});
 document.addEventListener("click",e=>{
   const tg=e.target.closest("[data-hq]");if(tg){$("#hq").value=tg.dataset.hq;hsRender();return}
@@ -2754,20 +2808,30 @@ const HS_CAT={"健診・病院":["#go-health",()=>svg(CH.health)],"保活ナビ"
   "地域":["#myArea",()=>svg(GIC.map,40)],"預け先":["#azuke",()=>svg(NIC.nursery,40)],
   "小児科・内科":["view:near?g=ped",()=>svg(MINI.cross,40)],"歯医者さん":["view:near?g=dent",()=>svg(MINI.cross,40)],"耳鼻科":["view:near?g=ent",()=>svg(MINI.cross,40)],"眼科":["view:near?g=eye",()=>svg(MINI.cross,40)],
   "皮膚科":["view:near?g=skin",()=>svg(MINI.cross,40)],"形成外科":["view:near?g=plastic",()=>svg(MINI.cross,40)],"整形外科":["view:near?g=ortho",()=>svg(MINI.cross,40)],"薬局":["view:near?g=pharm",()=>svg(MINI.cross,40)],
-  "子育て支援センター":["view:near?g=hub",()=>svg(MINI.hand,40)],"学童":["view:near?g=gakudo",()=>svg(MINI.school,40)],"児童センター":["view:near?g=jidou",()=>svg(MINI.hand,40)],"こども食堂":["view:near?g=shokudo",()=>svg(NIC.meal,40)],"学校":["#go-school",()=>svg(MINI.school,40)],"おでかけ":["view:near?g=odekake",()=>svg(GIC.bus,40)]};
+  "子育て支援センター":["view:near?g=hub",()=>svg(MINI.hand,40)],"学童":["view:near?g=gakudo",()=>svg(MINI.school,40)],"児童センター":["view:near?g=jidou",()=>svg(MINI.hand,40)],"こども食堂":["view:near?g=shokudo",()=>svg(NIC.meal,40)],"学校":["#go-school",()=>svg(MINI.school,40)],"小学校のガイド":["view:school?t=e",()=>svg(MINI.school,40)],"中学校のガイド":["view:school?t=j",()=>svg(MINI.school,40)],"特別支援":["view:school?t=s",()=>svg(MINI.school,40)],"保育園・幼稚園":["view:MpfmmxyxegrpSPYYF69Gqw",()=>svg(NIC.nursery,40)],"おでかけ":["view:near?g=odekake",()=>svg(GIC.bus,40)]};
 const hsLink=to=>to.startsWith("ichi:")?`href="#" data-ichi="${esc(to.slice(5))}"`:to.startsWith("view:")?`href="#" data-view="${esc(to.slice(5))}"`:to.startsWith("#")?`href="${esc(to)}"`:`href="#" data-view="${esc(to)}"`;
 function hsRender(){
   const q=$("#hq").value,box=$("#hsRes");
   if(!q.trim()){box.hidden=true;box.innerHTML="";box.classList.remove("on");return}
   hsLoadFac();
   const r=hsSearch(q);
-  const g={};r.forEach(x=>{(g[x.c]=g[x.c]||[]).push(x)});
-  const cats=Object.keys(g).slice(0,8);
+  const g={},best={};r.forEach(x=>{(g[x.c]=g[x.c]||[]).push(x);best[x.c]=Math.max(best[x.c]||0,x._s)});
+  const cats=Object.keys(g).sort((a,b)=>best[b]-best[a]);
+  /* よく合うカテゴリー と、ことばの一部（1文字など）だけ合うカテゴリー */
+  const strong=cats.filter(c=>best[c]>=24),weak=cats.filter(c=>best[c]<24);
+  const main=strong.length?strong:weak,rest=strong.length?weak:[];
+  const many=r.length>14||main.length>3;
+  const it=x=>`<a class="hsp-it" ${hsLink(x.to)} data-hsgo>${esc(x.t)}${x.sub?`<small>${esc(x.sub)}</small>`:""}</a>`;
+  const grp=(c,open)=>{const C=HS_CAT[c],L=g[c],n=L.length;
+    return `<details class="hsp-g"${open?" open":""}><summary class="hsp-cat">${C?`<span class="hsp-ci">${C[1]()}</span>`:`<span class="hsp-ci">${svg(MINI.star,40)}</span>`}<span><small>カテゴリー</small><b>${esc(c)}</b></span><em>${n>=40?"40+":n}件</em><span class="hsp-ar">${ico('<path d="M6 9l6 6 6-6"/>')}</span></summary>
+      <div class="hsp-items">${L.slice(0,6).map(it).join("")}${n>6?`<details class="hsp-mo"><summary>ほか ${n>40?"34+":n-6}件を見る（タップでひらく）</summary><div class="hsp-items">${L.slice(6,40).map(it).join("")}</div></details>`:""}</div>
+      ${C?`<a class="hsp-go" ${hsLink(C[0])} data-hsgo>「${esc(c)}」のところへ移動 ›</a>`:""}</details>`};
   box.hidden=false;requestAnimationFrame(()=>box.classList.add("on"));
-  box.innerHTML=`<div class="hsp-h"><b>「${esc(q)}」は、${cats.length?cats.length+"つのカテゴリーにあります":"見つかりませんでした"}</b><button type="button" class="hsp-x" data-hsx aria-label="閉じる">×</button></div>`+
-    (cats.length?cats.map(c=>{const C=HS_CAT[c];return `<div class="hsp-g">
-      <a class="hsp-cat" ${C?hsLink(C[0]):'href="#"'} data-hsgo>${C?`<span class="hsp-ci">${C[1]()}</span>`:""}<span><small>カテゴリー</small><b>${esc(c)}</b></span><i>そこへ移動 ›</i></a>
-      <div class="hsp-items"><small>見つかったもの</small>${g[c].slice(0,6).map(x=>`<a class="hsp-it" ${hsLink(x.to)} data-hsgo>${esc(x.t)}${x.sub?`<small>${esc(x.sub)}</small>`:""}</a>`).join("")}${g[c].length>6?`<span class="hsp-more">ほか${g[c].length-6}件（ことばを足すとしぼれます）</span>`:""}</div></div>`}).join("")+(HS_FAC?"":`<p class="hsp-load">病院・薬局・公園・学校の名前を読みこみ中…</p>`)
+  box.innerHTML=`<div class="hsp-h"><b>「${esc(q)}」の候補${r.length?` ${r.length>=600?"600+":r.length}件（${cats.length}カテゴリー）`:"は見つかりませんでした"}</b><button type="button" class="hsp-x" data-hsx aria-label="閉じる">×</button></div>`+
+    (cats.length?(many?`<p class="hsp-tip">${ico('<path d="M6 9l6 6 6-6"/>')}カテゴリーをタップすると、ひらくよ</p>`:"")+
+      main.map((c,i)=>grp(c,!many||i<2)).join("")+
+      (rest.length?`<details class="hsp-weak"><summary>ことばの一部（1文字など）が合ったもの ${rest.reduce((a,c)=>a+g[c].length,0)}件<small>タップでひらく</small></summary>${rest.map(c=>grp(c,false)).join("")}</details>`:"")+
+      (HS_FAC?"":`<p class="hsp-load">病院・薬局・公園・学校の名前を読みこみ中…</p>`)
       :`<p class="hr-none">ことばを短くするか、下のカテゴリーからさがしてね。<br>例：「熱」「預け」「公園」「手当」</p>`);
 }
 document.addEventListener("click",e=>{
