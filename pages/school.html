@@ -864,7 +864,7 @@ function showItem(path,push=true){
   const [g,it]=findItem(path);if(!it)return;
   if(push)gstack.push(["i",path]);openGd();$("#gdT").textContent=it.t;
   const key="item:"+path,fav=favSet().has(key);
-  let body="";
+  let body=it.html||"";/* 絵で見せるところ（ランドセルなど。data の html。scripts/add_randoseru.py が作る） */
   if(it.steps)body+=sec("いつ・なにがある？","cal",roadHtml(it.steps));
   if(it.why)body+=sec("どうしてこんなにあるの？","bulb",`<div class="why">${(_prevIc="",it.why).map(x=>`<p class="lrow">${lIcP(x,"bulb")}<span>${esc(x)}</span></p>`).join("")}</div>`);
   if(it.table)body+=sec(it.table_t||"くらべてみよう","check",`<div class="tbl"><table class="c${it.table.head.length}"><thead><tr>${it.table.head.map(h=>`<th>${esc(h)}</th>`).join("")}</tr></thead><tbody>${it.table.rows.map(r=>`<tr>${r.map((c,k)=>k?`<td>${esc(c)}</td>`:`<th>${esc(c)}</th>`).join("")}</tr>`).join("")}</tbody></table></div>`);
