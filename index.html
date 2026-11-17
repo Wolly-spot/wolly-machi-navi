@@ -986,8 +986,17 @@ html.hnew .kn-bell .ri{width:34px;height:34px;filter:drop-shadow(0 2px 2px rgba(
 .rm-card{position:relative;width:min(520px,100%);max-height:calc(100dvh - 28px);overflow:auto;box-sizing:border-box;padding:18px 16px 18px;border-radius:28px;background:linear-gradient(180deg,#FFF8FC,#F4F0FF);box-shadow:0 30px 60px -20px rgba(60,30,100,.5);
   transform:translateY(30px) scale(.94);opacity:0;transition:transform .45s cubic-bezier(.2,1.3,.4,1),opacity .3s}
 .rm-ov.on .rm-card{transform:none;opacity:1}
-.rm-ov.parked{visibility:hidden;opacity:0;pointer-events:none;transition:none}.rm-ov.parked .lgi,.rm-ov.on .lgi{animation-fill-mode:both}
-#rmOv:not(.parked){transition:opacity .22s,background .35s,backdrop-filter .35s}
+/* 11/18 習い事一覧 ⇄ 習い事のパネル：ぼかし（重い）は動かさず、不透明度だけで入れかえる */
+.rm-ov.lgkeep{transition:opacity .2s ease;will-change:opacity}
+.rm-ov.lgkeep.parked{opacity:0;pointer-events:none;transition:opacity .16s ease}
+.sheet.quick,.scrim.quick{transition:none!important;filter:none!important}
+.sheet.nofx{filter:none!important;transition:transform .5s cubic-bezier(.16,1,.3,1),opacity .28s ease!important}
+/* 一覧は軽く：ぼかし・回るホログラムの光を止め、見えているアイコンだけ動かす（スマホで引っかからないように） */
+.rm-ov.lgov,.rm-ov.lgov .rm-card.holo{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+.rm-ov.lgov.on{background:rgba(40,30,70,.45)}
+.rm-ov.lgov .rm-card.holo{background:linear-gradient(135deg,#FFFFFF,#F3EFFF 40%,#ECF8FF 70%,#FFF0F7)}
+.rm-ov.lgov .rm-card.holo::before,.rm-ov.lgov .rm-card.holo::after{animation:none;mix-blend-mode:normal;opacity:.45}
+.rm-ov.lgov .lgi:not(.ia) span *,.rm-ov.lgov .kjc:not(.ia) *,.rm-ov.parked *{animation-play-state:paused!important}
 .rm-x{position:absolute;top:12px;right:12px;z-index:2;width:40px;height:40px;border-radius:50%;border:2px solid #E3D7FF;background:#fff;color:#5A5AEF;font-size:22px;font-weight:700;cursor:pointer;box-shadow:0 4px 10px rgba(90,90,239,.2)}
 .rm-eb{margin:2px 0 0;font-size:11px;letter-spacing:.2em;font-weight:900;color:#FF5FA2}
 .rm-card h3{margin:2px 48px 10px 0;font-size:19px;font-weight:900;color:#2C2866}
@@ -2546,6 +2555,8 @@ function openLessonGrid(){
   openPop(`<div class="lgwrap"><div class="lgtop"><span class="lgsp">✨</span><h3>現在の習い事一覧</h3><p>いま載せている ${LESSONS.length}種類。アイコンをタップすると、その習い事へ。</p></div>${kjHTML()}${body}<button type="button" class="lgup" data-lgup aria-label="上にもどる"><span>↑</span>上にもどる</button></div>`,"現在の習い事一覧","holo");
   const card=document.querySelector("#rmOv .rm-card"),up=card&&card.querySelector(".lgup");
   card&&kjInit(card);
+  const ov=$("#rmOv");ov&&ov.classList.add("lgov");
+  if(card&&window.IntersectionObserver){const io=new IntersectionObserver(es=>es.forEach(x=>x.target.classList.toggle("ia",x.isIntersecting)),{root:card,rootMargin:"40px"});card.querySelectorAll(".lgi,.kjc").forEach(b=>io.observe(b))}
   if(card&&up)card.addEventListener("scroll",()=>up.classList.toggle("on",card.scrollTop>220),{passive:true});
 }
 function lessonCards(){
@@ -3602,8 +3613,9 @@ document.addEventListener("click",e=>{
   if(e.target.closest("[data-lgup]")){e.preventDefault();document.querySelector("#rmOv .rm-card")?.scrollTo({top:0,behavior:"smooth"});return}
   {const lg=e.target.closest("[data-lgo]");if(lg){e.preventDefault();const i=lg.dataset.lgo;const ov=$("#rmOv");lgReturn={hash:"#l-"+i};
     /* 11/18：一覧はこわさずに、うしろに「しまっておく」。×でもどるとき、同じ場所・同じ見た目のまま、すぐに出す */
-    if(ov){ov.id="rmPark";ov.classList.add("parked");document.body.classList.remove("rm-open")}
-    location.hash="#l-"+i;return}}
+    if(ov){ov.id="rmPark";ov.classList.add("lgkeep","parked");const sh=$("#sheet");sh.classList.add("nofx");setTimeout(()=>sh.classList.remove("nofx"),900)}
+    /* 一覧がすっと消えてから、パネルを作る（同時に動かすと引っかかる） */
+    setTimeout(()=>{location.hash="#l-"+i},ov?150:0);return}}
   {const pm=e.target.closest("[data-ptmore]");if(pm){e.preventDefault();const [i,j]=pm.dataset.ptmore.split(":").map(Number);openPtMore(i,j);return}}
   const ov=$("#rmOv");if(!ov)return;
   if(e.target.closest("[data-rmx]")||e.target===ov){closeRoom();return}
@@ -4047,10 +4059,12 @@ function closeSheet(){closeViewer();sheetKind=null;$("#scrim").classList.remove(
 $("#scrim").addEventListener("click",()=>sheetBack());
 /* 「現在の習い事一覧」から入った習い事は、×で一覧にもどる（11/16） */
 let lgReturn=null;
-function sheetBack(){const r=lgReturn,back=r&&location.hash===r.hash;lgReturn=null;goBack();
+function sheetBack(){const r=lgReturn,back=r&&location.hash===r.hash;lgReturn=null;
   const pk=$("#rmPark");
-  if(back&&pk){$("#rmOv")&&closeRoom(true);pk.id="rmOv";document.body.classList.add("rm-open");requestAnimationFrame(()=>pk.classList.remove("parked"))}
-  else if(pk)pk.remove()}
+  if(back&&pk){$("#rmOv")&&closeRoom(true);pk.id="rmOv";pk.classList.remove("parked");
+    /* 一覧がふわっと出きってから、うしろでパネルをしまう（同時に動かすと引っかかる） */
+    const sh=$("#sheet"),sc=$("#scrim");setTimeout(()=>{sh.classList.add("quick");sc.classList.add("quick");goBack();setTimeout(()=>{sh.classList.remove("quick");sc.classList.remove("quick")},120)},230);return}
+  goBack();if(pk){pk.remove();$("#rmOv")||document.body.classList.remove("rm-open")}}
 $("#sheetClose").addEventListener("click",()=>sheetBack());
 $("#sheet").addEventListener("click",e=>{if(e.target.closest("a[href='#mypage']"))closeSheet()});
 let viewerOpen=false;
@@ -4193,7 +4207,7 @@ function updateChrome(h,sheet){
     if(on)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
   $("#back").hidden=route==="home"&&!sheet&&h!=="search";
 }
-window.addEventListener("hashchange",()=>{inApp=true;applyRoute()});
+window.addEventListener("hashchange",()=>{inApp=true;/* しまっておいた習い事一覧：ほかへ行ったら片づける（ページがスクロールできなくならないように） */const pk=$("#rmPark");if(pk&&!(lgReturn&&location.hash===lgReturn.hash)){pk.remove();lgReturn=null;$("#rmOv")||document.body.classList.remove("rm-open")}applyRoute()});
 /* いつでも上へもどる：少し下に進んだら右下に出る */
 const toTop=$("#toTop");
 const onScroll=()=>toTop.classList.toggle("on",window.scrollY>500);
