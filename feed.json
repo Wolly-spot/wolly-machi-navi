@@ -1,6 +1,19 @@
 {
- "updatedAt": "2026-11-16T19:15:00+09:00",
+ "updatedAt": "2026-11-17T09:40:00+09:00",
  "events": [
+  {
+   "id": "e-shintoshin-illumination",
+   "kind": "free",
+   "title": "新都心イルミネーション（〜2/14）",
+   "desc": "けやきひろばや駅の通路が17〜24時に光るよ。お散歩ついでに見に行けるね。",
+   "date": "2026-11-07",
+   "area": "さいたま市中央区",
+   "src": "さいたま市",
+   "url": "https://www.city.saitama.lg.jp/006/014/008/003/015/007/p134331.html",
+   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/e-shintoshin-illumination.jpg",
+   "ai": true,
+   "added": "2026-11-17T09:40:00+09:00"
+  },
   {
    "id": "e-lalaport-bf",
    "kind": "mall",
@@ -398,6 +411,18 @@
    "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/11/IMG_9933.jpg",
    "ai": false,
    "added": "2026-11-16T19:15:00+09:00"
+  },
+  {
+   "id": "s-mikimoto-beauty-omiya",
+   "kind": "open",
+   "title": "大宮高島屋に「MIKIMOTO BEAUTY」11/13オープン",
+   "desc": "真珠のブランドのスキンケアのお店。1階にできたよ。",
+   "date": "2026-11-13",
+   "src": "宮原大宮ドットコム",
+   "url": "https://miyahara-kitaku.com/2026-11open/",
+   "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/11/phonto-60.jpg",
+   "ai": false,
+   "added": "2026-11-17T09:40:00+09:00"
   }
  ],
  "news": [
