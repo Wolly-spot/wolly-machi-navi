@@ -2806,7 +2806,7 @@ document.addEventListener("click",e=>{const b=e.target.closest("button[data-fsz]
 
 /* ===== ④ よくさがすことば：この端末でさがして開いたことばを数えて、ボタンの先頭に ===== */
 const HS_KEY="wolly.searchcount";
-function hsCount(q){q=String(q||"").trim();if(!q||q.length>16)return;try{const c=JSON.parse(localStorage.getItem(HS_KEY)||"{}");c[q]=(c[q]||0)+1;localStorage.setItem(HS_KEY,JSON.stringify(c))}catch(e){}}
+function hsCount(q){q=String(q||"").trim();if(q&&window.wTap)wTap("さがす語："+q.slice(0,20),true);if(!q||q.length>16)return;try{const c=JSON.parse(localStorage.getItem(HS_KEY)||"{}");c[q]=(c[q]||0)+1;localStorage.setItem(HS_KEY,JSON.stringify(c))}catch(e){}}
 function hsTop(){try{const c=JSON.parse(localStorage.getItem(HS_KEY)||"{}");return Object.entries(c).sort((a,b)=>b[1]-a[1]).map(([k])=>k).slice(0,4)}catch(e){return []}}
 
 /* ===== ⑤ イベントのお気に入り・カレンダー ===== */
@@ -4001,7 +4001,11 @@ const WOLLY_API="https://script.google.com/macros/s/AKfycbwv5gVNmYIem_rxce3Zo50c
    名前は「場所：ボタンの文字」（例：困ったとき：もらえるお金、パネル（児童手当）：スキマバイトに無料で登録）。 ===== */
 (function(){
   const LOCAL=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)&&!/[?&]tapdebug=1/.test(location.search);
-  let Q={},n=0,timer=0;
+  let Q={},n=0,timer=0,FL=[];
+  /* 1回の訪問ごとのでたらめな番号（この画面をとじると消える。人とはむすびつかない） */
+  let SID="";try{SID=sessionStorage.getItem("wolly.sid")||""}catch(e){}
+  if(!/^[a-z0-9]{6,16}$/.test(SID)){SID=Math.random().toString(36).slice(2,12).replace(/[^a-z0-9]/g,"x").padEnd(8,"0");try{sessionStorage.setItem("wolly.sid",SID)}catch(e){}}
+  const T0=Date.now();
   const clean=s=>String(s||"").replace(/\s+/g," ").replace(/[<>]/g,"").trim();
   function area(el){
     if(el.closest("#sheet")){const h=document.querySelector("#sheetBody #sheetTitle");return "パネル（"+clean(h?h.textContent:sheetKind||"").slice(0,16)+"）"}
@@ -4020,17 +4024,25 @@ const WOLLY_API="https://script.google.com/macros/s/AKfycbwv5gVNmYIem_rxce3Zo50c
     const b=el.querySelector("b");
     return clean(el.getAttribute("aria-label")||(b&&b.textContent)||el.textContent||el.getAttribute("href")||"").slice(0,28);
   }
-  function send(){clearTimeout(timer);timer=0;if(!n)return;const body=JSON.stringify({app:"navi",action:"tapLog",payload:{taps:Q}});Q={};n=0;
+  function send(){clearTimeout(timer);timer=0;if(!n&&!FL.length)return;const body=JSON.stringify({app:"navi",action:"tapLog",payload:{taps:Q,flow:FL.length?{sid:SID,ev:FL}:undefined}});Q={};n=0;FL=[];
     if(LOCAL){console.log("[tap]",body);return}
     try{if(navigator.sendBeacon&&navigator.sendBeacon(WOLLY_API,new Blob([body],{type:"text/plain;charset=utf-8"})))return}catch(e){}
     fetch(WOLLY_API,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body,keepalive:true}).catch(()=>{});}
   document.addEventListener("click",e=>{
     const el=e.target.closest&&e.target.closest("a,button,[role=button],.card");if(!el)return;
     const lab=label(el);if(!lab||/^#?$/.test(lab))return;
-    const key=(area(el)+"："+lab).slice(0,60);
-    if(Object.keys(Q).length>=40&&!(key in Q))send();
-    Q[key]=(Q[key]||0)+1;n++;if(!timer)timer=setTimeout(send,20000);
+    add((area(el)+"："+lab).slice(0,60));
   },true);
+  /* 1つ数える（flowOnly＝流れだけに入れて、回数には入れない） */
+  function add(key,flowOnly){if(!key)return;
+    if(!flowOnly){if(Object.keys(Q).length>=40&&!(key in Q))send();Q[key]=(Q[key]||0)+1;n++}
+    if(FL.length>=60)send();FL.push([key,Math.round((Date.now()-T0)/1000)]);
+    if(!timer)timer=setTimeout(send,20000)}
+  window.wTap=add;
+  /* 街ナビの中でひらいたページ（習い事・家の近く・学校など）の中のタップ */
+  addEventListener("message",e=>{const d=e.data;if(!d||d.type!=="wolly-tap"||typeof d.label!=="string")return;
+    if(typeof PAGES_ORIGIN!=="undefined"&&e.origin!==PAGES_ORIGIN)return;
+    const t=clean(($("#vTitle")&&$("#vTitle").textContent)||"ページ").slice(0,14);add(("ページ（"+t+"）："+clean(d.label)).slice(0,60))});
   addEventListener("visibilitychange",()=>{if(document.visibilityState==="hidden")send()});
   addEventListener("pagehide",send);
 })();

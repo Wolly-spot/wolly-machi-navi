@@ -616,6 +616,17 @@ b.addEventListener("click",function(){
 
 
 
+
+<!--wolly-tap-->
+<script>
+(function(){if(window.parent===window)return;
+  const cl=s=>String(s||"").replace(/\s+/g," ").replace(/[<>]/g,"").trim();
+  document.addEventListener("click",function(e){var el=e.target.closest&&e.target.closest("a,button,[role=button],.card,li[data-id],li[data-i]");if(!el)return;
+    var b=el.querySelector&&el.querySelector(".cn,h3,.np-t b,.nm,b");var lab=cl(el.getAttribute("aria-label")||(b&&b.textContent)||el.textContent).slice(0,28);if(!lab)return;
+    try{window.parent.postMessage({type:"wolly-tap",label:lab},"*")}catch(_){}},true);
+})();
+</script>
+<!--/wolly-tap-->
 <!--wolly-totop-->
 <style>
 .wtotop{position:fixed;z-index:60;right:max(22px,env(safe-area-inset-right,0px));bottom:calc(var(--wtb,24px) + env(safe-area-inset-bottom,0px));
