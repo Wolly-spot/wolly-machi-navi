@@ -3996,6 +3996,45 @@ function sendHome(){const w=$("#vFrame").contentWindow;if(!w)return;const p=S.pr
 /* スタンプ口コミ：写しのページ（near.html）から頼まれて、Wolly の業務システム（GAS）へ送る。
    LINEのIDトークンは街ナビの中だけで使い、写しのページには渡さない */
 const WOLLY_API="https://script.google.com/macros/s/AKfycbwv5gVNmYIem_rxce3Zo50cPFtFQ2duU6PqFN61-bjXfDycVBzF3nqpSZwsPaLe26aFSQ/exec";
+/* ===== タップ数を数える（11/17）：どのボタン・メニューが何回押されたかだけを、Wolly の業務システム（GAS）の「街ナビのタップ」シートへ。
+   だれが押したか（LINEのIDなど）は送らない。押した分を少しためて、20秒ごと・画面をとじるときにまとめて送る。
+   名前は「場所：ボタンの文字」（例：困ったとき：もらえるお金、パネル（児童手当）：スキマバイトに無料で登録）。 ===== */
+(function(){
+  const LOCAL=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)&&!/[?&]tapdebug=1/.test(location.search);
+  let Q={},n=0,timer=0;
+  const clean=s=>String(s||"").replace(/\s+/g," ").replace(/[<>]/g,"").trim();
+  function area(el){
+    if(el.closest("#sheet")){const h=document.querySelector("#sheetBody #sheetTitle");return "パネル（"+clean(h?h.textContent:sheetKind||"").slice(0,16)+"）"}
+    if(el.closest("#tabbar"))return "下のタブ";
+    if(el.closest("#helpGrid"))return "困ったとき";
+    if(el.closest("#enjoyGrid"))return "楽しむ";
+    if(el.closest("#hsTags,#hsRes,.hs"))return "さがす";
+    if(el.closest("#viewer"))return "ページ";
+    if(el.closest("header,.top,.appbar"))return "上のバー";
+    const sec=el.closest("section[id],[id^=row-],[id^=sec-]");
+    if(sec){const h=sec.querySelector("h2");return clean(h?h.textContent:sec.id).slice(0,16)}
+    return "ホーム";
+  }
+  function label(el){
+    if(el.classList.contains("spc-go"))return "★スキマバイトに無料で登録";
+    const b=el.querySelector("b");
+    return clean(el.getAttribute("aria-label")||(b&&b.textContent)||el.textContent||el.getAttribute("href")||"").slice(0,28);
+  }
+  function send(){clearTimeout(timer);timer=0;if(!n)return;const body=JSON.stringify({app:"navi",action:"tapLog",payload:{taps:Q}});Q={};n=0;
+    if(LOCAL){console.log("[tap]",body);return}
+    try{if(navigator.sendBeacon&&navigator.sendBeacon(WOLLY_API,new Blob([body],{type:"text/plain;charset=utf-8"})))return}catch(e){}
+    fetch(WOLLY_API,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body,keepalive:true}).catch(()=>{});}
+  document.addEventListener("click",e=>{
+    const el=e.target.closest&&e.target.closest("a,button,[role=button],.card");if(!el)return;
+    const lab=label(el);if(!lab||/^#?$/.test(lab))return;
+    const key=(area(el)+"："+lab).slice(0,60);
+    if(Object.keys(Q).length>=40&&!(key in Q))send();
+    Q[key]=(Q[key]||0)+1;n++;if(!timer)timer=setTimeout(send,20000);
+  },true);
+  addEventListener("visibilitychange",()=>{if(document.visibilityState==="hidden")send()});
+  addEventListener("pagehide",send);
+})();
+
 async function lineToken(){
   try{if(window.liffReady)await window.liffReady;if(window.liff&&liff.isLoggedIn&&liff.isLoggedIn())return liff.getIDToken()||null}catch(e){}
   return null;
