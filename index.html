@@ -4200,7 +4200,7 @@ function kidNotices(){
   const kids=getKids(),M=new Date().getMonth()+1,out=[];
   kids.forEach((b,n)=>{
     const who=kids.length>1?(n+1)+"人目のお子さん":"お子さん",mo=monthsOf(b),a=schoolAge(b);
-    const add=(o)=>out.push(Object.assign({who},o));
+    const add=(o)=>out.push(Object.assign({who,mo},o));
     /* 予防接種は1つにまとめる（いまの時期の種類／来月からの種類） */
     const vNow=VACCINES.filter(([,,f,t])=>mo>=f&&mo<t),vNext=VACCINES.filter(([,,f])=>mo===f-1);
     if(vNow.length)add({ic:"plaster",tag:"いまの時期",pr:2,t:"予防接種（"+vNow.length+"種類）",d:vNow.map(([nm,d])=>"・"+nm+"："+d).join("\n"),to:"#vaccine",ch:"k_vac",say:"予防接種の時期だよ！母子手帳をわすれずにね",go:"予防接種のスケジュール"});
@@ -4221,9 +4221,30 @@ function kidNotices(){
       if(M>=1&&M<=3)add({ic:"school",tag:"じゅんび",pr:2,t:"中学校の制服・体操着",d:"説明会のあと、指定のお店で注文するよ。早めに確かめてね。",to:SG("j","prep/uniform"),ch:"k_uniform",say:"制服や体操着、早めに注文しようね",go:"制服・体操着・指定のもの"});
     }
     if(a===14&&(M>=9||M<=2))add({ic:"pencil",tag:"いまの時期",pr:2,t:"高校受験のスケジュール",d:"学校説明会・出願・試験の時期を確かめておこう。",to:SG("j","exam/schedule"),ch:"k_exam",say:"受験の予定を、いっしょに確かめよう！",go:"受験のスケジュール"});
+    /* 11/17 追加（さいたま市の公式ページ 2026-11-17 確認）。pr：0＝期限がせまる 1＝申込み 2＝いまの時期 3＝もうすぐ・じゅんび 4＝季節・区のお知らせ */
+    if(mo>=0&&mo<=1)add({ic:"mail",tag:"期限あり",pr:0,t:"生まれたあとの手つづき",d:"・出生届：生まれた日をふくめて14日以内\n・児童手当：生まれた日の次の日から15日以内（おくれると、その月の分がもらえないことがあるよ）\n・こども医療費（子育て支援医療費）：1年以内なら生まれた日までさかのぼれるよ。18歳の年度末まで使えるよ\n区役所の支援課・保険年金課で。電子申請もできるよ。",url:"https://www.city.saitama.lg.jp/003/001/004/p015235.html",go:"児童手当（さいたま市）"});
+    if(a===2&&M>=9&&M<=11)add({ic:"house",tag:"申込み",pr:1,t:"幼稚園の入園願書（来年4月から）",d:"例年、願書は10月15日ごろから配られて、11月1日ごろに受付だよ。人気の園は早くうまるよ。日にちと受付のしかたは園ごとにちがうから、行きたい園に確かめてね。",url:"https://www.city.saitama.lg.jp/003/001/015/001/index.html",go:"保育園・幼稚園（さいたま市）"});
+    if((a===2&&M>=2&&M<=3)||(a===3&&M===4))add({ic:"coin",tag:"申込み",pr:1,t:"幼稚園の預かり保育を無償にする申請",d:"幼稚園の預かり保育も無償（上限あり）にするには「施設等利用給付認定」の申請がいるよ。入園する園から案内があるから、わすれずに出してね。",go:""});
+    if(a<=2&&mo>=2&&!(M>=8&&M<=10))add({ic:"house",tag:"毎月の締切",pr:3,t:"保育園のとちゅう入園",d:"入りたい月の前の月の10日が締切だよ（土日祝なら次の平日）。過ぎると、その次の月の申込みになるよ。空きは区役所の支援課に聞いてね。",to:"#hokatsu",go:"保活ナビ"});
+    if(a>=6&&a<=14&&M>=2&&M<=4)add({ic:"coin",tag:"申込み",pr:1,t:"就学援助の申しこみ",d:"学用品・給食費などの手助けだよ。新しい年度の分は、2月中旬から4月末までに申しこむよ（5月からも随時できるよ）。学校から案内が来るよ。",to:SG("e","money/shugaku"),go:"就学援助"});
+    if(a>=6&&a<=11&&M>=4&&M<=6)add({ic:"blocks",tag:"じゅんび",pr:3,t:"夏休みの学童",d:"夏休みだけ学童を使いたいときは、早めに区役所の支援課に聞いてね。民間の学童は、夏休みだけの受付をしているところもあるよ。",to:"view:near?g=gakudo",go:"学童の地図"});
+    if(a===15&&M>=4&&M<=7)add({ic:"coin",tag:"申込み",pr:1,t:"高校の授業料の支援・奨学給付金",d:"授業料の支援（就学支援金）は、入学したあと学校から案内があるよ。奨学給付金（埼玉県）は、7月ごろに申しこみの案内があるよ。期限は学校ごとにちがうから気をつけてね。",url:"https://www.pref.saitama.lg.jp/f2204/j-s/s-kyuhukin.html",go:"奨学給付金（埼玉県）"});
+    if(mo>=33&&mo<=40)add({ic:"plaster",tag:"いまの時期",pr:4,t:"はじめての歯医者さん・フッ素",d:"3歳ごろは、はじめての歯医者さんにいい時期だよ。フッ素をぬってもらうと、むし歯の予防になるよ。",to:"view:near?g=dent",go:"歯医者さんマップ"});
   });
+  /* 季節・区のお知らせ（1つだけ。お子さんごとには出さない） */
+  if(kids.length){
+    const D=new Date(),Y=D.getFullYear(),ww=S.profile&&S.profile.ward;
+    if(M>=6&&M<=8)out.push({who:"",ic:"park",tag:"夏",pr:4,t:"プールと熱中症",d:"市のプールの日にちは年でかわるよ。行く前に確かめてね。暑い日は水分と休けいをこまめにね。",to:"view:near?g=odekake",go:"おでかけスポット"});
+    if(M>=10&&M<=12&&kids.some(b=>monthsOf(b)>=6))out.push({who:"",ic:"plaster",tag:"秋冬",pr:4,t:"インフルエンザの予防接種",d:"子どもは任意の予防接種（自費）だよ。13歳未満は2回うつことが多いから、早めに予約してね。",to:"view:near?g=ped",go:"小児科マップ"});
+    if(M>=2&&M<=3)out.push({who:"",ic:"coin",tag:"確定申告",pr:4,t:"医療費控除（2月16日〜3月15日ごろ）",d:"1年の医療費が多かった家は、確定申告で税金がもどることがあるよ。病院や薬局のレシートをとっておいてね。",url:"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1120.htm",go:"医療費控除（国税庁）"});
+    const ls=new Date(Y,M,0);ls.setDate(ls.getDate()-ls.getDay());const left=Math.round((ls-new Date(Y,M-1,D.getDate()))/864e5);
+    if(left>=0&&left<=7)out.push({who:"",ic:"city",tag:"今月の休日窓口",pr:4,t:"区役所の日曜窓口（"+M+"月"+ls.getDate()+"日）",d:"毎月さいごの日曜日は、区役所の窓口があいているよ（区民課・保険年金課・支援課など）。平日に行けない手つづきに。",url:"https://www.city.saitama.lg.jp/001/001/007/p016829.html",go:"休日窓口（さいたま市）"});
+    if(kids.some(b=>schoolAge(b)<=2))out.push({who:"",ic:"kids",tag:ww?ww:"近くで",pr:4,t:(ww||"")+"子育て支援センター",d:"親子で遊べて、子育ての相談もできるよ。予約なしで行けるところも多いよ。",to:"view:near?g=hub",go:"子育て支援センターの地図"});
+  }
   soonDeadlines().forEach(x=>out.push({who:"",ic:"clock",tag:x.left===0?"きょう締切":"締切まであと"+x.left+"日",pr:0,t:x.title,d:x.desc||"",url:x.url||"",ch:"k_deadline",say:"締切がちかいよ！わすれないでね",go:"くわしく見る"}));
-  const seen=new Set();return out.filter(o=>{const k=o.t+"|"+o.who;if(seen.has(k))return false;seen.add(k);return true}).sort((p,q)=>p.pr-q.pr).slice(0,10);
+  /* 同じお知らせは1つにまとめる（「1人目・2人目のお子さん」）。並びは pr の順、同じなら年が下のお子さんを先に */
+  const by=new Map();out.forEach(o=>{const k=o.t;if(!by.has(k)){by.set(k,o);return}const p=by.get(k);if(o.who&&p.who&&p.who.indexOf(o.who.replace("のお子さん",""))<0)p.who=p.who.replace("のお子さん","")+"・"+o.who;if((o.mo??999)<(p.mo??999))p.mo=o.mo});
+  return [...by.values()].sort((p,q)=>p.pr-q.pr||(p.mo??999)-(q.mo??999)).slice(0,10);
 }
 /* お知らせをタップしたら、ふわっ＋グラデーション＋キラキラ */
 document.addEventListener("pointerdown",e=>{
