@@ -11,6 +11,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Arvo:wght@700&display=swap&text=Wolly%20spot">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@400;500&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Bebas+Neue&family=Yuji+Syuku&family=Kaisei+Decol:wght@700&display=swap&text=%20%26-0123456789ABCDEFGHIJKLMNOPQRSTUVWYaceghilnost%E2%80%BA%E3%81%84%E3%81%8B%E3%81%8D%E3%81%91%E3%81%93%E3%81%95%E3%81%9D%E3%81%9F%E3%81%A1%E3%81%A4%E3%81%A7%E3%81%AA%E3%81%AF%E3%81%B0%E3%81%BE%E3%82%89%E3%82%8B%E3%82%8D%E3%82%93%E3%82%A2%E3%82%A4%E3%82%A8%E3%82%AA%E3%82%AB%E3%82%AD%E3%82%AF%E3%82%B0%E3%82%B1%E3%82%B3%E3%82%B4%E3%82%B5%E3%82%B7%E3%82%B8%E3%82%B9%E3%82%BA%E3%82%BD%E3%83%80%E3%83%81%E3%83%83%E3%83%84%E3%83%86%E3%83%88%E3%83%89%E3%83%8B%E3%83%8E%E3%83%90%E3%83%91%E3%83%94%E3%83%95%E3%83%97%E3%83%9C%E3%83%9D%E3%83%9F%E3%83%A0%E3%83%A5%E3%83%A9%E3%83%AA%E3%83%AB%E3%83%AC%E3%83%AD%E3%83%B3%E3%83%BB%E3%83%BC%E4%B8%80%E4%BC%9A%E4%BD%93%E5%85%90%E5%85%A8%E5%86%99%E5%89%A3%E5%8C%BA%E5%8D%93%E5%90%88%E5%9B%A3%E5%9B%B2%E5%A0%B4%E5%A1%BE%E5%A5%B3%E5%AD%90%E5%AD%A6%E5%AE%A4%E5%B0%86%E5%B0%91%E5%B8%82%E5%B9%B4%E5%B9%BC%E6%89%8B%E6%93%8D%E6%95%99%E6%9B%B8%E6%9F%94%E6%A3%8B%E6%A5%AD%E6%B0%97%E7%84%B6%E7%90%83%E7%9C%9F%E7%A2%81%E7%A9%BA%E7%BF%92%E8%87%AA%E8%8B%B1%E8%8C%B6%E8%8F%AF%E8%A6%8B%E8%A6%A7%E8%A9%B1%E8%BE%B2%E9%81%93%E9%87%8E%E9%A8%93">
 <style>
@@ -857,6 +858,37 @@ html[data-fsz="2"] .ej b{font-size:11.5px}
 .ma-w{margin:6px 0 10px;font-size:13px;color:var(--muted)}.ma-w b{color:var(--ink)}
 .ma-links{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
 .ma-links a{display:grid;justify-items:center;gap:3px;padding:9px 2px;border-radius:14px;background:color-mix(in srgb,var(--surface) 60%,#F4F0FF);text-decoration:none;color:var(--ink);font-size:11.5px;font-weight:700}
+/*HNEW-CSS*/
+html.hnew .hero2{padding:26px 14px 18px;border-radius:26px;background:#FFFCF7;border:1px solid #F1EAF5;box-shadow:0 14px 30px -24px rgba(90,60,140,.5)}
+html.hnew .h2-bub{display:none}
+html.hnew .hero2:before,html.hnew .hero2:after{content:"";position:absolute;pointer-events:none}
+html.hnew .hero2:before{left:-30px;top:-34px;width:150px;height:110px;background:linear-gradient(115deg,#FF7FA8 0 38%,#FFC94D 38% 62%,transparent 62%);transform:rotate(-8deg);opacity:.92;border-radius:0 0 40px 0}
+html.hnew .hero2:after{right:-40px;bottom:-46px;width:220px;height:90px;background:linear-gradient(170deg,transparent 0 40%,#62B6FF 40% 66%,#FF8FB3 66%);transform:rotate(-6deg);opacity:.9}
+html.hnew .h2-dot{position:absolute;left:-14px;top:40px;width:40px;height:70px;background:#62B6FF;transform:skewY(-28deg);opacity:.9;pointer-events:none;display:block}
+.h2-dot{display:none}
+html.hnew .h2-t{font:700 clamp(36px,11vw,46px)/1.05 "Arvo","Rockwell","Georgia",serif;letter-spacing:.01em;color:#141A33;z-index:1}
+html.hnew .h2-s{font:700 13px/1.4 "Zen Kaku Gothic New",sans-serif;letter-spacing:.08em;color:#262B3F;margin:8px 0 16px;z-index:1}
+/* さがす欄：今の色（ピンク→むらさき→水色）のふちが光りながら流れる */
+html.hnew .hs{height:56px;border:0;padding:0 16px;background:#fff;isolation:isolate;box-shadow:0 10px 26px -14px rgba(142,107,245,.75);z-index:1}
+html.hnew .hs:before{content:"";position:absolute;inset:-2.5px;border-radius:inherit;padding:2.5px;background:linear-gradient(90deg,#FF8FC8,#A68BFF,#7FC8FF,#A68BFF,#FF8FC8);background-size:200% 100%;animation:hsFlow 4s linear infinite;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;z-index:-1}
+html.hnew .hs:after{content:"";position:absolute;inset:-9px;padding:9px;border-radius:inherit;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;background:linear-gradient(90deg,#FF8FC8,#A68BFF,#7FC8FF,#A68BFF,#FF8FC8);background-size:200% 100%;animation:hsFlow 4s linear infinite,hsGlow 2.6s ease-in-out infinite;filter:blur(10px);opacity:.45;z-index:-2}
+html.hnew .hs:focus-within:after{opacity:.75}
+html.hnew .hs .i{width:26px;height:26px;color:#8E4BEF;stroke-width:2.6}
+html.hnew .hs .i+input{border-left:2px solid #D8D2E6;padding-left:12px}
+html.hnew .hs input{font-size:16px}
+@keyframes hsFlow{to{background-position:200% 0}}
+@keyframes hsGlow{50%{opacity:.7}}
+/* よく見られることば：アイコンつきの大きな丸ボタン（ふわっと） */
+html.hnew .hs-tags{gap:8px;padding:16px 4px 6px;margin:0 -4px;z-index:1}
+html.hnew .hs-tags button{display:inline-flex;align-items:center;gap:6px;padding:6px 13px 6px 7px;border-radius:999px;font:700 14px/1 "Zen Kaku Gothic New",sans-serif;color:#fff;background:var(--tb,#9B6BF0);box-shadow:inset 0 -3px 0 rgba(0,0,0,.08),inset 0 2px 0 rgba(255,255,255,.35),0 6px 14px -8px var(--tb,#9B6BF0);text-shadow:0 1px 1px rgba(0,0,0,.12);transition:transform .35s cubic-bezier(.3,1.6,.5,1),box-shadow .35s}
+html.hnew .hs-tags button:hover,html.hnew .hs-tags button:focus-visible{transform:translateY(-4px) scale(1.04);box-shadow:inset 0 -3px 0 rgba(0,0,0,.08),inset 0 2px 0 rgba(255,255,255,.35),0 14px 20px -10px var(--tb,#9B6BF0)}
+html.hnew .hs-tags button.tapped,html.hnew .hs-tags button:active{transform:translateY(-6px) scale(1.07)}
+html.hnew .hs-tags button .ri{width:30px;height:30px;flex:0 0 auto;filter:drop-shadow(0 2px 2px rgba(0,0,0,.18));animation:riBob 3.2s ease-in-out infinite}
+html.hnew .hs-tags button:nth-child(2n) .ri{animation-delay:-1.4s}
+@keyframes riBob{50%{transform:translateY(-2px) rotate(-4deg)}}
+html.hnew .hs-tags button.mine{background:var(--tb)}
+@media (prefers-reduced-motion:reduce){html.hnew .hs:before,html.hnew .hs:after,html.hnew .hs-tags .ri{animation:none}}
+/*HNEW-CSS-END*/
 .ma-links svg{width:28px;height:28px}
 /* お知らせ：タップできるボタンは「立体地図で見る」と同じ（ピンク→むらさき→青に色が流れる・光が走る・ゆっくり脈打つ）。押すとキラキラ */
 .kn-go{position:relative;overflow:hidden;display:flex!important;align-items:center;justify-content:center;gap:6px;width:100%;box-sizing:border-box;margin-top:4px;padding:12px 16px!important;border:3px solid #fff;border-radius:999px;
@@ -1653,7 +1685,7 @@ svg .a-ring{animation:ring 2.4s ease-in-out infinite;transform-box:fill-box;tran
 
       <!-- いちばん上：Wolly spot ＋ さがす -->
       <section class="hero2">
-        <span class="h2-bub b1"></span><span class="h2-bub b2"></span><span class="h2-bub b3"></span>
+        <span class="h2-bub b1"></span><span class="h2-bub b2"></span><span class="h2-bub b3"></span><span class="h2-dot"></span>
         <h2 class="h2-t">Wolly spot</h2>
         <p class="h2-s">さいたま市の子育て・暮らし・おでかけ情報</p>
         <label class="hs"><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg><input id="hq" type="search" enterkeyhint="search" autocomplete="off" placeholder="地域・施設・お悩みから探す" aria-label="地域・施設・お悩みから探す"></label>
@@ -2611,6 +2643,24 @@ const SYN=[
   ["プール 動物園 水族館 科学館 博物館 おでかけ 雨の日 室内 モール","おでかけスポット","view:near?g=odekake","おでかけ"],
   ["小学校 学区 通学区域 ランドセル 入学","小学校マップ","view:school?t=e","学校"],["中学校 学区 制服 部活","中学校マップ","view:school?t=j","学校"],
   ["特別支援 支援学級 支援学校 通級 発達 就学相談","特別支援教育マップ","view:school?t=s","学校"],["学童 放課後児童クラブ 放課後 共働き","学童（放課後児童クラブ）","view:near?g=gakudo","学校"],["こども食堂 子ども食堂 子供食堂 食堂 ごはん 夕ごはん 地域食堂 フードパントリー","こども食堂マップ","view:near?g=shokudo","学校"],["児童センター 放課後 ひろば 遊び場","児童センター・放課後ひろば","view:near?g=jidou","学校"]];
+/*HNEW-JS*/
+const HNEW=(()=>{try{const q=new URLSearchParams(location.search).get("hero");if(q==="new"||q==="old")localStorage.setItem("wolly.hero",q);return (q||localStorage.getItem("wolly.hero"))==="new"}catch(e){return /hero=new/.test(location.search)}})();
+if(HNEW)document.documentElement.classList.add("hnew");
+const HN_ORDER=["予防接種","預けたい","熱が出た"];
+const HN_COL={"予防接種":"#F2577E","預けたい":"#F7B518","熱が出た":"#4FB94A","支援センター":"#F07AB6","公園":"#3FA3F0","歯医者":"#2BB3C9","児童手当":"#9B6BF0"};
+const RI={
+"予防接種":u=>`<defs><linearGradient id="a${u}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E9F6FF"/><stop offset="1" stop-color="#9FD2F7"/></linearGradient><linearGradient id="b${u}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7FC7FF"/><stop offset="1" stop-color="#2B86E0"/></linearGradient></defs><g transform="rotate(-45 24 24)"><rect x="20" y="1" width="8" height="5" rx="2" fill="#2B86E0"/><rect x="22.6" y="5" width="2.8" height="7" fill="#5AA7EE"/><rect x="15" y="11" width="18" height="4" rx="2" fill="#2B86E0"/><rect x="17" y="14" width="14" height="22" rx="3" fill="url(#a${u})" stroke="#2B86E0" stroke-width="1.6"/><rect x="18.6" y="24" width="10.8" height="10.4" rx="2" fill="url(#b${u})"/><path d="M19 18h4M19 21h3M19 27h4M19 30h3" stroke="#2B86E0" stroke-width="1.2" stroke-linecap="round"/><rect x="19.5" y="15.5" width="2.2" height="18" rx="1.1" fill="#fff" opacity=".7"/><path d="M21 36h6l-1.6 4h-2.8z" fill="#2B86E0"/><path d="M24 40v7" stroke="#B9C7D6" stroke-width="1.6" stroke-linecap="round"/><circle cx="24" cy="47.5" r=".9" fill="#7FC7FF"/></g>`,
+"預けたい":u=>`<defs><linearGradient id="a${u}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF9DB8"/><stop offset="1" stop-color="#F2577E"/></linearGradient><linearGradient id="b${u}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#F3EEF7"/></linearGradient></defs><rect x="6" y="9" width="36" height="33" rx="7" fill="url(#b${u})" stroke="#E64C74" stroke-width="2"/><path d="M6 16a7 7 0 0 1 7-7h22a7 7 0 0 1 7 7v4H6z" fill="url(#a${u})"/><rect x="13" y="5" width="4" height="9" rx="2" fill="#7A5466"/><rect x="31" y="5" width="4" height="9" rx="2" fill="#7A5466"/><g fill="#F7A3BC"><circle cx="15" cy="26" r="2.3"/><circle cx="24" cy="26" r="2.3"/><circle cx="33" cy="26" r="2.3"/><circle cx="15" cy="34" r="2.3"/><circle cx="33" cy="34" r="2.3"/></g><path d="M24 37.6l-3.4-3.2a2.1 2.1 0 0 1 3.4-2.5 2.1 2.1 0 0 1 3.4 2.5z" fill="#F2577E"/><rect x="9" y="11" width="16" height="2.4" rx="1.2" fill="#fff" opacity=".55"/>`,
+"熱が出た":u=>`<defs><linearGradient id="a${u}" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#DCE7F2"/></linearGradient><radialGradient id="b${u}" cx=".35" cy=".35" r=".7"><stop offset="0" stop-color="#FF9B9B"/><stop offset="1" stop-color="#E23B4A"/></radialGradient></defs><g transform="rotate(40 24 24)"><rect x="19" y="2" width="10" height="34" rx="5" fill="url(#a${u})" stroke="#C9D3DE" stroke-width="1.5"/><rect x="22.4" y="14" width="3.2" height="24" rx="1.6" fill="#E23B4A"/><circle cx="24" cy="40" r="6.5" fill="url(#b${u})"/><circle cx="21.8" cy="38" r="1.8" fill="#fff" opacity=".7"/><path d="M26 8h2.4M26 12h1.6M26 16h2.4M26 20h1.6M26 24h2.4" stroke="#9AA8B6" stroke-width="1.1" stroke-linecap="round"/><rect x="20.4" y="4" width="1.8" height="26" rx=".9" fill="#fff" opacity=".9"/></g>`,
+"支援センター":u=>`<defs><linearGradient id="a${u}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFB3D5"/><stop offset="1" stop-color="#F06FA9"/></linearGradient><linearGradient id="b${u}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFDF5"/><stop offset="1" stop-color="#FFEBC7"/></linearGradient></defs><path d="M10 22h28v20H10z" fill="url(#b${u})" stroke="#E7B97A" stroke-width="1.5"/><path d="M5 23L24 7l19 16a2 2 0 0 1-2.6 3L24 12 7.6 26A2 2 0 0 1 5 23z" fill="url(#a${u})"/><rect x="20" y="31" width="8" height="11" rx="4" fill="#B98AE8"/><path d="M24 25.5l-2.6-2.4a1.7 1.7 0 0 1 2.6-2.1 1.7 1.7 0 0 1 2.6 2.1z" fill="#F06FA9"/><circle cx="14.5" cy="30" r="2.6" fill="#8FD0FF"/><circle cx="33.5" cy="30" r="2.6" fill="#8FD0FF"/><path d="M11 22.4L24 11.6" stroke="#fff" stroke-width="1.6" opacity=".6" stroke-linecap="round"/>`,
+"公園":u=>`<defs><linearGradient id="a${u}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9FD8FF"/><stop offset="1" stop-color="#2F8BE0"/></linearGradient></defs><path d="M10 10v32M18 10v32" stroke="#F7B518" stroke-width="2.6" stroke-linecap="round"/><path d="M10 16h8M10 22h8M10 28h8M10 34h8" stroke="#F7B518" stroke-width="2"/><path d="M7 10h14" stroke="#F2577E" stroke-width="3" stroke-linecap="round"/><path d="M18 11c8 1 10 10 15 20 2 4 5 7 9 8v4c-6 0-10-4-13-9-4-7-6-16-11-17z" fill="url(#a${u})"/><path d="M20 13c5 2 8 9 11 16" stroke="#fff" stroke-width="1.4" opacity=".6" fill="none" stroke-linecap="round"/><ellipse cx="24" cy="44" rx="20" ry="2.4" fill="#000" opacity=".08"/>`,
+"歯医者":u=>`<defs><radialGradient id="a${u}" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#DDEFF5"/></radialGradient></defs><path d="M24 9c-4-3-11-3-14 2-3 5-1 12 2 17 2 4 2 14 6 14 3 0 3-9 6-9s3 9 6 9c4 0 4-10 6-14 3-5 5-12 2-17-3-5-10-5-14-2z" fill="url(#a${u})" stroke="#9CC9D9" stroke-width="1.6"/><path d="M14 13c2-3 6-3 8-1" stroke="#fff" stroke-width="2.4" stroke-linecap="round" fill="none"/><circle cx="19" cy="22" r="1.6" fill="#3B4660"/><circle cx="29" cy="22" r="1.6" fill="#3B4660"/><path d="M21.5 26.5c1.5 1.4 3.5 1.4 5 0" stroke="#3B4660" stroke-width="1.4" fill="none" stroke-linecap="round"/><ellipse cx="16" cy="25.5" rx="2.2" ry="1.4" fill="#FFB3C7"/><ellipse cx="32" cy="25.5" rx="2.2" ry="1.4" fill="#FFB3C7"/><path d="M37 6l1 2.4 2.4 1-2.4 1-1 2.4-1-2.4-2.4-1 2.4-1z" fill="#FFD84D"/>`,
+"児童手当":u=>`<defs><radialGradient id="a${u}" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#FFF2A8"/><stop offset="1" stop-color="#E9A90E"/></radialGradient></defs><ellipse cx="22" cy="40" rx="15" ry="5" fill="#D99A06"/><ellipse cx="22" cy="37" rx="15" ry="5" fill="#F4C431"/><ellipse cx="22" cy="33" rx="15" ry="5" fill="#D99A06"/><ellipse cx="22" cy="30" rx="15" ry="5" fill="#F4C431"/><circle cx="29" cy="17" r="12" fill="url(#a${u})" stroke="#D99A06" stroke-width="1.6"/><circle cx="29" cy="17" r="8.6" fill="none" stroke="#E9B21C" stroke-width="1.2"/><path d="M25.5 11.5l3.5 5 3.5-5M29 16.5v7M25.8 17.6h6.4M25.8 20.6h6.4" stroke="#B87A00" stroke-width="1.8" stroke-linecap="round" fill="none"/><path d="M21 11a10 10 0 0 1 6-4" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".8" fill="none"/>`,
+"_":u=>`<defs><radialGradient id="a${u}" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#E6DCFF"/></radialGradient></defs><circle cx="24" cy="24" r="17" fill="url(#a${u})" stroke="#9B6BF0" stroke-width="2"/><path d="M24 14v10l7 4" stroke="#9B6BF0" stroke-width="3" stroke-linecap="round" fill="none"/>`
+};
+let riN=0;
+function riSvg(t){const f=RI[t]||RI._;return `<svg class="ri" viewBox="0 0 48 48" aria-hidden="true">${f("ri"+(++riN))}</svg>`}
+/*HNEW-JS-END*/
 const HS_TAGS=["熱が出た","預けたい","支援センター","公園","歯医者","児童手当","予防接種"];
 const nz=t=>String(t||"").normalize("NFKC").toLowerCase().replace(/子(ども|供)/g,"こども").replace(/[\s　・･、。,.\-ー－〜~（）()「」]/g,"").replace(/[ァ-ン]/g,c=>String.fromCharCode(c.charCodeAt(0)-96)).replace(/さん$/,"");
 /* ひらがなで打っても見つかるように（よみ → 漢字） */
@@ -2727,7 +2777,7 @@ function hsSearch(q){
   const seen=new Set();return out.filter(([,x])=>{const k=x.to+"|"+x.t;if(seen.has(k))return false;seen.add(k);return true}).slice(0,600).map(([s,x])=>Object.assign({},x,{_s:s}));
 }
 
-function renderSearchTags(){const top=hsTop();const list=top.concat(HS_TAGS.filter(t=>!top.includes(t))).slice(0,8);$("#hsTags").innerHTML=list.map(t=>`<button type="button" data-hq="${esc(t)}"${top.includes(t)?' class="mine"':""}>${top.includes(t)?ico('<circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/>'):""}${esc(t)}</button>`).join("")}
+function renderSearchTags(){const top=hsTop();if(HNEW){const base=HN_ORDER.concat(HS_TAGS.filter(t=>!HN_ORDER.includes(t)));const list=base.slice(0,3).concat(top.filter(t=>!base.slice(0,3).includes(t)),base.slice(3).filter(t=>!top.includes(t))).slice(0,8);$("#hsTags").innerHTML=list.map(t=>`<button type="button" data-hq="${esc(t)}" style="--tb:${HN_COL[t]||"#9B6BF0"}"${top.includes(t)?' class="mine"':""}>${riSvg(t)}${esc(t)}</button>`).join("");return}const list=top.concat(HS_TAGS.filter(t=>!top.includes(t))).slice(0,8);$("#hsTags").innerHTML=list.map(t=>`<button type="button" data-hq="${esc(t)}"${top.includes(t)?' class="mine"':""}>${top.includes(t)?ico('<circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/>'):""}${esc(t)}</button>`).join("")}
 let hsT=0;document.addEventListener("input",e=>{if(e.target.id==="hq"){clearTimeout(hsT);hsT=setTimeout(hsRender,120)}});
 document.addEventListener("focusin",e=>{if(e.target.id==="hq")hsLoadFac()});
 document.addEventListener("click",e=>{
