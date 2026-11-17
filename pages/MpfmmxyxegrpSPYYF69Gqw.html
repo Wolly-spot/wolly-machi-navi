@@ -696,6 +696,7 @@ b.addEventListener("click",function(){
 
 
 
+
 <!--wolly-totop-->
 <style>
 .wtotop{position:fixed;z-index:60;right:max(22px,env(safe-area-inset-right,0px));bottom:calc(var(--wtb,24px) + env(safe-area-inset-bottom,0px));
@@ -798,6 +799,14 @@ window.wPeek=function(o){
       if(!RM)pmap.easeTo({bearing:12,duration:5000})});
   });
 };
+/* 地図を画面のまん中に。とちゅうで上の表示が変わってもずれないように、何回か合わせ直す（11/17） */
+window.wCenter=function(sel,map){
+  const fix=(smooth)=>{const el=typeof sel==="string"?document.querySelector(sel):sel;if(!el)return;const r=el.getBoundingClientRect();
+    const want=Math.max(8,(innerHeight-r.height)/2),d=r.top-want;if(Math.abs(d)<12)return;
+    scrollTo({top:scrollY+d,behavior:smooth&&!RM?"smooth":"auto"})};
+  fix(true);[600,1300,2200,3400].forEach(t=>setTimeout(()=>fix(false),t));
+  if(map&&map.once)map.once("moveend",()=>setTimeout(()=>fix(false),80));
+};
 /* くわしいページに、出してよい公式のホームページ・動画・インスタ投稿 */
 let EMB=null,EMBQ=null;
 function loadEmb(){if(EMB)return Promise.resolve(EMB);if(EMBQ)return EMBQ;EMBQ=fetch(BASE+"emb.json").then(r=>r.json()).then(j=>EMB=j).catch(()=>EMB={});return EMBQ}
@@ -821,7 +830,7 @@ window.wEmbed=function(u,host,name){
 <script>
 (function(){
   /* 園をタップ → 立体の地図でその園へとぶ（吹き出しの「くわしく」でいままでの小窓） */
-  const peek=(id,el)=>{const ll=(window.AZLL||{})[id];if(!ll||!window.AZF3)return openPop(id,el);window.AZF3(id)};
+  const peek=(id,el)=>{const ll=(window.AZLL||{})[id];if(!ll||!window.AZF3)return openPop(id,el);window.AZF3(id);setTimeout(()=>wCenter("#nearMap"),500);setTimeout(()=>wCenter("#nearMap"),2600)};
   document.addEventListener("click",e=>{const cd=e.target.closest&&e.target.closest("#list .card[data-id], #npList li[data-id]");if(!cd||e.target.closest("a,button:not(.card)"))return;
     e.preventDefault();e.stopPropagation();peek(+cd.dataset.id,cd)},true);
   const _op=openPop;openPop=function(id,el){_op(id,el);const r=BYID[id];if(!r||!r.u)return;const pb=document.querySelector("#pp .pbtns");if(!pb)return;

@@ -1145,6 +1145,14 @@ window.wPeek=function(o){
       if(!RM)pmap.easeTo({bearing:12,duration:5000})});
   });
 };
+/* 地図を画面のまん中に。とちゅうで上の表示が変わってもずれないように、何回か合わせ直す（11/17） */
+window.wCenter=function(sel,map){
+  const fix=(smooth)=>{const el=typeof sel==="string"?document.querySelector(sel):sel;if(!el)return;const r=el.getBoundingClientRect();
+    const want=Math.max(8,(innerHeight-r.height)/2),d=r.top-want;if(Math.abs(d)<12)return;
+    scrollTo({top:scrollY+d,behavior:smooth&&!RM?"smooth":"auto"})};
+  fix(true);[600,1300,2200,3400].forEach(t=>setTimeout(()=>fix(false),t));
+  if(map&&map.once)map.once("moveend",()=>setTimeout(()=>fix(false),80));
+};
 /* くわしいページに、出してよい公式のホームページ・動画・インスタ投稿 */
 let EMB=null,EMBQ=null;
 function loadEmb(){if(EMB)return Promise.resolve(EMB);if(EMBQ)return EMBQ;EMBQ=fetch(BASE+"emb.json").then(r=>r.json()).then(j=>EMB=j).catch(()=>EMB={});return EMBQ}
@@ -1171,11 +1179,11 @@ window.wEmbed=function(u,host,name){
     goMap(+li.dataset.i)},true);
   /* 一覧の施設をタップ → ページの立体地図へ移動して、その場所までとんでいく。吹き出しの「くわしく」でくわしいページ */
   function goMap(i){const x=LAST[i];if(!x||!x.r.la)return;
-    if(isReg()||S.here||S.target){if(!mapOpen)toggleMap();const m=$("#map");m&&m.scrollIntoView({behavior:RM?"auto":"smooth",block:"center"});
-      const t0=Date.now(),go=()=>{if(map&&ready)openPin(x,i);else if(Date.now()-t0<15000)setTimeout(go,250)};setTimeout(go,RM?0:450);return}
+    if(isReg()||S.here||S.target){if(!mapOpen)toggleMap();wCenter("#map");
+      const t0=Date.now(),go=()=>{if(map&&ready){openPin(x,i);wCenter("#map",map)}else if(Date.now()-t0<15000)setTimeout(go,250)};setTimeout(go,RM?0:450);return}
     /* 住所の登録がないとき：その施設を中心にした立体の地図にする（さがすから来たときと同じ） */
     S.target={lat:x.r.la,lon:x.r.lo,n:x.r.n};S.area=null;if(!mapOpen)toggleMap();refresh(true);
-    setTimeout(()=>{const m=$("#map");m&&m.scrollIntoView({behavior:RM?"auto":"smooth",block:"center"})},300)}
+    setTimeout(()=>wCenter("#map",map),120)}
   const _o=openFs;openFs=function(i,from){_o(i,from);const x=LAST[i];if(!x||!x.r.u)return;
     const rv=document.querySelector("#fsP .fs-rv");if(!rv)return;const host=document.createElement("div");rv.parentNode.insertBefore(host,rv);wEmbed(x.r.u,host,x.r.n)};
 })();
