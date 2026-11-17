@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-17T09:40:00+09:00",
+ "updatedAt": "2026-11-17T19:15:00+09:00",
  "events": [
   {
    "id": "e-shintoshin-illumination",
@@ -401,18 +401,6 @@
    "added": "2026-11-15T19:10:00+09:00"
   },
   {
-   "id": "s-bocchi-nisshin",
-   "kind": "open",
-   "title": "日進にカット専門店「Bocchi」オープン",
-   "desc": "予約なしで行けるカット専門店。カットは1,500円だよ。",
-   "date": "2026-11-01",
-   "src": "宮原大宮ドットコム",
-   "url": "https://miyahara-kitaku.com/bocchi-nisshin-open/",
-   "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/11/IMG_9933.jpg",
-   "ai": false,
-   "added": "2026-11-16T19:15:00+09:00"
-  },
-  {
    "id": "s-mikimoto-beauty-omiya",
    "kind": "open",
    "title": "大宮高島屋に「MIKIMOTO BEAUTY」11/13オープン",
@@ -423,6 +411,18 @@
    "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/11/phonto-60.jpg",
    "ai": false,
    "added": "2026-11-17T09:40:00+09:00"
+  },
+  {
+   "id": "s-menya-gen-shintoshin",
+   "kind": "open",
+   "title": "新都心にラーメン店「麺家 玄」11/18オープン",
+   "desc": "大宮区北袋町に新しいラーメン店。新都心駅・与野駅から歩いて10分弱だよ。",
+   "date": "2026-11-18",
+   "src": "宮原大宮ドットコム",
+   "url": "https://miyahara-kitaku.com/menya-gen-saitama-shintoshin-open/",
+   "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/11/IMG_4939.jpg",
+   "ai": false,
+   "added": "2026-11-17T19:15:00+09:00"
   }
  ],
  "news": [
@@ -592,17 +592,17 @@
    "added": "2026-11-14T19:30:00+09:00"
   },
   {
-   "id": "n-orange-ribbon-2026",
-   "kind": "kosodate",
-   "title": "11月はオレンジリボン（児童虐待防止）月間",
-   "desc": "区役所や図書館でリーフレット配布。心配なときは189（いちはやく）へ。",
-   "date": "2026-11-01",
+   "id": "n-madoguchi-jikan-r9",
+   "kind": "mama",
+   "title": "区役所の窓口受付 1/4から9時〜16時半に",
+   "desc": "区役所・市税事務所の受付時間が短くなる試行。手続きは早めにね。",
+   "date": "2027-01-04",
    "src": "さいたま市",
-   "url": "https://www.city.saitama.lg.jp/006/014/008/003/015/007/p133510.html",
-   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-orange-ribbon-2026.jpg",
+   "url": "https://www.city.saitama.lg.jp/006/007/014/020/p133609.html",
+   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-madoguchi-jikan-r9.jpg",
    "ai": true,
    "important": false,
-   "added": "2026-11-15T19:10:00+09:00"
+   "added": "2026-11-17T19:15:00+09:00"
   }
  ]
 }
