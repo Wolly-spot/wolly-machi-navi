@@ -1317,6 +1317,21 @@ svg .a-ring{animation:ring 2.4s ease-in-out infinite;transform-box:fill-box;tran
 .lfb .ftd{margin-bottom:20px}
 .jkn{display:table;margin:0 0 4px 0;padding:2px 10px;border-radius:999px;background:var(--jc);color:#fff;font-weight:900;font-size:13.5px;letter-spacing:.02em;box-shadow:0 2px 0 color-mix(in srgb,var(--jc) 60%,#000)}
 
+/* 11/17 スキマバイトの登録（目立つボタン。1つの画面に1つだけ） */
+.spc{margin:18px 0 6px;padding:14px 14px 16px;border-radius:22px;background:linear-gradient(140deg,rgba(255,240,248,.9),rgba(238,232,255,.9) 55%,rgba(226,242,255,.9));box-shadow:inset 0 0 0 1.5px rgba(201,182,255,.6)}
+.spc-l{display:flex;align-items:center;gap:8px;margin:0 0 4px;font-size:15px;font-weight:900;color:#3a2f78;line-height:1.45}
+.spc-l svg{flex:0 0 auto;width:34px;height:34px}
+.spc-s{margin:0 0 2px;font-size:12.5px;font-weight:700;color:#6a628f;line-height:1.6}
+.spc-go{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:12px;border:3px solid #fff;border-radius:999px;padding:14px 16px;box-sizing:border-box;text-decoration:none;
+  background:linear-gradient(100deg,#FF4F9A,#B45CFF 40%,#3D9BFF 70%,#FF4F9A);background-size:250% 100%;color:#fff;font-size:15.5px;font-weight:900;letter-spacing:.04em;text-shadow:0 1px 2px rgba(60,20,100,.35);
+  box-shadow:0 5px 0 #7B35C9,0 10px 24px rgba(180,92,255,.45);animation:spcBg 4s linear infinite,spcPulse 1.8s ease-in-out infinite}
+.spc-go svg{width:24px;height:24px;flex:0 0 auto}
+.spc-go::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.65),transparent);transform:skewX(-20deg);animation:spcShine 2.6s ease-in-out infinite}
+.spc-go:active{transform:translateY(3px);box-shadow:0 2px 0 #7B35C9}
+@keyframes spcBg{to{background-position:-250% 0}}@keyframes spcPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}@keyframes spcShine{0%,55%{left:-60%}100%{left:130%}}
+@media (prefers-reduced-motion:reduce){.spc-go,.spc-go::after{animation:none}}
+.spc-n{margin:8px 2px 0;font-size:11.5px;font-weight:700;color:#8a84a8;text-align:center}
+
 .lsh{margin:2px 0 14px;border-radius:18px;background:linear-gradient(135deg,rgba(255,229,154,.25),rgba(191,230,255,.3));box-shadow:inset 0 0 0 1.5px rgba(90,155,213,.35)}
 .lsh>summary{list-style:none;display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer}.lsh>summary::-webkit-details-marker{display:none}
 .lsh>summary .lsq{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:#fff;flex:0 0 auto}
@@ -2545,7 +2560,7 @@ function sheetOkane(){
   const g={};MONEY.forEach((m,i)=>{(g[m.c]=g[m.c]||[]).push([m,i])});
   return dhead(svg(CH.money),"#FFF1C2","MONEY","もらえるお金","さいたま市の給付金・助成制度 "+MONEY.length+"件")+
    Object.keys(g).map(c=>{const C=MONEY_CAT[c]||{n:"そのほか",ic:"coin"};return `<p class="az-h">${svg(MINI[C.ic]||MINI.coin,40)}${esc(C.n)}</p><div class="az">`+
-     g[c].map(([m,i])=>`<a class="az-b" href="#m-${i}"><span class="az-i" style="background:${C.bg||"#FFF1C2"}">${svg(MINI[C.ic]||MINI.coin,40)}</span><span><b>${esc(m.t)}</b><small>${esc(m.one||"")}</small></span><i>›</i></a>`).join("")+`</div>`}).join("");
+     g[c].map(([m,i])=>`<a class="az-b" href="#m-${i}"><span class="az-i" style="background:${C.bg||"#FFF1C2"}">${svg(MINI[C.ic]||MINI.coin,40)}</span><span><b>${esc(m.t)}</b><small>${esc(m.one||"")}</small></span><i>›</i></a>`).join("")+`</div>`}).join("")+spotCta("money");
 }
 /* 保活ナビ（パネル）：準備の順番に */
 function sheetHokatsuMenu(){
@@ -2557,7 +2572,7 @@ function sheetHokatsuMenu(){
       <span class="hkm-t"><em>${h.guide?"はじめに":"STEP "+h.step}</em><b>${esc(h.ct||h.t)}</b><small>${esc(h.guide?"はじめての人はここから":h.sl||"")}</small></span>
       <span class="hkm-ic">${svg(KIC(g.ic)||MINI.star,40)}</span></a>`};
   return dhead(svg(CH.hokatsu),"#F1E8FF","HOKATSU","保活ナビ","保育園に入るまでの準備を、順番に")+
-   `<div class="hkms">`+HOKATSU.map(row).join("")+`</div>`;
+   `<div class="hkms">`+HOKATSU.map(row).join("")+`</div>`+spotCta("azuke");
 }
 /* 預け先を探す（パネル） */
 function sheetAzuke(){
@@ -2568,7 +2583,7 @@ function sheetAzuke(){
     <a class="az-b" href="#ensearch"><span class="az-i" style="background:#E5F4FF">${svg(GIC.map,40)}</span><span><b>さいたま市の園を探す</b><small>保育園・幼稚園・こども園（あずかりマップ・保活）</small></span><i>›</i></a>
     <a class="az-b" href="#" data-view="near?g=hub" data-vt="子育て支援センター"><span class="az-i" style="background:#FCE6F5">${svg(MINI.hand,40)}</span><span><b>子育て支援センター</b><small>親子で遊べる・相談できる 69か所</small></span><i>›</i></a>
     <a class="az-b" href="#hokatsu"><span class="az-i" style="background:#F1E8FF">${svg(CH.hokatsu)}</span><span><b>保育園に入りたい</b><small>保活ナビ（点数・書類・締切）</small></span><i>›</i></a></div>
-    <p class="note">一時保育は、園によって受け付けの方法や空きがちがうよ。利用したい園に電話でたしかめてね。</p>`;
+    <p class="note">一時保育は、園によって受け付けの方法や空きがちがうよ。利用したい園に電話でたしかめてね。</p>`+spotCta("azuke");
 }
 /* ===== さがす（地域・施設・お悩みから）：ページの中の情報を、ことばでさがす ===== */
 const SYN=[
@@ -2954,13 +2969,22 @@ const PAGES_BASE=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.o
 const LOCAL_PAGES=new Set(["1A9FVjMyjw7Z1qeTR1PYb8", "46aiXnFAPJqq2TFrKg3YPU", "4DXLnYxw49xGkQLqb2JUff", "5sw7jm2a4RuUXWCBZrN4kW", "6nL3ULCWeDax2UrVyBJZyD", "835bgbNMZayWbxA3uQndR5", "8KxvgMDXNHUPWJqrrBjVMY", "9tRNjnjZgo6ahsXRrvvNKA", "BAZjQop2hS7NzefxH9hnbT", "D5TZbxjxGckC92efTtLFPA", "DP2ABq3gWDZT8QfciTMVst", "EBSjH4tPPXWnRohvo4dyUm", "GDsUKaWvcL5kR9qmzFgJ1Z", "GFvaTmMVnMNyi9qm15Ti9y", "HgEtKiUhTrM7ZP3uu3UNti", "Jq1szNceCTZRM4o2Ljgf2q", "LFhrH9kdQhJtuo1ZuzA7fS", "MmmV3f6hXy5cWggak1rXaH", "MpfmmxyxegrpSPYYF69Gqw", "PhjBg2uw9qhp9nZMc4Mu4h", "QJFPMd2pikgS9nd44Dwkpc", "RtwsQaVbRj8tjVuLmDNoLX", "Uz8Uj6qnV8z7K3BRs62FDd", "VQS3aiwxShGyPvvZ3ditfe"]);
 const artId=u=>{if(/^page:[a-z0-9-]+$/.test(u||""))return u.slice(5);const m=/claude\.ai\/artifact\/([A-Za-z0-9]+)/.exec(u||"");return m&&LOCAL_PAGES.has(m[1])?m[1]:null};
 const openA=(u,label,title,cls="go")=>{const id=artId(u);return id?`<button class="${cls} vbtn" type="button" data-view="${id}" data-vt="${esc(title)}">${esc(label)} ${ico('<path d="M5 12h14M13 6l6 6-6 6"/>')}</button>`:extA(u,label,cls)};
+
+/* 11/17 スキマバイト（Wolly spot）のマイページ登録へ。お金・預け先・保活ナビのパネルのいちばん下に1つだけ */
+const SPOT_REG="https://liff.line.me/2007823365-RNfPYqlv?page=u00";
+function spotCta(kind){
+  const L={money:["家計のたしに、スキマ時間でお仕事も","Wollyスキマバイトに登録すると、家の近くの短い時間のお仕事のお知らせが、LINEに届くよ。"],
+    azuke:["預けた時間に、家の近くで働ける","子どもを預けているあいだの数時間だけ。Wollyスキマバイトに登録すると、お仕事のお知らせがLINEに届くよ。"]}[kind]||[];
+  return `<div class="spc"><p class="spc-l">${svg(CH.money)}${L[0]}</p><p class="spc-s">${L[1]}</p>
+    <a class="spc-go" href="${SPOT_REG}" target="_blank" rel="noopener" data-noicon>${ico('<path d="M12 5v14M5 12h14"/>')}スキマバイトに無料で登録</a>
+    <p class="spc-n">登録は無料だよ。</p></div>`}
 function sheetMoney(i){const m=MONEY[i];if(!m)return"";const c=MONEY_CAT[m.c];
   return dhead(svg(MINI[c.ic],40),c.bg,c.n,m.t,`<span class="pill">${esc(m.k)}</span><span class="pill ${m.wait?"wait":""}">${m.wait?"次回募集待ち":"受付中"}</span>`)+
    `<div class="price"><b>${esc(m.num)}</b><span>${esc(m.sub)}</span></div>
     <dl class="dl"><div><dt>どんな</dt><dd>${esc(m.one)}</dd></div><div><dt>対象</dt><dd>${esc(m.who)}</dd></div><div><dt>窓口</dt><dd>${esc(m.how)}</dd></div></dl>
     ${m.note?`<p class="note">${esc(m.note)}</p>`:""}
     ${openA(m.url,"くわしく見る・いくらもらえるか計算",m.t)}
-    <p class="foot">金額や条件は年度ごとに変わることがあるよ。わからないときは さいたまコールセンター ${callA("048-835-3156","call mini")}</p>`}
+    <p class="foot">金額や条件は年度ごとに変わることがあるよ。わからないときは さいたまコールセンター ${callA("048-835-3156","call mini")}</p>${spotCta("money")}`}
 function sheetInfo(item,cat,i){
   const st=STYLE[cat][i%STYLE[cat].length];
   return dhead(`<svg viewBox="0 0 24 24" style="width:44px;height:44px;fill:none;stroke:#fff;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round">${P[item.p]}</svg>`,st[0],TAG[cat],item.t,esc(item.k))+
