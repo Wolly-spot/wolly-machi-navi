@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Glegoo:wght@700&display=swap&text=Wolly%20spot">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Glegoo:wght@700&display=swap&text=Wolly%20spot">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Glegoo:wght@700&display=swap&text=Wolly%20spot">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Glegoo:wght@700&display=swap&text=Wolly%20spot">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@400;500&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Bebas+Neue&family=Yuji+Syuku&family=Kaisei+Decol:wght@700&display=swap&text=%20%26-0123456789ABCDEFGHIJKLMNOPQRSTUVWYaceghilnost%E2%80%BA%E3%81%84%E3%81%8B%E3%81%8D%E3%81%91%E3%81%93%E3%81%95%E3%81%9D%E3%81%9F%E3%81%A1%E3%81%A4%E3%81%A7%E3%81%AA%E3%81%AF%E3%81%B0%E3%81%BE%E3%82%89%E3%82%8B%E3%82%8D%E3%82%93%E3%82%A2%E3%82%A4%E3%82%A8%E3%82%AA%E3%82%AB%E3%82%AD%E3%82%AF%E3%82%B0%E3%82%B1%E3%82%B3%E3%82%B4%E3%82%B5%E3%82%B7%E3%82%B8%E3%82%B9%E3%82%BA%E3%82%BD%E3%83%80%E3%83%81%E3%83%83%E3%83%84%E3%83%86%E3%83%88%E3%83%89%E3%83%8B%E3%83%8E%E3%83%90%E3%83%91%E3%83%94%E3%83%95%E3%83%97%E3%83%9C%E3%83%9D%E3%83%9F%E3%83%A0%E3%83%A5%E3%83%A9%E3%83%AA%E3%83%AB%E3%83%AC%E3%83%AD%E3%83%B3%E3%83%BB%E3%83%BC%E4%B8%80%E4%BC%9A%E4%BD%93%E5%85%90%E5%85%A8%E5%86%99%E5%89%A3%E5%8C%BA%E5%8D%93%E5%90%88%E5%9B%A3%E5%9B%B2%E5%A0%B4%E5%A1%BE%E5%A5%B3%E5%AD%90%E5%AD%A6%E5%AE%A4%E5%B0%86%E5%B0%91%E5%B8%82%E5%B9%B4%E5%B9%BC%E6%89%8B%E6%93%8D%E6%95%99%E6%9B%B8%E6%9F%94%E6%A3%8B%E6%A5%AD%E6%B0%97%E7%84%B6%E7%90%83%E7%9C%9F%E7%A2%81%E7%A9%BA%E7%BF%92%E8%87%AA%E8%8B%B1%E8%8C%B6%E8%8F%AF%E8%A6%8B%E8%A6%A7%E8%A9%B1%E8%BE%B2%E9%81%93%E9%87%8E%E9%A8%93">
 <style>
@@ -2651,7 +2652,7 @@ const SYN=[
   ["小学校 学区 通学区域 ランドセル 入学","小学校マップ","view:school?t=e","学校"],["中学校 学区 制服 部活","中学校マップ","view:school?t=j","学校"],
   ["特別支援 支援学級 支援学校 通級 発達 就学相談","特別支援教育マップ","view:school?t=s","学校"],["学童 放課後児童クラブ 放課後 共働き","学童（放課後児童クラブ）","view:near?g=gakudo","学校"],["こども食堂 子ども食堂 子供食堂 食堂 ごはん 夕ごはん 地域食堂 フードパントリー","こども食堂マップ","view:near?g=shokudo","学校"],["児童センター 放課後 ひろば 遊び場","児童センター・放課後ひろば","view:near?g=jidou","学校"]];
 /*HNEW-JS*/
-const HNEW=(()=>{try{const q=new URLSearchParams(location.search).get("hero");if(q==="new"||q==="old")localStorage.setItem("wolly.hero",q);return (q||localStorage.getItem("wolly.hero"))==="new"}catch(e){return /hero=new/.test(location.search)}})();
+const HNEW=true;/* 11/17 Yuji さんが新しいデザインに決定。前の切りかえ（?hero=・wolly.hero）はなくした */try{localStorage.removeItem("wolly.hero")}catch(e){}
 if(HNEW)document.documentElement.classList.add("hnew");
 const HN_ORDER=["予防接種","預けたい","熱が出た","歯医者"];
 const HN_COL={"予防接種":"#F2577E","預けたい":"#F7B518","熱が出た":"#4FB94A","支援センター":"#F07AB6","公園":"#3FA3F0","歯医者":"#2BB3C9","児童手当":"#9B6BF0"};
