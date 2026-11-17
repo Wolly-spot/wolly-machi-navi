@@ -694,6 +694,7 @@ b.addEventListener("click",function(){
 
 
 
+
 <!--wolly-totop-->
 <style>
 .wtotop{position:fixed;z-index:60;right:max(22px,env(safe-area-inset-right,0px));bottom:calc(var(--wtb,24px) + env(safe-area-inset-bottom,0px));
@@ -817,8 +818,8 @@ window.wEmbed=function(u,host,name){
 
 <script>
 (function(){
-  const peek=(id,el)=>{const r=BYID[id],ll=(window.AZLL||{})[id];if(!r||!ll)return openPop(id,el);const c=CAT[r.c];
-    wPeek({n:r.n,sub:esc(c.l)+"・"+esc(r.w)+"区<br>さいたま市"+esc(r.a),ll:ll,color:c.c,gmap:mapURL(r),more:()=>openPop(id,el)})};
+  /* 園をタップ → 立体の地図でその園へとぶ（吹き出しの「くわしく」でいままでの小窓） */
+  const peek=(id,el)=>{const ll=(window.AZLL||{})[id];if(!ll||!window.AZF3)return openPop(id,el);window.AZF3(id)};
   document.addEventListener("click",e=>{const cd=e.target.closest&&e.target.closest("#list .card[data-id], #npList li[data-id]");if(!cd||e.target.closest("a,button:not(.card)"))return;
     e.preventDefault();e.stopPropagation();peek(+cd.dataset.id,cd)},true);
   const _op=openPop;openPop=function(id,el){_op(id,el);const r=BYID[id];if(!r||!r.u)return;const pb=document.querySelector("#pp .pbtns");if(!pb)return;
@@ -1190,6 +1191,7 @@ const _openPop=openPop;openPop=function(id,el){_openPop(id,el);
   const pb=document.querySelector("#pp .pbtns");if(!pb||!LL[id])return;
   const b=document.createElement("button");b.type="button";b.className="go3d";b.innerHTML=GO3D+"立体地図で見る";
   b.onclick=()=>focus3d(id);pb.after(b)};
+window.AZF3=id=>focus3d(id);
 function focus3d(id){
   const ll=LL[id],r=DATA.find(x=>x.id===id);if(!ll||!r)return;
   const x=document.querySelector("#pop .x");x&&x.click();

@@ -1167,8 +1167,14 @@ window.wEmbed=function(u,host,name){
 (function(){
   const list=document.getElementById("list");if(!list)return;
   list.addEventListener("click",e=>{if(e.target.closest("a"))return;const li=e.target.closest(".card");if(!li)return;e.stopImmediatePropagation();
-    const i=+li.dataset.i,x=LAST[i];if(!x)return;const r=x.r;
-    wPeek({n:r.n,sub:esc(wn(r.w))+"・"+esc(G.word)+"<br>"+esc("さいたま市"+r.a)+"<br>"+kmT(x.km)+"（"+moveT(x.km)+"）",ll:[r.la,r.lo],gmap:gmap(r),more:()=>openFs(i,li)})},true);
+    goMap(+li.dataset.i)},true);
+  /* 一覧の施設をタップ → ページの立体地図へ移動して、その場所までとんでいく。吹き出しの「くわしく」でくわしいページ */
+  function goMap(i){const x=LAST[i];if(!x||!x.r.la)return;
+    if(isReg()||S.here||S.target){if(!mapOpen)toggleMap();const m=$("#map");m&&m.scrollIntoView({behavior:RM?"auto":"smooth",block:"center"});
+      const t0=Date.now(),go=()=>{if(map&&ready)openPin(x,i);else if(Date.now()-t0<15000)setTimeout(go,250)};setTimeout(go,RM?0:450);return}
+    /* 住所の登録がないとき：その施設を中心にした立体の地図にする（さがすから来たときと同じ） */
+    S.target={lat:x.r.la,lon:x.r.lo,n:x.r.n};S.area=null;if(!mapOpen)toggleMap();refresh(true);
+    setTimeout(()=>{const m=$("#map");m&&m.scrollIntoView({behavior:RM?"auto":"smooth",block:"center"})},300)}
   const _o=openFs;openFs=function(i,from){_o(i,from);const x=LAST[i];if(!x||!x.r.u)return;
     const rv=document.querySelector("#fsP .fs-rv");if(!rv)return;const host=document.createElement("div");rv.parentNode.insertBefore(host,rv);wEmbed(x.r.u,host,x.r.n)};
 })();
