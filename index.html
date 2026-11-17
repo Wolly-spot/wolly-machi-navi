@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Glegoo:wght@700&display=swap&text=Wolly%20spot">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Glegoo:wght@700&display=swap&text=Wolly%20spot">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Glegoo:wght@700&display=swap&text=Wolly%20spot">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Glegoo:wght@700&display=swap&text=Wolly%20spot">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@400;500&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Bebas+Neue&family=Yuji+Syuku&family=Kaisei+Decol:wght@700&display=swap&text=%20%26-0123456789ABCDEFGHIJKLMNOPQRSTUVWYaceghilnost%E2%80%BA%E3%81%84%E3%81%8B%E3%81%8D%E3%81%91%E3%81%93%E3%81%95%E3%81%9D%E3%81%9F%E3%81%A1%E3%81%A4%E3%81%A7%E3%81%AA%E3%81%AF%E3%81%B0%E3%81%BE%E3%82%89%E3%82%8B%E3%82%8D%E3%82%93%E3%82%A2%E3%82%A4%E3%82%A8%E3%82%AA%E3%82%AB%E3%82%AD%E3%82%AF%E3%82%B0%E3%82%B1%E3%82%B3%E3%82%B4%E3%82%B5%E3%82%B7%E3%82%B8%E3%82%B9%E3%82%BA%E3%82%BD%E3%83%80%E3%83%81%E3%83%83%E3%83%84%E3%83%86%E3%83%88%E3%83%89%E3%83%8B%E3%83%8E%E3%83%90%E3%83%91%E3%83%94%E3%83%95%E3%83%97%E3%83%9C%E3%83%9D%E3%83%9F%E3%83%A0%E3%83%A5%E3%83%A9%E3%83%AA%E3%83%AB%E3%83%AC%E3%83%AD%E3%83%B3%E3%83%BB%E3%83%BC%E4%B8%80%E4%BC%9A%E4%BD%93%E5%85%90%E5%85%A8%E5%86%99%E5%89%A3%E5%8C%BA%E5%8D%93%E5%90%88%E5%9B%A3%E5%9B%B2%E5%A0%B4%E5%A1%BE%E5%A5%B3%E5%AD%90%E5%AD%A6%E5%AE%A4%E5%B0%86%E5%B0%91%E5%B8%82%E5%B9%B4%E5%B9%BC%E6%89%8B%E6%93%8D%E6%95%99%E6%9B%B8%E6%9F%94%E6%A3%8B%E6%A5%AD%E6%B0%97%E7%84%B6%E7%90%83%E7%9C%9F%E7%A2%81%E7%A9%BA%E7%BF%92%E8%87%AA%E8%8B%B1%E8%8C%B6%E8%8F%AF%E8%A6%8B%E8%A6%A7%E8%A9%B1%E8%BE%B2%E9%81%93%E9%87%8E%E9%A8%93">
 <style>
@@ -885,18 +886,21 @@ html.hnew .hs input::placeholder{color:#8A8790}
 @keyframes hsFlow{to{background-position:200% 0}}
 @keyframes hsGlow{50%{opacity:.6}}
 /* よく見られることば：見本どおりの丸ボタン（2×2）。ほかのことばは下に小さく。押すとふわっと */
-html.hnew .hs-tags{display:block;overflow:visible;padding:18px 0 0;z-index:1}
-html.hnew .hn-big{display:flex;gap:4px;justify-content:space-between}
-html.hnew .hn-more{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:10px 2px 4px;margin:0 -2px}
-html.hnew .hs-tags button{display:flex;align-items:center;justify-content:center;gap:2px;height:38px;padding:0 6px 0 2px;border-radius:999px;font:700 12px/1 "Zen Kaku Gothic New",sans-serif;letter-spacing:-.04em;color:#fff;white-space:nowrap;background:linear-gradient(180deg,color-mix(in srgb,var(--tb) 80%,#fff),var(--tb));box-shadow:0 5px 10px -7px var(--tb);transition:transform .35s cubic-bezier(.3,1.6,.5,1),box-shadow .35s}
-html.hnew .hn-big button{flex:1 1 auto}
-html.hnew .hn-more button{flex:0 0 auto;height:32px;font-size:12px;padding:0 10px 0 4px}
+html.hnew .hs-tags{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;padding:12px 4px 6px;margin:0 -12px;padding-left:12px;padding-right:12px;z-index:1;scroll-padding:12px}
+html.hnew .hs-tags::-webkit-scrollbar{display:none}
+
+
+html.hnew .hs-tags button{flex:0 0 auto;display:flex;align-items:center;gap:4px;height:36px;padding:0 12px 0 5px;border-radius:999px;font:700 12.5px/1 "Zen Kaku Gothic New",sans-serif;color:color-mix(in srgb,var(--tb) 62%,#2B2236);white-space:nowrap;background:linear-gradient(180deg,color-mix(in srgb,var(--tb) 14%,#fff),color-mix(in srgb,var(--tb) 26%,#fff));border:1px solid color-mix(in srgb,var(--tb) 30%,#fff);box-shadow:0 4px 10px -8px var(--tb);transition:transform .35s cubic-bezier(.3,1.6,.5,1),box-shadow .35s}
+
+
 html.hnew .hs-tags button:hover,html.hnew .hs-tags button:focus-visible{transform:translateY(-4px) scale(1.03);box-shadow:0 14px 18px -10px var(--tb)}
 html.hnew .hs-tags button.tapped,html.hnew .hs-tags button:active{transform:translateY(-6px) scale(1.06)}
-html.hnew .hs-tags button .ri{width:22px;height:22px;margin-left:-1px;flex:0 0 auto;filter:drop-shadow(0 2px 2px rgba(0,0,0,.18));animation:riBob 3.2s ease-in-out infinite}
-html.hnew .hn-more button .ri{width:22px;height:22px}
+html.hnew .hs-tags button .ri{width:26px;height:26px;margin-left:-1px;flex:0 0 auto;filter:drop-shadow(0 2px 2px rgba(0,0,0,.18));animation:riBob 3.2s ease-in-out infinite}
+
 html.hnew .hs-tags button:nth-child(2n) .ri{animation-delay:-1.4s}
 @keyframes riBob{50%{transform:translateY(-2px) rotate(-4deg)}}
+html.hnew .kn-bell{background:radial-gradient(circle at 35% 30%,#fff,#FFF3D6 55%,#F6E4FF);box-shadow:0 0 0 4px rgba(255,255,255,.6),0 4px 16px -2px rgba(244,195,90,.45),0 0 18px 2px rgba(201,182,255,.35)}
+html.hnew .kn-bell .ri{width:34px;height:34px;filter:drop-shadow(0 2px 2px rgba(0,0,0,.12))}
 @media (prefers-reduced-motion:reduce){html.hnew .hs:before,html.hnew .hs:after,html.hnew .hs-tags .ri{animation:none}}
 /*HNEW-CSS-END*/
 .ma-links svg{width:28px;height:28px}
@@ -2666,6 +2670,7 @@ const RI={
 "公園":u=>`<defs><linearGradient id="a${u}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9FD8FF"/><stop offset="1" stop-color="#2F8BE0"/></linearGradient></defs><path d="M10 10v32M18 10v32" stroke="#F7B518" stroke-width="2.6" stroke-linecap="round"/><path d="M10 16h8M10 22h8M10 28h8M10 34h8" stroke="#F7B518" stroke-width="2"/><path d="M7 10h14" stroke="#F2577E" stroke-width="3" stroke-linecap="round"/><path d="M18 11c8 1 10 10 15 20 2 4 5 7 9 8v4c-6 0-10-4-13-9-4-7-6-16-11-17z" fill="url(#a${u})"/><path d="M20 13c5 2 8 9 11 16" stroke="#fff" stroke-width="1.4" opacity=".6" fill="none" stroke-linecap="round"/><ellipse cx="24" cy="44" rx="20" ry="2.4" fill="#000" opacity=".08"/>`,
 "歯医者":u=>`<defs><radialGradient id="a${u}" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#DDEFF5"/></radialGradient></defs><path d="M24 9c-4-3-11-3-14 2-3 5-1 12 2 17 2 4 2 14 6 14 3 0 3-9 6-9s3 9 6 9c4 0 4-10 6-14 3-5 5-12 2-17-3-5-10-5-14-2z" fill="url(#a${u})" stroke="#9CC9D9" stroke-width="1.6"/><path d="M14 13c2-3 6-3 8-1" stroke="#fff" stroke-width="2.4" stroke-linecap="round" fill="none"/><circle cx="19" cy="22" r="1.6" fill="#3B4660"/><circle cx="29" cy="22" r="1.6" fill="#3B4660"/><path d="M21.5 26.5c1.5 1.4 3.5 1.4 5 0" stroke="#3B4660" stroke-width="1.4" fill="none" stroke-linecap="round"/><ellipse cx="16" cy="25.5" rx="2.2" ry="1.4" fill="#FFB3C7"/><ellipse cx="32" cy="25.5" rx="2.2" ry="1.4" fill="#FFB3C7"/><path d="M37 6l1 2.4 2.4 1-2.4 1-1 2.4-1-2.4-2.4-1 2.4-1z" fill="#FFD84D"/>`,
 "児童手当":u=>`<defs><radialGradient id="a${u}" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#FFF2A8"/><stop offset="1" stop-color="#E9A90E"/></radialGradient></defs><ellipse cx="22" cy="40" rx="15" ry="5" fill="#D99A06"/><ellipse cx="22" cy="37" rx="15" ry="5" fill="#F4C431"/><ellipse cx="22" cy="33" rx="15" ry="5" fill="#D99A06"/><ellipse cx="22" cy="30" rx="15" ry="5" fill="#F4C431"/><circle cx="29" cy="17" r="12" fill="url(#a${u})" stroke="#D99A06" stroke-width="1.6"/><circle cx="29" cy="17" r="8.6" fill="none" stroke="#E9B21C" stroke-width="1.2"/><path d="M25.5 11.5l3.5 5 3.5-5M29 16.5v7M25.8 17.6h6.4M25.8 20.6h6.4" stroke="#B87A00" stroke-width="1.8" stroke-linecap="round" fill="none"/><path d="M21 11a10 10 0 0 1 6-4" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".8" fill="none"/>`,
+"お知らせ":u=>`<defs><linearGradient id="a${u}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE7A6"/><stop offset="1" stop-color="#F4C35A"/></linearGradient></defs><path d="M24 6c-7 0-12 5.5-12 12.5v8.5l-3.6 5.4c-.7 1.1.1 2.6 1.4 2.6h28.4c1.3 0 2.1-1.5 1.4-2.6L36 27v-8.5C36 11.5 31 6 24 6z" fill="url(#a${u})" stroke="#E2AE45" stroke-width="1.4"/><circle cx="24" cy="5.5" r="2.6" fill="#F4C35A"/><path d="M19.5 38.5a4.5 4.5 0 0 0 9 0z" fill="#E59AB4"/><path d="M16.5 17c.6-4 3.4-6.6 6.6-7.2" stroke="#fff" stroke-width="2.4" stroke-linecap="round" fill="none" opacity=".85"/><ellipse cx="18.5" cy="25" rx="2.2" ry="1.4" fill="#F7A9C0" opacity=".8"/><ellipse cx="29.5" cy="25" rx="2.2" ry="1.4" fill="#F7A9C0" opacity=".8"/><path d="M20 21.5q1.2-1.4 2.4 0M25.6 21.5q1.2-1.4 2.4 0" stroke="#7A5466" stroke-width="1.3" fill="none" stroke-linecap="round"/><path d="M38 8l1 2.2 2.2 1-2.2 1-1 2.2-1-2.2-2.2-1 2.2-1z" fill="#C9B6FF"/>`,
 "_":u=>`<defs><radialGradient id="a${u}" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#E6DCFF"/></radialGradient></defs><circle cx="24" cy="24" r="17" fill="url(#a${u})" stroke="#9B6BF0" stroke-width="2"/><path d="M24 14v10l7 4" stroke="#9B6BF0" stroke-width="3" stroke-linecap="round" fill="none"/>`
 };
 let riN=0;
@@ -2787,7 +2792,7 @@ function hsSearch(q){
   const seen=new Set();return out.filter(([,x])=>{const k=x.to+"|"+x.t;if(seen.has(k))return false;seen.add(k);return true}).slice(0,600).map(([s,x])=>Object.assign({},x,{_s:s}));
 }
 
-function renderSearchTags(){const top=hsTop();if(HNEW){const base=HN_ORDER.concat(HS_TAGS.filter(t=>!HN_ORDER.includes(t)));const list=base.slice(0,4).concat(top.filter(t=>!base.slice(0,4).includes(t)),base.slice(4).filter(t=>!top.includes(t))).slice(0,8);const btn=t=>`<button type="button" data-hq="${esc(t)}" style="--tb:${HN_COL[t]||"#9B6BF0"}"${top.includes(t)?' class="mine"':""}>${riSvg(t)}${esc(t)}</button>`;$("#hsTags").innerHTML=`<div class="hn-big">${list.slice(0,4).map(btn).join("")}</div><div class="hn-more">${list.slice(4).map(btn).join("")}</div>`;return}const list=top.concat(HS_TAGS.filter(t=>!top.includes(t))).slice(0,8);$("#hsTags").innerHTML=list.map(t=>`<button type="button" data-hq="${esc(t)}"${top.includes(t)?' class="mine"':""}>${top.includes(t)?ico('<circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/>'):""}${esc(t)}</button>`).join("")}
+function renderSearchTags(){const top=hsTop();if(HNEW){const base=HN_ORDER.concat(HS_TAGS.filter(t=>!HN_ORDER.includes(t)));const list=base.slice(0,4).concat(top.filter(t=>!base.slice(0,4).includes(t)),base.slice(4).filter(t=>!top.includes(t))).slice(0,8);const btn=t=>`<button type="button" data-hq="${esc(t)}" style="--tb:${HN_COL[t]||"#9B6BF0"}"${top.includes(t)?' class="mine"':""}>${riSvg(t)}${esc(t)}</button>`;$("#hsTags").innerHTML=list.map(btn).join("");return}const list=top.concat(HS_TAGS.filter(t=>!top.includes(t))).slice(0,8);$("#hsTags").innerHTML=list.map(t=>`<button type="button" data-hq="${esc(t)}"${top.includes(t)?' class="mine"':""}>${top.includes(t)?ico('<circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/>'):""}${esc(t)}</button>`).join("")}
 let hsT=0;document.addEventListener("input",e=>{if(e.target.id==="hq"){clearTimeout(hsT);hsT=setTimeout(hsRender,120)}});
 document.addEventListener("focusin",e=>{if(e.target.id==="hq")hsLoadFac()});
 document.addEventListener("click",e=>{
@@ -4235,10 +4240,10 @@ function renderKidNotice(){
   const el=$("#kidNotice");if(!el)return;
   const kids=getKids();
   if(!kids.length){el.hidden=false;el.className="kn kn-off";
-    el.innerHTML=`<a class="kn-inv" href="#mypage"><span class="kn-bell">${svg(KIC("cal")||MINI.star,40)}</span><span><b>Wollyからのお知らせ</b><small>マイページでお子さんの生まれた年月を登録すると、予防接種や申込みの時期をお知らせします</small></span><i>›</i></a>`;return}
+    el.innerHTML=`<a class="kn-inv" href="#mypage"><span class="kn-bell">${HNEW?riSvg("お知らせ"):svg(KIC("cal")||MINI.star,40)}</span><span><b>Wollyからのお知らせ</b><small>マイページでお子さんの生まれた年月を登録すると、予防接種や申込みの時期をお知らせします</small></span><i>›</i></a>`;return}
   const L=kidNotices(),open=LS.get("wolly.knopen")!==false;
   el.hidden=false;el.className="kn"+(open?" open":"");
-  el.innerHTML=`<button type="button" class="kn-h" aria-expanded="${open}"><span class="kn-bell">${svg(KIC("cal")||MINI.star,40)}${L.length?`<em>${L.length}</em>`:""}</span><span><b>Wollyからのお知らせ</b><small>${L.length?"お子さんの、いまの時期にあうこと":"いまのお知らせはありません"}</small></span><i class="kn-chev">${open?"とじる ▴":"ひらく ▾"}</i></button>
+  el.innerHTML=`<button type="button" class="kn-h" aria-expanded="${open}"><span class="kn-bell">${HNEW?riSvg("お知らせ"):svg(KIC("cal")||MINI.star,40)}${L.length?`<em>${L.length}</em>`:""}</span><span><b>Wollyからのお知らせ</b><small>${L.length?"お子さんの、いまの時期にあうこと":"いまのお知らせはありません"}</small></span><i class="kn-chev">${open?"とじる ▴":"ひらく ▾"}</i></button>
    <div class="kn-b">${L.length?L.map((o,i)=>`<details class="kn-i" style="--n:${i}"><summary><span class="kn-ic">${relIc(o.ic)}</span><span class="kn-st"><em class="kn-tag${o.pr<=1?" hot":""}">${esc(o.tag)}</em><b>${esc(o.t)}</b>${o.who?`<small>${esc(o.who)}</small>`:""}</span><i class="kn-ar">▾</i></summary>
      <div class="kn-d">${o.ch&&CH_TALK[o.ch]?`<div class="kn-talk"><img src="${CH_TALK[o.ch]}" alt=""><p>${esc(o.say)}</p></div>`:""}<p>${esc(o.d).replace(/\n/g,"<br>")}</p>${o.to?(o.to.startsWith("view:")?`<a class="kn-go" href="#" data-view="${o.to.slice(5)}" data-vt="${esc(o.go)}">${esc(o.go)}を見る ›</a>`:`<a class="kn-go" href="${o.to}">${esc(o.go)}を見る ›</a>`):o.url?`<a class="kn-go" href="${esc(o.url)}" target="_blank" rel="noopener">${esc(o.go)} ↗</a>`:""}</div></details>`).join(""):`<p class="kn-none">また時期が来たら、ここでお知らせするよ。</p>`}
      <p class="kn-note">時期は国や市のめやすだよ。正しい日にちは、市から届くお知らせで確かめてね。</p></div>`;
