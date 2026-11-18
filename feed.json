@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-18T09:50:00+09:00",
+ "updatedAt": "2026-11-18T18:55:00+09:00",
  "events": [
   {
    "id": "e-shintoshin-illumination",
@@ -600,8 +600,8 @@
    "src": "さいたま市",
    "url": "https://www.city.saitama.lg.jp/kagakukan/category/006/p134438.html",
    "important": false,
-   "img": "",
-   "ai": false,
+   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-wakata-kouen.jpg",
+   "ai": true,
    "added": "2026-11-18T09:50:00+09:00"
   }
  ]
