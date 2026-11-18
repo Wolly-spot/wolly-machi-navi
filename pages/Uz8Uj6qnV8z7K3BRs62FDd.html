@@ -963,6 +963,7 @@ p,li,dd,small,.hint,.bubble{text-wrap:pretty}
 
 
 
+
 <!--wolly-totop-->
 <style>
 .wtotop{position:fixed;z-index:60;right:max(22px,env(safe-area-inset-right,0px));bottom:calc(var(--wtb,24px) + env(safe-area-inset-bottom,0px));
@@ -1031,7 +1032,7 @@ b.addEventListener("click",function(){window.scrollTo({top:0,behavior:matchMedia
 })();
 </script><!--/wolly-icons--><!--wolly-tel2--><script>/* 電話番号はタップでかけられるように（tel_links.py） */
 (function(){
-var Z="0-9０-９",H="\\-‐－−ー―",RE=new RegExp("(0["+Z+"]{1,4}\\s?["+H+"(（]\\s?["+Z+"]{1,4}\\s?["+H+")）]\\s?["+Z+"]{3,4}|0[12]["+Z+"]0["+H+"]?["+Z+"]{2,3}["+H+"]?["+Z+"]{3}|[#＃](?:8000|７１１９|7119|８０００)|1[19][09]番)","g");
+var Z="0-9０-９",H="\\-‐－−ー―",RE=new RegExp("(0["+Z+"]{1,4}\\s?["+H+"(（]\\s?["+Z+"]{1,4}\\s?["+H+")）]\\s?["+Z+"]{3,5}(?!["+Z+"])|0[12]["+Z+"]0["+H+"]?["+Z+"]{2,3}["+H+"]?["+Z+"]{3}|[#＃](?:8000|７１１９|7119|８０００)|1[19][09]番)","g");
 var SKIP="a,button,script,style,textarea,input,select,option,title,svg,.maplibregl-map,[data-notel],[contenteditable]";
 function num(m){m=m.replace(/[０-９]/g,function(c){return String.fromCharCode(c.charCodeAt(0)-65248)}).replace(/＃/g,"#");
   if(/番$/.test(m))return m.replace("番","");return m.replace(/[^0-9#]/g,"").replace("#","%23")}
