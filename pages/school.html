@@ -326,15 +326,15 @@ body{text-wrap:pretty}
 @media (prefers-reduced-motion:reduce){.hdeco span{animation:none}}
 
 /* ==== holo-map ==== */
-.hl-full{width:40px!important;height:104px!important;cursor:pointer;background:none!important;border:0!important;box-shadow:none!important}
+.hl-full{width:40px!important;height:74px!important;cursor:pointer;background:none!important;border:0!important;box-shadow:none!important}
 .hl-full>*:not(.hl-x){display:none!important}
 .hl-x{pointer-events:none}
 .hl-full .hl-num{pointer-events:auto}
 .hl-full .hl-x,.hl-add .hl-x{rotate:none;font-style:normal}.hl-full .hl-dot{transform:none!important}
-.hl-beam{position:absolute;left:50%;bottom:8px;width:12px;height:92px;margin-left:-6px;border-radius:8px;z-index:-1;
+.hl-beam{position:absolute;left:50%;bottom:8px;width:10px;height:58px;margin-left:-5px;border-radius:8px;z-index:-1;
   background:linear-gradient(to top,var(--hc,#9b7bff) 0,color-mix(in srgb,var(--hc,#9b7bff) 55%,#7fe9ff) 45%,transparent);opacity:.9;filter:blur(.6px);
   transform-origin:bottom;animation:hlUp .9s cubic-bezier(.2,.8,.3,1.2) both,hlGlow 2.6s ease-in-out infinite;animation-delay:var(--hd,0s),calc(var(--hd,0s) + 1s)}
-.hl-add .hl-beam{bottom:2px;height:56px;width:9px;margin-left:-4.5px;opacity:.6}
+.hl-add .hl-beam{bottom:2px;height:34px;width:8px;margin-left:-4px;opacity:.55}
 .far .hl-add .hl-beam,.far .hl-add .hl-ring{display:none}
 @keyframes hlUp{from{transform:scaleY(0)}to{transform:scaleY(1)}}
 @keyframes hlGlow{50%{opacity:.5}}

@@ -345,15 +345,15 @@ body.fs-open{overflow:hidden}
 @media (prefers-reduced-motion:reduce){.hdeco span{animation:none}}
 
 /* ==== holo-map ==== */
-.hl-full{width:40px!important;height:104px!important;cursor:pointer;background:none!important;border:0!important;box-shadow:none!important}
+.hl-full{width:40px!important;height:74px!important;cursor:pointer;background:none!important;border:0!important;box-shadow:none!important}
 .hl-full>*:not(.hl-x){display:none!important}
 .hl-x{pointer-events:none}
 .hl-full .hl-num{pointer-events:auto}
 .hl-full .hl-x,.hl-add .hl-x{rotate:none;font-style:normal}.hl-full .hl-dot{transform:none!important}
-.hl-beam{position:absolute;left:50%;bottom:8px;width:12px;height:92px;margin-left:-6px;border-radius:8px;z-index:-1;
+.hl-beam{position:absolute;left:50%;bottom:8px;width:10px;height:58px;margin-left:-5px;border-radius:8px;z-index:-1;
   background:linear-gradient(to top,var(--hc,#9b7bff) 0,color-mix(in srgb,var(--hc,#9b7bff) 55%,#7fe9ff) 45%,transparent);opacity:.9;filter:blur(.6px);
   transform-origin:bottom;animation:hlUp .9s cubic-bezier(.2,.8,.3,1.2) both,hlGlow 2.6s ease-in-out infinite;animation-delay:var(--hd,0s),calc(var(--hd,0s) + 1s)}
-.hl-add .hl-beam{bottom:2px;height:56px;width:9px;margin-left:-4.5px;opacity:.6}
+.hl-add .hl-beam{bottom:2px;height:34px;width:8px;margin-left:-4px;opacity:.55}
 .far .hl-add .hl-beam,.far .hl-add .hl-ring{display:none}
 @keyframes hlUp{from{transform:scaleY(0)}to{transform:scaleY(1)}}
 @keyframes hlGlow{50%{opacity:.5}}
@@ -492,6 +492,8 @@ const svg=(body,vb=64,cls="")=>`<svg viewBox="0 0 ${vb} ${vb}" class="${cls}" ar
 const NO=`stroke="#1F2140" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"`;
 const NF=(x,y)=>`<circle cx="${x-3.6}" cy="${y}" r="1.5" fill="#1F2140"/><circle cx="${x+3.6}" cy="${y}" r="1.5" fill="#1F2140"/><path d="M${x-2} ${y+2.6}q2 2 4 0" stroke="#1F2140" stroke-width="1.5" fill="none" stroke-linecap="round"/><circle cx="${x-7}" cy="${y+2.4}" r="1.7" fill="#FF8FB8" opacity=".75"/><circle cx="${x+7}" cy="${y+2.4}" r="1.7" fill="#FF8FB8" opacity=".75"/>`;
 const NIC={
+  preg:`<circle cx="18" cy="10" r="6.5" fill="#FFE0C8" ${NO}/><path d="M12.5 8q5.5-7 11 0" fill="#8A5A44" ${NO}/><circle cx="15.8" cy="10.6" r="1.2" fill="#1F2140"/><circle cx="20.2" cy="10.6" r="1.2" fill="#1F2140"/><path d="M16.6 13.2q1.4 1.2 2.8 0" stroke="#1F2140" stroke-width="1.2" fill="none" stroke-linecap="round"/><path d="M11 37V24q0-7 7-7 5 0 6 4 9 2 9 9 0 7-8 7z" fill="#FFB3CF" ${NO}/><circle cx="26" cy="29" r="5.5" fill="#FFD6E6"/><path d="M26 31.5l-2.2-2.1a1.4 1.4 0 0 1 2.2-1.7 1.4 1.4 0 0 1 2.2 1.7z" fill="#FF6FA5"/>`,
+  fertile:`<path d="M6 26q-2-6 3-8l6 7M34 26q2-6-3-8l-6 7" fill="#FFE0C8" ${NO}/><path d="M5 26q3 9 15 11 12-2 15-11-5 3-15 3T5 26z" fill="#FFE0C8" ${NO}/><ellipse cx="20" cy="17" rx="7" ry="9" fill="#FFF6D6" ${NO}/><circle cx="17.6" cy="17" r="1.2" fill="#1F2140"/><circle cx="22.4" cy="17" r="1.2" fill="#1F2140"/><path d="M18.6 20q1.4 1.2 2.8 0" stroke="#1F2140" stroke-width="1.2" fill="none" stroke-linecap="round"/><ellipse cx="15.6" cy="19.6" rx="1.6" ry="1" fill="#FF9EC4"/><ellipse cx="24.4" cy="19.6" rx="1.6" ry="1" fill="#FF9EC4"/><path d="M31 6l1 2.2 2.2 1-2.2 1-1 2.2-1-2.2-2.2-1 2.2-1zM8 8l.8 1.6 1.6.8-1.6.8L8 12.8l-.8-1.6-1.6-.8 1.6-.8z" fill="#FFC83D"/><path d="M20 5.5l-1.6-1.5a1 1 0 0 1 1.6-1.2 1 1 0 0 1 1.6 1.2z" fill="#FF6FA5"/>`,
   meal:`<path d="M6 20h28q0 12-14 13Q6 32 6 20z" fill="#FFE3EE" stroke="#1F2140" stroke-width="2"/><path d="M9 20q11-6 22 0" fill="#fff" stroke="#1F2140" stroke-width="2"/><path d="M14 8q-2 3 0 6M20 6q-2 3 0 6M26 8q-2 3 0 6" stroke="#FF8FB8" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M13 33h14" stroke="#1F2140" stroke-width="2" stroke-linecap="round"/>`,
   onigiri:`<path d="M20 5C14 5 6 21 6 27q0 7 14 7t14-7C34 21 26 5 20 5z" fill="#fff" stroke="#1F2140" stroke-width="2"/><path d="M12 23h16v10q-8 2-16 0z" fill="#3E4A6B" stroke="#1F2140" stroke-width="2"/><circle cx="16" cy="18" r="1.4" fill="#1F2140"/><circle cx="24" cy="18" r="1.4" fill="#1F2140"/><circle cx="13" cy="20" r="1.8" fill="#FFB3CF"/><circle cx="27" cy="20" r="1.8" fill="#FFB3CF"/>`,
   kids:`<circle cx="18" cy="19" r="11" fill="#FFE0C8" ${NO}/><path d="M15 9q3-4 6 0" fill="none" ${NO}/>${NF(18,19)}<path d="M26 22v4a6 6 0 0 0 12 0v-3" fill="none" stroke="#5A5AEF" stroke-width="2.4" stroke-linecap="round"/><circle cx="38" cy="21" r="2.6" fill="#FF8FB8" ${NO}/>`,
@@ -557,9 +559,9 @@ Object.assign(NIC,{
 });
 const PAL=[["#FFF0F6","#FF6FA5"],["#EAF6FF","#2FA4EA"],["#FFF7D6","#E0A100"],["#F3EEFF","#8E6BF5"],["#FFEDF4","#EC5A92"],["#ECEFFF","#5A5AEF"]];
 const GENRES={
-  obgyn:{t:"産婦人科",ic:"heart",ac:"#E8558E",soft:"#FFE6F2",soft2:"#FFF5FA",sub:"妊婦健診・お産・婦人科の相談に。里帰り先（全国）でもさがせるよ。お産ができるかは、病院にたしかめてね。",deco:["heart","kids","heart"],
+  obgyn:{t:"産婦人科",ic:"preg",ac:"#E8558E",soft:"#FFE6F2",soft2:"#FFF5FA",sub:"妊婦健診・お産・婦人科の相談に。里帰り先（全国）でもさがせるよ。お産ができるかは、病院にたしかめてね。",deco:["preg","heart","kids"],
        subs:[["産科（妊婦健診・お産）","obst","#FF6FA5","kids","kid"],["婦人科","gyn","#C45BD9","heart","brace"],["不妊治療も","funin","#8E6BF5","star","adult"],["助産院","midwife","#EC5A92","heart","sun"]],word:"産婦人科",far:1},
-  funin:{t:"不妊治療の病院",ic:"heart",ac:"#8E6BF5",soft:"#F1E8FF",soft2:"#F9F5FF",sub:"保険で不妊治療ができると国に届け出ている病院・クリニック（2026年10月1日現在）。さいたま市を基本に、埼玉県・東京都にも広げられるよ。",deco:["heart","star","heart"],
+  funin:{t:"不妊治療の病院",ic:"fertile",ac:"#8E6BF5",soft:"#F1E8FF",soft2:"#F9F5FF",sub:"保険で不妊治療ができると国に届け出ている病院・クリニック（2026年10月1日現在）。さいたま市を基本に、埼玉県・東京都にも広げられるよ。",deco:["fertile","heart","star"],
        subs:[["体外受精など（生殖補助医療）","art","#8E6BF5","star","brace"],["タイミング法・人工授精など","ippan","#FF6FA5","heart","kid"],["男性不妊も","male","#2FA4EA","adult","adult"]],word:"病院・クリニック",
        regions:[["city","さいたま市"],["pref","埼玉県"],["tokyo","東京都"]]},
   ped:{t:"小児科・内科",ic:"kids",ac:"#FF6FA5",soft:"#FFE3EC",soft2:"#FFF5F8",sub:"子どもの熱・せき・おなかの調子に。おとなの内科も。",deco:["kids","pill","plaster"],
@@ -1048,7 +1050,7 @@ function place(o,rows){
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-fsopen]");if(b){e.preventDefault();e.stopPropagation();popup&&popup.remove();openFs(+b.dataset.fsopen,null)}},true);
 function openPin(x,i){
   if(!map)return;const r=x.r;popup&&popup.remove();
-  popup=new maplibregl.Popup({offset:[0,-108],anchor:"bottom",maxWidth:"260px"}).setLngLat([r.lo,r.la])
+  popup=new maplibregl.Popup({offset:[0,-78],anchor:"bottom",maxWidth:"260px"}).setLngLat([r.lo,r.la])
     .setHTML(`<div class="pp"><b><i class="hl-tic">${svg(NIC[cardIc(r)]||NIC[G.ic],40)}</i>${i+1}. ${esc(r.n)}</b><span>${esc(wn(r.w))} ／ ${kmT(x.km)}（${moveT(x.km)}）${r.h?"<br>"+esc(r.h):""}</span><div class="bt"><button type="button" data-fsopen="${i}">くわしく</button><a class="b-map" href="${gmap(r)}" target="_blank" rel="noopener">地図・道順 ↗</a>${r.u?`<a class="b-web" href="${esc(url(r.u))}" target="_blank" rel="noopener">HP ↗</a>`:""}</div></div>`).addTo(map);
   const t={center:[r.lo,r.la],zoom:Math.max(map.getZoom(),16),pitch:62,offset:[0,110]};
   RM?map.jumpTo(t):map.easeTo({...t,duration:1100});

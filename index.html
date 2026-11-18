@@ -1589,16 +1589,24 @@ svg .a-ring{animation:ring 2.4s ease-in-out infinite;transform-box:fill-box;tran
 .lgup.on{opacity:1;transform:none;pointer-events:auto}.lgup span{width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.3);display:grid;place-items:center}
 @keyframes lgIn{from{opacity:0;transform:translateY(10px) scale(.9)}to{opacity:1;transform:none}}
 
+/* 11/18 とじるボタン（×）をかわいく。もどる先が前の画面だけのときは × だけ（‹もどる は出さない） */
+#vClose,#sheetClose{width:auto!important;height:44px!important;padding:0 14px 0 6px;gap:4px;display:inline-flex!important;align-items:center;border-radius:999px!important;
+  background:linear-gradient(135deg,#FFB3D6,#C7B3FF)!important;color:#fff!important;box-shadow:0 6px 14px -6px rgba(142,107,245,.7),inset 0 -3px 0 rgba(0,0,0,.08)!important;border:2.5px solid #fff!important}
+#vClose svg,#sheetClose svg{width:30px!important;height:30px!important;padding:6px;border-radius:50%;background:rgba(255,255,255,.35);stroke:#fff;stroke-width:3.2!important}
+#vClose::after,#sheetClose::after{content:"とじる";font-size:13.5px;font-weight:900;letter-spacing:.04em}
+#vClose:active,#sheetClose:active{transform:scale(.94)}
+#vBack[hidden]{display:none!important}
+
 /* ==== holo-map ==== */
-.hl-full{width:40px!important;height:104px!important;cursor:pointer;background:none!important;border:0!important;box-shadow:none!important}
+.hl-full{width:40px!important;height:74px!important;cursor:pointer;background:none!important;border:0!important;box-shadow:none!important}
 .hl-full>*:not(.hl-x){display:none!important}
 .hl-x{pointer-events:none}
 .hl-full .hl-num{pointer-events:auto}
 .hl-full .hl-x,.hl-add .hl-x{rotate:none;font-style:normal}.hl-full .hl-dot{transform:none!important}
-.hl-beam{position:absolute;left:50%;bottom:8px;width:12px;height:92px;margin-left:-6px;border-radius:8px;z-index:-1;
+.hl-beam{position:absolute;left:50%;bottom:8px;width:10px;height:58px;margin-left:-5px;border-radius:8px;z-index:-1;
   background:linear-gradient(to top,var(--hc,#9b7bff) 0,color-mix(in srgb,var(--hc,#9b7bff) 55%,#7fe9ff) 45%,transparent);opacity:.9;filter:blur(.6px);
   transform-origin:bottom;animation:hlUp .9s cubic-bezier(.2,.8,.3,1.2) both,hlGlow 2.6s ease-in-out infinite;animation-delay:var(--hd,0s),calc(var(--hd,0s) + 1s)}
-.hl-add .hl-beam{bottom:2px;height:56px;width:9px;margin-left:-4.5px;opacity:.6}
+.hl-add .hl-beam{bottom:2px;height:34px;width:8px;margin-left:-4px;opacity:.55}
 .far .hl-add .hl-beam,.far .hl-add .hl-ring{display:none}
 @keyframes hlUp{from{transform:scaleY(0)}to{transform:scaleY(1)}}
 @keyframes hlGlow{50%{opacity:.5}}
@@ -1819,7 +1827,7 @@ svg .a-ring{animation:ring 2.4s ease-in-out infinite;transform-box:fill-box;tran
 </div>
 <!-- その場で開くページ（お金・保活ナビ） -->
 <div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-labelledby="vTitle" hidden>
-  <div class="vbar"><button class="pgback" id="vBack" type="button"><span>‹</span>もどる</button><b id="vTitle"></b><button class="iconbtn" id="vClose" type="button" aria-label="閉じる"><svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <div class="vbar"><button class="pgback" id="vBack" type="button" hidden><span>‹</span>もどる</button><b id="vTitle"></b><button class="iconbtn" id="vClose" type="button" aria-label="閉じる"><svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
   <div class="vbody"><span class="vload">ひらいています…</span><iframe id="vFrame" title="" loading="eager"></iframe></div>
 </div>
 
@@ -2137,9 +2145,9 @@ const NEAR=[
   {t:"皮膚科",g:"skin",ic:"cream",bg:"#FBE6FF"},
   {t:"形成外科",g:"plastic",ic:"plaster",bg:"#FFE6F2"},
   {t:"整形外科",g:"ortho",ic:"bone",bg:"#E1F3FF"},
+  {t:"産婦人科",g:"obgyn",ic:"preg",bg:"#FFE6F2"},
+  {t:"不妊治療の病院",g:"funin",ic:"fertile",bg:"#FFF6D6"},
   {t:"薬局",g:"pharm",ic:"pill",bg:"#F1E8FF"},
-  {t:"産婦人科",g:"obgyn",ic:"heart",bg:"#FFE6F2"},
-  {t:"不妊治療の病院",g:"funin",ic:"heart",bg:"#F1E8FF"},
   {t:"公園",g:"park",ic:"slide",bg:"#E5E8FF"},
   {t:"あずかりマップ",azukari:1,ic:"nursery",bg:"#FFF1C2",kinds:"保育園（公立・私立）・幼稚園・認定こども園・小規模保育・事業所内保育・家庭的保育・ナーサリールーム・家庭保育室・企業主導型保育・一時預かり・ベビーホテル・その他の認可外"}];
 /* 家の近くで探す：ジャンルごとの立体マップ（pages/near.html?g=…）と、あずかりマップの「近くの園をさがす」（?near=1）を、その場でふわっと開く */
@@ -2147,6 +2155,8 @@ const AZUKARI_ID="MpfmmxyxegrpSPYYF69Gqw";
 const NO=`stroke="#1F2140" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"`;
 const NF=(x,y)=>`<circle cx="${x-3.6}" cy="${y}" r="1.5" fill="#1F2140"/><circle cx="${x+3.6}" cy="${y}" r="1.5" fill="#1F2140"/><path d="M${x-2} ${y+2.6}q2 2 4 0" stroke="#1F2140" stroke-width="1.5" fill="none" stroke-linecap="round"/><circle cx="${x-7}" cy="${y+2.4}" r="1.7" fill="#FF8FB8" opacity=".75"/><circle cx="${x+7}" cy="${y+2.4}" r="1.7" fill="#FF8FB8" opacity=".75"/>`;
 const NIC={
+  preg:`<circle cx="18" cy="10" r="6.5" fill="#FFE0C8" ${NO}/><path d="M12.5 8q5.5-7 11 0" fill="#8A5A44" ${NO}/><circle cx="15.8" cy="10.6" r="1.2" fill="#1F2140"/><circle cx="20.2" cy="10.6" r="1.2" fill="#1F2140"/><path d="M16.6 13.2q1.4 1.2 2.8 0" stroke="#1F2140" stroke-width="1.2" fill="none" stroke-linecap="round"/><path d="M11 37V24q0-7 7-7 5 0 6 4 9 2 9 9 0 7-8 7z" fill="#FFB3CF" ${NO}/><circle cx="26" cy="29" r="5.5" fill="#FFD6E6"/><path d="M26 31.5l-2.2-2.1a1.4 1.4 0 0 1 2.2-1.7 1.4 1.4 0 0 1 2.2 1.7z" fill="#FF6FA5"/>`,
+  fertile:`<path d="M6 26q-2-6 3-8l6 7M34 26q2-6-3-8l-6 7" fill="#FFE0C8" ${NO}/><path d="M5 26q3 9 15 11 12-2 15-11-5 3-15 3T5 26z" fill="#FFE0C8" ${NO}/><ellipse cx="20" cy="17" rx="7" ry="9" fill="#FFF6D6" ${NO}/><circle cx="17.6" cy="17" r="1.2" fill="#1F2140"/><circle cx="22.4" cy="17" r="1.2" fill="#1F2140"/><path d="M18.6 20q1.4 1.2 2.8 0" stroke="#1F2140" stroke-width="1.2" fill="none" stroke-linecap="round"/><ellipse cx="15.6" cy="19.6" rx="1.6" ry="1" fill="#FF9EC4"/><ellipse cx="24.4" cy="19.6" rx="1.6" ry="1" fill="#FF9EC4"/><path d="M31 6l1 2.2 2.2 1-2.2 1-1 2.2-1-2.2-2.2-1 2.2-1zM8 8l.8 1.6 1.6.8-1.6.8L8 12.8l-.8-1.6-1.6-.8 1.6-.8z" fill="#FFC83D"/><path d="M20 5.5l-1.6-1.5a1 1 0 0 1 1.6-1.2 1 1 0 0 1 1.6 1.2z" fill="#FF6FA5"/>`,
   meal:`<path d="M6 20h28q0 12-14 13Q6 32 6 20z" fill="#FFE3EE" stroke="#1F2140" stroke-width="2"/><path d="M9 20q11-6 22 0" fill="#fff" stroke="#1F2140" stroke-width="2"/><path d="M14 8q-2 3 0 6M20 6q-2 3 0 6M26 8q-2 3 0 6" stroke="#FF8FB8" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M13 33h14" stroke="#1F2140" stroke-width="2" stroke-linecap="round"/>`,
   onigiri:`<path d="M20 5C14 5 6 21 6 27q0 7 14 7t14-7C34 21 26 5 20 5z" fill="#fff" stroke="#1F2140" stroke-width="2"/><path d="M12 23h16v10q-8 2-16 0z" fill="#3E4A6B" stroke="#1F2140" stroke-width="2"/><circle cx="16" cy="18" r="1.4" fill="#1F2140"/><circle cx="24" cy="18" r="1.4" fill="#1F2140"/><circle cx="13" cy="20" r="1.8" fill="#FFB3CF"/><circle cx="27" cy="20" r="1.8" fill="#FFB3CF"/>`,
   kids:`<circle cx="18" cy="19" r="11" fill="#FFE0C8" ${NO}/><path d="M15 9q3-4 6 0" fill="none" ${NO}/>${NF(18,19)}<path d="M26 22v4a6 6 0 0 0 12 0v-3" fill="none" stroke="#5A5AEF" stroke-width="2.4" stroke-linecap="round"/><circle cx="38" cy="21" r="2.6" fill="#FF8FB8" ${NO}/>`,
@@ -4090,7 +4100,7 @@ let viewerOpen=false;
    開くたびに新しい iframe に取りかえて、履歴をふやさないようにする */
 /* 写しのページの中で見たページの順番（もどるで1つ前へ。なければ写しを閉じて前の画面へ） */
 let vStack=[],vGoingBack=false;
-function vMark(){const v=$("#viewer");v&&(v.dataset.steps=vStack.length)}
+function vMark(){const v=$("#viewer");v&&(v.dataset.steps=vStack.length);const b=$("#vBack");b&&(b.hidden=vStack.length<2)}
 function hookFrame(f){f.addEventListener("load",()=>{let u="";try{u=f.contentWindow.location.href}catch(e){}
   if(!u||u==="about:blank")return;
   if(vStack.length&&u!==vStack[0]){try{const t=(f.contentDocument.title||"").replace(/[｜|].*$/,"").trim();t&&($("#vTitle").textContent=t)}catch(e){}}
@@ -4107,7 +4117,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11181131");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11181211");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
