@@ -1744,6 +1744,8 @@ html .hl-ring{box-shadow:0 0 6px #ffd6ea;opacity:.8}
         
         
         
+        
+        
         <nav class="help" id="helpGrid" aria-label="困ったときはこちら"></nav>
         <a class="ej ej-wide nin-wide" href="#" data-view="ninshin" data-vt="妊娠・出産ガイド"><span class="ci" style="--cbg:#FFE6F2"><svg viewBox="0 0 40 40" aria-hidden="true"><g stroke="#2E2B4F" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><circle cx="18" cy="10" r="6" fill="#FFE3CF"/><path d="M12 36V24q0-7 6-7t6 5q8 2 8 9t-6 5z" fill="#FFC6DA"/></g><path d="M27 29l1.4 1.3 1.6-1.6" stroke="#FF6FA5" stroke-width="1.6" fill="none"/></svg></span><span><b>妊娠・出産</b><small>赤ちゃんを考えたら〜1か月。やることと、もらえるお金をじゅんばんに</small></span><i>›</i></a>
       </section>
@@ -4228,7 +4230,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11190039");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11190128");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -4558,6 +4560,10 @@ else{document.body.classList.add("is-loading");leafShine();raf=requestAnimationF
 
 
 
+
+
+
+
 <!--vtel-css--><style>
 /* ===== 声で電話をさがす（voice_tel.py） ===== */
 .vt-bar{position:relative;display:flex;align-items:center;gap:10px;margin:0 0 12px;padding:9px 12px 9px 9px;border-radius:999px;text-decoration:none;color:#fff;overflow:hidden;
@@ -4702,7 +4708,7 @@ function homeLL(){if(FROM==="here"&&HERE2)return {ll:HERE2,t:"いまいる場所
 const km=(a,b)=>Math.hypot(a[0]-b[0],(a[1]-b[1])*Math.cos(a[0]*Math.PI/180))*111;
 function load(){if(DATA)return Promise.resolve(DATA);
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
-  return fetch(base+"near-data/tel.json?v=11190039").then(r=>r.json()).then(d=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||""))}));return DATA})
+  return fetch(base+"near-data/tel.json?v=11190128").then(r=>r.json()).then(d=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||""))}));return DATA})
     .catch(()=>{DATA=[];return DATA})}
 /* 聞きとった文 → キーワード */
 function terms(text){let s=(text||"").normalize("NFKC").replace(NOISE," ");
@@ -4722,7 +4728,7 @@ function results(){const ws=KW.slice();const h=homeLL();
 function dist(x){if(x.d==null)return "";if(x.d===0.5&&!x.r.ll)return "あなたの区";return (x.d<0.1?"0.1km未満":x.d.toFixed(1)+"km")+"・車で約"+Math.max(1,Math.round(x.d*1.3/25*60))+"分"}
 function catChip(c){const t=TELCAT[c]||["",""];return `<span class="cat" style="background:${t[1]}">${esc(t[0])}</span>`}
 function render(){const box=$("#vtRes");if(!box||!DATA)return;
-  if(!KW.length){lastTop=null;const ov0=document.getElementById("vtel");ov0&&ov0.classList.remove("vt-has");box.innerHTML=`<p class="vt-empty">マイクの丸を押して、こまっていることを話してね。<br>例：「熱が出た」「近くの歯医者」「区役所の手当の窓口」<br><small>Wollyにのっている ${DATA.length.toLocaleString()} の電話からさがすよ</small></p>`;return}
+  if(!KW.length){lastTop=null;const ov0=document.getElementById("vtel");ov0&&ov0.classList.remove("vt-has");box.innerHTML=`<p class="vt-empty">${SR&&!SRBAD?"マイクの丸を押して":"入力欄をタップして、キーボードの🎤で"}、こまっていることを話してね。<br>例：「熱が出た」「近くの歯医者」「区役所の手当の窓口」<br><small>Wollyにのっている ${DATA.length.toLocaleString()} の電話からさがすよ</small></p>`;return}
   const {h,L}=results();
   const ovh=document.getElementById("vtel");if(ovh)ovh.classList.toggle("vt-has",L.length>0);
   if(!L.length){lastTop=null;box.innerHTML=`<p class="vt-empty">「${esc(KW.join("・"))}」に合う電話が見つからなかったよ。<br>ことばを変えるか、×でキーワードをへらしてね。<br>こまったら <b>さいたまコールセンター</b>（048-835-3156）にきいてみよう。</p>`;return}
@@ -4740,8 +4746,14 @@ function renderKW(){const k=$("#vtKw");if(k)k.innerHTML=KW.map((w,i)=>`<button t
 function st(t){const e=$("#vtSt");if(e)e.textContent=t}
 function call(t){if(!t)return;st("電話をかけます…");location.href=telHref(t)}
 /* 声を聞く */
-const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-function listen(){if(!SR){const i=$("#vtIn");i&&i.focus();return}
+/* LINEの中のブラウザでは声を聞くしくみがことわられる（マイクが使えない）ので、はじめからキーボードのマイクの案内にする */
+const INLINE=/Line\//i.test(navigator.userAgent);
+const SR=INLINE?null:(window.SpeechRecognition||window.webkitSpeechRecognition);
+function noteHtml(why){return `<div class="vt-note" id="vtNote">${why?esc(why)+"<br>":""}<b>入力欄をタップ → キーボードの🎤（マイク）</b>で話すと、そのまま探せるよ。${INLINE?"<br>マイクの丸で話したいときは、ブラウザ（Safari・Chrome）で開いてね。":""}<br><button type="button" data-vfocus>🎤 キーボードで話す</button> ${INLINE?`<button type="button" data-vext>ブラウザで開く</button>`:""}</div>`}
+function showNote(why){const ov=document.getElementById("vtel");if(!ov)return;const old=document.getElementById("vtNote");if(old)old.remove();
+  document.getElementById("vtForm").insertAdjacentHTML("afterend",noteHtml(why));ov.classList.remove("vt-has")}
+let SRBAD=false;
+function listen(){if(!SR||SRBAD){const i=$("#vtIn");i&&i.focus();st("キーボードの🎤（マイク）を押して話してね");return}
   if(listening){try{rec.stop()}catch(e){}return}
   rec=new SR();rec.lang="ja-JP";rec.interimResults=true;rec.continuous=false;rec.maxAlternatives=1;
   const ov=$("#vtel");listening=true;ov.classList.add("vt-listen");st("お話しください…");
@@ -4750,22 +4762,21 @@ function listen(){if(!SR){const i=$("#vtIn");i&&i.focus();return}
   rec.onresult=e=>{let fin="",tmp="";for(let i=e.resultIndex;i<e.results.length;i++){const r=e.results[i];if(r.isFinal)fin+=r[0].transcript;else tmp+=r[0].transcript}
     const hd=$("#vtHeard");if(hd)hd.textContent=fin||tmp?"「"+(fin||tmp)+"」":"";
     if(fin){if(CALLW.test(fin)&&lastTop){call(lastTop.t);return}addKW(fin);st("もっと話すと、キーワードに足せるよ")}};
-  rec.onerror=e=>{st(e.error==="not-allowed"?"マイクが使えないよ。下の入力欄に書くか、キーボードのマイクで話してね":"うまく聞きとれなかったよ。もう一度マイクを押してね")};
+  rec.onerror=e=>{if(/not-allowed|service-not-allowed|audio-capture/.test(e.error)){SRBAD=true;st("この画面では、マイクの丸が使えないみたい");showNote("");}else st("うまく聞きとれなかったよ。もう一度マイクを押してね")};
   rec.onend=()=>{listening=false;ov.classList.remove("vt-listen","vt-speak");if(!/電話|マイク|うまく/.test(($("#vtSt")||{}).textContent||""))st("マイクを押すと、もう一度話せるよ")};
   try{rec.start()}catch(e){listening=false;ov.classList.remove("vt-listen")}}
 function open(){if($("#vtel"))return;
-  const inLine=/Line\//i.test(navigator.userAgent);
   const ideas=["熱が出た","夜にぐあいが悪い","近くの歯医者","日曜の歯医者","病児保育","一時保育","子育て支援センター","学童","いじめの相談","妊娠・出産の相談","児童手当の窓口","区役所"];
   document.body.insertAdjacentHTML("beforeend",`<div id="vtel" role="dialog" aria-modal="true" aria-label="声で電話をさがす" data-notel>
     <i class="vt-lamp t"></i><i class="vt-lamp b"></i><i class="vt-lamp l"></i><i class="vt-lamp r"></i><i class="vt-lamp c c1"></i><i class="vt-lamp c c2"></i><i class="vt-lamp c c3"></i><i class="vt-lamp c c4"></i>
     <div class="vt-in"><div class="vt-hd"><div><div class="ey">VOICE CALL</div><h2>声で電話をさがす</h2></div><button type="button" class="vt-x" data-vclose aria-label="とじる">×</button></div>
     <div class="vt-sos"><a href="tel:119"><b>119</b>救急・火事</a><a href="tel:%238000"><b>#8000</b>子どもの急病の相談</a><a href="tel:%237119"><b>#7119</b>救急か迷ったら</a><a href="tel:110"><b>110</b>警察</a></div>
     <div class="vt-orbw"><button type="button" class="vt-orb" data-vlisten aria-label="話す"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3" fill="#fff"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4M9 21h6"/></svg></button>
-      <div class="vt-wave">${"<i></i>".repeat(14)}</div><p class="vt-st" id="vtSt">${SR?"マイクの丸を押して話してね":"下の入力欄をタップして、キーボードのマイクで話してね"}</p><p class="vt-heard" id="vtHeard"></p></div>
+      <div class="vt-wave">${"<i></i>".repeat(14)}</div><p class="vt-st" id="vtSt">${SR?"マイクの丸を押して話してね":"キーボードの🎤で話してね"}</p><p class="vt-heard" id="vtHeard"></p></div>
     <div class="vt-kw" id="vtKw"></div>
     <form class="vt-type" id="vtForm"><input id="vtIn" type="search" enterkeyhint="search" placeholder="${SR?"ことばで入れてもOK":"🎤 キーボードのマイクで話せるよ"}" autocomplete="off"><button type="submit">さがす</button></form>
     <div class="vt-ideas">${ideas.map(t=>`<button type="button" data-videa="${esc(t)}">${esc(t)}</button>`).join("")}</div>
-    ${!SR?`<div class="vt-note">${inLine?"LINEの中では、声を直接聞きとれないことがあるよ。キーボードのマイク（入力欄をタップ→🎤）で話すか、ブラウザで開くとマイクの丸が使えるよ。":"このブラウザでは声を直接聞きとれないよ。キーボードのマイク（入力欄をタップ→🎤）で話してね。"}${inLine?`<br><button type="button" data-vext>ブラウザで開く（声でさがせる）</button>`:""}</div>`:""}
+    ${!SR?noteHtml(""):""}
     <div class="vt-from"><span>近い順：</span><button type="button" data-vfrom="home" class="${FROM==="home"?"on":""}">家・区から</button><button type="button" data-vfrom="here" class="${FROM==="here"?"on":""}">いまいる場所から</button></div>
     <div class="vt-res" id="vtRes"><p class="vt-empty">電話の一覧をよみこみ中…</p></div></div></div>`);
   const ov=$("#vtel");document.documentElement.style.overflow="hidden";requestAnimationFrame(()=>requestAnimationFrame(()=>ov.classList.add("on")));
@@ -4776,6 +4787,7 @@ document.addEventListener("click",e=>{
   if(!e.target.closest("#vtel"))return;
   if(e.target.closest("[data-vclose]")){close();return}
   if(e.target.closest("[data-vlisten]")){listen();return}
+  if(e.target.closest("[data-vfocus]")){const i=$("#vtIn");i&&i.focus();return}
   const kx=e.target.closest("[data-vkx]");if(kx){KW.splice(+kx.dataset.vkx,1);renderKW();render();return}
   const id=e.target.closest("[data-videa]");if(id){addKW(id.dataset.videa);return}
   const fr=e.target.closest("[data-vfrom]");if(fr){const v=fr.dataset.vfrom;
