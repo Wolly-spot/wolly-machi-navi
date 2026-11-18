@@ -593,7 +593,7 @@ function paint(map){
 }
 
 /* 11/18 本物寄りの地図（ためし：?real=1）。色を実物に近く・建物はコンクリートや外壁の色・近づくと航空写真をうすく重ねる */
-const REAL=/[?&]real=1\b/.test(location.search);
+const REAL=/[?&]real=[12]\b/.test(location.search);
 function paintReal(){
   const set=(id,k,v)=>{if(map.getLayer(id))try{map.setPaintProperty(id,k,v)}catch(e){}};
   set("background","background-color","#F1EEE8");
@@ -657,7 +657,14 @@ function paintReal(){
   /* 近づいたときだけ、航空写真をうすく重ねる（遠くでは読まない＝通信量をふやさない） */
   try{
     if(!map.getSource("aph"))map.addSource("aph",{type:"raster",tiles:["https://cyberjapandata.gsi.go.jp/xyz/seamlessphoto/{z}/{x}/{y}.jpg"],tileSize:256,maxzoom:18});
-    if(!map.getLayer("aph"))map.addLayer({id:"aph",type:"raster",source:"aph",minzoom:16,paint:{"raster-opacity":["interpolate",["linear"],["zoom"],16,0,17,.45,18,.6],"raster-saturation":-.15,"raster-fade-duration":300}},map.getLayer("building")?"building":undefined);
+    const R2=/[?&]real=2\b/.test(location.search);
+    if(!map.getLayer("aph"))map.addLayer({id:"aph",type:"raster",source:"aph",minzoom:R2?12.5:16,paint:{"raster-opacity":R2?["interpolate",["linear"],["zoom"],12.5,0,13.5,.92]:["interpolate",["linear"],["zoom"],16,0,17,.45,18,.6],"raster-saturation":R2?.05:-.15,"raster-contrast":R2?.05:0,"raster-fade-duration":300}},map.getLayer("building")?"building":undefined);
+    /* real=2：地面は航空写真の本物の色。道は写真が見えるよう半透明に、建物は屋根らしいグレーと外壁 */
+    if(R2){map.getStyle().layers.forEach(l=>{if(l.type==="line"&&/road|highway|bridge|tunnel|motorway|trunk|primary|secondary|tertiary|minor|service|path/.test(l.id)&&!/rail/.test(l.id)){try{map.setPaintProperty(l.id,"line-opacity",/casing/.test(l.id)?0:.42)}catch(e){}}});
+      const hid=["%",["abs",["to-number",["coalesce",["id"],["get","render_height"],0],0]],6];
+      try{map.setPaintProperty("building-3d","fill-extrusion-pattern",undefined)}catch(e){}
+      try{map.setPaintProperty("building-3d","fill-extrusion-color",["case",[">",["coalesce",["get","render_height"],0],20],["match",hid,0,"#9FA8B2",1,"#B4BAC0",2,"#8E9AA6",3,"#C2C4C4",4,"#A9B3BC","#B8B4AE"],["match",hid,0,"#C9C3BA",1,"#B9B4AD",2,"#D6CFC4",3,"#A79F96",4,"#C4B6A6","#BDBAB5"]]);map.setPaintProperty("building-3d","fill-extrusion-opacity",.93)}catch(e){}
+    }
   }catch(e){}
 }
 function initMap(){
