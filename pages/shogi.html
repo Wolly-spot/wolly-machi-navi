@@ -391,6 +391,16 @@ body.holo-on .ph .no{font-size:22px}
 .ci span b{font-weight:800;color:#1f6fa8}.ci span em{font-style:normal;color:#98a2ad;font-weight:600}
 .ci svg{flex:0 0 auto;width:14px;height:14px}
 .ci .wk{color:#0f7fc0;font-weight:800}
+.mv{display:flex;flex-wrap:wrap;gap:4px 5px;align-items:center}
+.mv>span{display:inline-flex;align-items:center;gap:3px;padding:2px 8px 2px 5px;border-radius:999px;font-weight:800;font-size:.92em;white-space:nowrap;line-height:1.5}
+.mv svg{width:15px;height:15px;flex:none}
+.mvw{background:#e3f4ff;color:#0f7fc0}
+.mvb{background:linear-gradient(90deg,#ffe3f1,#fff3c4);color:#c23a7e;box-shadow:0 0 0 1.5px #ffb3d6 inset}
+.mvb .ebd{font-style:normal;font-size:.8em;color:#fff;background:linear-gradient(90deg,#ff6fae,#ffb02e);border-radius:6px;padding:0 5px;margin-right:1px;letter-spacing:.04em;animation:ebd 2.4s ease-in-out infinite}
+@keyframes ebd{0%,100%{filter:none}50%{filter:brightness(1.15) drop-shadow(0 0 4px #ffb3d6)}}
+@media (prefers-reduced-motion:reduce){.mvb .ebd{animation:none}}
+.mvc{background:#efe8ff;color:#6a4fd0}
+.ci .wk{display:block}
 .hvtap{display:inline-flex;align-items:center;gap:3px;align-self:flex-start;margin-top:2px;font-size:10.5px;font-weight:800;color:#fff;background:linear-gradient(110deg,#4cc3ff,#7aa8ff);border-radius:999px;padding:2px 8px;box-shadow:0 0 8px rgba(80,190,255,.6)}
 .hvtap svg{width:14px!important;height:14px!important;flex:0 0 auto}
 /* ホログラムの窓 */
@@ -446,6 +456,8 @@ document.body.classList.add("holo-on");
 const O='stroke="#1f6fa8" stroke-width="1.9" fill="none" stroke-linecap="round" stroke-linejoin="round"';
 const SV=(p,c)=>`<svg viewBox="0 0 24 24" aria-hidden="true"${c?` class="${c}"`:""}>${p}</svg>`;
 const I={pin:SV(`<path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z" fill="#ff8fc0" stroke="#1f2140" stroke-width="1.5"/><circle cx="12" cy="10" r="2.3" fill="#fff"/>`),
+ bike:SV(`<circle cx="6" cy="16" r="3.6" fill="#fff" stroke="#1f2140" stroke-width="1.5"/><circle cx="18" cy="16" r="3.6" fill="#fff" stroke="#1f2140" stroke-width="1.5"/><path d="M6 16l4-7h6l2 7M10 9l3 7h5M9 6.5h3" stroke="#e0559a" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M14.5 4.5l-1.5 2.6h2l-1.5 2.6" stroke="#f5b400" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`),
+ car:SV(`<path d="M4 15.5l1.6-5a2 2 0 0 1 1.9-1.4h9a2 2 0 0 1 1.9 1.4l1.6 5v3H4z" fill="#c9b6ff" stroke="#1f2140" stroke-width="1.5" stroke-linejoin="round"/><path d="M7 12.5h10" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/><circle cx="7.5" cy="18.5" r="1.8" fill="#1f2140"/><circle cx="16.5" cy="18.5" r="1.8" fill="#1f2140"/>`),
  walk:SV(`<circle cx="13" cy="4.5" r="2" fill="#4cc3ff"/><path d="M10 21l2-6 3 3v3M9 12l2-4 4 2 2 3M12 15l-1-4" ${O}/>`),
  age:SV(`<circle cx="12" cy="8" r="4" fill="#ffe3cf" stroke="#1f2140" stroke-width="1.5"/><path d="M5 21a7 7 0 0 1 14 0" fill="#bfe6ff" stroke="#1f2140" stroke-width="1.5"/>`),
  yen:SV(`<circle cx="12" cy="12" r="9" fill="#ffe59a" stroke="#1f2140" stroke-width="1.5"/><path d="M8.5 7l3.5 5 3.5-5M12 12v6M9 13h6M9 16h6" stroke="#1f2140" stroke-width="1.5" fill="none" stroke-linecap="round"/>`),
@@ -465,6 +477,10 @@ addEventListener("message",e=>{const d=e.data;if(e.source!==window.parent||!d||d
   if(typeof render==="function"&&state.view!=="home")render()});
 const hv=(a,b)=>{const R=6371e3,r=x=>x*Math.PI/180,dl=r(b[0]-a[0]),dn=r(b[1]-a[1]);const s=Math.sin(dl/2)**2+Math.cos(r(a[0]))*Math.cos(r(b[0]))*Math.sin(dn/2)**2;return 2*R*Math.asin(Math.sqrt(s))};
 function walk(t){const x=HX[t.n];if(!HOME||!x||!x.ll)return "";const m=Math.max(1,Math.round(hv(HOME,x.ll)*1.3/80));return m>60?"歩くと60分より長いよ（車・自転車で）":`家から歩いて約${m}分`}
+/* 11/18 歩き・電動自転車・車の3つ（まっすぐの距離×1.3。歩き 80m/分・電動自転車 時速15km・車 時速25km のめやす） */
+function mv(t){const x=HX[t.n];if(!HOME||!x||!x.ll)return "";const d=hv(HOME,x.ll)*1.3,mn=v=>Math.max(1,Math.round(d/v));
+  const w=mn(80),b=mn(250),c=mn(417);
+  return `<span class="mv"><span class="mvw">${I.walk}歩き ${w>60?"60分〜":"約"+w+"分"}</span><span class="mvb">${I.bike}<i class="ebd">電動</i>自転車 約${b}分</span><span class="mvc">${I.car}車 約${c}分</span></span>`}
 const X=t=>HX[t.n]||{em:{s:"none"}};
 /* 月謝：いまの料金の文から、月のお金だけを短く */
 function fee(t){const s=(t.fee||t.i||"").replace(/,/g,",");const m=s.match(/(?:月額|月会費|月謝|団費|会費|毎月)\s*[:：/]?\s*(?:月)?\s*([\d,]+(?:\s*[〜~-]\s*[\d,]+)?\s*円)/)||s.match(/(年会費)\s*([\d,]+円)/);if(!m)return "";return m[2]?"年"+m[2]:"月"+m[1].replace(/\s/g,"")}
@@ -472,7 +488,7 @@ function fee(t){const s=(t.fee||t.i||"").replace(/,/g,",");const m=s.match(/(?:�
 const _card=card;
 card=function(t,no,ci){
   const h=_card(t,no,ci),x=X(t),w=walk(t),f=fee(t),d=shortDay(t);
-  const rows=[w?`<span class="wk">${I.walk}${esc(w)}</span>`:"",
+  const m3=mv(t),rows=[m3?`<span class="wk">${m3}</span>`:"",
     `<span>${I.age}<b>対象</b>${x.ag?esc(x.ag.length>16?x.ag.slice(0,16)+"…":x.ag):"<em>教室にきいてね</em>"}</span>`,
     `<span>${I.yen}<b>${f.startsWith("年")?"会費":"月謝"}</b>${f?esc(f):"<em>教室にきいてね</em>"}</span>`,
     x.ls?`<span>${I.ppl}<b>レッスン</b>${esc(x.ls)}</span>`:"",
@@ -509,7 +525,7 @@ function media(t){const x=X(t),e=x.em||{};
 function infoRows(t){const x=X(t),w=walk(t),f=t.fee||"",place=t.a||t.pl;
   const r=(ic,k,v)=>`<div>${ic}<dt>${k}</dt><dd>${v}</dd></div>`,ask="<em>教室にきいてね</em>";
   return `<dl class="hif">${place?r(I.pin,"場所",esc(place)+(t.pl&&t.a&&t.pl!==t.a?`<br><small>${esc(t.pl)}</small>`:"")):""}
-    ${r(I.pin,"区",esc(t.pf||t.d||"さいたま市"))}${w?r(I.walk,"家から",esc(w)+"<br><small>まっすぐの距離から計算した、めやすだよ</small>"):""}
+    ${r(I.pin,"区",esc(t.pf||t.d||"さいたま市"))}${w?r(I.walk,"家から",mv(t)+"<br><small>まっすぐの距離から計算した、めやすだよ</small>"):""}
     ${r(I.age,"対象",x.ag?esc(x.ag):ask)}${r(I.yen,"月謝・料金",f?esc(f):ask)}${r(I.ppl,"レッスン",x.ls?esc(x.ls):ask)}
     ${t.dy?r(I.cal,"練習日",esc(t.dy)):""}${t.i&&t.i!==t.dy&&t.i!==t.fee?r(I.star,"メモ",esc(t.i)):""}</dl>
     <div class="htg"><i class="t ${t.k}">${KIND[t.k]}</i>${t.tg.map(g=>`<i class="t ${g}">${TAG[g]}</i>`).join("")}</div>`}
