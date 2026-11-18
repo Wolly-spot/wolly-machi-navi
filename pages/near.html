@@ -329,6 +329,13 @@ body.fs-open{overflow:hidden}
 .wcard{background:repeating-linear-gradient(135deg,#dcefc8 0 26px,#e5f4d4 26px 52px)!important;border:4px solid #fff!important;box-shadow:0 10px 30px rgba(90,120,60,.12)!important}
 .ward path{filter:drop-shadow(0 4px 0 rgba(80,120,50,.22))}
 .whint{color:#5d6b4a;background:rgba(255,255,255,.8);border-radius:999px;padding:4px 12px;width:fit-content;max-width:100%;margin:4px auto 0}
+.regions{margin:10px 0 4px;padding:10px 12px;border-radius:18px;background:#fff;box-shadow:0 0 0 2px var(--lt,#eee)}
+.regions .rb{display:flex;flex-wrap:wrap;gap:6px}
+.regions .rb button{font:inherit;font-size:14px;font-weight:800;padding:8px 14px;border-radius:999px;border:2px solid var(--base);background:#fff;color:var(--dk);cursor:pointer}
+.regions .rb button.on{background:var(--dk);border-color:var(--dk);color:#fff}
+.regions .rs{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:8px;font-size:13px;font-weight:800;color:var(--dk)}
+.regions select{font:inherit;font-size:15px;font-weight:800;padding:7px 10px;border-radius:12px;border:2px solid var(--base);background:#fff;color:#2b2b44;max-width:100%}
+.regions small{display:block;margin-top:6px;font-size:12px;color:#7a7590;font-weight:700}
 
 .hdeco{position:absolute;inset:0;pointer-events:none;z-index:0}
 .hdeco span{position:absolute;display:block;opacity:.9;filter:drop-shadow(0 4px 6px rgba(90,60,140,.18));animation:hdf 5.5s ease-in-out infinite}
@@ -425,6 +432,7 @@ body.fs-open{overflow:hidden}
   <header class="hero" id="hero"></header>
   <div class="ntalk" id="ntalk"></div>
   <div class="from" id="from"></div>
+  <div class="regions" id="regions" hidden></div>
   <div class="chips" id="areas" aria-label="エリア"></div>
   <div class="chips" id="filters" aria-label="しぼりこみ"></div>
   <div class="tgrow"><button type="button" class="tg" id="tg" aria-expanded="true" aria-controls="mw">地図をとじる ▴</button></div>
@@ -549,6 +557,11 @@ Object.assign(NIC,{
 });
 const PAL=[["#FFF0F6","#FF6FA5"],["#EAF6FF","#2FA4EA"],["#FFF7D6","#E0A100"],["#F3EEFF","#8E6BF5"],["#FFEDF4","#EC5A92"],["#ECEFFF","#5A5AEF"]];
 const GENRES={
+  obgyn:{t:"産婦人科",ic:"heart",ac:"#E8558E",soft:"#FFE6F2",soft2:"#FFF5FA",sub:"妊婦健診・お産・婦人科の相談に。里帰り先（全国）でもさがせるよ。お産ができるかは、病院にたしかめてね。",deco:["heart","kids","heart"],
+       subs:[["産科（妊婦健診・お産）","obst","#FF6FA5","kids","kid"],["婦人科","gyn","#C45BD9","heart","brace"],["不妊治療も","funin","#8E6BF5","star","adult"],["助産院","midwife","#EC5A92","heart","sun"]],word:"産婦人科",far:1},
+  funin:{t:"不妊治療の病院",ic:"heart",ac:"#8E6BF5",soft:"#F1E8FF",soft2:"#F9F5FF",sub:"保険で不妊治療ができると国に届け出ている病院・クリニック（2026年10月1日現在）。さいたま市を基本に、埼玉県・東京都にも広げられるよ。",deco:["heart","star","heart"],
+       subs:[["体外受精など（生殖補助医療）","art","#8E6BF5","star","brace"],["タイミング法・人工授精など","ippan","#FF6FA5","heart","kid"],["男性不妊も","male","#2FA4EA","adult","adult"]],word:"病院・クリニック",
+       regions:[["city","さいたま市"],["pref","埼玉県"],["tokyo","東京都"]]},
   ped:{t:"小児科・内科",ic:"kids",ac:"#FF6FA5",soft:"#FFE3EC",soft2:"#FFF5F8",sub:"子どもの熱・せき・おなかの調子に。おとなの内科も。",deco:["kids","pill","plaster"],
        subs:[["小児科","小児科","#FF6FA5","kids","kid"],["内科","内科","#2FA4EA","adult","adult"]],word:"クリニック・病院"},
   dent:{t:"歯医者さん",ic:"tooth",ac:"#3DB2F2",soft:"#E1F3FF",soft2:"#F3FAFF",sub:"子どもの歯のチェックも、おとなの虫歯も。",deco:["tooth","tooth","pill"],
@@ -575,7 +588,7 @@ const g=(new URLSearchParams(location.search).get("g")||"ped");
 if(g==="ped")document.documentElement.classList.add("hl-soft");  /* 小児科・内科は、うすいやさしいホログラム（11/16） */
 const G=GENRES[g]||GENRES.ped;
 /* ジャンルの色：[ふつう, こい, うすい]。1つのページの中は全部この色にそろえる */
-const TH={ped:["#f2a7b8","#d6688a","#fdeef2"],dent:["#7fb8de","#3f86b8","#eaf5fc"],ent:["#e5b544","#a47812","#fff5d9"],eye:["#a5a8ea","#5c5fc4","#eff0fc"],
+const TH={obgyn:["#f4a6c6","#cc4f8a","#fdeef6"],funin:["#c3b0f2","#7a5ccb","#f5f0fe"],ped:["#f2a7b8","#d6688a","#fdeef2"],dent:["#7fb8de","#3f86b8","#eaf5fc"],ent:["#e5b544","#a47812","#fff5d9"],eye:["#a5a8ea","#5c5fc4","#eff0fc"],
   skin:["#dcaee6","#a560b8","#fbf0fd"],plastic:["#f0a9c8","#c95a8c","#fdeef5"],ortho:["#8fb6ea","#3e71c2","#edf3fd"],pharm:["#bfaaee","#7a5ccb","#f4effd"],park:["#86cbe9","#2f8ab8","#eaf6fc"],odekake:["#9db1f2","#4a64c8","#eef2fd"],gakudo:["#f2a9cf","#c0508f","#fdf0f7"],jidou:["#8fd0ea","#2f8ab8","#eaf7fc"],shokudo:["#f3a6c2","#c4507f","#fff0f6"],hub:["#eaa6d6","#b04f99","#fcf0f9"]};
 const th=TH[g]||TH.ped;
 {const st=document.documentElement.style;st.setProperty("--base",th[0]);st.setProperty("--dk",th[1]);st.setProperty("--lt",th[2]);st.setProperty("--ac",th[1]);st.setProperty("--soft",th[2]);st.setProperty("--soft2",th[2])}
@@ -586,7 +599,9 @@ const WARD_LL={"西区":[35.9256,139.5794],"北区":[35.9305,139.6203],"大宮�
 const CITY=[35.8617,139.6455];
 const N=10;
 const RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
-const S={area:null,subs:new Set(),sat:false,sun:false,night:false,shown:N};
+const S={area:null,subs:new Set(),sat:false,sun:false,night:false,shown:N,region:"city",muni:""};
+let ALL=[],PIDX=null;
+const REGN=()=>S.region==="city"?"さいたま市":S.region==="pref"?"埼玉県":S.region==="tokyo"?"東京都":(S.prefName||"里帰り先");
 let DATA=[],prof=null,map=null,ready=false,queued=null,markers=[],popup=null,photo=false,swing=18,first=true,pending=false,afterLoad=null,mapOpen=true;
 try{prof=JSON.parse(localStorage.getItem("wolly.profile")||"null")}catch(e){}
 addEventListener("message",e=>{const d=e.data;if(e.source!==window.parent||!d||d.type!=="wolly-home")return;
@@ -606,6 +621,12 @@ function hero(){
 const town=()=>String(prof&&prof.town||"").replace(/[0-9０-９].*$/,"");
 const isReg=()=>!!(prof&&prof.ward);
 function origin(){
+  if(S.region!=="city"&&!S.target){
+    if(S.here)return {ll:[S.here.lat,S.here.lon],reg:true,here:true,t:"いまいる場所から近い順",s:REGN()+(S.muni?"・"+S.muni:"")};
+    const gg=prof&&prof.geo;if(S.region==="pref"&&isReg()&&gg&&gg.ok&&gg.lat&&!S.muni)return {ll:[gg.lat,gg.lon],reg:true,home:true,t:"登録した住所から近い順",s:"埼玉県ぜんぶから"};
+    const rows=DATA.filter(r=>match(r));const c=rows.length?[rows.reduce((a,r)=>a+r.la,0)/rows.length,rows.reduce((a,r)=>a+r.lo,0)/rows.length]:CITY;
+    return {ll:c,reg:true,t:REGN()+(S.muni?"・"+S.muni:"")+"の"+G.word,s:"まんなかあたりから近い順に並べているよ。「いまいる場所」からもさがせるよ"};
+  }
   const reg=isReg(),inW=S.area?`（${S.area}区の中だけ）`:"";
   if(S.target)return {ll:[S.target.lat,S.target.lon],reg:true,tg:true,t:"「"+S.target.n+"」のまわり",s:"さがすで見つけた場所を1番にして、近くも並べています"};
   if(S.here)return {ll:[S.here.lat,S.here.lon],reg:true,here:true,t:"いまいる場所から近い順"+inW,s:"位置情報を使っています（この画面の中だけ。保存しません）"};
@@ -619,6 +640,7 @@ function origin(){
 }
 const WCOL=["#FFB3CF","#FFE38A","#9FD8FF","#CDB8FF","#FFC6DA","#B8C4FF","#FFD6E8","#FFF0A6","#BFE6FF","#E2D2FF"];
 function renderAreas(){
+  if(S.region!=="city"){$("#areas").innerHTML=`<span class="lab">場所</span><button class="chip here${S.here?" on":""}" data-here style="--cc:#35B3EE">${I(IC.pin)}いまいる場所</button>`;return}
   const reg=isReg();
   $("#areas").innerHTML=`<span class="lab">場所</span>`+`<button class="chip${!S.area&&!S.here?" on":""}" data-a="" style="--cc:#FF6FA5">${reg?svg(NIC.nursery,40)+"家の近く":svg(NIC.star,40)+"市全体"}</button>`
     +`<button class="chip here${S.here?" on":""}" data-here style="--cc:#35B3EE">${I(IC.pin)}いまいる場所</button>`
@@ -663,6 +685,7 @@ function renderWardMap(){
   $("#whint").textContent=S.area?`${S.area}区の${G.word}を並べています（もう一度タップで全体）`:`区をタップすると、その区の${G.word}だけを並べます`;
 }
 function showMaps(){
+  if(S.region!=="city"){$("#tg").parentElement.hidden=false;$("#mw").hidden=!mapOpen;$("#wardsec").hidden=true;return}
   const reg=isReg()||!!S.here||!!S.target;
   $("#tg").parentElement.hidden=!reg;
   $("#mw").hidden=!reg;
@@ -695,10 +718,11 @@ $("#filters").onclick=e=>{const b=e.target.closest("button");if(!b)return;
 /* ---------- しぼりこみ・近い順 ---------- */
 const dist=(a,b)=>{const R=6371,r=Math.PI/180,dl=(b[0]-a[0])*r,dn=(b[1]-a[1])*r;const h=Math.sin(dl/2)**2+Math.cos(a[0]*r)*Math.cos(b[0]*r)*Math.sin(dn/2)**2;return 2*R*Math.asin(Math.sqrt(h))};
 /* しぼりこみの印：big＝大きな公園、ck:kid / ck:mom＝幼児・妊婦の歯科健診ができる（市の実施医療機関）、ほかは診療科 */
-const wn=w=>/[市町村]$/.test(w||"")?w:(w||"")+"区";
+const wn=w=>/[市町村区]$/.test(w||"")?w:(w||"")+"区";
 const hasSub=(r,k)=>k==="big"?!!r.big:k.startsWith("fac:")?!!(r.fac&&(r.fac[k.slice(4)]||(k==="fac:play"&&r.fac.equip))):k.startsWith("ck:")?(r.ck||[]).includes(k.slice(3)):(r.s||[]).includes(k);
 function match(r,skipArea){
   if(!skipArea&&S.area&&r.w!==S.area)return false;
+  if(S.muni&&r.w!==S.muni)return false;
   if(S.subs.size){let ok=false;for(const k of S.subs){if(hasSub(r,k))ok=true}if(!ok)return false}
   const f=r.f||[];
   if(S.sat&&!f[0])return false;if(S.sun&&!f[1])return false;if(S.night&&!f[2])return false;
@@ -713,8 +737,8 @@ const pc=()=>th[1];
 const cardIc=r=>g==="shokudo"?((r.s||[]).includes("weekend")?"onigiri":"meal"):g==="gakudo"?((r.s||[]).includes("kousetsu")?"star":"heart"):g==="jidou"?((r.s||[]).includes("jidou")?"kids":"star"):g==="odekake"?((r.s||[]).includes("onsen")?"heart":(r.s||[]).includes("pool")?"star":(r.s||[]).includes("indoor")?"hospf":"tree"):g==="hub"?((r.s||[]).includes("single")?"star":"hub"):g==="ped"?((r.s||[]).includes("小児科")?"kids":"adult"):g==="park"?(r.big?"tree":"slide"):g==="dent"&&(r.s||[]).includes("小児歯科")?"tooth":G.ic;
 const host=u=>{try{const x=new URL(url(u));return (x.host+x.pathname).replace(/^www\./,"").replace(/\/$/,"")}catch(e){return u}};
 const url=u=>!u?"":(/^https?:\/\//i.test(u)?u:"https://"+u.replace(/^\/+/,""));
-const gmap=r=>"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(r.n+" さいたま市"+r.a.split(" ")[0]);
-const gsearch=r=>"https://www.google.com/search?q="+encodeURIComponent(r.n+" さいたま市"+wn(r.w)+" 電話");
+const gmap=r=>"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(r.n+" "+(r.fa?r.a:"さいたま市"+r.a.split(" ")[0]));
+const gsearch=r=>"https://www.google.com/search?q="+encodeURIComponent(r.n+" "+(r.fa?r.w:"さいたま市"+wn(r.w))+" 電話");
 
 /* ---------- 一覧 ---------- */
 function tags(r){
@@ -1081,7 +1105,36 @@ if(g==="shokudo"){
 }else{const m=TALK_MSG[g];if(m&&TALK[m[0]])$("#ntalk").innerHTML=`<img src="${TALK[m[0]]}" alt=""><p>${esc(m[1])}</p>`}
 hero();lawnDeco();buildWardMap();renderAreas();renderFilters();
 if(false)$("#legend").innerHTML="ピンの色："+G.subs.map(([lab,k,c])=>`<b style="color:${c}">●${esc(lab)}</b>`).join(" ")+(g==="ped"?"　":` <b style="color:${G.ac}">●そのほか</b>　`);
-fetch("near-data/"+g+".json").then(r=>r.json()).then(d=>{DATA=d;$("#hn").textContent=d.length;refresh(true);loadStamps()}).catch(()=>{$("#list").innerHTML='<li class="empty">データを読みこめなかったよ。時間をおいて開きなおしてね。</li>'});
+/* 地域の切りかえ（不妊治療：さいたま市・埼玉県・東京都／産婦人科：さいたま市・里帰り先の全国） */
+function renderRegions(){
+  const el=$("#regions");if(!el)return;
+  if(!G.regions&&!G.far){el.hidden=true;return}
+  el.hidden=false;
+  const btns=(G.regions||[["city","さいたま市"]]).map(([k,t])=>`<button type="button" data-rg="${k}" class="${S.region===k?"on":""}">${t}</button>`).join("")+(G.far?`<button type="button" data-rg="far" class="${S.region.startsWith("far")?"on":""}">里帰り先（全国）</button>`:"");
+  let sub="";
+  if(S.region.startsWith("far")){
+    sub=`<div class="rs">都道府県：<select id="rgPref"><option value="">えらんでね</option>${(PIDX||[]).map(([c,n,k])=>`<option value="${c}"${S.prefCode===c?" selected":""}>${n}（${k}）</option>`).join("")}</select></div>`;
+  }
+  if(S.region!=="city"&&ALL.length){
+    const ms=[...new Set(DATA.map(r=>r.w))].filter(Boolean).sort();
+    sub+=`<div class="rs">市区町村：<select id="rgMuni"><option value="">ぜんぶ</option>${ms.map(m=>`<option${S.muni===m?" selected":""}>${m}</option>`).join("")}</select></div>`;
+  }
+  el.innerHTML=`<div class="rb">${btns}</div>${sub}<small>${S.region.startsWith("far")?"里帰りの先の都道府県をえらぶと、その県の"+G.word+"が出るよ（全国 "+((PIDX||[]).reduce((a,x)=>a+x[2],0))+" か所）。":S.region==="city"?"ふだんはさいたま市の地図だよ。":"いまいる場所からも近い順にできるよ。"}</small>`;
+}
+function setData(rows){DATA=rows;$("#hn").textContent=rows.length;const hs=$(".hstat span");if(hs)hs.firstChild.textContent=REGN()+" ";S.shown=N;renderRegions();renderAreas();refresh(true)}
+function applyRegion(){
+  if(G.regions){const k=S.region;setData(ALL.filter(r=>k==="city"?r.pr==="city":k==="pref"?(r.pr==="city"||r.pr==="pref"):r.pr==="tokyo"));return}
+  if(S.region==="city"){setData(ALL);return}
+  if(!S.prefCode){DATA=[];renderRegions();$("#list").innerHTML='<li class="empty">上で、里帰り先の都道府県をえらんでね。</li>';return}
+  $("#list").innerHTML='<li class="empty">よみこみ中…</li>';
+  fetch("near-data/obgyn-p/"+S.prefCode+".json").then(r=>r.json()).then(setData).catch(()=>{$("#list").innerHTML='<li class="empty">データを読みこめなかったよ。</li>'});
+}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-rg]");if(!b)return;S.region=b.dataset.rg;S.muni="";S.area=null;S.here=null;S.target=null;
+  if(S.region==="far"&&!PIDX){fetch("near-data/obgyn-p/index.json").then(r=>r.json()).then(d=>{PIDX=d;applyRegion()});renderRegions();return}
+  applyRegion()});
+document.addEventListener("change",e=>{if(e.target.id==="rgPref"){S.prefCode=e.target.value;S.prefName=(PIDX.find(x=>x[0]===S.prefCode)||[])[1]||"";S.muni="";applyRegion()}
+  if(e.target.id==="rgMuni"){S.muni=e.target.value;S.shown=N;renderRegions();refresh(true)}});
+fetch("near-data/"+g+".json").then(r=>r.json()).then(d=>{ALL=d;if(G.regions||G.far){applyRegion();loadStamps();return}DATA=d;$("#hn").textContent=d.length;refresh(true);loadStamps()}).catch(()=>{$("#list").innerHTML='<li class="empty">データを読みこめなかったよ。</li>'});
 </script>
 <script>/* 外へのリンクは新しい画面で開く（街ナビの中で開いたとき） */document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a[href]");if(!a)return;var h=a.getAttribute("href")||"";if(h.charAt(0)==="#"||/^(javascript|tel|mailto):/i.test(h))return;a.target="_blank";a.rel="noopener"},true);</script>
 <style>

@@ -2137,6 +2137,8 @@ const NEAR=[
   {t:"形成外科",g:"plastic",ic:"plaster",bg:"#FFE6F2"},
   {t:"整形外科",g:"ortho",ic:"bone",bg:"#E1F3FF"},
   {t:"薬局",g:"pharm",ic:"pill",bg:"#F1E8FF"},
+  {t:"産婦人科",g:"obgyn",ic:"heart",bg:"#FFE6F2"},
+  {t:"不妊治療の病院",g:"funin",ic:"heart",bg:"#F1E8FF"},
   {t:"公園",g:"park",ic:"slide",bg:"#E5E8FF"},
   {t:"あずかりマップ",azukari:1,ic:"nursery",bg:"#FFF1C2",kinds:"保育園（公立・私立）・幼稚園・認定こども園・小規模保育・事業所内保育・家庭的保育・ナーサリールーム・家庭保育室・企業主導型保育・一時預かり・ベビーホテル・その他の認可外"}];
 /* 家の近くで探す：ジャンルごとの立体マップ（pages/near.html?g=…）と、あずかりマップの「近くの園をさがす」（?near=1）を、その場でふわっと開く */
@@ -2665,6 +2667,8 @@ function sheetAzuke(){
 }
 /* ===== さがす（地域・施設・お悩みから）：ページの中の情報を、ことばでさがす ===== */
 const SYN=[
+  ["産婦人科 産科 婦人科 さんふじんか 里帰り 里帰り出産 助産院 お産","産婦人科マップ（里帰り先の全国も）","near?g=obgyn","家の近く"],
+  ["不妊治療 不妊 ふにん 体外受精 人工授精 タイミング法 不育 生殖医療 男性不妊","不妊治療の病院マップ（さいたま市・埼玉県・東京都）","near?g=funin","家の近く"],
   ["妊娠 妊婦 にんしん 出産 しゅっさん 妊活 不妊 不育 母子手帳 母子健康手帳 妊婦健診 産後 産後ケア 出生届 1か月健診 RSウイルス 両親学級 出産前教室 赤ちゃんがほしい","妊娠・出産ガイド（赤ちゃんを考えたら〜1か月）","ninshin","妊娠・出産"],
   ["熱 発熱 けいれん 夜中 夜間 救急 急病 吐いた 具合 #8000 急患","子どもの急病（急患電話マップ）","#go-kyukan","健診・病院"],
   ["歯 歯医者 むし歯 虫歯 歯科","歯医者さんマップ","near?g=dent","家の近く"],
@@ -4099,7 +4103,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11181100");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11181120");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
