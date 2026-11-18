@@ -337,6 +337,13 @@ body.fs-open{overflow:hidden}
 .regions select{font:inherit;font-size:15px;font-weight:800;padding:7px 10px;border-radius:12px;border:2px solid var(--base);background:#fff;color:#2b2b44;max-width:100%}
 .regions small{display:block;margin-top:6px;font-size:12px;color:#7a7590;font-weight:700}
 
+/* 背景の写真があるマップ（見出しの文字が読めるよう、上に白いうすい膜） */
+.hero.ph{background:linear-gradient(180deg,rgba(255,255,255,.62),rgba(255,255,255,.28) 55%,rgba(255,255,255,.55)),var(--phimg) center 30%/cover no-repeat!important}
+.hero.ph::before,.hero.ph::after,.hero.ph .deco,.hero.ph .hdeco,.hero.ph .wave{display:none!important}
+.hero.ph h1,.hero.ph .hsub{text-shadow:0 1px 0 rgba(255,255,255,.9),0 0 12px rgba(255,255,255,.9)}
+.hero.ph .hsub{color:#3d3a52;font-weight:700}
+.hero.ph .hic{box-shadow:0 6px 16px -8px rgba(40,40,80,.5)}
+
 .hdeco{position:absolute;inset:0;pointer-events:none;z-index:0}
 .hdeco span{position:absolute;display:block;opacity:.9;filter:drop-shadow(0 4px 6px rgba(90,60,140,.18));animation:hdf 5.5s ease-in-out infinite}
 .hdeco span svg{display:block;width:100%;height:100%}
@@ -558,6 +565,7 @@ Object.assign(NIC,{
   free:`<path d="M6 16h28v18H6z" fill="#FFC6DA" stroke="#1F2140" stroke-width="2" stroke-linejoin="round"/><path d="M4 11h32v6H4z" fill="#FFE59A" stroke="#1F2140" stroke-width="2" stroke-linejoin="round"/><path d="M20 11v23" stroke="#1F2140" stroke-width="2"/><path d="M20 11c-3-6-10-6-9-1 1 3 9 1 9 1zm0 0c3-6 10-6 9-1-1 3-9 1-9 1z" fill="#C9B6FF" stroke="#1F2140" stroke-width="2"/>`
 });
 const PAL=[["#FFF0F6","#FF6FA5"],["#EAF6FF","#2FA4EA"],["#FFF7D6","#E0A100"],["#F3EEFF","#8E6BF5"],["#FFEDF4","#EC5A92"],["#ECEFFF","#5A5AEF"]];
+const HBG=["ped","dent","ent","eye","plastic","pharm","skin","funin","park","obgyn","ortho"];
 const GENRES={
   obgyn:{t:"産婦人科",ic:"preg",ac:"#E8558E",soft:"#FFE6F2",soft2:"#FFF5FA",sub:"妊婦健診・お産・婦人科の相談に。里帰り先（全国）でもさがせるよ。お産ができるかは、病院にたしかめてね。",deco:["preg","heart","kids"],
        subs:[["産科（妊婦健診・お産）","obst","#FF6FA5","kids","kid"],["婦人科","gyn","#C45BD9","heart","brace"],["不妊治療も","funin","#8E6BF5","star","adult"],["助産院","midwife","#EC5A92","heart","sun"]],word:"産婦人科",far:1},
@@ -615,6 +623,8 @@ function hero(){
   const dk=[G.deco[0],"heart","star",G.deco[1],"bub","star",G.deco[2],"heart"];
   const deco=[[6,"6%",30,"-1s"],[80,"6%",36,"-3s"],[92,"40%",22,"-2s"],[66,"58%",28,"-4s"],[2,"70%",22,"-2.5s"],[44,"4%",18,"-1.5s"],[86,"78%",30,"-.5s"],[28,"84%",18,"-3.5s"]].map(([l,t,s,d],i)=>`<span style="left:${l}%;top:${t};--s:${s}px;--d:${d}">${svg(NIC[dk[i]],40)}</span>`).join("");
   const th=HDECO[g];$("#hero").dataset.g=th?g:"";
+  /* 11/18 背景の写真（Yuji さんの絵。pages/near-img/<ジャンル>.jpg） */
+  if(HBG.includes(g)){const h=$("#hero");h.classList.add("ph");h.style.setProperty("--phimg",`url("near-img/${g}.jpg")`)}
   $("#hero").innerHTML=(th?th+(g==="odekake"?`<svg class="wave" viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0 22q25-14 50 0t50 0 50 0 50 0 50 0 50 0 50 0 50 0V40H0z" fill="#BFE6FF" opacity=".75"/><path d="M0 30q25-10 50 0t50 0 50 0 50 0 50 0 50 0 50 0 50 0V40H0z" fill="#8FD0F5" opacity=".6"/></svg>`:""):`<div class="deco" aria-hidden="true">${deco}</div>`)+`
     <div class="hrow"><div class="hic">${svg(NIC[G.ic],40)}</div><div><div class="eyebrow">NEAR HOME MAP</div><h1><span class="mk">${esc(G.t).replace(/（/g,"<wbr>（").replace(/・/g,"・<wbr>")}</span><small class="h1m">マップ</small></h1><p class="hsub">${esc(G.sub)}</p></div></div>
     <div class="hstat"><span>さいたま市内 <b id="hn">…</b> か所</span><span>近い順に <b>20</b> か所をピンで</span></div>`;
