@@ -1799,6 +1799,7 @@ svg .a-ring{animation:ring 2.4s ease-in-out infinite;transform-box:fill-box;tran
           <div class="field"><span class="lab">お子さんの生まれた年月（何人でも・任意）</span><div class="kidlist" id="kidList"></div>
             <div class="kidadd"><input type="month" id="kidNew" aria-label="お子さんの生まれた年月"><button type="button" class="btn ghost" id="kidAdd">＋ 追加</button></div>
             <small>ページには表示しないよ。お子さんの年齢に合う情報（健診・保活・習い事・学校など）を先に出すためだけに使い、この端末だけに覚えるんだ。</small></div>
+          <div class="field"><label for="fDue">出産予定日（妊娠中の方・任意）</label><input type="date" id="fDue" aria-label="出産予定日"><small>入れると「Wollyからのお知らせ」で、母子手帳・妊婦健診・ワクチン・生まれたあとの手つづきの時期をお知らせするよ。この端末だけに覚えるんだ。生まれたら、お子さんの生まれた年月に入れ直してね。</small></div>
           <div class="field"><span class="lab">文字の大きさ</span><div class="fsz" role="group" aria-label="文字の大きさ"><button type="button" data-fsz="0">ふつう</button><button type="button" data-fsz="1">大きめ</button><button type="button" data-fsz="2">とても大きく</button></div><small>この端末だけに覚えるよ。すぐに変わるんだ。</small></div>
           <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><button class="btn" type="submit" id="saveBtn">登録する</button><span class="status" id="saveStatus" role="status"></span></div>
         </form>
@@ -3355,7 +3356,7 @@ document.addEventListener("click",e=>{
   const d=e.target.closest("[data-kiddel]");if(d){const k=getKids();k.splice(+d.dataset.kiddel,1);setKids(k);kidSel=0;renderKidList();applyAgeOrder()}
 });
 function fillMyPage(){
-  renderKidList();
+  renderKidList();{const d=$("#fDue");if(d)d.value=getDue()}
   const p=S.profile;
   $("#myTitle").textContent=p?"マイページ":"マイページ登録";
   $("#profileCard").innerHTML=p?`${avatar(p.icon,"lg")}<div><b>${esc(p.name)}</b><small>さいたま市${esc(p.ward)}${S.town?" ・ "+esc(S.town):""} ・ メンバー</small></div>`
@@ -3493,6 +3494,9 @@ $("#sheet").addEventListener("click",e=>{const b=e.target.closest("[data-kyopen]
 const HC_URL={kenshin:"https://www.city.saitama.lg.jp/kosodate/shiritai/category4/p103698.html",vaccine:"https://www.city.saitama.lg.jp/kosodate/shiritai/category4/p103680.html",
   byouji:"https://www.city.saitama.lg.jp/003/001/015/002/p097696.html",hdent:"https://www.city.saitama.lg.jp/002/001/017/006/p019179.html"};
 /* 生まれた年月（この端末だけに覚える） */
+/* 出産予定日（妊娠・出産ガイドと同じ wolly.duedate。文字のまま保存） */
+function getDue(){try{const v=localStorage.getItem("wolly.duedate")||"";return /^\d{4}-\d{2}-\d{2}$/.test(v)?v:""}catch(e){return ""}}
+document.addEventListener("change",e=>{if(e.target.id!=="fDue")return;try{e.target.value?localStorage.setItem("wolly.duedate",e.target.value):localStorage.removeItem("wolly.duedate")}catch(x){}typeof renderKidNotice==="function"&&renderKidNotice()});
 /* 子どもの生まれた年月（何人でも。この端末の localStorage wolly.kids）。ページには出さず、並び順・「いまの時期」だけに使う */
 function getKids(){let k=LS.get("wolly.kids");if(!Array.isArray(k)){k=[];const o=LS.get("wolly.kidbirth");if(/^\d{4}-\d{2}$/.test(o||""))k=[o];LS.set("wolly.kids",k)}return k.filter(v=>/^\d{4}-\d{2}$/.test(v))}
 function setKids(k){LS.set("wolly.kids",k.filter(v=>/^\d{4}-\d{2}$/.test(v)).sort());typeof renderKidNotice==="function"&&renderKidNotice()}
@@ -4103,7 +4107,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11181120");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11181121");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -4294,6 +4298,22 @@ function kidNotices(){
     if(a===15&&M>=4&&M<=7)add({ic:"coin",tag:"申込み",pr:1,t:"高校の授業料の支援・奨学給付金",ch:"k_koukou",say:"高校のお金の手助け、わすれずに申しこもう",d:"授業料の支援（就学支援金）は、入学したあと学校から案内があるよ。奨学給付金（埼玉県）は、7月ごろに申しこみの案内があるよ。期限は学校ごとにちがうから気をつけてね。",url:"https://www.pref.saitama.lg.jp/f2204/j-s/s-kyuhukin.html",go:"奨学給付金（埼玉県）"});
     if(mo>=33&&mo<=40)add({ic:"plaster",tag:"いまの時期",pr:4,t:"はじめての歯医者さん・フッ素",ch:"k_haisha",say:"はじめての歯医者さん、こわくないよ！",d:"3歳ごろは、はじめての歯医者さんにいい時期だよ。フッ素をぬってもらうと、むし歯の予防になるよ。",to:"view:near?g=dent",go:"歯医者さんマップ"});
   });
+  /* 11/18 出産予定日（マイページ）からのお知らせ。妊娠・出産ガイドへ */
+  {const dv=getDue();if(dv){const [y,m,d]=dv.split("-").map(Number),due=new Date(y,m-1,d),t=new Date();t.setHours(0,0,0,0);
+    const start=new Date(+due-280*864e5),wk=Math.floor((t-start)/864e5/7),age=Math.floor((t-due)/864e5),who="おなかの赤ちゃん";
+    const G=(o)=>out.push(Object.assign({who,to:"view:ninshin",go:"妊娠・出産ガイド",mo:-1},o));
+    if(age<0){
+      if(wk>=4&&wk<13)G({ic:"docs",tag:"いまの時期",pr:1,t:"妊娠の届け出と母子手帳",d:"病院で赤ちゃんの心ぞうの動きがわかったら、区の「こども家庭センター」で母子手帳をもらおう。妊婦健診の券（14回分）と、妊婦さんのお金（5万円）の案内ももらえるよ。"});
+      if(wk>=12&&wk<28)G({ic:"tooth",tag:"妊娠中に",pr:3,t:"妊婦の歯科健診（無料）と出産前教室",d:"歯科健診は妊娠中に1回、無料。出産前教室（ママ・パパ教室）も無料だよ。"});
+      if(wk>=27&&wk<=36)G({ic:"plaster",tag:wk>=28?"いまの時期":"もうすぐ",pr:wk>=28?1:2,t:"RSウイルスワクチン（妊娠28〜36週・無料）",d:"ママがうつと、生まれた赤ちゃんをRSウイルスから守るよ。うつかどうかは、お医者さんと相談してね。"});
+      if(wk>=28)G({ic:"house",tag:"申込み",pr:2,t:"産後ケアの申しこみ（28週から）",d:"生まれたあと、助産師さんの訪問・日帰り・おとまりでママの体と心をケアしてもらえるよ。妊娠8か月から申しこめるんだ。"});
+      if(wk>=14&&wk<40)G({ic:"coin",tag:"届け出",pr:4,t:"国民年金の保険料がお休みに",d:"自分で国民年金をはらっている人は、生まれる前の月から4か月分がお休みになるよ。予定日の6か月前から届け出できるんだ。"});
+      if(wk>=34)G({ic:"check",tag:"じゅんび",pr:3,t:"生まれたら2週間のうちにすること",d:"出生届（14日以内）・児童手当（15日以内）・こどもの医療費の申しこみ。だれが行くか、家族で決めておこうね。"});
+    }else if(age<=45){
+      if(age<=15)G({ic:"docs",tag:"期限あり",pr:0,t:"出生届・児童手当（生まれて2週間のうちに）",d:"出生届は生まれた日をふくめて14日以内、児童手当は次の日から15日以内。生まれた日がわかったら、マイページでお子さんの生まれた年月も入れてね。"});
+      if(age>=20&&age<=41)G({ic:"age",tag:"いまの時期",pr:1,t:"赤ちゃんの1か月健診・ママの産後健診",d:"1か月健診は生後28〜41日（6,000円まで助成）。ママの健診も2回、助成があるよ。"});
+    }
+  }}
   /* 季節・区のお知らせ（1つだけ。お子さんごとには出さない） */
   if(kids.length){
     const D=new Date(),Y=D.getFullYear(),ww=S.profile&&S.profile.ward;
@@ -4323,7 +4343,7 @@ document.addEventListener("pointerdown",e=>{
 function renderKidNotice(){
   const el=$("#kidNotice");if(!el)return;
   const kids=getKids();
-  if(!kids.length){el.hidden=false;el.className="kn kn-off";
+  if(!kids.length&&!getDue()){el.hidden=false;el.className="kn kn-off";
     el.innerHTML=`<a class="kn-inv" href="#mypage"><span class="kn-bell">${HNEW?riSvg("お知らせ"):svg(KIC("cal")||MINI.star,40)}</span><span><b>Wollyからのお知らせ</b><small>マイページでお子さんの生まれた年月を登録すると、予防接種や申込みの時期をお知らせします</small></span><i>›</i></a>`;return}
   const L=kidNotices(),open=LS.get("wolly.knopen")!==false;
   el.hidden=false;el.className="kn"+(open?" open":"");
