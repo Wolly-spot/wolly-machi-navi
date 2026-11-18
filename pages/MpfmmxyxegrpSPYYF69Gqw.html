@@ -699,6 +699,7 @@ b.addEventListener("click",function(){
 
 
 
+
 <!--wolly-tap-->
 <script>
 (function(){if(window.parent===window)return;
@@ -1281,6 +1282,11 @@ if(/[?&]near=1\b/.test(location.search)){hd.style.display="none";box.style.margi
 .hl-full.hl-on .hl-num{background:linear-gradient(135deg,#ff8fc0,#9b7bff)}
 .hl-full.out .hl-x{animation:hlOut .25s forwards}
 @keyframes hlOut{to{opacity:0}}
+/* 指の反応（holoTouch） */
+.hl-moving .hl-x,.hl-moving .hl-x *,.hl-moving .maplibregl-popup-content,.hl-moving .maplibregl-popup-content::before{animation-play-state:paused!important}
+.hl-touch{position:absolute;left:50%;top:14px;translate:-50% 0;z-index:9;padding:7px 14px;border-radius:999px;font:800 12.5px/1.2 inherit;color:#5a3f86;background:rgba(255,255,255,.92);
+  box-shadow:0 6px 16px -8px rgba(90,60,150,.6),0 0 0 1.5px #d9c8ff;pointer-events:none;transition:opacity .4s,translate .4s}
+.hl-touch.out{opacity:0;translate:-50% -8px}
 /* 小窓＝浮かぶホログラムのカード */
 .maplibregl-popup{z-index:400}
 .maplibregl-popup .maplibregl-popup-content{position:relative;overflow:hidden;border-radius:16px!important;color:#eaf8ff!important;
@@ -1324,6 +1330,7 @@ html .hl-ring{box-shadow:0 0 6px #ffd6ea;opacity:.8}
 @keyframes hlMapIn{0%{opacity:0;clip-path:inset(50% 0 50% 0);filter:brightness(1.5) saturate(.3)}45%{opacity:1;clip-path:inset(0);filter:brightness(1.25) saturate(.6)}100%{opacity:1}}
 .hl-sweep{position:absolute;left:0;right:0;height:60px;top:-60px;z-index:6;pointer-events:none;background:linear-gradient(to bottom,transparent,rgba(127,233,255,.55),transparent)}
 @media (prefers-reduced-motion:reduce){.hl-beam,.hl-ring,.hl-num,.hl-open,.hl-sweep,.maplibregl-popup .maplibregl-popup-content,.maplibregl-popup .maplibregl-popup-content::before{animation:none!important}.hl-sweep{display:none}}
+
 /* ==== /holo-map ==== */
 </style>
 <script>
@@ -1360,7 +1367,7 @@ function holoOpen(box){
   s.animate([{top:(box.offsetTop-60)+"px"},{top:(box.offsetTop+box.offsetHeight)+"px"}],{duration:1400,delay:150,easing:"ease-out",fill:"forwards"}).onfinish=()=>s.remove();
 }
 /* 11/18 本物の色の地図（全部の立体地図で共通。mode 3＝近づくと航空写真の地面と屋根、壁は窓） */
-function holoReal(map,RMODE){RMODE=RMODE||3;
+function holoReal(map,RMODE){RMODE=RMODE||3;if(map&&map.getContainer)holoTouch(map);
   /* 11/18 アップ（z16.4〜17.4）で立体の建物をうすくして、航空写真の本物の建物を見せる（立体の形は地図データの目安で、本物とちがうことがあるため）。?bld=box で前のまま */
   const HF=!/[?&]bld=box\b/.test(location.search);if(!map||!map.getStyle)return;
   const set=(id,k,v)=>{if(map.getLayer(id))try{map.setPaintProperty(id,k,v)}catch(e){}};
@@ -1443,6 +1450,21 @@ function holoReal(map,RMODE){RMODE=RMODE||3;
           "fill-extrusion-opacity":HF?["interpolate",["linear"],["zoom"],16.4,1,17.4,.1]:1,"fill-extrusion-vertical-gradient":false}},(map.getStyle().layers.find(l=>l.type==="symbol")||{}).id)}catch(e){console.log(e)}}
     }
   }catch(e){}
+}
+/* 11/18 指の反応：①地図を1回タップすると指1本で動かせる（はじめは2本指＝ページのスクロールをじゃましない）。地図が画面から出たら2本指にもどす
+   ②動かしている間はホログラムの動きを止める ③画面のきめ細かさを2倍までにして軽く */
+function holoTouch(map){if(!map||map._wtouch)return;map._wtouch=1;const box=map.getContainer();
+  try{map.setPixelRatio&&map.setPixelRatio(Math.min(window.devicePixelRatio||1,2))}catch(e){}
+  map.on("movestart",()=>box.classList.add("hl-moving"));map.on("moveend",()=>box.classList.remove("hl-moving"));
+  const cg=map.cooperativeGestures;if(!cg||!cg.isEnabled||!cg.isEnabled())return;
+  const msg=box.querySelector(".maplibregl-mobile-message");if(msg)msg.textContent="地図を1回タップすると、指1本で動かせます";
+  let on=false,tm;
+  const free=()=>{if(on)return;on=true;cg.disable();box.classList.add("hl-free");
+    let h=box.querySelector(".hl-touch");if(!h){h=document.createElement("div");h.className="hl-touch";box.appendChild(h)}
+    h.textContent="指1本で動かせます";h.classList.remove("out");clearTimeout(tm);tm=setTimeout(()=>h.classList.add("out"),1600)};
+  const lock=()=>{if(!on)return;on=false;cg.enable();box.classList.remove("hl-free")};
+  map.on("click",free);map.on("touchstart",e=>{if(e.originalEvent&&e.originalEvent.touches&&e.originalEvent.touches.length>1)free()});
+  if(window.IntersectionObserver)new IntersectionObserver(es=>es.forEach(e=>{if(e.intersectionRatio<.35)lock()}),{threshold:[0,.35,.6]}).observe(box);
 }
 /* ==== /holo-map ==== */
 </script>
