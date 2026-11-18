@@ -385,6 +385,14 @@ body.fs-open{overflow:hidden}
 .vclose{display:block;margin:0 auto;border:0;border-radius:999px;padding:10px 28px;font:inherit;font-weight:800;color:#fff;background:linear-gradient(120deg,#ff8fb8,#c79bff);cursor:pointer}
 @media (prefers-reduced-motion:reduce){.vbtn,.vbtn .vh,.vfam span,.vbody p,.vcard{animation:none!important}}
 
+/* 体験談・近い順の行：ことばの途中で切らない */
+#hero .hsub{word-break:keep-all;overflow-wrap:anywhere;text-wrap:pretty}
+.from>span:not(.dot){word-break:keep-all;overflow-wrap:anywhere;min-width:0;flex:1}
+#vov p,#vov h3{word-break:keep-all;overflow-wrap:anywhere;text-wrap:pretty;line-break:strict}
+.vbody p{font-size:14.5px;line-height:1.9;letter-spacing:.02em}
+.vbtn{font-size:11.5px;padding:6px 10px;gap:3px}
+@media (max-width:380px){.vcard{padding:20px 16px 16px}.vbody{padding:14px 12px 4px}}
+
 .hdeco{position:absolute;inset:0;pointer-events:none;z-index:0}
 .hdeco span{position:absolute;display:block;opacity:.9;filter:drop-shadow(0 4px 6px rgba(90,60,140,.18));animation:hdf 5.5s ease-in-out infinite}
 .hdeco span svg{display:block;width:100%;height:100%}
@@ -820,6 +828,13 @@ function card(x,i){
 let LAST=[],LO=null;
 const PQ=new URLSearchParams(location.search).get("q")||"";let PQ_DONE=false;
 
+
+/* 11/18 体験談・近い順の行は、ことばの切れ目で改行（school.html の jbreak と同じ考え） */
+const VSEG=(window.Intl&&Intl.Segmenter)?new Intl.Segmenter("ja",{granularity:"word"}):null;
+function vbreak(t,fine){const w=[...VSEG.segment(t)].map(x=>x.segment);let o="",p="";for(let i=0;i<w.length;i++){const x=w[i];
+ if(p&&!(i===w.length-1&&x.length<2)&&((fine&&/[^\u3041-\u309F][がをで]$/.test(o)&&/^[\u3041-\u309F]/.test(x))||(fine&&p.length>1&&/[\u3041-\u309F\u30A0-\u30FF]$/.test(p)&&/^[\u3041-\u309F]{2,}$/.test(x))||(/[ぁ-ゟ）」』！？]$/.test(p)&&!/^[ぁ-ゟー、。）」』！？・ー〜：／]/.test(x))||/[、。・／：]$/.test(p)||(x[0]==="（"&&!/[（・]$/.test(p))))o+="​";o+=x;p=x}return o}
+function vbNode(root){if(!VSEG||!root)return;const tw=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;const L=[];while(n=tw.nextNode())L.push(n);
+ for(const t of L){const d=t.data;if(d.length<4||d.indexOf("\u200b")>=0||!/[\u3040-\u30ff\u4e00-\u9fff]/.test(d))continue;if(t.parentNode.closest&&t.parentNode.closest("svg"))continue;t.data=vbreak(d,false)}}
 /* 11/18 体験談（Yuji さんからいただいた口コミ。ジャンル→[{who,ps:[段落]}]） */
 const VOICE={funin:[{who:"大宮区・36才",ttl:"10年間の不妊治療をふりかえって",ps:[
 "約10年間、不妊治療を続け、これまでに3つの病院に通いました。",
@@ -841,7 +856,7 @@ function openVoice(){const v=VOICE[g][0];let ov=document.getElementById("vov");i
   <div class="vfam"><span>👶</span><span>👧</span><span class="vhh">♡</span></div>
   <p class="vnote">ひとりの方の体験です。治療のことや病院えらびは、人によってちがいます。不安なときは、かかりつけの先生や市の不妊専門相談にも話してみてね。</p>
   <button type="button" class="vclose">とじる</button></div></div>`);
-  ov=document.getElementById("vov");const cl=()=>{ov.classList.add("out");setTimeout(()=>ov.remove(),260);document.removeEventListener("keydown",kd)};
+  ov=document.getElementById("vov");vbNode(ov);const cl=()=>{ov.classList.add("out");setTimeout(()=>ov.remove(),260);document.removeEventListener("keydown",kd)};
   const kd=e=>{if(e.key==="Escape")cl()};document.addEventListener("keydown",kd);
   ov.onclick=e=>{if(e.target===ov||e.target.closest(".vx,.vclose"))cl()}}
 function refresh(move){
@@ -852,6 +867,7 @@ function refresh(move){
     const k=all.findIndex(z=>z.r.id===PQ||z.r.n===PQ);if(k>=0)setTimeout(()=>openFs(k),700)}
   $("#from").innerHTML=`<span class="dot">${I(o.home?IC.house:IC.pin)}</span><span>${esc(o.t)}<small>${esc(o.s)}</small></span>`;
   if(VOICE[g]){$("#from").insertAdjacentHTML("beforeend",`<button type="button" class="vbtn" id="vBtn"><span class="vh">♡</span>口コミあり</button>`);$("#vBtn").onclick=openVoice}
+  vbNode($("#from"));if(!window._vbh){window._vbh=1;vbNode(document.querySelector("#hero .hsub"))}
   $("#reg").innerHTML=o.reg?"":`<div class="reg"><p><b>マイページに住所を登録すると、</b>おうちの近くの${esc(G.word)}を自動でしぼりこんで、近い順に出せるよ。</p><button type="button" id="regBtn">マイページ登録する</button></div>`;
   const rb=$("#regBtn");if(rb)rb.onclick=toMyPage;
   if(!o.reg)$("#reg").querySelector("p").innerHTML=`<b>マイページに住所を登録すると、</b>立体の地図にピンが立って、おうちから近い${esc(G.word)}を順番に出せるよ。`;
