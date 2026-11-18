@@ -1190,7 +1190,7 @@ function drawMap(o,rows){
   loadL(()=>{
     if(!map){
       try{
-        map=new maplibregl.Map({container:"map",style:STYLE_URL,center:[o.ll[1],o.ll[0]],zoom:10.2,pitch:0,bearing:0,cooperativeGestures:true,attributionControl:{compact:true},maxPitch:70,
+        map=new maplibregl.Map({container:"map",style:STYLE_URL,center:[o.ll[1],o.ll[0]],zoom:15.4,pitch:58,bearing:-12,cooperativeGestures:true,attributionControl:{compact:true},maxPitch:70,
           locale:{"CooperativeGesturesHandler.MobileHelpText":"地図は2本の指で動かせます","CooperativeGesturesHandler.WindowsHelpText":"Ctrl を押しながらスクロールで拡大・縮小","CooperativeGesturesHandler.MacHelpText":"⌘ を押しながらスクロールで拡大・縮小","NavigationControl.ZoomIn":"大きく","NavigationControl.ZoomOut":"小さく","NavigationControl.ResetBearing":"北を上にもどす"}});
       }catch(e){failMsg();return}
       map.addControl(new maplibregl.NavigationControl({visualizePitch:true}),"top-right");
@@ -1218,7 +1218,9 @@ function place(o,rows){
   setTimeout(()=>holoMore(map,$("#map")),320);
   swing=-swing;
   const cam=map.cameraForBounds(b,{padding:{top:60,bottom:20,left:24,right:24},maxZoom:16.5})||{center:[o.ll[1],o.ll[0]],zoom:14};
-  const to={center:cam.center,zoom:Math.max(10,(cam.zoom||14)-.05),pitch:55,bearing:swing};
+  /* 11/18 最初から建物が見える高さ（z14.2 より引かない）。近い順のピンは、かたむけて奥に見せる */
+  const z0=Math.max(10,(cam.zoom||14)-.05),zz=Math.max(z0,14.2),cc=maplibregl.LngLat.convert(cam.center);
+  const to={center:zz>z0?[o.ll[1]*.6+cc.lng*.4,o.ll[0]*.6+cc.lat*.4]:cc,zoom:zz,pitch:zz>z0?62:55,bearing:swing,offset:zz>z0?[0,90]:[0,0]};
   if(o.tg&&rows[0]){const t={center:[o.ll[1],o.ll[0]],zoom:16.4,pitch:60,bearing:swing,offset:[0,110]};if(RM)map.jumpTo(t);else map.flyTo({...t,duration:2200,curve:1.5,essential:true});map.once("moveend",()=>openPin(rows[0],0));first=false;return}
   if(RM)map.jumpTo(to);
   else if(first){
