@@ -1877,7 +1877,9 @@ function holoOpen(box){
   s.animate([{top:(box.offsetTop-60)+"px"},{top:(box.offsetTop+box.offsetHeight)+"px"}],{duration:1400,delay:150,easing:"ease-out",fill:"forwards"}).onfinish=()=>s.remove();
 }
 /* 11/18 本物の色の地図（全部の立体地図で共通。mode 3＝近づくと航空写真の地面と屋根、壁は窓） */
-function holoReal(map,RMODE){RMODE=RMODE||3;if(!map||!map.getStyle)return;
+function holoReal(map,RMODE){RMODE=RMODE||3;
+  /* 11/18 アップ（z16.4〜17.4）で立体の建物をうすくして、航空写真の本物の建物を見せる（立体の形は地図データの目安で、本物とちがうことがあるため）。?bld=box で前のまま */
+  const HF=!/[?&]bld=box\b/.test(location.search);if(!map||!map.getStyle)return;
   const set=(id,k,v)=>{if(map.getLayer(id))try{map.setPaintProperty(id,k,v)}catch(e){}};
   set("background","background-color","#F1EEE8");
   map.getStyle().layers.forEach(l=>{const id=l.id;
@@ -1951,11 +1953,11 @@ function holoReal(map,RMODE){RMODE=RMODE||3;if(!map||!map.getStyle)return;
       if(!R3){try{map.setPaintProperty("building-3d","fill-extrusion-pattern",undefined)}catch(e){}}
       if(!R3)try{map.setPaintProperty("building-3d","fill-extrusion-color",["case",[">",["coalesce",["get","render_height"],0],20],["match",hid,0,"#9FA8B2",1,"#B4BAC0",2,"#8E9AA6",3,"#C2C4C4",4,"#A9B3BC","#B8B4AE"],["match",hid,0,"#C9C3BA",1,"#B9B4AD",2,"#D6CFC4",3,"#A79F96",4,"#C4B6A6","#BDBAB5"]]);map.setPaintProperty("building-3d","fill-extrusion-opacity",.93)}catch(e){}
       /* real=3：壁は窓の模様のまま、屋根だけ無地のふたをのせる（アップでも箱に見えず、上から見ると屋根の色） */
-      if(R3){try{const b3=map.getLayer("building-3d");map.setPaintProperty("building-3d","fill-extrusion-opacity",1);
+      if(R3){try{const b3=map.getLayer("building-3d");map.setPaintProperty("building-3d","fill-extrusion-opacity",HF?["interpolate",["linear"],["zoom"],16.4,1,17.4,.1]:1);
         if(!map.getLayer("w-roof"))map.addLayer({id:"w-roof",type:"fill-extrusion",source:b3.source,"source-layer":b3.sourceLayer||"building",minzoom:PZ,filter:b3.filter||["all"],
           paint:{"fill-extrusion-base":["max",0,["-",["coalesce",["get","render_height"],0],.4]],"fill-extrusion-height":["+",["coalesce",["get","render_height"],0],.15],
           "fill-extrusion-color":["case",[">",["coalesce",["get","render_height"],0],20],["match",hid,0,"#C9CED3",1,"#D6D9DC",2,"#BFC6CD",3,"#DADBDA","#CDD1D5"],["match",hid,0,"#C8BFB4",1,"#D4CABD",2,"#B9B4AF",3,"#D9CDBE",4,"#C6C3BF","#DCD3C8"]],
-          "fill-extrusion-opacity":1,"fill-extrusion-vertical-gradient":false}},(map.getStyle().layers.find(l=>l.type==="symbol")||{}).id)}catch(e){console.log(e)}}
+          "fill-extrusion-opacity":HF?["interpolate",["linear"],["zoom"],16.4,1,17.4,.1]:1,"fill-extrusion-vertical-gradient":false}},(map.getStyle().layers.find(l=>l.type==="symbol")||{}).id)}catch(e){console.log(e)}}
     }
   }catch(e){}
 }
@@ -4200,7 +4202,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11181848");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11181858");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
