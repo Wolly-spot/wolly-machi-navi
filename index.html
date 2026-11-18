@@ -855,7 +855,7 @@ html[data-fsz="2"] .ej b{font-size:11.5px}
 .hp b{font:500 16px/1.3 var(--f-display)}.hp small{font-size:12px;color:var(--muted)}
 .enjoy{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .ej{display:grid;justify-items:center;gap:6px;padding:12px 4px 10px;border-radius:18px;background:var(--surface);border:1px solid var(--line);text-decoration:none;color:var(--ink);text-align:center;transition:transform .2s}
-.ej-wide{grid-column:1/-1;display:flex!important;align-items:center;gap:12px;text-align:left;padding:12px 14px!important}.ej-wide>span:nth-child(2){flex:1;display:grid;gap:2px}.ej-wide b{font-size:15px!important}.ej-wide small{font-size:11.5px;color:var(--muted)}.ej-wide i{font-style:normal;font-size:22px;color:#A68BFF}
+.nin-wide{margin-top:10px}.ej-wide{grid-column:1/-1;display:flex!important;align-items:center;gap:12px;text-align:left;padding:12px 14px!important}.ej-wide>span:nth-child(2){flex:1;display:grid;gap:2px}.ej-wide b{font-size:15px!important}.ej-wide small{font-size:11.5px;color:var(--muted)}.ej-wide i{font-style:normal;font-size:22px;color:#A68BFF}
 .ej .ci{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:var(--cbg)}.ej .ci svg{width:38px;height:38px}
 .ej b{font:500 12.5px/1.25 var(--f-display);letter-spacing:-.02em}
 .myarea{margin:18px 0 6px;padding:16px;border-radius:24px;background:var(--surface);border:1px solid var(--line)}
@@ -1721,6 +1721,7 @@ svg .a-ring{animation:ring 2.4s ease-in-out infinite;transform-box:fill-box;tran
       <section class="block" id="sec-help">
         <div class="head cat-head"><div><div class="eyebrow">HELP</div><h2>困ったときはこちら</h2></div><span id="kyuSlotHead" hidden></span></div>
         <nav class="help" id="helpGrid" aria-label="困ったときはこちら"></nav>
+        <a class="ej ej-wide nin-wide" href="#" data-view="ninshin" data-vt="妊娠・出産ガイド"><span class="ci" style="--cbg:#FFE6F2"><svg viewBox="0 0 40 40" aria-hidden="true"><g stroke="#2E2B4F" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><circle cx="18" cy="10" r="6" fill="#FFE3CF"/><path d="M12 36V24q0-7 6-7t6 5q8 2 8 9t-6 5z" fill="#FFC6DA"/></g><path d="M27 29l1.4 1.3 1.6-1.6" stroke="#FF6FA5" stroke-width="1.6" fill="none"/></svg></span><span><b>妊娠・出産</b><small>赤ちゃんを考えたら〜1か月。やることと、もらえるお金をじゅんばんに</small></span><i>›</i></a>
       </section>
 
       <section class="block" id="sec-enjoy">
@@ -2658,6 +2659,7 @@ function sheetAzuke(){
 }
 /* ===== さがす（地域・施設・お悩みから）：ページの中の情報を、ことばでさがす ===== */
 const SYN=[
+  ["妊娠 妊婦 にんしん 出産 しゅっさん 妊活 不妊 不育 母子手帳 母子健康手帳 妊婦健診 産後 産後ケア 出生届 1か月健診 RSウイルス 両親学級 出産前教室 赤ちゃんがほしい","妊娠・出産ガイド（赤ちゃんを考えたら〜1か月）","ninshin","妊娠・出産"],
   ["熱 発熱 けいれん 夜中 夜間 救急 急病 吐いた 具合 #8000 急患","子どもの急病（急患電話マップ）","#go-kyukan","健診・病院"],
   ["歯 歯医者 むし歯 虫歯 歯科","歯医者さんマップ","near?g=dent","家の近く"],
   ["休日 日曜 歯が痛い","休日の歯医者さん","#hdent","健診・病院"],
@@ -4080,7 +4082,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11180930");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11180954");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
