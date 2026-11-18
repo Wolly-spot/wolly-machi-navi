@@ -457,18 +457,18 @@ body.fs-open{overflow:hidden}
 .maplibregl-popup .maplibregl-popup-close-button{color:#cfefff!important;z-index:2}
 .maplibregl-popup .maplibregl-popup-tip{border-top-color:rgba(127,233,255,.9)!important;border-bottom-color:rgba(127,233,255,.9)!important;filter:drop-shadow(0 0 4px #7fe9ff)}
 /* 11/16：うすい・やさしいホログラム（小児科・内科、あずかりマップ）。<html class="hl-soft"> のときだけ */
-.hl-soft .maplibregl-popup .maplibregl-popup-content,.hl-soft .hl-card{color:#3b3560!important;
+html .maplibregl-popup .maplibregl-popup-content,html .hl-card{color:#3b3560!important;
   background:linear-gradient(160deg,rgba(255,247,251,.93),rgba(240,236,255,.9) 55%,rgba(232,246,255,.9))!important;border:2px solid #B79BEF!important;
   box-shadow:0 0 0 1px rgba(255,255,255,.7),0 0 16px rgba(255,182,214,.55),inset 0 0 14px rgba(200,225,255,.35),0 14px 26px -12px rgba(120,90,170,.35)!important}
-.hl-soft .maplibregl-popup .maplibregl-popup-content::after{background:repeating-linear-gradient(to bottom,rgba(200,170,255,.10) 0 1px,transparent 1px 5px)}
-.hl-soft .maplibregl-popup .maplibregl-popup-content::before{background:linear-gradient(to bottom,transparent,rgba(255,190,220,.45),transparent)}
-.hl-soft .maplibregl-popup .maplibregl-popup-content b{color:#4a3f86!important;text-shadow:none}
-.hl-soft .maplibregl-popup .maplibregl-popup-content span{color:#6b6390!important}
-.hl-soft .maplibregl-popup .maplibregl-popup-close-button{color:#9b86d6!important}
-.hl-soft .maplibregl-popup .maplibregl-popup-tip{border-top-color:#B79BEF!important;border-bottom-color:#B79BEF!important;filter:drop-shadow(0 0 4px rgba(255,182,214,.8))}
-.hl-soft .hl-beam{background:linear-gradient(to top,var(--hc,#c9b8ff) 0,color-mix(in srgb,var(--hc,#c9b8ff) 45%,#fff) 45%,transparent);opacity:.65}
-.hl-soft .hl-dot{box-shadow:0 0 8px var(--hc,#c9b8ff),0 0 16px #ffd6ea}
-.hl-soft .hl-ring{box-shadow:0 0 6px #ffd6ea;opacity:.8}
+html .maplibregl-popup .maplibregl-popup-content::after{background:repeating-linear-gradient(to bottom,rgba(200,170,255,.10) 0 1px,transparent 1px 5px)}
+html .maplibregl-popup .maplibregl-popup-content::before{background:linear-gradient(to bottom,transparent,rgba(255,190,220,.45),transparent)}
+html .maplibregl-popup .maplibregl-popup-content b{color:#4a3f86!important;text-shadow:none}
+html .maplibregl-popup .maplibregl-popup-content span{color:#6b6390!important}
+html .maplibregl-popup .maplibregl-popup-close-button{color:#9b86d6!important}
+html .maplibregl-popup .maplibregl-popup-tip{border-top-color:#B79BEF!important;border-bottom-color:#B79BEF!important;filter:drop-shadow(0 0 4px rgba(255,182,214,.8))}
+html .hl-beam{background:linear-gradient(to top,var(--hc,#c9b8ff) 0,color-mix(in srgb,var(--hc,#c9b8ff) 45%,#fff) 45%,transparent);opacity:.65}
+html .hl-dot{box-shadow:0 0 8px var(--hc,#c9b8ff),0 0 16px #ffd6ea}
+html .hl-ring{box-shadow:0 0 6px #ffd6ea;opacity:.8}
 .hl-later{display:none!important}
 .hl-more{position:absolute;left:50%;bottom:16px;translate:-50% 0;z-index:8;display:flex;align-items:center;gap:6px;border:2px solid #fff;border-radius:999px;padding:9px 18px 9px 12px;font:800 13.5px/1 inherit;color:#fff;cursor:pointer;background:linear-gradient(135deg,#ff8fc0,#9b7bff);box-shadow:0 8px 18px -6px rgba(90,60,180,.65),0 0 14px rgba(127,233,255,.45);white-space:nowrap}
 .hl-more b{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.3);font-size:15px}
@@ -543,6 +543,89 @@ function holoOpen(box){
   box.classList.remove("hl-open");void box.offsetWidth;box.classList.add("hl-open");box.addEventListener("animationend",function f(e){if(e.target===box){box.classList.remove("hl-open");box.removeEventListener("animationend",f)}});
   const s=document.createElement("div");s.className="hl-sweep";s.style.top=(box.offsetTop-60)+"px";host.appendChild(s);
   s.animate([{top:(box.offsetTop-60)+"px"},{top:(box.offsetTop+box.offsetHeight)+"px"}],{duration:1400,delay:150,easing:"ease-out",fill:"forwards"}).onfinish=()=>s.remove();
+}
+/* 11/18 本物の色の地図（全部の立体地図で共通。mode 3＝近づくと航空写真の地面と屋根、壁は窓） */
+function holoReal(map,RMODE){RMODE=RMODE||3;if(!map||!map.getStyle)return;
+  const set=(id,k,v)=>{if(map.getLayer(id))try{map.setPaintProperty(id,k,v)}catch(e){}};
+  set("background","background-color","#F1EEE8");
+  map.getStyle().layers.forEach(l=>{const id=l.id;
+    if(l.type==="fill"){
+      if(/residential/.test(id))set(id,"fill-color","#ECE7DF");
+      else if(/commercial|retail/.test(id))set(id,"fill-color","#F3E8DC");
+      else if(/industrial|railway/.test(id))set(id,"fill-color","#E6E3E0");
+      else if(/school|university|kindergarten/.test(id))set(id,"fill-color","#F4EBCF");
+      else if(/hospital/.test(id))set(id,"fill-color","#F6E0E0");
+      else if(/wood|forest/.test(id)){set(id,"fill-color","#A9CF97");set(id,"fill-opacity",1)}
+      else if(/park|grass|pitch|track|cemetery|meadow|scrub/.test(id)){set(id,"fill-color","#C8E3B4");set(id,"fill-opacity",1)}
+      else if(/farmland/.test(id)){set(id,"fill-color","#E3E8C4");set(id,"fill-opacity",1)}
+      else if(/water/.test(id))set(id,"fill-color","#9DCAEB");
+    }
+    if(l.type==="line"){
+      if(/waterway/.test(id))set(id,"line-color","#8FC1E6");
+      else if(/park_outline/.test(id))set(id,"line-color","#B5D6A0");
+      else if(/hatching/.test(id))set(id,"line-color","#D8D2C8");
+      else if(/rail/.test(id))set(id,"line-color",/hatch|dash/.test(id)?"#FFFFFF":"#8E8C94");
+      else if(/motorway/.test(id))set(id,"line-color",/casing/.test(id)?"#C9A24A":"#F6CF6E");
+      else if(/trunk|primary/.test(id))set(id,"line-color",/casing/.test(id)?"#D8BE86":"#FBE3A6");
+      else if(/_link/.test(id))set(id,"line-color",/casing/.test(id)?"#D8BE86":"#FBE9BC");
+      else if(/path|pedestrian|footway|cycle/.test(id))set(id,"line-color","#CFC6B8");
+      else if(/casing/.test(id))set(id,"line-color","#D3CDC4");
+      else if(/road|highway|bridge|tunnel/.test(id))set(id,"line-color","#FFFFFF");
+      if(/boundary/.test(id))set(id,"line-color","#B7A9C9");
+    }
+    if(l.type==="symbol"){
+      if(/water/.test(id))set(id,"text-color","#3D7AAE");
+      else if(/highway-name|road/.test(id))set(id,"text-color","#6E6458");
+      else if(/label_(city|town|state|country)/.test(id))set(id,"text-color","#3A3A48");
+      else set(id,"text-color","#4F4D5C");
+    }
+  });
+  /* 建物：外壁の色（白・ベージュ・グレー・れんが）、高いビルはガラスとコンクリート */
+  const hid=["%",["abs",["to-number",["coalesce",["id"],["get","render_height"],0],0]],6];
+  const WALL=["#F4F1EC","#E9E3D9","#DCD8D2","#EDE4D6","#E3DCD3","#D9CFC4"];
+  set("building","fill-color",["match",hid,0,WALL[0],1,WALL[1],2,WALL[2],3,WALL[3],4,WALL[4],WALL[5]]);
+  set("building","fill-outline-color","#C9C1B5");
+  set("w-bline","line-color","#B3AA9D");set("w-hnum","text-color","#8C8478");
+  try{
+    const mk=(name,wall,win,frame,cw,ch,wx,wy,ww,wh,roof)=>{if(map.hasImage(name))map.removeImage(name);const c=document.createElement("canvas");c.width=cw;c.height=ch;const g=c.getContext("2d");
+      g.fillStyle=wall;g.fillRect(0,0,cw,ch);
+      /* 壁のざらつき */for(let i=0;i<cw*ch/6;i++){g.fillStyle=`rgba(0,0,0,${Math.random()*.035})`;g.fillRect(Math.random()*cw|0,Math.random()*ch|0,1,1)}
+      g.fillStyle=frame;g.fillRect(wx-1,wy-1,ww+2,wh+2);
+      const gr=g.createLinearGradient(wx,wy,wx+ww,wy+wh);gr.addColorStop(0,win);gr.addColorStop(1,"#6F8FA8");g.fillStyle=gr;g.fillRect(wx,wy,ww,wh);
+      g.fillStyle="rgba(255,255,255,.45)";g.fillRect(wx,wy,Math.max(1,ww/4),wh);
+      g.fillStyle="rgba(0,0,0,.08)";g.fillRect(0,ch-2,cw,2);
+      map.addImage(name,g.getImageData(0,0,cw,ch),{pixelRatio:2})};
+    mk("w-tall","#D6D8DC","#A9C3D8","#EEF0F2",16,20,3,4,10,11);
+    mk("w-tall2","#C3CAD2","#8FB1CC","#E4E8EC",16,20,2,3,12,13);
+    mk("w-h0","#F2EEE7","#C6D2DA","#F8F6F2",28,28,10,10,7,7);
+    mk("w-h1","#E8E1D6","#C3CFD8","#F4F0EA",28,28,10,10,7,7);
+    mk("w-h2","#DEDAD4","#C0CCD5","#EEEBE7",28,28,10,10,7,7);
+    mk("w-h3","#ECE3D5","#C5D0D8","#F6F0E8",28,28,10,10,7,7);
+    mk("w-h4","#D8C4B2","#BFCAD2","#E9DDD1",28,28,10,10,7,7);
+  }catch(e){}
+  try{map.setLight({anchor:"map",color:"#FFF8EC",intensity:.38,position:[1.4,210,40]})}catch(e){}
+  try{map.setSky&&map.setSky({"sky-color":"#9CC9EE","horizon-color":"#E6EEF4","fog-color":"#EEF1F3","sky-horizon-blend":.5,"horizon-fog-blend":.55,"fog-ground-blend":.3})}catch(e){}
+  /* 近づいたときだけ、航空写真をうすく重ねる（遠くでは読まない＝通信量をふやさない） */
+  try{
+    if(!map.getSource("aph"))map.addSource("aph",{type:"raster",tiles:["https://cyberjapandata.gsi.go.jp/xyz/seamlessphoto/{z}/{x}/{y}.jpg"],tileSize:256,maxzoom:18});
+    const R3=RMODE===3,R2=R3||RMODE===2,PZ=R3?15:12.5;
+    if(!map.getLayer("aph"))map.addLayer({id:"aph",type:"raster",source:"aph",minzoom:R2?PZ:16,paint:{"raster-opacity":R2?["interpolate",["linear"],["zoom"],PZ,0,PZ+1,.92]:["interpolate",["linear"],["zoom"],16,0,17,.45,18,.6],"raster-saturation":R2?.05:-.15,"raster-contrast":R2?.05:0,"raster-fade-duration":300}},map.getLayer("building")?"building":undefined);
+    /* 学区の色など、ページが足した地図の層は写真の上に出す */
+    try{const L=map.getStyle().layers,ai=L.findIndex(l=>l.id==="aph"),base=(map.getLayer("building")||{}).source;
+      L.forEach((l,k)=>{if(k<ai&&l.source&&l.source!==base&&!["aph","photo"].includes(l.source)&&/fill|line/.test(l.type)&&map.getLayer("building"))try{map.moveLayer(l.id,"building")}catch(e){}})}catch(e){}
+    /* real=2：地面は航空写真の本物の色。道は写真が見えるよう半透明に、建物は屋根らしいグレーと外壁 */
+    if(R2){map.getStyle().layers.forEach(l=>{if(l.type==="line"&&/road|highway|bridge|tunnel|motorway|trunk|primary|secondary|tertiary|minor|service|path/.test(l.id)&&!/rail/.test(l.id)){try{map.setPaintProperty(l.id,"line-opacity",["interpolate",["linear"],["zoom"],PZ,1,PZ+1,/casing/.test(l.id)?0:.42])}catch(e){}}});
+      const hid=["%",["abs",["to-number",["coalesce",["id"],["get","render_height"],0],0]],6];
+      if(!R3){try{map.setPaintProperty("building-3d","fill-extrusion-pattern",undefined)}catch(e){}}
+      if(!R3)try{map.setPaintProperty("building-3d","fill-extrusion-color",["case",[">",["coalesce",["get","render_height"],0],20],["match",hid,0,"#9FA8B2",1,"#B4BAC0",2,"#8E9AA6",3,"#C2C4C4",4,"#A9B3BC","#B8B4AE"],["match",hid,0,"#C9C3BA",1,"#B9B4AD",2,"#D6CFC4",3,"#A79F96",4,"#C4B6A6","#BDBAB5"]]);map.setPaintProperty("building-3d","fill-extrusion-opacity",.93)}catch(e){}
+      /* real=3：壁は窓の模様のまま、屋根だけ無地のふたをのせる（アップでも箱に見えず、上から見ると屋根の色） */
+      if(R3){try{const b3=map.getLayer("building-3d");map.setPaintProperty("building-3d","fill-extrusion-opacity",1);
+        if(!map.getLayer("w-roof"))map.addLayer({id:"w-roof",type:"fill-extrusion",source:b3.source,"source-layer":b3.sourceLayer||"building",minzoom:PZ,filter:b3.filter||["all"],
+          paint:{"fill-extrusion-base":["max",0,["-",["coalesce",["get","render_height"],0],.4]],"fill-extrusion-height":["+",["coalesce",["get","render_height"],0],.15],
+          "fill-extrusion-color":["case",[">",["coalesce",["get","render_height"],0],20],["match",hid,0,"#C9CED3",1,"#D6D9DC",2,"#BFC6CD",3,"#DADBDA","#CDD1D5"],["match",hid,0,"#C8BFB4",1,"#D4CABD",2,"#B9B4AF",3,"#D9CDBE",4,"#C6C3BF","#DCD3C8"]],
+          "fill-extrusion-opacity":1,"fill-extrusion-vertical-gradient":false}},(map.getStyle().layers.find(l=>l.type==="symbol")||{}).id)}catch(e){console.log(e)}}
+    }
+  }catch(e){}
 }
 /* ==== /holo-map ==== */
 
@@ -1100,85 +1183,6 @@ function paint(){
 const RQ=(location.search.match(/[?&]real=(\d)/)||[])[1];
 /* 11/18 小児科のマップは、ためしにふだんから real=3（近づいたときだけ写真）。?real=0 で今までの地図 */
 const RMODE=RQ!==undefined?+RQ:3;const REAL=RMODE>0;
-function paintReal(){
-  const set=(id,k,v)=>{if(map.getLayer(id))try{map.setPaintProperty(id,k,v)}catch(e){}};
-  set("background","background-color","#F1EEE8");
-  map.getStyle().layers.forEach(l=>{const id=l.id;
-    if(l.type==="fill"){
-      if(/residential/.test(id))set(id,"fill-color","#ECE7DF");
-      else if(/commercial|retail/.test(id))set(id,"fill-color","#F3E8DC");
-      else if(/industrial|railway/.test(id))set(id,"fill-color","#E6E3E0");
-      else if(/school|university|kindergarten/.test(id))set(id,"fill-color","#F4EBCF");
-      else if(/hospital/.test(id))set(id,"fill-color","#F6E0E0");
-      else if(/wood|forest/.test(id)){set(id,"fill-color","#A9CF97");set(id,"fill-opacity",1)}
-      else if(/park|grass|pitch|track|cemetery|meadow|scrub/.test(id)){set(id,"fill-color","#C8E3B4");set(id,"fill-opacity",1)}
-      else if(/farmland/.test(id)){set(id,"fill-color","#E3E8C4");set(id,"fill-opacity",1)}
-      else if(/water/.test(id))set(id,"fill-color","#9DCAEB");
-    }
-    if(l.type==="line"){
-      if(/waterway/.test(id))set(id,"line-color","#8FC1E6");
-      else if(/park_outline/.test(id))set(id,"line-color","#B5D6A0");
-      else if(/hatching/.test(id))set(id,"line-color","#D8D2C8");
-      else if(/rail/.test(id))set(id,"line-color",/hatch|dash/.test(id)?"#FFFFFF":"#8E8C94");
-      else if(/motorway/.test(id))set(id,"line-color",/casing/.test(id)?"#C9A24A":"#F6CF6E");
-      else if(/trunk|primary/.test(id))set(id,"line-color",/casing/.test(id)?"#D8BE86":"#FBE3A6");
-      else if(/_link/.test(id))set(id,"line-color",/casing/.test(id)?"#D8BE86":"#FBE9BC");
-      else if(/path|pedestrian|footway|cycle/.test(id))set(id,"line-color","#CFC6B8");
-      else if(/casing/.test(id))set(id,"line-color","#D3CDC4");
-      else if(/road|highway|bridge|tunnel/.test(id))set(id,"line-color","#FFFFFF");
-      if(/boundary/.test(id))set(id,"line-color","#B7A9C9");
-    }
-    if(l.type==="symbol"){
-      if(/water/.test(id))set(id,"text-color","#3D7AAE");
-      else if(/highway-name|road/.test(id))set(id,"text-color","#6E6458");
-      else if(/label_(city|town|state|country)/.test(id))set(id,"text-color","#3A3A48");
-      else set(id,"text-color","#4F4D5C");
-    }
-  });
-  /* 建物：外壁の色（白・ベージュ・グレー・れんが）、高いビルはガラスとコンクリート */
-  const hid=["%",["abs",["to-number",["coalesce",["id"],["get","render_height"],0],0]],6];
-  const WALL=["#F4F1EC","#E9E3D9","#DCD8D2","#EDE4D6","#E3DCD3","#D9CFC4"];
-  set("building","fill-color",["match",hid,0,WALL[0],1,WALL[1],2,WALL[2],3,WALL[3],4,WALL[4],WALL[5]]);
-  set("building","fill-outline-color","#C9C1B5");
-  set("w-bline","line-color","#B3AA9D");set("w-hnum","text-color","#8C8478");
-  try{
-    const mk=(name,wall,win,frame,cw,ch,wx,wy,ww,wh,roof)=>{if(map.hasImage(name))map.removeImage(name);const c=document.createElement("canvas");c.width=cw;c.height=ch;const g=c.getContext("2d");
-      g.fillStyle=wall;g.fillRect(0,0,cw,ch);
-      /* 壁のざらつき */for(let i=0;i<cw*ch/6;i++){g.fillStyle=`rgba(0,0,0,${Math.random()*.035})`;g.fillRect(Math.random()*cw|0,Math.random()*ch|0,1,1)}
-      g.fillStyle=frame;g.fillRect(wx-1,wy-1,ww+2,wh+2);
-      const gr=g.createLinearGradient(wx,wy,wx+ww,wy+wh);gr.addColorStop(0,win);gr.addColorStop(1,"#6F8FA8");g.fillStyle=gr;g.fillRect(wx,wy,ww,wh);
-      g.fillStyle="rgba(255,255,255,.45)";g.fillRect(wx,wy,Math.max(1,ww/4),wh);
-      g.fillStyle="rgba(0,0,0,.08)";g.fillRect(0,ch-2,cw,2);
-      map.addImage(name,g.getImageData(0,0,cw,ch),{pixelRatio:2})};
-    mk("w-tall","#D6D8DC","#A9C3D8","#EEF0F2",16,20,3,4,10,11);
-    mk("w-tall2","#C3CAD2","#8FB1CC","#E4E8EC",16,20,2,3,12,13);
-    mk("w-h0","#F2EEE7","#C6D2DA","#F8F6F2",28,28,10,10,7,7);
-    mk("w-h1","#E8E1D6","#C3CFD8","#F4F0EA",28,28,10,10,7,7);
-    mk("w-h2","#DEDAD4","#C0CCD5","#EEEBE7",28,28,10,10,7,7);
-    mk("w-h3","#ECE3D5","#C5D0D8","#F6F0E8",28,28,10,10,7,7);
-    mk("w-h4","#D8C4B2","#BFCAD2","#E9DDD1",28,28,10,10,7,7);
-  }catch(e){}
-  try{map.setLight({anchor:"map",color:"#FFF8EC",intensity:.38,position:[1.4,210,40]})}catch(e){}
-  try{map.setSky&&map.setSky({"sky-color":"#9CC9EE","horizon-color":"#E6EEF4","fog-color":"#EEF1F3","sky-horizon-blend":.5,"horizon-fog-blend":.55,"fog-ground-blend":.3})}catch(e){}
-  /* 近づいたときだけ、航空写真をうすく重ねる（遠くでは読まない＝通信量をふやさない） */
-  try{
-    if(!map.getSource("aph"))map.addSource("aph",{type:"raster",tiles:["https://cyberjapandata.gsi.go.jp/xyz/seamlessphoto/{z}/{x}/{y}.jpg"],tileSize:256,maxzoom:18});
-    const R3=RMODE===3,R2=R3||RMODE===2,PZ=R3?15:12.5;
-    if(!map.getLayer("aph"))map.addLayer({id:"aph",type:"raster",source:"aph",minzoom:R2?PZ:16,paint:{"raster-opacity":R2?["interpolate",["linear"],["zoom"],PZ,0,PZ+1,.92]:["interpolate",["linear"],["zoom"],16,0,17,.45,18,.6],"raster-saturation":R2?.05:-.15,"raster-contrast":R2?.05:0,"raster-fade-duration":300}},map.getLayer("building")?"building":undefined);
-    /* real=2：地面は航空写真の本物の色。道は写真が見えるよう半透明に、建物は屋根らしいグレーと外壁 */
-    if(R2){map.getStyle().layers.forEach(l=>{if(l.type==="line"&&/road|highway|bridge|tunnel|motorway|trunk|primary|secondary|tertiary|minor|service|path/.test(l.id)&&!/rail/.test(l.id)){try{map.setPaintProperty(l.id,"line-opacity",["interpolate",["linear"],["zoom"],PZ,1,PZ+1,/casing/.test(l.id)?0:.42])}catch(e){}}});
-      const hid=["%",["abs",["to-number",["coalesce",["id"],["get","render_height"],0],0]],6];
-      if(!R3){try{map.setPaintProperty("building-3d","fill-extrusion-pattern",undefined)}catch(e){}}
-      if(!R3)try{map.setPaintProperty("building-3d","fill-extrusion-color",["case",[">",["coalesce",["get","render_height"],0],20],["match",hid,0,"#9FA8B2",1,"#B4BAC0",2,"#8E9AA6",3,"#C2C4C4",4,"#A9B3BC","#B8B4AE"],["match",hid,0,"#C9C3BA",1,"#B9B4AD",2,"#D6CFC4",3,"#A79F96",4,"#C4B6A6","#BDBAB5"]]);map.setPaintProperty("building-3d","fill-extrusion-opacity",.93)}catch(e){}
-      /* real=3：壁は窓の模様のまま、屋根だけ無地のふたをのせる（アップでも箱に見えず、上から見ると屋根の色） */
-      if(R3){try{const b3=map.getLayer("building-3d");map.setPaintProperty("building-3d","fill-extrusion-opacity",1);
-        if(!map.getLayer("w-roof"))map.addLayer({id:"w-roof",type:"fill-extrusion",source:b3.source,"source-layer":b3.sourceLayer||"building",minzoom:PZ,filter:b3.filter||["all"],
-          paint:{"fill-extrusion-base":["max",0,["-",["coalesce",["get","render_height"],0],.4]],"fill-extrusion-height":["+",["coalesce",["get","render_height"],0],.15],
-          "fill-extrusion-color":["case",[">",["coalesce",["get","render_height"],0],20],["match",hid,0,"#C9CED3",1,"#D6D9DC",2,"#BFC6CD",3,"#DADBDA","#CDD1D5"],["match",hid,0,"#C8BFB4",1,"#D4CABD",2,"#B9B4AF",3,"#D9CDBE",4,"#C6C3BF","#DCD3C8"]],
-          "fill-extrusion-opacity":1,"fill-extrusion-vertical-gradient":false}},(map.getStyle().layers.find(l=>l.type==="symbol")||{}).id)}catch(e){console.log(e)}}
-    }
-  }catch(e){}
-}
 function setPhoto(){
   const v=photo?"visible":"none",nv=photo?"none":"visible";
   if(map.getLayer("photo"))map.setLayoutProperty("photo","visibility",v);
@@ -1194,7 +1198,7 @@ function drawMap(o,rows){
           locale:{"CooperativeGesturesHandler.MobileHelpText":"地図は2本の指で動かせます","CooperativeGesturesHandler.WindowsHelpText":"Ctrl を押しながらスクロールで拡大・縮小","CooperativeGesturesHandler.MacHelpText":"⌘ を押しながらスクロールで拡大・縮小","NavigationControl.ZoomIn":"大きく","NavigationControl.ZoomOut":"小さく","NavigationControl.ResetBearing":"北を上にもどす"}});
       }catch(e){failMsg();return}
       map.addControl(new maplibregl.NavigationControl({visualizePitch:true}),"top-right");
-      map.on("load",()=>{const at=document.querySelector("#map .maplibregl-ctrl-attrib");at&&at.classList.remove("maplibregl-compact-show");paint();if(REAL)paintReal();holoOpen($("#map"));ready=true;setPhoto();const l=$("#mload");l&&l.remove();if(queued){const q=queued;queued=null;place(q[0],q[1])}});
+      map.on("load",()=>{const at=document.querySelector("#map .maplibregl-ctrl-attrib");at&&at.classList.remove("maplibregl-compact-show");paint();if(REAL)holoReal(map,RMODE);holoOpen($("#map"));ready=true;setPhoto();const l=$("#mload");l&&l.remove();if(queued){const q=queued;queued=null;place(q[0],q[1])}});
     }
     if(!ready){queued=[o,rows];return}
     place(o,rows);
