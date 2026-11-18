@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-17T19:15:00+09:00",
+ "updatedAt": "2026-11-18T09:50:00+09:00",
  "events": [
   {
    "id": "e-shintoshin-illumination",
@@ -41,32 +41,6 @@
    "added": "2026-11-11T09:50:00+09:00"
   },
   {
-   "id": "e-shiki-illumination",
-   "kind": "free",
-   "title": "志木駅東口のイルミネーション（11/14〜1/31）",
-   "desc": "夕方16:30から駅前がキラキラに。お散歩ついでに見られます。",
-   "date": "2026-11-14",
-   "area": "志木市",
-   "src": "いこーよ",
-   "url": "https://iko-yo.net/events/611658",
-   "img": "https://d2goguvysdoarq.cloudfront.net/system/event_photos/photos/1779488/normal.jpg?1793385313",
-   "ai": false,
-   "added": "2026-11-14T07:55:00+09:00"
-  },
-  {
-   "id": "e-ario-happyday",
-   "kind": "point",
-   "title": "アリオ川口 nanacoポイント4倍（11/18）",
-   "desc": "8のつく日は専門店街でnanaco払いのポイントが4倍。",
-   "date": "2026-11-18",
-   "area": "川口市",
-   "src": "アリオ川口",
-   "url": "https://kawaguchi.ario.jp/event/1700012385",
-   "img": "https://kawaguchi.ario.jp/app/17/img/event/1700012385/img_3s1np1ftxhogo.png",
-   "ai": false,
-   "added": "2026-11-11T09:50:00+09:00"
-  },
-  {
    "id": "e-cocoon-card10",
    "kind": "point",
    "title": "コクーンシティカード10%オフ（11/20〜24）",
@@ -91,19 +65,6 @@
    "img": "https://www.cocooncity.jp/theme/cocooncity/resources/images/ogp.png",
    "ai": false,
    "added": "2026-11-11T09:50:00+09:00"
-  },
-  {
-   "id": "e-zenniku-soka",
-   "kind": "kids",
-   "title": "全肉祭 in 埼玉（11/21〜23 草加）",
-   "desc": "肉グルメ約30店と大型エアー遊具・射的など縁日コーナー。",
-   "date": "2026-11-21",
-   "area": "草加市",
-   "src": "いこーよ",
-   "url": "https://report.iko-yo.net/articles/35617",
-   "img": "https://d28w2qw7dtr435.cloudfront.net/uploaded/cover_images/images/35813/normal.jpg?1794387250",
-   "ai": false,
-   "added": "2026-11-14T07:55:00+09:00"
   },
   {
    "id": "e-iwatsuki-marche",
@@ -158,19 +119,6 @@
    "added": "2026-11-12T19:30:00+09:00"
   },
   {
-   "id": "e-kawagoe-winefesta",
-   "kind": "free",
-   "title": "川越駅西口でワインフェスタ（11/22）入場無料",
-   "desc": "キッチンカーも出る屋外の広場イベント。子連れもOK、雨天中止。",
-   "date": "2026-11-22",
-   "area": "川越市",
-   "src": "いこーよ",
-   "url": "https://iko-yo.net/events/609329",
-   "img": "https://d2goguvysdoarq.cloudfront.net/system/event_photos/photos/1773701/normal.jpg?1792465743",
-   "ai": false,
-   "added": "2026-11-15T09:40:00+09:00"
-  },
-  {
    "id": "e-planetarium-day",
    "kind": "facility",
    "title": "11/23はプラネタリウムの日 特別投影",
@@ -197,17 +145,56 @@
    "added": "2026-11-15T19:10:00+09:00"
   },
   {
-   "id": "e-pashalico-urawa",
-   "kind": "kids",
-   "title": "家族写真の無料撮影会（11/28 埼玉会館）",
-   "desc": "赤ちゃん〜小学生とマタニティOK。予約制で家計相談とセット、〆11/27",
-   "date": "2026-11-28",
-   "area": "さいたま市浦和区",
-   "src": "いこーよ",
-   "url": "https://iko-yo.net/events/603813",
-   "img": "https://d2goguvysdoarq.cloudfront.net/system/event_photos/photos/1762247/normal.png?1790653250",
+   "id": "e-cocoon-saison5",
+   "kind": "point",
+   "title": "コクーンシティ セゾンカード5%オフ（11/25）",
+   "desc": "第4水曜はコクーンシティカードセゾン払いで5%オフ。",
+   "date": "2026-11-25",
+   "area": "さいたま市大宮区",
+   "src": "コクーンシティ",
+   "url": "https://www.cocooncity.jp/event/detail/2658",
+   "img": "https://www.cocooncity.jp/theme/cocooncity/resources/images/ogp.png",
    "ai": false,
-   "added": "2026-11-16T09:45:00+09:00"
+   "added": "2026-11-18T09:50:00+09:00"
+  },
+  {
+   "id": "e-ario-happyday",
+   "kind": "point",
+   "title": "アリオ川口 nanacoポイント4倍（11/18・28）",
+   "desc": "8のつく日は専門店街でnanaco払いのポイントが4倍に。",
+   "date": "2026-11-28",
+   "area": "川口市",
+   "src": "アリオ川口",
+   "url": "https://kawaguchi.ario.jp/event/1700012385",
+   "img": "https://kawaguchi.ario.jp/app/17/img/event/1700012385/img_3s1np1ftxhogo.png",
+   "ai": false,
+   "added": "2026-11-11T09:50:00+09:00"
+  },
+  {
+   "id": "e-cocoon-shimajiro",
+   "kind": "mall",
+   "title": "しまじろうのクリスマス（11/28〜12/25）",
+   "desc": "コクーンシティにフォトスポットやスタンプラリー。ショーは12/5・6。",
+   "date": "2026-11-28",
+   "area": "さいたま市大宮区",
+   "src": "コクーンシティ",
+   "url": "https://www.cocooncity.jp/event/detail/2906",
+   "img": "https://www.cocooncity.jp/theme/cocooncity/resources/images/ogp.png",
+   "ai": false,
+   "added": "2026-11-18T09:50:00+09:00"
+  },
+  {
+   "id": "e-ario-danball-maze",
+   "kind": "kids",
+   "title": "クリスマスだんぼーるめいろ（11/28〜29）",
+   "desc": "アリオ川口で段ボールの迷路に挑戦。1〜12歳、30分500円。",
+   "date": "2026-11-28",
+   "area": "川口市",
+   "src": "アリオ川口",
+   "url": "https://kawaguchi.ario.jp/event/1700012565",
+   "img": "https://kawaguchi.ario.jp/app/17/img/event/1700012565/img_3sb3uqk9bda8k.png",
+   "ai": false,
+   "added": "2026-11-18T09:50:00+09:00"
   },
   {
    "id": "e-minuma-kosodate-fair",
@@ -221,6 +208,19 @@
    "img": "https://d2goguvysdoarq.cloudfront.net/system/event_photos/photos/1780429/normal.jpg?1793644462",
    "ai": false,
    "added": "2026-11-14T19:30:00+09:00"
+  },
+  {
+   "id": "e-misono-playpark",
+   "kind": "free",
+   "title": "1日プレーパーク（11/29 美園）無料",
+   "desc": "浦和美園4丁目公園で外遊び。赤ちゃんからだれでもOK、11〜14時。",
+   "date": "2026-11-29",
+   "area": "さいたま市緑区",
+   "src": "さいたま市",
+   "url": "https://www.city.saitama.lg.jp/003/001/016/005/p133353.html",
+   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/e-misono-playpark.jpg",
+   "ai": true,
+   "added": "2026-11-18T09:50:00+09:00"
   },
   {
    "id": "e-gakudo-r9",
@@ -453,19 +453,6 @@
    "added": "2026-11-12T09:45:00+09:00"
   },
   {
-   "id": "n-system-stop",
-   "kind": "safety",
-   "title": "市のシステム緊急停止 多くが再開（11/10）",
-   "desc": "安全を確かめたものから再開。盆栽美術館・人形博物館のHPはまだ停止中。",
-   "date": "2026-11-10",
-   "src": "さいたま市",
-   "url": "https://www.city.saitama.lg.jp/001/011/001/p134706.html",
-   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-system-stop.jpg",
-   "important": false,
-   "ai": true,
-   "added": "2026-11-11T09:50:00+09:00"
-  },
-  {
    "id": "n-bousai-leak",
    "kind": "safety",
    "title": "防災情報の配信システムに不正アクセス",
@@ -581,7 +568,7 @@
   {
    "id": "n-nursery-aki-1101",
    "kind": "kosodate",
-   "title": "ナーサリールームなどの空き状況（11/1時点）",
+   "title": "ナーサリールームなどの空き状況（11/15時点）",
    "desc": "家庭保育室・企業主導型保育の空きを市が公開。保活の参考に。",
    "date": "2026-11",
    "src": "さいたま市",
@@ -603,6 +590,19 @@
    "ai": true,
    "important": false,
    "added": "2026-11-17T19:15:00+09:00"
+  },
+  {
+   "id": "n-wakata-kouen",
+   "kind": "kids",
+   "title": "若田光一さんの講演会（12/19）無料 〆12/5",
+   "desc": "宇宙飛行士のお話。小学生以上、申込みが多いと抽選だよ。",
+   "date": "2026-12-19",
+   "src": "さいたま市",
+   "url": "https://www.city.saitama.lg.jp/kagakukan/category/006/p134438.html",
+   "important": false,
+   "img": "",
+   "ai": false,
+   "added": "2026-11-18T09:50:00+09:00"
   }
  ]
 }
