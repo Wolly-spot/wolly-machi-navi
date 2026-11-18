@@ -372,6 +372,11 @@ section.block{padding-block:16px}
 .sheet h3{font:500 22px/1.35 var(--f-display);margin:4px 0}
 .sheet .sub{color:var(--muted);font-size:13px;margin:0 0 14px}
 .sheet .close{position:absolute;top:12px;right:max(14px,env(safe-area-inset-right,0px))}
+/* 11/18 前のページへもどる（共通） */
+.pgback{display:inline-flex;align-items:center;gap:2px;flex:0 0 auto;height:40px;padding:0 14px 0 10px;border:0;border-radius:999px;background:linear-gradient(110deg,#FF8FC8,#A68BFF);color:#fff;font:inherit;font-size:14px;font-weight:800;cursor:pointer;box-shadow:0 4px 12px -6px rgba(142,107,245,.8);-webkit-tap-highlight-color:transparent}
+.pgback span{font-size:22px;line-height:1;margin-top:-2px}.pgback:active{transform:scale(.95)}
+.sheet .pgback{position:absolute;top:14px;left:max(14px,env(safe-area-inset-left,0px));z-index:3}
+.sheet:has(#sheetBackBtn:not([hidden])) #sheetBody{padding-top:44px}
 .sheet .news{background:color-mix(in srgb,var(--surface) 55%,transparent);border-color:var(--glass-line)}
 .sheet .ni{opacity:0;transform:translateY(10px);animation:pop .5s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(var(--n)*40ms + .12s)}
 .sheet .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px}
@@ -1807,12 +1812,13 @@ svg .a-ring{animation:ring 2.4s ease-in-out infinite;transform-box:fill-box;tran
 <div class="scrim" id="scrim"></div>
 <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
   <div class="grab"></div>
+  <button class="pgback" id="sheetBackBtn" type="button" hidden><span>‹</span>もどる</button>
   <button class="iconbtn close" id="sheetClose" type="button" aria-label="閉じる"><svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
   <div id="sheetBody"></div>
 </div>
 <!-- その場で開くページ（お金・保活ナビ） -->
 <div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-labelledby="vTitle" hidden>
-  <div class="vbar"><b id="vTitle"></b><button class="iconbtn" id="vClose" type="button" aria-label="閉じる"><svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <div class="vbar"><button class="pgback" id="vBack" type="button"><span>‹</span>もどる</button><b id="vTitle"></b><button class="iconbtn" id="vClose" type="button" aria-label="閉じる"><svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
   <div class="vbody"><span class="vload">ひらいています…</span><iframe id="vFrame" title="" loading="eager"></iframe></div>
 </div>
 
@@ -4060,7 +4066,7 @@ function openSheet(kind){
 function closeSheet(){closeViewer();sheetKind=null;$("#scrim").classList.remove("on");$("#sheet").classList.remove("on");document.body.classList.remove("sheet-open")}
 $("#scrim").addEventListener("click",()=>sheetBack());
 /* 「現在の習い事一覧」から入った習い事は、×で一覧にもどる（11/16） */
-let lgReturn=null;
+let lgReturn=null,sheetHist=[];
 function sheetBack(){const r=lgReturn,back=r&&location.hash===r.hash;lgReturn=null;
   const pk=$("#rmPark");
   if(back&&pk){$("#rmOv")&&closeRoom(true);pk.id="rmOv";pk.classList.remove("parked");
@@ -4068,21 +4074,32 @@ function sheetBack(){const r=lgReturn,back=r&&location.hash===r.hash;lgReturn=nu
     const sh=$("#sheet"),sc=$("#scrim");setTimeout(()=>{sh.classList.add("quick");sc.classList.add("quick");goBack();setTimeout(()=>{sh.classList.remove("quick");sc.classList.remove("quick")},120)},230);return}
   goBack();if(pk){pk.remove();$("#rmOv")||document.body.classList.remove("rm-open")}}
 $("#sheetClose").addEventListener("click",()=>sheetBack());
+$("#sheetBackBtn").addEventListener("click",()=>history.back());
 $("#sheet").addEventListener("click",e=>{if(e.target.closest("a[href='#mypage']"))closeSheet()});
 let viewerOpen=false;
 /* iframe の src を入れかえると、ブラウザの「もどる」の履歴が1つふえる。
    そのせいで × やパネルの「閉じる」（history.back）が中のページをもどるだけになり、反応しないように見えていた。
    開くたびに新しい iframe に取りかえて、履歴をふやさないようにする */
+/* 写しのページの中で見たページの順番（もどるで1つ前へ。なければ写しを閉じて前の画面へ） */
+let vStack=[],vGoingBack=false;
+function vMark(){const v=$("#viewer");v&&(v.dataset.steps=vStack.length)}
+function hookFrame(f){f.addEventListener("load",()=>{let u="";try{u=f.contentWindow.location.href}catch(e){}
+  if(!u||u==="about:blank")return;
+  if(vStack.length&&u!==vStack[0]){try{const t=(f.contentDocument.title||"").replace(/[｜|].*$/,"").trim();t&&($("#vTitle").textContent=t)}catch(e){}}
+  if(vGoingBack){vGoingBack=false}else if(vStack[vStack.length-1]!==u)vStack.push(u);
+  try{const h=f.contentWindow.history,ps=h.pushState.bind(h);h.pushState=function(st,t,url){const r=ps(st,t,url);try{const nu=f.contentWindow.location.href;if(vStack[vStack.length-1]!==nu)vStack.push(nu)}catch(e){}vMark();return r}}catch(e){}
+  vMark()})}
+function viewerBack(){const f=$("#vFrame");if(vStack.length>1&&f){vStack.pop();vGoingBack=true;try{f.contentWindow.location.replace(vStack[vStack.length-1]);vMark();return}catch(e){vGoingBack=false}}closeViewer()}
 function freshFrame(url,title){
   const old=$("#vFrame"),f=document.createElement("iframe");
   f.id="vFrame";f.title=title||"";f.setAttribute("loading","eager");
-  if(url)f.src=url;old.replaceWith(f);return f;
+  vStack=url?[new URL(url,location.href).href]:[];vGoingBack=false;hookFrame(f);if(url)f.src=url;old.replaceWith(f);return f;
 }
 function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11181029");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11181041");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -4092,6 +4109,7 @@ function closeViewer(){if(!viewerOpen)return;viewerOpen=false;const v=$("#viewer
   setTimeout(()=>{if(!viewerOpen){v.hidden=true;freshFrame("","")}},420)}
 $("#sheet").addEventListener("click",e=>{const b=e.target.closest("[data-view]");if(b){e.preventDefault();openViewer(b.dataset.view,b.dataset.vt)}});
 $("#vClose").addEventListener("click",closeViewer);
+$("#vBack").addEventListener("click",viewerBack);
 /* 写しのページ（あずかりマップの「近くの園をさがす」など）へ、登録した区・住所の位置を渡す。写しから「マイページ登録」を押されたらマイページへ */
 const PAGES_ORIGIN=new URL(PAGES_BASE).origin;
 function sendHome(){const w=$("#vFrame").contentWindow;if(!w)return;const p=S.profile;
@@ -4197,6 +4215,9 @@ function applyRoute(){
   const prev=route;
   route=views[h]||(sheet?prev:"home");
   if(!sheet)closeSheet();
+  /* パネル→パネルと進んだときだけ「もどる」を出す */
+  if(sheet){const n=sheetHist.length;if(n>1&&sheetHist[n-2]===sheet)sheetHist.pop();else if(sheetHist[n-1]!==sheet)sheetHist.push(sheet)}else sheetHist=[];
+  {const sb=$("#sheetBackBtn");if(sb)sb.hidden=sheetHist.length<2}
   lastSheet=sheet;
   document.querySelectorAll(".view").forEach(v=>v.classList.toggle("on",v.id==="v-"+route));
   updateChrome(h,sheet);
