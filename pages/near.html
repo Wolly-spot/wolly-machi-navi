@@ -1099,7 +1099,7 @@ function paint(){
 /* 11/18 本物寄りの地図（ためし：?real=1）。色を実物に近く・建物はコンクリートや外壁の色・近づくと航空写真をうすく重ねる */
 const RQ=(location.search.match(/[?&]real=(\d)/)||[])[1];
 /* 11/18 小児科のマップは、ためしにふだんから real=3（近づいたときだけ写真）。?real=0 で今までの地図 */
-const RMODE=RQ!==undefined?+RQ:(g==="ped"?3:0);const REAL=RMODE>0;
+const RMODE=RQ!==undefined?+RQ:3;const REAL=RMODE>0;
 function paintReal(){
   const set=(id,k,v)=>{if(map.getLayer(id))try{map.setPaintProperty(id,k,v)}catch(e){}};
   set("background","background-color","#F1EEE8");
@@ -1219,8 +1219,11 @@ function place(o,rows){
   swing=-swing;
   const cam=map.cameraForBounds(b,{padding:{top:60,bottom:20,left:24,right:24},maxZoom:16.5})||{center:[o.ll[1],o.ll[0]],zoom:14};
   /* 11/18 最初から建物が見える高さ（z14.2 より引かない）。近い順のピンは、かたむけて奥に見せる */
-  const z0=Math.max(10,(cam.zoom||14)-.05),zz=Math.max(z0,14.2),cc=maplibregl.LngLat.convert(cam.center);
-  const to={center:zz>z0?[o.ll[1]*.6+cc.lng*.4,o.ll[0]*.6+cc.lat*.4]:cc,zoom:zz,pitch:zz>z0?62:55,bearing:swing,offset:zz>z0?[0,90]:[0,0]};
+  /* 全部のピンが入る高さが低すぎるときは、家と近い3か所が入る高さに（ピンが画面の外にならないように）。高くても15まで */
+  const z0=Math.max(10,(cam.zoom||14)-.05);let to={center:cam.center,zoom:z0,pitch:55,bearing:swing};
+  if(z0<14.2){const b3=new maplibregl.LngLatBounds([o.ll[1],o.ll[0]],[o.ll[1],o.ll[0]]);rows.slice(0,3).forEach(x=>b3.extend([x.r.lo,x.r.la]));
+    const c3=map.cameraForBounds(b3,{padding:{top:90,bottom:70,left:40,right:40},maxZoom:15});
+    if(c3&&c3.zoom>z0)to={center:c3.center,zoom:Math.min(15,c3.zoom),pitch:58,bearing:swing}}
   if(o.tg&&rows[0]){const t={center:[o.ll[1],o.ll[0]],zoom:16.4,pitch:60,bearing:swing,offset:[0,110]};if(RM)map.jumpTo(t);else map.flyTo({...t,duration:2200,curve:1.5,essential:true});map.once("moveend",()=>openPin(rows[0],0));first=false;return}
   if(RM)map.jumpTo(to);
   else if(first){

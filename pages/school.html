@@ -595,7 +595,7 @@ function paint(map){
 /* 11/18 本物寄りの地図（ためし：?real=1）。色を実物に近く・建物はコンクリートや外壁の色・近づくと航空写真をうすく重ねる */
 const RQ=(location.search.match(/[?&]real=(\d)/)||[])[1];
 /* 11/18 小児科のマップは、ためしにふだんから real=3（近づいたときだけ写真）。?real=0 で今までの地図 */
-const RMODE=RQ!==undefined?+RQ:(g==="ped"?3:0);const REAL=RMODE>0;
+const RMODE=RQ!==undefined?+RQ:3;const REAL=RMODE>0;
 function paintReal(){
   const set=(id,k,v)=>{if(map.getLayer(id))try{map.setPaintProperty(id,k,v)}catch(e){}};
   set("background","background-color","#F1EEE8");
