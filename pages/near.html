@@ -504,7 +504,7 @@ html .hl-ring{box-shadow:0 0 6px #ffd6ea;opacity:.8}
   <div class="mw" id="mw"><div>
     <div class="mapbox"><div id="map" role="region" aria-label="地図（立体）"><span class="mload" id="mload">地図をよみこみ中…</span></div>
       <div class="mtools"><button type="button" id="ph" aria-pressed="false"></button></div></div>
-    <p class="mhint"><span id="legend"></span>ピンをタップすると名前が出るよ。地図は2本の指で動かす・回す・かたむけることができるんだ。</p>
+    <p class="mhint"><span id="legend"></span>ピンをタップすると名前が出るよ。地図は1回タップすると指1本で動かせるよ。2本の指で回す・かたむけることもできるんだ。</p>
   </div></div>
   <section class="wardsec" id="wardsec" hidden><div class="wcard">
     <svg id="wmap" viewBox="-12 -12 624 634" role="group" aria-label="さいたま市の区の地図"><g id="wdeco" aria-hidden="true"></g><g id="wpaths"></g><g id="wlabels"></g></svg>
@@ -1495,4 +1495,22 @@ window.wEmbed=function(u,host,name){
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",run);else run();
   new MutationObserver(later).observe(document.documentElement,{childList:true,subtree:true});
 })();
-</script><!--/wolly-icons--></body></html>
+</script><!--/wolly-icons--><!--wolly-tel2--><script>/* 電話番号はタップでかけられるように（tel_links.py） */
+(function(){
+var Z="0-9０-９",H="\\-‐－−ー―",RE=new RegExp("(0["+Z+"]{1,4}\\s?["+H+"(（]\\s?["+Z+"]{1,4}\\s?["+H+")）]\\s?["+Z+"]{3,4}|0[12]["+Z+"]0["+H+"]?["+Z+"]{2,3}["+H+"]?["+Z+"]{3}|[#＃](?:8000|７１１９|7119|８０００)|1[19][09]番)","g");
+var SKIP="a,button,script,style,textarea,input,select,option,title,svg,.maplibregl-map,[data-notel],[contenteditable]";
+function num(m){m=m.replace(/[０-９]/g,function(c){return String.fromCharCode(c.charCodeAt(0)-65248)}).replace(/＃/g,"#");
+  if(/番$/.test(m))return m.replace("番","");return m.replace(/[^0-9#]/g,"").replace("#","%23")}
+function run(root){if(!root||root.nodeType!==1||(root.closest&&root.closest(SKIP)))return;
+  var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:function(n){var p=n.parentNode;if(!p||!p.closest||p.closest(SKIP))return 2;RE.lastIndex=0;return RE.test(n.nodeValue)?1:2}}),list=[],n;
+  while(n=w.nextNode())list.push(n);
+  list.forEach(function(t){var f=document.createDocumentFragment(),s=t.nodeValue,last=0;RE.lastIndex=0;
+    s.replace(RE,function(m){var i=arguments[arguments.length-2];f.appendChild(document.createTextNode(s.slice(last,i)));var a=document.createElement("a");
+      a.href="tel:"+num(m);a.className="wolly-tel";a.textContent=(/^[📞☎]/.test(s.slice(Math.max(0,i-2),i))?"":"📞")+m;f.appendChild(a);last=i+m.length;return m});
+    f.appendChild(document.createTextNode(s.slice(last)));if(t.parentNode)t.parentNode.replaceChild(f,t)})}
+var st=document.createElement("style");st.textContent=".wolly-tel{color:inherit;font-weight:inherit;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px;white-space:nowrap;-webkit-tap-highlight-color:rgba(255,120,180,.25)}";
+function go(){document.head.appendChild(st);run(document.body);
+  new MutationObserver(function(ms){ms.forEach(function(m){m.addedNodes.forEach(function(x){if(x.nodeType===1)run(x);else if(x.nodeType===3&&x.parentNode)run(x.parentNode)})})}).observe(document.body,{childList:true,subtree:true})}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",go);else go();
+})();</script><!--/wolly-tel2-->
+</body></html>
