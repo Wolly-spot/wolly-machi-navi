@@ -853,7 +853,7 @@ html[data-fsz="2"] .ej b{font-size:11.5px}
 .hr b{flex:1;font-size:14px;font-weight:700}.hr i{font-style:normal;color:#A68BFF;font-weight:900}
 .hr-c{flex:0 0 auto;font-size:10.5px;font-weight:800;padding:2px 8px;border-radius:999px;background:#F1E8FF;color:#7155BD}
 .hr-none{margin:0;padding:10px 12px;border-radius:14px;background:#fff;font-size:13px;color:var(--muted)}
-.help{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.help{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .hp{display:grid;justify-items:center;gap:4px;padding:16px 8px 14px;border-radius:22px;background:var(--surface);border:1px solid var(--line);text-decoration:none;color:var(--ink);text-align:center;transition:transform .2s}
 .hp:active,.ej:active{transform:scale(.97)}
 .hp .ci{width:58px;height:58px;border-radius:18px;display:grid;place-items:center;background:var(--cbg);margin-bottom:2px}.hp .ci svg{width:46px;height:46px}
@@ -1739,7 +1739,10 @@ html .hl-ring{box-shadow:0 0 6px #ffd6ea;opacity:.8}
 
       <section class="block" id="sec-help">
         <div class="head cat-head"><div><div class="eyebrow">HELP</div><h2>困ったときはこちら</h2></div><span id="kyuSlotHead" hidden></span></div>
-        <!--vtel-bar--><a class="vt-bar" href="#" data-vtel id="vtBar" aria-label="声で電話をさがす"><span class="vt-mic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4M9 21h6"/></svg></span><span class="vt-tx"><b>声で電話をさがす</b><small>話すと、いちばん近い電話番号が出るよ</small></span><span class="vt-go"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg></span></a><!--/vtel-bar-->
+        <!--vtel-bar--><a class="vt-bar" href="#" data-vtel id="vtBar" aria-label="声で電話をさがす"><span class="vt-mic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4M9 21h6"/></svg></span><span class="vt-tx"><b>声で電話をさがす</b><small>話すと、いちばん近い電話番号が出るよ</small></span><span class="vt-go"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg></span></a><a class="vt-bar vt-bar2" href="#kyubyo" aria-label="子どもの急病・夜間救急"><span class="vt-mic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 14.8V5a2 2 0 0 0-4 0v9.8a4 4 0 1 0 4 0z"/><circle cx="12" cy="17.5" r="1.8" fill="#ff5a7a" stroke="none"/><path d="M12 9v6.5"/></svg></span><span class="vt-tx"><b>子どもの急病・夜間救急</b><small>電話マップ・休日の歯医者・小児科・薬局</small></span><span class="vt-go"><svg viewBox="0 0 24 24" aria-hidden="true" style="fill:none;stroke:#fff;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round"><path d="M9 6l6 6-6 6"/></svg></span></a><!--/vtel-bar-->
+        
+        
+        
         
         
         
@@ -2728,7 +2731,6 @@ $("#rows").addEventListener("click",e=>{
 
 /* ===== ホームの入口（2026-11-10 作り直し）：困ったときはこちら／地域の暮らしを楽しむ ===== */
 const HELP=[
-  {n:"子どもの急病",s:"病院・夜間救急",href:"#kyubyo",ic:()=>svg(MEMO_IC.temp,40),bg:"#E1F3FF"},
   {n:"預け先を探す",s:"病児・一時保育",href:"#azuke",ic:()=>svg(NIC.nursery,40),bg:"#FFE6F2"},
   {n:"もらえるお金",s:"給付金・助成制度",href:"#okane",ic:()=>svg(CH.money),bg:"#FFF1C2"},
   {n:"保活ナビ",s:"保育園・点数計算",href:"#hokatsu",ic:()=>svg(CH.hokatsu),bg:"#F1E8FF"}];
@@ -2758,7 +2760,6 @@ function sheetKyubyo(){
     <a class="az-b" href="#go-kyukan"><span class="az-i" style="background:#E1F3FF">${svg(GIC.phone,40)}</span><span><b>小児科 急患電話マップ</b><small>夜・休日の電話相談（#8000）と急患診療所4か所</small></span><i>›</i></a>
     <a class="az-b" href="#hdent"><span class="az-i" style="background:#E1F3FF">${svg(NIC.tooth||MINI.cross,40)}</span><span><b>休日の歯医者さん</b><small>日曜・祝日の午前にみてくれる歯科</small></span><i>›</i></a>
     <a class="az-b" href="#" data-view="near?g=ped" data-vt="小児科・内科マップ"><span class="az-i" style="background:#FFE6F2">${svg(NIC.kids||MINI.cross,40)}</span><span><b>近くの小児科</b><small>土曜・日曜・夜もやっている所をしぼれる</small></span><i>›</i></a>
-    <a class="az-b" href="#byouji"><span class="az-i" style="background:#FFE6F2">${svg(RM_IC.bed,40)}</span><span><b>病児・病後児保育</b><small>熱でも仕事を休めない日に</small></span><i>›</i></a>
     <a class="az-b" href="#" data-view="near?g=pharm" data-vt="薬局マップ"><span class="az-i" style="background:#F1E8FF">${svg(NIC.pill||MINI.cross,40)}</span><span><b>近くの薬局</b><small>夜・土日もあいている所をしぼれる</small></span><i>›</i></a></div>
     <p class="note">息が苦しそう・けいれんが止まらない・意識がおかしいときは、迷わず119番へ。</p>`;
 }
@@ -4233,7 +4234,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11190937");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11191000");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -4573,6 +4574,12 @@ else{document.body.classList.add("is-loading");leafShine();raf=requestAnimationF
 
 
 
+
+
+
+
+
+
 <!--vtel-css--><style>
 /* ===== 声で電話をさがす（voice_tel.py） ===== */
 .vt-bar{position:relative;display:flex;align-items:center;gap:10px;margin:0 0 12px;padding:9px 12px 9px 9px;border-radius:999px;text-decoration:none;color:#fff;overflow:hidden;
@@ -4585,6 +4592,9 @@ else{document.body.classList.add("is-loading");leafShine();raf=requestAnimationF
 .vt-mic svg{width:19px;height:19px;fill:none;stroke:#b04fe0;stroke-width:2.2;stroke-linecap:round}
 .vt-mic svg rect{fill:#ffd6ec}
 @keyframes vtPing{0%{box-shadow:0 0 0 0 rgba(255,255,255,.75)}80%,100%{box-shadow:0 0 0 12px rgba(255,255,255,0)}}
+.vt-bar2{margin-top:-4px;background:linear-gradient(100deg,#ff5a7a,#ff8db8 45%,#8f6bff);background-size:200% 100%;animation-delay:-3s;box-shadow:0 10px 22px -10px rgba(230,70,120,.7),0 0 0 2px rgba(255,255,255,.7) inset,0 0 18px rgba(255,140,190,.35)}
+.vt-bar2 .vt-mic svg{stroke:#e2456f}
+.vt-bar2 .vt-mic{animation-delay:1s}
 .vt-tx{flex:1;min-width:0;display:grid;line-height:1.25}
 .vt-tx b{font-size:15px;font-weight:900;letter-spacing:.04em;text-shadow:0 1px 6px rgba(80,20,120,.35)}
 .vt-tx small{font-size:11px;font-weight:700;opacity:.95;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -4742,7 +4752,7 @@ function homeLL(){if(FROM==="here"&&HERE2)return {ll:HERE2,t:"いまいる場所
 const km=(a,b)=>Math.hypot(a[0]-b[0],(a[1]-b[1])*Math.cos(a[0]*Math.PI/180))*111;
 function load(){if(DATA)return Promise.resolve(DATA);
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
-  return fetch(base+"near-data/tel.json?v=11190937").then(r=>r.json()).then(d=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||""))}));return DATA})
+  return fetch(base+"near-data/tel.json?v=11191000").then(r=>r.json()).then(d=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||""))}));return DATA})
     .catch(()=>{DATA=[];return DATA})}
 /* 聞きとった文 → キーワード */
 function terms(text){let s=(text||"").normalize("NFKC").replace(NOISE," ");
