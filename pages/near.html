@@ -1251,6 +1251,8 @@ function place(o,rows){
   if(z0<14.2){const b3=new maplibregl.LngLatBounds([o.ll[1],o.ll[0]],[o.ll[1],o.ll[0]]);rows.slice(0,3).forEach(x=>b3.extend([x.r.lo,x.r.la]));
     const c3=map.cameraForBounds(b3,{padding:{top:90,bottom:70,left:40,right:40},maxZoom:15});
     if(c3&&c3.zoom>z0)to={center:c3.center,zoom:Math.min(15,c3.zoom),pitch:58,bearing:swing}}
+  /* 11/19 地図をとじていたときに一覧の施設をタップ → 地図をひらいたあと、その施設へとぶ */
+  if(window._wFocus){const f=window._wFocus;window._wFocus=null;const k=LAST.findIndex(z=>z.r===f);if(k>=0){first=false;openPin(LAST[k],k);[300,1300].forEach(d=>setTimeout(()=>window.wCenter&&wCenter("#map",map),d));return}}
   if(o.tg&&rows[0]){const t={center:[o.ll[1],o.ll[0]],zoom:16.4,pitch:60,bearing:swing,offset:[0,110]};if(RM)map.jumpTo(t);else map.flyTo({...t,duration:2200,curve:1.5,essential:true});map.once("moveend",()=>openPin(rows[0],0));first=false;return}
   if(RM)map.jumpTo(to);
   else if(first){
@@ -1446,7 +1448,7 @@ window.wEmbed=function(u,host,name){
     goMap(+li.dataset.i)},true);
   /* 一覧の施設をタップ → ページの立体地図へ移動して、その場所までとんでいく。吹き出しの「くわしく」でくわしいページ */
   function goMap(i){const x=LAST[i];if(!x||!x.r.la)return;
-    if(isReg()||S.here||S.target){if(!mapOpen)toggleMap();wCenter("#map");
+    if(isReg()||S.here||S.target){if(!mapOpen){window._wFocus=x.r;toggleMap();wCenter("#map");return}wCenter("#map");
       const t0=Date.now(),go=()=>{if(map&&ready){openPin(x,i);wCenter("#map",map)}else if(Date.now()-t0<15000)setTimeout(go,250)};setTimeout(go,RM?0:450);return}
     /* 住所の登録がないとき：その施設を中心にした立体の地図にする（さがすから来たときと同じ） */
     S.target={lat:x.r.la,lon:x.r.lo,n:x.r.n};S.area=null;if(!mapOpen)toggleMap();refresh(true);
