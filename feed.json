@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-18T18:55:00+09:00",
+ "updatedAt": "2026-11-19T09:50:00+09:00",
  "events": [
   {
    "id": "e-shintoshin-illumination",
@@ -24,19 +24,6 @@
    "src": "ららぽーと富士見",
    "url": "https://mitsui-shopping-park.com/lalaport/fujimi/event/3632625.html",
    "img": "https://mitsui-shopping-park.com/lalaport/fujimi/event/3632625/image1.jpg",
-   "ai": false,
-   "added": "2026-11-11T09:50:00+09:00"
-  },
-  {
-   "id": "e-thomas-skip",
-   "kind": "kids",
-   "title": "きかんしゃトーマスの世界展（〜12/13）",
-   "desc": "原画や模型、ジオラマ、プロジェクションマッピングも。月曜休み。",
-   "date": "2026-11-14",
-   "area": "川口市",
-   "src": "ウォーカープラス",
-   "url": "https://www.walkerplus.com/event/ar0311e615217/",
-   "img": "https://ms-cache.walkerplus.com/walkertouch/wtd/event/17/l2/615217.jpg",
    "ai": false,
    "added": "2026-11-11T09:50:00+09:00"
   },
@@ -160,7 +147,7 @@
   {
    "id": "e-ario-happyday",
    "kind": "point",
-   "title": "アリオ川口 nanacoポイント4倍（11/18・28）",
+   "title": "アリオ川口 nanacoポイント4倍（11/28）",
    "desc": "8のつく日は専門店街でnanaco払いのポイントが4倍に。",
    "date": "2026-11-28",
    "area": "川口市",
@@ -195,6 +182,19 @@
    "img": "https://kawaguchi.ario.jp/app/17/img/event/1700012565/img_3sb3uqk9bda8k.png",
    "ai": false,
    "added": "2026-11-18T09:50:00+09:00"
+  },
+  {
+   "id": "e-pawpatrol-misono",
+   "kind": "mall",
+   "title": "パウ・パトロールの遊び場（11/28〜12/6）",
+   "desc": "イオンモール浦和美園でゲームや工作。ゲームは1回550円。",
+   "date": "2026-11-28",
+   "area": "さいたま市緑区",
+   "src": "BestCalendar（プレスリリース）",
+   "url": "https://bestcalendar.jp/press/166188",
+   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/e-pawpatrol-misono.jpg",
+   "ai": true,
+   "added": "2026-11-19T09:50:00+09:00"
   },
   {
    "id": "e-minuma-kosodate-fair",
@@ -369,7 +369,7 @@
    "kind": "event",
    "title": "市内でとれた農産物のプチマルシェ（11/16・30）",
    "desc": "中央区役所などで地元の新鮮な野菜を販売。",
-   "date": "2026-11-16",
+   "date": "2026-11-30",
    "src": "さいたま市",
    "url": "https://www.city.saitama.lg.jp/004/001/003/002/p086011.html",
    "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/s-petit-marche.jpg",
