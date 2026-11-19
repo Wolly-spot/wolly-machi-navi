@@ -4358,7 +4358,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11192156");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11192201");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -4833,6 +4833,12 @@ else{document.body.classList.add("is-loading");leafShine();raf=requestAnimationF
 
 
 
+
+
+
+
+
+
 <!--vtel-css--><style>
 /* ===== 声で電話をさがす（voice_tel.py） ===== */
 .vt-bar{position:relative;display:flex;align-items:center;gap:10px;margin:0 0 12px;padding:9px 12px 9px 9px;border-radius:999px;text-decoration:none;color:#fff;overflow:hidden;
@@ -5163,7 +5169,92 @@ else{document.body.classList.add("is-loading");leafShine();raf=requestAnimationF
     radial-gradient(30% 16% at 88% 66%,rgba(80,200,230,.8),transparent 70%),radial-gradient(28% 14% at 30% 82%,rgba(255,140,190,.8),transparent 70%),
     radial-gradient(22% 12% at 70% 92%,rgba(130,110,255,.8),transparent 70%),radial-gradient(18% 10% at 45% 22%,rgba(255,200,130,.55),transparent 70%)}
 @media (prefers-reduced-motion:reduce){#vtel::before,#vtel *::after{animation:none!important}}
-</style><!--/vtel-css-->
+
+/* ===== 11/19 3回目：高級感（パールの地・細い光のふち・墨色のボタン・品のある字体） ===== */
+#vtel{--ink:#2b2440;--sub:#6e6684;--gold:#a8834a;
+  font-family:"Zen Kaku Gothic New","Hiragino Sans",sans-serif;color:var(--ink);
+  background:linear-gradient(165deg,#f1edf3,#e6e2ec 45%,#eee6e3)}
+#vtel::before{filter:blur(46px)!important;opacity:.9;animation:vgDrift 26s ease-in-out infinite alternate;
+  background:radial-gradient(34% 18% at 84% 12%,rgba(176,150,214,.6),transparent 70%),radial-gradient(30% 20% at 6% 34%,rgba(150,196,196,.5),transparent 70%),
+    radial-gradient(32% 16% at 74% 46%,rgba(226,176,194,.45),transparent 70%),radial-gradient(30% 18% at 16% 66%,rgba(184,170,226,.5),transparent 70%),
+    radial-gradient(34% 18% at 90% 80%,rgba(236,212,176,.5),transparent 70%),radial-gradient(30% 16% at 30% 94%,rgba(214,176,206,.5),transparent 70%)!important}
+/* うすい粒子（紙・すりガラスの質感） */
+#vtel::after{display:block!important;content:"";position:absolute;inset:0;top:0;height:auto;z-index:0;pointer-events:none;animation:none!important;opacity:.55;
+  background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .35 0 0 0 0 .3 0 0 0 0 .45 0 0 0 .09 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+#vtel h3,#vtel b,#vtel button,#vtel a,#vtel input{font-family:inherit}
+
+/* --- ガラス（共通） --- */
+#vtel .vt-sos a,#vtel .vt-x,#vtel .vt-reset button,#vtel .vt-close2,#vtel .vt-li,#vtel .vt-top,#vtel .vt-inw,#vtel .vt-skip,#vtel .vt-type .vt-clr,#vtel .vt-li a,#vtel .vt-from button,#vtel .vt-note{
+  border:0!important;color:var(--ink);text-shadow:none;
+  background:linear-gradient(180deg,rgba(255,255,255,.34),rgba(255,255,255,.12))!important;
+  -webkit-backdrop-filter:blur(22px) saturate(1.6);backdrop-filter:blur(22px) saturate(1.6);
+  box-shadow:inset 0 -10px 20px rgba(255,255,255,.08),0 22px 40px -26px rgba(40,25,70,.5),0 2px 8px -3px rgba(40,25,70,.14)!important}
+#vtel .vt-inw{border-radius:999px;position:relative;isolation:isolate;overflow:hidden}
+#vtel .vt-sos a,#vtel .vt-x,#vtel .vt-reset button,#vtel .vt-close2,#vtel .vt-li,#vtel .vt-top,#vtel .vt-inw,#vtel .vt-skip,#vtel .vt-li a,#vtel .vt-call,#vtel .vt-type button:not(.vt-clr),#vtel .vt-mic2,#vtel .vt-type .vt-clr{isolation:isolate;overflow:hidden}
+/* ふち：左上が明るく、右下へ消えていく細い光 */
+#vtel .vt-sos a::before,#vtel .vt-x::before,#vtel .vt-reset button::before,#vtel .vt-close2::before,#vtel .vt-li::before,#vtel .vt-top::before,#vtel .vt-inw::before,#vtel .vt-li a::before,#vtel .vt-call::before,#vtel .vt-type button:not(.vt-clr)::before,#vtel .vt-mic2::before,#vtel .vt-skip::before,#vtel .vt-type .vt-clr::before{
+  content:"";position:absolute;inset:0;left:0;right:0;top:0;bottom:0;height:auto;width:auto;border-radius:inherit;padding:1px;z-index:2;opacity:1;pointer-events:none;
+  background:linear-gradient(140deg,rgba(255,255,255,.98),rgba(255,255,255,.35) 28%,rgba(255,255,255,0) 52%,rgba(255,255,255,.25) 78%,rgba(255,255,255,.85));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)}
+/* つや：上からやわらかい光（走る光はやめる） */
+#vtel .vt-sos a::after,#vtel .vt-x::after,#vtel .vt-reset button::after,#vtel .vt-close2::after,#vtel .vt-li::after,#vtel .vt-top::after,#vtel .vt-inw::after,#vtel .vt-li a::after,#vtel .vt-call::after,#vtel .vt-type button:not(.vt-clr)::after,#vtel .vt-mic2::after{
+  content:"";position:absolute;left:0;right:0;top:0;bottom:auto;height:60%;width:auto;transform:none;animation:none!important;z-index:-1;pointer-events:none;border-radius:inherit;
+  background:radial-gradient(70% 100% at 28% 0%,rgba(255,255,255,.55),rgba(255,255,255,0) 72%)}
+
+/* --- 墨色のボタン（発信する・さがす・マイク） --- */
+#vtel .vt-call,#vtel .vt-type button:not(.vt-clr),#vtel .vt-mic2{border:0!important;color:#f7f3ff;
+  background:linear-gradient(180deg,rgba(78,64,118,.94),rgba(40,32,66,.96))!important;
+  box-shadow:inset 0 -6px 14px rgba(0,0,0,.25),0 18px 30px -16px rgba(30,18,60,.75),0 3px 8px -3px rgba(30,18,60,.35)!important}
+#vtel .vt-call::before,#vtel .vt-type button:not(.vt-clr)::before,#vtel .vt-mic2::before{background:linear-gradient(150deg,rgba(255,255,255,.75),rgba(255,255,255,.12) 35%,rgba(255,255,255,0) 60%,rgba(214,186,140,.55))}
+#vtel .vt-call::after,#vtel .vt-type button:not(.vt-clr)::after,#vtel .vt-mic2::after{background:radial-gradient(80% 100% at 30% 0%,rgba(255,255,255,.28),rgba(255,255,255,0) 70%)}
+#vtel .vt-call{font-weight:700;font-size:16px;letter-spacing:.18em;padding:15px;border-radius:999px}
+#vtel .vt-call svg{fill:#e7cf9f;width:18px;height:18px}
+#vtel .vt-type button:not(.vt-clr){font-weight:700;letter-spacing:.12em;font-size:14px}
+#vtel .vt-mic2 svg{stroke:#e7cf9f}#vtel .vt-mic2 svg rect{fill:rgba(231,207,159,.25)}
+
+/* --- 入力欄 --- */
+#vtel .vt-type input{background:transparent!important;border:0!important;box-shadow:none!important;-webkit-backdrop-filter:none;backdrop-filter:none;
+  font-weight:500;letter-spacing:.06em;color:var(--ink);padding:13px 46px 13px 18px}
+#vtel .vt-type input::placeholder{color:#9a93ad}
+#vtel .vt-type .vt-clr{width:30px;height:30px;font-size:13px;color:var(--sub);font-weight:500}
+
+/* --- 上のボタン --- */
+#vtel .vt-sos a{color:#9b2c4b;font-weight:700;letter-spacing:.04em;font-size:12px}
+#vtel .vt-sos a b{font-family:"Cormorant Garamond",serif;font-weight:700;font-size:16px;letter-spacing:.02em}
+#vtel .vt-x{color:var(--sub);font-weight:300}
+#vtel .vt-reset button{font-weight:500;letter-spacing:.1em;color:var(--sub)}
+#vtel .vt-close2{font-weight:500;letter-spacing:.2em;color:var(--ink);padding:13px 40px}
+
+/* --- いちばんの候補 --- */
+#vtel .vt-top{border-radius:28px;padding:18px 18px 16px;
+  background:linear-gradient(150deg,rgba(255,255,255,.5),rgba(244,236,250,.28) 50%,rgba(255,255,255,.2))!important;
+  box-shadow:inset 0 -20px 40px rgba(255,255,255,.12),0 30px 60px -30px rgba(50,30,90,.55),0 4px 14px -6px rgba(50,30,90,.18)!important}
+#vtel .vt-top .lb{background:transparent!important;border:1px solid rgba(168,131,74,.45);color:var(--gold);font-weight:500;font-size:10.5px;letter-spacing:.2em;padding:5px 11px;box-shadow:none}
+#vtel .vt-top .lb small{color:var(--sub);letter-spacing:.06em}
+#vtel .vt-top h3{font-family:"Shippori Mincho B1","Hiragino Mincho ProN",serif;font-weight:600;font-size:22px;letter-spacing:.06em;margin:12px 0 6px;text-shadow:none}
+#vtel .vt-meta{color:var(--sub);font-weight:500;letter-spacing:.04em}
+#vtel .vt-meta .cat{background:transparent!important;color:#6b5a92!important;border:1px solid rgba(107,90,146,.35);font-weight:500;padding:1px 9px}
+#vtel .vt-num{font-family:"Cormorant Garamond",serif;font-variant-numeric:lining-nums tabular-nums;font-weight:600;font-size:46px!important;letter-spacing:.03em;color:var(--ink);margin:10px 0 6px;text-shadow:none}
+#vtel .vt-skip{color:var(--sub);font-weight:300;font-size:16px}
+
+/* --- ほかの候補 --- */
+#vtel .vt-more{font-weight:500;font-size:11px;letter-spacing:.22em;color:var(--sub)}
+#vtel .vt-li{border-radius:22px;padding:13px 12px 13px 16px}
+#vtel .vt-li b{font-family:"Shippori Mincho B1","Hiragino Mincho ProN",serif;font-weight:600;font-size:15.5px;letter-spacing:.04em;text-shadow:none}
+#vtel .vt-li small{color:var(--sub);font-weight:500;letter-spacing:.03em}
+#vtel .vt-li small:last-child{font-family:"Cormorant Garamond",serif;font-variant-numeric:lining-nums;font-weight:600;font-size:15px;letter-spacing:.04em;color:var(--ink)}
+#vtel .vt-li a{color:var(--ink);font-weight:700;letter-spacing:.12em;font-size:12.5px;padding:9px 14px}
+#vtel .vt-li a svg{fill:var(--gold)}
+
+#vtel .vt-sos a b{font-variant-numeric:lining-nums}
+#vtel .vt-li b{font-size:15px;letter-spacing:.01em;word-break:keep-all;overflow-wrap:anywhere}
+#vtel .vt-li small:not(:last-child){white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:0;font-size:11px}
+#vtel .vt-li a{padding:9px 12px;letter-spacing:.08em}
+/* --- はじめの画面 --- */
+#vtel .vt-start .vt-kbd{filter:drop-shadow(0 24px 30px rgba(50,30,90,.25))}
+#vtel .vt-bub{font-weight:700;letter-spacing:0;color:var(--ink);background:rgba(255,255,255,.85)}
+#vtel .vt-ring{border-color:rgba(168,131,74,.7);box-shadow:0 0 14px rgba(214,186,140,.7)}
+</style><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Shippori+Mincho+B1:wght@500;600&family=Zen+Kaku+Gothic+New:wght@300;500;700&display=swap"><!--/vtel-css-->
 <!--vtel-js--><script>
 /* ===== 声で電話をさがす（voice_tel.py） ===== */
 (function(){
@@ -5196,7 +5287,7 @@ function homeLL(){if(FROM==="here"&&HERE2)return {ll:HERE2,t:"いまいる場所
 const km=(a,b)=>Math.hypot(a[0]-b[0],(a[1]-b[1])*Math.cos(a[0]*Math.PI/180))*111;
 function load(){if(DATA)return Promise.resolve(DATA);
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
-  return fetch(base+"near-data/tel.json?v=11192156").then(r=>r.json()).then(d=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),ky:r[7]?nz(r[7]):""}));return DATA})
+  return fetch(base+"near-data/tel.json?v=11192201").then(r=>r.json()).then(d=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),ky:r[7]?nz(r[7]):""}));return DATA})
     .catch(()=>{DATA=[];return DATA})}
 /* 聞きとった文 → キーワード */
 function terms(text){let s=(text||"").normalize("NFKC").replace(NOISE," ");
