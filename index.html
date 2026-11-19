@@ -4358,7 +4358,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11192204");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11192207");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -4843,6 +4843,8 @@ else{document.body.classList.add("is-loading");leafShine();raf=requestAnimationF
 
 
 
+
+
 <!--vtel-css--><style>
 /* ===== 声で電話をさがす（voice_tel.py） ===== */
 .vt-bar{position:relative;display:flex;align-items:center;gap:10px;margin:0 0 12px;padding:9px 12px 9px 9px;border-radius:999px;text-decoration:none;color:#fff;overflow:hidden;
@@ -5053,290 +5055,7 @@ else{document.body.classList.add("is-loading");leafShine();raf=requestAnimationF
 .vt-from button.on{background:#8ff3ff;color:#3b1d72}
 @media (prefers-reduced-motion:reduce){#vtel,#vtel::after,.vt-lamp,.vt-orb::before,.vt-orb::after,.vt-wave i,.vt-call,.vt-top{animation:none!important;transition:none}#vtel .vt-lamp{opacity:1}}
 
-/* ===== 11/19 リキッドガラスのデザイン（Yuji さんの見本「Liquid Glass UI Kit」） ===== */
-#vtel{--g-tx:#2a2440;--g-sub:#6b6488;--g-pu1:#a48cff;--g-pu2:#7457ee;--g-te1:#9fe3da;--g-te2:#5cbcb1;
-  --g-glass:rgba(255,255,255,.42);--g-line:rgba(255,255,255,.85);
-  --g-sh:inset 0 1.5px 0 rgba(255,255,255,.95),inset 0 -3px 8px rgba(110,90,170,.08),0 16px 30px -16px rgba(70,50,130,.4);
-  color:var(--g-tx);
-  background:radial-gradient(60% 40% at 92% 8%,rgba(167,139,250,.55),transparent 70%),radial-gradient(55% 40% at 0% 45%,rgba(125,211,200,.5),transparent 70%),radial-gradient(60% 45% at 100% 92%,rgba(249,168,212,.5),transparent 70%),radial-gradient(50% 35% at 20% 100%,rgba(165,180,252,.5),transparent 70%),linear-gradient(160deg,#f4f1f7,#e6e2ee);
-  -webkit-backdrop-filter:blur(18px) saturate(1.2);backdrop-filter:blur(18px) saturate(1.2)}
-#vtel::before{background:linear-gradient(180deg,rgba(255,255,255,.35),rgba(255,255,255,0) 40%)}
-#vtel::after,#vtel .vt-lamp{display:none!important}
-/* ガラスのふち（共通） */
-#vtel .vt-sos a,#vtel .vt-x,#vtel .vt-clr,#vtel .vt-reset button,#vtel .vt-close2,#vtel .vt-li,#vtel .vt-skip,#vtel .vt-from button,#vtel .vt-note,#vtel .vt-back{
-  background:var(--g-glass);border:1px solid var(--g-line);box-shadow:var(--g-sh);-webkit-backdrop-filter:blur(16px) saturate(1.4);backdrop-filter:blur(16px) saturate(1.4);color:var(--g-tx);text-shadow:none}
-#vtel .vt-sos a{color:#d0386c;font-weight:800}
-#vtel .vt-x{color:#5b4a8a;font-weight:400}
-#vtel .vt-clr{width:32px;height:32px;color:#6a5aa0;font-size:15px;background:rgba(255,255,255,.6)}
-/* 入力欄＝白いカプセル */
-#vtel .vt-type input{border:1px solid var(--g-line);border-radius:999px;padding:12px 16px;color:var(--g-tx);background:rgba(255,255,255,.82);
-  box-shadow:inset 0 2px 4px rgba(90,70,150,.08),0 12px 26px -16px rgba(70,50,130,.45)}
-#vtel .vt-type input::placeholder{color:#8f89a6}
-/* むらさきのボタン（Primary） */
-#vtel .vt-type button,#vtel .vt-mic2,#vtel .vt-call{color:#fff;border:1px solid rgba(255,255,255,.7);
-  background:linear-gradient(180deg,var(--g-pu1),var(--g-pu2));
-  box-shadow:inset 0 2px 0 rgba(255,255,255,.55),inset 0 -4px 10px rgba(60,30,160,.25),0 14px 26px -12px rgba(116,87,238,.75)}
-#vtel .vt-type button{border-radius:999px;padding:0 16px}
-#vtel .vt-type button svg{fill:#fff;stroke:#fff}
-#vtel .vt-mic2{width:48px;border-radius:50%}
-#vtel .vt-mic2 svg{stroke:#fff}#vtel .vt-mic2 svg rect{fill:rgba(255,255,255,.35)}
-#vtel .vt-call{border-radius:999px;font-size:17px;padding:14px;animation:none!important}
-/* さがし直す・とじる */
-#vtel .vt-reset{justify-content:flex-start}
-#vtel .vt-reset button{padding:8px 15px;font-size:12.5px}
-#vtel .vt-close2{border-radius:999px;padding:12px 38px;font-weight:800}
-/* いちばんの候補＝パステルのガラスカード */
-#vtel .vt-top{color:var(--g-tx);border-radius:26px;border:1px solid var(--g-line);
-  background:linear-gradient(135deg,rgba(255,205,222,.82),rgba(214,196,255,.8) 52%,rgba(178,205,255,.8));
-  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.95),inset 0 -6px 18px rgba(255,255,255,.25),0 22px 40px -20px rgba(110,80,200,.55)}
-#vtel .vt-top .lb{color:#6a4fd0;background:rgba(255,255,255,.7);border:1px solid #fff;letter-spacing:.06em}
-#vtel .vt-top h3{color:var(--g-tx)}
-#vtel .vt-num{color:var(--g-tx)}
-#vtel .vt-meta{color:#5d567a}
-#vtel .vt-skip{color:#6a4fd0;width:36px;height:36px;font-size:17px;background:rgba(255,255,255,.55)}
-#vtel .vt-say{color:#6b5b96}
-/* ほかの候補＝ガラスのカード、発信はミント（Secondary） */
-#vtel .vt-more{color:var(--g-sub);letter-spacing:.04em}
-#vtel .vt-li{border-radius:22px;padding:11px 12px 11px 14px}
-#vtel .vt-li b{color:var(--g-tx)}
-#vtel .vt-li small{color:var(--g-sub)}
-#vtel .vt-li a{color:#fff;border:1px solid rgba(255,255,255,.7);background:linear-gradient(180deg,var(--g-te1),var(--g-te2));
-  box-shadow:inset 0 2px 0 rgba(255,255,255,.6),inset 0 -3px 8px rgba(20,110,100,.2),0 10px 20px -10px rgba(60,170,160,.8)}
-#vtel .vt-li a svg{fill:#fff}
-#vtel .vt-empty,#vtel .vt-hint,#vtel .vt-cnt,#vtel .vt-from,#vtel .vt-q small,#vtel .vt-st,#vtel .vt-heard{color:var(--g-sub);text-shadow:none}
-#vtel .vt-from button.on{color:#fff;background:linear-gradient(180deg,var(--g-pu1),var(--g-pu2))}
-#vtel .vt-wave i{background:linear-gradient(var(--g-pu1),#f0a6cf);box-shadow:none}
-/* はじめの画面（キーボードの絵） */
-#vtel .vt-start .vt-kbd{filter:drop-shadow(0 18px 26px rgba(70,50,130,.3))}
-#vtel .vt-bub{color:#6a4fd0;background:rgba(255,255,255,.9);box-shadow:0 0 0 1px #fff,0 10px 22px -10px rgba(110,80,200,.6)}
-#vtel .vt-ring{border-color:#a48cff;box-shadow:0 0 14px rgba(164,140,255,.8)}
-#vtel .vt-guide,#vtel .vt-ex,#vtel .vt-kbhint,#vtel .vt-how{color:var(--g-tx);text-shadow:none}
-#vtel .vt-note button{color:#fff;background:linear-gradient(180deg,var(--g-pu1),var(--g-pu2))}
-#vtel .vt-type .vt-clr{padding:0;color:#6a5aa0;background:rgba(255,255,255,.75);border:1px solid #fff;box-shadow:inset 0 1px 0 #fff,0 6px 14px -8px rgba(70,50,130,.5)}
-/* スクロールのはしの線 */
-#vtel .vt-res{scrollbar-color:rgba(120,100,180,.3) transparent}
-@media (prefers-color-scheme:dark){#vtel{--g-glass:rgba(255,255,255,.5)}}
-
-/* ===== 11/19 2回目：もっと透明に・ピカピカに（本物のガラスらしく） ===== */
-/* うしろに色のかたまりがゆっくり動く（ガラスごしに透けて見える） */
-#vtel{background:linear-gradient(160deg,#f6f3fb,#e9e4f2)}
-#vtel::before{content:"";position:absolute;inset:-20%;pointer-events:none;z-index:0;
-  background:radial-gradient(28% 22% at 82% 18%,rgba(140,105,255,.85),transparent 70%),radial-gradient(26% 24% at 12% 40%,rgba(70,205,190,.75),transparent 70%),
-    radial-gradient(30% 22% at 86% 70%,rgba(255,120,190,.75),transparent 70%),radial-gradient(28% 20% at 22% 88%,rgba(120,150,255,.75),transparent 70%),radial-gradient(18% 14% at 50% 55%,rgba(255,200,120,.45),transparent 70%);
-  filter:blur(24px);animation:vgDrift 18s ease-in-out infinite alternate}
-@keyframes vgDrift{0%{transform:translate(0,0) rotate(0)}50%{transform:translate(4%,-3%) rotate(8deg)}100%{transform:translate(-4%,3%) rotate(-6deg)}}
-/* ガラス（共通）：うすく透けて、ふちが光る */
-#vtel .vt-sos a,#vtel .vt-x,#vtel .vt-reset button,#vtel .vt-close2,#vtel .vt-li,#vtel .vt-skip,#vtel .vt-from button,#vtel .vt-note,#vtel .vt-back,#vtel .vt-type input,#vtel .vt-type .vt-clr{
-  background:linear-gradient(135deg,rgba(255,255,255,.42),rgba(255,255,255,.1) 60%,rgba(255,255,255,.22));
-  -webkit-backdrop-filter:blur(14px) saturate(1.9) brightness(1.06);backdrop-filter:blur(14px) saturate(1.9) brightness(1.06);
-  border:1px solid rgba(255,255,255,.65);
-  box-shadow:inset 0 1.5px 1px rgba(255,255,255,.95),inset 0 -1.5px 1px rgba(255,255,255,.45),inset 3px 0 8px rgba(255,255,255,.2),inset 0 -12px 22px rgba(255,255,255,.14),0 18px 34px -18px rgba(60,40,120,.5)}
-#vtel .vt-type input{background:linear-gradient(135deg,rgba(255,255,255,.62),rgba(255,255,255,.3))}
-/* 上半分のつや＋ときどき走る光 */
-#vtel .vt-sos a,#vtel .vt-x,#vtel .vt-reset button,#vtel .vt-close2,#vtel .vt-li,#vtel .vt-top,#vtel .vt-call,#vtel .vt-type button,#vtel .vt-mic2,#vtel .vt-li a,#vtel .vt-inw{position:relative;isolation:isolate}
-#vtel .vt-sos a,#vtel .vt-x,#vtel .vt-reset button,#vtel .vt-close2,#vtel .vt-li,#vtel .vt-top,#vtel .vt-call,#vtel .vt-type button:not(.vt-clr),#vtel .vt-mic2,#vtel .vt-li a{overflow:hidden}
-#vtel .vt-sos a::before,#vtel .vt-x::before,#vtel .vt-reset button::before,#vtel .vt-close2::before,#vtel .vt-li::before,#vtel .vt-top::before,#vtel .vt-call::before,#vtel .vt-type button:not(.vt-clr)::before,#vtel .vt-mic2::before,#vtel .vt-li a::before,#vtel .vt-inw::before{
-  content:"";position:absolute;left:6%;right:6%;top:2px;height:46%;border-radius:999px 999px 60% 60%/100% 100% 40% 40%;pointer-events:none;z-index:-1;
-  background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(255,255,255,.08));opacity:.75}
-#vtel .vt-li::before,#vtel .vt-top::before{left:3%;right:3%;height:38%;border-radius:22px 22px 50% 50%/22px 22px 30% 30%;opacity:.55}
-#vtel .vt-inw::before{z-index:1;left:20px;right:60px;top:3px;height:40%;opacity:.6}
-#vtel .vt-li::after,#vtel .vt-top::after,#vtel .vt-call::after,#vtel .vt-close2::after,#vtel .vt-type button:not(.vt-clr)::after,#vtel .vt-mic2::after,#vtel .vt-li a::after{
-  content:"";position:absolute;top:-50%;bottom:-50%;width:38%;left:-60%;pointer-events:none;z-index:2;transform:skewX(-20deg);
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.75),transparent);animation:vgGlint 5.5s ease-in-out infinite}
-#vtel .vt-li:nth-child(2n)::after{animation-delay:1.2s}#vtel .vt-li:nth-child(3n)::after{animation-delay:2.4s}
-#vtel .vt-call::after{animation-delay:.6s}#vtel .vt-mic2::after{animation-delay:2s}#vtel .vt-type button::after{animation-delay:3s}
-@keyframes vgGlint{0%,62%{left:-60%}88%,100%{left:130%}}
-/* むらさき・ミントのボタン：中が透けるゼリーのような色ガラス */
-#vtel .vt-type button:not(.vt-clr),#vtel .vt-mic2,#vtel .vt-call{
-  background:linear-gradient(180deg,rgba(176,150,255,.92),rgba(110,78,240,.88) 60%,rgba(140,110,255,.92));
-  border:1px solid rgba(255,255,255,.75);
-  box-shadow:inset 0 2px 1px rgba(255,255,255,.85),inset 0 -6px 12px rgba(60,20,170,.35),inset 0 -2px 1px rgba(220,200,255,.9),0 16px 30px -12px rgba(116,87,238,.8),0 4px 18px -6px rgba(170,140,255,.7)}
-#vtel .vt-li a{background:linear-gradient(180deg,rgba(170,240,230,.95),rgba(80,190,176,.9) 60%,rgba(120,215,200,.95));border:1px solid rgba(255,255,255,.8);
-  box-shadow:inset 0 2px 1px rgba(255,255,255,.9),inset 0 -5px 10px rgba(10,110,100,.3),inset 0 -2px 1px rgba(200,255,245,.9),0 12px 22px -10px rgba(50,170,155,.85)}
-/* いちばんの候補：色のついたガラス（うしろが透ける） */
-#vtel .vt-top{background:linear-gradient(135deg,rgba(255,190,215,.55),rgba(205,185,255,.45) 50%,rgba(165,200,255,.5));
-  -webkit-backdrop-filter:blur(18px) saturate(2);backdrop-filter:blur(18px) saturate(2);border:1px solid rgba(255,255,255,.75);
-  box-shadow:inset 0 2px 1px rgba(255,255,255,.95),inset 0 -2px 1px rgba(255,255,255,.5),inset 0 0 0 1px rgba(255,255,255,.15),inset 0 -20px 40px rgba(255,255,255,.18),0 26px 46px -22px rgba(100,70,200,.6),0 0 40px -10px rgba(200,170,255,.6)}
-#vtel .vt-top .lb,#vtel .vt-skip{background:linear-gradient(135deg,rgba(255,255,255,.75),rgba(255,255,255,.35));-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
-#vtel .vt-top>*{position:relative;z-index:1}
-#vtel .vt-top>.vt-skip{position:absolute}
-/* 文字はガラスの上でも読めるように */
-#vtel .vt-li b,#vtel .vt-top h3,#vtel .vt-num{text-shadow:0 1px 0 rgba(255,255,255,.7)}
-#vtel .vt-li small,#vtel .vt-meta,#vtel .vt-more{color:#4f4870}
-#vtel .vt-type .vt-clr{position:absolute}
-/* もっと透かす：カードの白をうすく、うしろの色をこく */
-#vtel .vt-li,#vtel .vt-sos a,#vtel .vt-x,#vtel .vt-reset button,#vtel .vt-close2{background:linear-gradient(135deg,rgba(255,255,255,.32),rgba(255,255,255,.06) 55%,rgba(255,255,255,.16))}
-#vtel{background:linear-gradient(165deg,#e8def9,#dcecf4 55%,#f3dcec)}
-#vtel::before{opacity:1;filter:blur(26px) saturate(1.25);
-  background:radial-gradient(30% 16% at 80% 14%,rgba(140,100,255,.9),transparent 70%),radial-gradient(26% 18% at 8% 30%,rgba(60,210,190,.85),transparent 70%),
-    radial-gradient(30% 14% at 70% 40%,rgba(255,130,200,.75),transparent 70%),radial-gradient(26% 16% at 18% 58%,rgba(150,120,255,.8),transparent 70%),
-    radial-gradient(30% 16% at 88% 66%,rgba(80,200,230,.8),transparent 70%),radial-gradient(28% 14% at 30% 82%,rgba(255,140,190,.8),transparent 70%),
-    radial-gradient(22% 12% at 70% 92%,rgba(130,110,255,.8),transparent 70%),radial-gradient(18% 10% at 45% 22%,rgba(255,200,130,.55),transparent 70%)}
-@media (prefers-reduced-motion:reduce){#vtel::before,#vtel *::after{animation:none!important}}
-
-/* ===== 11/19 3回目：高級感（パールの地・細い光のふち・墨色のボタン・品のある字体） ===== */
-#vtel{--ink:#2b2440;--sub:#6e6684;--gold:#a8834a;
-  font-family:"Zen Kaku Gothic New","Hiragino Sans",sans-serif;color:var(--ink);
-  background:linear-gradient(165deg,#f1edf3,#e6e2ec 45%,#eee6e3)}
-#vtel::before{filter:blur(46px)!important;opacity:.9;animation:vgDrift 26s ease-in-out infinite alternate;
-  background:radial-gradient(34% 18% at 84% 12%,rgba(176,150,214,.6),transparent 70%),radial-gradient(30% 20% at 6% 34%,rgba(150,196,196,.5),transparent 70%),
-    radial-gradient(32% 16% at 74% 46%,rgba(226,176,194,.45),transparent 70%),radial-gradient(30% 18% at 16% 66%,rgba(184,170,226,.5),transparent 70%),
-    radial-gradient(34% 18% at 90% 80%,rgba(236,212,176,.5),transparent 70%),radial-gradient(30% 16% at 30% 94%,rgba(214,176,206,.5),transparent 70%)!important}
-/* うすい粒子（紙・すりガラスの質感） */
-#vtel::after{display:block!important;content:"";position:absolute;inset:0;top:0;height:auto;z-index:0;pointer-events:none;animation:none!important;opacity:.55;
-  background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .35 0 0 0 0 .3 0 0 0 0 .45 0 0 0 .09 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
-#vtel h3,#vtel b,#vtel button,#vtel a,#vtel input{font-family:inherit}
-
-/* --- ガラス（共通） --- */
-#vtel .vt-sos a,#vtel .vt-x,#vtel .vt-reset button,#vtel .vt-close2,#vtel .vt-li,#vtel .vt-top,#vtel .vt-inw,#vtel .vt-skip,#vtel .vt-type .vt-clr,#vtel .vt-li a,#vtel .vt-from button,#vtel .vt-note{
-  border:0!important;color:var(--ink);text-shadow:none;
-  background:linear-gradient(180deg,rgba(255,255,255,.34),rgba(255,255,255,.12))!important;
-  -webkit-backdrop-filter:blur(22px) saturate(1.6);backdrop-filter:blur(22px) saturate(1.6);
-  box-shadow:inset 0 -10px 20px rgba(255,255,255,.08),0 22px 40px -26px rgba(40,25,70,.5),0 2px 8px -3px rgba(40,25,70,.14)!important}
-#vtel .vt-inw{border-radius:999px;position:relative;isolation:isolate;overflow:hidden}
-#vtel .vt-sos a,#vtel .vt-x,#vtel .vt-reset button,#vtel .vt-close2,#vtel .vt-li,#vtel .vt-top,#vtel .vt-inw,#vtel .vt-skip,#vtel .vt-li a,#vtel .vt-call,#vtel .vt-type button:not(.vt-clr),#vtel .vt-mic2,#vtel .vt-type .vt-clr{isolation:isolate;overflow:hidden}
-/* ふち：左上が明るく、右下へ消えていく細い光 */
-#vtel .vt-sos a::before,#vtel .vt-x::before,#vtel .vt-reset button::before,#vtel .vt-close2::before,#vtel .vt-li::before,#vtel .vt-top::before,#vtel .vt-inw::before,#vtel .vt-li a::before,#vtel .vt-call::before,#vtel .vt-type button:not(.vt-clr)::before,#vtel .vt-mic2::before,#vtel .vt-skip::before,#vtel .vt-type .vt-clr::before{
-  content:"";position:absolute;inset:0;left:0;right:0;top:0;bottom:0;height:auto;width:auto;border-radius:inherit;padding:1px;z-index:2;opacity:1;pointer-events:none;
-  background:linear-gradient(140deg,rgba(255,255,255,.98),rgba(255,255,255,.35) 28%,rgba(255,255,255,0) 52%,rgba(255,255,255,.25) 78%,rgba(255,255,255,.85));
-  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)}
-/* つや：上からやわらかい光（走る光はやめる） */
-#vtel .vt-sos a::after,#vtel .vt-x::after,#vtel .vt-reset button::after,#vtel .vt-close2::after,#vtel .vt-li::after,#vtel .vt-top::after,#vtel .vt-inw::after,#vtel .vt-li a::after,#vtel .vt-call::after,#vtel .vt-type button:not(.vt-clr)::after,#vtel .vt-mic2::after{
-  content:"";position:absolute;left:0;right:0;top:0;bottom:auto;height:60%;width:auto;transform:none;animation:none!important;z-index:-1;pointer-events:none;border-radius:inherit;
-  background:radial-gradient(70% 100% at 28% 0%,rgba(255,255,255,.55),rgba(255,255,255,0) 72%)}
-
-/* --- 墨色のボタン（発信する・さがす・マイク） --- */
-#vtel .vt-call,#vtel .vt-type button:not(.vt-clr),#vtel .vt-mic2{border:0!important;color:#f7f3ff;
-  background:linear-gradient(180deg,rgba(78,64,118,.94),rgba(40,32,66,.96))!important;
-  box-shadow:inset 0 -6px 14px rgba(0,0,0,.25),0 18px 30px -16px rgba(30,18,60,.75),0 3px 8px -3px rgba(30,18,60,.35)!important}
-#vtel .vt-call::before,#vtel .vt-type button:not(.vt-clr)::before,#vtel .vt-mic2::before{background:linear-gradient(150deg,rgba(255,255,255,.75),rgba(255,255,255,.12) 35%,rgba(255,255,255,0) 60%,rgba(214,186,140,.55))}
-#vtel .vt-call::after,#vtel .vt-type button:not(.vt-clr)::after,#vtel .vt-mic2::after{background:radial-gradient(80% 100% at 30% 0%,rgba(255,255,255,.28),rgba(255,255,255,0) 70%)}
-#vtel .vt-call{font-weight:700;font-size:16px;letter-spacing:.18em;padding:15px;border-radius:999px}
-#vtel .vt-call svg{fill:#e7cf9f;width:18px;height:18px}
-#vtel .vt-type button:not(.vt-clr){font-weight:700;letter-spacing:.12em;font-size:14px}
-#vtel .vt-mic2 svg{stroke:#e7cf9f}#vtel .vt-mic2 svg rect{fill:rgba(231,207,159,.25)}
-
-/* --- 入力欄 --- */
-#vtel .vt-type input{background:transparent!important;border:0!important;box-shadow:none!important;-webkit-backdrop-filter:none;backdrop-filter:none;
-  font-weight:500;letter-spacing:.06em;color:var(--ink);padding:13px 46px 13px 18px}
-#vtel .vt-type input::placeholder{color:#9a93ad}
-#vtel .vt-type .vt-clr{width:30px;height:30px;font-size:13px;color:var(--sub);font-weight:500}
-
-/* --- 上のボタン --- */
-#vtel .vt-sos a{color:#9b2c4b;font-weight:700;letter-spacing:.04em;font-size:12px}
-#vtel .vt-sos a b{font-family:"Cormorant Garamond",serif;font-weight:700;font-size:16px;letter-spacing:.02em}
-#vtel .vt-x{color:var(--sub);font-weight:300}
-#vtel .vt-reset button{font-weight:500;letter-spacing:.1em;color:var(--sub)}
-#vtel .vt-close2{font-weight:500;letter-spacing:.2em;color:var(--ink);padding:13px 40px}
-
-/* --- いちばんの候補 --- */
-#vtel .vt-top{border-radius:28px;padding:18px 18px 16px;
-  background:linear-gradient(150deg,rgba(255,255,255,.5),rgba(244,236,250,.28) 50%,rgba(255,255,255,.2))!important;
-  box-shadow:inset 0 -20px 40px rgba(255,255,255,.12),0 30px 60px -30px rgba(50,30,90,.55),0 4px 14px -6px rgba(50,30,90,.18)!important}
-#vtel .vt-top .lb{background:transparent!important;border:1px solid rgba(168,131,74,.45);color:var(--gold);font-weight:500;font-size:10.5px;letter-spacing:.2em;padding:5px 11px;box-shadow:none}
-#vtel .vt-top .lb small{color:var(--sub);letter-spacing:.06em}
-#vtel .vt-top h3{font-family:"Shippori Mincho B1","Hiragino Mincho ProN",serif;font-weight:600;font-size:22px;letter-spacing:.06em;margin:12px 0 6px;text-shadow:none}
-#vtel .vt-meta{color:var(--sub);font-weight:500;letter-spacing:.04em}
-#vtel .vt-meta .cat{background:transparent!important;color:#6b5a92!important;border:1px solid rgba(107,90,146,.35);font-weight:500;padding:1px 9px}
-#vtel .vt-num{font-family:"Cormorant Garamond",serif;font-variant-numeric:lining-nums tabular-nums;font-weight:600;font-size:46px!important;letter-spacing:.03em;color:var(--ink);margin:10px 0 6px;text-shadow:none}
-#vtel .vt-skip{color:var(--sub);font-weight:300;font-size:16px}
-
-/* --- ほかの候補 --- */
-#vtel .vt-more{font-weight:500;font-size:11px;letter-spacing:.22em;color:var(--sub)}
-#vtel .vt-li{border-radius:22px;padding:13px 12px 13px 16px}
-#vtel .vt-li b{font-family:"Shippori Mincho B1","Hiragino Mincho ProN",serif;font-weight:600;font-size:15.5px;letter-spacing:.04em;text-shadow:none}
-#vtel .vt-li small{color:var(--sub);font-weight:500;letter-spacing:.03em}
-#vtel .vt-li small:last-child{font-family:"Cormorant Garamond",serif;font-variant-numeric:lining-nums;font-weight:600;font-size:15px;letter-spacing:.04em;color:var(--ink)}
-#vtel .vt-li a{color:var(--ink);font-weight:700;letter-spacing:.12em;font-size:12.5px;padding:9px 14px}
-#vtel .vt-li a svg{fill:var(--gold)}
-
-#vtel .vt-sos a b{font-variant-numeric:lining-nums}
-#vtel .vt-li b{font-size:15px;letter-spacing:.01em;word-break:keep-all;overflow-wrap:anywhere}
-#vtel .vt-li small:not(:last-child){white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:0;font-size:11px}
-#vtel .vt-li a{padding:9px 12px;letter-spacing:.08em}
-/* --- はじめの画面 --- */
-#vtel .vt-start .vt-kbd{filter:drop-shadow(0 24px 30px rgba(50,30,90,.25))}
-#vtel .vt-bub{font-weight:700;letter-spacing:0;color:var(--ink);background:rgba(255,255,255,.85)}
-#vtel .vt-ring{border-color:rgba(168,131,74,.7);box-shadow:0 0 14px rgba(214,186,140,.7)}
-
-/* ===== 11/19 4回目：見本（Liquid Glass UI Kit）そのものに近づける ===== */
-/* 光の当たった部屋：左上が明るいグレージュ、右へ行くほど紫がかった影。右下に色の光のボケ */
-#vtel{--ink:#1f1d26;--sub:#5f5a6c;font-family:"Zen Kaku Gothic New","Hiragino Sans",sans-serif;
-  background:radial-gradient(70% 55% at 8% 4%,rgba(250,245,238,.95),transparent 70%),linear-gradient(105deg,#ebe5de 0%,#ddd6d6 40%,#b9b3c3 75%,#8f8aa3 100%)!important}
-#vtel::before{inset:0!important;filter:blur(22px)!important;opacity:1;animation:vgBokeh 9s ease-in-out infinite alternate!important;
-  background:radial-gradient(7% 4% at 92% 64%,rgba(255,120,220,.85),transparent 70%),radial-gradient(9% 4% at 80% 90%,rgba(255,140,200,.7),transparent 70%),
-    radial-gradient(8% 4% at 96% 82%,rgba(120,230,230,.75),transparent 70%),radial-gradient(10% 5% at 70% 98%,rgba(170,120,255,.7),transparent 70%),
-    radial-gradient(40% 30% at 100% 40%,rgba(120,110,160,.35),transparent 70%)!important}
-@keyframes vgBokeh{to{opacity:.75;transform:translateY(-1.5%)}}
-#vtel::after{opacity:.35}
-/* 外側の大きなガラス板 */
-#vtel .vt-in{margin:10px auto 0;width:calc(100% - 20px);border-radius:36px;padding-left:16px;padding-right:16px;position:relative;
-  background:linear-gradient(160deg,rgba(255,255,255,.22),rgba(255,255,255,.06));-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
-  box-shadow:inset 0 2px 1px rgba(255,255,255,.9),inset 2px 0 1px rgba(255,255,255,.5),inset 0 -2px 1px rgba(255,255,255,.55),inset -2px 0 1px rgba(255,255,255,.35),inset 0 0 30px rgba(255,255,255,.12),24px 30px 50px -20px rgba(50,40,70,.35)}
-#vtel .vt-res{margin:10px -16px 0;padding:4px 16px 26px}
-
-/* --- 共通：厚みのあるガラス（右下に影が落ちる） --- */
-#vtel .vt-sos a,#vtel .vt-x,#vtel .vt-reset button,#vtel .vt-close2,#vtel .vt-li,#vtel .vt-skip,#vtel .vt-type .vt-clr,#vtel .vt-from button,#vtel .vt-note{
-  color:var(--ink)!important;
-  background:linear-gradient(170deg,rgba(255,255,255,.55),rgba(255,255,255,.22) 55%,rgba(255,255,255,.32))!important;
-  -webkit-backdrop-filter:blur(10px) saturate(1.3);backdrop-filter:blur(10px) saturate(1.3);
-  box-shadow:inset 0 2px 1px rgba(255,255,255,.95),inset 0 -3px 2px rgba(255,255,255,.6),inset 0 -12px 18px rgba(80,70,110,.06),
-    16px 20px 26px -12px rgba(55,45,75,.38),5px 7px 10px -6px rgba(55,45,75,.25)!important}
-/* ふちの光：虹色にうっすら */
-#vtel .vt-sos a::before,#vtel .vt-x::before,#vtel .vt-reset button::before,#vtel .vt-close2::before,#vtel .vt-li::before,#vtel .vt-top::before,#vtel .vt-inw::before,#vtel .vt-skip::before,#vtel .vt-type .vt-clr::before,#vtel .vt-li a::before,#vtel .vt-call::before,#vtel .vt-type button:not(.vt-clr)::before,#vtel .vt-mic2::before{
-  padding:1.5px!important;
-  background:conic-gradient(from 210deg,rgba(255,255,255,.95),rgba(200,180,255,.75) 18%,rgba(255,255,255,.4) 32%,rgba(150,230,225,.7) 48%,rgba(255,255,255,.95) 60%,rgba(255,190,225,.65) 78%,rgba(255,255,255,.95))!important}
-/* つや：上のほうに白い光の帯 */
-#vtel .vt-sos a::after,#vtel .vt-x::after,#vtel .vt-reset button::after,#vtel .vt-close2::after,#vtel .vt-li::after,#vtel .vt-top::after,#vtel .vt-inw::after,#vtel .vt-li a::after,#vtel .vt-call::after,#vtel .vt-type button:not(.vt-clr)::after,#vtel .vt-mic2::after{
-  left:7%!important;right:7%!important;top:3px!important;height:42%!important;border-radius:999px!important;
-  background:linear-gradient(180deg,rgba(255,255,255,.7),rgba(255,255,255,0))!important}
-#vtel .vt-li::after,#vtel .vt-top::after{left:4%!important;right:4%!important;height:30%!important;border-radius:22px 22px 60% 60%/22px 22px 30% 30%!important;opacity:.6}
-
-/* --- むらさき（Primary）：色ガラス＋むらさきの影 --- */
-#vtel .vt-call,#vtel .vt-type button:not(.vt-clr),#vtel .vt-mic2{color:#fff!important;
-  background:linear-gradient(180deg,rgba(160,132,255,.95),rgba(118,88,240,.93) 60%,rgba(140,112,250,.95))!important;
-  box-shadow:inset 0 2px 1px rgba(255,255,255,.75),inset 0 -4px 6px rgba(70,40,190,.35),inset 0 -1.5px 1px rgba(225,215,255,.95),
-    16px 22px 30px -12px rgba(110,80,230,.55),5px 8px 12px -6px rgba(90,60,200,.35)!important}
-#vtel .vt-call svg{fill:#fff}#vtel .vt-mic2 svg{stroke:#fff}#vtel .vt-mic2 svg rect{fill:rgba(255,255,255,.3)}
-#vtel .vt-call{font-weight:700;letter-spacing:.1em;font-size:17px}
-/* --- ミント（Secondary）：ほかの候補の発信 --- */
-#vtel .vt-li a{color:#fff!important;
-  background:linear-gradient(180deg,rgba(150,226,214,.96),rgba(92,188,176,.94) 60%,rgba(120,208,196,.96))!important;
-  box-shadow:inset 0 2px 1px rgba(255,255,255,.8),inset 0 -3px 5px rgba(20,120,110,.3),inset 0 -1.5px 1px rgba(210,255,248,.95),
-    10px 14px 20px -10px rgba(50,160,148,.6),4px 6px 8px -5px rgba(40,130,120,.35)!important}
-#vtel .vt-li a svg{fill:#fff}
-/* --- 入力欄：白いカプセル（ほぼ白） --- */
-#vtel .vt-inw{background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(250,248,252,.86))!important;
-  box-shadow:inset 0 -2px 2px rgba(255,255,255,.9),inset 0 2px 3px rgba(80,70,110,.05),16px 20px 26px -12px rgba(55,45,75,.35),5px 7px 10px -6px rgba(55,45,75,.22)!important}
-#vtel .vt-type input{color:var(--ink);font-weight:500;letter-spacing:.02em}
-#vtel .vt-type .vt-clr{box-shadow:inset 0 1px 1px #fff,4px 6px 10px -5px rgba(55,45,75,.4)!important}
-/* --- いちばんの候補：見本の「Modern Glass」のカード（桃→ラベンダー→青） --- */
-#vtel .vt-top{border-radius:28px;
-  background:radial-gradient(40% 30% at 90% 100%,rgba(255,150,230,.55),transparent 70%),linear-gradient(135deg,rgba(252,196,190,.82),rgba(222,186,240,.8) 45%,rgba(168,186,250,.82))!important;
-  -webkit-backdrop-filter:blur(14px) saturate(1.4);backdrop-filter:blur(14px) saturate(1.4);
-  box-shadow:inset 0 2px 1px rgba(255,255,255,.95),inset 0 -3px 2px rgba(255,255,255,.55),inset 0 0 40px rgba(255,255,255,.18),
-    20px 26px 40px -16px rgba(90,70,150,.45),6px 9px 14px -8px rgba(70,50,120,.3)!important}
-#vtel .vt-top .lb{color:#5b4bb0;border:0;background:rgba(255,255,255,.6)!important;box-shadow:inset 0 1px 1px #fff,4px 6px 10px -6px rgba(60,40,120,.4);letter-spacing:.08em;font-weight:700}
-#vtel .vt-top .lb small{color:#5f5a6c}
-#vtel .vt-meta .cat{color:#4b3f8c!important;border:0;background:rgba(255,255,255,.55)!important;box-shadow:inset 0 1px 1px #fff;font-weight:700}
-#vtel .vt-skip{background:rgba(255,255,255,.55)!important}
-/* --- 字体：見本のようなすっきりしたゴシック。数字は Outfit --- */
-#vtel .vt-top h3,#vtel .vt-li b{font-family:"Zen Kaku Gothic New","Hiragino Sans",sans-serif;font-weight:700;letter-spacing:.02em;color:var(--ink)}
-#vtel .vt-top h3{font-size:21px}
-#vtel .vt-num,#vtel .vt-li small:last-child,#vtel .vt-sos a b{font-family:"Outfit","Zen Kaku Gothic New",sans-serif;font-variant-numeric:tabular-nums}
-#vtel .vt-num{font-weight:600;font-size:40px!important;letter-spacing:.01em}
-#vtel .vt-li small:last-child{font-weight:500;font-size:14px}
-#vtel .vt-sos a{color:#b02a55!important}
-#vtel .vt-more{color:#4d4859;letter-spacing:.12em;font-weight:700}
-#vtel .vt-close2,#vtel .vt-reset button{letter-spacing:.1em;font-weight:700;color:var(--ink)!important}
-#vtel .vt-hd2 .vt-sos{padding:4px 22px 18px 4px;margin:-4px 0 -14px -4px;-webkit-mask:linear-gradient(90deg,#000 88%,transparent);mask:linear-gradient(90deg,#000 88%,transparent)}
-#vtel .vt-li b{word-break:auto-phrase;overflow-wrap:normal}
-/* 影をはっきり（右下へ長く落ちる） */
-#vtel .vt-li{box-shadow:inset 0 2px 1px rgba(255,255,255,.95),inset 0 -3px 2px rgba(255,255,255,.6),inset 0 -12px 18px rgba(80,70,110,.06),22px 26px 30px -14px rgba(55,45,75,.5),6px 9px 12px -6px rgba(55,45,75,.3)!important}
-#vtel .vt-res{padding-right:26px;margin-right:-26px}
-#vtel .vt-bub{color:#5b4bb0}
-#vtel .vt-ring{border-color:#a48cff;box-shadow:0 0 14px rgba(164,140,255,.8)}
-</style><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600&family=Cormorant+Garamond:wght@500;600;700&family=Shippori+Mincho+B1:wght@500;600&family=Zen+Kaku+Gothic+New:wght@300;500;700&display=swap"><!--/vtel-css-->
+</style><!--/vtel-css-->
 <!--vtel-js--><script>
 /* ===== 声で電話をさがす（voice_tel.py） ===== */
 (function(){
@@ -5369,7 +5088,7 @@ function homeLL(){if(FROM==="here"&&HERE2)return {ll:HERE2,t:"いまいる場所
 const km=(a,b)=>Math.hypot(a[0]-b[0],(a[1]-b[1])*Math.cos(a[0]*Math.PI/180))*111;
 function load(){if(DATA)return Promise.resolve(DATA);
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
-  return fetch(base+"near-data/tel.json?v=11192204").then(r=>r.json()).then(d=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),ky:r[7]?nz(r[7]):""}));return DATA})
+  return fetch(base+"near-data/tel.json?v=11192207").then(r=>r.json()).then(d=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),ky:r[7]?nz(r[7]):""}));return DATA})
     .catch(()=>{DATA=[];return DATA})}
 /* 聞きとった文 → キーワード */
 function terms(text){let s=(text||"").normalize("NFKC").replace(NOISE," ");
