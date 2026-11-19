@@ -4358,7 +4358,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11192152");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11192156");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -4827,6 +4827,12 @@ else{document.body.classList.add("is-loading");leafShine();raf=requestAnimationF
 </style><!--/kidcolor-css-->
 
 
+
+
+
+
+
+
 <!--vtel-css--><style>
 /* ===== 声で電話をさがす（voice_tel.py） ===== */
 .vt-bar{position:relative;display:flex;align-items:center;gap:10px;margin:0 0 12px;padding:9px 12px 9px 9px;border-radius:999px;text-decoration:none;color:#fff;overflow:hidden;
@@ -5100,6 +5106,63 @@ else{document.body.classList.add("is-loading");leafShine();raf=requestAnimationF
 /* スクロールのはしの線 */
 #vtel .vt-res{scrollbar-color:rgba(120,100,180,.3) transparent}
 @media (prefers-color-scheme:dark){#vtel{--g-glass:rgba(255,255,255,.5)}}
+
+/* ===== 11/19 2回目：もっと透明に・ピカピカに（本物のガラスらしく） ===== */
+/* うしろに色のかたまりがゆっくり動く（ガラスごしに透けて見える） */
+#vtel{background:linear-gradient(160deg,#f6f3fb,#e9e4f2)}
+#vtel::before{content:"";position:absolute;inset:-20%;pointer-events:none;z-index:0;
+  background:radial-gradient(28% 22% at 82% 18%,rgba(140,105,255,.85),transparent 70%),radial-gradient(26% 24% at 12% 40%,rgba(70,205,190,.75),transparent 70%),
+    radial-gradient(30% 22% at 86% 70%,rgba(255,120,190,.75),transparent 70%),radial-gradient(28% 20% at 22% 88%,rgba(120,150,255,.75),transparent 70%),radial-gradient(18% 14% at 50% 55%,rgba(255,200,120,.45),transparent 70%);
+  filter:blur(24px);animation:vgDrift 18s ease-in-out infinite alternate}
+@keyframes vgDrift{0%{transform:translate(0,0) rotate(0)}50%{transform:translate(4%,-3%) rotate(8deg)}100%{transform:translate(-4%,3%) rotate(-6deg)}}
+/* ガラス（共通）：うすく透けて、ふちが光る */
+#vtel .vt-sos a,#vtel .vt-x,#vtel .vt-reset button,#vtel .vt-close2,#vtel .vt-li,#vtel .vt-skip,#vtel .vt-from button,#vtel .vt-note,#vtel .vt-back,#vtel .vt-type input,#vtel .vt-type .vt-clr{
+  background:linear-gradient(135deg,rgba(255,255,255,.42),rgba(255,255,255,.1) 60%,rgba(255,255,255,.22));
+  -webkit-backdrop-filter:blur(14px) saturate(1.9) brightness(1.06);backdrop-filter:blur(14px) saturate(1.9) brightness(1.06);
+  border:1px solid rgba(255,255,255,.65);
+  box-shadow:inset 0 1.5px 1px rgba(255,255,255,.95),inset 0 -1.5px 1px rgba(255,255,255,.45),inset 3px 0 8px rgba(255,255,255,.2),inset 0 -12px 22px rgba(255,255,255,.14),0 18px 34px -18px rgba(60,40,120,.5)}
+#vtel .vt-type input{background:linear-gradient(135deg,rgba(255,255,255,.62),rgba(255,255,255,.3))}
+/* 上半分のつや＋ときどき走る光 */
+#vtel .vt-sos a,#vtel .vt-x,#vtel .vt-reset button,#vtel .vt-close2,#vtel .vt-li,#vtel .vt-top,#vtel .vt-call,#vtel .vt-type button,#vtel .vt-mic2,#vtel .vt-li a,#vtel .vt-inw{position:relative;isolation:isolate}
+#vtel .vt-sos a,#vtel .vt-x,#vtel .vt-reset button,#vtel .vt-close2,#vtel .vt-li,#vtel .vt-top,#vtel .vt-call,#vtel .vt-type button:not(.vt-clr),#vtel .vt-mic2,#vtel .vt-li a{overflow:hidden}
+#vtel .vt-sos a::before,#vtel .vt-x::before,#vtel .vt-reset button::before,#vtel .vt-close2::before,#vtel .vt-li::before,#vtel .vt-top::before,#vtel .vt-call::before,#vtel .vt-type button:not(.vt-clr)::before,#vtel .vt-mic2::before,#vtel .vt-li a::before,#vtel .vt-inw::before{
+  content:"";position:absolute;left:6%;right:6%;top:2px;height:46%;border-radius:999px 999px 60% 60%/100% 100% 40% 40%;pointer-events:none;z-index:-1;
+  background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(255,255,255,.08));opacity:.75}
+#vtel .vt-li::before,#vtel .vt-top::before{left:3%;right:3%;height:38%;border-radius:22px 22px 50% 50%/22px 22px 30% 30%;opacity:.55}
+#vtel .vt-inw::before{z-index:1;left:20px;right:60px;top:3px;height:40%;opacity:.6}
+#vtel .vt-li::after,#vtel .vt-top::after,#vtel .vt-call::after,#vtel .vt-close2::after,#vtel .vt-type button:not(.vt-clr)::after,#vtel .vt-mic2::after,#vtel .vt-li a::after{
+  content:"";position:absolute;top:-50%;bottom:-50%;width:38%;left:-60%;pointer-events:none;z-index:2;transform:skewX(-20deg);
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.75),transparent);animation:vgGlint 5.5s ease-in-out infinite}
+#vtel .vt-li:nth-child(2n)::after{animation-delay:1.2s}#vtel .vt-li:nth-child(3n)::after{animation-delay:2.4s}
+#vtel .vt-call::after{animation-delay:.6s}#vtel .vt-mic2::after{animation-delay:2s}#vtel .vt-type button::after{animation-delay:3s}
+@keyframes vgGlint{0%,62%{left:-60%}88%,100%{left:130%}}
+/* むらさき・ミントのボタン：中が透けるゼリーのような色ガラス */
+#vtel .vt-type button:not(.vt-clr),#vtel .vt-mic2,#vtel .vt-call{
+  background:linear-gradient(180deg,rgba(176,150,255,.92),rgba(110,78,240,.88) 60%,rgba(140,110,255,.92));
+  border:1px solid rgba(255,255,255,.75);
+  box-shadow:inset 0 2px 1px rgba(255,255,255,.85),inset 0 -6px 12px rgba(60,20,170,.35),inset 0 -2px 1px rgba(220,200,255,.9),0 16px 30px -12px rgba(116,87,238,.8),0 4px 18px -6px rgba(170,140,255,.7)}
+#vtel .vt-li a{background:linear-gradient(180deg,rgba(170,240,230,.95),rgba(80,190,176,.9) 60%,rgba(120,215,200,.95));border:1px solid rgba(255,255,255,.8);
+  box-shadow:inset 0 2px 1px rgba(255,255,255,.9),inset 0 -5px 10px rgba(10,110,100,.3),inset 0 -2px 1px rgba(200,255,245,.9),0 12px 22px -10px rgba(50,170,155,.85)}
+/* いちばんの候補：色のついたガラス（うしろが透ける） */
+#vtel .vt-top{background:linear-gradient(135deg,rgba(255,190,215,.55),rgba(205,185,255,.45) 50%,rgba(165,200,255,.5));
+  -webkit-backdrop-filter:blur(18px) saturate(2);backdrop-filter:blur(18px) saturate(2);border:1px solid rgba(255,255,255,.75);
+  box-shadow:inset 0 2px 1px rgba(255,255,255,.95),inset 0 -2px 1px rgba(255,255,255,.5),inset 0 0 0 1px rgba(255,255,255,.15),inset 0 -20px 40px rgba(255,255,255,.18),0 26px 46px -22px rgba(100,70,200,.6),0 0 40px -10px rgba(200,170,255,.6)}
+#vtel .vt-top .lb,#vtel .vt-skip{background:linear-gradient(135deg,rgba(255,255,255,.75),rgba(255,255,255,.35));-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+#vtel .vt-top>*{position:relative;z-index:1}
+#vtel .vt-top>.vt-skip{position:absolute}
+/* 文字はガラスの上でも読めるように */
+#vtel .vt-li b,#vtel .vt-top h3,#vtel .vt-num{text-shadow:0 1px 0 rgba(255,255,255,.7)}
+#vtel .vt-li small,#vtel .vt-meta,#vtel .vt-more{color:#4f4870}
+#vtel .vt-type .vt-clr{position:absolute}
+/* もっと透かす：カードの白をうすく、うしろの色をこく */
+#vtel .vt-li,#vtel .vt-sos a,#vtel .vt-x,#vtel .vt-reset button,#vtel .vt-close2{background:linear-gradient(135deg,rgba(255,255,255,.32),rgba(255,255,255,.06) 55%,rgba(255,255,255,.16))}
+#vtel{background:linear-gradient(165deg,#e8def9,#dcecf4 55%,#f3dcec)}
+#vtel::before{opacity:1;filter:blur(26px) saturate(1.25);
+  background:radial-gradient(30% 16% at 80% 14%,rgba(140,100,255,.9),transparent 70%),radial-gradient(26% 18% at 8% 30%,rgba(60,210,190,.85),transparent 70%),
+    radial-gradient(30% 14% at 70% 40%,rgba(255,130,200,.75),transparent 70%),radial-gradient(26% 16% at 18% 58%,rgba(150,120,255,.8),transparent 70%),
+    radial-gradient(30% 16% at 88% 66%,rgba(80,200,230,.8),transparent 70%),radial-gradient(28% 14% at 30% 82%,rgba(255,140,190,.8),transparent 70%),
+    radial-gradient(22% 12% at 70% 92%,rgba(130,110,255,.8),transparent 70%),radial-gradient(18% 10% at 45% 22%,rgba(255,200,130,.55),transparent 70%)}
+@media (prefers-reduced-motion:reduce){#vtel::before,#vtel *::after{animation:none!important}}
 </style><!--/vtel-css-->
 <!--vtel-js--><script>
 /* ===== 声で電話をさがす（voice_tel.py） ===== */
@@ -5133,7 +5196,7 @@ function homeLL(){if(FROM==="here"&&HERE2)return {ll:HERE2,t:"いまいる場所
 const km=(a,b)=>Math.hypot(a[0]-b[0],(a[1]-b[1])*Math.cos(a[0]*Math.PI/180))*111;
 function load(){if(DATA)return Promise.resolve(DATA);
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
-  return fetch(base+"near-data/tel.json?v=11192152").then(r=>r.json()).then(d=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),ky:r[7]?nz(r[7]):""}));return DATA})
+  return fetch(base+"near-data/tel.json?v=11192156").then(r=>r.json()).then(d=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),ky:r[7]?nz(r[7]):""}));return DATA})
     .catch(()=>{DATA=[];return DATA})}
 /* 聞きとった文 → キーワード */
 function terms(text){let s=(text||"").normalize("NFKC").replace(NOISE," ");
