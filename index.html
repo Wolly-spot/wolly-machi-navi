@@ -1749,7 +1749,7 @@ html .hl-ring{box-shadow:0 0 6px #ffd6ea;opacity:.8}
 
       <section class="block" id="sec-help">
         <div class="head cat-head"><div><div class="eyebrow">HELP</div><h2>困ったときはこちら</h2></div><span id="kyuSlotHead" hidden></span></div>
-        <!--vtel-bar--><a class="vt-bar" href="#" data-vtel id="vtBar" aria-label="声で電話をさがす"><span class="vt-mic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4M9 21h6"/></svg></span><span class="vt-tx"><b>声で電話をさがす</b><small>話すと、いちばん近い電話番号が出るよ</small></span><span class="vt-go"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg></span></a><a class="vt-bar vt-bar2" href="#kyubyo" aria-label="子どもの急病・夜間救急"><span class="vt-mic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 14.8V5a2 2 0 0 0-4 0v9.8a4 4 0 1 0 4 0z"/><circle cx="12" cy="17.5" r="1.8" fill="#ff5a7a" stroke="none"/><path d="M12 9v6.5"/></svg></span><span class="vt-tx"><b>子どもの急病・夜間救急</b><small>電話マップ・休日の歯医者・小児科・薬局</small></span><span class="vt-go"><svg viewBox="0 0 24 24" aria-hidden="true" style="fill:none;stroke:#fff;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round"><path d="M9 6l6 6-6 6"/></svg></span></a><!--/vtel-bar-->
+        <!--vtel-bar--><a class="vt-bar" href="#" data-vtel id="vtBar" aria-label="急いでいるときは、声で探そう"><span class="vt-mic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4M9 21h6"/></svg></span><span class="vt-tx"><b>急いでいるときは、声で探そう！</b><small>お迎えの時間が間に合わない💦 そんなときに</small></span><span class="vt-go"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg></span></a><a class="vt-bar vt-bar2" href="#kyubyo" aria-label="子どもの急病・夜間救急"><span class="vt-mic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 14.8V5a2 2 0 0 0-4 0v9.8a4 4 0 1 0 4 0z"/><circle cx="12" cy="17.5" r="1.8" fill="#ff5a7a" stroke="none"/><path d="M12 9v6.5"/></svg></span><span class="vt-tx"><b>子どもの急病・夜間救急</b><small>電話マップ・休日の歯医者・小児科・薬局</small></span><span class="vt-go"><svg viewBox="0 0 24 24" aria-hidden="true" style="fill:none;stroke:#fff;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round"><path d="M9 6l6 6-6 6"/></svg></span></a><!--/vtel-bar-->
       </section>
 
       <section class="block" id="sec-navi">
@@ -4358,7 +4358,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11191249");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11191321");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -4720,70 +4720,12 @@ else{document.body.classList.add("is-loading");leafShine();raf=requestAnimationF
 
 
 
-<!--kidcolor-css--><style>
-/* ===== お子さんごとの色の枠（kid_colors.py） ===== */
-/* 枠は細く、ほんのり紫のグラデーションの光（じゃまにならないように）。だれ向けかは札の色で */
-.af{box-shadow:0 0 0 1px rgba(255,255,255,.9),0 0 0 2px rgba(196,170,255,.75),0 0 10px 1px rgba(178,140,255,.32),0 6px 16px -8px rgba(150,110,255,.45)!important;border-color:rgba(205,185,255,.9)!important;
-  background-image:linear-gradient(160deg,rgba(236,226,255,.55),rgba(255,255,255,0) 45%)!important}
-.af-tags{position:absolute;top:5px;left:5px;z-index:4;display:flex;flex-wrap:wrap;gap:3px;max-width:calc(100% - 10px);pointer-events:none}
-.af-tags i{font-style:normal;font-size:9.5px;font-weight:900;line-height:1;color:#fff;background:var(--c);border:1.5px solid #fff;border-radius:999px;padding:3px 6px 2px;box-shadow:0 2px 6px -2px var(--c);white-space:nowrap}
-.fbar.af{border-radius:18px}
-.fbar.af .af-tags{top:-8px;left:12px}
-.kn-i.af{border-radius:16px}
-.kn-i.af .af-tags{top:-7px;left:auto;right:10px}
-.help.navi .hp.af .af-tags i,.enjoy .ej.af .af-tags i{font-size:9px;padding:2px 5px 1px}
-.kn-who{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
-.kn-who i{font-style:normal;font-size:11.5px;font-weight:900;line-height:1;color:#fff;background:var(--c);border-radius:999px;padding:4px 9px 3px;box-shadow:0 2px 6px -2px var(--c)}
-.kn-i .af-tags{display:none}
-/* マイページ */
-.kidrow{border-left:5px solid var(--kc,#ccc)}
-.kid-dot{flex:none;display:grid;place-items:center;min-width:34px;height:34px;padding:0 4px;border-radius:999px;background:var(--kc);color:#fff;font-size:11px;font-weight:900;box-shadow:0 0 0 2px #fff,0 4px 10px -4px var(--kc)}
-.kid-g{display:flex;flex-wrap:nowrap;gap:6px;margin-top:6px}
-.kidrow>span:nth-child(2){min-width:0;flex:1}
-.kid-g button{white-space:nowrap;flex:none;width:auto!important;height:auto!important;border:1.5px solid var(--line,#ddd);border-radius:999px;padding:5px 12px;font:inherit;font-size:12px;font-weight:800;background:#fff;color:var(--ink,#333);cursor:pointer}
-.kid-g button[data-kidg$=":m"][aria-pressed="true"],.kid-g button[data-kidng="m"][aria-pressed="true"]{background:#3D8BFF;border-color:#3D8BFF;color:#fff}
-.kid-g button[data-kidg$=":f"][aria-pressed="true"],.kid-g button[data-kidng="f"][aria-pressed="true"]{background:#FF5FA2;border-color:#FF5FA2;color:#fff}
-.kidadd{flex-wrap:wrap;align-items:center}
-.kid-help{margin:6px 0 0;font-size:11.5px;color:var(--muted,#888)}
 
-.af-tags i{pointer-events:auto;cursor:pointer}
-.kidrow .kid-name{width:calc(100% - 44px)}
-.kid-name{display:block;width:100%;margin-top:6px;border:1.5px solid var(--line,#ddd);border-radius:12px;padding:7px 10px;font:inherit;font-size:13.5px;background:#fff}
-.kidadd .kid-name{flex:1 1 100%;margin:0}
-.kid-rank{font-style:normal;font-size:12px;color:var(--muted,#888);font-weight:700;margin-left:2px}
-.kid-help{margin:8px 0 0;padding:10px 12px;border-radius:14px;background:#F6F2FF;font-size:12px;line-height:1.7;color:var(--ink,#333)}
-.kid-help b{color:#6a4fd0}.kid-help small{display:block;margin-top:4px;color:#7a7396}
-/* 理由のホログラム（明るい半透明の白） */
-#afPop{position:fixed;inset:0;z-index:9100;display:grid;place-items:center;padding:20px;background:rgba(255,255,255,.35);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);opacity:0;transition:opacity .3s}
-#afPop.on{opacity:1}
-.afp-card{position:relative;width:min(380px,100%);border-radius:26px;padding:18px 18px 16px;color:#3a3358;overflow:hidden;
-  background:linear-gradient(160deg,rgba(255,255,255,.88),rgba(255,255,255,.72));border:2px solid rgba(255,255,255,.95);
-  box-shadow:0 0 0 2px var(--c),0 0 24px color-mix(in srgb,var(--c) 55%,transparent),0 20px 40px -18px rgba(80,60,140,.45);transform:translateY(16px) scale(.94);transition:transform .45s cubic-bezier(.2,.8,.3,1.25)}
-#afPop.on .afp-card{transform:none}
-.afp-card::before{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(to bottom,color-mix(in srgb,var(--c) 10%,transparent) 0 1px,transparent 1px 5px)}
-.afp-card::after{content:"";position:absolute;left:0;right:0;height:60px;top:-60px;pointer-events:none;background:linear-gradient(to bottom,transparent,color-mix(in srgb,var(--c) 22%,transparent),transparent);animation:afScan 3s .3s linear infinite}
-@keyframes afScan{to{top:100%}}
-.afp-x{position:absolute;top:10px;right:10px;z-index:2;width:34px;height:34px;border-radius:50%;border:0;background:rgba(255,255,255,.9);box-shadow:0 0 0 1.5px var(--c);color:var(--c);font-size:18px;font-weight:900;cursor:pointer}
-.afp-top{position:relative;display:flex;align-items:flex-end;gap:8px;margin-top:4px}
-.afp-ch{flex:none;width:96px;height:96px;object-fit:contain;filter:drop-shadow(0 6px 10px rgba(80,60,140,.25));animation:afBob 2.6s ease-in-out infinite}
-@keyframes afBob{50%{transform:translateY(-5px)}}
-.afp-say{position:relative;flex:1;padding:10px 12px;border-radius:16px;background:#fff;box-shadow:0 0 0 1.5px color-mix(in srgb,var(--c) 45%,#fff)}
-.afp-who{display:inline-block;padding:3px 10px;border-radius:999px;color:#fff;font-size:12px;font-weight:900}
-.afp-who small{font-size:10px;opacity:.9}
-.afp-say p{margin:6px 0 0;font-size:15px}
-.afp-t{position:relative;margin:14px 0 4px;font-size:16px;font-weight:900;color:var(--c)}
-.afp-why{position:relative;margin:4px 0 0;font-size:14px;line-height:1.75;font-weight:600}
-.afp-ls{position:relative;list-style:none;margin:6px 0 0;padding:0;display:grid;gap:8px}
-.afp-ls li{display:flex;align-items:flex-start;gap:10px;padding:9px 10px;border-radius:16px;background:rgba(255,255,255,.85);box-shadow:0 0 0 1.5px color-mix(in srgb,var(--c) 22%,#fff);font-size:13.5px;line-height:1.65;font-weight:700;animation:afLi .45s cubic-bezier(.2,.8,.3,1.2) both;animation-delay:calc(.15s + var(--n)*.09s)}
-.afp-ic{flex:none;display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:color-mix(in srgb,var(--c) 14%,#fff);box-shadow:0 0 0 2px #fff,0 3px 8px -4px var(--c);animation:afIc 2.8s ease-in-out infinite;animation-delay:calc(var(--n)*.3s)}
-.afp-ic svg{width:26px;height:26px}
-@keyframes afLi{from{opacity:0;transform:translateY(8px) scale(.97)}}
-@keyframes afIc{50%{transform:translateY(-2px) rotate(-4deg)}}
-@media (prefers-reduced-motion:reduce){.afp-ls li,.afp-ic{animation:none}}
-.afp-note{position:relative;margin:10px 0 0;font-size:11.5px;color:#8a83a8}
-.afp-ok{position:relative;display:block;margin:12px auto 0;border:0;border-radius:999px;padding:10px 30px;font:inherit;font-size:14px;font-weight:900;color:#fff;background:var(--c);box-shadow:0 8px 18px -8px var(--c);cursor:pointer}
-@media (prefers-reduced-motion:reduce){.afp-card::after,.afp-ch{animation:none}}
-</style><!--/kidcolor-css-->
+
+
+
+
+
 <!--vtel-css--><style>
 /* ===== 声で電話をさがす（voice_tel.py） ===== */
 .vt-bar{position:relative;display:flex;align-items:center;gap:10px;margin:0 0 12px;padding:9px 12px 9px 9px;border-radius:999px;text-decoration:none;color:#fff;overflow:hidden;
@@ -4897,6 +4839,33 @@ else{document.body.classList.add("is-loading");leafShine();raf=requestAnimationF
 .vt-mic2 svg rect{fill:#fff}
 .vt-listen .vt-wave{margin-top:0;height:26px}
 #vtel.vt-listen .vt-mic2{animation:vtPing 1.4s infinite}
+
+/* 11/19 シンプルに：キーボードの絵・×で次の候補 */
+.vt-sub{margin:4px 0 0;font-size:12.5px;font-weight:800;color:#ffd1ea}
+.vt-hd h2{line-height:1.3}
+.vt-start{display:flex;flex-direction:column;align-items:center;padding:6px 0 4px}
+.vt-kbw{position:relative;width:min(340px,100%);cursor:pointer;animation:vtKbIn .6s cubic-bezier(.2,.8,.3,1.2) both}
+@keyframes vtKbIn{from{opacity:0;transform:translateY(16px) scale(.95)}}
+.vt-kbd{display:block;width:100%;height:auto;filter:drop-shadow(0 0 14px rgba(140,240,255,.55)) drop-shadow(0 14px 22px rgba(40,10,80,.45))}
+.vt-kmic{animation:vtKm 1.4s ease-in-out infinite;transform-origin:286px 192px}
+@keyframes vtKm{50%{transform:scale(1.12)}}
+.vt-ring{position:absolute;right:calc(34/320*100% - 26px);bottom:calc(18/210*100% - 26px);width:52px;height:52px;border-radius:50%;border:3px solid #ffe3f0;box-shadow:0 0 14px #ff8fd0;animation:vtRing 1.6s ease-out infinite;pointer-events:none}
+.vt-finger{position:absolute;right:calc(34/320*100% - 22px);bottom:calc(18/210*100% - 46px);font-size:34px;transform:rotate(-12deg);animation:vtTap 1.4s ease-in-out infinite;pointer-events:none;filter:drop-shadow(0 4px 6px rgba(0,0,0,.35))}
+@keyframes vtTap{50%{transform:rotate(-12deg) translateY(-8px)}}
+.vt-bub{position:absolute;right:4px;top:-14px;padding:9px 13px;border-radius:16px;background:#fff;color:#c2477e;font-size:15px;font-weight:900;line-height:1.4;text-align:center;box-shadow:0 0 0 2px #ff8fd0,0 0 18px rgba(255,140,200,.7);animation:vtBub 2.4s ease-in-out infinite}
+.vt-bub::after{content:"";position:absolute;right:28px;bottom:-9px;border:9px solid transparent;border-top-color:#fff;border-bottom:0}
+@keyframes vtBub{50%{transform:translateY(-4px)}}
+.vt-how{margin:14px 4px 0;font-size:12.5px;line-height:1.9;font-weight:700;color:#e9fdff;text-align:center}
+.vt-how b{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#ff8fd0;color:#fff;font-size:11px;margin-right:2px}
+.vt-hint{margin:8px 0 0;font-size:12px;font-weight:800;color:#d8f8ff;text-align:center}
+.vt-top{position:relative}
+.vt-skip{position:absolute;top:10px;right:10px;z-index:2;width:38px;height:38px;border-radius:50%;border:0;background:#f3eefc;color:#6a4fd0;font-size:20px;font-weight:900;cursor:pointer;box-shadow:0 0 0 2px #fff,0 4px 10px -4px rgba(90,60,180,.6)}
+.vt-top .lb small{margin-left:8px;font-size:10px;opacity:.85}
+.vt-top h3{padding-right:44px}
+.vt-num{font-size:34px!important}
+.vt-li{cursor:pointer}
+.vt-li:active{transform:scale(.98)}
+#vtel.vt-has .vt-hint{display:none}
 .vt-res{flex:1;min-height:0;overflow-y:auto;margin:10px -18px 0;padding:4px 18px 12px;-webkit-overflow-scrolling:touch}
 .vt-top{position:relative;border-radius:22px;padding:14px 14px 12px;color:#2a1450;background:linear-gradient(160deg,rgba(255,255,255,.96),rgba(232,250,255,.94));
   box-shadow:0 0 0 2px #8ff3ff,0 0 26px rgba(90,220,255,.75),0 0 60px rgba(170,110,255,.5);animation:vtPop .6s cubic-bezier(.2,.8,.3,1.2) both}
@@ -4956,12 +4925,12 @@ function homeLL(){if(FROM==="here"&&HERE2)return {ll:HERE2,t:"いまいる場所
 const km=(a,b)=>Math.hypot(a[0]-b[0],(a[1]-b[1])*Math.cos(a[0]*Math.PI/180))*111;
 function load(){if(DATA)return Promise.resolve(DATA);
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
-  return fetch(base+"near-data/tel.json?v=11191249").then(r=>r.json()).then(d=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||""))}));return DATA})
+  return fetch(base+"near-data/tel.json?v=11191321").then(r=>r.json()).then(d=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||""))}));return DATA})
     .catch(()=>{DATA=[];return DATA})}
 /* 聞きとった文 → キーワード */
 function terms(text){let s=(text||"").normalize("NFKC").replace(NOISE," ");
   return s.split(/[\s、。,.!?！？]+|(?:と|や|か|の|を|が|に|で|は|も)(?=[一-鿿゠-ヿ])/).map(x=>x.replace(/^(の|を|が|に|で|は|も)+|(の|を|が|に|で|は|も)+$/g,"").trim()).filter(x=>x&&x.length>=1&&!/^[ぁ-ゖ]$/.test(x))}
-function addKW(text){CATS=null;const t=terms(text);t.forEach(w=>{if(!KW.includes(w))KW.push(w)});if(KW.length>6)KW=KW.slice(-6);renderKW();render()}
+function addKW(text){CATS=null;const t=terms(text);t.forEach(w=>{if(!KW.includes(w))KW.push(w)});if(KW.length>6)KW=KW.slice(-6);window.__vtSkipped=0;stackFrom();renderKW();render()}
 function score(r,ws){let s=0;const cw=CATW[r.c]||[];
   ws.forEach(w=>{const k=nz(w);if(!k)return;if(r.key.includes(k))s+=10;else if(k.length>=3&&[k.slice(1),k.slice(0,-1),k.slice(-2),k.slice(0,2)].some(x=>x.length>=2&&r.key.includes(x)))s+=6;cw.forEach(c=>{const cc=nz(c);if(cc.includes(k)||k.includes(cc))s+=4})});
   if(r.c==="sos"){const strong=/(救急車|意識|けいれん|痙攣|息|呼吸|火事|事故|警察|泥棒)/.test(ws.join(""));if(r.t==="119"||r.t==="110")s=strong?s+30:0;else if(s>0&&/(熱|夜|迷|具合|吐|けが)/.test(ws.join("")))s+=6}
@@ -4989,21 +4958,37 @@ let CATS=null,CATT="";
 function tilesHtml(){return `<p class="vt-q">どれにこまっていますか？<small>タップすると、いちばん近い電話が出るよ</small></p>
   <div class="vt-tiles">${TILES.map((t,i)=>`<button type="button" class="vt-tile" data-vtile="${i}" style="--d:${i*.04}s"><span class="em">${t[0]}</span><b>${esc(t[1]).replace("|","<br>")}</b><small>${esc(t[2])}</small></button>`).join("")}</div>
   <p class="vt-cnt">Wollyにのっている ${DATA.length.toLocaleString()} の電話からさがすよ</p>`}
+/* キーボードの絵（iPhone のキーボード。右下のマイクを指さす） */
+const KBD=`<svg class="vt-kbd" viewBox="0 0 320 210" aria-hidden="true">
+  <rect x="2" y="2" width="316" height="206" rx="18" fill="#E9ECF3" stroke="#fff" stroke-width="3"/>
+  ${[0,1,2].map(r=>{const n=r===0?10:r===1?9:7,w=26,g=5,tot=n*w+(n-1)*g,x0=(320-tot)/2;return Array.from({length:n},(_,k)=>`<rect x="${x0+k*(w+g)}" y="${14+r*42}" width="${w}" height="34" rx="6" fill="#fff"/>`).join("")}).join("")}
+  <rect x="14" y="140" width="40" height="34" rx="6" fill="#C9CEDB"/><rect x="60" y="140" width="34" height="34" rx="6" fill="#C9CEDB"/>
+  <rect x="100" y="140" width="140" height="34" rx="6" fill="#fff"/><text x="170" y="162" text-anchor="middle" font-size="12" fill="#8a8fa3" font-weight="700">空白</text>
+  <rect x="246" y="140" width="60" height="34" rx="6" fill="#C9CEDB"/><text x="276" y="162" text-anchor="middle" font-size="12" fill="#5a6075" font-weight="700">改行</text>
+  <circle cx="34" cy="192" r="9" fill="none" stroke="#8a8fa3" stroke-width="2"/><path d="M25 192h18M34 183c-4 5-4 13 0 18M34 183c4 5 4 13 0 18" fill="none" stroke="#8a8fa3" stroke-width="1.6"/>
+  <g class="vt-kmic"><circle cx="286" cy="192" r="16" fill="#FF5FA2"/><rect x="282" y="182" width="8" height="13" rx="4" fill="#fff"/><path d="M278 191a8 8 0 0 0 16 0M286 199v4" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/></g>
+</svg>`;
+let STACK=[];
+function stackFrom(){const {L}=results();STACK=L.slice()}
+function startHtml(){return `<div class="vt-start"><div class="vt-kbw" data-vfocus role="button" tabindex="0" aria-label="入力欄をひらく">${KBD}
+    <span class="vt-ring" aria-hidden="true"></span><span class="vt-finger" aria-hidden="true">👆</span>
+    <span class="vt-bub">ここを押して、<br>行き先を話してね！</span></div>
+  <p class="vt-how"><b>①</b> 下の入力欄をタップ　<b>②</b> キーボードの右下の🎤を押す　<b>③</b> 「〇〇保育園」のように、行き先の名前を話す</p></div>`}
+function bigCard(x,n,total){const meta=[catChip(x.r.c),x.r.w?esc(x.r.w):"",dist(x)].filter(Boolean).join("　");
+  return `<div class="vt-top" data-notel><button type="button" class="vt-skip" data-vskip aria-label="この候補を消して、次へ">×</button>
+    <span class="lb">${n===0?"★ いちばん可能性が高い":"候補"}<small>${n+1} / ${total}</small></span><h3>${esc(x.r.n)}</h3><div class="vt-meta">${meta}</div>
+    <a class="vt-num" href="${telHref(x.r.t)}">${esc(x.r.t)}</a>
+    <a class="vt-call" href="${telHref(x.r.t)}" data-vcall>${PH}発信する</a>
+    ${SR&&!SRBAD?`<p class="vt-say">「発信」と言っても、かけられるよ</p>`:""}</div>`}
 function render(){const box=$("#vtRes");if(!box||!DATA)return;const ov=$("#vtel");
-  if(!KW.length&&!CATS){lastTop=null;ov&&ov.classList.remove("vt-has");box.innerHTML=tilesHtml();box.scrollTop=0;return}
-  const {h,L}=results();ov&&ov.classList.add("vt-has");
-  const back=`<button type="button" class="vt-back" data-vback>‹ ほかのこまりごとをえらぶ</button>${CATS?`<p class="vt-ttl">${esc(CATT)}</p>`:""}`;
-  if(!L.length){lastTop=null;box.innerHTML=back+`<p class="vt-empty">「${esc(KW.join("・"))}」に合う電話が見つからなかったよ。<br>ことばを変えるか、上の「ほかのこまりごと」からえらんでね。<br>こまったら <b>さいたまコールセンター</b>（048-835-3156）にきいてみよう。</p>`;return}
-  const top=L[0];lastTop=top.r;
-  const meta=x=>[catChip(x.r.c),x.r.w?esc(x.r.w):"",dist(x)].filter(Boolean).join("　");
-  box.innerHTML=back+`<div class="vt-top" data-notel><span class="lb">★ いちばん近い電話</span><h3>${esc(top.r.n)}</h3><div class="vt-meta">${meta(top)}</div>
-    ${top.r.note&&top.r.note!==(TELCAT[top.r.c]||[])[0]?`<div class="vt-meta" style="margin-top:4px">${esc(top.r.note)}</div>`:""}
-    <a class="vt-num" href="${telHref(top.r.t)}">${esc(top.r.t)}</a>
-    <a class="vt-call" href="${telHref(top.r.t)}" data-vcall>${PH}発信する</a>
-    ${SR&&!SRBAD&&!CATS?`<p class="vt-say">「発信」と言っても、かけられるよ</p>`:""}</div>
-    <div class="vt-from"><span>近い順：</span><button type="button" data-vfrom="home" class="${FROM==="home"?"on":""}">家・区から</button><button type="button" data-vfrom="here" class="${FROM==="here"?"on":""}">いまいる場所から</button></div>
-    ${h?"":`<p class="vt-hint">マイページに住所を登録すると、家から近い順になるよ</p>`}
-    ${L.length>1?`<p class="vt-more">ほかの電話（${L.length-1}件）・下にスクロール</p>`+L.slice(1).map(x=>`<div class="vt-li" data-notel><div class="tx"><b>${esc(x.r.n)}</b><small>${[TELCAT[x.r.c]?TELCAT[x.r.c][0]:"",x.r.w,dist(x)].filter(Boolean).map(esc).join("・")}</small><small>${esc(x.r.t)}</small></div><a href="${telHref(x.r.t)}" data-vcall>${PH}発信</a></div>`).join(""):""}`;
+  if(!KW.length){lastTop=null;STACK=[];ov&&ov.classList.remove("vt-has");box.innerHTML=startHtml();box.scrollTop=0;return}
+  ov&&ov.classList.add("vt-has");
+  const back=`<button type="button" class="vt-back" data-vback>↺ さがし直す</button>`;
+  if(!STACK.length){lastTop=null;box.innerHTML=back+`<p class="vt-empty">「${esc(KW.join("・"))}」に合う電話が見つからなかったよ。<br>名前の一部（「〇〇保育園」なら「〇〇」）だけでも、さがしてみてね。<br>こまったら <b>さいたまコールセンター</b>（048-835-3156）にきいてみよう。</p>`;return}
+  const total=STACK.length+(window.__vtSkipped||0);
+  const top=STACK[0];lastTop=top.r;
+  box.innerHTML=back+bigCard(top,(window.__vtSkipped||0),total)+
+    (STACK.length>1?`<p class="vt-more">ほかの候補（${STACK.length-1}件）・タップで大きく表示</p>`+STACK.slice(1).map((x,k)=>`<div class="vt-li" data-notel data-vpick="${k+1}" role="button" tabindex="0"><div class="tx"><b>${esc(x.r.n)}</b><small>${[TELCAT[x.r.c]?TELCAT[x.r.c][0]:"",x.r.w,dist(x)].filter(Boolean).map(esc).join("・")}</small><small>${esc(x.r.t)}</small></div><a href="${telHref(x.r.t)}" data-vcall>${PH}発信</a></div>`).join(""):"");
   box.scrollTop=0}
 function renderKW(){const k=$("#vtKw");if(k)k.innerHTML=KW.map((w,i)=>`<button type="button" data-vkx="${i}">${esc(w)}<span>×</span></button>`).join("")}
 function st(t){const e=$("#vtSt");if(e)e.textContent=t;const l=$("#vtListen");if(l)l.hidden=!t}
@@ -5031,12 +5016,12 @@ function listen(){if(!SR||SRBAD){showNote("");const i=$("#vtIn");i&&i.focus();re
 function open(){if($("#vtel"))return;
   document.body.insertAdjacentHTML("beforeend",`<div id="vtel" role="dialog" aria-modal="true" aria-label="電話をさがす" data-notel>
     <i class="vt-lamp t"></i><i class="vt-lamp b"></i><i class="vt-lamp l"></i><i class="vt-lamp r"></i><i class="vt-lamp c c1"></i><i class="vt-lamp c c2"></i><i class="vt-lamp c c3"></i><i class="vt-lamp c c4"></i>
-    <div class="vt-in"><div class="vt-hd"><div><div class="ey">CALL NAVI</div><h2>電話をさがす</h2></div><button type="button" class="vt-x" data-vclose aria-label="とじる">×</button></div>
+    <div class="vt-in"><div class="vt-hd"><div><div class="ey">VOICE CALL</div><h2>急いでいるときは、<br>声で探そう！</h2><p class="vt-sub">お迎えの時間が間に合わない💦 そんなときに</p></div><button type="button" class="vt-x" data-vclose aria-label="とじる">×</button></div>
     <div class="vt-sos"><a href="tel:119"><b>119</b>救急・火事</a><a href="tel:%238000"><b>#8000</b>子どもの急病の相談</a><a href="tel:%237119"><b>#7119</b>救急か迷ったら</a><a href="tel:110"><b>110</b>警察</a></div>
     <div class="vt-res" id="vtRes"><p class="vt-empty">電話の一覧をよみこみ中…</p></div>
     <div class="vt-listen" id="vtListen" hidden><div class="vt-wave">${"<i></i>".repeat(14)}</div><p class="vt-st" id="vtSt"></p><p class="vt-heard" id="vtHeard"></p></div>
     <div class="vt-kw" id="vtKw"></div>
-    <form class="vt-type" id="vtForm"><button type="button" class="vt-mic2" data-vlisten aria-label="声でさがす"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4M9 21h6"/></svg></button><input id="vtIn" type="search" enterkeyhint="search" placeholder="ことば・声でもさがせるよ" autocomplete="off"><button type="submit">さがす</button></form>
+    <p class="vt-hint">🔍 Wollyにのっているところ（保育園・学童・病院など2,160件）を検索できます</p><form class="vt-type" id="vtForm"><button type="button" class="vt-mic2" data-vlisten aria-label="声でさがす"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4M9 21h6"/></svg></button><input id="vtIn" type="search" enterkeyhint="search" placeholder="行き先の名前（声でもOK）" autocomplete="off"><button type="submit">さがす</button></form>
     </div><button type="button" class="vt-close2" data-vclose>× とじる</button></div>`);
   const ov=$("#vtel");document.documentElement.style.overflow="hidden";requestAnimationFrame(()=>requestAnimationFrame(()=>ov.classList.add("on")));
   try{history.pushState({vtel:1},"",location.href)}catch(e){}
@@ -5048,10 +5033,12 @@ document.addEventListener("click",e=>{
   if(e.target.closest("[data-vclose]")){close();return}
   if(e.target.closest("[data-vlisten]")){listen();return}
   const tl=e.target.closest("[data-vtile]");if(tl){const t=TILES[+tl.dataset.vtile];CATS=t[3];CATT=t[0]+" "+t[1].replace("|","");KW=[];renderKW();render();return}
-  if(e.target.closest("[data-vback]")){CATS=null;KW=[];renderKW();const n=$("#vtNote");n&&n.remove();render();return}
+  if(e.target.closest("[data-vback]")){CATS=null;KW=[];STACK=[];window.__vtSkipped=0;renderKW();const n=$("#vtNote");n&&n.remove();render();return}
+  if(e.target.closest("[data-vskip]")){STACK.shift();window.__vtSkipped=(window.__vtSkipped||0)+1;render();return}
+  const pk=e.target.closest("[data-vpick]");if(pk&&!e.target.closest("[data-vcall]")){const k=+pk.dataset.vpick;const [x]=STACK.splice(k,1);STACK.unshift(x);render();return}
   if(e.target.closest("[data-vreset]")){KW=[];renderKW();render();const hd=$("#vtHeard");if(hd)hd.textContent="";st(SR&&!SRBAD?"マイクの丸を押して話してね":"キーボードの🎤で話してね");return}
   if(e.target.closest("[data-vfocus]")){const i=$("#vtIn");i&&i.focus();return}
-  const kx=e.target.closest("[data-vkx]");if(kx){KW.splice(+kx.dataset.vkx,1);renderKW();render();return}
+  const kx=e.target.closest("[data-vkx]");if(kx){KW.splice(+kx.dataset.vkx,1);window.__vtSkipped=0;stackFrom();renderKW();render();return}
   const id=e.target.closest("[data-videa]");if(id){addKW(id.dataset.videa);return}
   const fr=e.target.closest("[data-vfrom]");if(fr){const v=fr.dataset.vfrom;
     const done=()=>{FROM=v;document.querySelectorAll("[data-vfrom]").forEach(b=>b.classList.toggle("on",b.dataset.vfrom===FROM));render()};
@@ -5068,6 +5055,70 @@ if(location.hash==="#vtel"){history.replaceState(null,"",location.pathname+locat
 window.openVoiceTel=open;
 })();
 </script><!--/vtel-js-->
+<!--kidcolor-css--><style>
+/* ===== お子さんごとの色の枠（kid_colors.py） ===== */
+/* 枠は細く、ほんのり紫のグラデーションの光（じゃまにならないように）。だれ向けかは札の色で */
+.af{box-shadow:0 0 0 1px rgba(255,255,255,.9),0 0 0 2px rgba(196,170,255,.75),0 0 10px 1px rgba(178,140,255,.32),0 6px 16px -8px rgba(150,110,255,.45)!important;border-color:rgba(205,185,255,.9)!important;
+  background-image:linear-gradient(160deg,rgba(236,226,255,.55),rgba(255,255,255,0) 45%)!important}
+.af-tags{position:absolute;top:5px;left:5px;z-index:4;display:flex;flex-wrap:wrap;gap:3px;max-width:calc(100% - 10px);pointer-events:none}
+.af-tags i{font-style:normal;font-size:9.5px;font-weight:900;line-height:1;color:#fff;background:var(--c);border:1.5px solid #fff;border-radius:999px;padding:3px 6px 2px;box-shadow:0 2px 6px -2px var(--c);white-space:nowrap}
+.fbar.af{border-radius:18px}
+.fbar.af .af-tags{top:-8px;left:12px}
+.kn-i.af{border-radius:16px}
+.kn-i.af .af-tags{top:-7px;left:auto;right:10px}
+.help.navi .hp.af .af-tags i,.enjoy .ej.af .af-tags i{font-size:9px;padding:2px 5px 1px}
+.kn-who{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+.kn-who i{font-style:normal;font-size:11.5px;font-weight:900;line-height:1;color:#fff;background:var(--c);border-radius:999px;padding:4px 9px 3px;box-shadow:0 2px 6px -2px var(--c)}
+.kn-i .af-tags{display:none}
+/* マイページ */
+.kidrow{border-left:5px solid var(--kc,#ccc)}
+.kid-dot{flex:none;display:grid;place-items:center;min-width:34px;height:34px;padding:0 4px;border-radius:999px;background:var(--kc);color:#fff;font-size:11px;font-weight:900;box-shadow:0 0 0 2px #fff,0 4px 10px -4px var(--kc)}
+.kid-g{display:flex;flex-wrap:nowrap;gap:6px;margin-top:6px}
+.kidrow>span:nth-child(2){min-width:0;flex:1}
+.kid-g button{white-space:nowrap;flex:none;width:auto!important;height:auto!important;border:1.5px solid var(--line,#ddd);border-radius:999px;padding:5px 12px;font:inherit;font-size:12px;font-weight:800;background:#fff;color:var(--ink,#333);cursor:pointer}
+.kid-g button[data-kidg$=":m"][aria-pressed="true"],.kid-g button[data-kidng="m"][aria-pressed="true"]{background:#3D8BFF;border-color:#3D8BFF;color:#fff}
+.kid-g button[data-kidg$=":f"][aria-pressed="true"],.kid-g button[data-kidng="f"][aria-pressed="true"]{background:#FF5FA2;border-color:#FF5FA2;color:#fff}
+.kidadd{flex-wrap:wrap;align-items:center}
+.kid-help{margin:6px 0 0;font-size:11.5px;color:var(--muted,#888)}
+
+.af-tags i{pointer-events:auto;cursor:pointer}
+.kidrow .kid-name{width:calc(100% - 44px)}
+.kid-name{display:block;width:100%;margin-top:6px;border:1.5px solid var(--line,#ddd);border-radius:12px;padding:7px 10px;font:inherit;font-size:13.5px;background:#fff}
+.kidadd .kid-name{flex:1 1 100%;margin:0}
+.kid-rank{font-style:normal;font-size:12px;color:var(--muted,#888);font-weight:700;margin-left:2px}
+.kid-help{margin:8px 0 0;padding:10px 12px;border-radius:14px;background:#F6F2FF;font-size:12px;line-height:1.7;color:var(--ink,#333)}
+.kid-help b{color:#6a4fd0}.kid-help small{display:block;margin-top:4px;color:#7a7396}
+/* 理由のホログラム（明るい半透明の白） */
+#afPop{position:fixed;inset:0;z-index:9100;display:grid;place-items:center;padding:20px;background:rgba(255,255,255,.35);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);opacity:0;transition:opacity .3s}
+#afPop.on{opacity:1}
+.afp-card{position:relative;width:min(380px,100%);border-radius:26px;padding:18px 18px 16px;color:#3a3358;overflow:hidden;
+  background:linear-gradient(160deg,rgba(255,255,255,.88),rgba(255,255,255,.72));border:2px solid rgba(255,255,255,.95);
+  box-shadow:0 0 0 2px var(--c),0 0 24px color-mix(in srgb,var(--c) 55%,transparent),0 20px 40px -18px rgba(80,60,140,.45);transform:translateY(16px) scale(.94);transition:transform .45s cubic-bezier(.2,.8,.3,1.25)}
+#afPop.on .afp-card{transform:none}
+.afp-card::before{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(to bottom,color-mix(in srgb,var(--c) 10%,transparent) 0 1px,transparent 1px 5px)}
+.afp-card::after{content:"";position:absolute;left:0;right:0;height:60px;top:-60px;pointer-events:none;background:linear-gradient(to bottom,transparent,color-mix(in srgb,var(--c) 22%,transparent),transparent);animation:afScan 3s .3s linear infinite}
+@keyframes afScan{to{top:100%}}
+.afp-x{position:absolute;top:10px;right:10px;z-index:2;width:34px;height:34px;border-radius:50%;border:0;background:rgba(255,255,255,.9);box-shadow:0 0 0 1.5px var(--c);color:var(--c);font-size:18px;font-weight:900;cursor:pointer}
+.afp-top{position:relative;display:flex;align-items:flex-end;gap:8px;margin-top:4px}
+.afp-ch{flex:none;width:96px;height:96px;object-fit:contain;filter:drop-shadow(0 6px 10px rgba(80,60,140,.25));animation:afBob 2.6s ease-in-out infinite}
+@keyframes afBob{50%{transform:translateY(-5px)}}
+.afp-say{position:relative;flex:1;padding:10px 12px;border-radius:16px;background:#fff;box-shadow:0 0 0 1.5px color-mix(in srgb,var(--c) 45%,#fff)}
+.afp-who{display:inline-block;padding:3px 10px;border-radius:999px;color:#fff;font-size:12px;font-weight:900}
+.afp-who small{font-size:10px;opacity:.9}
+.afp-say p{margin:6px 0 0;font-size:15px}
+.afp-t{position:relative;margin:14px 0 4px;font-size:16px;font-weight:900;color:var(--c)}
+.afp-why{position:relative;margin:4px 0 0;font-size:14px;line-height:1.75;font-weight:600}
+.afp-ls{position:relative;list-style:none;margin:6px 0 0;padding:0;display:grid;gap:8px}
+.afp-ls li{display:flex;align-items:flex-start;gap:10px;padding:9px 10px;border-radius:16px;background:rgba(255,255,255,.85);box-shadow:0 0 0 1.5px color-mix(in srgb,var(--c) 22%,#fff);font-size:13.5px;line-height:1.65;font-weight:700;animation:afLi .45s cubic-bezier(.2,.8,.3,1.2) both;animation-delay:calc(.15s + var(--n)*.09s)}
+.afp-ic{flex:none;display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:color-mix(in srgb,var(--c) 14%,#fff);box-shadow:0 0 0 2px #fff,0 3px 8px -4px var(--c);animation:afIc 2.8s ease-in-out infinite;animation-delay:calc(var(--n)*.3s)}
+.afp-ic svg{width:26px;height:26px}
+@keyframes afLi{from{opacity:0;transform:translateY(8px) scale(.97)}}
+@keyframes afIc{50%{transform:translateY(-2px) rotate(-4deg)}}
+@media (prefers-reduced-motion:reduce){.afp-ls li,.afp-ic{animation:none}}
+.afp-note{position:relative;margin:10px 0 0;font-size:11.5px;color:#8a83a8}
+.afp-ok{position:relative;display:block;margin:12px auto 0;border:0;border-radius:999px;padding:10px 30px;font:inherit;font-size:14px;font-weight:900;color:#fff;background:var(--c);box-shadow:0 8px 18px -8px var(--c);cursor:pointer}
+@media (prefers-reduced-motion:reduce){.afp-card::after,.afp-ch{animation:none}}
+</style><!--/kidcolor-css-->
 
 <!--wolly-icons--><script>
 (function(){
