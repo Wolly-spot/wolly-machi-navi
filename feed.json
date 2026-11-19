@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-19T09:50:00+09:00",
+ "updatedAt": "2026-11-19T19:45:00+09:00",
  "events": [
   {
    "id": "e-shintoshin-illumination",
@@ -427,6 +427,19 @@
  ],
  "news": [
   {
+   "id": "n-shinnyugaku-setsumeikai-r9",
+   "kind": "kosodate",
+   "title": "来春入学の保護者説明会 日程が出たよ",
+   "desc": "小・中学校の新入学説明会の日程表が公開。日程は学校のHPでも確かめてね。",
+   "date": "2026-11-19",
+   "src": "さいたま市",
+   "url": "https://www.city.saitama.lg.jp/003/002/011/p032765.html",
+   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-shinnyugaku-setsumeikai-r9.jpg",
+   "ai": true,
+   "important": false,
+   "added": "2026-11-19T19:45:00+09:00"
+  },
+  {
    "id": "n-minna-hiroba-r9",
    "kind": "kosodate",
    "title": "放課後みんなのひろば 4月分の申込み（〆12/28）",
@@ -462,18 +475,6 @@
    "url": "https://www.city.saitama.lg.jp/001/011/015/004/002/p134482.html",
    "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-bousai-leak.jpg",
    "important": true,
-   "ai": true,
-   "added": "2026-11-11T09:50:00+09:00"
-  },
-  {
-   "id": "n-hoiku-tour",
-   "kind": "kosodate",
-   "title": "さいたま市「保育体感ツアー」参加者募集中",
-   "desc": "保育園の様子を見学できる市のツアー。参加費は無料。保活の前に雰囲気を知りたい方に。",
-   "date": "2026-11-06",
-   "src": "さいたま市",
-   "url": "https://www.city.saitama.lg.jp/003/001/015/006/002/p075327.html",
-   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-hoiku-tour.jpg",
    "ai": true,
    "added": "2026-11-11T09:50:00+09:00"
   },
