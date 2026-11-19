@@ -4358,7 +4358,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11200124");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11200209");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -4849,7 +4849,11 @@ else{document.body.classList.add("is-loading");leafShine();raf=requestAnimationF
 
 
 
-<!--vtel-css--><style>
+
+
+
+
+<!--vtel-css--><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@400;500;700&family=Outfit:wght@300;400;600&display=swap"><style>
 /* ===== 声で電話をさがす（voice_tel.py） ===== */
 .vt-bar{position:relative;display:flex;align-items:center;gap:10px;margin:0 0 12px;padding:9px 12px 9px 9px;border-radius:999px;text-decoration:none;color:#fff;overflow:hidden;
   background:linear-gradient(100deg,#ff5fa8,#b06bff 45%,#38c8f0);background-size:200% 100%;animation:vtFlow 6s ease-in-out infinite;
@@ -5106,6 +5110,21 @@ else{document.body.classList.add("is-loading");leafShine();raf=requestAnimationF
 #vtel .vt-orb svg,#vtel .vt-mic2 svg{stroke:#5b4fd0}
 #vtel .vt-mic2{background:#fff;box-shadow:0 0 0 1.5px #c9b8ff}
 
+/* 11/20 15回目：字体をおしゃれに（M PLUS 1＋数字は Outfit。細め・字間ひろめ） */
+#vtel,#vtel button,#vtel input,#vtel a{font-family:"Outfit","M PLUS 1",system-ui,sans-serif!important}
+#vtel b,#vtel h3,#vtel .vt-guide,#vtel button,#vtel a,#vtel .vt-q,#vtel .vt-ttl{font-weight:700!important;letter-spacing:.06em}
+#vtel .vt-guide{font-weight:500!important;font-size:20px;letter-spacing:.1em}
+#vtel .vt-top h3{font-size:19px;letter-spacing:.08em}
+#vtel .vt-num{font-family:"Outfit",sans-serif!important;font-weight:300!important;letter-spacing:.04em}
+#vtel .vt-sos a b,#vtel .vt-top .lb{font-family:"Outfit",sans-serif!important;font-weight:600!important}
+#vtel small,#vtel .vt-li small,#vtel .vt-meta{font-weight:400!important;letter-spacing:.04em}
+#vtel .vt-type input{font-weight:500!important;letter-spacing:.06em}
+#vtel .vt-more{font-weight:500!important;letter-spacing:.14em}
+#vtel .vt-li b,#vtel .vt-li small{letter-spacing:.01em!important}
+#vtel .vt-li small{font-size:11px}
+#vtel .vt-sos a{letter-spacing:.02em}
+#vtel .vt-x,#vtel .vt-skip,#vtel .vt-clr{font-family:"Outfit",sans-serif!important;font-weight:300!important}
+
 </style><!--/vtel-css-->
 <!--vtel-js--><script>
 /* ===== 声で電話をさがす（voice_tel.py） ===== */
@@ -5139,7 +5158,7 @@ function homeLL(){if(FROM==="here"&&HERE2)return {ll:HERE2,t:"いまいる場所
 const km=(a,b)=>Math.hypot(a[0]-b[0],(a[1]-b[1])*Math.cos(a[0]*Math.PI/180))*111;
 function load(){if(DATA)return Promise.resolve(DATA);
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
-  return fetch(base+"near-data/tel.json?v=11200124").then(r=>r.json()).then(d=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),ky:r[7]?nz(r[7]):""}));return DATA})
+  return fetch(base+"near-data/tel.json?v=11200209").then(r=>r.json()).then(d=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),ky:r[7]?nz(r[7]):""}));return DATA})
     .catch(()=>{DATA=[];return DATA})}
 /* 聞きとった文 → キーワード */
 function terms(text){let s=(text||"").normalize("NFKC").replace(NOISE," ");
