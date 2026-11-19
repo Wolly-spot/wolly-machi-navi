@@ -866,7 +866,7 @@ html[data-fsz="2"] .ej b{font-size:11.5px}
 .help.navi .hp{padding:12px 4px 10px;border-radius:18px}
 .help.navi .hp .ci svg{width:40px;height:40px}
 .help.navi .hp b{font-size:12.5px;line-height:1.3}
-.enjoy{grid-template-columns:repeat(4,1fr)!important}
+.enjoy{grid-template-columns:repeat(3,1fr)!important}
 .enjoy .ej b{font-size:12.5px;line-height:1.3}
 .enjoy .ej .wip{display:block;margin:3px auto 0;width:max-content;padding:2px 7px;border-radius:999px;font-size:10px;font-weight:800;color:#9a6bd8;background:#F1E8FF}
 #myArea[hidden]{display:none!important}
@@ -1825,7 +1825,7 @@ html .hl-ring{box-shadow:0 0 6px #ffd6ea;opacity:.8}
           <div class="field"><label for="fWard">お住まいの区</label><select id="fWard"></select><small>習い事は、登録した区の教室ページへ直接つながるよ。</small></div>
           <div class="field"><label for="fTown">町名・番地（任意）</label><input id="fTown" maxlength="40" placeholder="例：常盤6-4-18" autocomplete="address-line1"><small>番地まで入れると、病院や急患診療所を家から近い順に正しく並べられるよ。ほかのメンバーには公開されないよ（位置を調べるために国土地理院の住所検索を使います）。</small><small class="geo-st" id="geoSt" role="status"></small></div>
           <div class="field"><span class="lab">お子さんの生まれた年月（何人でも・任意）</span><div class="kidlist" id="kidList"></div>
-            <div class="kidadd"><input type="month" id="kidNew" aria-label="お子さんの生まれた年月"><button type="button" class="btn ghost" id="kidAdd">＋ 追加</button></div>
+            <div class="kidadd"><input type="month" id="kidNew" aria-label="お子さんの生まれた年月"><span class="kid-g" id="kidNewG" role="group" aria-label="男の子・女の子"><button type="button" data-kidng="m" aria-pressed="false">男の子</button><button type="button" data-kidng="f" aria-pressed="false">女の子</button></span><button type="button" class="btn ghost" id="kidAdd">＋ 追加</button></div><p class="kid-help">男の子・女の子をえらぶと、長男・長女…の色の枠で、その子に合う情報がわかるよ。</p>
             <small>ページには表示しないよ。お子さんの年齢に合う情報（健診・保活・習い事・学校など）を先に出すためだけに使い、この端末だけに覚えるんだ。</small></div>
           <div class="field"><label for="fDue">出産予定日（妊娠中の方・任意）</label><input type="date" id="fDue" aria-label="出産予定日"><small>入れると「Wollyからのお知らせ」で、母子手帳・妊婦健診・ワクチン・生まれたあとの手つづきの時期をお知らせするよ。この端末だけに覚えるんだ。生まれたら、お子さんの生まれた年月に入れ直してね。</small></div>
           <div class="field"><span class="lab">文字の大きさ</span><div class="fsz" role="group" aria-label="文字の大きさ"><button type="button" data-fsz="0">ふつう</button><button type="button" data-fsz="1">大きめ</button><button type="button" data-fsz="2">とても大きく</button></div><small>この端末だけに覚えるよ。すぐに変わるんだ。</small></div>
@@ -2732,23 +2732,23 @@ $("#rows").addEventListener("click",e=>{
 
 /* ===== ホームの入口（2026-11-10 作り直し）：困ったときはこちら／地域の暮らしを楽しむ ===== */
 const HELP=[
-  {n:"保活ナビ",href:"#hokatsu",ic:()=>svg(CH.hokatsu),bg:"#F1E8FF"},
-  {n:"預け先を<br>さがす",href:"#azuke",ic:()=>svg(NIC.nursery,40),bg:"#FFE6F2"},
-  {n:"健診・病院",href:"#go-health",ic:()=>svg(CH.health),bg:"#E1F3FF"},
-  {n:"妊娠・出産",view:"ninshin",vt:"妊娠・出産ガイド",ic:()=>svg(NIC.preg||NIC.kids,40),bg:"#FFE6F2"},
-  {n:"習い事",href:"#go-lesson",ic:()=>svg(CH.lesson),bg:"#FFF1C2"},
-  {n:"公園",href:"#go-park",ic:()=>svg(CH.park),bg:"#E5F4FF"},
-  {n:"もらえる<br>お金",href:"#okane",ic:()=>svg(CH.money),bg:"#FFF1C2"}];
+  {n:"妊娠・出産",view:"ninshin",vt:"妊娠・出産ガイド",ic:()=>svg(NIC.preg||NIC.kids,40),bg:"#FFE6F2",a:"ninshin"},
+  {n:"健診・病院",href:"#go-health",ic:()=>svg(CH.health),bg:"#E1F3FF",a:"health"},
+  {n:"もらえる<br>お金",href:"#okane",ic:()=>svg(CH.money),bg:"#FFF1C2",a:"money"},
+  {n:"交流施設",view:"near?g=hub",vt:"子育て支援センター",ic:()=>svg(MINI.hand,40),bg:"#FCE6F5",a:"hub"},
+  {n:"保活ナビ",href:"#hokatsu",ic:()=>svg(CH.hokatsu),bg:"#F1E8FF",a:"hokatsu"},
+  {n:"預け先を<br>さがす",href:"#azuke",ic:()=>svg(NIC.nursery,40),bg:"#FFE6F2",a:"azuke"},
+  {n:"習い事",href:"#go-lesson",ic:()=>svg(CH.lesson),bg:"#FFF1C2",a:"lesson"},
+  {n:"公園",href:"#go-park",ic:()=>svg(CH.park),bg:"#E5F4FF",a:"park"}];
 const ENJOY=[
-  {n:"交流施設",view:"near?g=hub",vt:"子育て支援センター",ic:()=>svg(MINI.hand,40),bg:"#FCE6F5"},
-  {n:"イベント",href:"#go-event",ic:()=>svg(GIC.cal,40),bg:"#F1E8FF"},
+  {n:"イベント",href:"#go-event",ic:()=>svg(GIC.cal,40),bg:"#F1E8FF",a:"event"},
   {n:"地域のお店",href:"#go-shopnews",ic:()=>svg(CH.shop),bg:"#FFF1C2"},
   {n:"Wolly限定<br>クーポン<small class=\"wip\">制作中</small>",href:"#go-coupon",ic:()=>svg(CH.coupon),bg:"#FBE6FF"}];
 const linkAttr=c=>c.view?`href="#" data-view="${c.view}" data-vt="${esc(c.vt||c.n)}"`:`href="${c.href}"`;
 function renderHome2(){
-  $("#helpGrid").innerHTML=HELP.map(c=>`<a class="hp" ${linkAttr(c)} style="--cbg:${c.bg}"><span class="ci">${c.ic()}</span><b>${c.n}</b>${c.s?`<small>${c.s}</small>`:""}</a>`).join("");
-  $("#enjoyGrid").innerHTML=ENJOY.map(c=>`<a class="ej" ${linkAttr(c)} style="--cbg:${c.bg}"><span class="ci">${c.ic()}</span><b>${c.n}</b></a>`).join("")+
-    `<a class="ej ej-wide" href="#" data-view="near?g=odekake" data-vt="おでかけスポット" style="--cbg:#E6ECFF"><span class="ci">${svg(GIC.bus,40)}</span><span><b>おでかけスポット</b><small>プール・動物園・科学館・大きな公園。市外の人気スポットも</small></span><i>›</i></a>`;/* n は自分で書いた文字だけ（<br> を使う） */
+  $("#helpGrid").innerHTML=HELP.map(c=>`<a class="hp" ${linkAttr(c)}${c.a?` data-age="${c.a}"`:""} style="--cbg:${c.bg}"><span class="ci">${c.ic()}</span><b>${c.n}</b>${c.s?`<small>${c.s}</small>`:""}</a>`).join("");
+  $("#enjoyGrid").innerHTML=ENJOY.map(c=>`<a class="ej" ${linkAttr(c)}${c.a?` data-age="${c.a}"`:""} style="--cbg:${c.bg}"><span class="ci">${c.ic()}</span><b>${c.n}</b></a>`).join("")+
+    `<a class="ej ej-wide" data-age="odekake" href="#" data-view="near?g=odekake" data-vt="おでかけスポット" style="--cbg:#E6ECFF"><span class="ci">${svg(GIC.bus,40)}</span><span><b>おでかけスポット</b><small>プール・動物園・科学館・大きな公園。市外の人気スポットも</small></span><i>›</i></a>`;/* n は自分で書いた文字だけ（<br> を使う） */
   const w=S.profile&&S.profile.ward;
   $("#myArea").innerHTML=`<div class="ma-h"><div><div class="eyebrow">MY AREA</div><h2>あなたの地域の情報</h2></div><a class="ma-set" href="#mypage">${ico('<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/>')}地域設定</a></div>
     <p class="ma-w">${w?`<b>${esc("さいたま市"+w+(townName()?" "+townName():""))}</b>のまわり`:"マイページで区を登録すると、あなたの地域の情報になります"}</p>
@@ -3476,14 +3476,20 @@ $("#fWard").innerHTML=`<option value="">選択してください</option>`+WARDS
 function renderIconPick(){$("#iconPick").innerHTML=AVATARS.map((a,i)=>`<button type="button" data-icon="${i}" aria-pressed="${i===pickIcon}">${avatar(i)}${a.n}</button>`).join("")}
 $("#iconPick").addEventListener("click",e=>{const b=e.target.closest("[data-icon]");if(!b)return;pickIcon=+b.dataset.icon;renderIconPick()});
 function renderKidList(){
-  const el=$("#kidList");if(!el)return;const kids=getKids();
-  el.innerHTML=kids.length?kids.map((k,i)=>`<div class="kidrow"><span class="kid-ic">${svg(MEMO_IC.age,40)}</span><span><b>${i+1}人目</b><small>${k.replace("-","年")}月生まれ・いま${ageTxt(monthsOf(k))}</small></span><button type="button" data-kiddel="${i}" aria-label="${i+1}人目を消す">×</button></div>`).join("")
+  const el=$("#kidList");if(!el)return;const kids=getKidsG();
+  el.innerHTML=kids.length?kids.map((k,i)=>{const c=kidColor(i);return `<div class="kidrow" style="--kc:${c.c}"><span class="kid-dot">${esc(c.short)}</span><span><b>${esc(c.n)}</b><small>${k.b.replace("-","年")}月生まれ・いま${ageTxt(monthsOf(k.b))}</small>
+      <span class="kid-g" role="group" aria-label="${esc(c.n)}の性別"><button type="button" data-kidg="${i}:m" aria-pressed="${k.g==="m"}">男の子</button><button type="button" data-kidg="${i}:f" aria-pressed="${k.g==="f"}">女の子</button></span></span>
+      <button type="button" data-kiddel="${i}" aria-label="${esc(c.n)}を消す">×</button></div>`}).join("")
     :`<p class="kid-none">まだ登録されていません</p>`;
   const n=$("#kidNew");if(n)n.max=new Date().toISOString().slice(0,7);
+  const ng=$("#kidNewG");if(ng)ng.querySelectorAll("[data-kidng]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.kidng===kidNewG));
 }
+let kidNewG="";
 document.addEventListener("click",e=>{
-  if(e.target.closest("#kidAdd")){const v=$("#kidNew").value;if(!/^\d{4}-\d{2}$/.test(v)){$("#kidNew").focus();return}setKids(getKids().concat([v]));$("#kidNew").value="";renderKidList();applyAgeOrder();return}
-  const d=e.target.closest("[data-kiddel]");if(d){const k=getKids();k.splice(+d.dataset.kiddel,1);setKids(k);kidSel=0;renderKidList();applyAgeOrder()}
+  const ng=e.target.closest("[data-kidng]");if(ng){kidNewG=kidNewG===ng.dataset.kidng?"":ng.dataset.kidng;renderKidList();return}
+  if(e.target.closest("#kidAdd")){const v=$("#kidNew").value;if(!/^\d{4}-\d{2}$/.test(v)){$("#kidNew").focus();return}setKidsG(getKidsG().concat([{b:v,g:kidNewG}]));$("#kidNew").value="";kidNewG="";renderKidList();applyAgeOrder();return}
+  const kg=e.target.closest("[data-kidg]");if(kg){const [i,g]=kg.dataset.kidg.split(":");const k=getKidsG();if(k[+i]){k[+i].g=k[+i].g===g?"":g;setKidsG(k);renderKidList();applyAgeOrder()}return}
+  const d=e.target.closest("[data-kiddel]");if(d){const k=getKidsG();k.splice(+d.dataset.kiddel,1);setKidsG(k);kidSel=0;renderKidList();applyAgeOrder()}
 });
 function fillMyPage(){
   renderKidList();{const d=$("#fDue");if(d)d.value=getDue()}
@@ -3628,8 +3634,66 @@ const HC_URL={kenshin:"https://www.city.saitama.lg.jp/kosodate/shiritai/category
 function getDue(){try{const v=localStorage.getItem("wolly.duedate")||"";return /^\d{4}-\d{2}-\d{2}$/.test(v)?v:""}catch(e){return ""}}
 document.addEventListener("change",e=>{if(e.target.id!=="fDue")return;try{e.target.value?localStorage.setItem("wolly.duedate",e.target.value):localStorage.removeItem("wolly.duedate")}catch(x){}typeof renderKidNotice==="function"&&renderKidNotice()});
 /* 子どもの生まれた年月（何人でも。この端末の localStorage wolly.kids）。ページには出さず、並び順・「いまの時期」だけに使う */
-function getKids(){let k=LS.get("wolly.kids");if(!Array.isArray(k)){k=[];const o=LS.get("wolly.kidbirth");if(/^\d{4}-\d{2}$/.test(o||""))k=[o];LS.set("wolly.kids",k)}return k.filter(v=>/^\d{4}-\d{2}$/.test(v))}
-function setKids(k){LS.set("wolly.kids",k.filter(v=>/^\d{4}-\d{2}$/.test(v)).sort());typeof renderKidNotice==="function"&&renderKidNotice()}
+/* 11/19 性別つき（wolly.kidsg）。生まれた順（年月の古い順）にならべる。wolly.kids（年月だけ）も同じ順でのこす */
+function getKidsG(){let g=LS.get("wolly.kidsg");if(!Array.isArray(g)){let k=LS.get("wolly.kids");if(!Array.isArray(k)){k=[];const o=LS.get("wolly.kidbirth");if(/^\d{4}-\d{2}$/.test(o||""))k=[o]}
+  g=k.filter(v=>/^\d{4}-\d{2}$/.test(v)).map(b=>({b,g:""}));LS.set("wolly.kidsg",g)}
+  return g.filter(x=>x&&/^\d{4}-\d{2}$/.test(x.b)).sort((a,b)=>a.b<b.b?-1:a.b>b.b?1:0)}
+function setKidsG(g){g=g.filter(x=>x&&/^\d{4}-\d{2}$/.test(x.b)).sort((a,b)=>a.b<b.b?-1:a.b>b.b?1:0);LS.set("wolly.kidsg",g);LS.set("wolly.kids",g.map(x=>x.b));typeof renderKidNotice==="function"&&renderKidNotice();typeof ageFitPaint==="function"&&ageFitPaint()}
+function getKids(){return getKidsG().map(x=>x.b)}
+/*kidcolor*/
+/* ===== お子さんごとの色の枠（kid_colors.py） ===== */
+/* 決まった色：長男〜五男・長女〜五女（ここを変えると全部の枠の色が変わる） */
+const KID_COLORS={m:[["長男","#3D8BFF"],["次男","#1FB2E8"],["三男","#14ABA3"],["四男","#5A5AEF"],["五男","#8E6CFF"]],
+  f:[["長女","#FF5FA2"],["次女","#B977FF"],["三女","#EFB300"],["四女","#E5508C"],["五女","#FF8FD0"]],
+  x:["#7C8DB5","#A07FB8","#6FA0A8","#B58F7C","#8C8FA8"]};
+function kidColor(i){const k=getKidsG();const me=k[i];if(!me)return {n:"",c:"#999",short:"?"};
+  if(me.g==="m"||me.g==="f"){const n=k.slice(0,i).filter(x=>x.g===me.g).length;const t=KID_COLORS[me.g][Math.min(n,4)];return {n:t[0],c:t[1],short:t[0].slice(0,2),g:me.g}}
+  return {n:(i+1)+"人目",c:KID_COLORS.x[i%5],short:String(i+1),g:""}}
+/* 年齢に合うものの月齢の範囲 [から, まで)（マイナスはおなかの中） */
+const AGEFIT={ninshin:[-10,3],health:[0,72],money:[-10,72],hub:[0,36],hokatsu:[-10,60],azuke:[6,72],lesson:[24,180],park:[12,144],
+  event:[12,144],odekake:[24,156],"school-e":[60,144],"school-j":[132,180],gakudo:[60,144],jidou:[72,216],special:[48,180],
+  "dk-kid":[18,42],"dk-mom":[-10,0],kenshin:[0,42],vaccine:[0,156],byouji:[6,144],
+  "lg-rhythm":[6,72],"lg-sport":[36,180],"lg-budo":[48,180],"lg-dance":[36,180],"lg-music":[36,180],"lg-study":[60,180],"lg-culture":[60,180],"lg-nature":[36,144]};
+const EVAGE=[[/赤ちゃん|乳児|0歳|ベビー|ハイハイ|授乳|産後|妊/,[-10,12]],[/1歳|2歳|よちよち|未就園|親子/,[6,36]],[/未就学|幼児|3歳|4歳|5歳|園児|年少|年中|年長/,[36,72]],
+  [/小学|児童|低学年|高学年|1年生|夏休み|自由研究/,[72,144]],[/中学|部活|受験/,[144,180]]];
+/* 色をつける相手：お子さん＋（出産予定日があれば）おなかの赤ちゃん */
+function ageKids(){const L=getKidsG().map((k,i)=>Object.assign({i,mo:monthsOf(k.b)},kidColor(i)));
+  try{const d=typeof getDue==="function"&&getDue();if(d){const due=new Date(d),now=new Date();if(due>now){const mo=-Math.ceil((due-now)/864e5/30.4);L.push({i:-1,mo,n:"おなかの赤ちゃん",c:"#FF8FB8",short:"おなか"})}}}catch(e){}
+  return L}
+function fitKids(key,kids){const r=AGEFIT[key];if(!r)return [];return kids.filter(k=>k.mo>=r[0]&&k.mo<r[1])}
+/* 画面の中で「どの項目がなにか」：data-age があればそれ、なければ場所から決める */
+const AGE_SEL=[['[data-view="school?t=e"]',"school-e"],['[data-view="school?t=j"]',"school-j"],['[data-view="school?t=s"]',"special"],['[data-view="near?g=gakudo"]',"gakudo"],
+  ['[data-view="near?g=jidou"]',"jidou"],["#row-health .fbar","health"],["#row-lesson .fbar","lesson"],["#row-park .fbar","park"]];
+function paintOne(el,ks){
+  el.querySelectorAll(":scope > .af-tags").forEach(t=>t.remove());el.classList.remove("af");el.style.removeProperty("--afs");el.style.removeProperty("--afc");
+  if(!ks.length)return;
+  const sh=ks.slice(0,4).map((k,n)=>`0 0 0 ${2.5+n*4.5}px ${k.c}`+(n<ks.length-1?`,0 0 0 ${4.5+n*4.5}px #fff`:"")).join(",");
+  el.classList.add("af");el.style.setProperty("--afs",sh+`,0 8px 18px -8px ${ks[0].c}`);el.style.setProperty("--afc",ks[0].c);
+  if(getComputedStyle(el).position==="static")el.style.position="relative";
+  el.insertAdjacentHTML("afterbegin",`<span class="af-tags" aria-hidden="true">${ks.map(k=>`<i style="--c:${k.c}">${esc(k.n)}</i>`).join("")}</span>`);
+  el.setAttribute("data-af",ks.map(k=>k.n).join("・"));
+}
+function ageFitPaint(){
+  const kids=ageKids();
+  document.querySelectorAll("[data-age]").forEach(el=>paintOne(el,kids.length?fitKids(el.dataset.age,kids):[]));
+  AGE_SEL.forEach(([q,key])=>document.querySelectorAll(q).forEach(el=>paintOne(el,kids.length?fitKids(key,kids):[])));
+  /* 健診・病院の列のカード */
+  document.querySelectorAll('#row-health a[href^="#"]').forEach(a=>{const k=a.getAttribute("href").slice(1);if(AGEFIT[k])paintOne(a,kids.length?fitKids(k,kids):[])});
+  /* 習い事の列のカード（ジャンルで） */
+  document.querySelectorAll('#lessonRow a[href^="#l-"]').forEach(a=>{const l=LESSONS[+a.getAttribute("href").slice(3)];if(l)paintOne(a,kids.length?fitKids("lg-"+l.g,kids):[])});
+  /* 今週のイベント（題名のことばで） */
+  document.querySelectorAll("#evRow > *").forEach(c=>{const tx=c.textContent||"";const rs=EVAGE.filter(([re])=>re.test(tx)).map(([,r])=>r);
+    paintOne(c,kids.filter(k=>rs.some(r=>k.mo>=r[0]&&k.mo<r[1])))});
+  /* お知らせ（そのお子さんの色） */
+  document.querySelectorAll("#kidNotice .kn-i[data-kids]").forEach(d=>{const ids=d.dataset.kids.split(",").map(Number);paintOne(d,kids.filter(k=>ids.includes(k.i)))});
+}
+/* 列を作り直したとき・しぼりこみを変えたときも塗る */
+(function(){let t;const go=()=>{clearTimeout(t);t=setTimeout(ageFitPaint,60)};
+  ["#rows","#evRow","#kidNotice","#helpGrid","#enjoyGrid"].forEach(q=>{const el=document.querySelector(q);if(el)new MutationObserver(ms=>{if(ms.some(m=>[...m.addedNodes].some(n=>n.nodeType===1&&!n.classList.contains("af-tags"))))go()}).observe(el,{childList:true,subtree:true})});
+  document.addEventListener("change",e=>{if(e.target&&e.target.id==="fDue")go()});
+  setTimeout(ageFitPaint,300)})();
+/*/kidcolor*/
+function setKids(k){const old=getKidsG();const used=new Set();setKidsG(k.filter(v=>/^\d{4}-\d{2}$/.test(v)).map(b=>{const i=old.findIndex((x,j)=>x.b===b&&!used.has(j));if(i>=0){used.add(i);return old[i]}return {b,g:""}}))}
 const monthsOf=b=>{const [y,m]=b.split("-").map(Number);const d=new Date();return (d.getFullYear()-y)*12+(d.getMonth()+1-m)};
 let kidSel=0;
 const kidBirth=()=>{const k=getKids();return k[Math.min(kidSel,k.length-1)]||""};
@@ -4237,7 +4301,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11191143");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11191206");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -4396,8 +4460,8 @@ function schoolAge(b){/* 4月1日の時点の年齢（学年を決める年齢�
 function kidNotices(){
   const kids=getKids(),M=new Date().getMonth()+1,out=[];
   kids.forEach((b,n)=>{
-    const who=kids.length>1?(n+1)+"人目のお子さん":"お子さん",mo=monthsOf(b),a=schoolAge(b);
-    const add=(o)=>out.push(Object.assign({who,mo},o));
+    const who=kids.length>1||kidColor(n).g?kidColor(n).n:"お子さん",mo=monthsOf(b),a=schoolAge(b);
+    const add=(o)=>out.push(Object.assign({who,mo,kids:[n]},o));
     /* 予防接種は1つにまとめる（いまの時期の種類／来月からの種類） */
     const vNow=VACCINES.filter(([,,f,t])=>mo>=f&&mo<t),vNext=VACCINES.filter(([,,f])=>mo===f-1);
     if(vNow.length)add({ic:"plaster",tag:"いまの時期",pr:2,t:"予防接種（"+vNow.length+"種類）",d:vNow.map(([nm,d])=>"・"+nm+"："+d).join("\n"),to:"#vaccine",ch:"k_vac",say:"予防接種の時期だよ！母子手帳をわすれずにね",go:"予防接種のスケジュール"});
@@ -4456,7 +4520,7 @@ function kidNotices(){
   }
   soonDeadlines().forEach(x=>out.push({who:"",ic:"clock",tag:x.left===0?"きょう締切":"締切まであと"+x.left+"日",pr:0,t:x.title,d:x.desc||"",url:x.url||"",ch:"k_deadline",say:"締切がちかいよ！わすれないでね",go:"くわしく見る"}));
   /* 同じお知らせは1つにまとめる（「1人目・2人目のお子さん」）。並びは pr の順、同じなら年が下のお子さんを先に */
-  const by=new Map();out.forEach(o=>{const k=o.t;if(!by.has(k)){by.set(k,o);return}const p=by.get(k);if(o.who&&p.who&&p.who.indexOf(o.who.replace("のお子さん",""))<0)p.who=p.who.replace("のお子さん","")+"・"+o.who;if((o.mo??999)<(p.mo??999))p.mo=o.mo});
+  const by=new Map();out.forEach(o=>{const k=o.t;if(!by.has(k)){by.set(k,o);return}const p=by.get(k);if(o.who&&p.who&&p.who.indexOf(o.who.replace("のお子さん",""))<0)p.who=p.who.replace("のお子さん","")+"・"+o.who;if(o.kids)p.kids=(p.kids||[]).concat(o.kids.filter(x=>!(p.kids||[]).includes(x)));if(o.kids)p.kids=(p.kids||[]).concat(o.kids.filter(x=>!(p.kids||[]).includes(x)));if((o.mo??999)<(p.mo??999))p.mo=o.mo});
   return [...by.values()].sort((p,q)=>p.pr-q.pr||(p.mo??999)-(q.mo??999)).slice(0,10);
 }
 /* お知らせをタップしたら、ふわっ＋グラデーション＋キラキラ */
@@ -4478,13 +4542,13 @@ function renderKidNotice(){
   const L=kidNotices(),open=LS.get("wolly.knopen")!==false;
   el.hidden=false;el.className="kn"+(open?" open":"");
   el.innerHTML=`<button type="button" class="kn-h" aria-expanded="${open}"><span class="kn-bell">${HNEW?riSvg("お知らせ"):svg(KIC("cal")||MINI.star,40)}${L.length?`<em>${L.length}</em>`:""}</span><span><b>Wollyからのお知らせ</b><small>${L.length?"お子さんの、いまの時期にあうこと":"いまのお知らせはありません"}</small></span><i class="kn-chev">${open?"とじる ▴":"ひらく ▾"}</i></button>
-   <div class="kn-b">${L.length?L.map((o,i)=>`<details class="kn-i" style="--n:${i}"><summary><span class="kn-ic">${relIc(o.ic)}</span><span class="kn-st"><em class="kn-tag${o.pr<=1?" hot":""}">${esc(o.tag)}</em><b>${esc(o.t)}</b>${o.who?`<small>${esc(o.who)}</small>`:""}</span><i class="kn-ar">▾</i></summary>
+   <div class="kn-b">${L.length?L.map((o,i)=>`<details class="kn-i"${o.kids&&o.kids.length?` data-kids="${o.kids.join(",")}"`:""} style="--n:${i}"><summary><span class="kn-ic">${relIc(o.ic)}</span><span class="kn-st"><em class="kn-tag${o.pr<=1?" hot":""}">${esc(o.tag)}</em><b>${esc(o.t)}</b>${o.who?`<small>${esc(o.who)}</small>`:""}</span><i class="kn-ar">▾</i></summary>
      <div class="kn-d">${o.ch&&CH_TALK[o.ch]?`<div class="kn-talk"><img src="${CH_TALK[o.ch]}" alt=""><p>${esc(o.say)}</p></div>`:""}<p>${esc(o.d).replace(/\n/g,"<br>")}</p>${o.to?(o.to.startsWith("view:")?`<a class="kn-go" href="#" data-view="${o.to.slice(5)}" data-vt="${esc(o.go)}">${esc(o.go)}を見る ›</a>`:`<a class="kn-go" href="${o.to}">${esc(o.go)}を見る ›</a>`):o.url?`<a class="kn-go" href="${esc(o.url)}" target="_blank" rel="noopener">${esc(o.go)} ↗</a>`:""}</div></details>`).join(""):`<p class="kn-none">また時期が来たら、ここでお知らせするよ。</p>`}
      <p class="kn-note">時期は国や市のめやすだよ。正しい日にちは、市から届くお知らせで確かめてね。</p></div>`;
 }
 document.addEventListener("click",e=>{const h=e.target.closest(".kn-h");if(!h)return;const el=$("#kidNotice"),open=!el.classList.contains("open");LS.set("wolly.knopen",open);renderKidNotice()});
 document.addEventListener("click",e=>{const b=e.target.closest("#kidNotice [data-view]");if(b){e.preventDefault();openViewer(b.dataset.view,b.dataset.vt)}});
-function renderAll(){renderMe();renderKidNotice();renderNews();renderCats();renderHome2();renderRows();foldRows();applyAgeOrder();renderFeed();renderEvents();window.__wollyWatch&&window.__wollyWatch();requestAnimationFrame(()=>fitTitles())}
+function renderAll(){renderMe();renderKidNotice();renderNews();renderCats();renderHome2();renderRows();foldRows();applyAgeOrder();renderFeed();renderEvents();ageFitPaint();ageFitPaint();window.__wollyWatch&&window.__wollyWatch();requestAnimationFrame(()=>fitTitles())}
 document.addEventListener("click",e=>{if(e.target.closest(".fbar"))requestAnimationFrame(()=>fitTitles())});
 
 
@@ -4585,6 +4649,32 @@ else{document.body.classList.add("is-loading");leafShine();raf=requestAnimationF
 
 
 
+
+
+
+
+
+<!--kidcolor-css--><style>
+/* ===== お子さんごとの色の枠（kid_colors.py） ===== */
+.af{box-shadow:var(--afs)!important;border-color:transparent!important}
+.af-tags{position:absolute;top:5px;left:5px;z-index:4;display:flex;flex-wrap:wrap;gap:3px;max-width:calc(100% - 10px);pointer-events:none}
+.af-tags i{font-style:normal;font-size:9.5px;font-weight:900;line-height:1;color:#fff;background:var(--c);border:1.5px solid #fff;border-radius:999px;padding:3px 6px 2px;box-shadow:0 2px 6px -2px var(--c);white-space:nowrap}
+.fbar.af{border-radius:18px}
+.fbar.af .af-tags{top:-8px;left:12px}
+.kn-i.af{border-radius:16px}
+.kn-i.af .af-tags{top:-7px;left:auto;right:10px}
+.help.navi .hp.af .af-tags i,.enjoy .ej.af .af-tags i{font-size:9px;padding:2px 5px 1px}
+/* マイページ */
+.kidrow{border-left:5px solid var(--kc,#ccc)}
+.kid-dot{flex:none;display:grid;place-items:center;min-width:34px;height:34px;padding:0 4px;border-radius:999px;background:var(--kc);color:#fff;font-size:11px;font-weight:900;box-shadow:0 0 0 2px #fff,0 4px 10px -4px var(--kc)}
+.kid-g{display:flex;flex-wrap:nowrap;gap:6px;margin-top:6px}
+.kidrow>span:nth-child(2){min-width:0;flex:1}
+.kid-g button{white-space:nowrap;flex:none;width:auto!important;height:auto!important;border:1.5px solid var(--line,#ddd);border-radius:999px;padding:5px 12px;font:inherit;font-size:12px;font-weight:800;background:#fff;color:var(--ink,#333);cursor:pointer}
+.kid-g button[data-kidg$=":m"][aria-pressed="true"],.kid-g button[data-kidng="m"][aria-pressed="true"]{background:#3D8BFF;border-color:#3D8BFF;color:#fff}
+.kid-g button[data-kidg$=":f"][aria-pressed="true"],.kid-g button[data-kidng="f"][aria-pressed="true"]{background:#FF5FA2;border-color:#FF5FA2;color:#fff}
+.kidadd{flex-wrap:wrap;align-items:center}
+.kid-help{margin:6px 0 0;font-size:11.5px;color:var(--muted,#888)}
+</style><!--/kidcolor-css-->
 <!--vtel-css--><style>
 /* ===== 声で電話をさがす（voice_tel.py） ===== */
 .vt-bar{position:relative;display:flex;align-items:center;gap:10px;margin:0 0 12px;padding:9px 12px 9px 9px;border-radius:999px;text-decoration:none;color:#fff;overflow:hidden;
@@ -4757,7 +4847,7 @@ function homeLL(){if(FROM==="here"&&HERE2)return {ll:HERE2,t:"いまいる場所
 const km=(a,b)=>Math.hypot(a[0]-b[0],(a[1]-b[1])*Math.cos(a[0]*Math.PI/180))*111;
 function load(){if(DATA)return Promise.resolve(DATA);
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
-  return fetch(base+"near-data/tel.json?v=11191143").then(r=>r.json()).then(d=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||""))}));return DATA})
+  return fetch(base+"near-data/tel.json?v=11191206").then(r=>r.json()).then(d=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||""))}));return DATA})
     .catch(()=>{DATA=[];return DATA})}
 /* 聞きとった文 → キーワード */
 function terms(text){let s=(text||"").normalize("NFKC").replace(NOISE," ");
