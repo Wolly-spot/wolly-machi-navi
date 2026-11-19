@@ -3698,41 +3698,44 @@ function knWho(o){const ids=(o.kids||[]).filter(i=>i>=0);if(!ids.length)return o
   return `<span class="kn-who">${ids.map(i=>{const c=kidColor(i);return `<i style="--c:${c.c}">${esc(c.hon||c.n)}へ</i>`}).join("")}</span>`}
 function knCall(o){const ids=(o.kids||[]).filter(i=>i>=0);if(ids.length!==1)return "";const c=kidColor(ids[0]);return getKidsG()[ids[0]]&&getKidsG()[ids[0]].n?c.hon+"、":""}
 /* 札をタップ → 明るい白のホログラムで、キャラが「〇〇くんに合う理由」を伝える（キャラは af_<項目>.webp、ないときはキャラなし） */
-const AF_WHY={ninshin:["妊娠・出産ガイド","赤ちゃんをむかえる前とあとの手つづき・もらえるお金・相談先が、じゅんばんにまとまっているよ。"],
-  health:["健診・病院","健診や予防接種がつづく時期だよ。熱が出たときの病院や、夜・休日の急患もここでさがせるよ。"],
-  money:["もらえるお金","この年齢でもらえる手当や助成があるよ。もらいわすれがないか、いっしょにチェックしよう。"],
-  hub:["交流施設","親子でふらっと遊びに行けて、子育ての相談もできる場所だよ。同じくらいの年の子にも会えるよ。"],
-  hokatsu:["保活ナビ","保育園に入るじゅんびをする時期だよ。申しこみの時期や点数を、早めに見ておくと安心だよ。"],
-  azuke:["預け先をさがす","ちょっとだけ預けたい日や、病気で仕事を休めない日の預け先がわかるよ。"],
-  lesson:["習い事","この年齢からはじめやすい習い事がたくさんあるよ。体験できる教室もさがしてみてね。"],
-  park:["公園","のびのび遊べる時期だよ。遊具やトイレ・駐車場がある公園をさがせるよ。"],
-  event:["イベント","この年齢の子と楽しめるイベントがのっているよ。週末の予定にどうぞ。"],
-  odekake:["おでかけスポット","いっしょに楽しめる動物園・科学館・プールなどのおでかけ先だよ。"],
-  "school-e":["小学校","小学校の時期、または入学のじゅんびの時期だよ。学区や入学までの流れをチェックしよう。"],
-  "school-j":["中学校","中学校への進学が近いよ。学区や中学校のことを見ておこう。"],
-  special:["特別支援","学びの場のちがいや、入学前の就学相談のことがわかるよ。"],
-  gakudo:["学童","小学生の放課後の居場所だよ。申しこみの時期にも気をつけてね。"],
-  jidou:["児童センター","放課後や休みの日に、友だちと遊べる場所だよ。"],
-  "dk-kid":["幼児の歯科健診","1歳6か月〜3歳の、無料の歯の健診の時期だよ。"],
-  "dk-mom":["妊婦の歯科健診","おなかに赤ちゃんがいるあいだに受けられる、無料の歯の健診だよ。"],
-  kenshin:["乳幼児健診","いまが乳幼児健診の時期だよ。成長を見てもらおうね。"],
-  vaccine:["予防接種","受ける予防接種がある時期だよ。スケジュールを確かめてね。"],
-  byouji:["病児・病後児保育","熱が出て仕事を休めない日に、看護師さんがいる部屋で預かってくれるよ。"],
-  ev:["今週のイベント","題名に、この年齢の子むけのことばが入っているよ。"],kn:["Wollyからのお知らせ","いまの時期に合わせて届いたお知らせだよ。"]};
+/* 理由は決めつけない言い方で、「こういうときに役立つよ」を1行ずつアイコンつきで（{n}＝なまえ（なければ「お子さん」）） */
+const AF_WHY={ninshin:["妊娠・出産",[["heart","赤ちゃんをむかえる前とあとには、やることがたくさんあるよ"],["docs","手つづき・もらえるお金・相談先を、時期の順にまとめているよ"],["cal","予定日を入れると、いつ何をするかもわかるよ"]]],
+  health:["健診・病院",[["age","{n}くらいの年は、健診や予防接種がつづきやすい時期だよ"],["temp","急に熱が出たときの病院や、夜・休日の急患もさがせるよ"],["cal","受けたかどうか、ここでたしかめておくと安心だよ"]]],
+  money:["もらえるお金",[["coin","{n}くらいの年の子がいる家で、もらえることがある手当や助成をまとめているよ"],["docs","当てはまるものは家によってちがうから、もらえそうなものがないか、のぞいてみてね"]]],
+  hub:["交流施設",[["kids","{n}くらいの年の子と、親子で遊べる場所だよ"],["hand","子育てのことを、気軽に相談できるよ"],["house","予約なしで、ふらっと行けるところも多いよ"]]],
+  hokatsu:["保活ナビ",[["house","もう保育園に通っている子も、まだの子もいるよね"],["cal","これから入れたいと思ったら、申しこみの時期や点数を早めに見ておくと安心だよ"],["bulb","いまは考えていなくても、知っておくとあとで役立つよ"]]],
+  azuke:["預け先をさがす",[["kids","もう園に通っている子も、まだおうちで過ごしている子もいるよね"],["house","まだ入っていなくて「ちょっとだけ預けたい日」があるときは、一時保育が使えることがあるよ"],["bed","熱で仕事を休めない日は、病児保育という方法もあるよ"]]],
+  lesson:["習い事",[["star","{n}くらいの年から、はじめられる習い事もあるよ"],["play","まだ早いかなと思っても、体験だけしてみる子も多いよ"],["map","家の近くの教室を、場所や種類でさがせるよ"]]],
+  park:["公園",[["park","{n}くらいの年なら、のびのび遊べる公園が楽しいころだよ"],["map","遊具・トイレ・駐車場があるかも見られるよ"]]],
+  event:["イベント",[["cal","{n}くらいの年の子と楽しめるイベントがあるかもしれないよ"],["heart","週末の予定に、のぞいてみてね"]]],
+  odekake:["おでかけスポット",[["bus","{n}くらいの年なら、いっしょに楽しめるおでかけ先がたくさんあるよ"],["map","雨の日でも行ける所や、無料の所もさがせるよ"]]],
+  "school-e":["小学校",[["school","{n}くらいの年は、入学のじゅんびや学校生活の情報が役に立つころだよ"],["docs","学区・入学までの流れ・お金の支援などをまとめているよ"]]],
+  "school-j":["中学校",[["school","中学校への進学が近づくころだよ"],["map","学区や中学校のことを、早めに見ておくと安心だよ"]]],
+  special:["特別支援",[["heart","多くの子には関係ないかもしれないけれど、ことばや発達、学校生活で気になることがあるときに役立つよ"],["hand","学びの場のちがいや、入学前に相談できるところ（就学相談）がわかるよ"],["bulb","気になることがなければ、そのままで大丈夫だよ"]]],
+  gakudo:["学童",[["house","小学生になって、放課後におうちの人がいないときの居場所だよ"],["cal","使うかもしれないときは、申しこみの時期に気をつけてね"]]],
+  jidou:["児童センター",[["play","放課後や休みの日に、友だちと遊べる場所だよ"],["kids","{n}くらいの年の子も、よく遊びに来ているよ"]]],
+  "dk-kid":["幼児の歯科健診",[["tooth","1歳6か月〜3歳ごろに受けられる、無料の歯の健診があるよ"],["cal","もう受けた子も、これからの子もいるよね。お知らせでたしかめてね"]]],
+  "dk-mom":["妊婦の歯科健診",[["tooth","おなかに赤ちゃんがいるあいだに受けられる、無料の歯の健診だよ"],["heart","ママの歯の元気は、赤ちゃんのためにも大切だよ"]]],
+  kenshin:["乳幼児健診",[["age","{n}くらいの年は、乳幼児健診があるころだよ"],["cal","もう受けた子も、これからの子もいるよね。届いたお知らせでたしかめてね"]]],
+  vaccine:["予防接種",[["plaster","{n}くらいの年は、受ける予防接種があるかもしれないころだよ"],["cal","母子手帳と見くらべて、受けわすれがないかたしかめてね"]]],
+  byouji:["病児・病後児保育",[["bed","熱が出たけれど、どうしても仕事を休めない日のための預け先だよ"],["nurse","看護師さんがいる部屋で見てもらえるよ。いざというときのために、知っておくと安心"]]],
+  ev:["今週のイベント",[["cal","題名に、{n}くらいの年の子むけのことばが入っているイベントだよ"],["heart","くわしい対象は、イベントのページでたしかめてね"]]],
+  kn:["Wollyからのお知らせ",[["cal","いまの時期に合わせて届いたお知らせだよ"],["heart","もうすんでいたら、気にしないでね"]]]};
 const AF_LG={rhythm:"リトミック",sport:"運動・スポーツ",budo:"武道",dance:"ダンス・バレエ",music:"音楽",study:"勉強・まなび",culture:"書道・囲碁・将棋など",nature:"自然・体験"};
-function afWhy(key){if(key&&key.startsWith("lg-")){const g=key.slice(3);return [AF_LG[g]||"習い事","この年齢から始めやすい「"+(AF_LG[g]||"習い事")+"」の習い事だよ。体験してみるのもおすすめ。"]}return AF_WHY[key]||["Wolly","この年齢にぴったりの情報だよ。"]}
+function afWhy(key){if(key&&key.startsWith("lg-")){const g=AF_LG[key.slice(3)]||"習い事";return [g,[["star","{n}くらいの年から、はじめやすい「"+g+"」の習い事もあるよ"],["play","合うかどうかは子どもによってちがうから、体験してみるのもおすすめだよ"]]]}
+  return AF_WHY[key]||["Wolly",[["star","{n}くらいの年に、役立つかもしれない情報だよ"]]]}
 function openAfPop(key,idx,src){
-  const k=ageKids().find(x=>x.i===idx);if(!k)return;const [t,why]=afWhy(key);
+  const k=ageKids().find(x=>x.i===idx);if(!k)return;const [t,why]=afWhy(key);const g=getKidsG()[idx];const nm=g&&g.n?k.hon:(idx<0?"赤ちゃん":"お子さん");
   const img="af_"+(key||"x").replace(/[^a-z0-9]/gi,"_");
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
   let ov=document.getElementById("afPop");if(ov)ov.remove();
   document.body.insertAdjacentHTML("beforeend",`<div id="afPop" role="dialog" aria-modal="true" aria-label="${esc(k.hon)}に合う理由" style="--c:${k.c}"><div class="afp-card">
     <button type="button" class="afp-x" aria-label="とじる">×</button>
     <div class="afp-top"><img class="afp-ch" src="${base}af-img/${img}.webp" alt="" onerror="this.remove()"><div class="afp-say"><span class="afp-who" style="background:${k.c}">${esc(k.hon)}${k.n!==k.rank&&k.rank?`<small>（${esc(k.rank)}）</small>`:""}</span>
-      <p><b>${esc(k.hon)}に、ぴったりだよ！</b></p></div></div>
-    <div class="afp-t">${esc(t)}</div><p class="afp-why">${esc(why)}</p>
+      <p><b>${esc(k.hon)}の年ごろなら、こんなときに役立つよ</b></p></div></div>
+    <div class="afp-t">${esc(t)}</div><ul class="afp-ls">${why.map((w,n)=>`<li style="--n:${n}"><span class="afp-ic">${relIc(w[0])}</span><span>${esc(w[1].replace(/\{n\}/g,nm))}</span></li>`).join("")}</ul>
     ${src&&key==="kn"?`<p class="afp-why">「${esc(src)}」</p>`:""}
-    <p class="afp-note">お子さんの年齢から、Wollyがえらんだめやすだよ。</p>
+    <p class="afp-note">お子さんの年齢から、Wollyがえらんだめやすだよ。当てはまらないときは、気にしないでね。</p>
     <button type="button" class="afp-ok">わかった</button></div></div>`);
   ov=document.getElementById("afPop");requestAnimationFrame(()=>ov.classList.add("on"));
   const cl=()=>{ov.classList.remove("on");setTimeout(()=>ov.remove(),300)};
@@ -4355,7 +4358,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11191234");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11191249");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -4714,6 +4717,9 @@ else{document.body.classList.add("is-loading");leafShine();raf=requestAnimationF
 
 
 
+
+
+
 <!--kidcolor-css--><style>
 /* ===== お子さんごとの色の枠（kid_colors.py） ===== */
 /* 枠は細く、ほんのり紫のグラデーションの光（じゃまにならないように）。だれ向けかは札の色で */
@@ -4767,6 +4773,13 @@ else{document.body.classList.add("is-loading");leafShine();raf=requestAnimationF
 .afp-say p{margin:6px 0 0;font-size:15px}
 .afp-t{position:relative;margin:14px 0 4px;font-size:16px;font-weight:900;color:var(--c)}
 .afp-why{position:relative;margin:4px 0 0;font-size:14px;line-height:1.75;font-weight:600}
+.afp-ls{position:relative;list-style:none;margin:6px 0 0;padding:0;display:grid;gap:8px}
+.afp-ls li{display:flex;align-items:flex-start;gap:10px;padding:9px 10px;border-radius:16px;background:rgba(255,255,255,.85);box-shadow:0 0 0 1.5px color-mix(in srgb,var(--c) 22%,#fff);font-size:13.5px;line-height:1.65;font-weight:700;animation:afLi .45s cubic-bezier(.2,.8,.3,1.2) both;animation-delay:calc(.15s + var(--n)*.09s)}
+.afp-ic{flex:none;display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:color-mix(in srgb,var(--c) 14%,#fff);box-shadow:0 0 0 2px #fff,0 3px 8px -4px var(--c);animation:afIc 2.8s ease-in-out infinite;animation-delay:calc(var(--n)*.3s)}
+.afp-ic svg{width:26px;height:26px}
+@keyframes afLi{from{opacity:0;transform:translateY(8px) scale(.97)}}
+@keyframes afIc{50%{transform:translateY(-2px) rotate(-4deg)}}
+@media (prefers-reduced-motion:reduce){.afp-ls li,.afp-ic{animation:none}}
 .afp-note{position:relative;margin:10px 0 0;font-size:11.5px;color:#8a83a8}
 .afp-ok{position:relative;display:block;margin:12px auto 0;border:0;border-radius:999px;padding:10px 30px;font:inherit;font-size:14px;font-weight:900;color:#fff;background:var(--c);box-shadow:0 8px 18px -8px var(--c);cursor:pointer}
 @media (prefers-reduced-motion:reduce){.afp-card::after,.afp-ch{animation:none}}
@@ -4943,7 +4956,7 @@ function homeLL(){if(FROM==="here"&&HERE2)return {ll:HERE2,t:"いまいる場所
 const km=(a,b)=>Math.hypot(a[0]-b[0],(a[1]-b[1])*Math.cos(a[0]*Math.PI/180))*111;
 function load(){if(DATA)return Promise.resolve(DATA);
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
-  return fetch(base+"near-data/tel.json?v=11191234").then(r=>r.json()).then(d=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||""))}));return DATA})
+  return fetch(base+"near-data/tel.json?v=11191249").then(r=>r.json()).then(d=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||""))}));return DATA})
     .catch(()=>{DATA=[];return DATA})}
 /* 聞きとった文 → キーワード */
 function terms(text){let s=(text||"").normalize("NFKC").replace(NOISE," ");
