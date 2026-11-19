@@ -3693,6 +3693,10 @@ function ageFitPaint(){
   document.querySelectorAll("#kidNotice .kn-i[data-kids]").forEach(d=>{const ids=d.dataset.kids.split(",").map(Number);paintOne(d,kids.filter(k=>ids.includes(k.i)),"kn")});
 }
 
+/* お知らせのだれ向け：その子の色のなまえ札（なまえがあれば「〇〇くんへ」、なければ「長男へ」） */
+function knWho(o){const ids=(o.kids||[]).filter(i=>i>=0);if(!ids.length)return o.who?`<small>${esc(o.who)}</small>`:"";
+  return `<span class="kn-who">${ids.map(i=>{const c=kidColor(i);return `<i style="--c:${c.c}">${esc(c.hon||c.n)}へ</i>`}).join("")}</span>`}
+function knCall(o){const ids=(o.kids||[]).filter(i=>i>=0);if(ids.length!==1)return "";const c=kidColor(ids[0]);return getKidsG()[ids[0]]&&getKidsG()[ids[0]].n?c.hon+"、":""}
 /* 札をタップ → 明るい白のホログラムで、キャラが「〇〇くんに合う理由」を伝える（キャラは af_<項目>.webp、ないときはキャラなし） */
 const AF_WHY={ninshin:["妊娠・出産ガイド","赤ちゃんをむかえる前とあとの手つづき・もらえるお金・相談先が、じゅんばんにまとまっているよ。"],
   health:["健診・病院","健診や予防接種がつづく時期だよ。熱が出たときの病院や、夜・休日の急患もここでさがせるよ。"],
@@ -4351,7 +4355,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11191232");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11191234");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -4592,8 +4596,8 @@ function renderKidNotice(){
   const L=kidNotices(),open=LS.get("wolly.knopen")!==false;
   el.hidden=false;el.className="kn"+(open?" open":"");
   el.innerHTML=`<button type="button" class="kn-h" aria-expanded="${open}"><span class="kn-bell">${HNEW?riSvg("お知らせ"):svg(KIC("cal")||MINI.star,40)}${L.length?`<em>${L.length}</em>`:""}</span><span><b>Wollyからのお知らせ</b><small>${L.length?"お子さんの、いまの時期にあうこと":"いまのお知らせはありません"}</small></span><i class="kn-chev">${open?"とじる ▴":"ひらく ▾"}</i></button>
-   <div class="kn-b">${L.length?L.map((o,i)=>`<details class="kn-i"${o.kids&&o.kids.length?` data-kids="${o.kids.join(",")}"`:""} style="--n:${i}"><summary><span class="kn-ic">${relIc(o.ic)}</span><span class="kn-st"><em class="kn-tag${o.pr<=1?" hot":""}">${esc(o.tag)}</em><b>${esc(o.t)}</b>${o.who?`<small>${esc(o.who)}</small>`:""}</span><i class="kn-ar">▾</i></summary>
-     <div class="kn-d">${o.ch&&CH_TALK[o.ch]?`<div class="kn-talk"><img src="${CH_TALK[o.ch]}" alt=""><p>${esc(o.say)}</p></div>`:""}<p>${esc(o.d).replace(/\n/g,"<br>")}</p>${o.to?(o.to.startsWith("view:")?`<a class="kn-go" href="#" data-view="${o.to.slice(5)}" data-vt="${esc(o.go)}">${esc(o.go)}を見る ›</a>`:`<a class="kn-go" href="${o.to}">${esc(o.go)}を見る ›</a>`):o.url?`<a class="kn-go" href="${esc(o.url)}" target="_blank" rel="noopener">${esc(o.go)} ↗</a>`:""}</div></details>`).join(""):`<p class="kn-none">また時期が来たら、ここでお知らせするよ。</p>`}
+   <div class="kn-b">${L.length?L.map((o,i)=>`<details class="kn-i"${o.kids&&o.kids.length?` data-kids="${o.kids.join(",")}"`:""} style="--n:${i}"><summary><span class="kn-ic">${relIc(o.ic)}</span><span class="kn-st"><em class="kn-tag${o.pr<=1?" hot":""}">${esc(o.tag)}</em><b>${esc(o.t)}</b>${knWho(o)}</span><i class="kn-ar">▾</i></summary>
+     <div class="kn-d">${o.ch&&CH_TALK[o.ch]?`<div class="kn-talk"><img src="${CH_TALK[o.ch]}" alt=""><p>${esc(knCall(o)+o.say)}</p></div>`:""}<p>${esc(o.d).replace(/\n/g,"<br>")}</p>${o.to?(o.to.startsWith("view:")?`<a class="kn-go" href="#" data-view="${o.to.slice(5)}" data-vt="${esc(o.go)}">${esc(o.go)}を見る ›</a>`:`<a class="kn-go" href="${o.to}">${esc(o.go)}を見る ›</a>`):o.url?`<a class="kn-go" href="${esc(o.url)}" target="_blank" rel="noopener">${esc(o.go)} ↗</a>`:""}</div></details>`).join(""):`<p class="kn-none">また時期が来たら、ここでお知らせするよ。</p>`}
      <p class="kn-note">時期は国や市のめやすだよ。正しい日にちは、市から届くお知らせで確かめてね。</p></div>`;
 }
 document.addEventListener("click",e=>{const h=e.target.closest(".kn-h");if(!h)return;const el=$("#kidNotice"),open=!el.classList.contains("open");LS.set("wolly.knopen",open);renderKidNotice()});
@@ -4707,6 +4711,9 @@ else{document.body.classList.add("is-loading");leafShine();raf=requestAnimationF
 
 
 
+
+
+
 <!--kidcolor-css--><style>
 /* ===== お子さんごとの色の枠（kid_colors.py） ===== */
 /* 枠は細く、ほんのり紫のグラデーションの光（じゃまにならないように）。だれ向けかは札の色で */
@@ -4719,6 +4726,9 @@ else{document.body.classList.add("is-loading");leafShine();raf=requestAnimationF
 .kn-i.af{border-radius:16px}
 .kn-i.af .af-tags{top:-7px;left:auto;right:10px}
 .help.navi .hp.af .af-tags i,.enjoy .ej.af .af-tags i{font-size:9px;padding:2px 5px 1px}
+.kn-who{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+.kn-who i{font-style:normal;font-size:11.5px;font-weight:900;line-height:1;color:#fff;background:var(--c);border-radius:999px;padding:4px 9px 3px;box-shadow:0 2px 6px -2px var(--c)}
+.kn-i .af-tags{display:none}
 /* マイページ */
 .kidrow{border-left:5px solid var(--kc,#ccc)}
 .kid-dot{flex:none;display:grid;place-items:center;min-width:34px;height:34px;padding:0 4px;border-radius:999px;background:var(--kc);color:#fff;font-size:11px;font-weight:900;box-shadow:0 0 0 2px #fff,0 4px 10px -4px var(--kc)}
@@ -4933,7 +4943,7 @@ function homeLL(){if(FROM==="here"&&HERE2)return {ll:HERE2,t:"いまいる場所
 const km=(a,b)=>Math.hypot(a[0]-b[0],(a[1]-b[1])*Math.cos(a[0]*Math.PI/180))*111;
 function load(){if(DATA)return Promise.resolve(DATA);
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
-  return fetch(base+"near-data/tel.json?v=11191232").then(r=>r.json()).then(d=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||""))}));return DATA})
+  return fetch(base+"near-data/tel.json?v=11191234").then(r=>r.json()).then(d=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||""))}));return DATA})
     .catch(()=>{DATA=[];return DATA})}
 /* 聞きとった文 → キーワード */
 function terms(text){let s=(text||"").normalize("NFKC").replace(NOISE," ");
