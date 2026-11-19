@@ -4358,7 +4358,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11191330");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11191403");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -4732,6 +4732,12 @@ else{document.body.classList.add("is-loading");leafShine();raf=requestAnimationF
 
 
 
+
+
+
+
+
+
 <!--vtel-css--><style>
 /* ===== 声で電話をさがす（voice_tel.py） ===== */
 .vt-bar{position:relative;display:flex;align-items:center;gap:10px;margin:0 0 12px;padding:9px 12px 9px 9px;border-radius:999px;text-decoration:none;color:#fff;overflow:hidden;
@@ -4887,6 +4893,15 @@ else{document.body.classList.add("is-loading");leafShine();raf=requestAnimationF
 .vt-arrow{display:block;margin:18px 14px 0 auto;width:max-content;font-size:46px;line-height:1;color:#ff8fd0;text-shadow:0 0 16px #ff8fd0;animation:vtArr 1.2s ease-in-out infinite}
 @keyframes vtArr{50%{transform:translate(6px,8px)}}
 @media (prefers-reduced-motion:reduce){.vt-arrow{animation:none}}
+
+/* 11/19 4回目：iPhone のキーボードの絵 */
+.vt-start .vt-kbw{position:relative;width:min(330px,100%);margin:6px auto 0}
+.vt-start .vt-kbd{filter:drop-shadow(0 0 16px rgba(140,240,255,.5)) drop-shadow(0 14px 22px rgba(40,10,80,.45))}
+.vt-start .vt-kmic{transform-origin:286px 234px}
+.vt-start .vt-ring{right:calc(34/320*100% - 30px);bottom:calc(28/262*100% - 30px);width:60px;height:60px}
+.vt-start .vt-finger{right:calc(34/320*100% - 26px);bottom:calc(28/262*100% - 52px)}
+.vt-start .vt-bub{top:auto;bottom:calc(28/262*100% + 34px);right:-2px;font-size:16px}
+.vt-start .vt-ex{margin-top:46px}
 .vt-res{flex:1;min-height:0;overflow-y:auto;margin:10px -18px 0;padding:4px 18px 12px;-webkit-overflow-scrolling:touch}
 .vt-top{position:relative;border-radius:22px;padding:14px 14px 12px;color:#2a1450;background:linear-gradient(160deg,rgba(255,255,255,.96),rgba(232,250,255,.94));
   box-shadow:0 0 0 2px #8ff3ff,0 0 26px rgba(90,220,255,.75),0 0 60px rgba(170,110,255,.5);animation:vtPop .6s cubic-bezier(.2,.8,.3,1.2) both}
@@ -4946,7 +4961,7 @@ function homeLL(){if(FROM==="here"&&HERE2)return {ll:HERE2,t:"いまいる場所
 const km=(a,b)=>Math.hypot(a[0]-b[0],(a[1]-b[1])*Math.cos(a[0]*Math.PI/180))*111;
 function load(){if(DATA)return Promise.resolve(DATA);
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
-  return fetch(base+"near-data/tel.json?v=11191330").then(r=>r.json()).then(d=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),ky:r[7]?nz(r[7]):""}));return DATA})
+  return fetch(base+"near-data/tel.json?v=11191403").then(r=>r.json()).then(d=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),ky:r[7]?nz(r[7]):""}));return DATA})
     .catch(()=>{DATA=[];return DATA})}
 /* 聞きとった文 → キーワード */
 function terms(text){let s=(text||"").normalize("NFKC").replace(NOISE," ");
@@ -5000,11 +5015,23 @@ let STACK=[];
 let liveT;function live(v){clearTimeout(liveT);liveT=setTimeout(()=>{if(!DATA)return;KW=terms(v).slice(0,6);window.__vtSkipped=0;CATS=null;stackFrom();renderKW();render()},180)}
 document.addEventListener("input",e=>{if(e.target&&e.target.id==="vtIn")live(e.target.value)});
 function stackFrom(){const {L}=results();STACK=L.slice()}
+/* iPhone の日本語キーボード（あかさた）の絵。下の左が🌐、右が🎤＝ここを光らせて指さす */
+const IPK=(()=>{const W=320,kw=56,kh=44,g=6,x0=9,y0=10,col=[x0,x0+kw+g,x0+2*(kw+g),x0+3*(kw+g),x0+4*(kw+g)];
+  const key=(c,r,t,o)=>{o=o||{};const gray=!!o.gray,h=o.h||1,fs=o.fs||17,H=kh*h+g*(h-1),y=y0+r*(kh+g);
+    return `<rect x="${col[c]}" y="${y}" width="${kw}" height="${H}" rx="7" fill="${gray?"#ABB0BA":"#fff"}" filter="url(#ks)"/><text x="${col[c]+kw/2}" y="${y+H/2+6}" text-anchor="middle" font-size="${fs}" font-weight="600" fill="#111">${t}</text>`};
+  return `<svg class="vt-kbd" viewBox="0 0 ${W} 262" aria-hidden="true"><defs><filter id="ks" x="-5%" y="-5%" width="110%" height="120%"><feDropShadow dx="0" dy="1" stdDeviation=".4" flood-color="#888" flood-opacity=".6"/></filter></defs>
+  <rect x="0" y="0" width="${W}" height="262" rx="14" fill="#D3D6DD"/>
+  ${key(0,0,"→",{gray:1})}${key(1,0,"あ")}${key(2,0,"か")}${key(3,0,"さ")}${key(4,0,"⌫",{gray:1})}
+  ${key(0,1,"↶",{gray:1})}${key(1,1,"た")}${key(2,1,"な")}${key(3,1,"は")}${key(4,1,"空白",{gray:1,fs:13})}
+  ${key(0,2,"ABC",{gray:1,fs:13})}${key(1,2,"ま")}${key(2,2,"や")}${key(3,2,"ら")}${key(4,2,"改行",{gray:1,h:2,fs:13})}
+  ${key(0,3,"☺︎",{gray:1})}${key(1,3,"^^",{fs:14})}${key(2,3,"わ")}${key(3,3,"、。?!",{fs:12})}
+  <g fill="none" stroke="#3a3d45" stroke-width="2"><circle cx="34" cy="234" r="11"/><path d="M23 234h22M34 223c-5 6-5 16 0 22M34 223c5 6 5 16 0 22"/></g>
+  <g class="vt-kmic"><circle cx="286" cy="234" r="19" fill="#FF5FA2"/><rect x="281" y="222" width="10" height="16" rx="5" fill="#fff"/><path d="M276 233a10 10 0 0 0 20 0M286 243v5" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></g>
+</svg>`})();
 function startHtml(){return `<div class="vt-start" data-vfocus>
-    <p class="vt-guide"><b>キーボードの右下の🎤</b>を押して、<br>行き先を話してね！</p>
-    <p class="vt-ex">例：「〇〇保育園」「〇〇学童」「〇〇小学校」<br>名前の一部だけでも、近い番号を出すよ</p>
-    <p class="vt-kbhint">キーボードが出ていないときは、上の入力欄をタップしてね</p>
-    <span class="vt-arrow" aria-hidden="true">↘</span></div>`}
+    <div class="vt-kbw">${IPK}<span class="vt-ring" aria-hidden="true"></span><span class="vt-finger" aria-hidden="true">👆</span><span class="vt-bub">ここを押して<br>話す！</span></div>
+    <p class="vt-ex">例：「〇〇保育園」　名前の一部だけでもOK</p>
+    <p class="vt-kbhint">Android は、キーボードの上の🎤だよ</p></div>`}
 function bigCard(x,n,total){const meta=[catChip(x.r.c),x.r.w?esc(x.r.w):"",dist(x)].filter(Boolean).join("　");
   return `<div class="vt-top" data-notel><button type="button" class="vt-skip" data-vskip aria-label="この候補を消して、次へ">×</button>
     <span class="lb">${n===0?"★ いちばん可能性が高い":"候補"}<small>${n+1} / ${total}</small></span><h3>${esc(x.r.n)}</h3><div class="vt-meta">${meta}</div>
