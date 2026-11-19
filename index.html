@@ -3652,7 +3652,8 @@ const KID_COLORS={m:[["長男","#3D8BFF"],["次男","#1FB2E8"],["三男","#14ABA
 function kidColor(i){const k=getKidsG();const me=k[i];if(!me)return {n:"",c:"#999",short:"?",rank:"",hon:""};
   let rank,c,g="";if(me.g==="m"||me.g==="f"){const n=k.slice(0,i).filter(x=>x.g===me.g).length;const t=KID_COLORS[me.g][Math.min(n,4)];rank=t[0];c=t[1];g=me.g}
   else{rank=(i+1)+"人目";c=KID_COLORS.x[i%5]}
-  const nm=(me.n||"").trim();const hon=nm?nm+(g==="m"?"くん":g==="f"?"ちゃん":"さん"):(g?rank:"お子さん");
+  const nm=(me.n||"").trim();let big=false;try{big=schoolAge(me.b)>=12}catch(e){}/* 中学生からは「さん」 */
+  const hon=nm?nm+(big||!g?"さん":g==="m"?"くん":"ちゃん"):(g?rank:"お子さん");
   return {n:nm||rank,rank,c,short:(nm||rank).slice(0,2),g,hon}}
 /* 年齢に合うものの月齢の範囲 [から, まで)（マイナスはおなかの中） */
 const AGEFIT={ninshin:[-10,3],health:[0,72],money:[-10,72],hub:[0,36],hokatsu:[-10,60],azuke:[6,72],lesson:[24,180],park:[12,144],
@@ -3672,8 +3673,7 @@ const AGE_SEL=[['[data-view="school?t=e"]',"school-e"],['[data-view="school?t=j"
 function paintOne(el,ks,key){
   el.querySelectorAll(":scope > .af-tags").forEach(t=>t.remove());el.classList.remove("af");el.style.removeProperty("--afs");el.style.removeProperty("--afc");
   if(!ks.length)return;
-  const sh=ks.slice(0,4).map((k,n)=>`0 0 0 ${2.5+n*4.5}px ${k.c}`+(n<ks.length-1?`,0 0 0 ${4.5+n*4.5}px #fff`:"")).join(",");
-  el.classList.add("af");el.style.setProperty("--afs",sh+`,0 8px 18px -8px ${ks[0].c}`);el.style.setProperty("--afc",ks[0].c);
+  el.classList.add("af");el.style.setProperty("--afc",ks[0].c);
   if(getComputedStyle(el).position==="static")el.style.position="relative";
   el.insertAdjacentHTML("afterbegin",`<span class="af-tags">${ks.map(k=>`<i role="button" tabindex="0" data-afk="${esc(key||"")}" data-afi="${k.i}" aria-label="${esc(k.hon||k.n)}に合う理由" style="--c:${k.c}">${esc(k.n)}</i>`).join("")}</span>`);
   el.setAttribute("data-af",ks.map(k=>k.n).join("・"));
@@ -4351,7 +4351,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11191221");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11191229");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -4704,9 +4704,14 @@ else{document.body.classList.add("is-loading");leafShine();raf=requestAnimationF
 
 
 
+
+
+
 <!--kidcolor-css--><style>
 /* ===== お子さんごとの色の枠（kid_colors.py） ===== */
-.af{box-shadow:var(--afs)!important;border-color:transparent!important}
+/* 枠は細く、ほんのり紫のグラデーションの光（じゃまにならないように）。だれ向けかは札の色で */
+.af{box-shadow:0 0 0 1px rgba(255,255,255,.9),0 0 0 2px rgba(196,170,255,.75),0 0 10px 1px rgba(178,140,255,.32),0 6px 16px -8px rgba(150,110,255,.45)!important;border-color:rgba(205,185,255,.9)!important;
+  background-image:linear-gradient(160deg,rgba(236,226,255,.55),rgba(255,255,255,0) 45%)!important}
 .af-tags{position:absolute;top:5px;left:5px;z-index:4;display:flex;flex-wrap:wrap;gap:3px;max-width:calc(100% - 10px);pointer-events:none}
 .af-tags i{font-style:normal;font-size:9.5px;font-weight:900;line-height:1;color:#fff;background:var(--c);border:1.5px solid #fff;border-radius:999px;padding:3px 6px 2px;box-shadow:0 2px 6px -2px var(--c);white-space:nowrap}
 .fbar.af{border-radius:18px}
@@ -4726,7 +4731,6 @@ else{document.body.classList.add("is-loading");leafShine();raf=requestAnimationF
 .kid-help{margin:6px 0 0;font-size:11.5px;color:var(--muted,#888)}
 
 .af-tags i{pointer-events:auto;cursor:pointer}
-.af-tags i::after{content:"？";margin-left:2px;font-size:8.5px;opacity:.85}
 .kidrow .kid-name{width:calc(100% - 44px)}
 .kid-name{display:block;width:100%;margin-top:6px;border:1.5px solid var(--line,#ddd);border-radius:12px;padding:7px 10px;font:inherit;font-size:13.5px;background:#fff}
 .kidadd .kid-name{flex:1 1 100%;margin:0}
@@ -4929,7 +4933,7 @@ function homeLL(){if(FROM==="here"&&HERE2)return {ll:HERE2,t:"いまいる場所
 const km=(a,b)=>Math.hypot(a[0]-b[0],(a[1]-b[1])*Math.cos(a[0]*Math.PI/180))*111;
 function load(){if(DATA)return Promise.resolve(DATA);
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
-  return fetch(base+"near-data/tel.json?v=11191221").then(r=>r.json()).then(d=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||""))}));return DATA})
+  return fetch(base+"near-data/tel.json?v=11191229").then(r=>r.json()).then(d=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||""))}));return DATA})
     .catch(()=>{DATA=[];return DATA})}
 /* 聞きとった文 → キーワード */
 function terms(text){let s=(text||"").normalize("NFKC").replace(NOISE," ");
