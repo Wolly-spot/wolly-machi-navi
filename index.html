@@ -4358,7 +4358,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11191417");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11191420");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -4750,6 +4750,9 @@ else{document.body.classList.add("is-loading");leafShine();raf=requestAnimationF
 
 
 
+
+
+
 <!--vtel-css--><style>
 /* ===== 声で電話をさがす（voice_tel.py） ===== */
 .vt-bar{position:relative;display:flex;align-items:center;gap:10px;margin:0 0 12px;padding:9px 12px 9px 9px;border-radius:999px;text-decoration:none;color:#fff;overflow:hidden;
@@ -4927,6 +4930,12 @@ else{document.body.classList.add("is-loading");leafShine();raf=requestAnimationF
 .vt-inw{position:relative;flex:1;min-width:0;display:flex}
 .vt-inw input{flex:1;min-width:0;padding-right:46px!important}
 .vt-clr{position:absolute;right:6px;top:50%;translate:0 -50%;width:34px;height:34px;border-radius:50%;border:0;background:#ffd1ea;color:#c2477e;font-size:17px;font-weight:900;cursor:pointer;box-shadow:0 0 10px rgba(255,140,200,.6)}
+
+/* 11/19 ぶるぶるしないように */
+#vtRes:not(.vt-newtop) .vt-top{animation:none!important}
+#vtRes .vt-li{animation:none!important}
+.vt-call{animation:vtCallGlow 2.4s ease-in-out infinite!important}
+@keyframes vtCallGlow{50%{box-shadow:0 10px 22px -10px rgba(140,60,220,.8),0 0 26px rgba(255,120,190,.85)}}
 .vt-res{flex:1;min-height:0;overflow-y:auto;margin:10px -18px 0;padding:4px 18px 12px;-webkit-overflow-scrolling:touch}
 .vt-top{position:relative;border-radius:22px;padding:14px 14px 12px;color:#2a1450;background:linear-gradient(160deg,rgba(255,255,255,.96),rgba(232,250,255,.94));
   box-shadow:0 0 0 2px #8ff3ff,0 0 26px rgba(90,220,255,.75),0 0 60px rgba(170,110,255,.5);animation:vtPop .6s cubic-bezier(.2,.8,.3,1.2) both}
@@ -4986,7 +4995,7 @@ function homeLL(){if(FROM==="here"&&HERE2)return {ll:HERE2,t:"いまいる場所
 const km=(a,b)=>Math.hypot(a[0]-b[0],(a[1]-b[1])*Math.cos(a[0]*Math.PI/180))*111;
 function load(){if(DATA)return Promise.resolve(DATA);
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
-  return fetch(base+"near-data/tel.json?v=11191417").then(r=>r.json()).then(d=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),ky:r[7]?nz(r[7]):""}));return DATA})
+  return fetch(base+"near-data/tel.json?v=11191420").then(r=>r.json()).then(d=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),ky:r[7]?nz(r[7]):""}));return DATA})
     .catch(()=>{DATA=[];return DATA})}
 /* 聞きとった文 → キーワード */
 function terms(text){let s=(text||"").normalize("NFKC").replace(NOISE," ");
@@ -5039,7 +5048,7 @@ const KBD=`<svg class="vt-kbd" viewBox="0 0 320 210" aria-hidden="true">
 </svg>`;
 let STACK=[];
 /* 入力欄の中身が変わるたびに候補を出しなおす（音声入力でも、とちゅうから出る） */
-let liveT;function live(v){clearTimeout(liveT);liveT=setTimeout(()=>{if(!DATA)return;KW=terms(v).slice(0,6);window.__vtSkipped=0;CATS=null;stackFrom();renderKW();render()},180)}
+let liveT;function live(v){clearTimeout(liveT);liveT=setTimeout(()=>{if(v===live._v&&STACK.length)return;live._v=v;if(!DATA)return;KW=terms(v).slice(0,6);window.__vtSkipped=0;CATS=null;stackFrom();renderKW();render()},350)}
 document.addEventListener("input",e=>{if(e.target&&e.target.id==="vtIn")live(e.target.value)});
 ["compositionend","keyup","change"].forEach(ev=>document.addEventListener(ev,e=>{if(e.target&&e.target.id==="vtIn")live(e.target.value)}));
 let vtLast="",vtStill=0;setInterval(()=>{const i=document.getElementById("vtIn");if(!i)return;const v=i.value;
@@ -5069,12 +5078,16 @@ function bigCard(x,n,total){const meta=[catChip(x.r.c),x.r.w?esc(x.r.w):"",dist(
     <a class="vt-call" href="${telHref(x.r.t)}" data-vcall>${PH}発信する</a>
     ${SR&&!SRBAD?`<p class="vt-say">「発信」と言っても、かけられるよ</p>`:""}</div>`}
 function render(){const box=$("#vtRes");if(!box||!DATA)return;const ov=$("#vtel");
-  if(!KW.length){lastTop=null;STACK=[];ov&&ov.classList.remove("vt-has");box.innerHTML=startHtml();box.scrollTop=0;return}
+  if(!KW.length){lastTop=null;STACK=[];box.dataset.sig="";ov&&ov.classList.remove("vt-has");if(!box.querySelector(".vt-start"))box.innerHTML=startHtml();box.scrollTop=0;return}
   ov&&ov.classList.add("vt-has");
   const back=`<button type="button" class="vt-back" data-vback>↺ さがし直す</button>`;
-  if(!STACK.length){lastTop=null;box.innerHTML=back+`<p class="vt-empty">「${esc(KW.join("・"))}」に合う電話が見つからなかったよ。<br>名前の一部（「〇〇保育園」なら「〇〇」）だけでも、さがしてみてね。<br>こまったら <b>さいたまコールセンター</b>（048-835-3156）にきいてみよう。</p>`;return}
+  if(!STACK.length){lastTop=null;box.dataset.sig="";box.innerHTML=back+`<p class="vt-empty">「${esc(KW.join("・"))}」に合う電話が見つからなかったよ。<br>名前の一部（「〇〇保育園」なら「〇〇」）だけでも、さがしてみてね。<br>こまったら <b>さいたまコールセンター</b>（048-835-3156）にきいてみよう。</p>`;return}
   const total=STACK.length+(window.__vtSkipped||0);
-  const top=STACK[0];lastTop=top.r;
+  const top=STACK[0];
+  const sig=STACK.slice(0,12).map(x=>x.r.t+x.r.n).join("|")+"#"+(window.__vtSkipped||0);
+  if(box.dataset.sig===sig)return;/* 同じ候補＝そのまま（ぶるぶるしないように） */
+  const newTop=!lastTop||lastTop.t!==top.r.t||lastTop.n!==top.r.n;box.dataset.sig=sig;lastTop=top.r;
+  box.classList.toggle("vt-newtop",newTop);
   box.innerHTML=back+bigCard(top,(window.__vtSkipped||0),total)+
     (STACK.length>1?`<p class="vt-more">ほかの候補（${STACK.length-1}件）・タップで大きく表示</p>`+STACK.slice(1).map((x,k)=>`<div class="vt-li" data-notel data-vpick="${k+1}" role="button" tabindex="0"><div class="tx"><b>${esc(x.r.n)}</b><small>${[TELCAT[x.r.c]?TELCAT[x.r.c][0]:"",x.r.w,dist(x)].filter(Boolean).map(esc).join("・")}</small><small>${esc(x.r.t)}</small></div><a href="${telHref(x.r.t)}" data-vcall>${PH}発信</a></div>`).join(""):"");
   box.scrollTop=0}
