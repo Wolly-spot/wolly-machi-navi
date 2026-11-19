@@ -4358,7 +4358,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11192207");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11200124");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -4845,6 +4845,10 @@ else{document.body.classList.add("is-loading");leafShine();raf=requestAnimationF
 
 
 
+
+
+
+
 <!--vtel-css--><style>
 /* ===== 声で電話をさがす（voice_tel.py） ===== */
 .vt-bar{position:relative;display:flex;align-items:center;gap:10px;margin:0 0 12px;padding:9px 12px 9px 9px;border-radius:999px;text-decoration:none;color:#fff;overflow:hidden;
@@ -5055,6 +5059,53 @@ else{document.body.classList.add("is-loading");leafShine();raf=requestAnimationF
 .vt-from button.on{background:#8ff3ff;color:#3b1d72}
 @media (prefers-reduced-motion:reduce){#vtel,#vtel::after,.vt-lamp,.vt-orb::before,.vt-orb::after,.vt-wave i,.vt-call,.vt-top{animation:none!important;transition:none}#vtel .vt-lamp{opacity:1}}
 
+/* 11/20 14回目：近未来の白＋虹のわく（この塊を消せば前のネオンにもどる） */
+#vtel{--rb:linear-gradient(115deg,#ff7ab6,#c084fc 22%,#7c9cff 42%,#38c8f0 60%,#7de3e0 74%,#ffe27a 88%,#ff7ab6);
+  color:#1c2240;background:radial-gradient(90% 60% at 15% 0%,rgba(255,200,235,.55),transparent 60%),radial-gradient(90% 60% at 100% 100%,rgba(180,225,255,.6),transparent 65%),rgba(250,251,255,.82);
+  -webkit-backdrop-filter:blur(22px) saturate(1.4);backdrop-filter:blur(22px) saturate(1.4)}
+#vtel::before{background:repeating-linear-gradient(to bottom,rgba(120,140,220,.035) 0 1px,transparent 1px 5px)}
+#vtel::after{height:2px;top:0;background:var(--rb);opacity:.55;animation:none}
+#vtel .vt-lamp{display:none}
+#vtel .vt-in{padding-top:max(14px,env(safe-area-inset-top))}
+/* 虹のわく（中は白いガラス） */
+#vtel .vt-x,#vtel .vt-sos a,#vtel .vt-type input,#vtel .vt-tile,#vtel .vt-li,#vtel .vt-back,#vtel .vt-from button,#vtel .vt-reset button,#vtel .vt-ideas button,#vtel .vt-close2{
+  border:1.5px solid transparent!important;background:linear-gradient(rgba(255,255,255,.9),rgba(255,255,255,.9)) padding-box,var(--rb) border-box!important;
+  color:#1c2240!important;box-shadow:0 6px 18px -10px rgba(90,110,200,.45)!important;text-shadow:none!important}
+#vtel .vt-sos a b{color:#d43a7a}
+#vtel .vt-x{font-weight:300}
+#vtel .vt-type input::placeholder{color:#9aa2c0}
+#vtel .vt-type button,#vtel .vt-li a,#vtel .vt-from button.on,#vtel .vt-note button{color:#fff!important;background:var(--rb)!important;background-size:200% 100%!important;box-shadow:0 6px 16px -8px rgba(120,100,230,.7)!important;text-shadow:0 1px 3px rgba(60,40,140,.35)}
+#vtel .vt-li a svg{fill:#fff}
+#vtel .vt-type .vt-clr{position:absolute;background:#eef0fb!important;color:#6a6f99!important;box-shadow:none!important;text-shadow:none}
+/* 文字 */
+#vtel .vt-guide{color:#1c2240;text-shadow:none;letter-spacing:.02em}
+#vtel .vt-guide b{background:var(--rb);-webkit-background-clip:text;background-clip:text;color:transparent}
+#vtel .vt-ex,#vtel .vt-kbhint,#vtel .vt-hint,#vtel .vt-st,#vtel .vt-cnt,#vtel .vt-empty,#vtel .vt-from{color:#5a6185;text-shadow:none}
+#vtel .vt-heard{color:#b0477f}
+#vtel .vt-q,#vtel .vt-ttl{color:#1c2240;text-shadow:none}
+#vtel .vt-q small,#vtel .vt-tile small,#vtel .vt-li small{color:#6a7194}
+#vtel .vt-li b{color:#1c2240}
+#vtel .vt-more{color:#7c6cf0;letter-spacing:.06em}
+#vtel .vt-top .lb,#vtel .vt-call{text-shadow:0 1px 3px rgba(50,30,120,.45)}
+#vtel .vt-arrow{color:#a78bfa;text-shadow:0 0 12px rgba(167,139,250,.6)}
+#vtel .vt-start .vt-kbd{filter:drop-shadow(0 10px 22px rgba(90,110,200,.28))}
+#vtel .vt-bub{color:#7a4fd8;box-shadow:0 0 0 1.5px #c9b8ff,0 8px 18px -8px rgba(120,100,230,.6)}
+#vtel .vt-ring{border-color:#c9b8ff;box-shadow:0 0 12px rgba(167,139,250,.6)}
+#vtel .vt-wave i{background:var(--rb);box-shadow:none}
+#vtel .vt-tile .em{background:#fff;box-shadow:0 0 0 1.5px #e3e0fb}
+#vtel .vt-note{color:#3a4062;background:rgba(255,255,255,.7);border-color:#cfd3ef}
+/* 結果のカード：虹のわく */
+#vtel .vt-top{color:#1c2240;border:2px solid transparent;background:linear-gradient(#fff,#fff) padding-box,var(--rb) border-box;box-shadow:0 18px 40px -18px rgba(90,110,200,.55)}
+#vtel .vt-top .lb,#vtel .vt-call{background:var(--rb);background-size:200% 100%;animation:vtRb 5s linear infinite!important}
+#vtel .vt-call{box-shadow:0 10px 22px -10px rgba(120,100,230,.8)}
+@keyframes vtRb{to{background-position:200% 0}}
+#vtel .vt-num{color:#1c2240}
+#vtel .vt-say{color:#6a7194}
+#vtel .vt-skip{background:#f1f2fb;color:#5a6185;box-shadow:0 0 0 1.5px #e1e3f5}
+#vtel .vt-orb{background:radial-gradient(circle at 35% 30%,#fff 0,#f3f0ff 40%,#d9e6ff 100%);box-shadow:0 0 0 2px #fff,0 0 0 4px rgba(167,139,250,.5),0 14px 30px -12px rgba(90,110,200,.6)}
+#vtel .vt-orb svg,#vtel .vt-mic2 svg{stroke:#5b4fd0}
+#vtel .vt-mic2{background:#fff;box-shadow:0 0 0 1.5px #c9b8ff}
+
 </style><!--/vtel-css-->
 <!--vtel-js--><script>
 /* ===== 声で電話をさがす（voice_tel.py） ===== */
@@ -5088,7 +5139,7 @@ function homeLL(){if(FROM==="here"&&HERE2)return {ll:HERE2,t:"いまいる場所
 const km=(a,b)=>Math.hypot(a[0]-b[0],(a[1]-b[1])*Math.cos(a[0]*Math.PI/180))*111;
 function load(){if(DATA)return Promise.resolve(DATA);
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
-  return fetch(base+"near-data/tel.json?v=11192207").then(r=>r.json()).then(d=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),ky:r[7]?nz(r[7]):""}));return DATA})
+  return fetch(base+"near-data/tel.json?v=11200124").then(r=>r.json()).then(d=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),ky:r[7]?nz(r[7]):""}));return DATA})
     .catch(()=>{DATA=[];return DATA})}
 /* 聞きとった文 → キーワード */
 function terms(text){let s=(text||"").normalize("NFKC").replace(NOISE," ");
