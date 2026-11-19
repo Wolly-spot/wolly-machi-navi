@@ -4358,7 +4358,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11191321");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11191330");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -4726,6 +4726,12 @@ else{document.body.classList.add("is-loading");leafShine();raf=requestAnimationF
 
 
 
+
+
+
+
+
+
 <!--vtel-css--><style>
 /* ===== 声で電話をさがす（voice_tel.py） ===== */
 .vt-bar{position:relative;display:flex;align-items:center;gap:10px;margin:0 0 12px;padding:9px 12px 9px 9px;border-radius:999px;text-decoration:none;color:#fff;overflow:hidden;
@@ -4866,6 +4872,21 @@ else{document.body.classList.add("is-loading");leafShine();raf=requestAnimationF
 .vt-li{cursor:pointer}
 .vt-li:active{transform:scale(.98)}
 #vtel.vt-has .vt-hint{display:none}
+
+/* 11/19 キーボードはスマホのもの・上の題名なし */
+.vt-hd2{display:flex;align-items:center;gap:8px}
+.vt-hd2 .vt-sos{flex:1;min-width:0;margin:0}
+.vt-hd2 .vt-x{margin:0;width:38px;height:38px}
+#vtel .vt-type{margin-top:10px}
+#vtel .vt-type input{font-size:16px}
+.vt-start{position:relative;padding:18px 8px 8px;text-align:center;cursor:text}
+.vt-guide{margin:0;font-size:21px;line-height:1.55;font-weight:900;color:#fff;text-shadow:0 0 14px rgba(150,230,255,.8);animation:vtKbIn .6s cubic-bezier(.2,.8,.3,1.2) both}
+.vt-guide b{color:#ffd1ea}
+.vt-ex{margin:14px 0 0;font-size:13px;line-height:1.8;font-weight:700;color:#d8f8ff}
+.vt-kbhint{margin:10px 0 0;font-size:11.5px;color:#bfe9ff}
+.vt-arrow{display:block;margin:18px 14px 0 auto;width:max-content;font-size:46px;line-height:1;color:#ff8fd0;text-shadow:0 0 16px #ff8fd0;animation:vtArr 1.2s ease-in-out infinite}
+@keyframes vtArr{50%{transform:translate(6px,8px)}}
+@media (prefers-reduced-motion:reduce){.vt-arrow{animation:none}}
 .vt-res{flex:1;min-height:0;overflow-y:auto;margin:10px -18px 0;padding:4px 18px 12px;-webkit-overflow-scrolling:touch}
 .vt-top{position:relative;border-radius:22px;padding:14px 14px 12px;color:#2a1450;background:linear-gradient(160deg,rgba(255,255,255,.96),rgba(232,250,255,.94));
   box-shadow:0 0 0 2px #8ff3ff,0 0 26px rgba(90,220,255,.75),0 0 60px rgba(170,110,255,.5);animation:vtPop .6s cubic-bezier(.2,.8,.3,1.2) both}
@@ -4925,14 +4946,20 @@ function homeLL(){if(FROM==="here"&&HERE2)return {ll:HERE2,t:"いまいる場所
 const km=(a,b)=>Math.hypot(a[0]-b[0],(a[1]-b[1])*Math.cos(a[0]*Math.PI/180))*111;
 function load(){if(DATA)return Promise.resolve(DATA);
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
-  return fetch(base+"near-data/tel.json?v=11191321").then(r=>r.json()).then(d=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||""))}));return DATA})
+  return fetch(base+"near-data/tel.json?v=11191330").then(r=>r.json()).then(d=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),ky:r[7]?nz(r[7]):""}));return DATA})
     .catch(()=>{DATA=[];return DATA})}
 /* 聞きとった文 → キーワード */
 function terms(text){let s=(text||"").normalize("NFKC").replace(NOISE," ");
   return s.split(/[\s、。,.!?！？]+|(?:と|や|か|の|を|が|に|で|は|も)(?=[一-鿿゠-ヿ])/).map(x=>x.replace(/^(の|を|が|に|で|は|も)+|(の|を|が|に|で|は|も)+$/g,"").trim()).filter(x=>x&&x.length>=1&&!/^[ぁ-ゖ]$/.test(x))}
 function addKW(text){CATS=null;const t=terms(text);t.forEach(w=>{if(!KW.includes(w))KW.push(w)});if(KW.length>6)KW=KW.slice(-6);window.__vtSkipped=0;stackFrom();renderKW();render()}
+function bi(x){const o=[];for(let k=0;k<x.length-1;k++)o.push(x.slice(k,k+2));return o}
 function score(r,ws){let s=0;const cw=CATW[r.c]||[];
-  ws.forEach(w=>{const k=nz(w);if(!k)return;if(r.key.includes(k))s+=10;else if(k.length>=3&&[k.slice(1),k.slice(0,-1),k.slice(-2),k.slice(0,2)].some(x=>x.length>=2&&r.key.includes(x)))s+=6;cw.forEach(c=>{const cc=nz(c);if(cc.includes(k)||k.includes(cc))s+=4})});
+  ws.forEach(w=>{const k=nz(w);if(!k)return;
+    if(r.key.includes(k)||(r.ky&&r.ky.includes(k)))s+=12;
+    else if(k.length>=2){/* 一部だけ合う：2文字ずつに分けて、どれだけ入っているか */
+      const g=bi(k),hit=g.filter(x=>r.key.includes(x)||(r.ky&&r.ky.includes(x))).length,ratio=g.length?hit/g.length:0;
+      if(ratio>=.5)s+=Math.round(9*ratio);else if(k.length>=3&&[k.slice(1),k.slice(0,-1)].some(x=>r.key.includes(x)||(r.ky&&r.ky.includes(x))))s+=5}
+    cw.forEach(c=>{const cc=nz(c);if(cc.includes(k)||k.includes(cc))s+=4})});
   if(r.c==="sos"){const strong=/(救急車|意識|けいれん|痙攣|息|呼吸|火事|事故|警察|泥棒)/.test(ws.join(""));if(r.t==="119"||r.t==="110")s=strong?s+30:0;else if(s>0&&/(熱|夜|迷|具合|吐|けが)/.test(ws.join("")))s+=6}
   return s}
 function dOf(r,h){if(h&&r.ll)return km(h.ll,r.ll);const pw=prof()&&prof().ward;if(r.w&&((h&&h.ward&&r.w===h.ward)||(pw&&r.w===pw)))return 0.5;return null}
@@ -4943,7 +4970,7 @@ function results(){if(CATS)return catResults();const ws=KW.slice();const h=homeL
   let L=DATA.map(r=>{const sc=ws.length?score(r,ws):0;return {r,sc,d:dOf(r,h)}}).filter(x=>x.sc>0);
   if(!L.length)return {h,L:[]};
   const mx=Math.max(...L.map(x=>x.sc));
-  L.sort((a,b)=>{const ta=a.sc>=mx*.6?0:1,tb=b.sc>=mx*.6?0:1;if(ta!==tb)return ta-tb;
+  L.sort((a,b)=>{const ta=a.sc>=mx*.5?0:1,tb=b.sc>=mx*.5?0:1;if(ta!==tb)return ta-tb;
     const da=a.d==null?9e9:a.d,db=b.d==null?9e9:b.d;if(da!==db)return da-db;return b.sc-a.sc});
   return {h,L:L.slice(0,40)}}
 function dist(x){if(x.d==null)return "";if(x.d===0.5&&!x.r.ll)return "あなたの区";return (x.d<0.1?"0.1km未満":x.d.toFixed(1)+"km")+"・車で約"+Math.max(1,Math.round(x.d*1.3/25*60))+"分"}
@@ -4969,11 +4996,15 @@ const KBD=`<svg class="vt-kbd" viewBox="0 0 320 210" aria-hidden="true">
   <g class="vt-kmic"><circle cx="286" cy="192" r="16" fill="#FF5FA2"/><rect x="282" y="182" width="8" height="13" rx="4" fill="#fff"/><path d="M278 191a8 8 0 0 0 16 0M286 199v4" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/></g>
 </svg>`;
 let STACK=[];
+/* 入力欄の中身が変わるたびに候補を出しなおす（音声入力でも、とちゅうから出る） */
+let liveT;function live(v){clearTimeout(liveT);liveT=setTimeout(()=>{if(!DATA)return;KW=terms(v).slice(0,6);window.__vtSkipped=0;CATS=null;stackFrom();renderKW();render()},180)}
+document.addEventListener("input",e=>{if(e.target&&e.target.id==="vtIn")live(e.target.value)});
 function stackFrom(){const {L}=results();STACK=L.slice()}
-function startHtml(){return `<div class="vt-start"><div class="vt-kbw" data-vfocus role="button" tabindex="0" aria-label="入力欄をひらく">${KBD}
-    <span class="vt-ring" aria-hidden="true"></span><span class="vt-finger" aria-hidden="true">👆</span>
-    <span class="vt-bub">ここを押して、<br>行き先を話してね！</span></div>
-  <p class="vt-how"><b>①</b> 下の入力欄をタップ　<b>②</b> キーボードの右下の🎤を押す　<b>③</b> 「〇〇保育園」のように、行き先の名前を話す</p></div>`}
+function startHtml(){return `<div class="vt-start" data-vfocus>
+    <p class="vt-guide"><b>キーボードの右下の🎤</b>を押して、<br>行き先を話してね！</p>
+    <p class="vt-ex">例：「〇〇保育園」「〇〇学童」「〇〇小学校」<br>名前の一部だけでも、近い番号を出すよ</p>
+    <p class="vt-kbhint">キーボードが出ていないときは、上の入力欄をタップしてね</p>
+    <span class="vt-arrow" aria-hidden="true">↘</span></div>`}
 function bigCard(x,n,total){const meta=[catChip(x.r.c),x.r.w?esc(x.r.w):"",dist(x)].filter(Boolean).join("　");
   return `<div class="vt-top" data-notel><button type="button" class="vt-skip" data-vskip aria-label="この候補を消して、次へ">×</button>
     <span class="lb">${n===0?"★ いちばん可能性が高い":"候補"}<small>${n+1} / ${total}</small></span><h3>${esc(x.r.n)}</h3><div class="vt-meta">${meta}</div>
@@ -5014,18 +5045,19 @@ function listen(){if(!SR||SRBAD){showNote("");const i=$("#vtIn");i&&i.focus();re
   rec.onend=()=>{listening=false;ov.classList.remove("vt-listen","vt-speak");if(!/電話|マイク|うまく/.test(($("#vtSt")||{}).textContent||""))st("")};
   try{rec.start()}catch(e){listening=false;ov.classList.remove("vt-listen")}}
 function open(){if($("#vtel"))return;
-  document.body.insertAdjacentHTML("beforeend",`<div id="vtel" role="dialog" aria-modal="true" aria-label="電話をさがす" data-notel>
+  document.body.insertAdjacentHTML("beforeend",`<div id="vtel" role="dialog" aria-modal="true" aria-label="声で電話をさがす" data-notel>
     <i class="vt-lamp t"></i><i class="vt-lamp b"></i><i class="vt-lamp l"></i><i class="vt-lamp r"></i><i class="vt-lamp c c1"></i><i class="vt-lamp c c2"></i><i class="vt-lamp c c3"></i><i class="vt-lamp c c4"></i>
-    <div class="vt-in"><div class="vt-hd"><div><div class="ey">VOICE CALL</div><h2>急いでいるときは、<br>声で探そう！</h2><p class="vt-sub">お迎えの時間が間に合わない💦 そんなときに</p></div><button type="button" class="vt-x" data-vclose aria-label="とじる">×</button></div>
-    <div class="vt-sos"><a href="tel:119"><b>119</b>救急・火事</a><a href="tel:%238000"><b>#8000</b>子どもの急病の相談</a><a href="tel:%237119"><b>#7119</b>救急か迷ったら</a><a href="tel:110"><b>110</b>警察</a></div>
-    <div class="vt-res" id="vtRes"><p class="vt-empty">電話の一覧をよみこみ中…</p></div>
+    <div class="vt-in"><div class="vt-hd2"><div class="vt-sos"><a href="tel:119"><b>119</b>救急・火事</a><a href="tel:%238000"><b>#8000</b>子どもの急病の相談</a><a href="tel:%237119"><b>#7119</b>救急か迷ったら</a><a href="tel:110"><b>110</b>警察</a></div><button type="button" class="vt-x" data-vclose aria-label="とじる">×</button></div>
+    <form class="vt-type" id="vtForm"><button type="button" class="vt-mic2" data-vlisten aria-label="声でさがす"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4M9 21h6"/></svg></button><input id="vtIn" type="search" enterkeyhint="search" placeholder="行き先の名前（一部だけでもOK）" autocomplete="off"><button type="submit">さがす</button></form>
     <div class="vt-listen" id="vtListen" hidden><div class="vt-wave">${"<i></i>".repeat(14)}</div><p class="vt-st" id="vtSt"></p><p class="vt-heard" id="vtHeard"></p></div>
-    <div class="vt-kw" id="vtKw"></div>
-    <p class="vt-hint">🔍 Wollyにのっているところ（保育園・学童・病院など2,160件）を検索できます</p><form class="vt-type" id="vtForm"><button type="button" class="vt-mic2" data-vlisten aria-label="声でさがす"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4M9 21h6"/></svg></button><input id="vtIn" type="search" enterkeyhint="search" placeholder="行き先の名前（声でもOK）" autocomplete="off"><button type="submit">さがす</button></form>
+    <div class="vt-res" id="vtRes"></div>
     </div><button type="button" class="vt-close2" data-vclose>× とじる</button></div>`);
-  const ov=$("#vtel");document.documentElement.style.overflow="hidden";requestAnimationFrame(()=>requestAnimationFrame(()=>ov.classList.add("on")));
+  const ov=$("#vtel");document.documentElement.style.overflow="hidden";
+  /* タップしたその場で入力欄に入る＝スマホのキーボードがそのまま出る（iPhone はタップの中でしか出ないため） */
+  const inp=$("#vtIn");try{inp.focus({preventScroll:true})}catch(e){inp.focus()}
+  render();requestAnimationFrame(()=>requestAnimationFrame(()=>ov.classList.add("on")));
   try{history.pushState({vtel:1},"",location.href)}catch(e){}
-  load().then(()=>render())}
+  load().then(()=>{if(inp.value.trim())live(inp.value);else render()})}
 function close(fromBack){const ov=$("#vtel");if(!ov)return;if(!fromBack&&history.state&&history.state.vtel){try{history.back();return}catch(e){}}try{rec&&rec.abort()}catch(e){}listening=false;ov.classList.remove("on");document.documentElement.style.overflow="";setTimeout(()=>ov.remove(),450)}
 document.addEventListener("click",e=>{
   if(e.target.closest("[data-vtel]")){e.preventDefault();open();return}
@@ -5048,7 +5080,7 @@ document.addEventListener("click",e=>{
   if(e.target.closest("[data-vext]")){const u="https://wolly-spot.github.io/wolly-machi-navi/#vtel";try{if(window.liff&&liff.openWindow){liff.openWindow({url:u,external:true});return}}catch(_){}window.open(u,"_blank");return}
 });
 document.addEventListener("submit",e=>{if(e.target.id!=="vtForm")return;e.preventDefault();const i=$("#vtIn");const v=(i.value||"").trim();if(!v)return;
-  if(CALLW.test(v)&&lastTop&&terms(v).every(w=>CALLW.test(w))){call(lastTop.t);return}addKW(v);i.value="";i.blur()});
+  if(CALLW.test(v)&&lastTop&&terms(v).every(w=>CALLW.test(w))){call(lastTop.t);return}live(v);i.blur()});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&$("#vtel"))close()});
 window.addEventListener("popstate",()=>{if($("#vtel"))close(true)});
 if(location.hash==="#vtel"){history.replaceState(null,"",location.pathname+location.search);setTimeout(open,600)}
