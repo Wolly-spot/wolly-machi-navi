@@ -4358,7 +4358,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11200906");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11200955");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -4853,6 +4853,24 @@ else{document.body.classList.add("is-loading");leafShine();raf=requestAnimationF
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!--vtel-css--><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@400;500;700&family=Outfit:wght@300;400;600&display=swap"><style>
 /* ===== 声で電話をさがす（voice_tel.py） ===== */
 .vt-bar{position:relative;display:flex;align-items:center;gap:10px;margin:0 0 12px;padding:9px 12px 9px 9px;border-radius:999px;text-decoration:none;color:#fff;overflow:hidden;
@@ -5140,7 +5158,7 @@ const CATW={sos:["救急","救急車","意識","けいれん","痙攣","息","�
   gakudo:["学童","放課後","児童クラブ"],dent:["歯","歯医者","歯科","虫歯","むし歯","健診","矯正"],funin:["不妊","妊活","体外","人工授精","不妊治療"],
   ninshin:["妊娠","出産","妊婦","母子手帳","不育","産後","助産"],school:["学校","いじめ","入学","転校","不登校","教育","就学","学事","特別支援","発達","相談"],
   city:["区役所","市役所","役所","手当","児童手当","申請","医療費","窓口","給付","保健センター","支援課","ひとり親","障害"]};
-const NOISE=/(の?電話番号|でんわばんごう|に電話|へ電話|に?でんわ|電話|電話して|でんわして|電話を?かけ(たい|て)?|を?教えて|おしえて|知りたい|しりたい|ください|下さい|ちょうだい|探して|さがして|調べて|しらべて|近くの|ちかくの|近い|ちかい|どこ|ですか|ですが|だけど|なんですが|お願い(します)?|おねがい(します)?|はありますか|ある[?？]?|したい|です|ます|が出た|がでた|になった|がある|みたい|かも)/g;
+const NOISE=/(えーと|ええと|えっと|えーっと|うーん|あのー|あのう|んーと|の?電話番号|でんわばんごう|に電話|へ電話|に?でんわ|電話|電話して|でんわして|電話を?かけ(たい|て)?|を?教えて|おしえて|知りたい|しりたい|ください|下さい|ちょうだい|探して|さがして|調べて|しらべて|近くの|ちかくの|近い|ちかい|どこ|ですか|ですが|だけど|なんですが|お願い(します)?|おねがい(します)?|はありますか|ある[?？]?|したい|です|ます|が出た|がでた|になった|がある|みたい|かも)/g;
 const CALLW=/(発信|はっしん|かけて|電話して|でんわして|コール|つないで|そこに(かけ|電話)|これに(かけ|電話))/;
 const VWARD={"西区":[35.9256,139.5794],"北区":[35.9305,139.6203],"大宮区":[35.9063,139.6290],"見沼区":[35.9265,139.6540],"中央区":[35.8840,139.6260],"桜区":[35.8563,139.6090],"浦和区":[35.8616,139.6457],"南区":[35.8447,139.6450],"緑区":[35.8710,139.6830],"岩槻区":[35.9497,139.6939]};
 let DATA=null,KW=[],FROM="home",HERE2=null,rec=null,listening=false,lastTop=null;
@@ -5156,16 +5174,47 @@ function homeLL(){if(FROM==="here"&&HERE2)return {ll:HERE2,t:"いまいる場所
   if(g&&g.ok&&g.lat)return {ll:[g.lat,g.lon],t:"登録した住所"};
   if(p.ward&&VWARD[p.ward])return {ll:VWARD[p.ward],t:p.ward+"役所のあたり",ward:p.ward};return null}
 const km=(a,b)=>Math.hypot(a[0]-b[0],(a[1]-b[1])*Math.cos(a[0]*Math.PI/180))*111;
+/* 11/20 聞きまちがいに強く：よみ（ひらがな）にして、音の近さでくらべる */
+let KANA={};
+function toKana(t){t=(t||"").normalize("NFKC");let o="";for(let i=0;i<t.length;){let hit=0;for(let L=Math.min(10,t.length-i);L>=1;L--){const w=t.substr(i,L);if(KANA[w]){o+=KANA[w];i+=L;hit=1;break}}if(!hit){o+=t[i];i++}}return o}
+const VW={};["あかさたなはまやらわ","いきしちにひみり","うくすつぬふむゆる","えけせてねへめれ","おこそとのほもよろ"].forEach((r,k)=>[...r].forEach(c=>VW[c]="aiueo"[k]));
+/* 音のかぎ：濁点・小さい字・のばす音・っ をそろえる（滑舌がわるくても近くなるように） */
+function phon(t){t=(t||"").normalize("NFKC").replace(/[ァ-ヶ]/g,c=>String.fromCharCode(c.charCodeAt(0)-96)).toLowerCase()
+  .replace(/ぢ/g,"じ").replace(/づ/g,"ず").replace(/を/g,"お").replace(/ゔ/g,"ぶ");
+  t=t.normalize("NFD").replace(/[\u3099\u309a]/g,"").normalize("NFC").replace(/[ぁぃぅぇぉゃゅょゎ]/g,c=>String.fromCharCode(c.charCodeAt(0)+1)).replace(/[っーｰ〜~\s　・、。「」（）()!?！？\-]/g,"");
+  let o="";for(const c of t){const pv=VW[o.slice(-1)];if(pv&&((c==="う"&&(pv==="o"||pv==="u"))||(c==="い"&&(pv==="e"||pv==="i"))||(c==="あ"&&pv==="a")||(c==="え"&&pv==="e")||(c==="お"&&pv==="o")))continue;o+=c}return o}
+/* q が t のどこかに、何文字ちがいで入っているか（最小のちがい） */
+function near(q,t){const m=q.length,n=t.length;if(!m)return 0;if(!n)return m;let pr=new Array(n+1).fill(0),cu=new Array(n+1);
+  for(let i=1;i<=m;i++){cu[0]=i;for(let j=1;j<=n;j++){cu[j]=Math.min(pr[j]+1,cu[j-1]+1,pr[j-1]+(q[i-1]===t[j-1]?0:1))}[pr,cu]=[cu,pr]}
+  let b=m;for(let j=0;j<=n;j++)b=Math.min(b,pr[j]);return b}
+/* 話した文のよみ（同じ文は一度だけ計算） */
+const INTENT=[[/(熱|ねつ|発熱|吐い|吐き|はいた|下痢|げり|せき|咳|けが|怪我|ぐあい|具合|気持ち悪|頭が?痛|お腹|おなか)/,["kyu"]],
+  [/(歯|は)(が|)(痛|いた)|歯痛|虫歯|むしば/,["hdent","dent"]],[/(預け|あずけ|預か|あずか)/,["ichiji","byouji"]]];
+const SYN=[[/はいしや(さん)?/g,"しか"],[/しかいいん/g,"しか"]];
+function qk(w){let q=phon(toKana(w));SYN.forEach(([a,b])=>q=q.replace(a,b));return q}
+let QPK="",QP=null;
+/* RAWQ＝話した文まるごと（「ふるや歯医者」の「や」で切れないように） */
+let RAWQ="";function setRaw(v){RAWQ=(v||"").normalize("NFKC").replace(NOISE,"").replace(/[\s、。,.!?！？]/g,"")}
+function qph(ws){const k=ws.join("|")+"#"+RAWQ;if(k===QPK&&QP)return QP;const list=ws.map(qk);const j=qk(RAWQ||ws.join(""));if(ws.length>1||RAWQ)list.push(j);QPK=k;QP={list,all:Math.max(3,j.length)};return QP}
 function load(){if(DATA)return Promise.resolve(DATA);
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
-  return fetch(base+"near-data/tel.json?v=11200906").then(r=>r.json()).then(d=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),ky:r[7]?nz(r[7]):""}));return DATA})
+  const kp=fetch(base+"near-data/tel-kana.json?v=11200955").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
+  return Promise.all([fetch(base+"near-data/tel.json?v=11200955").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
     .catch(()=>{DATA=[];return DATA})}
 /* 聞きとった文 → キーワード */
 function terms(text){let s=(text||"").normalize("NFKC").replace(NOISE," ");
   return s.split(/[\s、。,.!?！？]+|(?:と|や|か|の|を|が|に|で|は|も)(?=[一-鿿゠-ヿ])/).map(x=>x.replace(/^(の|を|が|に|で|は|も)+|(の|を|が|に|で|は|も)+$/g,"").trim()).filter(x=>x&&x.length>=1&&!/^[ぁ-ゖ]$/.test(x))}
-function addKW(text){CATS=null;const t=terms(text);t.forEach(w=>{if(!KW.includes(w))KW.push(w)});if(KW.length>6)KW=KW.slice(-6);window.__vtSkipped=0;stackFrom();renderKW();render()}
+function addKW(text){CATS=null;setRaw(text);const t=terms(text);t.forEach(w=>{if(!KW.includes(w))KW.push(w)});if(KW.length>6)KW=KW.slice(-6);window.__vtSkipped=0;stackFrom();renderKW();render()}
 function bi(x){const o=[];for(let k=0;k<x.length-1;k++)o.push(x.slice(k,k+2));return o}
 function score(r,ws){let s=0,full=0,part=0;const cw=CATW[r.c]||[];
+  /* 音の近さ（聞きまちがい・滑舌）。話した文ぜんたいのうち、合った部分が長いほど高い点 */
+  const P=qph(ws);let best=0,whole=0;
+  /* 話の中身（こまりごと）から種類をきめる：「熱を出した」→急患、「歯がいたい」→歯医者 */
+  INTENT.forEach(([re,cs])=>{if(re.test(RAWQ)&&cs.includes(r.c)){s+=40;full++}});
+  /* 短いことばは1字ちがいまで、長いほど多めにゆるす。話した文の半分以上が合うときだけ */
+  P.list.forEach(q=>{if(q.length<3||!r.ph||q.length*2<P.all)return;const d=near(q,r.ph),sim=1-d/q.length;
+    if(d===0||(q.length>=4&&d<=Math.max(1,Math.floor(q.length*.34)))){if(d===0&&q.length>=P.all)whole=1;const v=sim*Math.min(1,q.length/P.all)+.04*Math.min(1,q.length/r.ph.length);if(v>best)best=v}});
+  if(best){s+=24*best;if(best>=.999)full++;else if(best>=.7)part++}
   ws.forEach(w=>{const k=nz(w);if(!k)return;
     if(r.key.includes(k)||(r.ky&&r.ky.includes(k))){s+=12;full++}
     else if(k.length>=2){const g=bi(k),hit=g.filter(x=>r.key.includes(x)||(r.ky&&r.ky.includes(x))).length,ratio=g.length?hit/g.length:0;
@@ -5173,7 +5222,7 @@ function score(r,ws){let s=0,full=0,part=0;const cw=CATW[r.c]||[];
     /* 種類のことば（1文字のことばは、まったく同じときだけ） */
     cw.forEach(c=>{const cc=nz(c);if(k===cc||(cc.length>=2&&k.length>=2&&(cc.includes(k)||k.includes(cc))))s+=4})});
   if(r.c==="sos"){const strong=/(救急車|意識|けいれん|痙攣|息|呼吸|火事|事故|警察|泥棒)/.test(ws.join(""));if(r.t==="119"||r.t==="110"){s=strong?s+30:0;full=strong?1:0}else if(s>0&&/(熱|夜|迷|具合|吐|けが)/.test(ws.join("")))s+=6}
-  r._tier=full?2:part?1:0;return s}
+  r._tier=whole?3:full?2:part?1:0;return s}
 function dOf(r,h){if(h&&r.ll)return km(h.ll,r.ll);const pw=prof()&&prof().ward;if(r.w&&((h&&h.ward&&r.w===h.ward)||(pw&&r.w===pw)))return 0.5;return null}
 function catResults(){const h=homeLL();const sun=new Date().getDay()===0;const L=DATA.filter(r=>CATS.includes(r.c)).map(r=>({r,sc:1,d:dOf(r,h)}));
   L.sort((a,b)=>{const ia=CATS.indexOf(a.r.c),ib=CATS.indexOf(b.r.c);const da=a.d==null?9e9:a.d,db=b.d==null?9e9:b.d;if(sun&&(a.r.c==="hdent")!==(b.r.c==="hdent"))return a.r.c==="hdent"?-1:1;if(da!==db)return da-db;return ia-ib});
@@ -5183,7 +5232,7 @@ function results(){if(CATS)return catResults();const ws=KW.slice();const h=homeL
   if(!L.length)return {h,L:[]};
   /* ①名前がまるごと合う（合うことばが多い順→近い順）②一部だけ合う（点の高い順→近い順）③種類だけ（近い順） */
   L.sort((a,b)=>{if(a.t!==b.t)return b.t-a.t;const da=a.d==null?9e9:a.d,db=b.d==null?9e9:b.d;
-    if(a.t===2){if(b.sc!==a.sc&&Math.abs(b.sc-a.sc)>=12)return b.sc-a.sc;return da-db}
+    if(a.t>=2){if(b.sc!==a.sc&&Math.abs(b.sc-a.sc)>=12)return b.sc-a.sc;return da-db}
     if(a.t===1){if(b.sc!==a.sc)return b.sc-a.sc;return da-db}
     return da-db||b.sc-a.sc});
   return {h,L:L.slice(0,40)}}
@@ -5211,7 +5260,7 @@ const KBD=`<svg class="vt-kbd" viewBox="0 0 320 210" aria-hidden="true">
 </svg>`;
 let STACK=[];
 /* 入力欄の中身が変わるたびに候補を出しなおす（音声入力でも、とちゅうから出る） */
-let liveT;function live(v){clearTimeout(liveT);liveT=setTimeout(()=>{if(v===live._v&&STACK.length)return;live._v=v;if(!DATA)return;KW=terms(v).slice(0,6);window.__vtSkipped=0;window.__vtPicked=false;CATS=null;stackFrom();renderKW();render()},350)}
+let liveT;function live(v){clearTimeout(liveT);liveT=setTimeout(()=>{if(v===live._v&&STACK.length)return;live._v=v;if(!DATA)return;setRaw(v);KW=terms(v).slice(0,6);window.__vtSkipped=0;window.__vtPicked=false;CATS=null;stackFrom();renderKW();render()},350)}
 document.addEventListener("input",e=>{if(e.target&&e.target.id==="vtIn")live(e.target.value)});
 ["compositionend","keyup","change"].forEach(ev=>document.addEventListener(ev,e=>{if(e.target&&e.target.id==="vtIn")live(e.target.value)}));
 let vtLast="",vtStill=0;setInterval(()=>{const i=document.getElementById("vtIn");if(!i)return;const v=i.value;
@@ -5243,7 +5292,7 @@ function bigCard(x,n,total){const meta=[catChip(x.r.c),x.r.w?esc(x.r.w):"",dist(
 function render(){const box=$("#vtRes");if(!box||!DATA)return;const ov=$("#vtel");
   if(!KW.length){lastTop=null;STACK=[];box.dataset.sig="";ov&&ov.classList.remove("vt-has");if(!box.querySelector(".vt-start"))box.innerHTML=startHtml();box.scrollTop=0;return}
   ov&&ov.classList.add("vt-has");
-  const back=`<button type="button" class="vt-back" data-vback>↺ さがし直す</button>`;
+  const back="";/* 11/20 さがし直す・ほかの候補の一覧は消した（×で次の候補） */
   if(!STACK.length){lastTop=null;box.dataset.sig="";box.innerHTML=back+`<p class="vt-empty">「${esc(KW.join("・"))}」に合う電話が見つからなかったよ。<br>名前の一部（「〇〇保育園」なら「〇〇」）だけでも、さがしてみてね。<br>こまったら <b>さいたまコールセンター</b>（048-835-3156）にきいてみよう。</p>`;return}
   const total=STACK.length+(window.__vtSkipped||0);
   const top=STACK[0];
@@ -5251,8 +5300,7 @@ function render(){const box=$("#vtRes");if(!box||!DATA)return;const ov=$("#vtel"
   if(box.dataset.sig===sig)return;/* 同じ候補＝そのまま（ぶるぶるしないように） */
   const newTop=!lastTop||lastTop.t!==top.r.t||lastTop.n!==top.r.n;box.dataset.sig=sig;lastTop=top.r;
   box.classList.toggle("vt-newtop",newTop);
-  box.innerHTML=back+bigCard(top,(window.__vtSkipped||0),total)+
-    (STACK.length>1?`<p class="vt-more">ほかの候補（${STACK.length-1}件）・タップで大きく表示</p>`+STACK.slice(1).map((x,k)=>`<div class="vt-li" data-notel data-vpick="${k+1}" role="button" tabindex="0"><div class="tx"><b>${esc(x.r.n)}</b><small>${[TELCAT[x.r.c]?TELCAT[x.r.c][0]:"",x.r.w,dist(x)].filter(Boolean).map(esc).join("・")}</small><small>${esc(x.r.t)}</small></div><a href="${telHref(x.r.t)}" data-vcall>${PH}発信</a></div>`).join(""):"");
+  box.innerHTML=back+bigCard(top,(window.__vtSkipped||0),total);
   box.scrollTop=0}
 function renderKW(){const k=$("#vtKw");if(k)k.innerHTML=KW.map((w,i)=>`<button type="button" data-vkx="${i}">${esc(w)}<span>×</span></button>`).join("")}
 function st(t){const e=$("#vtSt");if(e)e.textContent=t;const l=$("#vtListen");if(l)l.hidden=!t}
@@ -5265,13 +5313,14 @@ function noteHtml(why){return `<div class="vt-note" id="vtNote">${why?esc(why)+"
 function showNote(why){const ov=document.getElementById("vtel");if(!ov)return;const old=document.getElementById("vtNote");if(old)old.remove();
   document.getElementById("vtForm").insertAdjacentHTML("beforebegin",noteHtml(why))}
 let SRBAD=false;
+function bestAlt(r){let b=r[0].transcript,bs=-1;for(let i=0;i<r.length;i++){const a=r[i].transcript;if(CALLW.test(a))return a;const ws=terms(a);if(!ws.length||!DATA)continue;let m=0;DATA.forEach(x=>{const v=score(x,ws);if(v>m)m=v});if(m>bs){bs=m;b=a}}return b}
 function listen(){if(!SR||SRBAD){showNote("");const i=$("#vtIn");i&&i.focus();return}
   if(listening){try{rec.stop()}catch(e){}return}
-  rec=new SR();rec.lang="ja-JP";rec.interimResults=true;rec.continuous=false;rec.maxAlternatives=1;
+  rec=new SR();rec.lang="ja-JP";rec.interimResults=true;rec.continuous=false;rec.maxAlternatives=5;
   const ov=$("#vtel");listening=true;ov.classList.add("vt-listen");st("お話しください…");
   rec.onspeechstart=()=>{ov.classList.add("vt-speak");st("聞きとっています…")};
   rec.onspeechend=()=>ov.classList.remove("vt-speak");
-  rec.onresult=e=>{let fin="",tmp="";for(let i=e.resultIndex;i<e.results.length;i++){const r=e.results[i];if(r.isFinal)fin+=r[0].transcript;else tmp+=r[0].transcript}
+  rec.onresult=e=>{let fin="",tmp="";for(let i=e.resultIndex;i<e.results.length;i++){const r=e.results[i];if(r.isFinal)fin+=bestAlt(r);else tmp+=r[0].transcript}
     const hd=$("#vtHeard");if(hd)hd.textContent=fin||tmp?"「"+(fin||tmp)+"」":"";
     if(fin){if(CALLW.test(fin)&&lastTop){call(lastTop.t);return}addKW(fin);st("")}};
   rec.onerror=e=>{if(/not-allowed|service-not-allowed|audio-capture/.test(e.error)){SRBAD=true;st("この画面では、マイクの丸が使えないみたい");showNote("");}else st("うまく聞きとれなかったよ。もう一度マイクを押してね")};
