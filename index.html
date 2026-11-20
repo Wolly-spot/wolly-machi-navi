@@ -1613,6 +1613,31 @@ svg .a-ring{animation:ring 2.4s ease-in-out infinite;transform-box:fill-box;tran
 #vClose:active,#sheetClose:active{transform:scale(.94)}
 #vBack[hidden]{display:none!important}
 
+/* ===== 11/20 テーマの色（光沢のあるガラスフィルム）。こまったとき・子育てナビは今のまま ===== */
+.thm{position:relative;isolation:isolate;margin:14px -6px;padding:14px 12px 16px!important;border-radius:28px;overflow:hidden;
+  background:linear-gradient(155deg,rgba(255,255,255,.82) 0%,rgba(255,255,255,.35) 38%,color-mix(in srgb,var(--th) 20%,rgba(255,255,255,.4)) 100%);
+  border:1px solid rgba(255,255,255,.95);
+  box-shadow:inset 0 1px 0 #fff,inset 0 -18px 30px -24px color-mix(in srgb,var(--th) 70%,transparent),0 0 0 1.5px color-mix(in srgb,var(--th) 28%,transparent),0 14px 30px -22px var(--th);
+  -webkit-backdrop-filter:blur(14px) saturate(1.5);backdrop-filter:blur(14px) saturate(1.5)}
+.thm::before{content:"";position:absolute;left:10px;right:10px;top:4px;height:70px;border-radius:24px 24px 50% 50%/24px 24px 40px 40px;z-index:-1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(255,255,255,0))}
+.thm::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(120% 60% at 100% 0%,color-mix(in srgb,var(--th) 22%,transparent),transparent 60%),radial-gradient(90% 50% at 0% 100%,color-mix(in srgb,var(--th2) 22%,transparent),transparent 60%)}
+.thp{display:inline-flex;align-items:center;gap:4px;margin:0 0 6px;padding:3px 10px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.04em;color:#fff;
+  background:linear-gradient(110deg,var(--th),var(--th2));box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 4px 10px -6px var(--th)}
+.thm .eyebrow{color:color-mix(in srgb,var(--th) 85%,#1F2140)}
+#rows .thm{margin:10px -6px;padding:8px 8px!important}
+#rows .thm .fbar{background:rgba(255,255,255,.55);border-color:rgba(255,255,255,.9)}
+#rows .thm .fb-t small .thp{margin:0 6px 0 0;vertical-align:1px}
+/* 上のテーマの目次 */
+.thnav{position:sticky;top:64px;z-index:30;display:flex;gap:6px;overflow-x:auto;margin:8px -16px 2px;padding:8px 16px;scrollbar-width:none;
+  background:linear-gradient(180deg,rgba(247,246,252,.92),rgba(247,246,252,.75));-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.thnav::-webkit-scrollbar{display:none}
+.thnav a{flex:none;display:inline-flex;align-items:center;gap:5px;padding:7px 12px;border-radius:999px;text-decoration:none;font-size:12.5px;font-weight:800;color:var(--ink);
+  background:linear-gradient(155deg,rgba(255,255,255,.95),color-mix(in srgb,var(--th) 22%,#fff));border:1px solid rgba(255,255,255,.95);
+  box-shadow:inset 0 1px 0 #fff,0 0 0 1.5px color-mix(in srgb,var(--th) 35%,transparent),0 6px 12px -10px var(--th)}
+.thnav a i{width:9px;height:9px;border-radius:50%;background:var(--th)}
+
 /* ==== holo-map ==== */
 .hl-full{width:40px!important;height:74px!important;cursor:pointer;background:none!important;border:0!important;box-shadow:none!important}
 .hl-full>*:not(.hl-x){display:none!important}
@@ -1753,6 +1778,7 @@ html .hl-ring{box-shadow:0 0 6px #ffd6ea;opacity:.8}
         <div class="hs-res" id="hsRes" hidden></div>
       </section>
 
+      <nav class="thnav" id="thNav" aria-label="テーマ"></nav>
       <section class="block" id="sec-help">
         <div class="head cat-head"><div><div class="eyebrow">HELP</div><h2>困ったときはこちら</h2></div><span id="kyuSlotHead" hidden></span></div>
         <!--vtel-bar--><a class="vt-bar" href="#" data-vtel id="vtBar" aria-label="急いでいるときは、声で探そう"><span class="vt-mic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4M9 21h6"/></svg></span><span class="vt-tx"><b>急いでいるときは、声で探そう！</b><small>お迎えの時間が間に合わない💦 そんなときに</small></span><span class="vt-go"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg></span></a><a class="vt-bar vt-bar2" href="#kyubyo" aria-label="子どもの急病・夜間救急"><span class="vt-mic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 14.8V5a2 2 0 0 0-4 0v9.8a4 4 0 1 0 4 0z"/><circle cx="12" cy="17.5" r="1.8" fill="#ff5a7a" stroke="none"/><path d="M12 9v6.5"/></svg></span><span class="vt-tx"><b>子どもの急病・夜間救急</b><small>電話マップ・休日の歯医者・小児科・薬局</small></span><span class="vt-go"><svg viewBox="0 0 24 24" aria-hidden="true" style="fill:none;stroke:#fff;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round"><path d="M9 6l6 6-6 6"/></svg></span></a><!--/vtel-bar-->
@@ -2559,7 +2585,7 @@ const byNew=(a,b)=>String(b.added||"").localeCompare(String(a.added||""))||byDat
 function renderFeed(){
   if(!FEED)return;
   const shops=(FEED.shops||[]).slice().sort(byNew),news=(FEED.news||[]).slice().sort((a,b)=>(b.important?1:0)-(a.important?1:0)||byDate(a,b));
-  if(shops.length){$("#feedShops").hidden=false;feedTabs("#shopTabs",SHOP_K,shops,shopKind,"data-sk");
+  if(shops.length){$("#feedShops").hidden=false;window.themeize&&themeize();feedTabs("#shopTabs",SHOP_K,shops,shopKind,"data-sk");
     const l=shops.filter(x=>shopKind==="all"||x.kind===shopKind);$("#shopRow").innerHTML=l.map(x=>feedCard(x,SHOP_K)).join("")}
   if(news.length){$("#newsTabs").hidden=false;$("#newsRow").hidden=false;$("#newsHome").hidden=true;feedTabs("#newsTabs",NEWS_K,news,newsKind,"data-nk");
     const l=news.filter(x=>newsKind==="all"||x.kind===newsKind);$("#newsRow").innerHTML=l.map(x=>feedCard(x,NEWS_K)).join("");
@@ -3000,7 +3026,7 @@ function renderEvents(){
   ev.forEach(x=>{const tx=(x.title||"")+(x.desc||"");x._age=kids.length&&EV_AGE.some(([re,st])=>re.test(tx)&&st.some(z=>kids.includes(z)))?1:0});
   if(kids.length)ev.sort((a,b)=>b._age-a._age);
   if(!ev.length)return;
-  $("#feedEvents").hidden=false;feedTabs("#evTabs",EV_K,ev,evKind,"data-ek");
+  $("#feedEvents").hidden=false;window.themeize&&themeize();feedTabs("#evTabs",EV_K,ev,evKind,"data-ek");
   const l=ev.filter(x=>evKind==="all"||evKind==="fav"||x.kind===evKind);
   const fv=favs();const l2=evKind==="fav"?ev.filter(x=>fv.has(x.id)):l;
   $("#evRow").innerHTML=l2.length?l2.map(evCard).join(""):`<p class="ev-none">ハートを押したイベントがここに集まるよ。</p>`;
@@ -4369,7 +4395,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11201514");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11201532");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -4616,7 +4642,25 @@ function renderKidNotice(){
 }
 document.addEventListener("click",e=>{const h=e.target.closest(".kn-h");if(!h)return;const el=$("#kidNotice"),open=!el.classList.contains("open");LS.set("wolly.knopen",open);renderKidNotice()});
 document.addEventListener("click",e=>{const b=e.target.closest("#kidNotice [data-view]");if(b){e.preventDefault();openViewer(b.dataset.view,b.dataset.vt)}});
-function renderAll(){renderMe();renderKidNotice();renderNews();renderCats();renderHome2();renderRows();foldRows();applyAgeOrder();renderFeed();renderEvents();ageFitPaint();window.__wollyWatch&&window.__wollyWatch();requestAnimationFrame(()=>fitTitles())}
+
+/* 11/20 テーマ：区分ごとにガラスフィルムの色と札をつける（こまったとき・子育てナビは今のまま） */
+const THEMES={"sec-enjoy":["あそぶ・でかける","#2FA4EA","#7FD3FF"],"feedEvents":["あそぶ・でかける","#2FA4EA","#7FD3FF"],
+  "sec-school":["学校・受験","#3D6BFF","#8EA8FF"],"feedShops":["お店・おトク","#F2B705","#FFD95A"],"homeNews":["お店・おトク","#F2B705","#FFD95A"],
+  "row-health":["健診・病院","#F0569A","#FF9CC4"],"row-lesson":["習い事","#8B5CF6","#C3A6FF"],"row-park":["あそぶ・でかける","#2FA4EA","#7FD3FF"],"row-coupon":["お店・おトク","#F2B705","#FFD95A"]};
+const THNAV=[["sec-help","こまったとき","#FF5C9A"],["sec-navi","子育てナビ","#9B6BFF"],["sec-enjoy","あそぶ・でかける","#2FA4EA"],["sec-school","学校・受験","#3D6BFF"],
+  ["feedEvents","イベント","#2FA4EA"],["feedShops","お店・おトク","#F2B705"],["row-health","健診・病院","#F0569A"],["row-lesson","習い事","#8B5CF6"],["row-park","公園","#2FA4EA"]];
+window.themeize=themeize;function themeize(){Object.entries(THEMES).forEach(([id,[t,c,c2]])=>{const sec=document.getElementById(id);if(!sec)return;
+    sec.classList.add("thm");sec.style.setProperty("--th",c);sec.style.setProperty("--th2",c2);
+    if(sec.querySelector(".thp"))return;const pill=`<span class="thp">${t}</span>`;
+    const fb=sec.querySelector(".fbar .fb-t small");if(fb){const tt=(sec.querySelector(".fb-t")||{}).textContent||"";if(!tt.includes(t.split("・")[0]))fb.insertAdjacentHTML("afterbegin",pill)}
+    const h=sec.querySelector(".head > div");if(h&&!fb)h.insertAdjacentHTML("afterbegin",pill)});
+  const nav=document.getElementById("thNav");if(nav&&!nav.children.length)nav.innerHTML=THNAV.map(([id,t,c])=>`<a href="#" data-thgo="${id}" style="--th:${c}"><i></i>${t}</a>`).join("");
+  if(nav)[...nav.children].forEach(a=>{const el=document.getElementById(a.dataset.thgo);a.hidden=!el||el.hidden})}
+document.addEventListener("click",e=>{const a=e.target.closest("[data-thgo]");if(!a)return;e.preventDefault();const el=document.getElementById(a.dataset.thgo);if(!el)return;
+  if(el.classList.contains("fold")&&!el.classList.contains("open")){const b=el.querySelector(".fbar");b&&b.click()}
+  const y=el.getBoundingClientRect().top+scrollY-120;scrollTo({top:y,behavior:"smooth"})});
+
+function renderAll(){renderMe();renderKidNotice();renderNews();renderCats();renderHome2();renderRows();foldRows();applyAgeOrder();renderFeed();renderEvents();ageFitPaint();window.__wollyWatch&&window.__wollyWatch();themeize();requestAnimationFrame(()=>fitTitles())}
 document.addEventListener("click",e=>{if(e.target.closest(".fbar"))requestAnimationFrame(()=>fitTitles())});
 
 
@@ -5230,8 +5274,8 @@ let RAWQ="";function setRaw(v){RAWQ=(v||"").normalize("NFKC").replace(NOISE,"").
 function qph(ws){const k=ws.join("|")+"#"+RAWQ;if(k===QPK&&QP)return QP;const list=ws.map(qk);const j=qk(RAWQ||ws.join(""));if(ws.length>1||RAWQ)list.push(j);QPK=k;QP={list,all:Math.max(3,j.length)};return QP}
 function load(){if(DATA)return Promise.resolve(DATA);
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
-  const kp=fetch(base+"near-data/tel-kana.json?v=11201514").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
-  return Promise.all([fetch(base+"near-data/tel.json?v=11201514").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
+  const kp=fetch(base+"near-data/tel-kana.json?v=11201532").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
+  return Promise.all([fetch(base+"near-data/tel.json?v=11201532").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
     .catch(()=>{DATA=[];return DATA})}
 /* 聞きとった文 → キーワード */
 function terms(text){let s=(text||"").normalize("NFKC").replace(NOISE," ");
