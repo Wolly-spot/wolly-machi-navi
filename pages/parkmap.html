@@ -205,6 +205,8 @@ document.addEventListener("click",e=>{const c=e.target.closest(".chip");if(c){F=
     markers.forEach((m,k)=>{m.getElement().style.display=ok(P[k])?"":"none"});renderList();closeCard();return}
   const l=e.target.closest(".li");if(l){scrollTo({top:document.querySelector(".mapw").offsetTop-10,behavior:"smooth"});card(+l.dataset.i)}});
 renderList();
+/* 11/20 ?q=公園名 で、その公園の100の質問をすぐ開く（ホームの公園の並びから） */
+try{const q=new URLSearchParams(location.search).get("q");if(q){const i=P.findIndex(x=>x.n===q);if(i>=0)openQ(i)}}catch(e){}
 try{map=new maplibregl.Map({container:"map",style:"https://tiles.openfreemap.org/styles/liberty",center:[139.645,35.895],zoom:10.6,attributionControl:{compact:true},dragRotate:false,pitchWithRotate:false});
   map.touchZoomRotate.disableRotation();
   map.on("load",()=>{

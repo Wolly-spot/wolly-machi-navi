@@ -2251,6 +2251,7 @@ const PARKS=[
    topics:[["駐車場",["18台・アスファルト。狭いのでポールに注意","土日のお昼前後に混みやすい"]],["トイレ・設備",["トイレは1か所（洋式・古め）","自販機2台、ベンチあり。屋根付きスペースなし"]],["遊び",["遊具は1〜3歳向き。1時間半くらいがちょうどいい","グラウンドでボール遊びOK。砂地なので走ると滑りやすい"]]],
    warn:["不審者の情報あり。トイレは必ず大人が付き添う","駐車場から階段があり、ベビーカーは大変"]}
 ];
+/*PARKMAP*/const PARKMAP=[{"n": "岩槻文化公園", "w": "岩槻", "c": 603, "k": 20, "t": ["遊具", "芝生", "BBQ"]}, {"n": "秋ヶ瀬公園", "w": "桜", "c": 977, "k": 18, "t": ["芝生", "BBQ", "池・川"]}, {"n": "埼玉スタジアム2002公園", "w": "緑", "c": 1185, "k": 14, "t": ["遊具"]}, {"n": "大崎公園", "w": "緑", "c": 400, "k": 12, "t": ["動物園", "遊具"]}, {"n": "大宮第二・第三公園", "w": "大宮", "c": 317, "k": 16, "t": ["芝生", "自然", "池・川"]}, {"n": "岩槻城址公園", "w": "岩槻", "c": 291, "k": 24, "t": ["遊具", "芝生", "池・川"]}, {"n": "大宮公園", "w": "大宮", "c": 278, "k": 20, "t": ["動物園", "遊具", "池・川"]}, {"n": "三橋総合公園", "w": "西", "c": 258, "k": 17, "t": ["遊具", "BBQ", "池・川"]}, {"n": "見沼自然公園", "w": "緑", "c": 198, "k": 15, "t": ["芝生", "自然", "池・川"]}, {"n": "さぎ山記念公園", "w": "緑", "c": 42, "k": 17, "t": ["遊具", "BBQ", "自然"]}, {"n": "駒場運動公園", "w": "浦和", "c": 168, "k": 13, "t": []}, {"n": "大和田公園", "w": "大宮", "c": 67, "k": 11, "t": ["遊具"]}, {"n": "合併記念見沼公園", "w": "大宮", "c": 62, "k": 18, "t": ["芝生", "自然", "BBQ"]}, {"n": "堀崎公園", "w": "見沼", "c": 62, "k": 14, "t": ["遊具", "散歩コース"]}, {"n": "天沼緑地（天沼テニス公園）", "w": "大宮", "c": 60, "k": 15, "t": ["遊具", "芝生"]}, {"n": "桜草公園", "w": "桜", "c": 57, "k": 17, "t": ["芝生", "自然", "散歩コース"]}, {"n": "与野中央公園", "w": "中央", "c": 38, "k": 17, "t": ["遊具", "芝生"]}, {"n": "八王子公園", "w": "中央", "c": 34, "k": 14, "t": ["遊具"]}, {"n": "七里総合公園", "w": "見沼", "c": 28, "k": 15, "t": ["遊具", "自然", "池・川"]}, {"n": "岩槻諏訪公園", "w": "岩槻", "c": 25, "k": 12, "t": ["遊具"]}, {"n": "番場公園", "w": "北", "c": 20, "k": 87, "t": ["遊具", "芝生", "散歩コース"]}, {"n": "大平公園", "w": "大宮", "c": 18, "k": 87, "t": ["遊具"]}, {"n": "川通公園", "w": "岩槻", "c": 11, "k": 16, "t": ["遊具", "屋根つき"]}, {"n": "大宮花の丘農林公苑", "w": "西", "c": null, "k": 30, "t": ["遊具", "芝生", "水遊び"]}, {"n": "秋葉の森総合公園", "w": "西", "c": 113, "k": 19, "t": ["芝生", "BBQ"]}, {"n": "荒川彩湖公園", "w": "桜", "c": null, "k": 23, "t": ["遊具", "芝生", "池・川"]}, {"n": "別所沼公園", "w": "南", "c": null, "k": 21, "t": ["遊具", "自然", "池・川"]}];/*/PARKMAP*/
 const SHOPS=[
   {t:"掲載店 準備中",k:"掲載OKのお店",p:"bag",u:"",lead:"Wolly spotに掲載OKをいただいたお店を、ここに順番に並べていくよ。",f:["お店のページ・アニメーションをそのまま紹介予定"]},
   {t:"プチマルシェ",k:"市内産の野菜",p:"veg",u:"https://www.city.saitama.lg.jp/004/001/003/002/p086011.html",lead:"市内でとれた野菜などを販売する、さいたま市の小さなマルシェ。毎月開催しているよ。",f:["日程と場所は市のページで"]},
@@ -2720,7 +2721,7 @@ function renderRows(){
      <div class="row" id="lessonRow">${lessonCards()}</div></section>`+
    `<section class="block" id="row-park">${head("park","PARKS WITH PARKING","駐車場がある公園",`<span class="rowhint">口コミつき</span>`)}
      <p class="sec-lead">台数・時間・トイレ・注意点を、行く前にチェック。</p>
-     <div class="row"><a class="tc" href="#" data-view="parkmap" data-vt="駐車場のある公園マップ">${cover("park",2,`<span class="big" style="top:34%;color:#fff">P<small style="font-size:18px;font-weight:700;margin-top:2px">27公園</small></span>`,"駐車場のある公園マップ","タップで台数・行き方")}<small>さいたま市の駐車場がある公園を地図で</small></a>${tc(CANVA+"dahi3vg9fds",cover("park",1,glyph("list"),"公園チェック100","忘れ物チェックシートにも"),"駐車台数・トイレ・テント可否など100項目",true)}${PARKS.map((p,i)=>tc("#p-"+i,cover("park",i,`<span class="big" style="top:34%;color:#fff">P<small style="font-size:20px;font-family:var(--f-display);font-weight:500;margin-top:2px">${esc(p.p1)}</small></span>`,p.t,p.p3),`${p.area?p.area+"・":""}${p.p2}`,false)).join("")}</div></section>`+
+     <div class="row"><a class="tc" href="#" data-view="parkmap" data-vt="駐車場のある公園マップ">${cover("park",2,`<span class="big" style="top:34%;color:#fff">P<small style="font-size:18px;font-weight:700;margin-top:2px">27公園</small></span>`,"駐車場のある公園マップ","タップで台数・行き方")}<small>さいたま市の駐車場がある公園を地図で</small></a>${tc(CANVA+"dahi3vg9fds",cover("park",1,glyph("list"),"公園チェック100","忘れ物チェックシートにも"),"駐車台数・トイレ・テント可否など100項目",true)}${/* 11/20 全公園で共通のカード：スライドして、タップでその公園の100の質問 */PARKMAP.map((p,i)=>`<a class="tc" href="#" data-view="parkmap?q=${encodeURIComponent(p.n)}" data-vt="${esc(p.n)}">${cover("park",i,`<span class="big" style="top:34%;color:#fff">P<small style="font-size:18px;font-weight:700;margin-top:2px">${p.c?p.c.toLocaleString()+"台":"あり"}</small></span>`,p.n,`100の質問 ${p.k}問わかる`)}<small>${esc(p.w)}区${p.t.length?"・"+esc(p.t.join("・")):""}</small></a>`).join("")}</div></section>`+
    `<section class="block" id="row-coupon">${head("coupon","WOLLY COUPON","Wolly限定クーポン",`<span class="rowhint">お店の紹介</span>`)}
      <p class="sec-lead">Wollyのパートナーのお店から届いた、クーポン・お店の紹介・イベントだよ。</p>
      <div class="feedrow" id="couponRow">${couponCards()}</div></section>`;
@@ -4358,7 +4359,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11201423");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11201436");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -5219,8 +5220,8 @@ let RAWQ="";function setRaw(v){RAWQ=(v||"").normalize("NFKC").replace(NOISE,"").
 function qph(ws){const k=ws.join("|")+"#"+RAWQ;if(k===QPK&&QP)return QP;const list=ws.map(qk);const j=qk(RAWQ||ws.join(""));if(ws.length>1||RAWQ)list.push(j);QPK=k;QP={list,all:Math.max(3,j.length)};return QP}
 function load(){if(DATA)return Promise.resolve(DATA);
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
-  const kp=fetch(base+"near-data/tel-kana.json?v=11201423").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
-  return Promise.all([fetch(base+"near-data/tel.json?v=11201423").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
+  const kp=fetch(base+"near-data/tel-kana.json?v=11201436").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
+  return Promise.all([fetch(base+"near-data/tel.json?v=11201436").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
     .catch(()=>{DATA=[];return DATA})}
 /* 聞きとった文 → キーワード */
 function terms(text){let s=(text||"").normalize("NFKC").replace(NOISE," ");
