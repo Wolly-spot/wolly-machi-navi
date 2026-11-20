@@ -692,6 +692,12 @@ svg .a-strike{animation:a-strike 1.3s cubic-bezier(.7,0,.3,1) infinite;transform
 .sch>span:nth-child(2){flex:1;display:grid;gap:2px}.sch b{font:500 17px/1.3 var(--f-display)}.sch small{font-size:12px;color:var(--muted)}
 .sch i{font-style:normal;font-size:24px;color:#A68BFF}
 .sch3{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+/* 11/20 受験（制作中） */
+.exam-h{margin:6px 2px 0;font-size:14px;font-weight:800;color:var(--ink)}
+.sch.wip{position:relative}
+.sch.wip .wipb{position:absolute;top:6px;right:6px;font-style:normal;font-size:10px;font-weight:800;line-height:1;padding:4px 7px;border-radius:999px;color:#fff;background:linear-gradient(110deg,#FF8FB8,#A68BFF);box-shadow:0 2px 6px -2px rgba(140,100,230,.6)}
+.wiptoast{position:fixed;left:50%;bottom:110px;z-index:9999;transform:translateX(-50%);padding:10px 16px;border-radius:999px;background:#2E2B4F;color:#fff;font-size:13.5px;font-weight:700;box-shadow:0 10px 24px -10px rgba(0,0,0,.5);animation:wipIn .3s ease}
+@keyframes wipIn{from{opacity:0;transform:translate(-50%,10px)}}
 .sch.sm{flex-direction:column;gap:6px;text-align:center;padding:12px 6px}.sch.sm .ci{width:48px;height:48px}.sch.sm .ci svg{width:38px;height:38px}.sch.sm b{font-size:14px}.sch.sm small{font-size:10.5px}
 .evage{display:inline-flex;align-items:center;gap:3px;width:fit-content;padding:2px 9px;border-radius:999px;background:linear-gradient(110deg,#FF5FA2,#8E6BF5);color:#fff;font-size:10.5px;font-weight:800}
 .evage .i{width:12px;height:12px;fill:#FFE45C;stroke:#FFE45C}
@@ -1774,6 +1780,8 @@ html .hl-ring{box-shadow:0 0 6px #ffd6ea;opacity:.8}
             <a class="sch sm" href="#" data-view="near?g=jidou" data-vt="児童センター・放課後ひろば" style="--cbg:#E3F4FC"><span class="ci"><svg viewBox="0 0 64 64"><circle cx="22" cy="22" r="9" fill="#FFE3CF" stroke="#1F2140" stroke-width="2.4"/><circle cx="42" cy="26" r="7.5" fill="#FFE3CF" stroke="#1F2140" stroke-width="2.4"/><path d="M8 56q0-18 14-18t14 18z" fill="#BFE6FF" stroke="#1F2140" stroke-width="2.4"/><path d="M30 56q0-14 12-14t12 14z" fill="#FFC6DA" stroke="#1F2140" stroke-width="2.4"/><circle cx="52" cy="10" r="5" fill="#FFE070" stroke="#1F2140" stroke-width="2"/></svg></span><span><b>児童センター</b><small>放課後ひろば</small></span></a>
             <a class="sch sm" href="#" data-view="near?g=shokudo" data-vt="こども食堂" style="--cbg:#FFF0F5"><span class="ci"><svg viewBox="0 0 64 64"><path d="M32 8C22 8 10 34 10 44q0 10 22 10t22-10C54 34 42 8 32 8z" fill="#fff" stroke="#1F2140" stroke-width="2.4" stroke-linejoin="round"/><path d="M20 38h24v16q-12 3-24 0z" fill="#3E4A6B" stroke="#1F2140" stroke-width="2.4" stroke-linejoin="round"/><circle cx="26" cy="30" r="2" fill="#1F2140"/><circle cx="38" cy="30" r="2" fill="#1F2140"/><path d="M28 35q4 3 8 0" fill="none" stroke="#1F2140" stroke-width="2" stroke-linecap="round"/><circle cx="22" cy="34" r="2.6" fill="#FFB3CF"/><circle cx="42" cy="34" r="2.6" fill="#FFB3CF"/></svg></span><span><b>こども食堂</b><small>市内71か所</small></span></a>
           </div>
+          <p class="exam-h">🎓 受験のじゅんび</p>
+          <div class="sch3 exam"><a class="sch sm wip" href="#" data-wip="幼稚園のお受験" style="--cbg:#FFF1C2"><span class="ci"><svg viewBox="0 0 64 64"><path d="M12 30L32 14l20 16v24H12z" fill="#FFE070" stroke="#1F2140" stroke-width="2.4" stroke-linejoin="round"/><path d="M26 54V40h12v14" fill="#fff" stroke="#1F2140" stroke-width="2.4" stroke-linejoin="round"/><circle cx="32" cy="28" r="5" fill="#FF8FB8" stroke="#1F2140" stroke-width="2.4" stroke-linejoin="round"/><path d="M46 8l1.6 3.4 3.7.5-2.7 2.6.7 3.7-3.3-1.8-3.3 1.8.7-3.7-2.7-2.6 3.7-.5z" fill="#FFB3CF" stroke="#1F2140" stroke-width="2.4" stroke-linejoin="round"/></svg></span><span><b>幼稚園のお受験</b><small>私立・国立の幼稚園</small></span><em class="wipb">制作中</em></a><a class="sch sm wip" href="#" data-wip="小学校の受験" style="--cbg:#FFE6F2"><span class="ci"><svg viewBox="0 0 64 64"><rect x="16" y="22" width="32" height="32" rx="9" fill="#FF8FB8" stroke="#1F2140" stroke-width="2.4" stroke-linejoin="round"/><path d="M16 32h32" stroke="#1F2140" stroke-width="2.4" stroke-linejoin="round"/><path d="M24 22q0-9 8-9t8 9" fill="none" stroke="#1F2140" stroke-width="2.4" stroke-linejoin="round"/><path d="M38 40l4 4 8-9" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>小学校の受験</b><small>私立・国立の小学校</small></span><em class="wipb">制作中</em></a><a class="sch sm wip" href="#" data-wip="中学校の受験" style="--cbg:#E1EFFF"><span class="ci"><svg viewBox="0 0 64 64"><rect x="12" y="14" width="30" height="40" rx="4" fill="#fff" stroke="#1F2140" stroke-width="2.4" stroke-linejoin="round"/><path d="M18 24h18M18 32h18M18 40h12" stroke="#5A9BD5" stroke-width="2.4" stroke-linecap="round"/><path d="M40 46l12-22 4 2-12 22-5 2z" fill="#FFE070" stroke="#1F2140" stroke-width="2.4" stroke-linejoin="round"/></svg></span><span><b>中学校の受験</b><small>私立・国立・公立の中高一貫</small></span><em class="wipb">制作中</em></a><a class="sch sm wip" href="#" data-wip="高校の受験" style="--cbg:#EFE8FF"><span class="ci"><svg viewBox="0 0 64 64"><path d="M8 26l24-12 24 12-24 12z" fill="#9B6BFF" stroke="#1F2140" stroke-width="2.4" stroke-linejoin="round"/><path d="M18 31v12q14 8 28 0V31" fill="#D9CCFF" stroke="#1F2140" stroke-width="2.4" stroke-linejoin="round"/><path d="M52 28v14" stroke="#1F2140" stroke-width="2.4" stroke-linejoin="round"/><circle cx="52" cy="44" r="2.6" fill="#FFE070" stroke="#1F2140" stroke-width="2.4" stroke-linejoin="round"/></svg></span><span><b>高校の受験</b><small>県立・市立・私立の高校</small></span><em class="wipb">制作中</em></a></div>
         </nav>
       </section>
       <div id="regBanner"></div>
@@ -2969,6 +2977,8 @@ document.addEventListener("click",e=>{
 
 });
 /* ホームの中の data-view（交流施設・あずかりマップなど）もその場でふわっと */
+document.addEventListener("click",e=>{const w=e.target.closest("[data-wip]");if(!w)return;e.preventDefault();const o=document.querySelector(".wiptoast");o&&o.remove();
+  const t=document.createElement("div");t.className="wiptoast";t.textContent="「"+w.dataset.wip+"」は制作中だよ。もうしばらく待ってね";document.body.appendChild(t);setTimeout(()=>t.remove(),2600)});
 document.addEventListener("click",e=>{const b=e.target.closest("#v-home [data-view]");if(b){e.preventDefault();openViewer(b.dataset.view,b.dataset.vt)}});
 /* カテゴリーを押すと、押したことがわかるように「ぷにっ」 */
 document.addEventListener("pointerdown",e=>{const c=e.target.closest(".hp,.ej,.ma-links a,.fbar,.cat,.tc,.az-b");if(!c)return;c.classList.remove("tapped");void c.offsetWidth;c.classList.add("tapped")});
@@ -4359,7 +4369,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11201448");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11201514");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -5220,8 +5230,8 @@ let RAWQ="";function setRaw(v){RAWQ=(v||"").normalize("NFKC").replace(NOISE,"").
 function qph(ws){const k=ws.join("|")+"#"+RAWQ;if(k===QPK&&QP)return QP;const list=ws.map(qk);const j=qk(RAWQ||ws.join(""));if(ws.length>1||RAWQ)list.push(j);QPK=k;QP={list,all:Math.max(3,j.length)};return QP}
 function load(){if(DATA)return Promise.resolve(DATA);
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
-  const kp=fetch(base+"near-data/tel-kana.json?v=11201448").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
-  return Promise.all([fetch(base+"near-data/tel.json?v=11201448").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
+  const kp=fetch(base+"near-data/tel-kana.json?v=11201514").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
+  return Promise.all([fetch(base+"near-data/tel.json?v=11201514").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
     .catch(()=>{DATA=[];return DATA})}
 /* 聞きとった文 → キーワード */
 function terms(text){let s=(text||"").normalize("NFKC").replace(NOISE," ");
