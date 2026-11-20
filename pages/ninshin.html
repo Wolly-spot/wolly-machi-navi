@@ -290,7 +290,7 @@ body{background:#FFF8FC radial-gradient(circle at 12px 12px,rgba(255,92,154,.10)
 .sgr .tr i{position:absolute;top:3px;bottom:3px;border-radius:999px;background:var(--bc)}
 .sgr .tr b{position:absolute;top:50%;width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;background:var(--bc);box-shadow:0 0 0 3px #fff}
 .sgax{display:grid;grid-template-columns:88px 1fr;gap:6px}.sgax div{position:relative;height:16px;font-size:10px;font-weight:900;color:var(--muted)}.sgax div span{position:absolute;transform:translateX(-50%);white-space:nowrap}.sgax div span:last-child{transform:translateX(-100%)}
-.more{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;margin:12px 0 0;padding:10px;border:0;border-radius:999px;background:linear-gradient(110deg,#FF8FC8,#A68BFF);color:#fff;font:inherit;font-size:15px;font-weight:900;cursor:pointer;box-shadow:0 6px 14px -8px rgba(142,107,245,.8)}
+html.jb body{word-break:keep-all;overflow-wrap:anywhere}html.jb h1,html.jb h2,html.jb h3,html.jb p,html.jb li,html.jb summary{text-wrap:pretty}@media (max-width:380px){h1{font-size:23px}.hl{font-size:13.5px}.sh h2{font-size:17px}.sh h2 small{font-size:11.5px}.tt b{font-size:15px}.big b{font-size:23px}.dhero h2{font-size:20px}.ds h3{font-size:16px}.dmoney b{font-size:25px}.it li,.dl li,.dsteps li{font-size:13.5px}.dp{font-size:14px}.say p{font-size:13px}.ruler a{min-width:56px;font-size:11px}}.more{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;margin:12px 0 0;padding:10px;border:0;border-radius:999px;background:linear-gradient(110deg,#FF8FC8,#A68BFF);color:#fff;font:inherit;font-size:15px;font-weight:900;cursor:pointer;box-shadow:0 6px 14px -8px rgba(142,107,245,.8)}
 .more .i{width:26px;height:26px}
 .dpov{position:fixed;inset:0;z-index:50;background:var(--bg);overflow-y:auto;-webkit-overflow-scrolling:touch;animation:dpin .32s cubic-bezier(.2,.9,.3,1)}
 @keyframes dpin{from{transform:translateX(30px);opacity:0}}
@@ -360,6 +360,14 @@ body{background:#FFF8FC radial-gradient(circle at 12px 12px,rgba(255,92,154,.10)
 </main>
 <div class="dpov" id="dpov" hidden><div class="dpbar"><button type="button" class="dpback" id="dpback"><span>‹</span>もどる</button><b id="dptitle"></b></div><div class="dpbody" id="dpbody"></div></div>
 <script>
+const JSEG=(window.Intl&&Intl.Segmenter)?new Intl.Segmenter("ja",{granularity:"word"}):null;
+function jbreak(t,fine){const w=[...JSEG.segment(t)].map(x=>x.segment);let o="",p="";for(let i=0;i<w.length;i++){const x=w[i];
+ if(p&&!(i===w.length-1&&x.length<2)&&((fine&&/[^\u3041-\u309F][がをで]$/.test(o)&&/^[\u3041-\u309F]/.test(x))||(fine&&p.length>1&&/[\u3041-\u309F\u30A0-\u30FF]$/.test(p)&&/^[\u3041-\u309F]{2,}$/.test(x))||(/[ぁ-ゟ）」』！？]$/.test(p)&&!/^[ぁ-ゟー、。）」』！？・ー〜：／]/.test(x))||/[、。・／：]$/.test(p)||(x[0]==="（"&&!/[（・]$/.test(p))))o+="​";o+=x;p=x}return o}
+const JB_SKIP=/^(SCRIPT|STYLE|TEXTAREA|INPUT|SELECT|OPTION|svg|SVG|text|title)$/;
+function jbNode(root){if(!JSEG||!root)return;const tw=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;const L=[];while(n=tw.nextNode())L.push(n);
+ for(const t of L){const d=t.data;if(d.length<5||d.indexOf("​")>=0||!/[぀-ヿ一-鿿]/.test(d))continue;let e=t.parentNode,ok=true;while(e&&e!==document.body){if(JB_SKIP.test(e.nodeName)||e.isContentEditable){ok=false;break}e=e.parentNode}if(ok)t.data=jbreak(d,!!(t.parentNode.closest&&t.parentNode.closest("td,th")))}}
+if(JSEG){document.documentElement.classList.add("jb");new MutationObserver(ms=>{for(const m of ms)for(const a of m.addedNodes){if(a.nodeType===1)jbNode(a);else if(a.nodeType===3&&a.parentNode)jbNode(a.parentNode)}}).observe(document.documentElement,{childList:true,subtree:true});document.addEventListener("DOMContentLoaded",()=>jbNode(document.body));}
+
 const KEY="wolly.duedate",DAY=864e5;
 const inp=document.getElementById("due"),nowEl=document.getElementById("now");
 const fmt=d=>(d.getMonth()+1)+"月"+d.getDate()+"日";
@@ -392,7 +400,7 @@ document.getElementById("clr").addEventListener("click",()=>{inp.value="";try{lo
 paint();
 document.addEventListener("click",e=>{const c=e.target.closest(".cl");if(c){const d=c.closest("details");d.open=false;d.scrollIntoView({block:"nearest",behavior:"smooth"});return}
   const g=e.target.closest("[data-go]");if(!g)return;e.preventDefault();const v=g.dataset.go,inW=window.parent!==window;
-  if(v.startsWith("view:")){if(inW)parent.postMessage({type:"wolly-view",view:v.slice(5),vt:g.textContent.replace(" ›","")},"*");else location.href="https://wolly-spot.github.io/wolly-machi-navi/pages/"+v.slice(5).replace(/^([^?]+)/,"$1.html")}
+  if(v.startsWith("view:")){if(inW)parent.postMessage({type:"wolly-view",view:v.slice(5),vt:g.textContent.replace(/\u200b/g,"").replace(" ›","")},"*");else location.href="https://wolly-spot.github.io/wolly-machi-navi/pages/"+v.slice(5).replace(/^([^?]+)/,"$1.html")}
   else{if(inW)parent.postMessage({type:"wolly-go",hash:v},"*");else location.href="https://liff.line.me/2007823365-Ckc0dnQW"+v}});
 /* くわしいページ（同じページの中で、右からふわっと） */
 function whenText(w){const due=parse(inp.value);if(!due||!w)return null;const start=new Date(due-280*DAY),[kind,r]=w.split(":"),[a,b]=r.split("-");let s,en;
