@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-19T19:45:00+09:00",
+ "updatedAt": "2026-11-20T09:20:00+09:00",
  "events": [
   {
    "id": "e-shintoshin-illumination",
@@ -13,19 +13,6 @@
    "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/e-shintoshin-illumination.jpg",
    "ai": true,
    "added": "2026-11-17T09:40:00+09:00"
-  },
-  {
-   "id": "e-lalaport-bf",
-   "kind": "mall",
-   "title": "ららぽーと富士見 ブラックフライデー（11/13〜29）",
-   "desc": "最大75%オフのお店も。11/21〜23は抽選会。",
-   "date": "2026-11-13",
-   "area": "富士見市",
-   "src": "ららぽーと富士見",
-   "url": "https://mitsui-shopping-park.com/lalaport/fujimi/event/3632625.html",
-   "img": "https://mitsui-shopping-park.com/lalaport/fujimi/event/3632625/image1.jpg",
-   "ai": false,
-   "added": "2026-11-11T09:50:00+09:00"
   },
   {
    "id": "e-cocoon-card10",
@@ -80,6 +67,19 @@
    "added": "2026-11-14T19:30:00+09:00"
   },
   {
+   "id": "e-kidsfes-ageo",
+   "kind": "free",
+   "title": "KIDS FES in さいたま（11/21〜23）入場無料",
+   "desc": "上尾丸山公園で工作やわたがし作りなど親子の体験がいっぱい。キッチンカーも来るよ。",
+   "date": "2026-11-21",
+   "area": "上尾市",
+   "src": "いこーよ",
+   "url": "https://iko-yo.net/events/612822",
+   "img": "https://d2goguvysdoarq.cloudfront.net/system/event_photos/photos/1782597/normal.png?1794386729",
+   "ai": false,
+   "added": "2026-11-20T09:20:00+09:00"
+  },
+  {
    "id": "e-ario-glass",
    "kind": "kids",
    "title": "ガラスにお絵かき（11/22〜23）無料",
@@ -106,6 +106,19 @@
    "added": "2026-11-12T19:30:00+09:00"
   },
   {
+   "id": "e-hajimete-market-asaka",
+   "kind": "free",
+   "title": "はじめてづくりマーケット（11/22）入場無料",
+   "desc": "朝霞市産業文化センターで手づくり雑貨や小さな本が並ぶよ。予約なしでOK。",
+   "date": "2026-11-22",
+   "area": "朝霞市",
+   "src": "いこーよ",
+   "url": "https://iko-yo.net/events/611474",
+   "img": "https://d2goguvysdoarq.cloudfront.net/system/event_photos/photos/1779110/normal.png?1793340069",
+   "ai": false,
+   "added": "2026-11-20T09:20:00+09:00"
+  },
+  {
    "id": "e-planetarium-day",
    "kind": "facility",
    "title": "11/23はプラネタリウムの日 特別投影",
@@ -130,19 +143,6 @@
    "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/e-uchu-mission-ten.jpg",
    "ai": true,
    "added": "2026-11-15T19:10:00+09:00"
-  },
-  {
-   "id": "e-cocoon-saison5",
-   "kind": "point",
-   "title": "コクーンシティ セゾンカード5%オフ（11/25）",
-   "desc": "第4水曜はコクーンシティカードセゾン払いで5%オフ。",
-   "date": "2026-11-25",
-   "area": "さいたま市大宮区",
-   "src": "コクーンシティ",
-   "url": "https://www.cocooncity.jp/event/detail/2658",
-   "img": "https://www.cocooncity.jp/theme/cocooncity/resources/images/ogp.png",
-   "ai": false,
-   "added": "2026-11-18T09:50:00+09:00"
   },
   {
    "id": "e-ario-happyday",
