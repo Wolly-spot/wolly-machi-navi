@@ -4358,7 +4358,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11200955");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11201038");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -4871,6 +4871,8 @@ else{document.body.classList.add("is-loading");leafShine();raf=requestAnimationF
 
 
 
+
+
 <!--vtel-css--><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@400;500;700&family=Outfit:wght@300;400;600&display=swap"><style>
 /* ===== 声で電話をさがす（voice_tel.py） ===== */
 .vt-bar{position:relative;display:flex;align-items:center;gap:10px;margin:0 0 12px;padding:9px 12px 9px 9px;border-radius:999px;text-decoration:none;color:#fff;overflow:hidden;
@@ -5143,13 +5145,27 @@ else{document.body.classList.add("is-loading");leafShine();raf=requestAnimationF
 #vtel .vt-sos a{letter-spacing:.02em}
 #vtel .vt-x,#vtel .vt-skip,#vtel .vt-clr{font-family:"Outfit",sans-serif!important;font-weight:300!important}
 
+/* 11/20 16回目：候補5件＋もう5件・電話のない場所は地図とHP */
+#vtel .vt-more{margin:14px 2px 6px;font-size:12px}
+#vtel .vt-li{animation:none}
+#vtel .vt-li a{white-space:nowrap}
+#vtel .vt-plus{display:block;width:100%;margin:4px 0 10px;padding:11px;border-radius:999px;font-size:13.5px;cursor:pointer;color:#5b4fd0!important;
+  border:1.5px solid transparent;background:linear-gradient(rgba(255,255,255,.9),rgba(255,255,255,.9)) padding-box,var(--rb) border-box}
+#vtel .vt-addr{margin:10px 0 2px;font-size:16px;font-weight:600;line-height:1.5;color:#1c2240}
+#vtel .vt-notel{margin:0;font-size:11.5px;color:#7a80a0}
+#vtel .vt-acts{display:flex;gap:8px;margin-top:10px}
+#vtel .vt-mapb{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:11px 8px;border-radius:999px;text-decoration:none;font-size:14px;color:#1c2240;
+  border:1.5px solid transparent;background:linear-gradient(#fff,#fff) padding-box,var(--rb) border-box}
+#vtel .vt-mapb svg,#vtel .vt-li a svg{width:16px;height:16px;fill:currentColor}
+
 </style><!--/vtel-css-->
 <!--vtel-js--><script>
 /* ===== 声で電話をさがす（voice_tel.py） ===== */
 (function(){
 const TELCAT={sos:["電話相談・救急","#ff5f8f"],kyu:["夜間・休日の急患","#ff7a59"],hdent:["休日の歯医者","#3fa9e0"],byouji:["病児保育","#ef6aa8"],ichiji:["一時保育","#e58ac8"],
   en:["保育園・幼稚園","#f0a020"],hub:["子育て支援センター","#c070e0"],jidou:["児童センター","#5bb8a0"],gakudo:["学童","#6c8cf0"],dent:["歯医者","#39a8d8"],
-  funin:["不妊治療","#d97ab8"],ninshin:["妊娠・出産","#ff8fb8"],school:["学校・教育の相談","#7a7ff0"],city:["市・区の窓口","#8a7fb0"]};
+  funin:["不妊治療","#d97ab8"],ninshin:["妊娠・出産","#ff8fb8"],school:["学校・教育の相談","#7a7ff0"],city:["市・区の窓口","#8a7fb0"],
+  sho:["小学校","#5b8def"],chu:["中学校","#4a62d8"],med:["病院・クリニック","#e0609a"],pharm:["薬局","#9b7fe0"],play:["公園・おでかけ","#3fb6c9"]};
 /* 種類ごとの、話しことばの手がかり */
 const CATW={sos:["救急","救急車","意識","けいれん","痙攣","息","呼吸","事故","警察","泥棒","不審","火事","迷う","迷っ","具合","夜","夜中","深夜"],
   kyu:["熱","発熱","夜","夜中","夜間","休日","日曜","祝日","急患","急病","具合","吐","嘔吐","下痢","咳","せき","けが","怪我","小児科","病院","救急","診療所","内科","耳","目"],
@@ -5157,6 +5173,8 @@ const CATW={sos:["救急","救急車","意識","けいれん","痙攣","息","�
   en:["保育園","幼稚園","こども園","園","入園","保活","認可"],hub:["支援センター","子育て支援","子育て","ひろば","広場","遊び","交流","相談"],jidou:["児童センター","児童館","ひろば","遊び"],
   gakudo:["学童","放課後","児童クラブ"],dent:["歯","歯医者","歯科","虫歯","むし歯","健診","矯正"],funin:["不妊","妊活","体外","人工授精","不妊治療"],
   ninshin:["妊娠","出産","妊婦","母子手帳","不育","産後","助産"],school:["学校","いじめ","入学","転校","不登校","教育","就学","学事","特別支援","発達","相談"],
+  sho:["小学校","小学","学校","特別支援"],chu:["中学校","中学","学校"],med:["病院","クリニック","医院","小児科","内科","耳鼻科","眼科","皮膚科","整形","形成","産婦人科","婦人科"],
+  pharm:["薬局","薬","くすり"],play:["公園","遊び","あそび","おでかけ","子ども食堂","食堂","博物館","水族館"],
   city:["区役所","市役所","役所","手当","児童手当","申請","医療費","窓口","給付","保健センター","支援課","ひとり親","障害"]};
 const NOISE=/(えーと|ええと|えっと|えーっと|うーん|あのー|あのう|んーと|の?電話番号|でんわばんごう|に電話|へ電話|に?でんわ|電話|電話して|でんわして|電話を?かけ(たい|て)?|を?教えて|おしえて|知りたい|しりたい|ください|下さい|ちょうだい|探して|さがして|調べて|しらべて|近くの|ちかくの|近い|ちかい|どこ|ですか|ですが|だけど|なんですが|お願い(します)?|おねがい(します)?|はありますか|ある[?？]?|したい|です|ます|が出た|がでた|になった|がある|みたい|かも)/g;
 const CALLW=/(発信|はっしん|かけて|電話して|でんわして|コール|つないで|そこに(かけ|電話)|これに(かけ|電話))/;
@@ -5166,6 +5184,9 @@ const $=s=>document.querySelector(s);
 const kata=s=>s.replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+96));
 const nz=s=>kata((s||"").normalize("NFKC").toLowerCase()).replace(/[\s　・、。「」（）()]/g,"");
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]));
+const mapHref=r=>r.ll?`https://www.google.com/maps/search/?api=1&query=${r.ll[0]},${r.ll[1]}`:"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent("さいたま市 "+(r.a||r.n));
+const hpHref=u=>u?(/^https?:/.test(u)?u:"https://"+u):"";
+const MAPI='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>';
 const telHref=t=>"tel:"+String(t).replace(/[^0-9#]/g,"").replace("#","%23");
 const PH='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg>';
 function prof(){try{return (typeof S!=="undefined"&&S.profile)||JSON.parse(localStorage.getItem("wolly.profile")||"null")}catch(e){return null}}
@@ -5198,14 +5219,15 @@ let RAWQ="";function setRaw(v){RAWQ=(v||"").normalize("NFKC").replace(NOISE,"").
 function qph(ws){const k=ws.join("|")+"#"+RAWQ;if(k===QPK&&QP)return QP;const list=ws.map(qk);const j=qk(RAWQ||ws.join(""));if(ws.length>1||RAWQ)list.push(j);QPK=k;QP={list,all:Math.max(3,j.length)};return QP}
 function load(){if(DATA)return Promise.resolve(DATA);
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
-  const kp=fetch(base+"near-data/tel-kana.json?v=11200955").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
-  return Promise.all([fetch(base+"near-data/tel.json?v=11200955").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
+  const kp=fetch(base+"near-data/tel-kana.json?v=11201038").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
+  return Promise.all([fetch(base+"near-data/tel.json?v=11201038").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
     .catch(()=>{DATA=[];return DATA})}
 /* 聞きとった文 → キーワード */
 function terms(text){let s=(text||"").normalize("NFKC").replace(NOISE," ");
   return s.split(/[\s、。,.!?！？]+|(?:と|や|か|の|を|が|に|で|は|も)(?=[一-鿿゠-ヿ])/).map(x=>x.replace(/^(の|を|が|に|で|は|も)+|(の|を|が|に|で|は|も)+$/g,"").trim()).filter(x=>x&&x.length>=1&&!/^[ぁ-ゖ]$/.test(x))}
 function addKW(text){CATS=null;setRaw(text);const t=terms(text);t.forEach(w=>{if(!KW.includes(w))KW.push(w)});if(KW.length>6)KW=KW.slice(-6);window.__vtSkipped=0;stackFrom();renderKW();render()}
 function bi(x){const o=[];for(let k=0;k<x.length-1;k++)o.push(x.slice(k,k+2));return o}
+let LOOSE=0;
 function score(r,ws){let s=0,full=0,part=0;const cw=CATW[r.c]||[];
   /* 音の近さ（聞きまちがい・滑舌）。話した文ぜんたいのうち、合った部分が長いほど高い点 */
   const P=qph(ws);let best=0,whole=0;
@@ -5213,10 +5235,11 @@ function score(r,ws){let s=0,full=0,part=0;const cw=CATW[r.c]||[];
   INTENT.forEach(([re,cs])=>{if(re.test(RAWQ)&&cs.includes(r.c)){s+=40;full++}});
   /* 短いことばは1字ちがいまで、長いほど多めにゆるす。話した文の半分以上が合うときだけ */
   P.list.forEach(q=>{if(q.length<3||!r.ph||q.length*2<P.all)return;const d=near(q,r.ph),sim=1-d/q.length;
-    if(d===0||(q.length>=4&&d<=Math.max(1,Math.floor(q.length*.34)))){if(d===0&&q.length>=P.all)whole=1;const v=sim*Math.min(1,q.length/P.all)+.04*Math.min(1,q.length/r.ph.length);if(v>best)best=v}});
+    if(d===0||(q.length>=4&&d<=Math.max(1,Math.floor(q.length*.34)))||(LOOSE&&q.length===3&&d<=1)){if(d===0&&q.length>=P.all)whole=1;const v=sim*Math.min(1,q.length/P.all)+.04*Math.min(1,q.length/r.ph.length);if(v>best)best=v}});
   if(best){s+=24*best;if(best>=.999)full++;else if(best>=.7)part++}
   ws.forEach(w=>{const k=nz(w);if(!k)return;
-    if(r.key.includes(k)||(r.ky&&r.ky.includes(k))){s+=12;full++}
+    if(r.nk.includes(k)||(r.ky&&r.ky.includes(k))){s+=12;full++}
+    else if(r.key.includes(k)){s+=4;part++}
     else if(k.length>=2){const g=bi(k),hit=g.filter(x=>r.key.includes(x)||(r.ky&&r.ky.includes(x))).length,ratio=g.length?hit/g.length:0;
       if(ratio>=.5){s+=Math.round(9*ratio);part++}else if(k.length>=3&&[k.slice(1),k.slice(0,-1)].some(x=>r.key.includes(x)||(r.ky&&r.ky.includes(x)))){s+=5;part++}}
     /* 種類のことば（1文字のことばは、まったく同じときだけ） */
@@ -5228,14 +5251,15 @@ function catResults(){const h=homeLL();const sun=new Date().getDay()===0;const L
   L.sort((a,b)=>{const ia=CATS.indexOf(a.r.c),ib=CATS.indexOf(b.r.c);const da=a.d==null?9e9:a.d,db=b.d==null?9e9:b.d;if(sun&&(a.r.c==="hdent")!==(b.r.c==="hdent"))return a.r.c==="hdent"?-1:1;if(da!==db)return da-db;return ia-ib});
   return {h,L:L.slice(0,40)}}
 function results(){if(CATS)return catResults();const ws=KW.slice();const h=homeLL();
-  let L=DATA.map(r=>{const sc=ws.length?score(r,ws):0;return {r,sc,t:r._tier||0,d:dOf(r,h)}}).filter(x=>x.sc>0);
+  const run=()=>DATA.map(r=>{const sc=ws.length?score(r,ws):0;return {r,sc,t:r._tier||0,d:dOf(r,h)}}).filter(x=>x.sc>0);
+  let L=run();if(!L.some(x=>x.t>=2)){LOOSE=1;QPK="";L=run();LOOSE=0;QPK=""}
   if(!L.length)return {h,L:[]};
   /* ①名前がまるごと合う（合うことばが多い順→近い順）②一部だけ合う（点の高い順→近い順）③種類だけ（近い順） */
   L.sort((a,b)=>{if(a.t!==b.t)return b.t-a.t;const da=a.d==null?9e9:a.d,db=b.d==null?9e9:b.d;
     if(a.t>=2){if(b.sc!==a.sc&&Math.abs(b.sc-a.sc)>=12)return b.sc-a.sc;return da-db}
     if(a.t===1){if(b.sc!==a.sc)return b.sc-a.sc;return da-db}
     return da-db||b.sc-a.sc});
-  return {h,L:L.slice(0,40)}}
+  return {h,L:L.slice(0,60)}}
 function dist(x){if(x.d==null)return "";if(x.d===0.5&&!x.r.ll)return "あなたの区";return (x.d<0.1?"0.1km未満":x.d.toFixed(1)+"km")+"・車で約"+Math.max(1,Math.round(x.d*1.3/25*60))+"分"}
 function catChip(c){const t=TELCAT[c]||["",""];return `<span class="cat" style="background:${t[1]}">${esc(t[0])}</span>`}
 /* こまりごとのボタン（いちばん使う入口）。cats＝電話の種類（TELCAT）。上のものほど上に */
@@ -5266,7 +5290,8 @@ document.addEventListener("input",e=>{if(e.target&&e.target.id==="vtIn")live(e.t
 let vtLast="",vtStill=0;setInterval(()=>{const i=document.getElementById("vtIn");if(!i)return;const v=i.value;
   if(v!==vtLast){vtLast=v;vtStill=0;live(v);return}
   if(v.trim()&&document.activeElement===i&&++vtStill===3&&STACK.length){/* 話しおわった＝0.9秒かわらない → キーボードをしまって、いちばん上の候補を見せる */i.blur();const r=document.getElementById("vtRes");r&&(r.scrollTop=0)}},300);
-function stackFrom(){const {L}=results();STACK=L.slice()}
+let SHOWN=5;
+function stackFrom(){const {L}=results();STACK=L.slice();SHOWN=5}
 /* iPhone の日本語キーボード（あかさた）の絵。下の左が🌐、右が🎤＝ここを光らせて指さす */
 const IPK=(()=>{const W=320,kw=56,kh=44,g=6,x0=9,y0=10,col=[x0,x0+kw+g,x0+2*(kw+g),x0+3*(kw+g),x0+4*(kw+g)];
   const key=(c,r,t,o)=>{o=o||{};const gray=!!o.gray,h=o.h||1,fs=o.fs||17,H=kh*h+g*(h-1),y=y0+r*(kh+g);
@@ -5286,21 +5311,25 @@ function startHtml(){return `<div class="vt-start" data-vfocus>
 function bigCard(x,n,total){const meta=[catChip(x.r.c),x.r.w?esc(x.r.w):"",dist(x)].filter(Boolean).join("　");
   return `<div class="vt-top" data-notel><button type="button" class="vt-skip" data-vskip aria-label="この候補を消して、次へ">×</button>
     <span class="lb">${window.__vtPicked?"👆 えらんだ候補":n===0?"★ いちばん可能性が高い":"候補"}<small>${n+1} / ${total}</small></span><h3>${esc(x.r.n)}</h3><div class="vt-meta">${meta}</div>
-    <a class="vt-num" href="${telHref(x.r.t)}">${esc(x.r.t)}</a>
+    ${x.r.t?`<a class="vt-num" href="${telHref(x.r.t)}">${esc(x.r.t)}</a>
     <a class="vt-call" href="${telHref(x.r.t)}" data-vcall>${PH}発信する</a>
-    ${SR&&!SRBAD?`<p class="vt-say">「発信」と言っても、かけられるよ</p>`:""}</div>`}
+    ${SR&&!SRBAD?`<p class="vt-say">「発信」と言っても、かけられるよ</p>`:""}`:`<p class="vt-addr">${esc(x.r.a||x.r.w||"")}</p><p class="vt-notel">電話番号はのっていないよ</p>`}
+    <div class="vt-acts"><a class="vt-mapb" href="${mapHref(x.r)}" target="_blank" rel="noopener" data-notel>${MAPI}地図でみる</a>${x.r.u?`<a class="vt-mapb" href="${esc(hpHref(x.r.u))}" target="_blank" rel="noopener" data-notel>🌐 ホームページ</a>`:""}</div></div>`}
 function render(){const box=$("#vtRes");if(!box||!DATA)return;const ov=$("#vtel");
   if(!KW.length){lastTop=null;STACK=[];box.dataset.sig="";ov&&ov.classList.remove("vt-has");if(!box.querySelector(".vt-start"))box.innerHTML=startHtml();box.scrollTop=0;return}
   ov&&ov.classList.add("vt-has");
   const back="";/* 11/20 さがし直す・ほかの候補の一覧は消した（×で次の候補） */
-  if(!STACK.length){lastTop=null;box.dataset.sig="";box.innerHTML=back+`<p class="vt-empty">「${esc(KW.join("・"))}」に合う電話が見つからなかったよ。<br>名前の一部（「〇〇保育園」なら「〇〇」）だけでも、さがしてみてね。<br>こまったら <b>さいたまコールセンター</b>（048-835-3156）にきいてみよう。</p>`;return}
+  if(!STACK.length){lastTop=null;box.dataset.sig="";box.innerHTML=back+`<p class="vt-empty">「${esc(KW.join("・"))}」に合う場所が見つからなかったよ。<br>名前の一部（「〇〇保育園」なら「〇〇」）だけでも、さがしてみてね。<br>こまったら <b>さいたまコールセンター</b>（048-835-3156）にきいてみよう。</p>`;return}
   const total=STACK.length+(window.__vtSkipped||0);
   const top=STACK[0];
-  const sig=STACK.slice(0,12).map(x=>x.r.t+x.r.n).join("|")+"#"+(window.__vtSkipped||0);
+  const sig=STACK.slice(0,SHOWN).map(x=>x.r.t+x.r.n).join("|")+"#"+(window.__vtSkipped||0)+"#"+SHOWN;
   if(box.dataset.sig===sig)return;/* 同じ候補＝そのまま（ぶるぶるしないように） */
   const newTop=!lastTop||lastTop.t!==top.r.t||lastTop.n!==top.r.n;box.dataset.sig=sig;lastTop=top.r;
   box.classList.toggle("vt-newtop",newTop);
-  box.innerHTML=back+bigCard(top,(window.__vtSkipped||0),total);
+  const rest=STACK.slice(1,SHOWN);
+  box.innerHTML=back+bigCard(top,(window.__vtSkipped||0),total)+
+    (rest.length?`<p class="vt-more">ほかの候補・タップで大きく表示</p>`+rest.map((x,k)=>`<div class="vt-li" data-notel data-vpick="${k+1}" role="button" tabindex="0"><div class="tx"><b>${esc(x.r.n)}</b><small>${[TELCAT[x.r.c]?TELCAT[x.r.c][0]:"",x.r.w,dist(x)].filter(Boolean).map(esc).join("・")}</small><small>${esc(x.r.t||x.r.a||"")}</small></div>${x.r.t?`<a href="${telHref(x.r.t)}" data-vcall>${PH}発信</a>`:`<a href="${mapHref(x.r)}" target="_blank" rel="noopener" data-vcall data-notel>${MAPI}地図</a>`}</div>`).join(""):"")+
+    (STACK.length>SHOWN?`<button type="button" class="vt-plus" data-vplus>＋ もう5件みる（のこり${STACK.length-SHOWN}件）</button>`:"");
   box.scrollTop=0}
 function renderKW(){const k=$("#vtKw");if(k)k.innerHTML=KW.map((w,i)=>`<button type="button" data-vkx="${i}">${esc(w)}<span>×</span></button>`).join("")}
 function st(t){const e=$("#vtSt");if(e)e.textContent=t;const l=$("#vtListen");if(l)l.hidden=!t}
@@ -5322,7 +5351,7 @@ function listen(){if(!SR||SRBAD){showNote("");const i=$("#vtIn");i&&i.focus();re
   rec.onspeechend=()=>ov.classList.remove("vt-speak");
   rec.onresult=e=>{let fin="",tmp="";for(let i=e.resultIndex;i<e.results.length;i++){const r=e.results[i];if(r.isFinal)fin+=bestAlt(r);else tmp+=r[0].transcript}
     const hd=$("#vtHeard");if(hd)hd.textContent=fin||tmp?"「"+(fin||tmp)+"」":"";
-    if(fin){if(CALLW.test(fin)&&lastTop){call(lastTop.t);return}addKW(fin);st("")}};
+    if(fin){if(CALLW.test(fin)&&lastTop&&lastTop.t){call(lastTop.t);return}addKW(fin);st("")}};
   rec.onerror=e=>{if(/not-allowed|service-not-allowed|audio-capture/.test(e.error)){SRBAD=true;st("この画面では、マイクの丸が使えないみたい");showNote("");}else st("うまく聞きとれなかったよ。もう一度マイクを押してね")};
   rec.onend=()=>{listening=false;ov.classList.remove("vt-listen","vt-speak");if(!/電話|マイク|うまく/.test(($("#vtSt")||{}).textContent||""))st("")};
   try{rec.start()}catch(e){listening=false;ov.classList.remove("vt-listen")}}
@@ -5350,6 +5379,7 @@ document.addEventListener("click",e=>{
     if(e.target.closest("[data-vlisten]")&&SR&&!SRBAD){listen();return}i&&i.focus();return}
   const tl=e.target.closest("[data-vtile]");if(tl){const t=TILES[+tl.dataset.vtile];CATS=t[3];CATT=t[0]+" "+t[1].replace("|","");KW=[];renderKW();render();return}
   if(e.target.closest("[data-vback]")){CATS=null;KW=[];STACK=[];window.__vtSkipped=0;renderKW();const n=$("#vtNote");n&&n.remove();render();return}
+  if(e.target.closest("[data-vplus]")){SHOWN+=5;render();const b=$("#vtRes");return}
   if(e.target.closest("[data-vskip]")){window.__vtPicked=false;STACK.shift();window.__vtSkipped=(window.__vtSkipped||0)+1;render();return}
   const pk=e.target.closest("[data-vpick]");if(pk&&!e.target.closest("[data-vcall]")){
     /* タップした候補が、上の大きいカードの場所まで動いて大きくなる */
