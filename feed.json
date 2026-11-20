@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-20T09:20:00+09:00",
+ "updatedAt": "2026-11-20T18:55:00+09:00",
  "events": [
   {
    "id": "e-shintoshin-illumination",
@@ -427,6 +427,19 @@
  ],
  "news": [
   {
+   "id": "n-orange-ribbon-2026",
+   "kind": "kosodate",
+   "title": "11月は児童虐待防止のオレンジリボン月間",
+   "desc": "子育てで困ったら一人でかかえず相談してね。市が啓発中（〜11/30）",
+   "date": "2026-11-30",
+   "src": "さいたま市",
+   "url": "https://www.city.saitama.lg.jp/003/001/0011/p133503.html",
+   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-orange-ribbon-2026.jpg",
+   "ai": true,
+   "important": false,
+   "added": "2026-11-20T18:55:00+09:00"
+  },
+  {
    "id": "n-shinnyugaku-setsumeikai-r9",
    "kind": "kosodate",
    "title": "来春入学の保護者説明会 日程が出たよ",
@@ -536,19 +549,6 @@
    "src": "埼玉県",
    "url": "https://www.pref.saitama.lg.jp/b0201/20261123.html",
    "img": "https://www.pref.saitama.lg.jp/shared/images/sns/logo.png",
-   "ai": false,
-   "important": false,
-   "added": "2026-11-11T09:50:00+09:00"
-  },
-  {
-   "id": "n-kousaku-hiroba",
-   "kind": "kids",
-   "title": "浦和住宅公園の工作ひろば（11/23）",
-   "desc": "小学生以下が無料で工作できます。予約不要、各日先着15名。",
-   "date": "2026-11-23",
-   "src": "いこーよ",
-   "url": "https://iko-yo.net/events/612142",
-   "img": "https://d2goguvysdoarq.cloudfront.net/system/event_photos/photos/1780842/normal.jpg?1793755283",
    "ai": false,
    "important": false,
    "added": "2026-11-11T09:50:00+09:00"
