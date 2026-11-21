@@ -649,6 +649,7 @@ svg .a-strike{animation:a-strike 1.3s cubic-bezier(.7,0,.3,1) infinite;transform
 .bym-pin span{color:#fff;font:900 14px/1 system-ui,sans-serif}
 .bym-pin.on span{background:#7B5CFF;transform:rotate(-45deg) scale(1.25)}
 @keyframes bymDrop{from{opacity:0;translate:0 -30px}to{opacity:1;translate:0 0}}
+.bym-name .maplibregl-popup-content{padding:5px 12px!important;border-radius:999px!important}.bym-name .maplibregl-popup-content b{font-size:13.5px;font-weight:900;color:#2C2866!important;white-space:nowrap}
 .bym-card{margin:8px 12px 0;padding:10px 12px;border-radius:18px;background:#fff;box-shadow:0 8px 20px -10px rgba(60,30,100,.35);display:grid;gap:4px}
 .bym-card b{font-size:15px;color:#2C2866}.bym-card small{font-size:12px;color:#6B6690}
 .bym-card .row2{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:4px}
@@ -1736,6 +1737,8 @@ html .maplibregl-popup .maplibregl-popup-content,html .hl-card{color:#3b3560!imp
 html .maplibregl-popup .maplibregl-popup-content::after{background:repeating-linear-gradient(to bottom,rgba(200,170,255,.10) 0 1px,transparent 1px 5px)}
 html .maplibregl-popup .maplibregl-popup-content::before{background:linear-gradient(to bottom,transparent,rgba(255,190,220,.45),transparent)}
 html .maplibregl-popup .maplibregl-popup-content b{color:#4a3f86!important;text-shadow:none}
+/* 11/21 明るいカードでは名前・説明もこい色に（白で見えづらかった） */
+html .hl-card b{color:#2C2866!important;text-shadow:none}html .hl-card small{color:#5f5888!important}html .hl-card::after{background:repeating-linear-gradient(to bottom,rgba(200,170,255,.10) 0 1px,transparent 1px 5px)}
 html .maplibregl-popup .maplibregl-popup-content span{color:#6b6390!important}
 html .maplibregl-popup .maplibregl-popup-close-button{color:#9b86d6!important}
 html .maplibregl-popup .maplibregl-popup-tip{border-top-color:#B79BEF!important;border-bottom-color:#B79BEF!important;filter:drop-shadow(0 0 4px rgba(255,182,214,.8))}
@@ -4144,16 +4147,18 @@ function byFocus(i){
   document.querySelectorAll(".bym-chips button").forEach(b=>b.classList.toggle("on",+b.dataset.bymi===i));
   const c=document.querySelector(`.bym-chips [data-bymi="${i}"]`);c&&c.scrollIntoView({inline:"center",block:"nearest",behavior:"smooth"});
   bym.flyTo({center:[p[1],p[0]],zoom:16.6,pitch:58,bearing:-20,speed:.9,curve:1.5,essential:true});
+  /* 11/21 目的地の名前を、ピンの上に読みやすい札で（地図の文字は白くて見えづらい） */
+  if(window.bymName)bymName.remove();window.bymName=new maplibregl.Popup({closeButton:false,closeOnClick:false,anchor:"bottom",offset:[0,-80],className:"bym-name"}).setLngLat([p[1],p[0]]).setHTML(`<b>${i+1}. ${esc(r.n)}</b>`).addTo(bym);
   const card=$("#bymCard");card.hidden=false;card.classList.add("hl-card");card.classList.remove("hl-in");void card.offsetWidth;card.classList.add("hl-in");
   card.innerHTML=`<b><i class="hl-tic">${svg(MS.ic||MINI.cross,40)}</i>${i+1}. ${esc(r.n)}</b><small>${esc(r.a)}</small><div class="row2">${r.tel?callA(r.tel,"call"):""}<button type="button" class="bym-more" data-bymore="${i}">くわしく ›</button><button type="button" class="bym-all" data-bymall>全体にもどる</button></div>`;
 }
-function closeByMap(now){const el=$("#bymOv");if(!el)return;document.body.classList.remove("rm-open");if(bym){try{bym.remove()}catch(e){}bym=null;bymMk=[]}if(now){el.remove();return}el.classList.remove("on");setTimeout(()=>el.remove(),350)}
+function closeByMap(now){const el=$("#bymOv");if(!el)return;document.body.classList.remove("rm-open");if(bym){try{bym.remove()}catch(e){}bym=null;bymMk=[];window.bymName=null}if(now){el.remove();return}el.classList.remove("on");setTimeout(()=>el.remove(),350)}
 document.addEventListener("click",e=>{
   const mb=e.target.closest("[data-bymap]");if(mb){e.preventDefault();openByMap(mb.dataset.bymap===""?null:+mb.dataset.bymap,mb.dataset.bymset);return}
   const bmo=e.target.closest("[data-bymore]");if(bmo){e.preventDefault();const i=+bmo.dataset.bymore,ms=MS;closeByMap(true);ms.info(i);return}
   if(e.target.closest("[data-bymx]")){closeByMap();return}
   const ch=e.target.closest("[data-bymi]");if(ch){byFocus(+ch.dataset.bymi);return}
-  if(e.target.closest("[data-bymall]")&&bym){const b=new maplibregl.LngLatBounds();MS.items.forEach(r=>{const p=r.ll;p&&b.extend([p[1],p[0]])});bym.fitBounds(b,{padding:40,pitch:45,bearing:0,duration:1400});$("#bymCard").hidden=true;bymMk.forEach(m=>m.getElement().classList.remove("on"));return}
+  if(e.target.closest("[data-bymall]")&&bym){const b=new maplibregl.LngLatBounds();MS.items.forEach(r=>{const p=r.ll;p&&b.extend([p[1],p[0]])});bym.fitBounds(b,{padding:40,pitch:45,bearing:0,duration:1400});if(window.bymName){bymName.remove();window.bymName=null}$("#bymCard").hidden=true;bymMk.forEach(m=>m.getElement().classList.remove("on"));return}
   const by=e.target.closest("[data-by]");if(by){e.preventDefault();if($("#bymOv"))closeByMap(true);byInfo(+by.dataset.by);return}
 });
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&$("#bymOv"))closeByMap();if(e.key==="Enter"){const b=document.activeElement&&document.activeElement.closest&&document.activeElement.closest(".by-tap");b&&byInfo(+b.dataset.by)}});
@@ -4431,7 +4436,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11212131");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11212139");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -5385,8 +5390,8 @@ let RAWQ="";function setRaw(v){RAWQ=(v||"").normalize("NFKC").replace(NOISE,"").
 function qph(ws){const k=ws.join("|")+"#"+RAWQ;if(k===QPK&&QP)return QP;const list=ws.map(qk);const j=qk(RAWQ||ws.join(""));if(ws.length>1||RAWQ)list.push(j);QPK=k;QP={list,all:Math.max(3,j.length)};return QP}
 function load(){if(DATA)return Promise.resolve(DATA);
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
-  const kp=fetch(base+"near-data/tel-kana.json?v=11212131").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
-  return Promise.all([fetch(base+"near-data/tel.json?v=11212131").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
+  const kp=fetch(base+"near-data/tel-kana.json?v=11212139").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
+  return Promise.all([fetch(base+"near-data/tel.json?v=11212139").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
     .catch(()=>{DATA=[];return DATA})}
 /* 聞きとった文 → キーワード */
 function terms(text){let s=(text||"").normalize("NFKC").replace(NOISE," ");
