@@ -1046,6 +1046,10 @@ html.hnew .kn-bell .ri{width:34px;height:34px;filter:drop-shadow(0 2px 2px rgba(
 .sch-sub{display:grid;gap:6px}.sch-sub label{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:14px;font-size:13.5px;font-weight:800;cursor:pointer;background:linear-gradient(#fff,#fff) padding-box,linear-gradient(90deg,#C9B3FF,#9FD8FF) border-box;border:1.5px solid transparent}
 .sch-sub label span{display:flex;align-items:center;gap:6px}.sch-sub label svg{width:22px;height:22px}.sch-sub input{width:20px;height:20px;accent-color:#7B3BFF;flex:0 0 auto}.sch-sub .lock{opacity:.75}
 #thNav .th-sch{font-weight:900}
+.kn-tk{font-size:11px!important;font-weight:700!important}
+.kn-ok{display:inline-flex;align-items:center;gap:4px;margin:0 0 6px;padding:6px 14px;border:0;border-radius:999px;font:inherit;font-size:12.5px;font-weight:900;color:#fff;cursor:pointer;background:linear-gradient(100deg,#7B3BFF,#0094FF);box-shadow:0 5px 12px -7px #7B3BFF}
+.kn-i.kn-bye{overflow:hidden;opacity:0;transform:translateX(30px);margin:0!important;transition:height .35s ease,opacity .3s,transform .3s}
+.sch-undo{display:block;margin:10px auto 0;padding:8px 14px;border-radius:999px;font:inherit;font-size:12.5px;font-weight:800;color:#6a6390;background:#fff;border:1.5px solid #E3DDF5;cursor:pointer}
 /*/sched-css*/
 .row:has(>.lgen){display:flex}.row:has(>.lgen)>*:not(.lgen){flex:0 0 clamp(168px,44vw,212px)}@media(min-width:900px){.row:has(>.lgen)>*:not(.lgen){flex-basis:200px}}
 .row>.lgen,.lgen{flex:0 0 auto!important;width:auto!important;min-width:0!important;align-self:stretch;display:flex;align-items:center;margin:0 -2px 0 4px;scroll-snap-align:none}.lgen span{writing-mode:vertical-rl;font-size:12.5px;font-weight:900;letter-spacing:.12em;color:#5A5AEF;background:linear-gradient(180deg,#F1ECFF,#E5F4FF);border-radius:999px;padding:12px 6px;box-shadow:inset 0 0 0 1.5px #fff}
@@ -4488,7 +4492,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11212236");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11212251");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -4800,7 +4804,7 @@ function sheetSeido(){
 function knType(o){if(o.pr===0||/締切|期限|しめきり/.test(o.tag||""))return "dead";if(/いまの時期|もうすぐ|秋冬|夏|今月|妊娠中に|確定申告|毎月|きょう|あした|^あと\d+日/.test(o.tag||""))return "time";return "plain"}
 function knKc(o){const ids=(o.kids||[]).filter(x=>x>=0);return ids.length?kidColor(ids[0]).c:""}
 function knItem(o,i){const ty=knType(o),kc=knKc(o);return `<details class="kn-i kt-${ty}${kc?" kt-kid":""}"${o.kids&&o.kids.length?` data-kids="${o.kids.join(",")}"`:""} style="--n:${i}${kc?";--kc:"+kc:""}"><summary><span class="kn-ic">${relIc(o.ic)}</span><span class="kn-st"><em class="kn-tag">${esc(o.tag)}</em><b>${esc(o.t)}</b>${knWho(o)}</span><i class="kn-ar">▾</i></summary>
-     <div class="kn-d">${o.ch&&CH_TALK[o.ch]?`<div class="kn-talk"><img src="${CH_TALK[o.ch]}" alt=""><p>${esc(knCall(o)+o.say)}</p></div>`:""}<p>${esc(o.d).replace(/\n/g,"<br>")}</p><p class="kn-ku">${relIc("house")}さいごは、近くの区役所でたしかめてね</p>${o.sched?`<a class="kn-schg" href="#sched">📅 スケジュールを見る ›</a>`:`<button type="button" class="kn-add" data-knadd="${esc(o.t)}">📅 スケジュールに入れる</button>`}${o.to?(o.to.startsWith("view:")?`<a class="kn-go" href="#" data-view="${o.to.slice(5)}" data-vt="${esc(o.go)}">${esc(o.go)}を見る ›</a>`:`<a class="kn-go" href="${o.to}">${esc(o.go)}を見る ›</a>`):o.url?`<a class="kn-go" href="${esc(o.url)}" target="_blank" rel="noopener">${esc(o.go)} ↗</a>`:""}</div></details>`}
+     <div class="kn-d">${o.ch&&CH_TALK[o.ch]?`<div class="kn-talk"><img src="${CH_TALK[o.ch]}" alt=""><p>${esc(knCall(o)+o.say)}</p></div>`:""}<p>${esc(o.d).replace(/\n/g,"<br>")}</p><p class="kn-ku">${relIc("house")}さいごは、近くの区役所でたしかめてね</p><button type="button" class="kn-ok" data-knok="${esc(knKey(o))}">✓ わかった</button>${o.sched?`<a class="kn-schg" href="#sched">📅 スケジュールを見る ›</a>`:`<button type="button" class="kn-add" data-knadd="${esc(o.t)}">📅 スケジュールに入れる</button>`}${o.to?(o.to.startsWith("view:")?`<a class="kn-go" href="#" data-view="${o.to.slice(5)}" data-vt="${esc(o.go)}">${esc(o.go)}を見る ›</a>`:`<a class="kn-go" href="${o.to}">${esc(o.go)}を見る ›</a>`):o.url?`<a class="kn-go" href="${esc(o.url)}" target="_blank" rel="noopener">${esc(o.go)} ↗</a>`:""}</div></details>`}
 /*sched-js*/
 /* ── わたしのスケジュール（このスマホの中だけ） ── */
 const SCH_CAT={vac:["予防接種","plaster"],ken:["健診・病院","age"],money:["手つづき・お金","coin"],ninshin:["妊娠・出産","kids"],en:["園・預け先","house"],school:["学校","school"],season:["季節・区","park"],event:["イベント・おでかけ","park"],own:["じぶんの予定","cal"],reco:["知ってトク","coin"]};
@@ -4813,7 +4817,11 @@ function knCat(o){if(o.sched)return "own";if(o.reco)return "reco";const t=(o.t||
   if(/健診|検査|けんこうしんだん|歯医者|フッ素/.test(t))return "ken";if(/保育|幼稚園|通園|学童|預/.test(t))return "en";
   if(/入学|学校|中学|高校|受験|制服|就学|給食|学習|模試/.test(t))return "school";if(/プール|窓口|支援センター|控除/.test(t))return "season";return "money"}
 /* えらんだ種類だけにする（インフルエンザ・おたふくかぜ・スケジュールの予定は、いつも出す） */
-function knFilter(L){const sub=knSub(),ok=o=>o.sched||KN_COMMON.test(o.t||"")||sub[knCat(o)]!==false;
+function knKey(o){return (o.t||"")+"|"+(o.kids||[]).join(",")}
+function knDone(){const o=LS.get("wolly.kndone");return o&&typeof o==="object"?o:{}}
+function knSoftOff(){const o=LS.get("wolly.knsoftoff");return o&&typeof o==="object"?o:{}}
+const KN_SOFT_T=SEIDO.filter(x=>x.g==="b").map(x=>x.t);
+function knFilter(L){const dn=knDone(),off=knSoftOff(),ok=o=>!dn[knKey(o)]&&!off[o.t];
   const m=L.filter(ok);m.soft=(L.soft||[]).filter(ok);m.reco=(L.reco||[]).filter(ok);return m}
 const ymd=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
 const WD="日月火水木金土";
@@ -4873,9 +4881,9 @@ function sheetSched(){
      <div class="sch-btns"><button type="button" class="sch-ok" data-schsave>入れる</button></div></div></details>
    <p class="sch-h">これからの予定（${up.length}）</p>${up.length?up.map(schCard).join(""):`<p class="sch-none">まだ予定はないよ。お知らせの「スケジュールに入れる」か、上の「＋ 予定を書く」から入れてね。</p>`}
    ${past.length?`<details class="sch-past"><summary>すぎた予定（${past.length}）</summary>${past.map(schCard).join("")}</details>`:""}
-   <p class="sch-h">お知らせに出す種類</p><p class="sch-note">いらない種類は外せるよ。インフルエンザ・おたふくかぜの予防接種は、みんなに出すよ。</p>
-   <div class="sch-sub"><label class="lock"><input type="checkbox" checked disabled><span>インフルエンザ・おたふくかぜの予防接種（いつも出す）</span></label>
-   ${Object.keys(SCH_CAT).filter(k=>!["own","event"].includes(k)).map(k=>`<label><input type="checkbox" data-knsub="${k}"${sub[k]!==false?" checked":""}><span>${relIc(SCH_CAT[k][1])}${SCH_CAT[k][0]}</span></label>`).join("")}</div>`;
+   <p class="sch-h">「当てはまるかも」のお知らせ</p><p class="sch-note">おうちに合うものだけ残してね。外したものは、お知らせに出ないよ。予防接種・健診・妊娠出産のお知らせは、登録した生まれた年月・出産予定日に合わせて、いつも届くよ。</p>
+   <div class="sch-sub">${KN_SOFT_T.map(t=>`<label><input type="checkbox" data-knsoft="${esc(t)}"${knSoftOff()[t]?"":" checked"}><span>${relIc((SEIDO.find(x=>x.t===t)||{}).ic||"park")}${esc(t)}</span></label>`).join("")}</div>
+   ${Object.keys(knDone()).length?`<button type="button" class="sch-undo" data-knundo>「わかった」で消したお知らせ（${Object.keys(knDone()).length}）を、もとにもどす</button>`:""}`;
 }
 function schRedraw(){const b=$("#sheetBody");if(!b)return;const sc=b.scrollTop;b.innerHTML=sheetSched();b.scrollTop=sc;typeof renderKidNotice==="function"&&renderKidNotice()}
 document.addEventListener("click",e=>{
@@ -4886,7 +4894,9 @@ document.addEventListener("click",e=>{
     if(!g("t")){schToast("なにをするかを入れてね");return}if(!g("date")){schToast("日にちを入れてね");return}
     const a=schGet();a.push({id:Date.now().toString(36),t:g("t"),cat:g("cat")||"own",kid:g("kid"),date:g("date"),time:g("time"),lead:+g("lead"),memo:g("memo")});schSet(a);schDay=g("date");schToast("スケジュールに入れたよ");schRedraw();return}
 });
-document.addEventListener("change",e=>{const c=e.target.closest("[data-knsub]");if(!c)return;const o=knSub();if(c.checked)delete o[c.dataset.knsub];else o[c.dataset.knsub]=false;LS.set("wolly.knsub",o);typeof renderKidNotice==="function"&&renderKidNotice()});
+document.addEventListener("change",e=>{const c=e.target.closest("[data-knsoft]");if(!c)return;const o=knSoftOff(),k=c.dataset.knsoft;if(c.checked)delete o[k];else o[k]=1;LS.set("wolly.knsoftoff",o);typeof renderKidNotice==="function"&&renderKidNotice()});
+/* 「わかった」：そのお知らせを消して、次のお知らせを前へ */
+document.addEventListener("click",e=>{const b=e.target.closest("[data-knok]");if(b){e.preventDefault();const o=knDone();o[b.dataset.knok]=Date.now();LS.set("wolly.kndone",o);const d=b.closest(".kn-i");if(d){d.style.height=d.offsetHeight+"px";d.classList.add("kn-bye");requestAnimationFrame(()=>{d.style.height="0px"});setTimeout(()=>renderKidNotice(),380)}else renderKidNotice();return}if(e.target.closest("[data-knundo]")){LS.set("wolly.kndone",{});schRedraw();schToast("もとにもどしたよ")}});
 /*/sched-js*/function renderKidNotice(){
   const el=$("#kidNotice");if(!el)return;
   const kids=getKids();
@@ -5532,8 +5542,8 @@ let RAWQ="";function setRaw(v){RAWQ=(v||"").normalize("NFKC").replace(NOISE,"").
 function qph(ws){const k=ws.join("|")+"#"+RAWQ;if(k===QPK&&QP)return QP;const list=ws.map(qk);const j=qk(RAWQ||ws.join(""));if(ws.length>1||RAWQ)list.push(j);QPK=k;QP={list,all:Math.max(3,j.length)};return QP}
 function load(){if(DATA)return Promise.resolve(DATA);
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
-  const kp=fetch(base+"near-data/tel-kana.json?v=11212236").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
-  return Promise.all([fetch(base+"near-data/tel.json?v=11212236").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
+  const kp=fetch(base+"near-data/tel-kana.json?v=11212251").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
+  return Promise.all([fetch(base+"near-data/tel.json?v=11212251").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
     .catch(()=>{DATA=[];return DATA})}
 /* 聞きとった文 → キーワード */
 function terms(text){let s=(text||"").normalize("NFKC").replace(NOISE," ");
