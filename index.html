@@ -997,6 +997,25 @@ html.hnew .kn-bell .ri{width:34px;height:34px;filter:drop-shadow(0 2px 2px rgba(
 .sd-g{display:grid;gap:8px;margin:14px 0 0}.sd-h{display:flex;align-items:center;gap:8px;margin:0}.sd-h b{font-size:16px;color:var(--g)}.sd-h small{padding:1px 9px;border-radius:999px;background:var(--g);color:#fff;font-weight:900;font-size:11.5px}
 .sd-gd{margin:0;font-size:12px;color:var(--muted);font-weight:700}.sd-who{font-size:12px!important;font-weight:800;color:#5A5AEF;border:0!important;padding:0!important}
 /*/kopt-css*/
+/*kn-type-css*/
+.kn-h{padding:8px 12px;gap:10px}.kn-bell{width:40px;height:40px}.kn-bell svg{width:28px;height:28px}.kn-h b{font-size:15px}
+.kn-tk{display:block;overflow:hidden;white-space:nowrap;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);font-size:12.5px!important;font-weight:800;color:#4a4378!important}
+.kn-tkr{display:inline-flex;animation:knTk var(--d,20s) linear infinite}.kn-tkr i{font-style:normal;padding-right:3em}
+@keyframes knTk{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.kn-tkr{animation:none}.kn-tkr i+i{display:none}.kn-tk{text-overflow:ellipsis}}
+.kn-hi{padding:0;border:0;background:none}.kn-hi .kn-yr{margin:0}
+/* 種類の色（枠：しめきり赤＞お子さんの色＞時期の黄＞透明な光沢。札：しめきり赤・時期黄・ほか透明な光沢） */
+.kn .kn-i.kt-plain{--a1:rgba(190,180,230,.9);--a2:rgba(170,210,240,.9)}
+.kn .kn-i.kt-time{--a1:#F2B705;--a2:#FFD84D}
+.kn .kn-i.kt-kid{--a1:var(--kc);--a2:color-mix(in srgb,var(--kc) 55%,#fff)}
+.kn .kn-i.kt-dead{--a1:#E5303F;--a2:#F7707A}
+.kn .kn-i{box-shadow:0 10px 20px -16px var(--a1),inset 0 1px 0 #fff}
+.kn .kn-i .kn-tag{background:linear-gradient(#fff,#fff) padding-box,linear-gradient(135deg,rgba(255,255,255,.9),rgba(185,175,225,.95),rgba(255,255,255,.9)) border-box;border:1.5px solid transparent;color:#4a4378;box-shadow:inset 0 1px 0 #fff,0 2px 6px -3px rgba(90,80,150,.35)}
+.kn .kn-i.kt-time .kn-tag{background:linear-gradient(90deg,#F2B705,#FFD84D);border:0;color:#4A3600;box-shadow:0 3px 8px -4px #F2B705}
+.kn .kn-i.kt-dead .kn-tag{background:linear-gradient(90deg,#E5303F,#F25A66);border:0;color:#fff;box-shadow:0 3px 8px -4px #E5303F}
+.kn .kn-i.kt-plain,.kn .kn-i.kt-time,.kn .kn-i.kt-kid,.kn .kn-i.kt-dead{border:1.5px solid transparent!important;background:linear-gradient(#fff,#fff) padding-box,linear-gradient(135deg,var(--a1),var(--a2)) border-box!important;box-shadow:0 10px 20px -16px var(--a1),inset 0 1px 0 #fff!important}
+.kn .kn-i.kt-kid:not(.kt-dead){--a1:var(--kc)!important;--a2:color-mix(in srgb,var(--kc) 55%,#fff)!important}.kn .kn-i.kt-dead{--a1:#E5303F!important;--a2:#F7707A!important}
+/*/kn-type-css*/
 .row:has(>.lgen){display:flex}.row:has(>.lgen)>*:not(.lgen){flex:0 0 clamp(168px,44vw,212px)}@media(min-width:900px){.row:has(>.lgen)>*:not(.lgen){flex-basis:200px}}
 .row>.lgen,.lgen{flex:0 0 auto!important;width:auto!important;min-width:0!important;align-self:stretch;display:flex;align-items:center;margin:0 -2px 0 4px;scroll-snap-align:none}.lgen span{writing-mode:vertical-rl;font-size:12.5px;font-weight:900;letter-spacing:.12em;color:#5A5AEF;background:linear-gradient(180deg,#F1ECFF,#E5F4FF);border-radius:999px;padding:12px 6px;box-shadow:inset 0 0 0 1.5px #fff}
 .relc{margin:22px 0 6px;padding:12px;border-radius:20px;background:color-mix(in srgb,var(--surface) 70%,transparent);border:1.5px dashed var(--line)}
@@ -4436,7 +4455,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11212139");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11212206");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -4742,8 +4761,11 @@ function sheetSeido(){
       L.map((x,i)=>`<details class="sd-i kn-i" style="--n:${i};--k:${i+gi*2}"><summary><span class="kn-ic">${relIc(x.ic)}</span><span class="kn-st"><em class="kn-tag${x.tag==="期限あり"?" hot":""}">${esc(x.tag==="—"?"さがすと見つかる":x.tag)}</em><b>${esc(x.t)}</b>${x.w&&x.w!=="—"?`<small>${esc(x.w)}</small>`:""}</span><i class="kn-ar">▾</i></summary>
         <div class="kn-d"><p class="sd-who">${esc(x.who)}</p><p>${esc(x.d)}</p><p class="kn-ku">${relIc("house")}さいごは、近くの区役所でたしかめてね</p></div></details>`).join("")+`</section>`}).join("");
 }
-/*/kopt-js*/const KN_HI=`<div class="kn-hi"><p class="kn-yr">${relIc("cal")}この内容は、毎年見直して新しくしているよ<small>いまの内容：${KN_CHECKED}にたしかめたもの</small></p><b>知っていると、トクすることもあるよ</b><span>使えるかもしれない制度を、できるだけたくさんお知らせするね。かならずもらえる・使えるとはかぎらないけど、少しでも可能性があればうれしいな。</span><em>さいごは、近くの区役所でたしかめてね</em></div>`;
-function knItem(o,i){return `<details class="kn-i"${o.kids&&o.kids.length?` data-kids="${o.kids.join(",")}"`:""} style="--n:${i}"><summary><span class="kn-ic">${relIc(o.ic)}</span><span class="kn-st"><em class="kn-tag${o.pr===0?" hot":""}">${esc(o.tag)}</em><b>${esc(o.t)}</b>${knWho(o)}</span><i class="kn-ar">▾</i></summary>
+/*/kopt-js*/const KN_HI=`<div class="kn-hi"><p class="kn-yr">${relIc("cal")}この内容は、毎年見直して新しくしているよ<small>いまの内容：${KN_CHECKED}にたしかめたもの</small></p></div>`;
+/* 11/21 お知らせの色の共通：しめきり＝赤、時期＝黄、お子さん＝マイページの色、ほか＝透明な光沢の枠 */
+function knType(o){if(o.pr===0||/締切|期限|しめきり/.test(o.tag||""))return "dead";if(/いまの時期|もうすぐ|秋冬|夏|今月|妊娠中に|確定申告|毎月/.test(o.tag||""))return "time";return "plain"}
+function knKc(o){const ids=(o.kids||[]).filter(x=>x>=0);return ids.length?kidColor(ids[0]).c:""}
+function knItem(o,i){const ty=knType(o),kc=knKc(o);return `<details class="kn-i kt-${ty}${kc?" kt-kid":""}"${o.kids&&o.kids.length?` data-kids="${o.kids.join(",")}"`:""} style="--n:${i}${kc?";--kc:"+kc:""}"><summary><span class="kn-ic">${relIc(o.ic)}</span><span class="kn-st"><em class="kn-tag">${esc(o.tag)}</em><b>${esc(o.t)}</b>${knWho(o)}</span><i class="kn-ar">▾</i></summary>
      <div class="kn-d">${o.ch&&CH_TALK[o.ch]?`<div class="kn-talk"><img src="${CH_TALK[o.ch]}" alt=""><p>${esc(knCall(o)+o.say)}</p></div>`:""}<p>${esc(o.d).replace(/\n/g,"<br>")}</p><p class="kn-ku">${relIc("house")}さいごは、近くの区役所でたしかめてね</p>${o.to?(o.to.startsWith("view:")?`<a class="kn-go" href="#" data-view="${o.to.slice(5)}" data-vt="${esc(o.go)}">${esc(o.go)}を見る ›</a>`:`<a class="kn-go" href="${o.to}">${esc(o.go)}を見る ›</a>`):o.url?`<a class="kn-go" href="${esc(o.url)}" target="_blank" rel="noopener">${esc(o.go)} ↗</a>`:""}</div></details>`}
 function renderKidNotice(){
   const el=$("#kidNotice");if(!el)return;
@@ -4752,7 +4774,7 @@ function renderKidNotice(){
     el.innerHTML=`<a class="kn-inv" href="#mypage"><span class="kn-bell">${HNEW?riSvg("お知らせ"):svg(KIC("cal")||MINI.star,40)}</span><span><b>Wollyからのお知らせ</b><small>マイページでお子さんの生まれた年月を登録すると、予防接種や申込みの時期をお知らせします</small></span><i>›</i></a>`;return}
   const L=kidNotices(),open=LS.get("wolly.knopen")!==false;
   el.hidden=false;el.className="kn"+(open?" open":"");
-  el.innerHTML=`<button type="button" class="kn-h" aria-expanded="${open}"><span class="kn-bell">${HNEW?riSvg("お知らせ"):svg(KIC("cal")||MINI.star,40)}${L.length?`<em>${L.length}</em>`:""}</span><span><b>Wollyからのお知らせ</b><small>${L.length?"お子さんの、いまの時期にあうこと":"いまのお知らせはありません"}</small></span><i class="kn-chev">${open?"とじる ▴":"ひらく ▾"}</i></button>
+  el.innerHTML=`<button type="button" class="kn-h" aria-expanded="${open}"><span class="kn-bell">${HNEW?riSvg("お知らせ"):svg(KIC("cal")||MINI.star,40)}${L.length?`<em>${L.length}</em>`:""}</span><span><b>Wollyからのお知らせ</b><small class="kn-tk">${L.length?(()=>{const s=L.map(o=>esc(o.t)).join("　✦　");return `<span class="kn-tkr" style="--d:${Math.max(14,Math.round(s.length*.32))}s"><i>${s}</i><i aria-hidden="true">${s}</i></span>`})():"いまのお知らせはありません"}</small></span><i class="kn-chev">${open?"とじる ▴":"ひらく ▾"}</i></button>
    <div class="kn-b">${KN_HI}${L.length?L.map((o,i)=>knItem(o,i)).join(""):`<p class="kn-none">また時期が来たら、ここでお知らせするよ。</p>`}
      ${L.soft&&L.soft.length?`<details class="kn-soft"><summary><b>当てはまるかも</b><small>おうちによってちがうこと ${L.soft.length}こ・タップでひらく</small><i>▾</i></summary><div class="kn-sb">${L.soft.map((o,i)=>knItem(o,i)).join("")}</div></details>`:""}${L.reco&&L.reco.length?`<p class="kn-rh">知ってトク</p>${L.reco.map((o,i)=>knItem(o,i)).join("")}`:""}<a class="kn-all" href="#seido">使えるかもしれない制度を、ぜんぶ見る ›</a><p class="kn-note">時期は国や市のめやすだよ。正しい日にちは、市から届くお知らせで確かめてね。</p></div>`;
 }
@@ -5390,8 +5412,8 @@ let RAWQ="";function setRaw(v){RAWQ=(v||"").normalize("NFKC").replace(NOISE,"").
 function qph(ws){const k=ws.join("|")+"#"+RAWQ;if(k===QPK&&QP)return QP;const list=ws.map(qk);const j=qk(RAWQ||ws.join(""));if(ws.length>1||RAWQ)list.push(j);QPK=k;QP={list,all:Math.max(3,j.length)};return QP}
 function load(){if(DATA)return Promise.resolve(DATA);
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
-  const kp=fetch(base+"near-data/tel-kana.json?v=11212139").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
-  return Promise.all([fetch(base+"near-data/tel.json?v=11212139").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
+  const kp=fetch(base+"near-data/tel-kana.json?v=11212206").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
+  return Promise.all([fetch(base+"near-data/tel.json?v=11212206").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
     .catch(()=>{DATA=[];return DATA})}
 /* 聞きとった文 → キーワード */
 function terms(text){let s=(text||"").normalize("NFKC").replace(NOISE," ");
