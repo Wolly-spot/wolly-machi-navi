@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-21T08:00:00+09:00",
+ "updatedAt": "2026-11-21T21:35:00+09:00",
  "events": [
   {
    "id": "e-cocoon-card10",
@@ -28,19 +28,6 @@
    "added": "2026-11-11T09:50:00+09:00"
   },
   {
-   "id": "e-iwatsuki-marche",
-   "kind": "free",
-   "title": "岩槻駅前のストリートマルシェ（11/21）入場無料",
-   "desc": "キャンドルとイルミネーションの中でお店やライブ。11時〜17時。",
-   "date": "2026-11-21",
-   "area": "さいたま市岩槻区",
-   "src": "いこーよ",
-   "url": "https://iko-yo.net/events/609433",
-   "img": "https://d2goguvysdoarq.cloudfront.net/system/event_photos/photos/1784887/normal.jpg?1794335575",
-   "ai": false,
-   "added": "2026-11-14T19:30:00+09:00"
-  },
-  {
    "id": "e-nikofes-urawa",
    "kind": "kids",
    "title": "nikoフェス（11/21〜22 浦和住宅公園）",
@@ -65,19 +52,6 @@
    "img": "https://d2goguvysdoarq.cloudfront.net/system/event_photos/photos/1782597/normal.png?1794386729",
    "ai": false,
    "added": "2026-11-20T09:20:00+09:00"
-  },
-  {
-   "id": "e-tetsudo-fair-omiya",
-   "kind": "free",
-   "title": "鉄道ふれあいフェア（11/21 大宮）入場無料",
-   "desc": "車両基地の見学や駅前のイベントで、電車好きの子と一日楽しめるよ。",
-   "date": "2026-11-21",
-   "area": "さいたま市大宮区",
-   "src": "さいたま市",
-   "url": "https://www.city.saitama.lg.jp/004/001/002/005/oomiya/p134319.html",
-   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/e-tetsudo-fair-omiya.jpg",
-   "ai": true,
-   "added": "2026-11-21T08:00:00+09:00"
   },
   {
    "id": "e-ario-glass",
