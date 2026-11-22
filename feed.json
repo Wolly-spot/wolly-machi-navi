@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-22T09:37:38+09:00",
+ "updatedAt": "2026-11-22T21:50:00+09:00",
  "events": [
   {
    "id": "e-cocoon-card10",
@@ -588,8 +588,8 @@
    "date": "2026-11-20",
    "src": "さいたま市",
    "url": "https://www.city.saitama.lg.jp/003/002/001/p117896.html",
-   "img": "",
-   "ai": false,
+   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-irodori-gakuen.jpg",
+   "ai": true,
    "added": "2026-11-22T09:37:38+09:00"
   },
   {
