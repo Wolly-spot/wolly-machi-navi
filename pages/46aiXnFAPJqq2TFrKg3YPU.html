@@ -906,6 +906,26 @@ p,li,dd,small,.hint,.bubble{text-wrap:pretty}
 
 
 
+<!--jbreak-all--><style>html.jb2 body{word-break:keep-all;overflow-wrap:anywhere}html.jb2 h1,html.jb2 h2,html.jb2 h3,html.jb2 p,html.jb2 li,html.jb2 summary,html.jb2 dd,html.jb2 small{text-wrap:pretty}html.jb2 body :not(.nojb){word-break:keep-all!important}html.jb2 .nojb,html.jb2 .nojb *{word-break:normal!important}</style><script>(function(){if(!(window.Intl&&Intl.Segmenter))return;const JSEG=new Intl.Segmenter("ja",{granularity:"word"});
+function jbParts(t,fine){const w=[...JSEG.segment(t)].map(x=>x.segment);let o="",p="";const out=[];for(let i=0;i<w.length;i++){const x=w[i];
+ if(p&&!(i===w.length-1&&x.length<2)&&((fine&&/[^\u3041-\u309F][がをで]$/.test(o)&&/^[\u3041-\u309F]/.test(x))||(fine&&p.length>1&&/[\u3041-\u309F\u30A0-\u30FF]$/.test(p)&&/^[\u3041-\u309F]{2,}$/.test(x))||(!(x.length===1&&/^[一-鿿]$/.test(x)&&/[ぁ-ゟ]$/.test(p))&&/[ぁ-ゟ）」』！？]$/.test(p)&&!/^[ぁ-ゟー、。）」』！？・ー〜：／]/.test(x))||/[、。・／：]$/.test(p)||(x[0]==="（"&&!/[（・]$/.test(p)))){out.push(o);o=""}o+=x;p=x}out.push(o);return out}
+/* 長いひと続き（12文字より長く、切れ目がない）だけ、ことばとことばの間でも折り返せるようにする。
+   「です・ます・ない」などの前や、句読点・小さい字の前では切らない */
+const JB_AUX=/^(です|でし|ます|まし|ませ|ない|なかっ|たい|たく|ください|いる|いま|ある|あり|する|して|した|しま|られ|れる|せる|ので|のに|から|まで|けど|ため|よう|そう|こと|もの|とき|ところ)/;
+function jbLong(ps){const o=[];for(const s of ps){if(s.length<=12){o.push(s);continue}const w=[...JSEG.segment(s)].map(x=>x.segment);let c="",n=0;
+  for(let i=0;i<w.length;i++){const x=w[i];if(c&&n>=4&&(x.length>=2||/^[一-鿿]/.test(x))&&/[くてにでとをがはもへ]$/.test(c)&&!JB_AUX.test(x)&&!/^[ぁぃぅぇぉっゃゅょゎァィゥェォッャュョヮー、。・」』）！？]/.test(x)){o.push(c);c="";n=0}c+=x;n+=x.length}if(c)o.push(c)}return o}
+const SKIP=/^(SCRIPT|STYLE|TEXTAREA|INPUT|SELECT|OPTION|svg|SVG|text|tspan|title|CODE|PRE|NOSCRIPT)$/,done=new WeakSet();let mo;
+function ok(t){const d=t.data;if(done.has(t)||d.length<5||!/[぀-ヿ一-鿿]/.test(d))return false;let e=t.parentNode;
+  while(e&&e.nodeType===1){if(SKIP.test(e.nodeName)||e.isContentEditable||(e.classList&&e.classList.contains("nojb")))return false;e=e.parentNode}return true}
+function run(root){if(!root)return;const L=[];if(root.nodeType===3){if(ok(root))L.push(root)}else{const tw=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;while(n=tw.nextNode())if(ok(n))L.push(n)}
+  if(!L.length)return;mo&&mo.disconnect();
+  for(const t of L){const fine=!!(t.parentNode.closest&&t.parentNode.closest("td,th"));const ps=jbLong(jbParts(t.data.split("​").join(""),fine).filter(x=>x));done.add(t);if(ps.length<2)continue;
+    const f=document.createDocumentFragment();ps.forEach((s,i)=>{if(i)f.appendChild(document.createElement("wbr"));const n=document.createTextNode(s);done.add(n);f.appendChild(n)});t.parentNode.replaceChild(f,t)}
+  mo&&mo.observe(document.documentElement,{childList:true,subtree:true,characterData:true})}
+document.documentElement.classList.add("jb2");
+mo=new MutationObserver(ms=>{const R=new Set();for(const m of ms){if(m.type==="characterData"){const t=m.target;done.delete(t);R.add(t)}else for(const a of m.addedNodes)if(a.nodeType===1||a.nodeType===3)R.add(a)}R.forEach(run)});
+const go=()=>{run(document.body);mo.observe(document.documentElement,{childList:true,subtree:true,characterData:true})};
+document.readyState==="loading"?document.addEventListener("DOMContentLoaded",go):go()})();</script><!--/jbreak-all-->
 <!--wolly-totop-->
 <style>
 .wtotop{position:fixed;z-index:60;right:max(22px,env(safe-area-inset-right,0px));bottom:calc(var(--wtb,24px) + env(safe-area-inset-bottom,0px));

@@ -998,6 +998,8 @@ html.hnew .kn-bell .ri{width:34px;height:34px;filter:drop-shadow(0 2px 2px rgba(
 .sd-gd{margin:0;font-size:12px;color:var(--muted);font-weight:700}.sd-who{font-size:12px!important;font-weight:800;color:#5A5AEF;border:0!important;padding:0!important}
 /*/kopt-css*/
 /*okst-css*/
+.nb{display:inline-block}
+.ok-ph{flex-wrap:wrap;row-gap:2px}
 .ok-lead{margin:4px 2px 8px;font-size:12.5px;color:var(--ink-2,#5b5f7a);font-weight:700}
 .ok-tabs{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 10px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .ok-tabs::-webkit-scrollbar{display:none}
@@ -1012,7 +1014,7 @@ html.hnew .kn-bell .ri{width:34px;height:34px;filter:drop-shadow(0 2px 2px rgba(
 .ok-g{margin:0 0 14px;padding:12px;border-radius:20px;background:#fff;border:1.5px solid #E9E5F7;box-shadow:0 4px 14px rgba(120,100,200,.07)}
 .ok-g-n{border-color:#BFD3FF}.ok-g-o{border-color:#E6D3FF}.ok-g-k{border-color:#E6E6EE}
 .ok-gh{display:grid;grid-template-columns:auto 1fr;column-gap:8px;align-items:center;margin:0 0 8px}
-.ok-gh span{grid-row:span 2;font-size:22px}.ok-gh b{font-size:15px;color:#2A2D4A}.ok-gh small{font-size:11.5px;color:#6B6F8E;font-weight:700;line-height:1.5}
+.ok-gh>span{grid-row:span 2;font-size:22px}.ok-gh b{font-size:15px;color:#2A2D4A}.ok-gh small{font-size:11.5px;color:#6B6F8E;font-weight:700;line-height:1.5}
 .ok-reg,.ok-sel{display:block;margin:0 0 8px;padding:9px 12px;border-radius:14px;text-align:center;font-weight:800;font-size:13px;text-decoration:none}
 .ok-reg{background:linear-gradient(135deg,#7B3BFF,#0094FF);color:#fff}
 .ok-sel{background:#F4EEFF;color:#6A3BE0}
@@ -1028,6 +1030,13 @@ html.hnew .kn-bell .ri{width:34px;height:34px;filter:drop-shadow(0 2px 2px rgba(
 .wg-h i{font-style:normal;font-size:11px;font-weight:900;color:#5A5AEF;padding:3px 9px;border-radius:999px;background:linear-gradient(#fff,#fff) padding-box,linear-gradient(90deg,#7B3BFF,#0094FF) border-box;border:1.5px solid transparent}
 .wg-b{display:none;padding:0 14px 14px}.wg.open .wg-b{display:block}
 .wg-c{margin:2px 0 10px;font-size:13px;line-height:1.75;color:#3a3352}.wg-c b{color:#5A5AEF}
+/* どのスマホでも、ことばの途中で折り返さない（まとまりごとに折り返す） */
+.wg .p{display:inline-block}
+.wg-ht small{display:block}
+@media (max-width:389px){.wg .wg-steps{grid-template-columns:1fr;gap:5px}.wg .wg-steps li{grid-template-columns:22px 1fr;justify-items:start;align-items:center;gap:8px;padding:7px 10px;text-align:left}.wg .wg-steps br{display:none}}
+@media (max-width:339px){.wg-c{font-size:12.5px}.wg-line span{font-size:9px}}
+/* 小さいスマホ：シートの題名が右上の「とじる」と重ならないように */
+@media (max-width:359px){.dhead{margin-top:46px}}
 .wg-line{position:relative;display:flex;justify-content:space-between;margin:4px 2px 12px;padding-top:14px}
 .wg-line::before{content:"";position:absolute;left:4%;right:4%;top:18px;height:3px;border-radius:3px;background:linear-gradient(90deg,#B977FF,#3D8BFF,#14ABA3,#EFB300,#5A5AEF,#8E6CFF,#E5508C)}
 .wg-line span{position:relative;display:grid;justify-items:center;gap:3px;font-size:9.5px;font-weight:900;color:#4a4378;white-space:nowrap}.wg-line i{width:11px;height:11px;border-radius:50%;background:#fff;box-shadow:0 0 0 2.5px #7B3BFF}
@@ -2133,7 +2142,7 @@ html .hl-ring{box-shadow:0 0 6px #ffd6ea;opacity:.8}
 <nav class="tabbar" id="tabbar" aria-label="メインメニュー">
   <a href="#" data-tab="home"><svg class="i" viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg>ホーム</a>
   <a href="#search" data-tab="search"><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg>さがす</a>
-  <a href="#near" data-tab="near" class="chatbtn nearbtn"><span class="b"><svg class="i" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span>家の近くで探す</a>
+  <a href="#near" data-tab="near" class="chatbtn nearbtn nojb"><span class="b"><svg class="i" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span>家の近くで探す</a>
   <a href="#news" data-tab="news"><svg class="i" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 9h8M8 13h8M8 17h5"/></svg>ニュース</a>
   <a href="#mypage" data-tab="mypage"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="9" r="3.6"/><path d="M5 20a7 7 0 0 1 14 0"/></svg>マイページ</a>
 </nav>
@@ -2272,7 +2281,7 @@ function holoTouch(map){if(!map||map._wtouch)return;map._wtouch=1;const box=map.
   if(window.IntersectionObserver)new IntersectionObserver(es=>es.forEach(e=>{if(e.intersectionRatio<.35)lock()}),{threshold:[0,.35,.6]}).observe(box);
 }
 /* ==== /holo-map ==== */
-/*vcheck*/(function(){var V="11222236";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
+/*vcheck*/(function(){var V="11222358";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
 <script>
 (()=>{
 const $=s=>document.querySelector(s);
@@ -3069,9 +3078,9 @@ const OK_MAP={"児童手当":[[1,2,3,4,5,6],"n","生まれたら15日までに�
  "治療用眼鏡・装具":[[2,3,4],"k","お医者さんにメガネをすすめられたときに見てね"],
  "軽・中等度難聴児の補聴器購入費助成":[[1,2,3,4,5,6],"k","必要になったときに見てね"],
  "補装具費支給制度":[[1,2,3,4,5,6],"k","必要になったときに見てね"]};
-const OK_W={n:["🔔","Wollyがお知らせ","マイページで生まれた年月（妊娠中は予定日）を登録すると、時期になったら届くよ"],
- o:["☑","えらぶとお知らせ","「わたしのスケジュール」の「お知らせの種類」でえらんだ人にだけ届くよ"],
- k:["📖","知っておこう","お知らせはしないよ。必要なときに見てね"]};
+const OK_W={n:["🔔","Wollyがお知らせ",'<span class="nb">マイページで</span><span class="nb">生まれた年月</span><span class="nb">（妊娠中は予定日）を</span><span class="nb">登録すると、</span><span class="nb">時期になったら</span><span class="nb">届くよ</span>'],
+ o:["☑","えらぶとお知らせ",'<span class="nb">「わたしのスケジュール」の</span><span class="nb">「お知らせの種類」で</span><span class="nb">えらんだ人にだけ</span><span class="nb">届くよ</span>'],
+ k:["📖","知っておこう",'<span class="nb">お知らせはしないよ。</span><span class="nb">必要なときに見てね</span>']};
 function okKidStage(){/* 登録したお子さんの今の時期（ホームの「年齢からさがす」と同じ分けかた） */
   const r=[];if(typeof AGE_GUIDE!=="undefined")AGE_GUIDE.forEach((g,i)=>{const ks=waKidsAt(g);if(ks.length)r.push([i,ks])});return r}
 function okReg(){return getKidsG().length>0||!!getDue()}
@@ -3083,7 +3092,7 @@ function sheetOkane(){
     return `<div class="ok-p${st===pick?" on":""}" data-okp="${st}"><p class="ok-ph"><b>${OK_ST[st]}</b><span>${OK_ST_S[st]}</span></p>`+
      ["n","o","k"].map(w=>{const L=items.filter(x=>x[2][1]===w);if(!L.length)return "";
        return `<div class="ok-g ok-g-${w}"><p class="ok-gh"><span>${OK_W[w][0]}</span><b>${OK_W[w][1]}</b><small>${OK_W[w][2]}</small></p>${w==="n"&&!okReg()?`<a class="ok-reg" href="#mypage">マイページで登録する（無料）›</a>`:""}${w==="o"?`<a class="ok-sel" href="#sched">お知らせの種類をえらぶ ›</a>`:""}<div class="az">${L.map(x=>card(x[0],x[1],x[2])).join("")}</div></div>`}).join("")+`</div>`};
-  return dhead(svg(CH.money),"#FFF1C2","MONEY","もらえるお金","さいたま市の給付金・助成制度 "+MONEY.length+"件を、時期べつに")+
+  return dhead(svg(CH.money),"#FFF1C2","MONEY","もらえるお金",`<span class="nb">さいたま市の</span><span class="nb">給付金・助成制度</span><span class="nb">${MONEY.length}件を、</span><span class="nb">時期べつに</span>`)+
    `<p class="ok-lead">お子さんの時期をえらんでね。${now.length?"いまの時期に名前が出ているよ。":""}</p>
    <div class="ok-tabs">${OK_ST.map((t,i)=>`<button type="button" class="ok-t${i===pick?" on":""}" data-okst="${i}">${t}${tag(i)}</button>`).join("")}</div>`+
    OK_ST.map((t,i)=>panel(i)).join("")+
@@ -4691,7 +4700,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11222236");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11222358");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -5249,8 +5258,8 @@ const WG_LINE=["妊娠","0歳","1〜2歳","3〜5歳","小学生","中学生","�
 function wgReg(){return getKids().length>0||!!getDue()}
 function renderGuide(){const el=$("#wGuide");if(!el)return;const reg=wgReg(),op=LS.get("wolly.wgopen");const open=op==null?!reg:!!op;
   el.className="wg"+(open?" open":"");
-  el.innerHTML=`<button type="button" class="wg-h" data-wgt aria-expanded="${open}"><span class="wg-ic">${svg(KIC("map")||MINI.star,40)}</span><span class="wg-ht"><b>Wolly街ナビってなに？</b><small>使い方とこのページでできること</small></span><i>${open?"とじる ▴":"ひらく ▾"}</i></button>
-  <div class="wg-b"><p class="wg-c">さいたま市の子育て情報（<b>施設・病院・習い事・イベント</b>）の中から、<b>お子さんの年齢に合わせて</b>「いま調べること」をお知らせするページだよ。</p>
+  el.innerHTML=`<button type="button" class="wg-h" data-wgt aria-expanded="${open}"><span class="wg-ic">${svg(KIC("map")||MINI.star,40)}</span><span class="wg-ht"><b>Wolly街ナビってなに？</b><small><span class="p">使い方と</span><span class="p">このページでできること</span></small></span><i>${open?"とじる ▴":"ひらく ▾"}</i></button>
+  <div class="wg-b"><p class="wg-c"><span class="p">さいたま市の</span><span class="p">子育て情報</span><span class="p">（<b>施設・病院・</b></span><span class="p"><b>習い事・イベント</b>）の</span><span class="p">一覧や、</span><span class="p"><b>お子さんの</b></span><span class="p"><b>年齢に合わせて</b></span><span class="p">「いま調べること」を</span><span class="p">お知らせする</span><span class="p">ページだよ。</span></p>
    <div class="wg-line">${WG_LINE.map((x,i)=>`<span style="--i:${i}"><i></i>${x}</span>`).join("")}</div>
    <ol class="wg-steps"><li><b>1</b><span>マイページで<br>生まれた年月を登録</span></li><li><b>2</b><span>年齢に合わせて<br>お知らせが届く</span></li><li><b>3</b><span>スケジュールで<br>予定といっしょに</span></li></ol>
    ${reg?"":`<a class="wg-cta" href="#mypage">マイページで登録する（無料）›</a>`}
@@ -5893,8 +5902,8 @@ let RAWQ="";function setRaw(v){RAWQ=(v||"").normalize("NFKC").replace(NOISE,"").
 function qph(ws){const k=ws.join("|")+"#"+RAWQ;if(k===QPK&&QP)return QP;const list=ws.map(qk);const j=qk(RAWQ||ws.join(""));if(ws.length>1||RAWQ)list.push(j);QPK=k;QP={list,all:Math.max(3,j.length)};return QP}
 function load(){if(DATA)return Promise.resolve(DATA);
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
-  const kp=fetch(base+"near-data/tel-kana.json?v=11222236").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
-  return Promise.all([fetch(base+"near-data/tel.json?v=11222236").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
+  const kp=fetch(base+"near-data/tel-kana.json?v=11222358").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
+  return Promise.all([fetch(base+"near-data/tel.json?v=11222358").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
     .catch(()=>{DATA=[];return DATA})}
 /* 聞きとった文 → キーワード */
 function terms(text){let s=(text||"").normalize("NFKC").replace(NOISE," ");
@@ -6136,5 +6145,24 @@ function go(){document.head.appendChild(st);run(document.body);
   new MutationObserver(function(ms){ms.forEach(function(m){m.addedNodes.forEach(function(x){if(x.nodeType===1)run(x);else if(x.nodeType===3&&x.parentNode)run(x.parentNode)})})}).observe(document.body,{childList:true,subtree:true})}
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",go);else go();
 })();</script><!--/wolly-tel2-->
-</body>
+<!--jbreak-all--><style>html.jb2 body{word-break:keep-all;overflow-wrap:anywhere}html.jb2 h1,html.jb2 h2,html.jb2 h3,html.jb2 p,html.jb2 li,html.jb2 summary,html.jb2 dd,html.jb2 small{text-wrap:pretty}html.jb2 body :not(.nojb){word-break:keep-all!important}html.jb2 .nojb,html.jb2 .nojb *{word-break:normal!important}</style><script>(function(){if(!(window.Intl&&Intl.Segmenter))return;const JSEG=new Intl.Segmenter("ja",{granularity:"word"});
+function jbParts(t,fine){const w=[...JSEG.segment(t)].map(x=>x.segment);let o="",p="";const out=[];for(let i=0;i<w.length;i++){const x=w[i];
+ if(p&&!(i===w.length-1&&x.length<2)&&((fine&&/[^\u3041-\u309F][がをで]$/.test(o)&&/^[\u3041-\u309F]/.test(x))||(fine&&p.length>1&&/[\u3041-\u309F\u30A0-\u30FF]$/.test(p)&&/^[\u3041-\u309F]{2,}$/.test(x))||(!(x.length===1&&/^[一-鿿]$/.test(x)&&/[ぁ-ゟ]$/.test(p))&&/[ぁ-ゟ）」』！？]$/.test(p)&&!/^[ぁ-ゟー、。）」』！？・ー〜：／]/.test(x))||/[、。・／：]$/.test(p)||(x[0]==="（"&&!/[（・]$/.test(p)))){out.push(o);o=""}o+=x;p=x}out.push(o);return out}
+/* 長いひと続き（12文字より長く、切れ目がない）だけ、ことばとことばの間でも折り返せるようにする。
+   「です・ます・ない」などの前や、句読点・小さい字の前では切らない */
+const JB_AUX=/^(です|でし|ます|まし|ませ|ない|なかっ|たい|たく|ください|いる|いま|ある|あり|する|して|した|しま|られ|れる|せる|ので|のに|から|まで|けど|ため|よう|そう|こと|もの|とき|ところ)/;
+function jbLong(ps){const o=[];for(const s of ps){if(s.length<=12){o.push(s);continue}const w=[...JSEG.segment(s)].map(x=>x.segment);let c="",n=0;
+  for(let i=0;i<w.length;i++){const x=w[i];if(c&&n>=4&&(x.length>=2||/^[一-鿿]/.test(x))&&/[くてにでとをがはもへ]$/.test(c)&&!JB_AUX.test(x)&&!/^[ぁぃぅぇぉっゃゅょゎァィゥェォッャュョヮー、。・」』）！？]/.test(x)){o.push(c);c="";n=0}c+=x;n+=x.length}if(c)o.push(c)}return o}
+const SKIP=/^(SCRIPT|STYLE|TEXTAREA|INPUT|SELECT|OPTION|svg|SVG|text|tspan|title|CODE|PRE|NOSCRIPT)$/,done=new WeakSet();let mo;
+function ok(t){const d=t.data;if(done.has(t)||d.length<5||!/[぀-ヿ一-鿿]/.test(d))return false;let e=t.parentNode;
+  while(e&&e.nodeType===1){if(SKIP.test(e.nodeName)||e.isContentEditable||(e.classList&&e.classList.contains("nojb")))return false;e=e.parentNode}return true}
+function run(root){if(!root)return;const L=[];if(root.nodeType===3){if(ok(root))L.push(root)}else{const tw=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;while(n=tw.nextNode())if(ok(n))L.push(n)}
+  if(!L.length)return;mo&&mo.disconnect();
+  for(const t of L){const fine=!!(t.parentNode.closest&&t.parentNode.closest("td,th"));const ps=jbLong(jbParts(t.data.split("​").join(""),fine).filter(x=>x));done.add(t);if(ps.length<2)continue;
+    const f=document.createDocumentFragment();ps.forEach((s,i)=>{if(i)f.appendChild(document.createElement("wbr"));const n=document.createTextNode(s);done.add(n);f.appendChild(n)});t.parentNode.replaceChild(f,t)}
+  mo&&mo.observe(document.documentElement,{childList:true,subtree:true,characterData:true})}
+document.documentElement.classList.add("jb2");
+mo=new MutationObserver(ms=>{const R=new Set();for(const m of ms){if(m.type==="characterData"){const t=m.target;done.delete(t);R.add(t)}else for(const a of m.addedNodes)if(a.nodeType===1||a.nodeType===3)R.add(a)}R.forEach(run)});
+const go=()=>{run(document.body);mo.observe(document.documentElement,{childList:true,subtree:true,characterData:true})};
+document.readyState==="loading"?document.addEventListener("DOMContentLoaded",go):go()})();</script><!--/jbreak-all--></body>
 </html>
