@@ -997,6 +997,30 @@ html.hnew .kn-bell .ri{width:34px;height:34px;filter:drop-shadow(0 2px 2px rgba(
 .sd-g{display:grid;gap:8px;margin:14px 0 0}.sd-h{display:flex;align-items:center;gap:8px;margin:0}.sd-h b{font-size:16px;color:var(--g)}.sd-h small{padding:1px 9px;border-radius:999px;background:var(--g);color:#fff;font-weight:900;font-size:11.5px}
 .sd-gd{margin:0;font-size:12px;color:var(--muted);font-weight:700}.sd-who{font-size:12px!important;font-weight:800;color:#5A5AEF;border:0!important;padding:0!important}
 /*/kopt-css*/
+/*okst-css*/
+.ok-lead{margin:4px 2px 8px;font-size:12.5px;color:var(--ink-2,#5b5f7a);font-weight:700}
+.ok-tabs{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 10px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.ok-tabs::-webkit-scrollbar{display:none}
+.ok-t{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:9px 14px;border-radius:999px;border:1.5px solid #E2DDF5;background:#fff;color:#3A3D5C;font-weight:800;font-size:13.5px;line-height:1.1;font-family:inherit;box-shadow:0 2px 8px rgba(120,100,200,.08)}
+.ok-t.on{background:linear-gradient(135deg,#7B3BFF,#3E8BFF);color:#fff;border-color:transparent;box-shadow:0 6px 16px rgba(110,80,255,.28)}
+.ok-t em{display:flex;gap:3px;font-style:normal}
+.ok-t em i{font-style:normal;font-size:10px;font-weight:800;padding:1px 6px;border-radius:999px;background:var(--kc);color:#fff}
+.ok-p{display:none}.ok-p.on{display:block;animation:okIn .28s ease}
+@keyframes okIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.ok-ph{display:flex;align-items:baseline;gap:10px;margin:6px 2px 10px}
+.ok-ph b{font-size:20px;color:#2A2D4A}.ok-ph span{font-size:12.5px;color:#6B6F8E;font-weight:700}
+.ok-g{margin:0 0 14px;padding:12px;border-radius:20px;background:#fff;border:1.5px solid #E9E5F7;box-shadow:0 4px 14px rgba(120,100,200,.07)}
+.ok-g-n{border-color:#BFD3FF}.ok-g-o{border-color:#E6D3FF}.ok-g-k{border-color:#E6E6EE}
+.ok-gh{display:grid;grid-template-columns:auto 1fr;column-gap:8px;align-items:center;margin:0 0 8px}
+.ok-gh span{grid-row:span 2;font-size:22px}.ok-gh b{font-size:15px;color:#2A2D4A}.ok-gh small{font-size:11.5px;color:#6B6F8E;font-weight:700;line-height:1.5}
+.ok-reg,.ok-sel{display:block;margin:0 0 8px;padding:9px 12px;border-radius:14px;text-align:center;font-weight:800;font-size:13px;text-decoration:none}
+.ok-reg{background:linear-gradient(135deg,#7B3BFF,#0094FF);color:#fff}
+.ok-sel{background:#F4EEFF;color:#6A3BE0}
+.ok-b u{display:block;margin-top:5px;text-decoration:none;font-size:11px;font-weight:800;line-height:1.45;padding:3px 8px;border-radius:10px;width:fit-content}
+.ok-w.ok-n{background:#E8F0FF;color:#2F5BD8}.ok-w.ok-o{background:#F3EAFF;color:#7A3FD9}.ok-w.ok-k{background:#F2F2F6;color:#666A85}
+.ok-all{margin:6px 0 10px;padding:10px 12px;border-radius:18px;background:#fff;border:1.5px dashed #DCD6F0}
+.ok-all summary{font-weight:800;font-size:13.5px;color:#5A4BB0;cursor:pointer}
+/*/okst-css*/
 /*wguide-css*/
 .wg{margin:4px 0 12px;border-radius:20px;background:linear-gradient(#fff,#fff) padding-box,linear-gradient(120deg,#7B3BFF,#0094FF,#00C8E8) border-box;border:1.5px solid transparent;box-shadow:0 12px 26px -22px #7B3BFF;overflow:hidden}
 .wg-h{display:flex;align-items:center;gap:10px;width:100%;padding:8px 12px;border:0;background:none;font:inherit;text-align:left;cursor:pointer;color:#2C2866}
@@ -2248,7 +2272,7 @@ function holoTouch(map){if(!map||map._wtouch)return;map._wtouch=1;const box=map.
   if(window.IntersectionObserver)new IntersectionObserver(es=>es.forEach(e=>{if(e.intersectionRatio<.35)lock()}),{threshold:[0,.35,.6]}).observe(box);
 }
 /* ==== /holo-map ==== */
-/*vcheck*/(function(){var V="11222217";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
+/*vcheck*/(function(){var V="11222236";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
 <script>
 (()=>{
 const $=s=>document.querySelector(s);
@@ -3020,12 +3044,59 @@ function sheetKyubyo(){
     <p class="note">息が苦しそう・けいれんが止まらない・意識がおかしいときは、迷わず119番へ。</p>`;
 }
 /* もらえるお金（パネル）：種類ごとに */
+/*okst-js*/
+/* もらえるお金：時期べつ。st＝出す時期（0妊娠中 1:0歳 2:1〜2歳 3:3〜5歳 4小学生 5中学生 6高校入学）、w＝Wollyのお知らせ
+   n＝年齢に合わせてお知らせ（マイページ登録で届く） o＝えらんだ人にお知らせ（お知らせの種類でチェック） k＝知っておこう（お知らせはしない） */
+const OK_ST=["妊娠中","0歳","1〜2歳","3〜5歳","小学生","中学生","高校入学"];
+const OK_ST_S=["母子手帳をもらったら、まずここ","生まれて15日までの手つづきが大事","病院代・のりもの","幼稚園・保育のお金と、入学のじゅんび","学校・医療費・メガネなど","医療費と、高校受験のお金","受験と、高校のお金"];
+const OK_MAP={"児童手当":[[1,2,3,4,5,6],"n","生まれたら15日までに申しこみ。その時期にお知らせするよ",["k","高校生年代まで、2か月ごとに届くよ"]],
+ "妊婦のための支援給付":[[0,1],"n","妊娠中に1回目、生まれて4か月までに2回目をお知らせするよ"],
+ "妊婦健康診査費の助成":[[0],"n","母子手帳をもらう時期にお知らせするよ"],
+ "産後ケア事業":[[0,1],"n","妊娠28週ごろ、申しこみの時期をお知らせするよ"],
+ "子育て支援医療費助成":[[1,2,3,4,5,6],"n","生まれたときと、生後10か月ごろに確かめのお知らせをするよ",["k","18歳の年度末まで、病院代の助成がつづくよ"]],
+ "子育てヘルパー派遣":[[0,1],"o","「お知らせの種類」でえらぶと、使える時期に届くよ"],
+ "多胎児家庭サポート支援":[[0,1],"o","「お知らせの種類」でえらぶと届くよ"],
+ "3人乗り電動アシスト自転車の購入補助":[[2,3],"o","えらぶと、市の募集が出たときに届くよ"],
+ "幼稚園・認定こども園の入園料補助":[[3],"o","えらぶと、幼稚園の願書の時期にいっしょに届くよ"],
+ "子育て支援型幼稚園の預かり保育":[[3],"o","えらぶと、申しこみの時期に届くよ"],
+ "小学校の入学準備金":[[3],"o","えらぶと、年長さんの秋に届くよ（1月に受けとり）"],
+ "児童扶養手当":[[0,1,2,3,4,5,6],"o","「お知らせの種類」でえらぶと、手つづきの時期に届くよ"],
+ "ひとり親家庭等医療費支給":[[1,2,3,4,5,6],"o","「お知らせの種類」でえらぶと届くよ"],
+ "養育費立替支援事業":[[1,2,3,4,5,6],"o","「お知らせの種類」でえらぶと届くよ"],
+ "養育費に関する各種補助":[[1,2,3,4,5,6],"o","「お知らせの種類」でえらぶと届くよ"],
+ "低所得の子育て家庭児童進学支援金":[[5,6],"k","中3・高3の受験の前に見てね"],
+ "ファミリー・サポート・センター利用支援":[[1,2,3,4],"k","預けたいときに見てね"],
+ "治療用眼鏡・装具":[[2,3,4],"k","お医者さんにメガネをすすめられたときに見てね"],
+ "軽・中等度難聴児の補聴器購入費助成":[[1,2,3,4,5,6],"k","必要になったときに見てね"],
+ "補装具費支給制度":[[1,2,3,4,5,6],"k","必要になったときに見てね"]};
+const OK_W={n:["🔔","Wollyがお知らせ","マイページで生まれた年月（妊娠中は予定日）を登録すると、時期になったら届くよ"],
+ o:["☑","えらぶとお知らせ","「わたしのスケジュール」の「お知らせの種類」でえらんだ人にだけ届くよ"],
+ k:["📖","知っておこう","お知らせはしないよ。必要なときに見てね"]};
+function okKidStage(){/* 登録したお子さんの今の時期（ホームの「年齢からさがす」と同じ分けかた） */
+  const r=[];if(typeof AGE_GUIDE!=="undefined")AGE_GUIDE.forEach((g,i)=>{const ks=waKidsAt(g);if(ks.length)r.push([i,ks])});return r}
+function okReg(){return getKidsG().length>0||!!getDue()}
 function sheetOkane(){
-  const g={};MONEY.forEach((m,i)=>{(g[m.c]=g[m.c]||[]).push([m,i])});
-  return dhead(svg(CH.money),"#FFF1C2","MONEY","もらえるお金","さいたま市の給付金・助成制度 "+MONEY.length+"件")+
-   Object.keys(g).map(c=>{const C=MONEY_CAT[c]||{n:"そのほか",ic:"coin"};return `<p class="az-h">${svg(MINI[C.ic]||MINI.coin,40)}${esc(C.n)}</p><div class="az">`+
-     g[c].map(([m,i])=>`<a class="az-b" href="#m-${i}"><span class="az-i" style="background:${C.bg||"#FFF1C2"}">${svg(MINI[C.ic]||MINI.coin,40)}</span><span><b>${esc(m.t)}</b><small>${esc(m.one||"")}</small></span><i>›</i></a>`).join("")+`</div>`}).join("")+spotCta("money");
+  const now=okKidStage(),pick=window._okStage!=null?window._okStage:(now.length?now[0][0]:0);window._okStage=null;
+  const tag=i=>{const f=now.find(x=>x[0]===i);return f?`<em>${f[1].map(k=>`<i style="--kc:${k.c}">${esc(k.hon||k.n)}</i>`).join("")}</em>`:""};
+  const card=(m,i,w)=>{const C=MONEY_CAT[m.c]||{bg:"#FFF1C2",ic:"coin"};return `<a class="az-b ok-b" href="#m-${i}"><span class="az-i" style="background:${C.bg||"#FFF1C2"}">${svg(MINI[C.ic]||MINI.coin,40)}</span><span><b>${esc(m.t)}</b><small>${esc(m.one||"")}</small><u class="ok-w ok-${w[1]}">${OK_W[w[1]][0]} ${esc(w[2])}</u></span><i>›</i></a>`};
+  const panel=st=>{const items=MONEY.map((m,i)=>{let w=OK_MAP[m.t];if(w&&w[3]&&st>=2)w=[w[0],w[3][0],w[3][1]];return [m,i,w]}).filter(x=>x[2]&&x[2][0].includes(st)).sort((a,b)=>a[2][0].length-b[2][0].length);/* その時期だけのものを先に */
+    return `<div class="ok-p${st===pick?" on":""}" data-okp="${st}"><p class="ok-ph"><b>${OK_ST[st]}</b><span>${OK_ST_S[st]}</span></p>`+
+     ["n","o","k"].map(w=>{const L=items.filter(x=>x[2][1]===w);if(!L.length)return "";
+       return `<div class="ok-g ok-g-${w}"><p class="ok-gh"><span>${OK_W[w][0]}</span><b>${OK_W[w][1]}</b><small>${OK_W[w][2]}</small></p>${w==="n"&&!okReg()?`<a class="ok-reg" href="#mypage">マイページで登録する（無料）›</a>`:""}${w==="o"?`<a class="ok-sel" href="#sched">お知らせの種類をえらぶ ›</a>`:""}<div class="az">${L.map(x=>card(x[0],x[1],x[2])).join("")}</div></div>`}).join("")+`</div>`};
+  return dhead(svg(CH.money),"#FFF1C2","MONEY","もらえるお金","さいたま市の給付金・助成制度 "+MONEY.length+"件を、時期べつに")+
+   `<p class="ok-lead">お子さんの時期をえらんでね。${now.length?"いまの時期に名前が出ているよ。":""}</p>
+   <div class="ok-tabs">${OK_ST.map((t,i)=>`<button type="button" class="ok-t${i===pick?" on":""}" data-okst="${i}">${t}${tag(i)}</button>`).join("")}</div>`+
+   OK_ST.map((t,i)=>panel(i)).join("")+
+   `<details class="ok-all"><summary>ぜんぶを種類べつに見る（${MONEY.length}件）</summary>${okAll()}</details>`+
+   `<p class="note">金額や条件は年度でかわることがあるよ。さいごは、近くの区役所でたしかめてね。</p>`+spotCta("money");
 }
+function okAll(){const g={};MONEY.forEach((m,i)=>{(g[m.c]=g[m.c]||[]).push([m,i])});
+  return Object.keys(g).map(c=>{const C=MONEY_CAT[c]||{n:"そのほか",ic:"coin"};return `<p class="az-h">${svg(MINI[C.ic]||MINI.coin,40)}${esc(C.n)}</p><div class="az">`+
+     g[c].map(([m,i])=>`<a class="az-b" href="#m-${i}"><span class="az-i" style="background:${C.bg||"#FFF1C2"}">${svg(MINI[C.ic]||MINI.coin,40)}</span><span><b>${esc(m.t)}</b><small>${esc(m.one||"")}</small></span><i>›</i></a>`).join("")+`</div>`}).join("")}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-okst]");if(!b)return;e.preventDefault();const st=b.dataset.okst,box=b.closest(".ok-tabs").parentNode;
+  box.querySelectorAll(".ok-t").forEach(x=>x.classList.toggle("on",x===b));box.querySelectorAll(".ok-p").forEach(p=>p.classList.toggle("on",p.dataset.okp===st));
+  b.scrollIntoView({inline:"center",block:"nearest",behavior:"smooth"})});
+/*/okst-js*/
 /* 保活ナビ（パネル）：準備の順番に */
 function sheetHokatsuMenu(){
   /* STEP1〜8：左＝そのステップのキャラ（下の列の表紙と同じ絵）、まん中＝目立つ STEP と題名、右＝テーマのアイコン */
@@ -4620,7 +4691,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11222217");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11222236");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -5205,9 +5276,9 @@ const AGE_GUIDE=[
 function waKidsAt(g){const out=[];getKidsG().forEach((k,i)=>{const mo=monthsOf(k.b),sa=schoolAge(k.b);/* 3歳からは学年（4月1日の年齢）で分ける */const Y={"3〜5歳":[3,5],"小学生":[6,11],"中学生":[12,14],"高校入学":[14,15]}[g.t];const on=g.k==="preg"?false:g.t==="0歳"?mo<=11:g.t==="1〜2歳"?(mo>=12&&sa<=2):Y?(sa>=Y[0]&&sa<=Y[1]&&mo>=12):false;if(on)out.push(kidColor(i))});if(g.k==="preg"&&getDue())out.push({c:"#FF8FB8",n:"おなかの赤ちゃん",hon:"おなかの赤ちゃん"});return out}
 function renderAgeGuide(){const el=$("#waRow");if(!el)return;
   el.innerHTML=AGE_GUIDE.map((g,i)=>{const ks=waKidsAt(g);return `<button type="button" class="wa-c${ks.length?" now":""}" data-wa="${i}" style="--c:${g.c}"><span class="wa-ic">${relIc(g.ic)}</span><b>${g.t}</b><small>${g.s}</small>${ks.length?`<em>${ks.map(k=>`<i style="--kc:${k.c}">${esc(k.hon||k.n)}</i>`).join("")}</em>`:""}</button>`}).join("");const now=el.querySelector(".wa-c.now");if(now)requestAnimationFrame(()=>{el.scrollLeft=Math.max(0,now.offsetLeft-el.offsetLeft-12)})}
-document.addEventListener("click",e=>{const b=e.target.closest("[data-wa]");if(b){e.preventDefault();const g=AGE_GUIDE[+b.dataset.wa];
+document.addEventListener("click",e=>{const b=e.target.closest("[data-wa]");if(b){e.preventDefault();const g=AGE_GUIDE[+b.dataset.wa];window._okFrom=+b.dataset.wa;
   openPop(`<div class="kp wa-pop"><span class="kp-ic">${relIc(g.ic)}</span><b>${g.t}に調べること</b><em style="background:${g.c};color:#fff">${g.s}</em><div class="wa-l">${g.L.map(([t,to,ic])=>`<a class="wa-go" href="${to.startsWith("#")?to:"#"}" data-wago="${esc(to)}">${relIc(ic)}<span>${esc(t)}</span><i>›</i></a>`).join("")}</div><p class="kn-ku">${relIc("house")}さいごは、近くの区役所でたしかめてね</p></div>`,g.t,"holo");return}
-  const a=e.target.closest("[data-wago]");if(a){e.preventDefault();const to=a.dataset.wago;closeRoom();setTimeout(()=>{if(to.startsWith("view:"))openViewer(to.slice(5),a.textContent.replace("›","").trim());else location.hash=to.slice(1)},120)}});
+  const a=e.target.closest("[data-wago]");if(a){e.preventDefault();const to=a.dataset.wago;if(to==="#okane")window._okStage=window._okFrom;closeRoom();setTimeout(()=>{if(to.startsWith("view:"))openViewer(to.slice(5),a.textContent.replace("›","").trim());else location.hash=to.slice(1)},120)}});
 /*/wguide-js*/function renderAll(){renderMe();renderGuide();renderAgeGuide();renderKidNotice();renderNews();renderCats();renderHome2();renderRows();foldRows();applyAgeOrder();renderFeed();renderEvents();ageFitPaint();window.__wollyWatch&&window.__wollyWatch();themeize();requestAnimationFrame(()=>fitTitles())}
 document.addEventListener("click",e=>{if(e.target.closest(".fbar"))requestAnimationFrame(()=>fitTitles())});
 
@@ -5822,8 +5893,8 @@ let RAWQ="";function setRaw(v){RAWQ=(v||"").normalize("NFKC").replace(NOISE,"").
 function qph(ws){const k=ws.join("|")+"#"+RAWQ;if(k===QPK&&QP)return QP;const list=ws.map(qk);const j=qk(RAWQ||ws.join(""));if(ws.length>1||RAWQ)list.push(j);QPK=k;QP={list,all:Math.max(3,j.length)};return QP}
 function load(){if(DATA)return Promise.resolve(DATA);
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
-  const kp=fetch(base+"near-data/tel-kana.json?v=11222217").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
-  return Promise.all([fetch(base+"near-data/tel.json?v=11222217").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
+  const kp=fetch(base+"near-data/tel-kana.json?v=11222236").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
+  return Promise.all([fetch(base+"near-data/tel.json?v=11222236").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
     .catch(()=>{DATA=[];return DATA})}
 /* 聞きとった文 → キーワード */
 function terms(text){let s=(text||"").normalize("NFKC").replace(NOISE," ");
