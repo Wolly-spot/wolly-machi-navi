@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-21T21:35:00+09:00",
+ "updatedAt": "2026-11-22T09:37:38+09:00",
  "events": [
   {
    "id": "e-cocoon-card10",
@@ -13,32 +13,6 @@
    "img": "https://www.cocooncity.jp/theme/cocooncity/resources/images/ogp.png",
    "ai": false,
    "added": "2026-11-13T09:45:00+09:00"
-  },
-  {
-   "id": "e-moomin-cocoon",
-   "kind": "mall",
-   "title": "コクーンシティでムーミンの体験ひろば（11/21〜22）",
-   "desc": "ゲーム体験、塗り絵、スタンプラリーでシールがもらえる。",
-   "date": "2026-11-21",
-   "area": "さいたま市大宮区",
-   "src": "コクーンシティ",
-   "url": "https://www.cocooncity.jp/event/detail/2895",
-   "img": "https://www.cocooncity.jp/theme/cocooncity/resources/images/ogp.png",
-   "ai": false,
-   "added": "2026-11-11T09:50:00+09:00"
-  },
-  {
-   "id": "e-nikofes-urawa",
-   "kind": "kids",
-   "title": "nikoフェス（11/21〜22 浦和住宅公園）",
-   "desc": "0歳から楽しめるワークショップとフード。予約不要、300円から。",
-   "date": "2026-11-21",
-   "area": "さいたま市緑区",
-   "src": "いこーよ",
-   "url": "https://iko-yo.net/events/614338",
-   "img": "https://d2goguvysdoarq.cloudfront.net/system/event_photos/photos/1786011/normal.jpg?1794469127",
-   "ai": false,
-   "added": "2026-11-14T19:30:00+09:00"
   },
   {
    "id": "e-kidsfes-ageo",
@@ -67,32 +41,6 @@
    "added": "2026-11-11T09:50:00+09:00"
   },
   {
-   "id": "e-kodomo-machi-saiden",
-   "kind": "kids",
-   "title": "子どもがつくるまち（11/22）無料",
-   "desc": "小学生がお店や仕事を体験する1日のまち。先着順の申込制。",
-   "date": "2026-11-22",
-   "area": "さいたま市桜区",
-   "src": "さいたま市",
-   "url": "https://www.city.saitama.lg.jp/003/002/018/sakura/p134373.html",
-   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/e-kodomo-machi-saiden.jpg",
-   "ai": true,
-   "added": "2026-11-12T19:30:00+09:00"
-  },
-  {
-   "id": "e-hajimete-market-asaka",
-   "kind": "free",
-   "title": "はじめてづくりマーケット（11/22）入場無料",
-   "desc": "朝霞市産業文化センターで手づくり雑貨や小さな本が並ぶよ。予約なしでOK。",
-   "date": "2026-11-22",
-   "area": "朝霞市",
-   "src": "いこーよ",
-   "url": "https://iko-yo.net/events/611474",
-   "img": "https://d2goguvysdoarq.cloudfront.net/system/event_photos/photos/1779110/normal.png?1793340069",
-   "ai": false,
-   "added": "2026-11-20T09:20:00+09:00"
-  },
-  {
    "id": "e-planetarium-day",
    "kind": "facility",
    "title": "11/23はプラネタリウムの日 特別投影",
@@ -117,6 +65,45 @@
    "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/e-uchu-mission-ten.jpg",
    "ai": true,
    "added": "2026-11-15T19:10:00+09:00"
+  },
+  {
+   "id": "e-hikawa-lightup",
+   "kind": "free",
+   "title": "氷川神社の夜のライトアップ（〜11/23）無料",
+   "desc": "大宮の氷川神社が光の森に。未就学児は保護者といっしょなら無料だよ。",
+   "date": "2026-11-23",
+   "area": "さいたま市大宮区",
+   "src": "さいたまイベント情報",
+   "url": "https://www.saitama-e.com/hikawa-lightup/",
+   "img": "https://www.saitama-e.com/wp-content/uploads/2026/09/hikawa-lightup.png",
+   "ai": false,
+   "added": "2026-11-22T09:37:38+09:00"
+  },
+  {
+   "id": "e-thomas-skipcity",
+   "kind": "facility",
+   "title": "きかんしゃトーマスの世界展（〜12/13）",
+   "desc": "SKIPシティで開催中。未就学児は無料、小中学生260円。月曜は休み。",
+   "date": "2026-11-23",
+   "area": "川口市",
+   "src": "埼玉県",
+   "url": "https://www.pref.saitama.lg.jp/a0802/news/page/news2026110601.html",
+   "img": "https://www.pref.saitama.lg.jp/shared/images/sns/logo.png",
+   "ai": false,
+   "added": "2026-11-22T09:37:38+09:00"
+  },
+  {
+   "id": "e-lalaport-fujimi-23",
+   "kind": "mall",
+   "title": "ららぽーと富士見「いい富士見の日」（11/23）",
+   "desc": "スタンプラリーの抽選会やスティールパンの演奏。ミニライブもあるよ。",
+   "date": "2026-11-23",
+   "area": "富士見市",
+   "src": "ららぽーと富士見",
+   "url": "https://mitsui-shopping-park.com/lalaport/fujimi/event/3688835.html",
+   "img": "https://mitsui-shopping-park.com/lalaport/fujimi/event/3688835/image1.jpg",
+   "ai": false,
+   "added": "2026-11-22T09:37:38+09:00"
   },
   {
    "id": "e-ario-happyday",
@@ -171,6 +158,19 @@
    "added": "2026-11-19T09:50:00+09:00"
   },
   {
+   "id": "e-organic-city-fes",
+   "kind": "free",
+   "title": "オーガニック・シティ・フェス（11/28・29）",
+   "desc": "地元の有機野菜や新米のマルシェ。28日は浦和駅東口、29日は新都心公園。",
+   "date": "2026-11-28",
+   "area": "さいたま市浦和区／大宮区",
+   "src": "さいたまイベント情報",
+   "url": "https://www.saitama-e.com/saitama-organic-city-fes/",
+   "img": "https://www.saitama-e.com/wp-content/uploads/2026/10/saitama-organic-city-fes-eyecatch.png",
+   "ai": false,
+   "added": "2026-11-22T09:37:38+09:00"
+  },
+  {
    "id": "e-minuma-kosodate-fair",
    "kind": "free",
    "title": "第1回 見沼区子育てフェア（11/29）入場無料",
@@ -208,15 +208,41 @@
    "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/e-gakudo-r9.jpg",
    "ai": true,
    "added": "2026-11-11T09:50:00+09:00"
+  },
+  {
+   "id": "e-reds-kids-play-park",
+   "kind": "kids",
+   "title": "埼スタ前でキッズプレイパーク（12/5）",
+   "desc": "パトカーやはしご車の展示・乗車、ふわふわ遊具も。申込みいらず。",
+   "date": "2026-12-05",
+   "area": "さいたま市緑区",
+   "src": "さいたまイベント情報",
+   "url": "https://www.saitama-e.com/out-of-kidzania-urawa-reds/",
+   "img": "https://www.saitama-e.com/wp-content/uploads/2026/11/out-of-kidzania-urawa-reds-eye-1119.jpg",
+   "ai": false,
+   "added": "2026-11-22T09:37:38+09:00"
+  },
+  {
+   "id": "e-orchestra-0sai",
+   "kind": "kids",
+   "title": "0歳からのクリスマスオーケストラ（12/6）",
+   "desc": "南浦和の文化センターで親子コンサート。開演前に楽器あそびも。",
+   "date": "2026-12-06",
+   "area": "さいたま市南区",
+   "src": "レッツエンジョイ東京",
+   "url": "https://www.enjoytokyo.jp/event/2091359/",
+   "img": "https://rstatic.enjoytokyo.jp/assets/images/event_draft/a0/2091359/img_1.jpg?1794210312&p=t&w=1200",
+   "ai": false,
+   "added": "2026-11-22T09:37:38+09:00"
   }
  ],
  "shops": [
   {
    "id": "s-maratan-omiya",
-   "kind": "open",
-   "title": "大宮駅東口に麻辣湯の専門店 11/16オープン",
-   "desc": "具材や辛さを選べるマーラータン。オープン記念の割引もあり。",
-   "date": "2026-11-16",
+   "kind": "coupon",
+   "title": "大宮の麻辣湯のお店 レシートで割引（〜12/6）",
+   "desc": "11/22までのレシートを見せると、麻辣湯がその分安くなるよ。",
+   "date": "2026-11-23",
    "src": "宮原大宮ドットコム",
    "url": "https://miyahara-kitaku.com/rishouchi-maratan-omiya-open/",
    "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/11/IMG_5247.jpg",
@@ -226,9 +252,9 @@
   {
    "id": "s-motsuyaki-ban",
    "kind": "open",
-   "title": "大宮駅東口に「もつ焼きばん」11月下旬オープン",
+   "title": "大宮駅東口に「もつ焼きばん」11/28オープン予定",
    "desc": "中目黒の老舗もつ焼き店が大宮に。レモンサワー発祥のお店。",
-   "date": "2026-11",
+   "date": "2026-11-28",
    "src": "宮原大宮ドットコム",
    "url": "https://miyahara-kitaku.com/motsuyaki-ban-omiya-open/",
    "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/11/IMG_5171.jpg",
@@ -245,17 +271,6 @@
    "url": "https://miyahara-kitaku.com/new-tomochin-ramen-omiya-open/",
    "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/11/IMG_5113.jpg",
    "ai": false,
-   "added": "2026-11-11T09:50:00+09:00"
-  },
-  {
-   "id": "s-more-donut",
-   "kind": "open",
-   "title": "生ドーナツ専門店「MORE DONUT」ルミネ大宮に11月オープン",
-   "desc": "ふわふわ食感の生ドーナツのお店。はじめての常設店が大宮に。",
-   "date": "2026-11",
-   "src": "宮原大宮ドットコム",
-   "url": "https://miyahara-kitaku.com/more-donut-omiya-lumine/",
-   "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/10/99298976b13a148c5ce347acb7a5fc95.png",
    "added": "2026-11-11T09:50:00+09:00"
   },
   {
@@ -397,6 +412,18 @@
    "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/11/IMG_4939.jpg",
    "ai": false,
    "added": "2026-11-17T19:15:00+09:00"
+  },
+  {
+   "id": "s-fitsall-owada",
+   "kind": "open",
+   "title": "大和田駅前に24時間ジム 12/1グランドオープン",
+   "desc": "見沼区の大和田駅前に、24時間使えるジムができるよ。",
+   "date": "2026-12-01",
+   "src": "宮原大宮ドットコム",
+   "url": "https://miyahara-kitaku.com/2026-11open/",
+   "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/11/phonto-60.jpg",
+   "ai": false,
+   "added": "2026-11-22T09:37:38+09:00"
   }
  ],
  "news": [
@@ -478,18 +505,6 @@
    "added": "2026-11-11T09:50:00+09:00"
   },
   {
-   "id": "n-minuma-akifes",
-   "kind": "kids",
-   "title": "みぬま秋フェス2026 inさぎ山（11/21〜22）",
-   "desc": "さぎ山記念公園の秋のお祭り。広い公園で家族でゆっくり。",
-   "date": "2026-11-21",
-   "src": "さいたま市",
-   "url": "https://www.city.saitama.lg.jp/006/014/008/003/015/007/p134622.html",
-   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-minuma-akifes.jpg",
-   "ai": true,
-   "added": "2026-11-11T09:50:00+09:00"
-  },
-  {
    "id": "n-bousai-fair",
    "kind": "kids",
    "title": "市総合防災訓練・防災フェア（11/23）",
@@ -528,32 +543,6 @@
    "added": "2026-11-11T09:50:00+09:00"
   },
   {
-   "id": "n-kamikizaki-nobinobi",
-   "kind": "kosodate",
-   "title": "上木崎のびのびルーム 来年3月中旬で終了",
-   "desc": "それまでは通常どおり利用可。あいぱれっとなど近くの施設も使えます。",
-   "date": "2026-11",
-   "src": "さいたま市",
-   "url": "https://www.city.saitama.lg.jp/kosodate/oshirase/p134549.html",
-   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-kamikizaki-nobinobi.jpg",
-   "ai": true,
-   "important": false,
-   "added": "2026-11-13T09:45:00+09:00"
-  },
-  {
-   "id": "n-nursery-aki-1101",
-   "kind": "kosodate",
-   "title": "ナーサリールームなどの空き状況（11/15時点）",
-   "desc": "家庭保育室・企業主導型保育の空きを市が公開。保活の参考に。",
-   "date": "2026-11",
-   "src": "さいたま市",
-   "url": "https://www.city.saitama.lg.jp/kosodate/shiritai/category8/p105052.html",
-   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-nursery-aki-1101.jpg",
-   "ai": true,
-   "important": false,
-   "added": "2026-11-14T19:30:00+09:00"
-  },
-  {
    "id": "n-madoguchi-jikan-r9",
    "kind": "mama",
    "title": "区役所の窓口受付 1/4から9時〜16時半に",
@@ -578,6 +567,42 @@
    "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-wakata-kouen.jpg",
    "ai": true,
    "added": "2026-11-18T09:50:00+09:00"
+  },
+  {
+   "id": "n-kodomo-kankyo-ws",
+   "kind": "kids",
+   "title": "親子で作る環境ワークショップ（12/13）",
+   "desc": "見沼環境センターで小学生と保護者がオーナメントやバッグ作り。20組まで。",
+   "date": "2026-12-13",
+   "src": "さいたま市",
+   "url": "https://www.city.saitama.lg.jp/001/009/017/001/p134637.html",
+   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-kodomo-kankyo-ws.jpg",
+   "ai": true,
+   "added": "2026-11-22T09:37:38+09:00"
+  },
+  {
+   "id": "n-irodori-gakuen",
+   "kind": "kosodate",
+   "title": "いろどり学園 来年4月の転入学の案内",
+   "desc": "学校に通いにくい子の小中一貫校。見学会や個別相談の案内が出たよ。",
+   "date": "2026-11-20",
+   "src": "さいたま市",
+   "url": "https://www.city.saitama.lg.jp/003/002/001/p117896.html",
+   "img": "",
+   "ai": false,
+   "added": "2026-11-22T09:37:38+09:00"
+  },
+  {
+   "id": "n-kidsfes-binnuma",
+   "kind": "kids",
+   "title": "KIDS FES in さいたま びん沼で（12/19・20）",
+   "desc": "西区のびん沼自然公園で、親子で遊んで学べる2日間のイベント。",
+   "date": "2026-12-19",
+   "src": "PR TIMES",
+   "url": "https://prtimes.jp/main/html/rd/p/000000143.000096737.html",
+   "img": "https://prcdn.freetls.fastly.net/release_image/96737/143/96737-143-c6b36664987fdc1d83692a369a9da923-907x1280.jpg?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+   "ai": false,
+   "added": "2026-11-22T09:37:38+09:00"
   }
  ]
 }
