@@ -945,7 +945,7 @@ function dleft(a,b){const t=new Date();t.setHours(0,0,0,0);const A=new Date(a+"T
   return [`<span class="st end">おわりました</span>`,2]}
 const jd=s=>{const d=new Date(s+"T00:00:00");return `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日（${"日月火水木金土"[d.getDay()]}）`};
 function gcal(t,a,b){const f=x=>x.replace(/-/g,"");const e=new Date((b||a)+"T00:00:00");e.setDate(e.getDate()+1);const ee=e.getFullYear()+String(e.getMonth()+1).padStart(2,"0")+String(e.getDate()).padStart(2,"0");
-  return "https://calendar.google.com/calendar/render?action=TEMPLATE&text="+encodeURIComponent((b?"【締切】":"")+t)+"&dates="+f(a)+"/"+ee+"&details="+encodeURIComponent("wolly街ナビ（小学校）より。日付は市のページでたしかめてね。")}
+  return "https://calendar.google.com/calendar/render?action=TEMPLATE&text="+encodeURIComponent((b?"【締切】":"")+t)+"&dates="+f(a)+"/"+ee+"&details="+encodeURIComponent("Wolly街ナビ（小学校）より。日付は市のページでたしかめてね。")}
 function relBtn(r){
   if(r.item)return `<button type="button" data-gi="${esc(r.item)}">${gi("star")}${esc(r.t)}</button>`;
   if(r.g)return `<button type="button" data-gg="${esc(r.g)}">${gi(r.g==="map"?"map":"star")}${esc(r.t)}</button>`;
