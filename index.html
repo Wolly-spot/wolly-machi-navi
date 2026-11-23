@@ -1068,6 +1068,42 @@ body.spn-open{overflow:hidden}
 /* 上の帯：もどるボタンが出たとき（ページをひらいたとき）も、ロゴとボタンが重ならないように */
 @media (max-width:449px){.top .wrap{gap:6px}.top .brand{flex:0 0 auto}.top .brand b{display:none!important}.top .brand img{height:40px;margin:-2px 0}.me>span:last-child:not(:first-child){display:none}.me{padding:3px}}
 /*/spn2-css*/
+/*today-css*/
+/* きょうの予定（ホログラム） */
+.rm-card.hfull{max-width:min(520px,calc(100vw - 20px))}
+.tw-pop{text-align:center;padding-top:6px}
+.tw-k{margin:0;font-size:11px;letter-spacing:.3em;font-weight:900;color:#7B5CFF}
+.tw-t{display:block;font-size:22px;color:#2C2866;text-shadow:0 0 12px rgba(166,139,255,.55)}
+.tw-d{margin:2px 0 6px;font-size:13px;font-weight:800;color:#5B5F7A}
+.tw-wx{display:inline-flex;align-items:center;gap:8px;margin:0 0 10px;padding:6px 14px;border-radius:999px;background:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.95);font-size:14px;font-weight:900;color:#3B2E8F;box-shadow:0 0 16px rgba(120,200,255,.45)}
+.tw-wx span{font-size:13px;color:#5A5AEF}.tw-wx0{font-size:12px;font-weight:700;color:#7A7396}
+.tw-g{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0 0 12px;text-align:left}
+.tw-g .wt{flex:none;aspect-ratio:auto;min-height:150px;box-shadow:0 0 0 1.5px rgba(255,255,255,.85),0 0 18px rgba(166,139,255,.45),0 10px 20px -12px rgba(60,40,120,.6)}
+.tw-g .wt-in{padding:8px 6px;gap:5px;overflow:visible}
+.tw-g .wt-h{font-size:13px;padding:2px 8px;margin:0;width:fit-content}
+.tw-ic{margin:0;font-size:26px;line-height:1;filter:drop-shadow(0 2px 4px rgba(0,0,0,.15))}
+.tw-g .wt-e{font-size:12px;padding:6px 7px;border-radius:10px;text-align:left;line-height:1.35}
+.tw-g .wt-e i{display:block;font-style:normal;font-size:10.5px}
+.tw-g .wt-no{margin:0;font-size:11.5px;font-weight:800;opacity:.75}
+.tw-go{display:block;margin:0 auto 6px;padding:11px;border-radius:999px;background:linear-gradient(135deg,#7B3BFF,#0094FF);color:#fff;font-weight:900;font-size:14px;text-decoration:none;box-shadow:0 8px 20px rgba(91,80,255,.35)}
+.tw-pop .wx-src{margin:0;font-size:10.5px;color:#7A7396}
+.rm-card.hfull .rm-close{margin-top:6px}
+@media (max-width:359px){.tw-g{gap:5px}.tw-g .wt-h{font-size:11.5px;padding:2px 6px}.tw-g .wt-e{font-size:11px}.tw-ic{font-size:22px}}
+/* さがすの窓：ホログラム・画面の6割くらいの大きさで、まん中に */
+.spn{align-items:center;padding:0 10px}
+.spn-card,.spn-card.spn-h2{width:min(560px,100%);height:min(62vh,620px);max-height:none;margin:0;overflow:auto;padding:18px 16px 18px;border-radius:28px;
+  background:linear-gradient(135deg,rgba(255,255,255,.72),rgba(236,230,255,.62) 40%,rgba(224,246,255,.62) 70%,rgba(255,232,244,.66))!important;
+  -webkit-backdrop-filter:blur(16px) saturate(1.4)!important;backdrop-filter:blur(16px) saturate(1.4)!important;border:2px solid rgba(255,255,255,.9)!important;
+  box-shadow:0 0 0 1px rgba(166,139,255,.4),0 0 40px rgba(140,120,255,.45),0 24px 60px rgba(90,90,239,.3),inset 0 0 40px rgba(255,255,255,.45)!important;
+  transform:translateY(24px) scale(.9);filter:blur(6px) hue-rotate(60deg)}
+.spn.on .spn-card{transform:none;filter:none;transition:transform .6s cubic-bezier(.2,1.2,.3,1),opacity .35s ease,filter .5s ease}
+.spn-card::before{content:"";position:absolute;inset:-40%;background:conic-gradient(from 0deg,rgba(255,143,184,0),rgba(255,143,184,.26),rgba(166,139,255,.26),rgba(53,179,238,.26),rgba(255,214,64,.2),rgba(255,143,184,0));animation:holoSpin 7s linear infinite;pointer-events:none;z-index:0}
+.spn-card::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.16) 0 1px,transparent 1px 4px);pointer-events:none;animation:holoScan 3s linear infinite;z-index:0}
+.spn-card>*{position:relative;z-index:1}
+.spn-top b{font-size:19px}.spn-ic{width:38px;height:38px}
+.spn-body .hs input{font-size:17px}
+@media (prefers-reduced-motion:reduce){.spn-card::before,.spn-card::after{animation:none}}
+/*/today-css*/
 /*sos-css*/
 .sosbtn{display:inline-flex;align-items:center;gap:4px;height:32px;padding:0 10px 0 7px;border-radius:999px;border:1.5px solid #FFC2D4;background:#fff;color:#E5508C;font:inherit;font-size:11.5px;font-weight:900;cursor:pointer;flex:0 0 auto;white-space:nowrap}
 .sosbtn svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
@@ -2390,7 +2426,7 @@ function holoTouch(map){if(!map||map._wtouch)return;map._wtouch=1;const box=map.
   if(window.IntersectionObserver)new IntersectionObserver(es=>es.forEach(e=>{if(e.intersectionRatio<.35)lock()}),{threshold:[0,.35,.6]}).observe(box);
 }
 /* ==== /holo-map ==== */
-/*vcheck*/(function(){var V="11231108";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
+/*vcheck*/(function(){var V="11231320";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
 <script>
 (()=>{
 const $=s=>document.querySelector(s);
@@ -4386,7 +4422,7 @@ function byInfo(i){
 function openPop(html,label,cls){
   closeRoom(true);$("#rmPark")&&$("#rmPark").remove();
   const el=document.createElement("div");el.className="rm-ov";el.id="rmOv";el.setAttribute("role","dialog");el.setAttribute("aria-modal","true");el.setAttribute("aria-label",label||"");
-  el.innerHTML=`<div class="rm-card"><button type="button" class="rm-x" data-rmx aria-label="閉じる">×</button>${html}<button type="button" class="rm-close" data-rmx>とじて、もどる</button></div>`;
+  el.innerHTML=`<div class="rm-card${cls&&cls!=="holo"?" "+cls:""}"><button type="button" class="rm-x" data-rmx aria-label="閉じる">×</button>${html}<button type="button" class="rm-close" data-rmx>とじて、もどる</button></div>`;
   document.body.appendChild(el);document.body.classList.add("rm-open");
   requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.add("on")));
 }
@@ -4815,7 +4851,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11231108");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11231320");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -5391,6 +5427,24 @@ function kyuGrowHtml(){if(typeof grKids!=="function")return "";const K=grKids();
     return `<div class="kg-r"><i style="--kc:${k.c}">${esc(k.hon)}</i><span class="kg-a">${n.mo<12?n.mo+"か月":Math.floor(n.mo/12)+"歳"+(n.mo%12?n.mo%12+"か月":"")}</span><span class="kg-v">身長 だいたい <b>${grFmt(n.h.v,"h")}</b>cm・体重 だいたい <b>${grFmt(n.w.v,"w")}</b>kg</span><small>${last?`${+last.d.slice(5,7)}月の記録から計算したよ`:"同じ月齢の子のまんなか"}</small></div>`}).join("")}
    <p class="kg-note">⚠️ これは<b>めやす</b>だよ。お薬の量を決めるときに聞かれることもあるので、<b>電話や病院に行く前に、できればちゃんと測ってね</b>。</p></div>`}
 /*/spn2-js*/
+/*today-js*/
+/* きょうの予定：午前・午後・夜＋天気（ホログラム） */
+function todayPop(){const k=ymd(new Date()),L=schSortT(schGet().filter(e=>e.date===k)),w=wxGet().d[k];
+  const sq=Object.keys(SCH_BAND).map((b,n)=>{const c=wxBand(k,b)||"none",E=L.filter(e=>schBand(e)===b);
+    return `<div class="wt wt-${c} wb-${b}" style="animation-delay:${.15+n*.12}s"><span class="wt-fx"><i></i><i></i><i></i></span><div class="wt-in"><p class="wt-h">${SCH_BAND[b][0].replace("の用事","")}</p><p class="tw-ic">${c!=="none"?({sun:"☀️",moon:"🌙",cloud:"☁️",rain:"☔",snow:"⛄"})[c]:"・"}</p>${E.length?E.map(e=>`<button type="button" class="wt-e" data-schview="${e.id}"><i>${e.at?esc(t12(e.at)):""}</i>${esc(e.t)}</button>`).join(""):`<p class="wt-no">予定なし</p>`}</div></div>`}).join("");
+  openPop(`<div class="kp tw-pop"><p class="tw-k">TODAY</p><b class="tw-t">きょうの予定</b><p class="tw-d">${esc(schDayText(k))}</p>
+   ${w&&w.c?`<p class="tw-wx">${WX_IC[w.c]||""} ${esc(w.t||"")}${w.hi!=null?`<span>${w.hi}° / ${w.lo}°</span>`:""}</p>`:`<p class="tw-wx tw-wx0">天気をよみこみ中…</p>`}
+   <div class="tw-g">${sq}</div>
+   <a class="tw-go" href="#sched">スケジュールをひらく ›</a><p class="wx-src">天気：気象庁の予報</p></div>`,"きょうの予定","holo hfull")}
+document.addEventListener("click",e=>{if(e.target.closest(".tw-go"))closeRoom()});
+/* 1日のはじめて開いたとき（オープニングのあと）に1回だけ */
+setTimeout(function(){let t;try{t=ymd(new Date());if(LS.get("wolly.todaypop")===t)return}catch(e){return}
+  if(location.hash&&location.hash.length>1)return;
+  try{wxLoad()}catch(e){}
+  let n=0;const wait=()=>{n++;const b=document.body;if(n<60&&(!b.classList.contains("is-ready")||b.classList.contains("is-loading")||document.getElementById("rmOv"))){setTimeout(wait,300);return}
+    if(location.hash&&location.hash.length>1)return;LS.set("wolly.todaypop",t);
+    /* 天気がまだなら少しまつ */let m=0;const go=()=>{m++;if(!(wxGet().d||{})[t]&&m<8){setTimeout(go,300);return}todayPop()};setTimeout(go,350)};wait()},0);
+/*/today-js*/
 /*sos-js*/
 /* 祝日（2026・2027年）。毎年4月の見直しで翌年分を足す */
 const SOS_HOLI=["2026-01-01","2026-01-12","2026-02-11","2026-02-23","2026-03-20","2026-04-29","2026-05-03","2026-05-04","2026-05-05","2026-05-06","2026-07-20","2026-08-11","2026-09-21","2026-09-22","2026-09-23","2026-10-12","2026-11-03","2026-11-23","2027-01-01","2027-01-11","2027-02-11","2027-02-23","2027-03-21","2027-03-22","2027-04-29","2027-05-03","2027-05-04","2027-05-05","2027-07-19","2027-08-11","2027-09-20","2027-09-23","2027-10-11","2027-11-03","2027-11-23"];
@@ -6101,8 +6155,8 @@ let RAWQ="";function setRaw(v){RAWQ=(v||"").normalize("NFKC").replace(NOISE,"").
 function qph(ws){const k=ws.join("|")+"#"+RAWQ;if(k===QPK&&QP)return QP;const list=ws.map(qk);const j=qk(RAWQ||ws.join(""));if(ws.length>1||RAWQ)list.push(j);QPK=k;QP={list,all:Math.max(3,j.length)};return QP}
 function load(){if(DATA)return Promise.resolve(DATA);
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
-  const kp=fetch(base+"near-data/tel-kana.json?v=11231108").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
-  return Promise.all([fetch(base+"near-data/tel.json?v=11231108").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
+  const kp=fetch(base+"near-data/tel-kana.json?v=11231320").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
+  return Promise.all([fetch(base+"near-data/tel.json?v=11231320").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
     .catch(()=>{DATA=[];return DATA})}
 /* 聞きとった文 → キーワード */
 function terms(text){let s=(text||"").normalize("NFKC").replace(NOISE," ");
