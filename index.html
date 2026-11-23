@@ -1100,6 +1100,11 @@ body.spn-open{overflow:hidden}
 .sch-cal .sc-mo{animation:moIn .35s ease}
 @keyframes moIn{from{opacity:0;filter:blur(3px)}to{opacity:1;filter:none}}
 /*/day3-css*/
+/*lv-css*/
+.sch-logv .lv-d{margin:8px 0 6px;font-size:14px;line-height:1.75;color:#3a3352;text-align:left}
+.sch-logv .lv-go{display:block;margin:8px 0 0}
+.lv-kn{display:block;width:100%;margin:10px 0 0;padding:11px;border:0;border-radius:999px;background:linear-gradient(135deg,#7B3BFF,#0094FF);color:#fff;font:inherit;font-weight:900;font-size:14px;cursor:pointer}
+/*/lv-css*/
 /*dh-css*/
 .dh-pop{text-align:center}
 .dh-t{display:block;font-size:20px!important;color:#2C2866;text-shadow:0 0 12px rgba(166,139,255,.5)}
@@ -2500,7 +2505,7 @@ function holoTouch(map){if(!map||map._wtouch)return;map._wtouch=1;const box=map.
   if(window.IntersectionObserver)new IntersectionObserver(es=>es.forEach(e=>{if(e.intersectionRatio<.35)lock()}),{threshold:[0,.35,.6]}).observe(box);
 }
 /* ==== /holo-map ==== */
-/*vcheck*/(function(){var V="11231609";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
+/*vcheck*/(function(){var V="11231826";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
 <script>
 (()=>{
 const $=s=>document.querySelector(s);
@@ -4925,7 +4930,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11231609");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11231826");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -5318,7 +5323,7 @@ document.addEventListener("click",e=>{
 /* スケジュールのパネル */
 /* 11/21 届いたお知らせは「通知済み」としてスケジュールに自動で残す（wolly.knlog＝{キー:{t,cat,kid,date}}） */
 function knLogGet(){const o=LS.get("wolly.knlog");return o&&typeof o==="object"?o:{}}
-function knLogRecord(L){const g=knLogGet(),d=ymd(new Date());let ch=false;L.forEach(o=>{if(o.sched)return;const k=knKey(o);if(g[k])return;g[k]={t:o.t,cat:knCat(o),kid:(o.kids&&o.kids.length)?o.kids[0]:"",date:d,tag:o.tag||""};ch=true});if(ch)LS.set("wolly.knlog",g)}
+function knLogRecord(L){const g=knLogGet(),d=ymd(new Date());let ch=false;L.forEach(o=>{if(o.sched)return;const k=knKey(o);if(g[k])return;g[k]={t:o.t,cat:knCat(o),kid:(o.kids&&o.kids.length)?o.kids[0]:"",date:d,tag:o.tag||"",d:(o.d||"").slice(0,600),ic:o.ic||"",to:o.to||"",go:o.go||"",url:o.url||""};ch=true});if(ch)LS.set("wolly.knlog",g)}
 function knLogList(){const g=knLogGet();return Object.keys(g).map(k=>Object.assign({key:k,log:1},g[k]))}
 let schMon=0,schDay="";
 function schMe(){return (S.profile&&S.profile.name)||"じぶん"}
@@ -5433,7 +5438,7 @@ document.addEventListener("click",e=>{
   const ed=e.target.closest("[data-schedit]");if(ed){const o=schGet().find(q=>q.id===ed.dataset.schedit);if(o)schBandPop(o.date,schBand(o),o.id);return}
   const vw=e.target.closest("[data-schview]");if(vw){const o=schGet().find(q=>q.id===vw.dataset.schview);if(!o)return;const C=SCH_CAT[o.cat]||SCH_CAT.own,wn=schWho(o);openPop(`<div class="kp sch-view"><span class="kp-ic">${relIc(C[1])}</span><b>${esc(o.t)}</b><em>📅 ${esc(schDateText(o))}の予定</em>${wn?`<small>👤 ${esc(wn)}</small>`:""}<p>🔔 ${esc(schWhenText(o))}に出るよ</p>${o.memo?`<p>📝 ${esc(o.memo)}</p>`:""}<div class="sch-btns"><button type="button" class="sch-ok" data-schfix="${o.id}">かきなおす？</button></div></div>`,o.t,"holo");return}
   const fx=e.target.closest("[data-schfix]");if(fx){const o=schGet().find(q=>q.id===fx.dataset.schfix);if(o)openPop(`<div class="kp sch-pop">${schForm(o)}</div>`,"予定を直す","holo");return}
-  const lo=e.target.closest("[data-logopen]");if(lo){const o=knLogList().find(q=>q.key===lo.dataset.logopen);if(!o)return;const C=SCH_CAT[o.cat]||SCH_CAT.own,wn=schWho(o);openPop(`<div class="kp sch-logv"><span class="kp-ic">${relIc(C[1])}</span><b>${esc(o.t)}</b><em>✓ 通知済み　${esc(schDateText(o))}</em>${wn?`<small>👤 ${esc(wn)}</small>`:""}<p>「Wollyからのお知らせ」に届いたものだよ。くわしくは、お知らせの中で見られるよ。</p></div>`,o.t,"holo");return}
+  const lo=e.target.closest("[data-logopen]");if(lo){const o=knLogList().find(q=>q.key===lo.dataset.logopen);if(!o)return;const C=SCH_CAT[o.cat]||SCH_CAT.own,wn=schWho(o);const x=logFull(o);openPop(`<div class="kp sch-logv"><span class="kp-ic">${relIc(x.ic||C[1])}</span><b>${esc(o.t)}</b><em>✓ 通知済み　${esc(schDateText(o))}</em>${wn?`<small>👤 ${esc(wn)}</small>`:""}${x.d?`<p class="lv-d">${esc(x.d).replace(/\n/g,"<br>")}</p><p class="kn-ku">${relIc("house")}さいごは、近くの区役所でたしかめてね</p>`:`<p>くわしい説明は、お知らせの中で見られるよ。</p>`}${x.to?(x.to.startsWith("view:")?`<a class="kn-go lv-go" href="#" data-view="${x.to.slice(5)}" data-vt="${esc(x.go)}">${esc(x.go)}を見る ›</a>`:`<a class="kn-go lv-go" href="${x.to}">${esc(x.go)}を見る ›</a>`):x.url?`<a class="kn-go lv-go" href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.go)} ↗</a>`:""}<button type="button" class="lv-kn" data-lvkn="${esc(o.key)}">🔔 Wollyからのお知らせで見る ›</button></div>`,o.t,"holo");return}
   if(e.target.closest("[data-schsave]")){const f=e.target.closest("[data-schform]"),g=k=>{const el=f.querySelector(`[data-f="${k}"]`);return el?el.value.trim():""};
     if(!g("t")){schToast("なにをするかを入れてね");return}if(!g("date")){schToast("日にちを入れてね");return}
     let tm="";if(g("ap")){let hh=(+g("hh"))%12;if(g("ap")==="pm")hh+=12;tm=String(hh).padStart(2,"0")+":"+String(+g("mm")).padStart(2,"0")}
@@ -5513,6 +5518,16 @@ function thSchWx(){const a=document.querySelector("#thNav .th-sch");if(!a)return
   const ic=w&&w.c?(WX_IC[w.c]||""):"";a.innerHTML=`<i></i>📅 スケジュール${ic?`<em class="th-wx">${ic}</em>`:""}`}
 [300,2500,7000].forEach(ms=>setTimeout(()=>{try{wxLoad()}catch(e){}thSchWx()},ms));
 /*/day3-js*/
+/*lv-js*/
+/* 通知の記録の中身：記録にあればそれ、なければいまのお知らせの一覧からさがす */
+function logFull(o){if(o.d)return o;let L=[];try{const r=kidNotices();L=r.concat(r.soft||[],r.reco||[])}catch(e){}
+  const f=L.find(q=>{try{return knKey(q)===o.key}catch(e){return false}})||L.find(q=>q.t===o.t);return f?Object.assign({},o,{d:f.d,ic:f.ic,to:f.to,go:f.go,url:f.url}):o}
+/* 「Wollyからのお知らせで見る」：ホームのお知らせをひらいて、そのお知らせまでうごく */
+document.addEventListener("click",e=>{const b=e.target.closest("[data-lvkn]");if(!b)return;e.preventDefault();const key=b.dataset.lvkn;closeRoom();
+  setTimeout(()=>{location.hash="";setTimeout(()=>{const kn=document.getElementById("kidNotice");if(!kn)return;try{LS.set("wolly.knopen",true)}catch(x){}typeof renderKidNotice==="function"&&renderKidNotice();
+    const it=[...document.querySelectorAll("#kidNotice details.kn-i")].find(d=>{const k=d.querySelector("[data-knok]");return k&&k.dataset.knok===key});
+    const tg=it||kn;if(it)it.open=true;const y=tg.getBoundingClientRect().top+scrollY-130;scrollTo({top:y,behavior:"smooth"})},450)},150)});
+/*/lv-js*/
 /*dh-js*/
 /* ホログラムの「＋ この日に予定を書く」：閉じて、カレンダーの下のフォームをひらく */
 document.addEventListener("click",e=>{const a=e.target.closest("[data-dhadd]");if(!a)return;e.preventDefault();const k=a.dataset.dhadd;closeRoom();
@@ -6254,8 +6269,8 @@ let RAWQ="";function setRaw(v){RAWQ=(v||"").normalize("NFKC").replace(NOISE,"").
 function qph(ws){const k=ws.join("|")+"#"+RAWQ;if(k===QPK&&QP)return QP;const list=ws.map(qk);const j=qk(RAWQ||ws.join(""));if(ws.length>1||RAWQ)list.push(j);QPK=k;QP={list,all:Math.max(3,j.length)};return QP}
 function load(){if(DATA)return Promise.resolve(DATA);
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
-  const kp=fetch(base+"near-data/tel-kana.json?v=11231609").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
-  return Promise.all([fetch(base+"near-data/tel.json?v=11231609").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
+  const kp=fetch(base+"near-data/tel-kana.json?v=11231826").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
+  return Promise.all([fetch(base+"near-data/tel.json?v=11231826").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
     .catch(()=>{DATA=[];return DATA})}
 /* 聞きとった文 → キーワード */
 function terms(text){let s=(text||"").normalize("NFKC").replace(NOISE," ");
