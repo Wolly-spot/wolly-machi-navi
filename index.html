@@ -2521,7 +2521,7 @@ function holoTouch(map){if(!map||map._wtouch)return;map._wtouch=1;const box=map.
   if(window.IntersectionObserver)new IntersectionObserver(es=>es.forEach(e=>{if(e.intersectionRatio<.35)lock()}),{threshold:[0,.35,.6]}).observe(box);
 }
 /* ==== /holo-map ==== */
-/*vcheck*/(function(){var V="11231859";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
+/*vcheck*/(function(){var V="11231934";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
 <script>
 (()=>{
 const $=s=>document.querySelector(s);
@@ -4946,7 +4946,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11231859");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11231934");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -5436,8 +5436,8 @@ function calStart(x,y,el){if(!el.closest(".sch-cal"))return;calS={x,y,dx:0,drag:
 function calMove(x,y){if(!calS)return;const dx=x-calS.x,dy=y-calS.y;if(!calS.drag){if(Math.abs(dx)>8&&Math.abs(dx)>Math.abs(dy)*1.2)calS.drag=true;else{if(Math.abs(dy)>12)calS=null;return}}calS.dx=dx;const yr=calYrDir(dx);if(!yr&&window._calYr){const y=document.querySelector(".sch-cal .cw-y");y&&(y.style.transform="",y.style.opacity="")}window._calYr=yr;calSet(dx,Math.max(.35,1-Math.abs(dx)/500))}
 function calEnd(){if(!calS)return;const s=calS;calS=null;if(!s.drag)return;setTimeout(()=>{window._calYr=false},700);window._calSkipClick=Date.now();const w=(document.querySelector(".sch-cal .sch-g")||{}).offsetWidth||320;
   if(Math.abs(s.dx)<60){calSet(0,1,"transform .25s ease,opacity .25s ease");return}
-  const n=s.dx<0?1:-1;calSet(-n*w,0,"transform .2s ease-in,opacity .2s ease-in");
-  setTimeout(()=>{window._calSkipClick=Date.now();schMon+=n;schRedraw();calSet(n*w*.6,0);requestAnimationFrame(()=>requestAnimationFrame(()=>calSet(0,1,"transform .28s cubic-bezier(.2,.8,.3,1),opacity .28s ease")))},200)}
+  const n=s.dx<0?1:-1;calSet(-w*.7,0,"transform .22s ease-in,opacity .22s ease-in");
+  setTimeout(()=>{window._calSkipClick=Date.now();schMon+=n;schRedraw();calSet(w*.5,0);requestAnimationFrame(()=>requestAnimationFrame(()=>calSet(0,1,"transform .28s cubic-bezier(.2,.8,.3,1),opacity .28s ease")))},200)}
 document.addEventListener("touchstart",e=>{calStart(e.touches[0].clientX,e.touches[0].clientY,e.target)},{passive:true});
 document.addEventListener("touchmove",e=>{calMove(e.touches[0].clientX,e.touches[0].clientY)},{passive:true});
 document.addEventListener("touchend",calEnd,{passive:true});document.addEventListener("touchcancel",()=>{if(calS){calS=null;calSet(0,1,"transform .2s")}},{passive:true});
@@ -6290,8 +6290,8 @@ let RAWQ="";function setRaw(v){RAWQ=(v||"").normalize("NFKC").replace(NOISE,"").
 function qph(ws){const k=ws.join("|")+"#"+RAWQ;if(k===QPK&&QP)return QP;const list=ws.map(qk);const j=qk(RAWQ||ws.join(""));if(ws.length>1||RAWQ)list.push(j);QPK=k;QP={list,all:Math.max(3,j.length)};return QP}
 function load(){if(DATA)return Promise.resolve(DATA);
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
-  const kp=fetch(base+"near-data/tel-kana.json?v=11231859").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
-  return Promise.all([fetch(base+"near-data/tel.json?v=11231859").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
+  const kp=fetch(base+"near-data/tel-kana.json?v=11231934").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
+  return Promise.all([fetch(base+"near-data/tel.json?v=11231934").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
     .catch(()=>{DATA=[];return DATA})}
 /* 聞きとった文 → キーワード */
 function terms(text){let s=(text||"").normalize("NFKC").replace(NOISE," ");
