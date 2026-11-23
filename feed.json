@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-23T08:40:00+09:00",
+ "updatedAt": "2026-11-23T19:00:00+09:00",
  "events": [
   {
    "id": "e-cocoon-card10",
@@ -15,19 +15,6 @@
    "added": "2026-11-13T09:45:00+09:00"
   },
   {
-   "id": "e-kidsfes-ageo",
-   "kind": "free",
-   "title": "KIDS FES in さいたま（11/21〜23）入場無料",
-   "desc": "上尾丸山公園で工作やわたがし作りなど親子の体験がいっぱい。キッチンカーも来るよ。",
-   "date": "2026-11-21",
-   "area": "上尾市",
-   "src": "いこーよ",
-   "url": "https://iko-yo.net/events/612822",
-   "img": "https://d2goguvysdoarq.cloudfront.net/system/event_photos/photos/1782597/normal.png?1794386729",
-   "ai": false,
-   "added": "2026-11-20T09:20:00+09:00"
-  },
-  {
    "id": "e-thomas-skipcity",
    "kind": "facility",
    "title": "きかんしゃトーマスの世界展（〜12/13）",
@@ -37,19 +24,6 @@
    "src": "埼玉県",
    "url": "https://www.pref.saitama.lg.jp/a0802/news/page/news2026110601.html",
    "img": "https://www.pref.saitama.lg.jp/shared/images/sns/logo.png",
-   "ai": false,
-   "added": "2026-11-22T09:37:38+09:00"
-  },
-  {
-   "id": "e-lalaport-fujimi-23",
-   "kind": "mall",
-   "title": "ららぽーと富士見「いい富士見の日」（11/23）",
-   "desc": "スタンプラリーの抽選会やスティールパンの演奏。ミニライブもあるよ。",
-   "date": "2026-11-23",
-   "area": "富士見市",
-   "src": "ららぽーと富士見",
-   "url": "https://mitsui-shopping-park.com/lalaport/fujimi/event/3688835.html",
-   "img": "https://mitsui-shopping-park.com/lalaport/fujimi/event/3688835/image1.jpg",
    "ai": false,
    "added": "2026-11-22T09:37:38+09:00"
   },
@@ -132,6 +106,19 @@
    "added": "2026-11-22T09:37:38+09:00"
   },
   {
+   "id": "e-asaka-akari-terrace",
+   "kind": "free",
+   "title": "朝霞 冬のあかりテラス 点灯式（11/28）",
+   "desc": "駅前や公園が光るイルミネーション。初日は15時から縁日も。",
+   "date": "2026-11-28",
+   "area": "朝霞市",
+   "src": "さいたマガジン",
+   "url": "https://www.saitama-e.com/asaka-fuyu-akari-terrace/",
+   "img": "https://www.saitama-e.com/wp-content/uploads/2026/11/asaka-fuyu-akari-terrace-eyecatch.jpg",
+   "ai": false,
+   "added": "2026-11-23T19:00:00+09:00"
+  },
+  {
    "id": "e-minuma-kosodate-fair",
    "kind": "free",
    "title": "第1回 見沼区子育てフェア（11/29）入場無料",
@@ -179,8 +166,8 @@
    "area": "さいたま市",
    "src": "さいたま市",
    "url": "https://www.city.saitama.lg.jp/003/002/003/p061055.html",
-   "img": "",
-   "ai": false,
+   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/e-nyugaku-junbikin-r9.jpg",
+   "ai": true,
    "added": "2026-11-23T08:40:00+09:00"
   },
   {
@@ -192,7 +179,7 @@
    "area": "さいたま市大宮区",
    "src": "さいたまイベント情報",
    "url": "https://www.saitama-e.com/saitama-event-december/",
-   "img": "",
+   "img": "https://www.saitama-e.com/wp-content/uploads/2026/11/saitama-event-december-eye-1119.jpg",
    "ai": false,
    "added": "2026-11-23T08:40:00+09:00"
   },
@@ -367,18 +354,6 @@
    "added": "2026-11-11T09:50:00+09:00"
   },
   {
-   "id": "s-yaoko-omiyaichiba",
-   "kind": "open",
-   "title": "「ヤオコー大宮市場店」11/17オープン",
-   "desc": "大宮市場の中、国道17号沿い。焼きたてピザや店内で握るお寿司も。",
-   "date": "2026-11-17",
-   "src": "宮原大宮ドットコム",
-   "url": "https://miyahara-kitaku.com/yaoko-omiyaichiba/",
-   "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/07/IMG_4851.jpg",
-   "ai": false,
-   "added": "2026-11-15T19:10:00+09:00"
-  },
-  {
    "id": "s-menya-gen-shintoshin",
    "kind": "open",
    "title": "新都心にラーメン店「麺家 玄」11/18オープン",
@@ -425,6 +400,18 @@
    "img": "https://www.saitama-e.com/wp-content/uploads/2026/10/belc-saitama-tajima-eyecatch.png",
    "ai": false,
    "added": "2026-11-23T08:40:00+09:00"
+  },
+  {
+   "id": "s-more-donut-lumine",
+   "kind": "open",
+   "title": "ルミネ大宮に生ドーナツ「MORE DONUT」",
+   "desc": "カボチャを練りこんだ生ドーナツのお店。ルミネ2の1階。",
+   "date": "2026-11",
+   "src": "宮原大宮ドットコム",
+   "url": "https://miyahara-kitaku.com/more-donut-omiya-lumine/",
+   "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/10/99298976b13a148c5ce347acb7a5fc95.png",
+   "ai": false,
+   "added": "2026-11-23T19:00:00+09:00"
   }
  ],
  "news": [
@@ -502,18 +489,6 @@
    "src": "さいたま市",
    "url": "https://www.city.saitama.lg.jp/001/001/007/p016829.html",
    "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-holiday-window.jpg",
-   "ai": true,
-   "added": "2026-11-11T09:50:00+09:00"
-  },
-  {
-   "id": "n-bousai-fair",
-   "kind": "kids",
-   "title": "市総合防災訓練・防災フェア（11/23）",
-   "desc": "大宮消防署・見沼公園で。消防車や体験コーナーで親子で防災を学べます。",
-   "date": "2026-11-23",
-   "src": "さいたま市",
-   "url": "https://www.city.saitama.lg.jp/001/011/015/005/p130175.html",
-   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-bousai-fair.jpg",
    "ai": true,
    "added": "2026-11-11T09:50:00+09:00"
   },
