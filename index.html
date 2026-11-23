@@ -1132,7 +1132,8 @@ body.spn-open{overflow:hidden}
 .rv-br{display:none}@media(max-width:389px){.rv-br{display:inline}}
 .rv-s{margin:0 0 12px;font-size:12px;color:#6B6F8E;font-weight:700;line-height:1.6}
 .rv-t{margin:4px 2px 8px;font-size:12.5px;font-weight:900;color:#5A5AEF}
-.rv-loss{display:grid;gap:8px;margin:0 0 14px}
+.rv-loss{display:grid;gap:8px;margin:0 0 8px}
+.rv-more{margin:0 2px 14px;font-size:11.5px;line-height:1.6;color:#6B6F8E;font-weight:700}.rv-more b{display:block;color:#C2185B;font-weight:900}.rv-nb{display:inline-block}
 .rv-loss>div{display:grid;grid-template-columns:36px 1fr;gap:10px;align-items:center;padding:10px 12px;border-radius:16px;background:#FFF6F9;border:1.5px solid #FFD3E2}
 .rv-loss i,.rv-ls i{font-style:normal;font-size:24px;text-align:center}
 .rv-loss b,.rv-ls b{display:block;font-size:14px;line-height:1.4}
@@ -2393,7 +2394,7 @@ html .hl-ring{box-shadow:0 0 6px #ffd6ea;opacity:.8}
       <section class="block">
         <div class="head"><div><div class="eyebrow">MY PAGE</div><h2 id="myTitle">マイページ登録</h2></div></div>
         <div class="profile-card" id="profileCard"></div>
-        <!--rv-html--><div class="rv" id="rvBox" hidden><p class="rv-h">マイページを登録すると、<br class="rv-br">こんなことができるよ</p><p class="rv-s">お子さんの生まれた年月を入れるだけで、いまやることと締め切りをお知らせするよ。</p><p class="rv-t">💡 もらい損ねがなくなるよ</p><div class="rv-loss"><div><i>💴</i><span><b>児童手当</b><small>生まれて15日以内に申請</small><em>おくれると、さかのぼってもらえないことがあるよ</em></span></div><div><i>🎁</i><span><b>妊婦のための支援給付（2回目）</b><small>子ども1人 5万円・生まれて4か月まで</small><em>申請しないと、もらえないよ</em></span></div><div><i>🎒</i><span><b>小学校の入学準備金</b><small>年長さんの秋に申請</small><em>時期が来たらお知らせするよ</em></span></div></div><p class="rv-t">✨ こんなページが見やすくなるよ</p><ul class="rv-ls"><li><i>🔔</i><span><b>お子さんの名前つきのお知らせ</b><small>予防接種・健診・申込みの時期と締め切り</small></span></li><li><i>📍</i><span><b>ぜんぶ家から近い順に</b><small>病院・歯医者・薬局・保育園・公園・習い事…が、市全体 → 家から近い順に</small></span></li><li><i>💰</i><span><b>もらえるお金</b><small>お子さんの時期のページから開く</small></span></li><li><i>📏</i><span><b>すくすくメモ</b><small>いまの身長・体重のめやすと服のサイズ</small></span></li><li><i>📅</i><span><b>きょうの予定と天気</b><small>朝・昼・夜にホログラムでお知らせ</small></span></li></ul><button type="button" class="rv-go" data-rvtry>いちどやってみよう（30秒）</button><p class="rv-n">名前は空でもOK。入れたことは、あとからいつでも変えられるよ。</p></div><!--/rv-html-->
+        <!--rv-html--><div class="rv" id="rvBox" hidden><p class="rv-h">マイページを登録すると、<br class="rv-br">こんなことができるよ</p><p class="rv-s">お子さんの生まれた年月を入れるだけで、いまやることと締め切りをお知らせするよ。</p><p class="rv-t">💡 もらい損ねがなくなるよ</p><div class="rv-loss"><div><i>💴</i><span><b>児童手当</b><small>生まれて15日以内に申請</small><em>おくれると、さかのぼってもらえないことがあるよ</em></span></div><div><i>🎁</i><span><b>妊婦のための支援給付（2回目）</b><small>子ども1人 5万円・生まれて4か月まで</small><em>申請しないと、もらえないよ</em></span></div><div><i>🎒</i><span><b>小学校の入学準備金</b><small>年長さんの秋に申請</small><em>時期が来たらお知らせするよ</em></span></div></div><p class="rv-more"><b>ここにのせたのは、ほんの一部だよ。</b>ぜんぶは登録したあと、ホームの<span class="rv-nb">「🔔 Wollyからのお知らせ」</span>と<span class="rv-nb">「💰 もらえるお金」</span>で確認できるよ。</p><p class="rv-t">✨ こんなページが見やすくなるよ</p><ul class="rv-ls"><li><i>🔔</i><span><b>お子さんの名前つきのお知らせ</b><small>予防接種<span class="rv-nb">（インフルエンザ・</span><span class="rv-nb">おたふくかぜも）</span>・健診・申込みの時期と締め切り</small></span></li><li><i>📍</i><span><b>ぜんぶ家から近い順に</b><small>病院・歯医者・薬局・保育園・公園・習い事…が、市全体 → 家から近い順に</small></span></li><li><i>💰</i><span><b>もらえるお金</b><small>お子さんの時期のページから開く</small></span></li><li><i>📏</i><span><b>すくすくメモ</b><small>いまの身長・体重のめやすと服のサイズ</small></span></li><li><i>📅</i><span><b>きょうの予定と天気</b><small>朝・昼・夜にホログラムでお知らせ</small></span></li></ul><button type="button" class="rv-go" data-rvtry>いちどやってみよう（30秒）</button><p class="rv-n">名前は空でもOK。入れたことは、あとからいつでも変えられるよ。</p></div><!--/rv-html-->
         <form class="form" id="myForm" novalidate>
           <div class="field"><label for="fName">ニックネーム（任意）</label><input id="fName" maxlength="16" placeholder="例：さくらママ（空でもOK）" autocomplete="nickname"><small>空のときは、えらんだアイコンの名前で呼ぶよ。</small></div>
           <div class="field"><span class="lab">アイコンをえらぶ</span><div class="icons" id="iconPick"></div></div>
@@ -2573,7 +2574,7 @@ function holoTouch(map){if(!map||map._wtouch)return;map._wtouch=1;const box=map.
   if(window.IntersectionObserver)new IntersectionObserver(es=>es.forEach(e=>{if(e.intersectionRatio<.35)lock()}),{threshold:[0,.35,.6]}).observe(box);
 }
 /* ==== /holo-map ==== */
-/*vcheck*/(function(){var V="11232229";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
+/*vcheck*/(function(){var V="11232354";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
 <script>
 (()=>{
 const $=s=>document.querySelector(s);
@@ -4995,7 +4996,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11232229");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11232354");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -6408,8 +6409,8 @@ let RAWQ="";function setRaw(v){RAWQ=(v||"").normalize("NFKC").replace(NOISE,"").
 function qph(ws){const k=ws.join("|")+"#"+RAWQ;if(k===QPK&&QP)return QP;const list=ws.map(qk);const j=qk(RAWQ||ws.join(""));if(ws.length>1||RAWQ)list.push(j);QPK=k;QP={list,all:Math.max(3,j.length)};return QP}
 function load(){if(DATA)return Promise.resolve(DATA);
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
-  const kp=fetch(base+"near-data/tel-kana.json?v=11232229").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
-  return Promise.all([fetch(base+"near-data/tel.json?v=11232229").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
+  const kp=fetch(base+"near-data/tel-kana.json?v=11232354").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
+  return Promise.all([fetch(base+"near-data/tel.json?v=11232354").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
     .catch(()=>{DATA=[];return DATA})}
 /* 聞きとった文 → キーワード */
 function terms(text){let s=(text||"").normalize("NFKC").replace(NOISE," ");
