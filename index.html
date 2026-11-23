@@ -1068,6 +1068,23 @@ body.spn-open{overflow:hidden}
 /* 上の帯：もどるボタンが出たとき（ページをひらいたとき）も、ロゴとボタンが重ならないように */
 @media (max-width:449px){.top .wrap{gap:6px}.top .brand{flex:0 0 auto}.top .brand b{display:none!important}.top .brand img{height:40px;margin:-2px 0}.me>span:last-child:not(:first-child){display:none}.me{padding:3px}}
 /*/spn2-css*/
+/*calw-css*/
+/* カレンダー：Wollyらしく（うすめ） */
+.sch-cal{background:linear-gradient(#fff,#fff) padding-box,linear-gradient(120deg,#FFC9DE,#D9CCFF,#BFE8FF,#FFF0B8,#FFC9DE) border-box!important;border:2px solid transparent!important;box-shadow:0 10px 24px rgba(90,90,239,.08)!important;position:relative}
+.sch-cal::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(115deg,transparent 30%,rgba(185,164,255,.06) 45%,rgba(127,211,255,.06) 55%,transparent 70%);pointer-events:none}
+.sch-cal .sch-cm{margin:6px 0 14px!important}
+.sch-cal .cw-mo{display:flex!important;flex-direction:column;align-items:center;gap:2px;font-family:"Outfit","Zen Maru Gothic",system-ui,sans-serif}
+.sch-cal .cw-mo i{font-style:normal;font-size:12px;font-weight:600;letter-spacing:.28em;color:#A9A3C2}
+.sch-cal .cw-mo span{font-size:27px;font-weight:600;letter-spacing:.03em;line-height:1.1;background:linear-gradient(90deg,#9A7BFF,#7F86F5 45%,#5BBEF5);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sch-cal .sch-wd i{font-weight:700;color:#A9A3C2}
+.sch-cal .sch-wd i:first-child{color:#F28AB5}.sch-cal .sch-wd i:last-child{color:#6FA8F5}
+.sch-cal .sch-g button{background:#fff;color:#3B3760;font-family:"Outfit","Zen Maru Gothic",sans-serif;font-weight:500}
+.sch-cal .sch-g button>span{font-weight:500}
+.sch-cal .sch-g button.has{background:#FAF8FF}
+.sch-cal .sch-g button.sun>span{color:#F28AB5}.sch-cal .sch-g button.sat>span{color:#6FA8F5}
+.sch-cal .sch-g button.td span{background:linear-gradient(135deg,#A88BFF,#7FB8F7);box-shadow:0 0 0 2px #fff,0 0 0 4px rgba(200,185,255,.55),0 3px 10px rgba(120,110,240,.25)}
+.sch-cal .sch-g button.on{box-shadow:inset 0 0 0 2px #C9BBFF}
+/*/calw-css*/
 /*day3-css*/
 .d3{margin:6px 0 10px}
 .tw-g .wt{width:auto;min-width:0}
@@ -1079,6 +1096,9 @@ body.spn-open{overflow:hidden}
 /* 予定を書くフォームが小さいスマホではみ出さないように */
 .sch-add{box-sizing:border-box;max-width:100%;overflow:hidden}.sch-add>*,.sch-add label,.sch-add .sch-band,.sch-add .bd-btns{box-sizing:border-box;max-width:100%;min-width:0}
 .sch-add select,.sch-add input{box-sizing:border-box;max-width:100%;min-width:0}.sch-add .tp{display:flex;gap:6px;min-width:0}.sch-add .tp>*{flex:1 1 0;min-width:0;width:auto}
+/* 月がかわったら、月の名前はその場でふわっと入れかわる */
+.sch-cal .sc-mo{animation:moIn .35s ease}
+@keyframes moIn{from{opacity:0;filter:blur(3px)}to{opacity:1;filter:none}}
 /*/day3-css*/
 /*dh-css*/
 .dh-pop{text-align:center}
@@ -2480,7 +2500,7 @@ function holoTouch(map){if(!map||map._wtouch)return;map._wtouch=1;const box=map.
   if(window.IntersectionObserver)new IntersectionObserver(es=>es.forEach(e=>{if(e.intersectionRatio<.35)lock()}),{threshold:[0,.35,.6]}).observe(box);
 }
 /* ==== /holo-map ==== */
-/*vcheck*/(function(){var V="11231542";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
+/*vcheck*/(function(){var V="11231609";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
 <script>
 (()=>{
 const $=s=>document.querySelector(s);
@@ -4905,7 +4925,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11231542");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11231609");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -5345,7 +5365,7 @@ function schForm(e){const kids=getKidsG(),ed=!!e.id,bd=schBand(e),at=e.at||"",ah
 function schCal(){const now=new Date(),b=new Date(now.getFullYear(),now.getMonth()+schMon,1),y=b.getFullYear(),m=b.getMonth(),first=b.getDay(),days=new Date(y,m+1,0).getDate(),today=ymd(now);
   const by={};schGet().concat(knLogList()).forEach(e=>{(by[e.date]=by[e.date]||[]).push(e)});let c="";for(let i=0;i<first;i++)c+="<i></i>";
   for(let d=1;d<=days;d++){const k=ymd(new Date(y,m,d)),L=by[k]||[],wd=new Date(y,m,d).getDay();c+=`<button type="button" data-schday="${k}" class="${wd===0?"sun ":wd===6?"sat ":""}${k===today?"td ":""}${k===schDay?"on ":""}${L.length?"has":""}"><span>${d}</span>${(()=>{const w=wxGet().d[k];return w&&w.c?`<i class="wx" title="${esc(w.t||"")}">${WX_IC[w.c]}</i>`:""})()}${L.slice(0,2).map(e=>`<em class="sc-t${e.log?" lg":""}" style="--c:${schColor(e)||(e.log?"#C9A400":"#7B3BFF")}">${esc(e.t)}</em>`).join("")}${L.length>2?`<em class="sc-more">+${L.length-2}</em>`:""}</button>`}
-  return `<div class="sch-cal"><div class="sch-cm"><b class="sc-mo"><i>${y}</i><span>${m+1}<small>月</small></span><em>${["JANUARY","FEBRUARY","MARCH","APRIL","MAY","JUNE","JULY","AUGUST","SEPTEMBER","OCTOBER","NOVEMBER","DECEMBER"][m]}</em></b></div><div class="sch-wd">${[...WD].map(w=>`<i>${w}</i>`).join("")}</div><div class="sch-g">${c}</div><p class="wx-src">天気：気象庁の予報（埼玉県南部）。毎日自動で新しくなるよ</p></div>`}
+  return `<div class="sch-cal"><div class="sch-cm"><b class="sc-mo cw-mo"><i>${y}　${m+1}月</i><span>${["January","February","March","April","May","June","July","August","September","October","November","December"][m]}</span></b></div><div class="sch-wd">${[...WD].map(w=>`<i>${w}</i>`).join("")}</div><div class="sch-g">${c}</div><p class="wx-src">天気：気象庁の予報（埼玉県南部）。毎日自動で新しくなるよ</p></div>`}
 function logCard(e){const C=SCH_CAT[e.cat]||SCH_CAT.own,kc=schColor(e),kn=kc?kidColor(+e.kid):null,[y,m,d]=e.date.split("-").map(Number),dt=new Date(y,m-1,d);
   return `<div class="sch-i sch-lgc" role="button" tabindex="0" data-logopen="${esc(e.key)}"${kc?` style="--kc:${kc}"`:""}><span class="kn-ic">${relIc(C[1])}</span><div class="sch-b"><em class="sch-dt lg">✓ 通知済み　${m}/${d}（${WD[dt.getDay()]}）</em><b>${esc(e.t)}</b>
    <span class="sch-tg"><i>${esc(C[0])}</i>${kn?`<i class="kid">${esc(kn.hon||kn.n)}</i>`:""}${e.tag?`<i>${esc(e.tag)}</i>`:""}</span></div><i class="sch-go">›</i></div>`}
@@ -5388,7 +5408,7 @@ function schFoldRestore(){const o=window._schFold||{};document.querySelectorAll(
 document.addEventListener("click",e=>{const b=e.target.closest("[data-bd]");if(!b)return;e.preventDefault();const f=b.closest("[data-schform]");f.querySelectorAll("[data-bd]").forEach(x=>x.classList.toggle("on",x===b));f.querySelector('[data-f="band"]').value=b.dataset.bd;const s=f.querySelector('[data-f="ah"]');[...s.options].forEach(o=>{if(o.value)o.hidden=o.dataset.band!==b.dataset.bd});if(s.selectedOptions[0]&&s.selectedOptions[0].hidden)s.value=""});
 /* カレンダーを横にスライドして月をかえる */
 /* カレンダー：指についてくるスライドで月をかえる（日にちと月の名前が横に動く） */
-const calEls=()=>[...document.querySelectorAll(".sch-cal .sch-g,.sch-cal .sch-wd,.sch-cal .sch-cm b")];
+const calEls=()=>[...document.querySelectorAll(".sch-cal .sch-g")];/* 11/23 月の名前と曜日はうごかさない（日にちだけスライド） */
 function calSet(x,op,tr){calEls().forEach(el=>{el.style.transition=tr||"none";el.style.transform=x?`translateX(${x}px)`:"";el.style.opacity=op==null?"":op})}
 let calS=null;
 function calStart(x,y,el){if(!el.closest(".sch-cal"))return;calS={x,y,dx:0,drag:false}}
@@ -6234,8 +6254,8 @@ let RAWQ="";function setRaw(v){RAWQ=(v||"").normalize("NFKC").replace(NOISE,"").
 function qph(ws){const k=ws.join("|")+"#"+RAWQ;if(k===QPK&&QP)return QP;const list=ws.map(qk);const j=qk(RAWQ||ws.join(""));if(ws.length>1||RAWQ)list.push(j);QPK=k;QP={list,all:Math.max(3,j.length)};return QP}
 function load(){if(DATA)return Promise.resolve(DATA);
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
-  const kp=fetch(base+"near-data/tel-kana.json?v=11231542").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
-  return Promise.all([fetch(base+"near-data/tel.json?v=11231542").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
+  const kp=fetch(base+"near-data/tel-kana.json?v=11231609").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
+  return Promise.all([fetch(base+"near-data/tel.json?v=11231609").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
     .catch(()=>{DATA=[];return DATA})}
 /* 聞きとった文 → キーワード */
 function terms(text){let s=(text||"").normalize("NFKC").replace(NOISE," ");
