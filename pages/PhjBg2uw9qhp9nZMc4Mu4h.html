@@ -1137,7 +1137,7 @@ function ok(t){const d=t.data;if(done.has(t)||d.length<5||!/[぀-ヿ一-鿿]/.te
   while(e&&e.nodeType===1){if(SKIP.test(e.nodeName)||e.isContentEditable||(e.classList&&e.classList.contains("nojb")))return false;e=e.parentNode}return true}
 function run(root){if(!root)return;const L=[];if(root.nodeType===3){if(ok(root))L.push(root)}else{const tw=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;while(n=tw.nextNode())if(ok(n))L.push(n)}
   if(!L.length)return;mo&&mo.disconnect();
-  for(const t of L){const fine=!!(t.parentNode.closest&&t.parentNode.closest("td,th"));const ps=jbLong(jbParts(t.data.split("​").join(""),fine).filter(x=>x));done.add(t);if(ps.length<2)continue;
+  for(const t of L){if(!t.parentNode||!t.isConnected)continue;const fine=!!(t.parentNode.closest&&t.parentNode.closest("td,th"));const ps=jbLong(jbParts(t.data.split("​").join(""),fine).filter(x=>x));done.add(t);if(ps.length<2)continue;
     const f=document.createDocumentFragment();ps.forEach((s,i)=>{if(i)f.appendChild(document.createElement("wbr"));const n=document.createTextNode(s);done.add(n);f.appendChild(n)});t.parentNode.replaceChild(f,t)}
   mo&&mo.observe(document.documentElement,{childList:true,subtree:true,characterData:true})}
 document.documentElement.classList.add("jb2");

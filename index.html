@@ -1068,6 +1068,18 @@ body.spn-open{overflow:hidden}
 /* 上の帯：もどるボタンが出たとき（ページをひらいたとき）も、ロゴとボタンが重ならないように */
 @media (max-width:449px){.top .wrap{gap:6px}.top .brand{flex:0 0 auto}.top .brand b{display:none!important}.top .brand img{height:40px;margin:-2px 0}.me>span:last-child:not(:first-child){display:none}.me{padding:3px}}
 /*/spn2-css*/
+/*day3-css*/
+.d3{margin:6px 0 10px}
+.tw-g .wt{width:auto;min-width:0}
+.sch-day .d3 .wt{min-height:130px}
+.d3-n{margin:0 0 10px;padding:9px 12px;border-radius:14px;background:#FFF8E1;border:1.5px solid #F7DC8C}
+.d3-n summary{font-weight:900;font-size:13px;color:#5A4A12;cursor:pointer}.d3-n summary b{color:#B4500F}.d3-n summary small{margin-left:6px;font-size:10.5px;color:#8A7A3C;font-weight:700}
+.d3-n[open] summary{margin-bottom:8px}
+.th-sch .th-wx{font-style:normal;margin-left:4px;font-size:1.05em}
+/* 予定を書くフォームが小さいスマホではみ出さないように */
+.sch-add{box-sizing:border-box;max-width:100%;overflow:hidden}.sch-add>*,.sch-add label,.sch-add .sch-band,.sch-add .bd-btns{box-sizing:border-box;max-width:100%;min-width:0}
+.sch-add select,.sch-add input{box-sizing:border-box;max-width:100%;min-width:0}.sch-add .tp{display:flex;gap:6px;min-width:0}.sch-add .tp>*{flex:1 1 0;min-width:0;width:auto}
+/*/day3-css*/
 /*today-css*/
 /* きょうの予定（ホログラム） */
 .rm-card.hfull{max-width:min(520px,calc(100vw - 20px))}
@@ -1092,13 +1104,12 @@ body.spn-open{overflow:hidden}
 /* さがすの窓：ホログラム・画面の6割くらいの大きさで、まん中に */
 .spn{align-items:center;padding:0 10px}
 .spn-card,.spn-card.spn-h2{width:min(560px,100%);height:min(62vh,620px);max-height:none;margin:0;overflow:auto;padding:18px 16px 18px;border-radius:28px;
-  background:linear-gradient(135deg,rgba(255,255,255,.72),rgba(236,230,255,.62) 40%,rgba(224,246,255,.62) 70%,rgba(255,232,244,.66))!important;
-  -webkit-backdrop-filter:blur(16px) saturate(1.4)!important;backdrop-filter:blur(16px) saturate(1.4)!important;border:2px solid rgba(255,255,255,.9)!important;
+  border:2px solid rgba(255,255,255,.95)!important;
   box-shadow:0 0 0 1px rgba(166,139,255,.4),0 0 40px rgba(140,120,255,.45),0 24px 60px rgba(90,90,239,.3),inset 0 0 40px rgba(255,255,255,.45)!important;
   transform:translateY(24px) scale(.9);filter:blur(6px) hue-rotate(60deg)}
 .spn.on .spn-card{transform:none;filter:none;transition:transform .6s cubic-bezier(.2,1.2,.3,1),opacity .35s ease,filter .5s ease}
-.spn-card::before{content:"";position:absolute;inset:-40%;background:conic-gradient(from 0deg,rgba(255,143,184,0),rgba(255,143,184,.26),rgba(166,139,255,.26),rgba(53,179,238,.26),rgba(255,214,64,.2),rgba(255,143,184,0));animation:holoSpin 7s linear infinite;pointer-events:none;z-index:0}
-.spn-card::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.16) 0 1px,transparent 1px 4px);pointer-events:none;animation:holoScan 3s linear infinite;z-index:0}
+.spn-card::before{content:"";position:absolute;inset:-40%;opacity:.42;background:conic-gradient(from 0deg,rgba(255,143,184,0),rgba(255,143,184,.26),rgba(166,139,255,.26),rgba(53,179,238,.26),rgba(255,214,64,.2),rgba(255,143,184,0));animation:holoSpin 7s linear infinite;pointer-events:none;z-index:0}
+.spn-card::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.22) 0 1px,transparent 1px 4px);pointer-events:none;animation:holoScan 3s linear infinite;z-index:0}
 .spn-card>*{position:relative;z-index:1}
 .spn-top b{font-size:19px}.spn-ic{width:38px;height:38px}
 .spn-body .hs input{font-size:17px}
@@ -2426,7 +2437,7 @@ function holoTouch(map){if(!map||map._wtouch)return;map._wtouch=1;const box=map.
   if(window.IntersectionObserver)new IntersectionObserver(es=>es.forEach(e=>{if(e.intersectionRatio<.35)lock()}),{threshold:[0,.35,.6]}).observe(box);
 }
 /* ==== /holo-map ==== */
-/*vcheck*/(function(){var V="11231320";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
+/*vcheck*/(function(){var V="11231423";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
 <script>
 (()=>{
 const $=s=>document.querySelector(s);
@@ -4851,7 +4862,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11231320");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11231423");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -5322,7 +5333,7 @@ function sheetSched(){wxLoad();
   const kidOpt=kids.map((k,i)=>`<option value="${i}">${esc(kidColor(i).hon||kidColor(i).n)}</option>`).join("");
   const cats=Object.keys(SCH_CAT).filter(k=>k!=="reco").map(k=>`<option value="${k}"${k==="own"?" selected":""}>${SCH_CAT[k][0]}</option>`).join("");
   return `<div class="sch-top"><h3 id="sheetTitle" class="sch-sr">わたしのスケジュール</h3><span class="sch-topic">${svg(KIC("cal")||MINI.star,40)}</span><p>お知らせとじぶんの予定を、<wbr>まとめて見られるよ。</p><em class="sch-share">家族との共有　準備中</em></div>${schCal()}
-   ${day?`<div class="sch-day" id="schDayBox"><p class="sch-h sch-dayh">${esc(schDayText(schDay))}</p>${day.length?day.map(schCard).join(""):`<p class="sch-none">この日の予定・お知らせはないよ</p>`}
+   ${day?`<div class="sch-day" id="schDayBox"><p class="sch-h sch-dayh">${esc(schDayText(schDay))}</p>${day3Html(schDay)}${day3Notes(schDay)}
    ${schForm({date:schDay})}</div>`:`<p class="sch-hint">📅 日にちをタップすると、その日のくわしい内容が見られて、予定も書けるよ</p>`}
    <details class="sch-fold sch-kinds"><summary>お知らせの種類</summary><div class="sch-kb">
    <details class="sch-fold"><summary>えらべるお知らせ<small>${KN_OPT_T.filter(x=>knSoftOn()[x]).length}/${KN_OPT_T.length}</small></summary><p class="sch-note">チェックしたものが届くよ。名前をタップで説明が出るよ。</p>
@@ -5397,7 +5408,7 @@ window.themeize=themeize;function themeize(){Object.entries(THEMES).forEach(([id
     const fb=sec.querySelector(".fbar .fb-t small");if(fb){const tt=(sec.querySelector(".fb-t")||{}).textContent||"";if(!tt.includes(t.split("・")[0]))fb.insertAdjacentHTML("afterbegin",pill)}
     const h=sec.querySelector(".head > div");if(h&&!fb)h.insertAdjacentHTML("afterbegin",pill)});
   const nav=document.getElementById("thNav");if(nav&&!nav.children.length)nav.innerHTML=`<a href="#sched" class="th-sch" style="--th:#5A5AEF"><i></i>📅 スケジュール</a>`+THNAV.map(([id,t,c])=>`<a href="#" data-thgo="${id}" style="--th:${c}"><i></i>${t}</a>`).join("");
-  if(nav)[...nav.children].forEach(a=>{if(!a.dataset.thgo)return;const el=document.getElementById(a.dataset.thgo);a.hidden=!el||el.hidden})}
+  if(nav)[...nav.children].forEach(a=>{if(!a.dataset.thgo)return;const el=document.getElementById(a.dataset.thgo);a.hidden=!el||el.hidden});typeof thSchWx==="function"&&thSchWx()}
 document.addEventListener("click",e=>{const a=e.target.closest("[data-thgo]");if(!a)return;e.preventDefault();const el=document.getElementById(a.dataset.thgo);if(!el)return;
   if(el.classList.contains("fold")&&!el.classList.contains("open")){const b=el.querySelector(".fbar");b&&b.click()}
   const y=el.getBoundingClientRect().top+scrollY-120;scrollTo({top:y,behavior:"smooth"})});
@@ -5427,6 +5438,18 @@ function kyuGrowHtml(){if(typeof grKids!=="function")return "";const K=grKids();
     return `<div class="kg-r"><i style="--kc:${k.c}">${esc(k.hon)}</i><span class="kg-a">${n.mo<12?n.mo+"か月":Math.floor(n.mo/12)+"歳"+(n.mo%12?n.mo%12+"か月":"")}</span><span class="kg-v">身長 だいたい <b>${grFmt(n.h.v,"h")}</b>cm・体重 だいたい <b>${grFmt(n.w.v,"w")}</b>kg</span><small>${last?`${+last.d.slice(5,7)}月の記録から計算したよ`:"同じ月齢の子のまんなか"}</small></div>`}).join("")}
    <p class="kg-note">⚠️ これは<b>めやす</b>だよ。お薬の量を決めるときに聞かれることもあるので、<b>電話や病院に行く前に、できればちゃんと測ってね</b>。</p></div>`}
 /*/spn2-js*/
+/*day3-js*/
+/* 午前・午後・夜の3つのマス（自分の予定だけ・天気の動き） */
+function day3Html(k){const L=schSortT(schGet().filter(e=>e.date===k));
+  return `<div class="tw-g d3">${Object.keys(SCH_BAND).map((b,n)=>{const c=wxBand(k,b)||"none",E=L.filter(e=>schBand(e)===b);
+    return `<div class="wt wt-${c} wb-${b}" style="animation-delay:${.1+n*.1}s"><span class="wt-fx"><i></i><i></i><i></i></span><div class="wt-in"><p class="wt-h">${SCH_BAND[b][0].replace("の用事","")}</p><p class="tw-ic">${c!=="none"?({sun:"☀️",moon:"🌙",cloud:"☁️",rain:"☔",snow:"⛄"})[c]:"・"}</p>${E.length?E.map(e=>`<button type="button" class="wt-e" data-schview="${e.id}"><i>${e.at?esc(t12(e.at)):""}</i>${esc(e.t)}</button>`).join(""):`<p class="wt-no">予定なし</p>`}</div></div>`}).join("")}</div>`}
+function day3Notes(k){const N=knLogList().filter(e=>e.date===k);if(!N.length)return "";
+  return `<details class="d3-n"><summary>🔔 この日のお知らせ <b>${N.length}件</b><small>タップでひらく</small></summary>${N.map(schCard).join("")}</details>`}
+/* テーマの「📅 スケジュール」にきょうの天気 */
+function thSchWx(){const a=document.querySelector("#thNav .th-sch");if(!a)return;let w=null;try{w=wxGet().d[ymd(new Date())]}catch(e){}
+  const ic=w&&w.c?(WX_IC[w.c]||""):"";a.innerHTML=`<i></i>📅 スケジュール${ic?`<em class="th-wx">${ic}</em>`:""}`}
+[300,2500,7000].forEach(ms=>setTimeout(()=>{try{wxLoad()}catch(e){}thSchWx()},ms));
+/*/day3-js*/
 /*today-js*/
 /* きょうの予定：午前・午後・夜＋天気（ホログラム） */
 function todayPop(){const k=ymd(new Date()),L=schSortT(schGet().filter(e=>e.date===k)),w=wxGet().d[k];
@@ -5434,7 +5457,7 @@ function todayPop(){const k=ymd(new Date()),L=schSortT(schGet().filter(e=>e.date
     return `<div class="wt wt-${c} wb-${b}" style="animation-delay:${.15+n*.12}s"><span class="wt-fx"><i></i><i></i><i></i></span><div class="wt-in"><p class="wt-h">${SCH_BAND[b][0].replace("の用事","")}</p><p class="tw-ic">${c!=="none"?({sun:"☀️",moon:"🌙",cloud:"☁️",rain:"☔",snow:"⛄"})[c]:"・"}</p>${E.length?E.map(e=>`<button type="button" class="wt-e" data-schview="${e.id}"><i>${e.at?esc(t12(e.at)):""}</i>${esc(e.t)}</button>`).join(""):`<p class="wt-no">予定なし</p>`}</div></div>`}).join("");
   openPop(`<div class="kp tw-pop"><p class="tw-k">TODAY</p><b class="tw-t">きょうの予定</b><p class="tw-d">${esc(schDayText(k))}</p>
    ${w&&w.c?`<p class="tw-wx">${WX_IC[w.c]||""} ${esc(w.t||"")}${w.hi!=null?`<span>${w.hi}° / ${w.lo}°</span>`:""}</p>`:`<p class="tw-wx tw-wx0">天気をよみこみ中…</p>`}
-   <div class="tw-g">${sq}</div>
+   ${day3Html(k)}${day3Notes(k)}
    <a class="tw-go" href="#sched">スケジュールをひらく ›</a><p class="wx-src">天気：気象庁の予報</p></div>`,"きょうの予定","holo hfull")}
 document.addEventListener("click",e=>{if(e.target.closest(".tw-go"))closeRoom()});
 /* 1日のはじめて開いたとき（オープニングのあと）に1回だけ */
@@ -6155,8 +6178,8 @@ let RAWQ="";function setRaw(v){RAWQ=(v||"").normalize("NFKC").replace(NOISE,"").
 function qph(ws){const k=ws.join("|")+"#"+RAWQ;if(k===QPK&&QP)return QP;const list=ws.map(qk);const j=qk(RAWQ||ws.join(""));if(ws.length>1||RAWQ)list.push(j);QPK=k;QP={list,all:Math.max(3,j.length)};return QP}
 function load(){if(DATA)return Promise.resolve(DATA);
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
-  const kp=fetch(base+"near-data/tel-kana.json?v=11231320").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
-  return Promise.all([fetch(base+"near-data/tel.json?v=11231320").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
+  const kp=fetch(base+"near-data/tel-kana.json?v=11231423").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
+  return Promise.all([fetch(base+"near-data/tel.json?v=11231423").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
     .catch(()=>{DATA=[];return DATA})}
 /* 聞きとった文 → キーワード */
 function terms(text){let s=(text||"").normalize("NFKC").replace(NOISE," ");
@@ -6411,7 +6434,7 @@ function ok(t){const d=t.data;if(done.has(t)||d.length<5||!/[぀-ヿ一-鿿]/.te
   while(e&&e.nodeType===1){if(SKIP.test(e.nodeName)||e.isContentEditable||(e.classList&&e.classList.contains("nojb")))return false;e=e.parentNode}return true}
 function run(root){if(!root)return;const L=[];if(root.nodeType===3){if(ok(root))L.push(root)}else{const tw=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;while(n=tw.nextNode())if(ok(n))L.push(n)}
   if(!L.length)return;mo&&mo.disconnect();
-  for(const t of L){const fine=!!(t.parentNode.closest&&t.parentNode.closest("td,th"));const ps=jbLong(jbParts(t.data.split("​").join(""),fine).filter(x=>x));done.add(t);if(ps.length<2)continue;
+  for(const t of L){if(!t.parentNode||!t.isConnected)continue;const fine=!!(t.parentNode.closest&&t.parentNode.closest("td,th"));const ps=jbLong(jbParts(t.data.split("​").join(""),fine).filter(x=>x));done.add(t);if(ps.length<2)continue;
     const f=document.createDocumentFragment();ps.forEach((s,i)=>{if(i)f.appendChild(document.createElement("wbr"));const n=document.createTextNode(s);done.add(n);f.appendChild(n)});t.parentNode.replaceChild(f,t)}
   mo&&mo.observe(document.documentElement,{childList:true,subtree:true,characterData:true})}
 document.documentElement.classList.add("jb2");
