@@ -1093,6 +1093,15 @@ body.spn-open{overflow:hidden}
 .dh-pop .wt-e{font-size:16px}
 .dh-pop .d3-n{text-align:left;margin:10px 0 0}
 .dh-add{display:block;width:100%;margin:12px 0 6px;padding:12px;border:0;border-radius:999px;background:linear-gradient(135deg,#7B3BFF,#0094FF);color:#fff;font:inherit;font-weight:900;font-size:15px;box-shadow:0 8px 20px rgba(91,80,255,.35);cursor:pointer}
+/* 1つずつ大きく：横スライド（予定がなくても同じ） */
+.dh-pop .wt-g{gap:12px;scroll-padding:0 6%}
+.dh-pop .wt{flex:0 0 100%;aspect-ratio:auto;height:min(52vh,440px);border-radius:22px}
+.dh-pop .wt-in{padding:16px 16px;gap:10px}
+.dh-pop .wt-h{font-size:18px;padding:5px 14px}
+.dh-pop .wt .dh-big{margin:4px 0 2px;font-size:64px;line-height:1;filter:drop-shadow(0 4px 10px rgba(0,0,0,.18))}
+.dh-pop .wt-e{font-size:17px;padding:10px 13px}
+.dh-pop .wt-no{font-size:16px;font-weight:800;opacity:.85}
+.dh-pop .wt-dots{margin-top:8px}.dh-pop .wt-dots i{width:10px;height:10px}.dh-pop .wt-dots i.on{width:26px}
 /*/dh-css*/
 /*today-css*/
 /* きょうの予定（ホログラム） */
@@ -1131,6 +1140,7 @@ body.spn-open{overflow:hidden}
 /* 上の帯：いつもの並び（右よせ）のまま、子どもの急病だけ少し左へ（マイクと近すぎないように） */
 .top .sosbtn{margin-right:12px}
 @media (max-width:359px){.top .sosbtn{margin-right:6px}}
+.ky-wrap.ky-now,.ky-wrap.ky-now .ky{transition:none!important}
 /*/today-css*/
 /*sos-css*/
 .sosbtn{display:inline-flex;align-items:center;gap:4px;height:32px;padding:0 10px 0 7px;border-radius:999px;border:1.5px solid #FFC2D4;background:#fff;color:#E5508C;font:inherit;font-size:11.5px;font-weight:900;cursor:pointer;flex:0 0 auto;white-space:nowrap}
@@ -2454,7 +2464,7 @@ function holoTouch(map){if(!map||map._wtouch)return;map._wtouch=1;const box=map.
   if(window.IntersectionObserver)new IntersectionObserver(es=>es.forEach(e=>{if(e.intersectionRatio<.35)lock()}),{threshold:[0,.35,.6]}).observe(box);
 }
 /* ==== /holo-map ==== */
-/*vcheck*/(function(){var V="11231511";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
+/*vcheck*/(function(){var V="11231528";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
 <script>
 (()=>{
 const $=s=>document.querySelector(s);
@@ -4879,7 +4889,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11231511");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11231528");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -5339,7 +5349,7 @@ function schUpDays(up){const by={};schSortT(up).forEach(e=>{(by[e.date]=by[e.dat
   return Object.keys(by).sort().map(k=>{const w=wxGet().d[k];return `<button type="button" class="up-day" data-upday="${k}"><span class="ud-h"><b>${esc(schDayText(k))}</b>${w&&w.c?`<i>${WX_IC[w.c]}${w.hi!=null?` ${w.hi}°`:""}</i>`:""}<em>${by[k].length}件 ›</em></span>${by[k].map(e=>{const kc=schColor(e);return `<span class="ud-r"${kc?` style="--kc:${kc}"`:""}><i>${esc(schAtText(e))}</i><b>${esc(e.t)}</b></span>`}).join("")}</button>`}).join("")}
 /* 日にちをタップ：午前・午後・夜の3つの四角（その時間帯の天気のアニメーション） */
 function schBandPop(k,fb,hi,from){const L=schSortT(schGet().filter(e=>e.date===k)),w=wxGet().d[k],BK=Object.keys(SCH_BAND).slice(Math.max(0,Object.keys(SCH_BAND).indexOf(from||"am")));
-  const sq=BK.map(b=>{const c=wxBand(k,b)||"none",E=L.filter(e=>schBand(e)===b);return `<div class="wt wt-${c} wb-${b}"><span class="wt-fx"><i></i><i></i><i></i></span><div class="wt-in"><p class="wt-h">${SCH_BAND[b][0].replace("の用事","")}${c!=="none"?` ${({sun:"☀️",moon:"🌙",cloud:"☁️",rain:"☔",snow:"⛄"})[c]}`:""}</p>${E.length?E.map(e=>`<button type="button" class="wt-e${e.id===hi?" hi":""}" data-schview="${e.id}"><i>${e.at?esc(t12(e.at)):""}</i>${esc(e.t)}</button>`).join(""):`<p class="wt-no">なし</p>`}</div></div>`}).join("");
+  const sq=BK.map(b=>{const c=wxBand(k,b)||"none",E=L.filter(e=>schBand(e)===b);return `<div class="wt wt-${c} wb-${b}"><span class="wt-fx"><i></i><i></i><i></i></span><div class="wt-in"><p class="wt-h">${SCH_BAND[b][0].replace("の用事","")}</p><p class="dh-big">${c!=="none"?({sun:"☀️",moon:"🌙",cloud:"☁️",rain:"☔",snow:"⛄"})[c]:"・"}</p>${E.length?E.map(e=>`<button type="button" class="wt-e${e.id===hi?" hi":""}" data-schview="${e.id}"><i>${e.at?esc(t12(e.at)):""}</i>${esc(e.t)}</button>`).join(""):`<p class="wt-no">予定なし</p>`}</div></div>`}).join("");
   const isT=k===ymd(new Date());openPop(`<div class="kp sch-bpop dh-pop">${isT?`<p class="tw-k">TODAY</p>`:""}<b class="dh-t">${isT?"きょうの予定":esc(schDayText(k))+"の予定"}</b>${isT?`<p class="tw-d">${esc(schDayText(k))}</p>`:""}${w&&w.c?`<p class="dh-wx"><span class="dh-wi">${WX_IC[w.c]||""}</span><span class="dh-wt">${esc(w.t||"")}</span>${w.hi!=null?`<span class="dh-tp"><b>${w.hi}°</b> / ${w.lo}°</span>`:""}</p>`:`<p class="dh-wx dh-wx0">${(new Date(k)-new Date(ymd(new Date())))/864e5<=6&&k>=ymd(new Date())?"天気をよみこみ中…（電波のよいところで出るよ）":"天気は、だいたい1週間先まで出るよ"}</p>`}<div class="wt-g" id="wtG">${sq}</div><div class="wt-dots">${BK.map((b,i)=>`<i data-wti="${i}"></i>`).join("")}</div>${typeof day3Notes==="function"?day3Notes(k):""}<button type="button" class="dh-add" data-dhadd="${k}">＋ この日に予定を書く</button><p class="wx-src">← 横にスライド →　天気：気象庁の予報</p></div>`,schDayText(k),"holo hfull");
   const g=$("#wtG");if(g){const i=Math.max(0,BK.indexOf(fb||"am"));const dot=()=>{const n=Math.round(g.scrollLeft/(g.children[0].offsetWidth+10));document.querySelectorAll(".wt-dots i").forEach((d,j)=>d.classList.toggle("on",j===n))};requestAnimationFrame(()=>{g.scrollLeft=i*(g.children[0].offsetWidth+10);dot()});g.addEventListener("scroll",dot,{passive:true})}}
 document.addEventListener("click",e=>{const d=e.target.closest("[data-wti]");if(!d)return;const g=$("#wtG");g&&g.scrollTo({left:+d.dataset.wti*(g.children[0].offsetWidth+10),behavior:"smooth"})});
@@ -5477,7 +5487,7 @@ function todayPop(){const h=new Date().getHours(),b=h<12?"am":h<18?"pm":"night";
 /*/dh-js*/
 /*today-js*/
 /* きょうの予定：午前・午後・夜＋天気（ホログラム） */
-function todayPop(){const k=ymd(new Date()),L=schSortT(schGet().filter(e=>e.date===k)),w=wxGet().d[k];
+function todayPopOld(){const k=ymd(new Date()),L=schSortT(schGet().filter(e=>e.date===k)),w=wxGet().d[k];
   const sq=Object.keys(SCH_BAND).map((b,n)=>{const c=wxBand(k,b)||"none",E=L.filter(e=>schBand(e)===b);
     return `<div class="wt wt-${c} wb-${b}" style="animation-delay:${.15+n*.12}s"><span class="wt-fx"><i></i><i></i><i></i></span><div class="wt-in"><p class="wt-h">${SCH_BAND[b][0].replace("の用事","")}</p><p class="tw-ic">${c!=="none"?({sun:"☀️",moon:"🌙",cloud:"☁️",rain:"☔",snow:"⛄"})[c]:"・"}</p>${E.length?E.map(e=>`<button type="button" class="wt-e" data-schview="${e.id}"><i>${e.at?esc(t12(e.at)):""}</i>${esc(e.t)}</button>`).join(""):`<p class="wt-no">予定なし</p>`}</div></div>`}).join("");
   openPop(`<div class="kp tw-pop"><p class="tw-k">TODAY</p><b class="tw-t">きょうの予定</b><p class="tw-d">${esc(schDayText(k))}</p>
@@ -5492,6 +5502,11 @@ setTimeout(function(){let t,tk;try{t=ymd(new Date());const hh=new Date().getHour
   let n=0;const wait=()=>{n++;const b=document.body;if(n<60&&(!b.classList.contains("is-ready")||b.classList.contains("is-loading")||document.getElementById("rmOv"))){setTimeout(wait,300);return}
     if(location.hash&&location.hash.length>1)return;LS.set("wolly.todaypop",tk);
     /* 天気がまだなら少しまつ */let m=0;const go=()=>{m++;if(!(wxGet().d||{})[t]&&m<8){setTimeout(go,300);return}todayPop()};setTimeout(go,350)};wait()},0);
+/* 子どもの急病から開いたときは、急患電話マップの中身をはじめからひらいておく（スクロールもしない） */
+(function(){const ob=new MutationObserver(()=>{if(!window._kyAuto||Date.now()-window._kyAuto>3000)return;const w=document.getElementById("kyBox"),b=document.querySelector("#sheet [data-kyopen]");
+  if(!w||!b||w.classList.contains("open"))return;window._kyAuto=0;w.classList.add("ky-now","open");b.setAttribute("aria-expanded","true");b.firstChild&&(b.firstChild.textContent="とじる ");
+  requestAnimationFrame(()=>requestAnimationFrame(()=>w.classList.remove("ky-now")))});
+  const sb=document.getElementById("sheetBody");sb&&ob.observe(sb,{childList:true})})();
 /*/today-js*/
 /*sos-js*/
 /* 祝日（2026・2027年）。毎年4月の見直しで翌年分を足す */
@@ -5501,7 +5516,7 @@ function sosWhen(){const d=new Date(),h=d.getHours(),ds=d.getFullYear()+"-"+Stri
 function sosPaint(){const b=$("#sosBtn");if(!b)return;const w=sosWhen();b.classList.toggle("hot",!!w);b.dataset.when=w}
 /* 11/23 ボタンは「小児科 急患電話マップ」のページ（#x-…）を開き、中身もひらく。ホームの「困ったときはこちら」には何も足さない（急患電話マップと同じことを書かないため） */
 function renderSosHelp(){}
-document.addEventListener("click",e=>{if(e.target.closest("#sosBtn")){e.preventDefault();const i=HEALTH.findIndex(h=>h.kyu);location.hash=i>=0?"#x-"+i:"#kyubyo";/* 中身（電話番号）もひらいておく */[500,900].forEach(ms=>setTimeout(()=>{const o=document.querySelector("#sheet [data-kyopen]");if(o&&o.getAttribute("aria-expanded")!=="true")o.click()},ms));/* ひらいたあとも、ページのいちばん上（題名と「あわてなくてだいじょうぶ」）から見せる */[1300,1700].forEach(ms=>setTimeout(()=>{const sh=$("#sheet"),sb=$("#sheetBody");sh&&(sh.scrollTop=0);sb&&(sb.scrollTop=0)},ms))}});
+document.addEventListener("click",e=>{if(e.target.closest("#sosBtn")){e.preventDefault();const i=HEALTH.findIndex(h=>h.kyu);location.hash=i>=0?"#x-"+i:"#kyubyo";/* 中身（電話番号）は、ページが出るときにはもうひらいている（あとから動かさない） */window._kyAuto=Date.now()}});
 sosPaint();setInterval(sosPaint,5*60*1000);
 /*/sos-js*/
 /*wgrow-js*/
@@ -6203,8 +6218,8 @@ let RAWQ="";function setRaw(v){RAWQ=(v||"").normalize("NFKC").replace(NOISE,"").
 function qph(ws){const k=ws.join("|")+"#"+RAWQ;if(k===QPK&&QP)return QP;const list=ws.map(qk);const j=qk(RAWQ||ws.join(""));if(ws.length>1||RAWQ)list.push(j);QPK=k;QP={list,all:Math.max(3,j.length)};return QP}
 function load(){if(DATA)return Promise.resolve(DATA);
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
-  const kp=fetch(base+"near-data/tel-kana.json?v=11231511").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
-  return Promise.all([fetch(base+"near-data/tel.json?v=11231511").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
+  const kp=fetch(base+"near-data/tel-kana.json?v=11231528").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
+  return Promise.all([fetch(base+"near-data/tel.json?v=11231528").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
     .catch(()=>{DATA=[];return DATA})}
 /* 聞きとった文 → キーワード */
 function terms(text){let s=(text||"").normalize("NFKC").replace(NOISE," ");
