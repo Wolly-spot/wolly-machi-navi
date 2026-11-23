@@ -1043,9 +1043,31 @@ body.spn-open{overflow:hidden}
 /* 上の帯の「声で探す」 */
 .vbtn{display:inline-flex;align-items:center;gap:3px;height:32px;padding:0 9px 0 6px;border-radius:999px;border:1.5px solid #D9CCFF;background:#fff;color:#6A3BE0;font:inherit;font-size:11.5px;font-weight:900;cursor:pointer;flex:0 0 auto;white-space:nowrap}
 .vbtn svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-@media (max-width:429px){.vbtn{padding:0;width:32px;justify-content:center}.vbtn span{display:none}}
+@media (max-width:449px){.vbtn{padding:0;width:32px;justify-content:center}.vbtn span{display:none}}
 @media (max-width:389px){.top .wrap{gap:6px}.me>span:last-child:not(:first-child){display:none}.me{padding:3px}}
 /*/spn-css*/
+/*spn2-css*/
+.spn-card.spn-h2{-webkit-backdrop-filter:none;backdrop-filter:none;border:1.5px solid #fff;box-shadow:0 20px 50px rgba(70,50,160,.22)}
+.spn-card.spn-h2 .spn-x{background:#fff}
+/* 上の帯のマイク：ムンムン */
+.vbtn{position:relative;overflow:visible;background:linear-gradient(135deg,#FFF0F7,#F1ECFF)}
+.vbtn::after{content:"";position:absolute;inset:-2px;border-radius:inherit;box-shadow:0 0 0 0 rgba(176,79,224,.55);animation:vbPing 1.8s ease-out infinite;pointer-events:none}
+.vbtn svg{animation:vbBob 1.8s ease-in-out infinite}
+@keyframes vbPing{0%{box-shadow:0 0 0 0 rgba(176,79,224,.55)}70%,100%{box-shadow:0 0 0 10px rgba(176,79,224,0)}}
+@keyframes vbBob{0%,100%{transform:scale(1)}40%{transform:scale(1.18)}}
+@media (prefers-reduced-motion:reduce){.vbtn::after,.vbtn svg{animation:none}}
+/* 電話の前のメモ：身長・体重のめやす */
+.kg{margin:10px 0 2px;padding:10px 11px;border-radius:14px;background:#fff;border:1.5px dashed #F2C94C}
+.kg-h{margin:0 0 6px;font-weight:900;font-size:13px;color:#5A4A12}
+.kg-r{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;padding:6px 0;border-bottom:1px dashed #F3E6B5;font-size:12.5px;font-weight:700;color:#3a3352}
+.kg-r:last-of-type{border-bottom:0}
+.kg-r i{font-style:normal;font-size:11px;font-weight:800;color:#fff;background:var(--kc);padding:2px 9px;border-radius:999px}
+.kg-r b{font-size:15px;color:#2C2866}.kg-r small{flex-basis:100%;font-size:10.5px;color:#8A7A3C}
+.kg-no{margin:0;font-size:12px;color:#5B5F7A;font-weight:700}
+.kg-note{margin:6px 0 0;padding:7px 9px;border-radius:10px;background:#FFF6D6;font-size:11.5px;line-height:1.6;color:#5A4A12;font-weight:700}.kg-note b{color:#B4500F}
+/* 上の帯：もどるボタンが出たとき（ページをひらいたとき）も、ロゴとボタンが重ならないように */
+@media (max-width:449px){.top .wrap{gap:6px}.top .brand{flex:0 0 auto}.top .brand b{display:none!important}.top .brand img{height:40px;margin:-2px 0}.me>span:last-child:not(:first-child){display:none}.me{padding:3px}}
+/*/spn2-css*/
 /*sos-css*/
 .sosbtn{display:inline-flex;align-items:center;gap:4px;height:32px;padding:0 10px 0 7px;border-radius:999px;border:1.5px solid #FFC2D4;background:#fff;color:#E5508C;font:inherit;font-size:11.5px;font-weight:900;cursor:pointer;flex:0 0 auto;white-space:nowrap}
 .sosbtn svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
@@ -2368,7 +2390,7 @@ function holoTouch(map){if(!map||map._wtouch)return;map._wtouch=1;const box=map.
   if(window.IntersectionObserver)new IntersectionObserver(es=>es.forEach(e=>{if(e.intersectionRatio<.35)lock()}),{threshold:[0,.35,.6]}).observe(box);
 }
 /* ==== /holo-map ==== */
-/*vcheck*/(function(){var V="11231049";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
+/*vcheck*/(function(){var V="11231108";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
 <script>
 (()=>{
 const $=s=>document.querySelector(s);
@@ -4040,7 +4062,7 @@ function sheetKyukan(i){
        ${who(KYU_PEOPLE.city,"看護師さんなど","さいたま市の相談窓口。子どもの急な病気やけがのとき、家でできる手当てや、病院に行ったほうがいいかを教えてくれるよ。さいたま市に住んでいる、または滞在している子どもと、その家族が相談できるんだ。")}</div>
      <div class="ky-card blue"><b class="ky-name">小児救急電話相談</b>${tel("#8000")}<span class="ky-hr">24時間・365日（中学生まで）</span>
        ${who(KYU_PEOPLE.n8000,"看護師さん（埼玉県の相談員）","埼玉県の「小児救急電話相談」。家でできることや、病院に行ったほうがいいかを教えてくれるよ。夜中も休日も、<b>24時間</b>つながるんだ。対象は<b>中学生まで</b>。電話でのアドバイスなので、診察じゃないよ。")}</div>
-     <div class="ky-memo">${pop("電話の前にメモしておくと伝えやすいこと",svg(MEMO_IC.note,40),`<b class="ky-mh">電話の前にメモしておくと伝えやすいこと</b><ul class="ky-ml">${MEMO.map(([k,t])=>`<li><span class="mi">${svg(MEMO_IC[k],40)}</span><span>${t}</span></li>`).join("")}</ul>`)}</div>
+     <div class="ky-memo">${pop("電話の前にメモしておくと伝えやすいこと",svg(MEMO_IC.note,40),`<b class="ky-mh">電話の前にメモしておくと伝えやすいこと</b><ul class="ky-ml">${MEMO.map(([k,t])=>`<li><span class="mi">${svg(MEMO_IC[k],40)}</span><span>${t}</span></li>`).join("")}</ul>${typeof kyuGrowHtml==="function"?kyuGrowHtml():""}`)}</div>
      <div class="ky-sub"><h4>休日・夜間の急患診療所（4か所）</h4><p>小児科は、かぜや発熱などの内科的な病気のみ。時間は受付時間だよ。診療所をタップすると、くわしい情報と地図が出るんだ。</p></div>
      <div id="kyList">${kyListHtml()}</div>
      <p class="foot">熱などの症状があるときは、受診の前に電話で相談してね。出典：さいたま市「子ども急患電話相談」「休日・夜間の急患診療所」、埼玉県「小児救急電話相談」（2026年11月時点）。診療日や時間は変わることがあるので、出かける前に電話などで確認してね。</p>
@@ -4793,7 +4815,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11231049");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11231108");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -5357,6 +5379,18 @@ document.addEventListener("click",e=>{if(e.target.closest("[data-spx]")){e.preve
 document.addEventListener("keydown",e=>{if(e.key==="Escape")spnClose()});
 window.addEventListener("hashchange",()=>{if(location.hash==="#search")spnOpen();else spnClose()});
 /*/spn-js*/
+/*spn2-js*/
+/* さがすの窓の背景は、前のホームの検索の枠（.hero2）と同じ */
+(function(){const h=document.querySelector(".hero2"),c=document.querySelector(".spn-card");if(!h||!c)return;const cs=getComputedStyle(h);
+  c.style.backgroundImage=cs.backgroundImage;c.style.backgroundColor=cs.backgroundColor;c.style.backgroundSize=cs.backgroundSize;c.style.backgroundPosition=cs.backgroundPosition;c.style.backgroundRepeat=cs.backgroundRepeat;c.classList.add("spn-h2")})();
+/* 電話の前のメモ：お子さんの身長・体重のめやす（すくすくメモから） */
+function kyuGrowHtml(){if(typeof grKids!=="function")return "";const K=grKids();
+  const head=`<p class="kg-h">📏 お子さんの身長・体重（めやす）</p>`;
+  if(!K.length)return `<div class="kg">${head}<p class="kg-no">マイページでお子さんの生まれた年月を登録すると、ここに身長・体重のめやすが出るよ。</p></div>`;
+  return `<div class="kg">${head}${K.map(k=>{const n=grNow(k),R=grRecs(k),last=R[R.length-1];
+    return `<div class="kg-r"><i style="--kc:${k.c}">${esc(k.hon)}</i><span class="kg-a">${n.mo<12?n.mo+"か月":Math.floor(n.mo/12)+"歳"+(n.mo%12?n.mo%12+"か月":"")}</span><span class="kg-v">身長 だいたい <b>${grFmt(n.h.v,"h")}</b>cm・体重 だいたい <b>${grFmt(n.w.v,"w")}</b>kg</span><small>${last?`${+last.d.slice(5,7)}月の記録から計算したよ`:"同じ月齢の子のまんなか"}</small></div>`}).join("")}
+   <p class="kg-note">⚠️ これは<b>めやす</b>だよ。お薬の量を決めるときに聞かれることもあるので、<b>電話や病院に行く前に、できればちゃんと測ってね</b>。</p></div>`}
+/*/spn2-js*/
 /*sos-js*/
 /* 祝日（2026・2027年）。毎年4月の見直しで翌年分を足す */
 const SOS_HOLI=["2026-01-01","2026-01-12","2026-02-11","2026-02-23","2026-03-20","2026-04-29","2026-05-03","2026-05-04","2026-05-05","2026-05-06","2026-07-20","2026-08-11","2026-09-21","2026-09-22","2026-09-23","2026-10-12","2026-11-03","2026-11-23","2027-01-01","2027-01-11","2027-02-11","2027-02-23","2027-03-21","2027-03-22","2027-04-29","2027-05-03","2027-05-04","2027-05-05","2027-07-19","2027-08-11","2027-09-20","2027-09-23","2027-10-11","2027-11-03","2027-11-23"];
@@ -6067,8 +6101,8 @@ let RAWQ="";function setRaw(v){RAWQ=(v||"").normalize("NFKC").replace(NOISE,"").
 function qph(ws){const k=ws.join("|")+"#"+RAWQ;if(k===QPK&&QP)return QP;const list=ws.map(qk);const j=qk(RAWQ||ws.join(""));if(ws.length>1||RAWQ)list.push(j);QPK=k;QP={list,all:Math.max(3,j.length)};return QP}
 function load(){if(DATA)return Promise.resolve(DATA);
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
-  const kp=fetch(base+"near-data/tel-kana.json?v=11231049").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
-  return Promise.all([fetch(base+"near-data/tel.json?v=11231049").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
+  const kp=fetch(base+"near-data/tel-kana.json?v=11231108").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
+  return Promise.all([fetch(base+"near-data/tel.json?v=11231108").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
     .catch(()=>{DATA=[];return DATA})}
 /* 聞きとった文 → キーワード */
 function terms(text){let s=(text||"").normalize("NFKC").replace(NOISE," ");
