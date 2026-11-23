@@ -1054,6 +1054,8 @@ html.hnew .kn-bell .ri{width:34px;height:34px;filter:drop-shadow(0 2px 2px rgba(
 /* シートの題名が右上の「とじる」の下にもぐらないように（長い題名は空白のところで2行に） */
 .dhead>div{min-width:0}.dhead h3{white-space:normal!important;word-break:keep-all}
 #sheetBody .dhead{margin-top:48px!important}
+/* 急患電話マップ：「電話に出てくれるのはどんな人？」は1行に */
+.ky-card .ky-tap .kt-l{white-space:nowrap;min-width:0}.ky-card .ky-tap{white-space:nowrap;font-size:clamp(10px,3.6vw,15px)!important;gap:8px}@media (max-width:359px){.ky-card .ky-tap{font-size:10.5px!important;gap:5px;padding-left:6px!important;padding-right:6px!important}.ky-card .ky-tap .kt-ic{width:30px;height:30px}}.ky-card .ky-tap .kt-ic{width:34px;height:34px}
 /*/sos-css*/
 /*wgrow-css*/
 .gr{margin:12px 0}
@@ -2344,7 +2346,7 @@ function holoTouch(map){if(!map||map._wtouch)return;map._wtouch=1;const box=map.
   if(window.IntersectionObserver)new IntersectionObserver(es=>es.forEach(e=>{if(e.intersectionRatio<.35)lock()}),{threshold:[0,.35,.6]}).observe(box);
 }
 /* ==== /holo-map ==== */
-/*vcheck*/(function(){var V="11230819";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
+/*vcheck*/(function(){var V="11231026";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
 <script>
 (()=>{
 const $=s=>document.querySelector(s);
@@ -4005,7 +4007,7 @@ function sheetKyukan(i){
   const tel=(n,big=true)=>callA(n,big?"call big":"call");
   /* タップするとその場にふわっと出る小窓（×で閉じる） */
   const pop=(label,icon,inner)=>`<button class="ky-tap" type="button" data-kypop aria-expanded="false"><span class="kt-ic">${icon}</span>${label}<span class="kt-ar">${ico('<path d="M6 9l6 6 6-6"/>')}</span></button><div class="ky-pop" hidden><button class="iconbtn ky-x" type="button" data-kyx aria-label="閉じる">${ico('<path d="M6 6l12 12M18 6L6 18"/>')}</button>${inner}</div>`;
-  const who=(icon,name,more)=>pop("電話に出てくれるのはどんな人？",`<span class="kt-pp">${icon}</span>`,`<div class="ky-who"><span class="ky-pp">${icon}</span><div class="ky-wn"><small>電話に出てくれる人</small><b>${name}</b></div><p>${more}</p></div>`);
+  const who=(icon,name,more)=>pop(`<span class="kt-l nojb">電話に出てくれるのはどんな人？</span>`,`<span class="kt-pp">${icon}</span>`,`<div class="ky-who"><span class="ky-pp">${icon}</span><div class="ky-wn"><small>電話に出てくれる人</small><b>${name}</b></div><p>${more}</p></div>`);
   return dhead(`<svg viewBox="0 0 24 24" style="width:44px;height:44px;fill:none;stroke:#fff;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round">${P[item.p]}</svg>`,st[0],TAG.health,item.t,esc(item.k))+
    `<p class="lead" style="margin:0 0 12px;font-size:14.5px;line-height:1.8">${esc(item.lead)}</p><ul class="feat">${item.f.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>
    <button class="go ky-open" type="button" data-kyopen aria-expanded="false" aria-controls="kyBox">ページをひらく <span class="chev">${ico('<path d="M6 9l6 6 6-6"/>')}</span></button>
@@ -4769,7 +4771,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11230819");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11231026");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -6030,8 +6032,8 @@ let RAWQ="";function setRaw(v){RAWQ=(v||"").normalize("NFKC").replace(NOISE,"").
 function qph(ws){const k=ws.join("|")+"#"+RAWQ;if(k===QPK&&QP)return QP;const list=ws.map(qk);const j=qk(RAWQ||ws.join(""));if(ws.length>1||RAWQ)list.push(j);QPK=k;QP={list,all:Math.max(3,j.length)};return QP}
 function load(){if(DATA)return Promise.resolve(DATA);
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
-  const kp=fetch(base+"near-data/tel-kana.json?v=11230819").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
-  return Promise.all([fetch(base+"near-data/tel.json?v=11230819").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
+  const kp=fetch(base+"near-data/tel-kana.json?v=11231026").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
+  return Promise.all([fetch(base+"near-data/tel.json?v=11231026").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
     .catch(()=>{DATA=[];return DATA})}
 /* 聞きとった文 → キーワード */
 function terms(text){let s=(text||"").normalize("NFKC").replace(NOISE," ");
