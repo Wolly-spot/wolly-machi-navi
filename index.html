@@ -1142,6 +1142,22 @@ body.spn-open{overflow:hidden}
 @media (max-width:359px){.top .sosbtn{margin-right:6px}}
 .ky-wrap.ky-now,.ky-wrap.ky-now .ky{transition:none!important}
 /*/today-css*/
+/*stand-css*/
+/* 子どもの急病：いつも目立つ色と光のわく */
+.top .sosbtn{position:relative;background:linear-gradient(135deg,#FF5F8F,#B44CFF)!important;color:#fff!important;border:2px solid #fff!important;
+  box-shadow:0 0 0 2px #FF8FB8,0 6px 16px rgba(230,80,140,.35)!important}
+.top .sosbtn .th-b{fill:#fff!important}
+.top .sosbtn::before{content:"";position:absolute;inset:-4px;border-radius:999px;border:2px solid rgba(255,95,143,.75);animation:sosRing 2s ease-out infinite;pointer-events:none}
+.top .sosbtn.hot::before{border-color:rgba(255,255,255,.95);animation-duration:1.3s}
+.top .sosbtn.hot{box-shadow:0 0 0 2px #FFD36E,0 0 18px rgba(255,95,143,.7)!important}
+@keyframes sosRing{0%{opacity:.9;transform:scale(1)}80%,100%{opacity:0;transform:scale(1.18,1.45)}}
+@media (prefers-reduced-motion:reduce){.top .sosbtn::before{animation:none}}
+/* ホームの「困ったときはこちら」は出さない */
+#sec-help{display:none!important}
+/* 子どもの急病は、どのスマホでも1行（小さいスマホは字を少し小さく・体温計のマークを小さく） */
+.top .sosbtn span{white-space:nowrap!important;max-width:none!important}
+@media (max-width:359px){.top .sosbtn{height:32px!important;padding:0 7px 0 5px!important;gap:2px!important;margin-right:4px!important}.top .sosbtn span{font-size:10px!important;letter-spacing:-.03em}.top .sosbtn svg{width:12px!important;height:12px!important}.top .wrap{gap:5px!important}.top .brand img{height:36px!important}}
+/*/stand-css*/
 /*sos-css*/
 .sosbtn{display:inline-flex;align-items:center;gap:4px;height:32px;padding:0 10px 0 7px;border-radius:999px;border:1.5px solid #FFC2D4;background:#fff;color:#E5508C;font:inherit;font-size:11.5px;font-weight:900;cursor:pointer;flex:0 0 auto;white-space:nowrap}
 .sosbtn svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
@@ -2464,7 +2480,7 @@ function holoTouch(map){if(!map||map._wtouch)return;map._wtouch=1;const box=map.
   if(window.IntersectionObserver)new IntersectionObserver(es=>es.forEach(e=>{if(e.intersectionRatio<.35)lock()}),{threshold:[0,.35,.6]}).observe(box);
 }
 /* ==== /holo-map ==== */
-/*vcheck*/(function(){var V="11231528";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
+/*vcheck*/(function(){var V="11231542";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
 <script>
 (()=>{
 const $=s=>document.querySelector(s);
@@ -3592,7 +3608,7 @@ function soonDeadlines(){
 /* ===== さがす：入力したことばに合うものを、カテゴリーごとにふわっと半透明で出す。カテゴリーを押すとその場所へ ===== */
 const HS_CAT={"健診・病院":["#go-health",()=>svg(CH.health)],"保活ナビ":["#hokatsu",()=>svg(CH.hokatsu)],"お金":["#okane",()=>svg(CH.money)],
   "習い事":["#go-lesson",()=>svg(CH.lesson)],"公園":["#go-park",()=>svg(CH.park)],"家の近く":["#near",()=>svg(MINI.cross,40)],"交流施設":["view:near?g=hub",()=>svg(MINI.hand,40)],
-  "イベント":["#go-event",()=>svg(GIC.cal,40)],"クーポン":["#go-coupon",()=>svg(CH.coupon)],"お店":["#go-shopnews",()=>svg(CH.shop)],"困ったとき":["#sec-help",()=>svg(MEMO_IC.temp,40)],
+  "イベント":["#go-event",()=>svg(GIC.cal,40)],"クーポン":["#go-coupon",()=>svg(CH.coupon)],"お店":["#go-shopnews",()=>svg(CH.shop)],"困ったとき":["#kyubyo",()=>svg(MEMO_IC.temp,40)],
   "地域":["#myArea",()=>svg(GIC.map,40)],"預け先":["#azuke",()=>svg(NIC.nursery,40)],
   "小児科・内科":["view:near?g=ped",()=>svg(MINI.cross,40)],"歯医者さん":["view:near?g=dent",()=>svg(MINI.cross,40)],"耳鼻科":["view:near?g=ent",()=>svg(MINI.cross,40)],"眼科":["view:near?g=eye",()=>svg(MINI.cross,40)],
   "皮膚科":["view:near?g=skin",()=>svg(MINI.cross,40)],"形成外科":["view:near?g=plastic",()=>svg(MINI.cross,40)],"整形外科":["view:near?g=ortho",()=>svg(MINI.cross,40)],"薬局":["view:near?g=pharm",()=>svg(MINI.cross,40)],
@@ -4889,7 +4905,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11231528");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11231542");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -5569,7 +5585,7 @@ document.addEventListener("submit",e=>{const f=e.target.closest("[data-grform]")
 /*/wgrow-js*/
 /*wguide-js*/
 /* ── Wolly街ナビってなに？（ページの使い方） ── */
-const WG_JUMP=[["🔔","お知らせ","#kidNotice"],["🧒","年齢からさがす","#wAge"],["🆘","困ったとき","#sec-help"],["🧭","子育てナビ","#sec-navi"],["🎈","あそぶ・でかける","#sec-enjoy"],["🏫","学校・受験","#sec-school"],["📅","スケジュール","#sched"]];
+const WG_JUMP=[["🔔","お知らせ","#kidNotice"],["🧒","年齢からさがす","#wAge"],["🌡️","子どもの急病","#kyubyo"],["🧭","子育てナビ","#sec-navi"],["🎈","あそぶ・でかける","#sec-enjoy"],["🏫","学校・受験","#sec-school"],["📅","スケジュール","#sched"]];
 const WG_LINE=["妊娠","0歳","1〜2歳","3〜5歳","小学生","中学生","高校入学"];
 function wgReg(){return getKids().length>0||!!getDue()}
 function renderGuide(){const el=$("#wGuide");if(!el)return;const reg=wgReg(),op=LS.get("wolly.wgopen");const open=op==null?!reg:!!op;
@@ -5581,7 +5597,7 @@ function renderGuide(){const el=$("#wGuide");if(!el)return;const reg=wgReg(),op=
    ${reg?"":`<a class="wg-cta" href="#mypage">マイページで登録する（無料）›</a>`}
    <p class="wg-jh">このページでできること</p><div class="wg-jump">${WG_JUMP.map(([e,t,h])=>`<a href="${h}" data-wgj="${h}">${e} ${t}</a>`).join("")}</div></div>`}
 document.addEventListener("click",e=>{if(e.target.closest("[data-wgt]")){const el=$("#wGuide");LS.set("wolly.wgopen",!el.classList.contains("open"));renderGuide();return}
-  const j=e.target.closest("[data-wgj]");if(j){const h=j.dataset.wgj;if(h==="#sched")return;e.preventDefault();const t=document.querySelector(h);if(t){const y=t.getBoundingClientRect().top+scrollY-90;scrollTo({top:y,behavior:"smooth"})}}});
+  const j=e.target.closest("[data-wgj]");if(j){const h=j.dataset.wgj;if(h==="#sched"||h==="#kyubyo")return;e.preventDefault();const t=document.querySelector(h);if(t){const y=t.getBoundingClientRect().top+scrollY-90;scrollTo({top:y,behavior:"smooth"})}}});
 /* ── 年齢からさがす ── */
 const AGE_GUIDE=[
  {k:"preg",t:"妊娠中",ic:"kids",c:"#B977FF",s:"母子手帳・健診・お産の病院",m:[-12,-1],
@@ -6218,8 +6234,8 @@ let RAWQ="";function setRaw(v){RAWQ=(v||"").normalize("NFKC").replace(NOISE,"").
 function qph(ws){const k=ws.join("|")+"#"+RAWQ;if(k===QPK&&QP)return QP;const list=ws.map(qk);const j=qk(RAWQ||ws.join(""));if(ws.length>1||RAWQ)list.push(j);QPK=k;QP={list,all:Math.max(3,j.length)};return QP}
 function load(){if(DATA)return Promise.resolve(DATA);
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
-  const kp=fetch(base+"near-data/tel-kana.json?v=11231528").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
-  return Promise.all([fetch(base+"near-data/tel.json?v=11231528").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
+  const kp=fetch(base+"near-data/tel-kana.json?v=11231542").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
+  return Promise.all([fetch(base+"near-data/tel.json?v=11231542").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
     .catch(()=>{DATA=[];return DATA})}
 /* 聞きとった文 → キーワード */
 function terms(text){let s=(text||"").normalize("NFKC").replace(NOISE," ");
