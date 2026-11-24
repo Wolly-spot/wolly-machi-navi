@@ -1418,6 +1418,34 @@ html[data-theme="dark"] .wxt{color:#d9d4ff}
 .an-wait b{display:block;font-size:14px;color:#2C2866;font-weight:900;margin:4px 0}
 .an-wait p{margin:0;font-size:11.5px;line-height:1.65;color:#6B6690;font-weight:700}
 .an-news{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:11px 14px;border-radius:16px;background:#fff;border:1.5px dashed #D9D2F5;font-size:12.5px;font-weight:800;color:#5A5AEF;text-decoration:none;margin:4px 0 8px}
+
+.anv{margin:4px 0 14px;padding:14px 12px 12px;border-radius:20px;background:linear-gradient(#fff,#fff) padding-box,linear-gradient(135deg,#FFC9DE,#D9CCFF,#BFE8FF) border-box;border:2px solid transparent}
+.anv h4{margin:0 0 2px;font-size:15px;font-weight:900;color:#2C2866}
+.anv .av-s{margin:0 0 10px;font-size:11px;line-height:1.6;color:#6B6690;font-weight:700}
+.av-f{display:flex;gap:6px;overflow-x:auto;margin:0 -2px 10px;padding:0 2px 2px;scrollbar-width:none}
+.av-f button{flex:0 0 auto;font:inherit;font-size:11.5px;font-weight:800;padding:5px 11px;border-radius:999px;border:1.5px solid #E3DEFF;background:#fff;color:#5b5680;cursor:pointer}
+.av-f button.on{background:#5A5AEF;border-color:#5A5AEF;color:#fff}
+.av-l{display:grid;gap:7px;margin:0 0 10px}
+.av-i{padding:9px 11px;border-radius:14px;background:#F8F6FF;border:1.5px solid #EEEAFB}
+.av-i .t{display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px;font-size:12.5px;font-weight:900;color:#2C2866}
+.av-i .k{font-size:10.5px;font-weight:900;color:#fff;border-radius:999px;padding:1px 8px;background:#FF6F9F}
+.av-i .k.h{background:#E8B400}
+.av-i .w{font-size:11px;font-weight:800;color:#6B6690}
+.av-i p{margin:4px 0 0;font-size:11.5px;line-height:1.6;color:#4a4378;font-weight:700}
+.av-i .d{display:flex;justify-content:space-between;align-items:center;margin-top:3px;font-size:10px;color:#9a94bb;font-weight:700}
+.av-i .d button{font:inherit;font-size:10.5px;font-weight:800;color:#C2185B;background:none;border:0;padding:2px 4px;cursor:pointer}
+.av-none{text-align:center;font-size:11.5px;color:#8d88b0;font-weight:700;padding:10px 4px}
+.av-go{display:block;width:100%;font:inherit;font-size:13.5px;font-weight:900;color:#fff;border:0;border-radius:999px;padding:11px;background:linear-gradient(135deg,#FF7BAC,#8E6CFF);box-shadow:0 8px 18px rgba(142,108,255,.25);cursor:pointer}
+.av-form{display:grid;gap:9px;margin-top:10px}
+.av-form label{display:grid;gap:4px;font-size:11.5px;font-weight:900;color:#2C2866}
+.av-form label small{font-weight:700;color:#8d88b0}
+.av-form select,.av-form input,.av-form textarea{font:inherit;font-size:16px;padding:9px 10px;border-radius:12px;border:1.5px solid #D9D2F5;background:#fff;color:#2C2866;width:100%;box-sizing:border-box}
+.av-form textarea{min-height:64px;resize:vertical}
+.av-chips{display:flex;flex-wrap:wrap;gap:6px}
+.av-chips button{font:inherit;font-size:12px;font-weight:800;padding:6px 11px;border-radius:999px;border:1.5px solid #E3DEFF;background:#fff;color:#5b5680;cursor:pointer}
+.av-chips button.on{background:#FF7BAC;border-color:#FF7BAC;color:#fff}
+.av-rule{font-size:10.5px;line-height:1.6;color:#8d88b0;font-weight:700;margin:0;padding:8px 10px;border-radius:12px;background:#FFF8E6}
+.av-msg{font-size:11.5px;font-weight:800;color:#C2185B;margin:0;text-align:center}
 @media (max-width:359px){.an-c img,.an-c .an-ph{width:52px;height:52px}.an-c b{font-size:13px}.an-d{grid-template-columns:34px 1fr auto;gap:8px;padding:9px 10px}.an-d .ic{width:34px;height:34px;font-size:19px}}
 /*/anshin-css*//*kn-slim*/.kn{border-radius:18px}.kn .kn-h{padding:5px 10px;gap:8px;min-height:0}.kn .kn-h b{font-size:12px!important;line-height:1.35}.kn .kn-h .kn-tk{font-size:10px!important}.kn .kn-h>span:nth-child(2){gap:0}.kn .kn-tk{line-height:1.35}.kn .kn-bell{width:30px;height:30px}.kn .kn-bell svg{width:21px;height:21px}.kn .kn-bell em{min-width:16px;height:16px;font-size:10px;line-height:16px;top:-3px;right:-4px;padding:0 4px}.kn .kn-chev{font-size:11px;padding:3px 9px}.kn::before{height:22px}/*/kn-slim*/
 /*kn-noboost*/html{-webkit-text-size-adjust:100%;text-size-adjust:100%}.kn .kn-h b,.kn .kn-h .kn-tk,.kn .kn-tkr i{-webkit-text-size-adjust:none;text-size-adjust:none;max-height:1.5em}/*/kn-noboost*/
@@ -2629,7 +2657,7 @@ function holoTouch(map){if(!map||map._wtouch)return;map._wtouch=1;const box=map.
   if(window.IntersectionObserver)new IntersectionObserver(es=>es.forEach(e=>{if(e.intersectionRatio<.35)lock()}),{threshold:[0,.35,.6]}).observe(box);
 }
 /* ==== /holo-map ==== */
-/*vcheck*/(function(){var V="11241047";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
+/*vcheck*/(function(){var V="11241102";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
 <script>
 (()=>{
 const $=s=>document.querySelector(s);
@@ -3438,6 +3466,7 @@ function anKansenHtml(d){
    <div class="an-list">${show.map(li).join("")}</div>
    ${rows.length>show.length?`<button type="button" class="an-more" data-anall>ほかの病気も見る（${rows.length-show.length}）</button>`:""}
    <div class="an-how"><b>数字の見かた</b><ul><li>さいたま市の決まった小児科などから届いた1週間の患者さんの数を、<b>1つの病院あたり</b>にしたものだよ（右の「人」）。</li><li>「多い」「とても多い」は、国が注意報・警報を出す目安などをもとに、Wollyが分けたもの。↑↓は先週とのくらべ。</li><li>具合がわるいときは、この数字にかかわらず、かかりつけの病院に相談してね。</li></ul></div>
+   <div id="anVoice" class="anv">${avHtml()}</div>
    <p class="an-src2">出典：${esc(d.src||"埼玉県感染症情報センター 週報")}<br><a href="${esc(d.url||d.page||"#")}" target="_blank" rel="noopener">この週の週報（PDF）</a>・<a href="${esc(d.page||"#")}" target="_blank" rel="noopener">感染症情報センターのページ</a></p>`}
 function anBouhanHtml(){
   return `<div class="an-wait"><b>ただいま準備中だよ</b><p>埼玉県警の「犯罪情報官NEWS」から、さいたま市の不審者（声かけ・つきまとい など）や、空き巣などの事件を、届いたらすぐにお知らせする予定です。</p></div>
@@ -3446,10 +3475,57 @@ function anCard(k){const A=AN_SRC[k],ch=CH_TALK&&CH_TALK[A.ch];
   return `<button type="button" class="an-c${anSel===k?" on":""}" data-an="${k}" aria-pressed="${anSel===k}" style="--ac:${A.ac};--ac2:${A.ac2}"><span class="an-ck"></span>${A.soon?`<span class="an-soon">準備中</span>`:""}${ch?`<img src="${ch}" alt="">`:`<span class="an-ph"></span>`}<b>${esc(A.t)}</b><span class="an-src"><i>どこから</i>${esc(A.from)}</span><span class="an-up"><i>🔄 更新</i>${esc(A.up)}</span></button>`}
 function anBody(){return anSel==="kansen"?(KANSEN?anKansenHtml(KANSEN):`<div class="an-wait"><p>読みこみ中…</p></div>`):anBouhanHtml()}
 function sheetAnshin(){
-  anLoad().then(()=>{const b=document.getElementById("anBody");if(b&&anSel==="kansen")b.innerHTML=anBody()});
+  anLoad().then(()=>{const b=document.getElementById("anBody");if(b&&anSel==="kansen")b.innerHTML=anBody()});avLoad();
   return dhead(`<span style="font-size:26px">🛡️</span>`,"#EEF0FF","ANSHIN","あんしん情報","病気のはやりと、まちの安全。見たいほうをえらんでね")+
    `<div class="an-pick">${anCard("kansen")}${anCard("bouhan")}</div><div id="anBody">${anBody()}</div>
     <a class="an-news" href="#news"><span>📰 さいたま市のニュース・お店情報</span><span>›</span></a>`}
+
+/* ── みんなのクチコミ（どこで何がはやっているか・学級閉鎖）。保存は Wolly の業務システム（Voices.gs）。書くのはLINEの中だけ ── */
+const AV_WARDS=["西区","北区","大宮区","見沼区","中央区","桜区","浦和区","南区","緑区","岩槻区"];
+const AV_PLACES=["保育園・幼稚園","小学校","中学校","高校","習い事・その他"];
+const AV_KINDS=["学級閉鎖","学年閉鎖","学校・園がお休み","はやっている"];
+const AV_DIS=["インフルエンザ","新型コロナ","RSウイルス","溶連菌","胃腸炎（おう吐・下痢）","手足口病","ヘルパンギーナ","プール熱","マイコプラズマ","水ぼうそう","おたふくかぜ","りんご病","かぜ・熱","そのほか"];
+let AV=null,avWard="",avForm=false,avBusy=false,avMsg="",avPT="小学校";
+function avMyWard(){try{return (S.profile&&S.profile.ward)||""}catch(e){return ""}}
+function avApi(action,payload,tok){return fetch(WOLLY_API,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({app:"navi",action,payload:payload||{},idToken:tok||undefined})}).then(r=>r.json())}
+async function avLoad(){const tok=await lineToken();const r=await avApi("voiceList",{},tok).catch(()=>null);AV=r&&r.ok?r.data.list:(AV||[]);avPaint()}
+function avPaint(){const b=document.getElementById("anVoice");if(b)b.innerHTML=avHtml()}
+function avHtml(){
+  if(!avWard&&avWard!=="all")avWard=avMyWard()||"all";
+  const list=AV||[],wards=[...new Set(list.map(v=>v.ward))];
+  const show=avWard==="all"?list:list.filter(v=>v.ward===avWard);
+  const fil=`<div class="av-f"><button type="button" data-avw="all" class="${avWard==="all"?"on":""}">ぜんぶ（${list.length}）</button>${AV_WARDS.filter(w=>wards.includes(w)||w===avMyWard()).map(w=>`<button type="button" data-avw="${w}" class="${avWard===w?"on":""}">${w}${w===avMyWard()?"🏠":""}（${list.filter(v=>v.ward===w).length}）</button>`).join("")}</div>`;
+  const items=AV===null?`<div class="av-none">読みこみ中…</div>`:show.length?show.slice(0,30).map(v=>`<div class="av-i"><div class="t"><span class="k${v.kind==="はやっている"?" h":""}">${esc(v.kind)}</span>${esc(v.disease)}<span class="w">${esc(v.ward)}・${esc(v.placeType)}${v.place?`（${esc(v.place)}）`:""}</span></div>${v.note?`<p>${esc(v.note)}</p>`:""}<div class="d"><span>${+v.at.slice(5,7)}/${+v.at.slice(8,10)}</span>${v.mine?`<button type="button" data-avdel="${v.id}">自分の投稿を消す</button>`:""}</div></div>`).join(""):`<div class="av-none">${avWard==="all"?"まだクチコミはないよ。気づいたことがあったら、教えてね":esc(avWard)+"のクチコミは、まだないよ"}</div>`;
+  const form=!avForm?`<button type="button" class="av-go" data-avopen>✏️ クチコミを書く</button>`:avFormHtml();
+  return `<h4>💬 みんなのクチコミ</h4><p class="av-s">「〇〇小で学級閉鎖」「園で胃腸炎がはやってる」など、メンバーが教えてくれたこと（さいきん14日）。公式の情報ではないので、めやすにしてね。</p>${fil}<div class="av-l">${items}</div>${form}`}
+function avFormHtml(){const inLine=/Line\//i.test(navigator.userAgent);
+  if(!inLine)return `<p class="av-rule">クチコミを書けるのは、LINEの中で街ナビを開いたときだけだよ（なりすましを防ぐため）。Wollyのトーク画面の下のメニューから開いてね。</p>`;
+  const opt=(a,sel)=>a.map(x=>`<option${x===sel?" selected":""}>${x}</option>`).join("");
+  return `<div class="av-form">
+   <label>区<select id="avWard">${opt(AV_WARDS,avMyWard()||"浦和区")}</select></label>
+   <label>どこで？<div class="av-chips">${AV_PLACES.map(x=>`<button type="button" data-avpt="${x}" class="${x===avPT?"on":""}">${x}</button>`).join("")}</div></label>
+   <label>学校・園の名前 <small>（書かなくてもOK・30字まで）</small><input id="avPlace" maxlength="30" placeholder="例：〇〇小学校"></label>
+   <label>ようす<select id="avKind">${opt(AV_KINDS,"学級閉鎖")}</select></label>
+   <label>病気<select id="avDis">${opt(AV_DIS,"インフルエンザ")}</select></label>
+   <label>ひとこと <small>（書かなくてもOK・80字まで）</small><textarea id="avNote" maxlength="80" placeholder="例：2年生が学級閉鎖。熱が高い子が多いみたい"></textarea></label>
+   <p class="av-rule">⚠️ お子さん・先生・おうちの人の名前や、うわさ・決めつけは書かないでね。書いた人の名前は出ません。運営が見て、合わないものは消すことがあります。</p>
+   ${avMsg?`<p class="av-msg">${esc(avMsg)}</p>`:""}
+   <button type="button" class="av-go" data-avsend${avBusy?" disabled":""}>${avBusy?"送っています…":"書きこむ"}</button></div>`}
+document.addEventListener("click",async e=>{
+  const w=e.target.closest("[data-avw]");if(w){avWard=w.dataset.avw;avPaint();return}
+  if(e.target.closest("[data-avopen]")){avForm=true;avMsg="";avPaint();return}
+  const pt=e.target.closest("[data-avpt]");if(pt){avPT=pt.dataset.avpt;document.querySelectorAll("[data-avpt]").forEach(x=>x.classList.toggle("on",x===pt));return}
+  const del=e.target.closest("[data-avdel]");if(del){if(!confirm("この投稿を消しますか？"))return;const tok=await lineToken();const r=await avApi("voiceDelete",{id:+del.dataset.avdel},tok).catch(()=>null);if(r&&r.ok){AV=r.data.list;avPaint()}else alert((r&&r.error)||"消せませんでした");return}
+  if(e.target.closest("[data-avsend]")&&!avBusy){
+    const p={ward:$("#avWard").value,placeType:avPT,place:$("#avPlace").value.trim(),kind:$("#avKind").value,disease:$("#avDis").value,note:$("#avNote").value.trim()};
+    const keep={place:p.place,note:p.note};
+    avBusy=true;avMsg="";avPaint();$("#avPlace").value=keep.place;$("#avNote").value=keep.note;
+    const tok=await lineToken();
+    const r=tok?await avApi("voicePost",p,tok).catch(()=>null):{ok:false,error:"LINEの確認ができませんでした。街ナビを開き直してね"};
+    avBusy=false;
+    if(r&&r.ok){AV=r.data.list;avForm=false;avWard=p.ward;avMsg="";avPaint();try{tapLog&&tapLog("あんしん：クチコミを書いた")}catch(_){}}
+    else{avMsg=(r&&r.error)||"送れませんでした。少したってからもう一度ためしてね";avPaint();$("#avPlace").value=keep.place;$("#avNote").value=keep.note}
+  }});
 document.addEventListener("click",e=>{const c=e.target.closest("[data-an]");if(c){e.preventDefault();anSel=c.dataset.an;anAll=false;
     document.querySelectorAll(".an-c").forEach(x=>{const on=x.dataset.an===anSel;x.classList.toggle("on",on);x.setAttribute("aria-pressed",on)});
     const b=document.getElementById("anBody");if(b){b.innerHTML=anBody();if(anSel==="kansen")anLoad().then(()=>{if(anSel==="kansen")b.innerHTML=anBody()})}return}
@@ -5110,7 +5186,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11241047");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11241102");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -6560,8 +6636,8 @@ let RAWQ="";function setRaw(v){RAWQ=(v||"").normalize("NFKC").replace(NOISE,"").
 function qph(ws){const k=ws.join("|")+"#"+RAWQ;if(k===QPK&&QP)return QP;const list=ws.map(qk);const j=qk(RAWQ||ws.join(""));if(ws.length>1||RAWQ)list.push(j);QPK=k;QP={list,all:Math.max(3,j.length)};return QP}
 function load(){if(DATA)return Promise.resolve(DATA);
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
-  const kp=fetch(base+"near-data/tel-kana.json?v=11241047").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
-  return Promise.all([fetch(base+"near-data/tel.json?v=11241047").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
+  const kp=fetch(base+"near-data/tel-kana.json?v=11241102").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
+  return Promise.all([fetch(base+"near-data/tel.json?v=11241102").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
     .catch(()=>{DATA=[];return DATA})}
 /* 聞きとった文 → キーワード */
 function terms(text){let s=(text||"").normalize("NFKC").replace(NOISE," ");
