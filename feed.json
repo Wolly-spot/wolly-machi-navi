@@ -1,19 +1,6 @@
 {
- "updatedAt": "2026-11-24T09:55:00+09:00",
+ "updatedAt": "2026-11-24T19:30:00+09:00",
  "events": [
-  {
-   "id": "e-cocoon-card10",
-   "kind": "point",
-   "title": "コクーンシティカード10%オフ（11/20〜24）",
-   "desc": "5日間、コクーンシティカードの支払いで10%オフに。",
-   "date": "2026-11-20",
-   "area": "さいたま市大宮区",
-   "src": "コクーンシティ",
-   "url": "https://www.cocooncity.jp/event/detail/2880",
-   "img": "https://www.cocooncity.jp/theme/cocooncity/resources/images/ogp.png",
-   "ai": false,
-   "added": "2026-11-13T09:45:00+09:00"
-  },
   {
    "id": "e-thomas-skipcity",
    "kind": "facility",
