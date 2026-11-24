@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-23T19:00:00+09:00",
+ "updatedAt": "2026-11-24T09:55:00+09:00",
  "events": [
   {
    "id": "e-cocoon-card10",
@@ -416,17 +416,30 @@
  ],
  "news": [
   {
-   "id": "n-orange-ribbon-2026",
+   "id": "n-3nin-jitensha-r8",
    "kind": "kosodate",
-   "title": "11月は児童虐待防止のオレンジリボン月間",
-   "desc": "子育てで困ったら一人でかかえず相談してね。市が啓発中（〜11/30）",
-   "date": "2026-11-30",
+   "title": "3人乗り自転車の購入費補助 〆12/9",
+   "desc": "幼児2人以上の家庭に半額（最大3万円）。80名、多いと抽選だよ。",
+   "date": "2026-12-09",
    "src": "さいたま市",
-   "url": "https://www.city.saitama.lg.jp/003/001/0011/p133503.html",
-   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-orange-ribbon-2026.jpg",
+   "url": "https://www.city.saitama.lg.jp/001/010/018/001/001/p090182.html",
+   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/n-3nin-jitensha-r8.jpg",
    "ai": true,
    "important": false,
-   "added": "2026-11-20T18:55:00+09:00"
+   "added": "2026-11-24T09:55:00+09:00"
+  },
+  {
+   "id": "n-nishiku-shinnyu-1122",
+   "kind": "safety",
+   "title": "西区二ツ宮・土屋で寝ている間の空き巣",
+   "desc": "11/21夜〜22朝、窓を割られる被害が続いたよ。補助錠やセンサーライトを。",
+   "date": "2026-11-22",
+   "src": "さいたマガジン",
+   "url": "https://www.saitama-e.com/nishi-ku-futatsumiya-tsuchiya-burglary/",
+   "img": "https://www.saitama-e.com/wp-content/uploads/2026/11/nishi-ku-futatsumiya-burglary-eyecatch.jpg",
+   "ai": false,
+   "important": true,
+   "added": "2026-11-24T09:55:00+09:00"
   },
   {
    "id": "n-shinnyugaku-setsumeikai-r9",
