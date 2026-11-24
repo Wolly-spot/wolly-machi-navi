@@ -1459,7 +1459,34 @@ html[data-theme="dark"] .wxt{color:#d9d4ff}
 .wa-pg2 .dhead{margin-top:0!important}
 .wa-back{display:inline-flex;align-items:center;gap:4px;font:inherit;font-size:12.5px;font-weight:800;color:#5A5AEF;background:#F1EEFF;border:0;border-radius:999px;padding:7px 14px;margin:0 0 12px;cursor:pointer}
 @media (prefers-reduced-motion:reduce){.wa-sl,.wa-tr{transition:none}}
-/*/waslide-css*//*thfocus-css*/a.tc.tc-focus{animation:tcFocus 1.3s ease-in-out 2;position:relative;z-index:2;border-radius:24px}@keyframes tcFocus{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(255,95,162,0)}45%{transform:scale(1.04);box-shadow:0 0 0 4px #fff,0 0 0 8px rgba(255,95,162,.85),0 14px 30px rgba(166,139,255,.55)}}@media (prefers-reduced-motion:reduce){a.tc.tc-focus{animation:none;box-shadow:0 0 0 4px #fff,0 0 0 8px rgba(255,95,162,.85)}}/*/thfocus-css*//*kn-slim*/.kn{border-radius:18px}.kn .kn-h{padding:5px 10px;gap:8px;min-height:0}.kn .kn-h b{font-size:12px!important;line-height:1.35}.kn .kn-h .kn-tk{font-size:10px!important}.kn .kn-h>span:nth-child(2){gap:0}.kn .kn-tk{line-height:1.35}.kn .kn-bell{width:30px;height:30px}.kn .kn-bell svg{width:21px;height:21px}.kn .kn-bell em{min-width:16px;height:16px;font-size:10px;line-height:16px;top:-3px;right:-4px;padding:0 4px}.kn .kn-chev{font-size:11px;padding:3px 9px}.kn::before{height:22px}/*/kn-slim*/
+/*/waslide-css*//*thfocus-css*/a.tc.tc-focus{animation:tcFocus 1.3s ease-in-out 2;position:relative;z-index:2;border-radius:24px}@keyframes tcFocus{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(255,95,162,0)}45%{transform:scale(1.04);box-shadow:0 0 0 4px #fff,0 0 0 8px rgba(255,95,162,.85),0 14px 30px rgba(166,139,255,.55)}}@media (prefers-reduced-motion:reduce){a.tc.tc-focus{animation:none;box-shadow:0 0 0 4px #fff,0 0 0 8px rgba(255,95,162,.85)}}/*/thfocus-css*//*wxmore-css*/
+/* 天気の四角：気温・湿度・風とひとこと */
+.wt-st{margin:2px 0 4px;padding:9px 11px;border-radius:14px;background:rgba(255,255,255,.78);border:1px solid rgba(255,255,255,.95);box-shadow:0 4px 12px -8px rgba(40,30,90,.45);color:#3B2E6E;text-align:left;line-height:1.45}
+.wt-st:empty{display:none}
+.wt-st p{margin:0}
+.wt-st .ws-w{font-size:15px;font-weight:900;margin-bottom:3px}
+.wt-st .ws-n{display:flex;flex-wrap:wrap;gap:2px 14px;font-size:12.5px;font-weight:700}
+.wt-st .ws-n b{font-size:16px;font-weight:900}
+.wt-st .ws-c{font-size:12.5px;font-weight:800;margin-top:4px}
+.wt-st .ws-0{opacity:.7;font-weight:700}
+.wt-st b.hu-hi{color:#5F6168!important;background:#E2E3E8;border-radius:6px;padding:0 5px;box-shadow:inset 0 0 0 1.5px #9A9CA6}
+.wt-st .ws-w{color:#3B2E6E}
+.wtx-sun .wt-st .ws-w{color:#A87A00}
+.wtx-moon .wt-st .ws-w{color:#3B3FA0}
+.wtx-cloud .wt-st .ws-w,.wtx-cloud .wt-st{color:#555B70}
+.wtx-snow .wt-st,.wtx-snow .wt-st .ws-w{color:#3F86B5}
+.wt.wr-1 .wt-st,.wt.wr-1 .wt-st *:not(.hu-hi),.wt.wr-1 .wt-in .wt-h,.wt.wr-1 .wt-in .wt-no{color:#3A92D6!important}
+.wt.wr-2 .wt-st,.wt.wr-2 .wt-st *:not(.hu-hi),.wt.wr-2 .wt-in .wt-h,.wt.wr-2 .wt-in .wt-no{color:#123F95!important}
+.dh-ex{display:block;margin:-4px 0 8px;font-size:12.5px;font-weight:800;color:#4a4378}
+.dh-ex i{font-style:normal;display:inline-block;white-space:nowrap;margin:0 6px}.dh-ex small{font-size:10.5px}.dh-ex b{font-size:14px}.dh-ex b.hu-hi{color:#5F6168;background:#E2E3E8;border-radius:6px;padding:0 5px;box-shadow:inset 0 0 0 1.5px #9A9CA6}
+/* 横スライド：指についてくる */
+.wt-g.wtp{overflow:hidden!important;scroll-snap-type:none!important;touch-action:pan-y!important;animation:wtFade .35s ease both}
+@keyframes wtFade{from{opacity:0}}
+.wt-g.wtp>.wt{transform:translate3d(var(--wtx,0px),0,0);animation:none!important;scroll-snap-align:none;will-change:transform;contain:layout paint;backface-visibility:hidden}
+.wt-g.wtp.anim>.wt{transition:transform .38s cubic-bezier(.22,.8,.3,1)}
+.wt-g.wtp>.wt.off .wt-fx,.wt-g.wtp>.wt.off .wt-fx *{animation-play-state:paused!important}
+@media (prefers-reduced-motion:reduce){.wt-g.wtp.anim>.wt{transition:none}}
+/*/wxmore-css*//*kn-slim*/.kn{border-radius:18px}.kn .kn-h{padding:5px 10px;gap:8px;min-height:0}.kn .kn-h b{font-size:12px!important;line-height:1.35}.kn .kn-h .kn-tk{font-size:10px!important}.kn .kn-h>span:nth-child(2){gap:0}.kn .kn-tk{line-height:1.35}.kn .kn-bell{width:30px;height:30px}.kn .kn-bell svg{width:21px;height:21px}.kn .kn-bell em{min-width:16px;height:16px;font-size:10px;line-height:16px;top:-3px;right:-4px;padding:0 4px}.kn .kn-chev{font-size:11px;padding:3px 9px}.kn::before{height:22px}/*/kn-slim*/
 /*kn-noboost*/html{-webkit-text-size-adjust:100%;text-size-adjust:100%}.kn .kn-h b,.kn .kn-h .kn-tk,.kn .kn-tkr i{-webkit-text-size-adjust:none;text-size-adjust:none;max-height:1.5em}/*/kn-noboost*/
 
 
@@ -2669,7 +2696,7 @@ function holoTouch(map){if(!map||map._wtouch)return;map._wtouch=1;const box=map.
   if(window.IntersectionObserver)new IntersectionObserver(es=>es.forEach(e=>{if(e.intersectionRatio<.35)lock()}),{threshold:[0,.35,.6]}).observe(box);
 }
 /* ==== /holo-map ==== */
-/*vcheck*/(function(){var V="11241920";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
+/*vcheck*/(function(){var V="11242201";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
 <script>
 (()=>{
 const $=s=>document.querySelector(s);
@@ -5198,7 +5225,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11241920");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11242201");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -5605,7 +5632,7 @@ const WX_IC={sun:"☀️",cloud:"☁️",rain:"☔",snow:"⛄"};
 function wxCat(c){c=String(c||"");return c[0]==="1"?"sun":c[0]==="2"?"cloud":c[0]==="3"?"rain":c[0]==="4"?"snow":""}
 function wxGet(){const o=LS.get("wolly.wx");return o&&o.d?o:{at:0,d:{}}}
 let wxBusy=false;
-function wxLoad(){const o=wxGet();if(Date.now()-o.at<3*3600e3&&o.day===ymd(new Date())&&o.v===2)return;if(wxBusy)return;wxBusy=true;
+function wxLoad(){try{wx2Load()}catch(e){}const o=wxGet();if(Date.now()-o.at<3*3600e3&&o.day===ymd(new Date())&&o.v===2)return;if(wxBusy)return;wxBusy=true;
   fetch(WX_URL,{cache:"no-store"}).then(r=>r.json()).then(j=>{const d={};
     try{const s=j[0].timeSeries,a0=s[0].areas.find(a=>a.area.code==="110010")||s[0].areas[0];
       s[0].timeDefines.forEach((tm,i)=>{const k=tm.slice(0,10);d[k]={c:wxCat(a0.weatherCodes[i]),t:(a0.weathers[i]||"").replace(/　/g," "),pop:{}}});
@@ -5658,10 +5685,10 @@ function schUpDays(up){const by={};schSortT(up).forEach(e=>{(by[e.date]=by[e.dat
   return Object.keys(by).sort().map(k=>{const w=wxGet().d[k];return `<button type="button" class="up-day" data-upday="${k}"><span class="ud-h"><b>${esc(schDayText(k))}</b>${w&&w.c?`<i>${WX_IC[w.c]}${w.hi!=null?` ${w.hi}°`:""}</i>`:""}<em>${by[k].length}件 ›</em></span>${by[k].map(e=>{const kc=schColor(e);return `<span class="ud-r"${kc?` style="--kc:${kc}"`:""}><i>${esc(schAtText(e))}</i><b>${esc(e.t)}</b></span>`}).join("")}</button>`}).join("")}
 /* 日にちをタップ：午前・午後・夜の3つの四角（その時間帯の天気のアニメーション） */
 function schBandPop(k,fb,hi,from){const L=schSortT(schGet().filter(e=>e.date===k)),w=wxGet().d[k],BK=Object.keys(SCH_BAND).slice(Math.max(0,Object.keys(SCH_BAND).indexOf(from||"am")));
-  const sq=BK.map(b=>{const c=wxBand(k,b)||"none",E=L.filter(e=>schBand(e)===b);return `<div class="wt wt-${c} wb-${b}"><span class="wt-fx"><i></i><i></i><i></i></span><div class="wt-in"><p class="wt-h">${SCH_BAND[b][0].replace("の用事","")}</p><p class="dh-big">${c!=="none"?({sun:"☀️",moon:"🌙",cloud:"☁️",rain:"☔",snow:"⛄"})[c]:"・"}</p>${E.length?E.map(e=>`<button type="button" class="wt-e${e.id===hi?" hi":""}" data-schview="${e.id}"><i>${e.at?esc(t12(e.at)):""}</i>${esc(e.t)}</button>`).join(""):`<p class="wt-no">予定なし</p>`}</div></div>`}).join("");
-  const isT=k===ymd(new Date());openPop(`<div class="kp sch-bpop dh-pop">${isT?`<p class="tw-k">TODAY</p>`:""}<b class="dh-t">${isT?"きょうの予定":esc(schDayText(k))+"の予定"}</b>${isT?`<p class="tw-d">${esc(schDayText(k))}</p>`:""}${w&&w.c?`<p class="dh-wx"><span class="dh-wi">${WX_IC[w.c]||""}</span><span class="dh-wt">${esc(w.t||"")}</span>${w.hi!=null?`<span class="dh-tp"><b>${w.hi}°</b> / ${w.lo}°</span>`:""}</p>`:`<p class="dh-wx dh-wx0">${(new Date(k)-new Date(ymd(new Date())))/864e5<=6&&k>=ymd(new Date())?"天気をよみこみ中…（電波のよいところで出るよ）":"天気は、だいたい1週間先まで出るよ"}</p>`}<div class="wt-g" id="wtG">${sq}</div><div class="wt-dots">${BK.map((b,i)=>`<i data-wti="${i}"></i>`).join("")}</div>${typeof day3Notes==="function"?day3Notes(k):""}<button type="button" class="dh-add" data-dhadd="${k}">＋ この日に予定を書く</button><p class="wx-src">← 横にスライド →　天気：気象庁の予報</p></div>`,schDayText(k),"holo hfull");
-  const g=$("#wtG");if(g){const i=Math.max(0,BK.indexOf(fb||"am"));const dot=()=>{const n=Math.round(g.scrollLeft/(g.children[0].offsetWidth+10));document.querySelectorAll(".wt-dots i").forEach((d,j)=>d.classList.toggle("on",j===n))};requestAnimationFrame(()=>{g.scrollLeft=i*(g.children[0].offsetWidth+10);dot()});g.addEventListener("scroll",dot,{passive:true})}}
-document.addEventListener("click",e=>{const d=e.target.closest("[data-wti]");if(!d)return;const g=$("#wtG");g&&g.scrollTo({left:+d.dataset.wti*(g.children[0].offsetWidth+10),behavior:"smooth"})});
+  const sq=BK.map(b=>{const c=wxBand(k,b)||"none",E=L.filter(e=>schBand(e)===b);return `<div class="wt wt-${c} wb-${b}${wxCls(k,b)}"><span class="wt-fx"><i></i><i></i><i></i></span><div class="wt-in"><p class="wt-h">${SCH_BAND[b][0].replace("の用事","")}</p><p class="dh-big">${c!=="none"?({sun:"☀️",moon:"🌙",cloud:"☁️",rain:"☔",snow:"⛄"})[c]:"・"}</p>${wxStat(k,b)}${E.length?E.map(e=>`<button type="button" class="wt-e${e.id===hi?" hi":""}" data-schview="${e.id}"><i>${e.at?esc(t12(e.at)):""}</i>${esc(e.t)}</button>`).join(""):`<p class="wt-no">予定なし</p>`}</div></div>`}).join("");
+  const isT=k===ymd(new Date());openPop(`<div class="kp sch-bpop dh-pop">${isT?`<p class="tw-k">TODAY</p>`:""}<b class="dh-t">${isT?"きょうの予定":esc(schDayText(k))+"の予定"}</b>${isT?`<p class="tw-d">${esc(schDayText(k))}</p>`:""}${w&&w.c?`<p class="dh-wx"><span class="dh-wi">${WX_IC[w.c]||""}</span><span class="dh-wt">${esc(w.t||"")}</span>${w.hi!=null?`<span class="dh-tp"><b>${w.hi}°</b> / ${w.lo}°</span>`:""}</p>`:`<p class="dh-wx dh-wx0">${(new Date(k)-new Date(ymd(new Date())))/864e5<=6&&k>=ymd(new Date())?"天気をよみこみ中…（電波のよいところで出るよ）":"天気は、だいたい1週間先まで出るよ"}</p>`}${wxDaySum(k)}<div class="wt-g" id="wtG">${sq}</div><div class="wt-dots">${BK.map((b,i)=>`<i data-wti="${i}"></i>`).join("")}</div>${typeof day3Notes==="function"?day3Notes(k):""}<button type="button" class="dh-add" data-dhadd="${k}">＋ この日に予定を書く</button><p class="wx-src">← 横にスライド →　天気：気象庁の予報／気温・湿度・風：MET Norway</p></div>`,schDayText(k),"holo hfull");
+  const g=$("#wtG");if(g)wtPager(g,Math.max(0,BK.indexOf(fb||"am")))}
+document.addEventListener("click",e=>{const d=e.target.closest("[data-wti]");if(!d)return;const g=$("#wtG");g&&g._go&&g._go(+d.dataset.wti)});
 document.addEventListener("click",e=>{const d=e.target.closest("[data-upday]");if(d){e.preventDefault();schBandPop(d.dataset.upday)}});
 function sheetSched(){wxLoad();
   const a=schGet().slice().sort((p,q)=>(p.date+(p.time||"99")).localeCompare(q.date+(q.time||"99"))),today=ymd(new Date());
@@ -5914,7 +5941,64 @@ document.addEventListener("click",e=>{const a=e.target.closest("[data-dhadd]");i
   if(location.hash!=="#sched"){location.hash="#sched";setTimeout(go,500)}else setTimeout(go,150)});
 /* きょうの予定（1日のはじめ）も同じホログラム */
 function todayPop(){const h=new Date().getHours(),b=h<12?"am":h<18?"pm":"night";schBandPop(ymd(new Date()),b,null,b)}
-/*/dh-js*/
+/*wxmore-js*/
+/* 気温・湿度・風：MET Norway の予報（気象庁は湿度の予報を出していないため）。さいたま市役所の位置 */
+const WX2_URL="https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=35.8617&lon=139.6455";
+function wx2Get(){const o=LS.get("wolly.wx2");return o&&o.d?o:{at:0,d:{}}}
+let wx2Busy=false;
+function wx2Load(){const o=wx2Get();if(Date.now()-o.at<2*3600e3&&o.v===1)return;if(wx2Busy)return;wx2Busy=true;
+  fetch(WX2_URL).then(r=>r.json()).then(j=>{const A={};
+    (j.properties.timeseries||[]).forEach(q=>{const t=new Date(Date.parse(q.time)+9*3600e3),k=t.toISOString().slice(0,10),h=t.getUTCHours(),b=h>=6&&h<12?"am":h>=12&&h<18?"pm":h>=18?"night":"";if(!b)return;
+      const D=A[k]=A[k]||{},a=D[b]=D[b]||{t:[],h:[],w:[],m1:0,h1:0,m6:0,h6:0},x=(q.data.instant||{}).details||{},n1=q.data.next_1_hours,n6=q.data.next_6_hours;
+      if(x.air_temperature!=null)a.t.push(x.air_temperature);if(x.relative_humidity!=null)a.h.push(x.relative_humidity);if(x.wind_speed!=null)a.w.push(x.wind_speed);
+      if(n1&&n1.details){a.m1+=n1.details.precipitation_amount||0;a.h1++}else if(n6&&n6.details&&!a.h6){a.m6+=n6.details.precipitation_amount||0;a.h6=6}});
+    const d={};Object.keys(A).forEach(k=>{d[k]={};Object.keys(A[k]).forEach(b=>{const a=A[k][b];if(!a.t.length)return;const mm=a.h1?a.m1:a.m6,hr=a.h1||a.h6||1;
+      d[k][b]={hi:Math.round(Math.max(...a.t)),lo:Math.round(Math.min(...a.t)),hu:a.h.length?Math.round(a.h.reduce((p,v)=>p+v,0)/a.h.length):null,ws:a.w.length?Math.round(Math.max(...a.w)*10)/10:null,mm:Math.round(mm*10)/10,r:Math.round(mm/hr*10)/10}})});
+    LS.set("wolly.wx2",{at:Date.now(),d,v:1});wx2Busy=false;wx2Paint()}).catch(()=>{wx2Busy=false})}
+function wx2(k,b){const d=wx2Get().d[k];return d&&d[b]||null}
+/* 雨の強さ：0＝雨じゃない 1＝小雨・にわか雨 2＝しっかり雨（気象庁が雨のときだけ。量は MET Norway） */
+function wxRain(k,b){if(wxBand(k,b)!=="rain")return 0;const x=wx2(k,b),w=wxGet().d[k]||{};if(/強い|激しい|大雨|雷/.test(w.t||""))return 2;if(x&&(x.r>=1||x.mm>=3))return 2;return 1}
+function wxWord(k,b){const c=wxBand(k,b),rl=wxRain(k,b);if(c==="rain")return rl===2?["☔","雨（しっかりふるよ）"]:["🌂","小雨・にわか雨"];return ({sun:["☀️","はれ"],moon:["🌙","はれ（星が見えそう）"],cloud:["☁️","くもり"],snow:["⛄","雪"]})[c]||null}
+function wxCls(k,b){const c=wxBand(k,b);return (c?" wtx-"+c:"")+" wr-"+wxRain(k,b)}
+function wxStatIn(k,b){const x=wx2(k,b),wd=wxWord(k,b),c=wxBand(k,b),rl=wxRain(k,b);let h="";
+  if(wd)h+=`<p class="ws-w">${wd[0]} ${esc(wd[1])}</p>`;
+  if(x){h+=`<p class="ws-n">${x.hi===x.lo?`<span>気温 <b>${x.hi}°</b></span>`:`<span>最高 <b>${x.hi}°</b></span><span>最低 <b>${x.lo}°</b></span>`}</p>`;
+    h+=`<p class="ws-n">${x.hu!=null?`<span>湿度 <b class="${x.hu>70?"hu-hi":""}">${x.hu}%</b></span>`:""}${x.ws!=null?`<span>風 <b>${x.ws}m/s</b></span>`:""}</p>`;
+    const L=[];
+    if(rl||c==="snow")L.push(b==="night"?"🧺 雨の夜。洗濯物は部屋干しにしよう":"🧺 雨だから、洗濯物は部屋干しがおすすめ");
+    else if(x.hu!=null&&x.hu>70)L.push("🧺 しめっぽくて、洗濯物が乾きにくいかも");
+    else if(b==="night")L.push("🧺 夜は乾きにくいよ。外の洗濯物は取りこんでおこう");
+    else if(x.hu!=null&&x.hu<=50&&c==="sun")L.push("🧺 からっとして、洗濯物がよく乾きそう");
+    else L.push("🧺 洗濯物は、ふつうに乾きそう");
+    if(x.ws!=null&&x.ws>=9)L.push("💨 風がとても強いよ。外干しはやめておこう");
+    else if(x.ws!=null&&x.ws>=6)L.push("💨 風が強め。洗濯物が飛びやすいかも");
+    h+=L.map(t=>`<p class="ws-c">${t}</p>`).join("")}
+  else if(!wx2Get().at)h+=`<p class="ws-c ws-0">気温・湿度・風をよみこみ中…</p>`;
+  return h}
+function wxStat(k,b){return `<div class="wt-st" data-wk="${k}" data-wb="${b}">${wxStatIn(k,b)}</div>`}
+/* その日ぜんたい：湿度（いちばん高い時間帯）と風（いちばん強い時間帯） */
+function wxDaySum(k){const d=wx2Get().d[k];if(!d)return "";const V=Object.values(d),hu=V.map(x=>x.hu).filter(v=>v!=null),ws=V.map(x=>x.ws).filter(v=>v!=null);if(!hu.length&&!ws.length)return "";
+  const mh=Math.max(...hu);return `<span class="dh-ex">${hu.length?`<i>💧 湿度 <b class="${mh>70?"hu-hi":""}">${mh}%</b><small>（いちばん高いとき）</small></i>`:""}${ws.length?`<i>💨 風 <b>${Math.max(...ws)}m/s</b></i>`:""}</span>`}
+function wx2Paint(){document.querySelectorAll(".wt-st[data-wk]").forEach(el=>{const k=el.dataset.wk,b=el.dataset.wb;el.innerHTML=wxStatIn(k,b);const w=el.closest(".wt");if(w){w.className=w.className.replace(/ wtx-\w+| wr-\d/g,"")+wxCls(k,b)}})}
+/* 午前・午後・夜の横スライド：指についてくる（はなすと、近いほうへすっと止まる） */
+function wtPager(g,i0){const n=g.children.length;if(!n)return;let i=Math.min(i0||0,n-1),x0=0,y0=0,dx=0,lock=0,t0=0,down=false;
+  g.classList.add("wtp");
+  const step=()=>g.children[0].offsetWidth+(parseFloat(getComputedStyle(g).columnGap)||0);
+  const set=(px,anim)=>{g.classList.toggle("anim",!!anim);g.style.setProperty("--wtx",px+"px")};
+  const go=(j,anim=true)=>{i=Math.max(0,Math.min(n-1,j));set(-i*step(),anim);[...g.children].forEach((c,m)=>c.classList.toggle("off",m!==i));document.querySelectorAll(".wt-dots i").forEach((d,m)=>d.classList.toggle("on",m===i))};
+  g._go=go;go(i,false);
+  const st=(x,y)=>{x0=x;y0=y;dx=0;lock=0;t0=Date.now();down=true;g.classList.remove("anim");[...g.children].forEach(c=>c.classList.remove("off"))};
+  const mv=(x,y,e)=>{if(!down)return;const mx=x-x0,my=y-y0;if(!lock){if(Math.abs(mx)<7&&Math.abs(my)<7)return;lock=Math.abs(mx)>Math.abs(my)?1:2}
+    if(lock!==1)return;if(e&&e.cancelable)e.preventDefault();dx=mx;if((i===0&&dx>0)||(i===n-1&&dx<0))dx*=.3;set(-i*step()+dx,false)};
+  const en=()=>{if(!down)return;down=false;if(lock===1){const v=Math.abs(dx)/Math.max(1,Date.now()-t0),w=step();let j=i;
+      if(dx<-w*.18||(dx<-24&&v>.3))j=i+1;else if(dx>w*.18||(dx>24&&v>.3))j=i-1;if(Math.abs(dx)>8)g._sw=Date.now();go(j)}else go(i,false);lock=0;dx=0};
+  g.addEventListener("touchstart",e=>{const t=e.touches[0];st(t.clientX,t.clientY)},{passive:true});
+  g.addEventListener("touchmove",e=>{const t=e.touches[0];mv(t.clientX,t.clientY,e)},{passive:false});
+  g.addEventListener("touchend",en);g.addEventListener("touchcancel",en);
+  g.addEventListener("mousedown",e=>{st(e.clientX,e.clientY);const m=ev=>mv(ev.clientX,ev.clientY,ev),u=()=>{en();removeEventListener("mousemove",m);removeEventListener("mouseup",u)};addEventListener("mousemove",m);addEventListener("mouseup",u)});
+  g.addEventListener("click",e=>{if(g._sw&&Date.now()-g._sw<400){e.preventDefault();e.stopPropagation()}},true);
+  addEventListener("resize",()=>{if(g.isConnected)go(i,false)})}
+/*/wxmore-js*//*/dh-js*/
 /*today-js*/
 /* きょうの予定：午前・午後・夜＋天気（ホログラム） */
 function todayPopOld(){const k=ymd(new Date()),L=schSortT(schGet().filter(e=>e.date===k)),w=wxGet().d[k];
@@ -6679,8 +6763,8 @@ let RAWQ="";function setRaw(v){RAWQ=(v||"").normalize("NFKC").replace(NOISE,"").
 function qph(ws){const k=ws.join("|")+"#"+RAWQ;if(k===QPK&&QP)return QP;const list=ws.map(qk);const j=qk(RAWQ||ws.join(""));if(ws.length>1||RAWQ)list.push(j);QPK=k;QP={list,all:Math.max(3,j.length)};return QP}
 function load(){if(DATA)return Promise.resolve(DATA);
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
-  const kp=fetch(base+"near-data/tel-kana.json?v=11241920").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
-  return Promise.all([fetch(base+"near-data/tel.json?v=11241920").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
+  const kp=fetch(base+"near-data/tel-kana.json?v=11242201").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
+  return Promise.all([fetch(base+"near-data/tel.json?v=11242201").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
     .catch(()=>{DATA=[];return DATA})}
 /* 聞きとった文 → キーワード */
 function terms(text){let s=(text||"").normalize("NFKC").replace(NOISE," ");

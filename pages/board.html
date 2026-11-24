@@ -486,7 +486,8 @@ function run(root){if(!root)return;const L=[];if(root.nodeType===3){if(ok(root))
 document.documentElement.classList.add("jb2");
 mo=new MutationObserver(ms=>{const R=new Set();for(const m of ms){if(m.type==="characterData"){const t=m.target;done.delete(t);R.add(t)}else for(const a of m.addedNodes)if(a.nodeType===1||a.nodeType===3)R.add(a)}R.forEach(run)});
 const go=()=>{run(document.body);mo.observe(document.documentElement,{childList:true,subtree:true,characterData:true})};
-document.readyState==="loading"?document.addEventListener("DOMContentLoaded",go):go()})();</script><!--/jbreak-all--><!--wolly-totop-->
+document.readyState==="loading"?document.addEventListener("DOMContentLoaded",go):go()})();</script><!--/jbreak-all-->
+<!--wolly-totop-->
 <style>
 .wtotop{position:fixed;z-index:60;right:max(22px,env(safe-area-inset-right,0px));bottom:calc(var(--wtb,24px) + env(safe-area-inset-bottom,0px));
   display:grid;justify-items:center;align-content:center;width:60px;height:60px;padding:0;border-radius:50%;border:3px solid #fff;cursor:pointer;
