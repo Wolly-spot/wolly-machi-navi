@@ -1507,7 +1507,70 @@ html[data-theme="dark"] .wxt{color:#d9d4ff}
 .wt-g.wtp.anim>.wt{transition:transform .38s cubic-bezier(.22,.8,.3,1)}
 .wt-g.wtp>.wt.off .wt-fx,.wt-g.wtp>.wt.off .wt-fx *{animation-play-state:paused!important}
 @media (prefers-reduced-motion:reduce){.wt-g.wtp.anim>.wt{transition:none}}
-/*/wxmore-css*//*kn-slim*/.kn{border-radius:18px}.kn .kn-h{padding:5px 10px;gap:8px;min-height:0}.kn .kn-h b{font-size:12px!important;line-height:1.35}.kn .kn-h .kn-tk{font-size:10px!important}.kn .kn-h>span:nth-child(2){gap:0}.kn .kn-tk{line-height:1.35}.kn .kn-bell{width:30px;height:30px}.kn .kn-bell svg{width:21px;height:21px}.kn .kn-bell em{min-width:16px;height:16px;font-size:10px;line-height:16px;top:-3px;right:-4px;padding:0 4px}.kn .kn-chev{font-size:11px;padding:3px 9px}.kn::before{height:22px}/*/kn-slim*/
+/*/wxmore-css*//*kesa-css*/
+.kesa{margin:8px 0 16px}
+.kesa-sq.wt{aspect-ratio:1/1;overflow:visible;border-radius:26px;box-shadow:0 0 0 2px rgba(255,255,255,.95),0 0 24px rgba(120,180,255,.45),0 18px 30px -20px rgba(40,40,120,.6)}
+.kesa-sq.wt::before{border-radius:inherit;opacity:1}
+.kesa-sq .wt-fx{border-radius:inherit;overflow:hidden}
+.kesa-sq .kq{position:relative;display:flex;flex-direction:column;gap:9px;padding:14px;min-height:100%;box-sizing:border-box}
+.kq-top{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.kq-tag{font-size:14px;font-weight:900;padding:4px 12px;border-radius:999px;background:rgba(255,255,255,.88);color:#1F2250;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);white-space:nowrap}
+.kq-day{font-size:12px;font-weight:800;color:#1F2250;background:rgba(255,255,255,.62);padding:3px 10px;border-radius:999px;white-space:nowrap}
+.kq-wx{display:flex;align-items:center;gap:12px;color:#1F2250;text-decoration:none;text-shadow:0 0 2px #fff,0 0 10px rgba(255,255,255,.95),0 0 18px rgba(255,255,255,.8)}
+.wt-rain .kq-wx,.wb-night .kq-wx,.wt-moon .kq-wx{color:#fff;text-shadow:0 1px 2px rgba(0,25,70,.6),0 2px 12px rgba(0,25,70,.5)}
+.kq-wi{font-size:62px;line-height:1;text-shadow:none;filter:drop-shadow(0 4px 10px rgba(0,0,0,.22));animation:kqBob 4s ease-in-out infinite}
+@keyframes kqBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+.kq-ww b{display:block;font-size:27px;font-weight:900;line-height:1.15;letter-spacing:.02em}
+.kq-ww span{font-size:16px;font-weight:900}
+.kq-tip{align-self:flex-start;max-width:100%;box-sizing:border-box;font-size:12.5px;font-weight:800;color:#1F2250;background:rgba(255,255,255,.78);border-radius:12px;padding:5px 10px;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);line-height:1.55;word-break:keep-all;overflow-wrap:anywhere}
+.kq-tip i{font-style:normal;display:inline-block;max-width:100%;margin-right:8px}
+.kesa-sq.wr-1 .kq-tip,.kesa-sq.wr-2 .kq-tip{color:#1B5FA8}
+.kq-gomi{margin-top:auto;display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:20px;background:rgba(255,255,255,.92);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);box-shadow:0 8px 18px -10px rgba(30,30,80,.5);color:#1F2140;text-decoration:none;-webkit-tap-highlight-color:transparent}
+.kq-gomi:active{transform:scale(.985)}
+.kq-gi{flex:none;width:60px;height:60px;border-radius:18px;display:grid;place-items:center;background:var(--c,#EEF0F4)}
+.kq-gi svg{width:50px;height:50px;animation:kqWig 3.2s ease-in-out infinite;transform-origin:50% 90%}
+@keyframes kqWig{0%,100%{transform:rotate(0)}45%{transform:rotate(-5deg)}55%{transform:rotate(4deg)}}
+.kq-gt{flex:1;min-width:0;line-height:1.35;word-break:keep-all;overflow-wrap:anywhere}
+.kq-gt small{display:block;font-size:12px;font-weight:800;color:#6B6F8E}
+.kq-gt b{display:block;font-size:20px;font-weight:900}
+.kq-gt em{display:block;font-style:normal;font-size:12px;font-weight:800;color:#D0477E;margin-top:1px}
+.kq-gt .kq-new{display:inline-block;font-size:10px;font-weight:900;color:#fff;background:#FF5E9C;border-radius:999px;padding:1px 7px;margin-left:6px;vertical-align:3px}
+.kq-gomi.set b{color:#5A5AEF}
+.kq-go{flex:none;font-size:20px;font-weight:900;color:#B0B2C8}
+.kq-chips{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.kq-c{display:flex;align-items:center;gap:6px;padding:8px 9px;border-radius:15px;background:rgba(255,255,255,.88);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);color:#1F2140;text-decoration:none;font-size:12px;font-weight:800;line-height:1.35;min-width:0;word-break:keep-all;overflow-wrap:anywhere}
+.kq-c>span:first-child{font-size:21px;flex:none}
+.kq-c small{display:block;font-size:10.5px;font-weight:700;color:#6B6F8E}
+.kq-c.w-1{background:rgba(255,244,204,.95)}.kq-c.w-2{background:rgba(255,225,225,.96);color:#B3261E}.kq-c.w-3{background:rgba(243,221,255,.96);color:#7A1FA0}
+.kq-c .kq-1{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}.kq-c>span:last-child{min-width:0}
+@media (max-width:359px){.kq-chips{grid-template-columns:1fr}}
+.kq-src{margin:0;font-size:9.5px;font-weight:700;color:#4A4F6E;text-shadow:0 0 6px rgba(255,255,255,.95)}.wt-rain .kq-src,.wb-night .kq-src,.wt-moon .kq-src{color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.55)}
+@media (prefers-reduced-motion:reduce){.kq-wi,.kq-gi svg{animation:none}}
+.kq-fold{margin-left:auto;flex:none;font:inherit;font-size:12px;font-weight:900;color:#5A5AEF;background:rgba(255,255,255,.88);border:0;border-radius:999px;padding:5px 11px;cursor:pointer;white-space:nowrap;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.kesa-mini.wt{aspect-ratio:auto;border-radius:20px;box-shadow:0 0 0 2px rgba(255,255,255,.95),0 0 18px rgba(120,180,255,.4),0 12px 22px -16px rgba(40,40,120,.6)}
+.kesa-mini.wt::before{opacity:1}
+.kesa-mini .km{position:relative;display:flex;align-items:center;gap:8px;padding:9px 10px 9px 12px;min-width:0}
+.km-i{font-size:30px;line-height:1;flex:none;filter:drop-shadow(0 2px 5px rgba(0,0,0,.2))}
+.km-t{flex:1;min-width:0;display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px}
+.km-t>span{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:999px;background:rgba(255,255,255,.88);color:#1F2250;font-size:12.5px;font-weight:900;white-space:nowrap;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.km-t>span.km-g{color:#C2410C}.km-t>span.km-w{color:#B3261E}
+.kesa-mini .kq-fold{margin-left:0}
+/* ゴミの曜日えらび */
+.gm-g{margin:14px 0 4px;padding:12px;border-radius:18px;background:var(--accent-soft,#F4F1FF)}
+.gm-g h4{margin:0 0 2px;font-size:15px;font-weight:900}
+.gm-g p{margin:0 0 8px;font-size:12px;font-weight:700;color:var(--muted,#6B6F8E)}
+.gm-d{display:flex;gap:6px;flex-wrap:wrap}
+.gm-d button{width:38px;height:38px;border-radius:12px;border:2px solid var(--line,#E0DCF5);background:var(--surface,#fff);color:var(--ink,#1F2140);font:inherit;font-size:15px;font-weight:900;cursor:pointer}
+.gm-d button.on{background:#5A5AEF;border-color:#5A5AEF;color:#fff}
+.gm-note{font-size:12px;font-weight:700;color:var(--muted,#6B6F8E);line-height:1.6;margin:12px 2px}
+.gm-btns{display:flex;gap:8px;margin:14px 0 6px}
+.gm-btns a,.gm-btns button{flex:1;text-align:center;padding:12px 8px;border-radius:14px;font:inherit;font-size:14px;font-weight:900;text-decoration:none;cursor:pointer;border:0}
+.gm-save{background:#5A5AEF;color:#fff}
+.gm-off{background:var(--accent-soft,#F1ECFF);color:#5A5AEF!important}
+.gm-early{display:flex;align-items:center;gap:8px;margin:12px 2px 0;font-size:13px;font-weight:800}
+.gm-early input{width:20px;height:20px;accent-color:#5A5AEF}
+.wxt.kesa-off{display:none!important}
+/*/kesa-css*//*kn-slim*/.kn{border-radius:18px}.kn .kn-h{padding:5px 10px;gap:8px;min-height:0}.kn .kn-h b{font-size:12px!important;line-height:1.35}.kn .kn-h .kn-tk{font-size:10px!important}.kn .kn-h>span:nth-child(2){gap:0}.kn .kn-tk{line-height:1.35}.kn .kn-bell{width:30px;height:30px}.kn .kn-bell svg{width:21px;height:21px}.kn .kn-bell em{min-width:16px;height:16px;font-size:10px;line-height:16px;top:-3px;right:-4px;padding:0 4px}.kn .kn-chev{font-size:11px;padding:3px 9px}.kn::before{height:22px}/*/kn-slim*/
 /*kn-noboost*/html{-webkit-text-size-adjust:100%;text-size-adjust:100%}.kn .kn-h b,.kn .kn-h .kn-tk,.kn .kn-tkr i{-webkit-text-size-adjust:none;text-size-adjust:none;max-height:1.5em}/*/kn-noboost*/
 
 
@@ -2447,7 +2510,7 @@ html .hl-ring{box-shadow:0 0 6px #ffd6ea;opacity:.8}
         <div class="members" id="membersStrip"></div>
       </div>
       <!--wguide--><section class="wg" id="wGuide"></section>
-      <!--/wguide--><section class="kn" id="kidNotice" hidden></section><!--wxt--><div class="wxt" id="wxTelop" hidden></div><!--/wxt--><!--wgrow--><section class="gr" id="wGrow" hidden></section><!--/wgrow-->
+      <!--/wguide--><!--kesa-html--><section class="kesa" id="kesaCard" hidden aria-label="けさの3秒"></section><!--/kesa-html--><section class="kn" id="kidNotice" hidden></section><!--wxt--><div class="wxt" id="wxTelop" hidden></div><!--/wxt--><!--wgrow--><section class="gr" id="wGrow" hidden></section><!--/wgrow-->
 
       <!-- いちばん上：Wolly spot ＋ さがす -->
       <section class="hero2">
@@ -2717,7 +2780,7 @@ function holoTouch(map){if(!map||map._wtouch)return;map._wtouch=1;const box=map.
   if(window.IntersectionObserver)new IntersectionObserver(es=>es.forEach(e=>{if(e.intersectionRatio<.35)lock()}),{threshold:[0,.35,.6]}).observe(box);
 }
 /* ==== /holo-map ==== */
-/*vcheck*/(function(){var V="11251910";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
+/*vcheck*/(function(){var V="11252341";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
 <script>
 (()=>{
 const $=s=>document.querySelector(s);
@@ -5048,6 +5111,7 @@ $("#sheet").addEventListener("change",e=>{const i=e.target.closest("[data-kidb]"
 $("#sheet").addEventListener("click",e=>{const b=e.target.closest("[data-kidsel]");if(!b)return;kidSel=+b.dataset.kidsel;const k=b.dataset.kk,sc=$("#sheetBody").scrollTop;$("#sheetBody").innerHTML=k==="vaccine"?sheetVaccine():sheetKenshin();addTalk(k);kwDecorate(k);$("#sheetBody").scrollTop=sc});document.addEventListener("click",e=>{if(e.target.closest("[data-kyopen]"))[80,400,800].forEach(ms=>setTimeout(()=>fitTitles($("#sheetBody")),ms))});
 function sheetHtml(kind){
   const [k,n]=kind.split("-");const i=+n;
+  if(kind==="gomi")return sheetGomi();
   if(kind==="dent")return sheetDent();
   if(kind==="dk-kid"||kind==="dk-mom")return sheetDentalKind(kind);
   if(kind==="kenshin")return sheetKenshin();
@@ -5246,7 +5310,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11251910");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11252341");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -5661,7 +5725,7 @@ function wxLoad(){try{wx2Load()}catch(e){}const o=wxGet();if(Date.now()-o.at<3*3
       s[1].timeDefines.forEach((tm,i)=>{const k=tm.slice(0,10),h=+tm.slice(11,13),b=h===6?"am":h===12?"pm":h===18?"night":"";if(b&&d[k]&&a1.pops[i]!=="")d[k].pop[b]=+a1.pops[i]});/*wxt-temp*/const a2=s[2]&&(s[2].areas.find(a=>/さいたま/.test(a.area.name))||s[2].areas[0]);if(a2)s[2].timeDefines.forEach((tm,i)=>{const k=tm.slice(0,10),h=+tm.slice(11,13),v=a2.temps[i];if(!d[k]||v===""||v==null)return;if(h===9)d[k].th=+v;else if(h===0)d[k].tl=+v});/*/wxt-temp*/}catch(e){}
     try{const w=j[1].timeSeries,aw=w[0].areas[0];w[0].timeDefines.forEach((tm,i)=>{const k=tm.slice(0,10);if(!d[k])d[k]={c:wxCat(aw.weatherCodes[i]),t:"",pop:{}};if(aw.pops[i]!=="")d[k].p=+aw.pops[i]});
       const at=w[1].areas.find(a=>/さいたま/.test(a.area.name))||w[1].areas[0];w[1].timeDefines.forEach((tm,i)=>{const k=tm.slice(0,10);if(d[k]){if(at.tempsMax[i])d[k].hi=+at.tempsMax[i];if(at.tempsMin[i])d[k].lo=+at.tempsMin[i]}});}catch(e){}
-    LS.set("wolly.wx",{at:Date.now(),day:ymd(new Date()),d,v:2});try{wxTelop()}catch(e){};wxBusy=false;if($("#sheetBody .sch-cal"))schRedraw()}).catch(()=>{wxBusy=false})}
+    LS.set("wolly.wx",{at:Date.now(),day:ymd(new Date()),d,v:2});try{wxTelop()}catch(e){};try{kesaRender()}catch(e){};wxBusy=false;if($("#sheetBody .sch-cal"))schRedraw()}).catch(()=>{wxBusy=false})}
 /* その日・その時間帯の天気（6時間ごとの降水確率が50%以上なら雨、夜の晴れは月と星） */
 function wxBand(k,b){const w=wxGet().d[k];if(!w||!w.c)return "";let c=w.c;const p=w.pop[b]!=null?w.pop[b]:w.p;if(p!=null&&p>=50&&c!=="snow")c="rain";if(b==="night"&&c==="sun")c="moon";return c}
 /* 時間帯のしるしは時計（天気のアイコンとまちがえないように） */const SCH_BAND={am:["午前の用事","🕘",[6,7,8,9,10,11]],pm:["午後の用事","🕒",[12,13,14,15,16,17]],night:["夜の用事","🕗",[18,19,20,21,22,23]]};
@@ -6036,7 +6100,91 @@ function wtPager(g,i0){const n=g.children.length;if(!n)return;let i=Math.min(i0|
   g.addEventListener("mousedown",e=>{st(e.clientX,e.clientY);const m=ev=>mv(ev.clientX,ev.clientY,ev),u=()=>{en();removeEventListener("mousemove",m);removeEventListener("mouseup",u)};addEventListener("mousemove",m);addEventListener("mouseup",u)});
   g.addEventListener("click",e=>{if(g._sw&&Date.now()-g._sw<400){e.preventDefault();e.stopPropagation()}},true);
   addEventListener("resize",()=>{if(g.isConnected)go(i,false)})}
-/*/wxmore-js*//*/dh-js*/
+/*/wxmore-js*//*kesa-js*/
+/* ゴミ：さいたま市は区分ごとに毎週同じ曜日（もえるごみ週2回、資源物1類 週1回、もえないごみ・有害危険ごみ・資源物2類は同じ曜日に週1回）。祝日も収集、1/1〜3はなし */
+const GOMI_K=[["burn","🔥","もえるごみ","生ごみ・紙くずなど",2,"#FFE4D6"],["r1","🍾","資源物1類","びん・缶・ペットボトル・食品のプラ",1,"#DDF3E6"],["r2","📦","もえないごみ・資源物2類","紙・布・電池・小さな金物など",1,"#E4ECFF"]];
+function gomiGet(){const o=LS.get("wolly.gomi");return o&&typeof o==="object"?o:null}
+function gomiOn(d){const o=gomiGet();if(!o)return null;const m=d.getMonth(),dd=d.getDate();if(m===0&&dd<=3)return [];const w=d.getDay();return GOMI_K.filter(g=>(o[g[0]]||[]).includes(w))}
+/* 警報・注意報（気象庁の新しい防災気象情報 r8。さいたま市=1110000） */
+const WARN_N={"02":"暴風雪警報","03":"大雨警報","04":"洪水警報","05":"暴風警報","06":"大雪警報","10":"大雨注意報","12":"大雪注意報","13":"風雪注意報","14":"雷注意報","15":"強風注意報","17":"融雪注意報","18":"洪水注意報","20":"濃霧注意報","21":"乾燥注意報","23":"低温注意報","24":"霜注意報","25":"着氷注意報","26":"着雪注意報","32":"暴風雪特別警報","33":"大雨特別警報","35":"暴風特別警報","36":"大雪特別警報"};
+const WARN_ICON={"03":"🌧️","10":"🌧️","04":"🌊","18":"🌊","05":"🌀","15":"💨","13":"🌨️","06":"⛄","12":"⛄","14":"⚡","21":"🧯","20":"🌫️","23":"🥶","24":"❄️"};
+const WARN_SAY={"21":"火の元に注意","14":"雷は建物の中へ","15":"自転車に注意","10":"川に近づかないで","18":"川に近づかないで","03":"外出はひかえて","04":"川に近づかないで","05":"外出はひかえて","20":"運転に注意","24":"霜・凍結に注意","23":"あたたかくしてね","12":"足もとに注意","06":"外出はひかえて","13":"足もとに注意"};
+let warnBusy=false;
+function warnGet(){const o=LS.get("wolly.warn");return o&&o.at?o:null}
+function warnLoad(){const o=warnGet();if(warnBusy||(o&&Date.now()-o.at<20*60e3))return;warnBusy=true;
+  fetch("https://www.jma.go.jp/bosai/warning/data/r8/110000.json",{cache:"no-store"}).then(r=>r.json()).then(a=>{
+    let best=null;(a||[]).forEach(r=>{const it=((r.warning||{}).class20Items||[]).find(x=>x.areaCode==="1110000");if(it&&(!best||r.reportDatetime>best.t))best={t:r.reportDatetime,k:it.kinds||[]}});
+    const k=best?best.k.filter(x=>x.code&&/発表|継続/.test(x.status||"")).map(x=>x.code):[];
+    LS.set("wolly.warn",{at:Date.now(),t:best?best.t:"",k});warnBusy=false;kesaRender()}).catch(()=>{warnBusy=false})}
+function warnLv(c){const n=WARN_N[c]||"";return /特別警報/.test(n)?3:/警報/.test(n)?2:1}
+function gomiBag(col,em){return `<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M23 13c3 5 6 7 9 8 3-1 6-3 9-8" fill="none" stroke="#1F2140" stroke-width="2.8" stroke-linecap="round"/><path d="M26 21h12l2 3H24z" fill="${col}" stroke="#1F2140" stroke-width="2.4" stroke-linejoin="round"/><path d="M24 24h16c7 6 12 14 12 21 0 8-6 12-12 12H24c-6 0-12-4-12-12 0-7 5-15 12-21z" fill="${col}" stroke="#1F2140" stroke-width="2.8" stroke-linejoin="round"/><path d="M19 38q3-6 8-9" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".7"/><circle cx="34" cy="43" r="10" fill="#fff" opacity=".92"/><text x="34" y="48" font-size="13" text-anchor="middle">${em}</text></svg>`}
+const GOMI_COL={burn:"#FF9F7A",r1:"#6FD3A0",r2:"#8FB2FF"};
+function kesaRender(){const el=document.getElementById("kesaCard");if(!el)return;
+  const now=new Date(),h=now.getHours(),eve=h>=18,d=new Date(now);if(eve)d.setDate(d.getDate()+1);
+  const k=ymd(d),day=`${d.getMonth()+1}月${d.getDate()}日（${WD[d.getDay()]}）`;
+  const ttl=eve?"🌙 あしたのじゅんび":h<12?"🌅 けさの3秒":"🕒 きょうの3秒",band=eve?"am":h<12?"am":"pm";
+  const wb=t=>(t||"").replace(/([、。／・])(?![^<]*>)/g,"$1<wbr>");
+  /* 天気（背景になる） */
+  let w=null;try{w=(wxGet().d||{})[k]}catch(e){}
+  let c="none";try{c=wxBand(k,band)||(w&&w.c)||"none"}catch(e){}
+  let cls="";try{cls=wxCls(k,band)}catch(e){}
+  let wxh="",tip="";
+  if(w&&(w.c||w.t)){let wd=null;try{wd=wxWord(k,band)}catch(e){}
+    const ic=wd?wd[0]:({sun:"☀️",moon:"🌙",cloud:"☁️",rain:"☔",snow:"⛄"}[c]||"🌤️"),nm=wd?wd[1].replace(/（.*?）/,""):({sun:"はれ",cloud:"くもり",rain:"雨",snow:"雪"}[w.c]||"");
+    const hi=w.th!=null?w.th:w.hi,lo=(w.tl!=null&&w.th!=null&&w.tl<w.th)?w.tl:w.lo,p=w.pop||{};
+    const wet=/雨|雪/.test(w.t||"")||["am","pm","night"].some(b=>p[b]>=50);
+    let x2=null;try{x2=wx2(k,"pm")}catch(e){}
+    const tips=[];if(wet)tips.push("☂️ かさを持っていこう");
+    if(x2&&x2.hu!=null){if(wet)tips.push("🧺 洗濯物は部屋干しに");else if(x2.hu>70)tips.push("🧺 洗濯物が乾きにくいかも");else if(x2.hu<=50&&w.c==="sun")tips.push("🧺 洗濯物がよく乾きそう")}
+    if(x2&&x2.ws>=6)tips.push("💨 風が強め");
+    if(!tips.length&&hi!=null)tips.push(hi>=28?"🥤 水分をこまめにね":lo!=null&&lo<=5?"🧣 朝は冷えるよ。上着をわすれずに":"🙂 すごしやすそう");
+    wxh=`<a class="kq-wx" href="#sched"><span class="kq-wi">${ic}</span><span class="kq-ww"><b>${esc(nm)}</b>${hi!=null?`<span>${hi}°${lo!=null?` / ${lo}°`:""}</span>`:""}</span></a>`;
+    tip=`<p class="kq-tip">${tips.map(t=>`<i>${wb(t)}</i>`).join("")}</p>`}
+  else wxh=`<a class="kq-wx" href="#sched"><span class="kq-wi">🌤️</span><span class="kq-ww"><b>天気をよみこみ中…</b></span></a>`;
+  /* ゴミ（いちばん大きく） */
+  const g=gomiOn(d),o=gomiGet()||{},wh=eve?"あしたは":"きょうは";let gh;
+  if(!g)gh=`<a class="kq-gomi set" href="#" data-gomi-set><span class="kq-gi" style="--c:#EEF0F4">${gomiBag("#C9CEDA","？")}</span><span class="kq-gt"><b>ゴミの日を入れよう<span class="kq-new">NEW</span></b><small>${wb("曜日を1回えらぶと、毎朝おしえるよ")}</small></span><span class="kq-go">›</span></a>`;
+  else if(g.length){const dl=(o.early&&g.some(x=>x[0]==="burn"))?"朝5:30":"朝8:30";
+    gh=`<a class="kq-gomi" href="#" data-gomi-set><span class="kq-gi" style="--c:${g[0][5]}">${gomiBag(GOMI_COL[g[0][0]],g[0][1])}</span><span class="kq-gt"><small>${wh}</small><b>${wb(g.map(x=>x[2]).join("・"))}</b><em>⏰ ${dl}までに出してね</em></span><span class="kq-go">›</span></a>`}
+  else{let nx="";for(let i=1;i<=7&&!nx;i++){const n=new Date(d);n.setDate(n.getDate()+i);const q=gomiOn(n);if(q&&q.length)nx=(i===1?(eve?"あさって":"あした"):`${n.getMonth()+1}/${n.getDate()}（${WD[n.getDay()]}）`)+"は "+q.map(x=>x[2]).join("・")}
+    gh=`<a class="kq-gomi" href="#" data-gomi-set><span class="kq-gi" style="--c:#EEF0F4">${gomiBag("#D5D9E3","💤")}</span><span class="kq-gt"><small>${wh}</small><b>ゴミの日じゃないよ</b>${nx?`<em style="color:#5A5AEF">${wb(esc(nx))}</em>`:""}</span><span class="kq-go">›</span></a>`}
+  /* 警報・予定（小さく2つ） */
+  const wn=warnGet(),J='href="https://www.jma.go.jp/bosai/warning/#area_type=class20s&area_code=1110000" target="_blank" rel="noopener"';let ch="";
+  if(wn){const ks=wn.k||[];if(ks.length){const lv=Math.max(...ks.map(warnLv)),top=ks.slice().sort((a,b)=>warnLv(b)-warnLv(a))[0];
+      ch+=`<a class="kq-c w-${lv}" ${J}><span>${WARN_ICON[top]||"⚠️"}</span><span>${wb(ks.map(c=>esc(WARN_N[c]||"気象の注意報")).join("・"))}${WARN_SAY[top]?`<small>${wb(WARN_SAY[top])}</small>`:""}</span></a>`}
+    else ch+=`<a class="kq-c" ${J}><span>✅</span><span>警報・注意報なし<small>さいたま市</small></span></a>`}
+  else ch+=`<a class="kq-c" ${J}><span>⚠️</span><span>警報・注意報<small>よみこみ中…</small></span></a>`;
+  let ev=[];try{ev=schGet().filter(e=>e.date===k).sort((p,q)=>(p.at||p.time||"99").localeCompare(q.at||q.time||"99"))}catch(e){}
+  ch+=ev.length?`<a class="kq-c" href="#sched"><span>📅</span><span>予定 ${ev.length}件<small class="kq-1">${ev[0].at?esc(t12(ev[0].at))+" ":""}${esc(ev[0].t||"")}</small></span></a>`
+    :`<a class="kq-c" href="#sched"><span>📅</span><span>予定はないよ<small>＋ 予定を入れる</small></span></a>`;
+  if(LS.get("wolly.kesafold")){let wi="🌤️",wt="";try{const wd=wxWord(k,band);if(wd){wi=wd[0];wt=wd[1].replace(/（.*?）/,"")}}catch(e){}
+    const hi=w&&(w.th!=null?w.th:w.hi),gm=g&&g.length?`<span class="km-g">${g[0][1]} ${esc(g.map(x=>x[2]).join("・"))}</span>`:g?`<span>🗑️ ゴミなし</span>`:"",
+      wk=(wn&&wn.k&&wn.k.length)?`<span class="km-w">${WARN_ICON[wn.k[0]]||"⚠️"} ${esc(WARN_N[wn.k[0]]||"注意報")}</span>`:"";
+    const mh=`<div class="kesa-mini wt wt-${c} wb-${band}${cls}"><span class="wt-fx"><i></i><i></i><i></i></span><div class="km"><span class="km-i">${wi}</span><span class="km-t"><span>${eve?"あした ":""}${esc(wt)}${hi!=null?` ${hi}°`:""}</span>${gm}${wk}</span><button type="button" class="kq-fold" data-kesa-fold aria-expanded="false">ひらく ▼</button></div></div>`;
+    if(el.dataset.h===mh&&!el.hidden)return;el.dataset.h=mh;el.innerHTML=mh;el.hidden=false;const tl0=document.getElementById("wxTelop");if(tl0)tl0.classList.add("kesa-off");return}
+  const html=`<div class="kesa-sq wt wt-${c} wb-${band}${cls}"><span class="wt-fx"><i></i><i></i><i></i></span><div class="kq"><p class="kq-top"><span class="kq-tag">${ttl}</span><span class="kq-day">${day}</span><button type="button" class="kq-fold" data-kesa-fold aria-expanded="true">たたむ ▲</button></p>${wxh}${tip}${gh}<div class="kq-chips">${ch}</div><p class="kq-src">天気・警報：気象庁／湿度・風：MET Norway</p></div></div>`;
+  if(el.dataset.h===html&&!el.hidden)return;el.dataset.h=html;el.innerHTML=html;
+  el.hidden=false;const tl=document.getElementById("wxTelop");if(tl)tl.classList.add("kesa-off")}
+function sheetGomi(){const o=gomiGet()||{};
+  return `<h3 id="sheetTitle">🗑️ ゴミの日をえらぼう</h3><p class="gm-note">さいたま市のゴミは、区分ごとに<b>毎週おなじ曜日</b>に集めるよ。あなたの地区の曜日をえらぶと、毎朝「きょうは何の日か」をおしえるね。この端末の中だけに保存するよ。</p>`+
+  GOMI_K.map(g=>`<div class="gm-g"><h4>${g[1]} ${g[2]}</h4><p>${g[3]}（週${g[4]}回）</p><div class="gm-d" data-gm="${g[0]}" data-max="${g[4]}">${[1,2,3,4,5,6,0].map(w=>`<button type="button" data-w="${w}" class="${(o[g[0]]||[]).includes(w)?"on":""}" aria-pressed="${(o[g[0]]||[]).includes(w)}">${WD[w]}</button>`).join("")}</div></div>`).join("")+
+  `<label class="gm-early"><input type="checkbox" id="gmEarly"${o.early?" checked":""}>もえるごみの早朝地区（朝5:30まで）</label>
+  <div class="gm-btns"><a class="gm-off" href="https://www.city.saitama.lg.jp/001/006/010/003/p042612.html" target="_blank" rel="noopener">地区の曜日を調べる</a><button type="button" class="gm-save" data-gm-save>保存する</button></div>
+  <p class="gm-note">※ 祝日も集めるよ（1月1日〜3日はお休み）。曜日は市の「収集日カレンダー」で確かめてね。</p>`}
+document.addEventListener("click",e=>{
+  if(e.target.closest("[data-kesa-fold]")){e.preventDefault();LS.set("wolly.kesafold",LS.get("wolly.kesafold")?null:1);kesaRender();return}
+  const s=e.target.closest("[data-gomi-set]");if(s){e.preventDefault();openSheet("gomi");return}
+  const b=e.target.closest(".gm-d button");if(b){const box=b.parentNode,max=+box.dataset.max;b.classList.toggle("on");
+    const on=[...box.querySelectorAll("button.on")];if(on.length>max){on.find(x=>x!==b).classList.remove("on")}
+    box.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x.classList.contains("on")));return}
+  if(e.target.closest("[data-gm-save]")){const o={};document.querySelectorAll(".gm-d").forEach(x=>{o[x.dataset.gm]=[...x.querySelectorAll("button.on")].map(y=>+y.dataset.w)});
+    o.early=!!(document.getElementById("gmEarly")||{}).checked;
+    if(!GOMI_K.some(g=>(o[g[0]]||[]).length))LS.set("wolly.gomi",null);else LS.set("wolly.gomi",o);closeSheet();kesaRender()}});
+function kesaInit(){try{kesaRender()}catch(e){}try{warnLoad()}catch(e){}}
+[300,2500,7000].forEach(ms=>setTimeout(kesaInit,ms));
+setInterval(kesaInit,20*60e3);
+document.addEventListener("visibilitychange",()=>{if(!document.hidden)kesaInit()});
+/*/kesa-js*//*/dh-js*/
 /*today-js*/
 /* きょうの予定：午前・午後・夜＋天気（ホログラム） */
 function todayPopOld(){const k=ymd(new Date()),L=schSortT(schGet().filter(e=>e.date===k)),w=wxGet().d[k];
@@ -6801,8 +6949,8 @@ let RAWQ="";function setRaw(v){RAWQ=(v||"").normalize("NFKC").replace(NOISE,"").
 function qph(ws){const k=ws.join("|")+"#"+RAWQ;if(k===QPK&&QP)return QP;const list=ws.map(qk);const j=qk(RAWQ||ws.join(""));if(ws.length>1||RAWQ)list.push(j);QPK=k;QP={list,all:Math.max(3,j.length)};return QP}
 function load(){if(DATA)return Promise.resolve(DATA);
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
-  const kp=fetch(base+"near-data/tel-kana.json?v=11251910").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
-  return Promise.all([fetch(base+"near-data/tel.json?v=11251910").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
+  const kp=fetch(base+"near-data/tel-kana.json?v=11252341").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
+  return Promise.all([fetch(base+"near-data/tel.json?v=11252341").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
     .catch(()=>{DATA=[];return DATA})}
 /* 聞きとった文 → キーワード */
 function terms(text){let s=(text||"").normalize("NFKC").replace(NOISE," ");
