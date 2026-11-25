@@ -134,6 +134,14 @@ h3{display:flex;align-items:center;gap:8px;margin:20px 4px 8px;font-size:18px;fo
 .qnone{margin:0;padding:12px 14px;font-size:12.5px;font-weight:800;color:#9AA0B8}.qv.all .qnone{display:none}
 .qmore{display:block;width:100%;margin:12px 0 0;padding:11px;border:0;border-radius:999px;background:#fff;color:#5A5AEF;font:inherit;font-size:14px;font-weight:900;box-shadow:0 0 0 2px #DADCF7}
 .qask{margin:16px 0 0;padding:12px 14px;border-radius:18px;background:linear-gradient(110deg,#FFF3C4,#FFE1EE);font-size:13px;font-weight:800;line-height:1.7}
+</style><style id="wolly-btnu">
+/* 11/26 とじる（×）は 32px の小さい丸にそろえる（写真や色の上でも見えるように白い丸） */
+.x,.hx,.px,.wpk-x,.vx,.fs-x,.sx{width:32px!important;height:32px!important;min-width:32px!important;padding:0!important;border:0!important;border-radius:50%!important;
+  background:rgba(255,255,255,.92)!important;box-shadow:0 1px 5px rgba(0,0,0,.18)!important;color:#55597A!important;font-size:18px!important;font-weight:500!important;line-height:32px!important;
+  display:inline-grid!important;place-items:center!important;cursor:pointer}
+.x:active,.hx:active,.px:active,.wpk-x:active,.vx:active,.fs-x:active,.sx:active{transform:scale(.92)}
+/* 昔の「← 子育て補助金ガイドにもどる」（claude.ai へ出ていく）は出さない。街ナビの中では上の × でとじる */
+a.back[href*="claude.ai"]{display:none!important}
 </style></head><body data-noicon><main class="w">
 <section class="hero"><p class="eb">🚗 さいたま市の公園</p><h1>駐車場のある公園マップ</h1>
 <p class="lead">ピンをタップすると、駐車場の台数・遊べるもの・行き方がわかるよ。</p>

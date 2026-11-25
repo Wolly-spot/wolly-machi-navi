@@ -204,7 +204,15 @@ a{color:inherit}
 .phx.ill{padding:0;display:block;position:relative}.phx.ill svg{width:100%;height:100%;display:block}.phx.ill .illtag{position:absolute;right:6px;bottom:6px;font-style:normal;font-size:10px;font-weight:700;color:#fff;background:rgba(0,0,0,.35);border-radius:999px;padding:2px 7px}
 :root{--outc:#3B4A8C}.t.out,.t.online{background:#3B4A8C;color:#fff}.t.out::before{content:'🚃 '}.t.online::before{content:'💻 '}
 </style>
-</head>
+<style id="wolly-btnu">
+/* 11/26 とじる（×）は 32px の小さい丸にそろえる（写真や色の上でも見えるように白い丸） */
+.x,.hx,.px,.wpk-x,.vx,.fs-x,.sx{width:32px!important;height:32px!important;min-width:32px!important;padding:0!important;border:0!important;border-radius:50%!important;
+  background:rgba(255,255,255,.92)!important;box-shadow:0 1px 5px rgba(0,0,0,.18)!important;color:#55597A!important;font-size:18px!important;font-weight:500!important;line-height:32px!important;
+  display:inline-grid!important;place-items:center!important;cursor:pointer}
+.x:active,.hx:active,.px:active,.wpk-x:active,.vx:active,.fs-x:active,.sx:active{transform:scale(.92)}
+/* 昔の「← 子育て補助金ガイドにもどる」（claude.ai へ出ていく）は出さない。街ナビの中では上の × でとじる */
+a.back[href*="claude.ai"]{display:none!important}
+</style></head>
 <body data-noicon>
 <div class="wrap" id="app"></div>
 <script>

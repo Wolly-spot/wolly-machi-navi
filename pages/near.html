@@ -493,6 +493,14 @@ html .hl-ring{box-shadow:0 0 6px #ffd6ea;opacity:.8}
 @media (prefers-reduced-motion:reduce){.hl-beam,.hl-ring,.hl-num,.hl-open,.hl-sweep,.maplibregl-popup .maplibregl-popup-content,.maplibregl-popup .maplibregl-popup-content::before{animation:none!important}.hl-sweep{display:none}}
 
 /* ==== /holo-map ==== */
+</style><style id="wolly-btnu">
+/* 11/26 とじる（×）は 32px の小さい丸にそろえる（写真や色の上でも見えるように白い丸） */
+.x,.hx,.px,.wpk-x,.vx,.fs-x,.sx{width:32px!important;height:32px!important;min-width:32px!important;padding:0!important;border:0!important;border-radius:50%!important;
+  background:rgba(255,255,255,.92)!important;box-shadow:0 1px 5px rgba(0,0,0,.18)!important;color:#55597A!important;font-size:18px!important;font-weight:500!important;line-height:32px!important;
+  display:inline-grid!important;place-items:center!important;cursor:pointer}
+.x:active,.hx:active,.px:active,.wpk-x:active,.vx:active,.fs-x:active,.sx:active{transform:scale(.92)}
+/* 昔の「← 子育て補助金ガイドにもどる」（claude.ai へ出ていく）は出さない。街ナビの中では上の × でとじる */
+a.back[href*="claude.ai"]{display:none!important}
 </style></head>
 <body>
 <div class="wrap">
