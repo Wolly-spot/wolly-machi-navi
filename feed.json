@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-25T19:15:00+09:00",
+ "updatedAt": "2026-11-26T08:05:00+09:00",
  "events": [
   {
    "id": "e-thomas-skipcity",
@@ -104,6 +104,19 @@
    "img": "https://www.saitama-e.com/wp-content/uploads/2026/11/asaka-fuyu-akari-terrace-eyecatch.jpg",
    "ai": false,
    "added": "2026-11-23T19:00:00+09:00"
+  },
+  {
+   "id": "e-keyaki-illumi-2026",
+   "kind": "free",
+   "title": "けやきひろばのイルミネーション（〜1/24）無料",
+   "desc": "新都心のけやき並木が光でいっぱい。夕方の親子さんぽにどうぞ。",
+   "date": "2026-11-28",
+   "area": "さいたま市中央区",
+   "src": "さいたまスーパーアリーナ",
+   "url": "https://www.saitama-arena.co.jp/event/illumination2026/",
+   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/e-keyaki-illumi-2026.jpg",
+   "ai": true,
+   "added": "2026-11-26T08:05:00+09:00"
   },
   {
    "id": "e-minuma-kosodate-fair",
@@ -354,18 +367,6 @@
    "added": "2026-11-11T09:50:00+09:00"
   },
   {
-   "id": "s-menya-gen-shintoshin",
-   "kind": "open",
-   "title": "新都心にラーメン店「麺家 玄」11/18オープン",
-   "desc": "大宮区北袋町に新しいラーメン店。新都心駅・与野駅から歩いて10分弱だよ。",
-   "date": "2026-11-18",
-   "src": "宮原大宮ドットコム",
-   "url": "https://miyahara-kitaku.com/menya-gen-saitama-shintoshin-open/",
-   "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/11/IMG_4939.jpg",
-   "ai": false,
-   "added": "2026-11-17T19:15:00+09:00"
-  },
-  {
    "id": "s-fitsall-owada",
    "kind": "open",
    "title": "大和田駅前に24時間ジム 12/1グランドオープン",
@@ -412,6 +413,18 @@
    "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/10/99298976b13a148c5ce347acb7a5fc95.png",
    "ai": false,
    "added": "2026-11-23T19:00:00+09:00"
+  },
+  {
+   "id": "s-yaoko-kita-yoshino",
+   "kind": "open",
+   "title": "北区吉野町にヤオコーの新店 11/28予定（届出）",
+   "desc": "大宮の市場あとにスーパーができる予定。駐車場は64台だよ。",
+   "date": "2026-11-28",
+   "src": "流通ニュース",
+   "url": "https://www.ryutsuu.biz/store/s0525011.html",
+   "img": "https://www.ryutsuu.biz/main/images/2026/05/20260525thumbnail_yaoko.jpg",
+   "ai": false,
+   "added": "2026-11-26T08:05:00+09:00"
   }
  ],
  "news": [
