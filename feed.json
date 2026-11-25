@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-24T19:30:00+09:00",
+ "updatedAt": "2026-11-25T09:40:00+09:00",
  "events": [
   {
    "id": "e-thomas-skipcity",
@@ -182,6 +182,19 @@
    "img": "https://www.saitama-e.com/wp-content/uploads/2026/11/out-of-kidzania-urawa-reds-eye-1119.jpg",
    "ai": false,
    "added": "2026-11-22T09:37:38+09:00"
+  },
+  {
+   "id": "e-kuki-lib-ohanashi-dec",
+   "kind": "facility",
+   "title": "県立久喜図書館のおはなし会（12/5〜）無料",
+   "desc": "12月の土曜14時から30分。申込みなしで親子で聞けるよ。",
+   "date": "2026-12-05",
+   "area": "久喜市",
+   "src": "埼玉県立図書館",
+   "url": "https://www.pref.saitama.lg.jp/g2208/library-info/0812-01.html",
+   "img": "https://www.pref.saitama.lg.jp/shared/images/sns/logo.png",
+   "ai": false,
+   "added": "2026-11-25T09:40:00+09:00"
   },
   {
    "id": "e-orchestra-0sai",
