@@ -1569,6 +1569,7 @@ html[data-theme="dark"] .wxt{color:#d9d4ff}
 .kq-mt:focus-visible .kq-th i{outline:2px solid #5A5AEF;outline-offset:3px}
 .kq-hu{display:inline-block;font-size:11px;font-weight:800;color:#3A7BD5;font-variant-numeric:tabular-nums;white-space:nowrap}.kq-hu.wet{color:#6B6F8E;background:#ECEDF3;border-radius:999px;padding:0 6px}
 .kq-bub .kq-hu{font-size:11px}
+.kq-t3 .kq-past b{color:#B6B9CC!important}.kq-pst{font-size:10px;font-weight:800;color:#9A9DB4}
 .kq-tl{display:flex;justify-content:space-between;margin:-4px 0 0;font-size:10px;font-weight:700;color:#8A8DA8}
 .kq-cr{margin:3px 0 0;text-align:right;font-size:8.5px;font-weight:600;color:#A2A5BC}
 .kq-kn{display:flex;align-items:center;gap:6px;width:100%;border:0;background:transparent;padding:4px 2px;margin:0;font:inherit;font-size:9.5px;font-weight:700;text-align:left;cursor:pointer;min-height:30px}
@@ -1642,7 +1643,44 @@ html[data-theme="dark"] .wxt{color:#d9d4ff}
 .gm-save{background:#5A5AEF;color:#fff}
 .gm-off{background:var(--accent-soft,#F1ECFF);color:#5A5AEF!important}
 .wxt.kesa-off{display:none!important}
-/*/kesa-css*//*chiiki-css*/
+/*/kesa-css*//*kurashi-css*/
+a.kq-tip.kml-tip{display:flex;align-items:center;gap:6px;text-decoration:none;cursor:pointer;animation:kmGlow 2.8s ease-in-out infinite}
+a.kml-tip .kml-tx{flex:1;min-width:0}
+a.kml-tip .kml-go{flex:0 0 auto;font-size:11px;font-weight:900;color:#5A5AEF;white-space:nowrap}
+.kq-tm a.kml-tip{max-width:none;width:100%;margin:8px 0 2px;padding:8px 10px;border-radius:12px;background:transparent;box-shadow:none;animation:none;font-size:13px;line-height:1.5;color:#1F2250;-webkit-backdrop-filter:none;backdrop-filter:none}
+.kq-tm a.kml-tip .kml-go{font-size:20px;line-height:1;font-weight:700;color:#8E7BFF}
+@keyframes kmGlow{50%{box-shadow:0 0 0 2px rgba(190,170,255,.7)}}
+@keyframes kmGlow{50%{box-shadow:0 0 0 3px rgba(190,170,255,.6)}}
+@media (prefers-reduced-motion:reduce){a.kml-tip{animation:none}}
+.kms .kml-h{font-size:12px;color:#8A8CA8;margin:0 0 2px}
+.kms .kml-t{font-size:19px;font-weight:900;margin:0 0 10px;color:#2B2D4A}
+.kms .kml-who{display:flex;flex-wrap:wrap;gap:5px;margin:0 0 12px}
+.kms .kml-who i{font-style:normal;font-size:11px;background:#EFEDFF;color:#5A5AEF;border-radius:99px;padding:3px 9px}
+.kms .kml-story{border-radius:18px;padding:14px;background:linear-gradient(135deg,#FFF0F7,#F1EEFF 55%,#EAF6FF);font-size:14.5px;line-height:1.9;box-shadow:0 0 0 1px #ECE6FF inset}
+.kms .kml-lb{display:inline-block;font-size:10.5px;font-weight:800;color:#fff;background:linear-gradient(90deg,#FF7EB6,#9B7BFF);border-radius:99px;padding:2px 9px;margin-bottom:6px}
+.kms .kml-story p{margin:0}
+.kms .kml-sec{margin:18px 0 6px;font-size:13px;font-weight:900;color:#4A4C6E}
+.kms .kml-sec small{font-weight:400;color:#8A8CA8;font-size:11px;margin-left:6px}
+.kms .kml-row{display:flex;gap:10px;align-items:flex-start;padding:10px 2px;border-bottom:1px dashed #E4E1F3}
+.kms .kml-ri{flex:0 0 38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:21px;background:#F3F1FF}
+.kms .kml-rb{flex:1;min-width:0}
+.kms .kml-rb b{display:block;font-size:12px;color:#8A8CA8}
+.kms .kml-rb span{display:block;font-size:14px;line-height:1.6}
+.kms .kml-row.warn .kml-ri{background:#FFE6EF}
+.kms .kml-row.warn .kml-rb span{color:#B0124F;font-weight:800}
+.kms .kml-row.ok .kml-rb span{color:#6E7090}
+.kms details.kml-more summary{list-style:none;cursor:pointer;font-size:12.5px;color:#5A5AEF;font-weight:800;padding:10px 2px}
+.kms details.kml-more summary::-webkit-details-marker{display:none}
+.kms .kml-set{margin-top:18px;border-radius:18px;background:#F7F6FD;padding:12px}
+.kms .kml-set h3{margin:0 0 4px;font-size:13.5px}
+.kms .kml-set p{margin:0 0 8px;font-size:11.5px;color:#7A7C98;line-height:1.6}
+.kms .kml-set h4{margin:12px 0 6px;font-size:12px;color:#4A4C6E}
+.kms .kml-chips{display:flex;flex-wrap:wrap;gap:6px}
+.kms .kml-chips button{border:1px solid #DCD8F5;background:#fff;border-radius:99px;padding:7px 11px;font:inherit;font-size:12.5px;color:#4A4C6E}
+.kms .kml-chips button.on{background:#EFEDFF;border-color:#9B8BFF;color:#4B3FD6;font-weight:800}
+.kms .kml-chips button.on::before{content:"✓ "}
+.kms .kml-src{margin-top:14px;font-size:10.5px;color:#9A9CB6;line-height:1.6}
+/*/kurashi-css*//*chiiki-css*/
 .ck{margin:0 0 18px;position:relative;border-radius:24px;padding:14px 14px 12px;background:linear-gradient(160deg,rgba(255,255,255,.96),rgba(246,244,255,.92));
   box-shadow:0 0 0 1.5px rgba(255,255,255,.95),0 0 0 3px rgba(190,180,255,.35),0 16px 30px -22px rgba(60,50,140,.55)}
 .ck-h{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-bottom:4px}
@@ -1694,44 +1732,7 @@ html[data-theme="dark"] #chiikiCard #feedEvents h2,html[data-theme="dark"] #chii
 html[data-theme="dark"] .ck{background:linear-gradient(160deg,rgba(40,42,70,.96),rgba(32,30,60,.94))}
 html[data-theme="dark"] .ck-h h2,html[data-theme="dark"] .ck-st,html[data-theme="dark"] .ck-e,html[data-theme="dark"] .ck-row{color:#E6E7F5}
 html[data-theme="dark"] .ck-row{background:rgba(255,255,255,.07)}
-/*/chiiki-css*//*kurashi-css*/
-a.kq-tip.kml-tip{display:flex;align-items:center;gap:6px;text-decoration:none;cursor:pointer;animation:kmGlow 2.8s ease-in-out infinite}
-a.kml-tip .kml-tx{flex:1;min-width:0}
-a.kml-tip .kml-go{flex:0 0 auto;font-size:11px;font-weight:900;color:#5A5AEF;white-space:nowrap}
-.kq-tm a.kml-tip{max-width:none;width:100%;margin:8px 0 2px;padding:8px 10px;border-radius:12px;background:transparent;box-shadow:none;animation:none;font-size:13px;line-height:1.5;color:#1F2250;-webkit-backdrop-filter:none;backdrop-filter:none}
-.kq-tm a.kml-tip .kml-go{font-size:20px;line-height:1;font-weight:700;color:#8E7BFF}
-@keyframes kmGlow{50%{box-shadow:0 0 0 2px rgba(190,170,255,.7)}}
-@keyframes kmGlow{50%{box-shadow:0 0 0 3px rgba(190,170,255,.6)}}
-@media (prefers-reduced-motion:reduce){a.kml-tip{animation:none}}
-.kms .kml-h{font-size:12px;color:#8A8CA8;margin:0 0 2px}
-.kms .kml-t{font-size:19px;font-weight:900;margin:0 0 10px;color:#2B2D4A}
-.kms .kml-who{display:flex;flex-wrap:wrap;gap:5px;margin:0 0 12px}
-.kms .kml-who i{font-style:normal;font-size:11px;background:#EFEDFF;color:#5A5AEF;border-radius:99px;padding:3px 9px}
-.kms .kml-story{border-radius:18px;padding:14px;background:linear-gradient(135deg,#FFF0F7,#F1EEFF 55%,#EAF6FF);font-size:14.5px;line-height:1.9;box-shadow:0 0 0 1px #ECE6FF inset}
-.kms .kml-lb{display:inline-block;font-size:10.5px;font-weight:800;color:#fff;background:linear-gradient(90deg,#FF7EB6,#9B7BFF);border-radius:99px;padding:2px 9px;margin-bottom:6px}
-.kms .kml-story p{margin:0}
-.kms .kml-sec{margin:18px 0 6px;font-size:13px;font-weight:900;color:#4A4C6E}
-.kms .kml-sec small{font-weight:400;color:#8A8CA8;font-size:11px;margin-left:6px}
-.kms .kml-row{display:flex;gap:10px;align-items:flex-start;padding:10px 2px;border-bottom:1px dashed #E4E1F3}
-.kms .kml-ri{flex:0 0 38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:21px;background:#F3F1FF}
-.kms .kml-rb{flex:1;min-width:0}
-.kms .kml-rb b{display:block;font-size:12px;color:#8A8CA8}
-.kms .kml-rb span{display:block;font-size:14px;line-height:1.6}
-.kms .kml-row.warn .kml-ri{background:#FFE6EF}
-.kms .kml-row.warn .kml-rb span{color:#B0124F;font-weight:800}
-.kms .kml-row.ok .kml-rb span{color:#6E7090}
-.kms details.kml-more summary{list-style:none;cursor:pointer;font-size:12.5px;color:#5A5AEF;font-weight:800;padding:10px 2px}
-.kms details.kml-more summary::-webkit-details-marker{display:none}
-.kms .kml-set{margin-top:18px;border-radius:18px;background:#F7F6FD;padding:12px}
-.kms .kml-set h3{margin:0 0 4px;font-size:13.5px}
-.kms .kml-set p{margin:0 0 8px;font-size:11.5px;color:#7A7C98;line-height:1.6}
-.kms .kml-set h4{margin:12px 0 6px;font-size:12px;color:#4A4C6E}
-.kms .kml-chips{display:flex;flex-wrap:wrap;gap:6px}
-.kms .kml-chips button{border:1px solid #DCD8F5;background:#fff;border-radius:99px;padding:7px 11px;font:inherit;font-size:12.5px;color:#4A4C6E}
-.kms .kml-chips button.on{background:#EFEDFF;border-color:#9B8BFF;color:#4B3FD6;font-weight:800}
-.kms .kml-chips button.on::before{content:"✓ "}
-.kms .kml-src{margin-top:14px;font-size:10.5px;color:#9A9CB6;line-height:1.6}
-/*/kurashi-css*//*kn-slim*/.kn{border-radius:18px}.kn .kn-h{padding:5px 10px;gap:8px;min-height:0}.kn .kn-h b{font-size:12px!important;line-height:1.35}.kn .kn-h .kn-tk{font-size:10px!important}.kn .kn-h>span:nth-child(2){gap:0}.kn .kn-tk{line-height:1.35}.kn .kn-bell{width:30px;height:30px}.kn .kn-bell svg{width:21px;height:21px}.kn .kn-bell em{min-width:16px;height:16px;font-size:10px;line-height:16px;top:-3px;right:-4px;padding:0 4px}.kn .kn-chev{font-size:11px;padding:3px 9px}.kn::before{height:22px}/*/kn-slim*/
+/*/chiiki-css*//*kn-slim*/.kn{border-radius:18px}.kn .kn-h{padding:5px 10px;gap:8px;min-height:0}.kn .kn-h b{font-size:12px!important;line-height:1.35}.kn .kn-h .kn-tk{font-size:10px!important}.kn .kn-h>span:nth-child(2){gap:0}.kn .kn-tk{line-height:1.35}.kn .kn-bell{width:30px;height:30px}.kn .kn-bell svg{width:21px;height:21px}.kn .kn-bell em{min-width:16px;height:16px;font-size:10px;line-height:16px;top:-3px;right:-4px;padding:0 4px}.kn .kn-chev{font-size:11px;padding:3px 9px}.kn::before{height:22px}/*/kn-slim*/
 /*kn-noboost*/html{-webkit-text-size-adjust:100%;text-size-adjust:100%}.kn .kn-h b,.kn .kn-h .kn-tk,.kn .kn-tkr i{-webkit-text-size-adjust:none;text-size-adjust:none;max-height:1.5em}/*/kn-noboost*/
 
 
@@ -2941,7 +2942,7 @@ function holoTouch(map){if(!map||map._wtouch)return;map._wtouch=1;const box=map.
   if(window.IntersectionObserver)new IntersectionObserver(es=>es.forEach(e=>{if(e.intersectionRatio<.35)lock()}),{threshold:[0,.35,.6]}).observe(box);
 }
 /* ==== /holo-map ==== */
-/*vcheck*/(function(){var V="11261928";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
+/*vcheck*/(function(){var V="11262024";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
 <script>
 (()=>{
 const $=s=>document.querySelector(s);
@@ -5472,7 +5473,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11261928");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11262024");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -6196,7 +6197,7 @@ function wx2Get(){const o=LS.get("wolly.wx2");return o&&o.d?o:{at:0,d:{}}}
 let wx2Busy=false;
 function wx2Load(){const o=wx2Get();if(Date.now()-o.at<2*3600e3&&o.v===3)return;if(wx2Busy)return;wx2Busy=true;
   fetch(WX2_URL).then(r=>r.json()).then(j=>{const A={},HR={};
-    (j.properties.timeseries||[]).forEach(q=>{const t=new Date(Date.parse(q.time)+9*3600e3),k=t.toISOString().slice(0,10),h=t.getUTCHours(),b=h>=6&&h<12?"am":h>=12&&h<18?"pm":h>=18?"night":"";if(!b)return;
+    (j.properties.timeseries||[]).forEach(q=>{const t=new Date(Date.parse(q.time)+9*3600e3),k=t.toISOString().slice(0,10),h=t.getUTCHours(),b=h>=6&&h<12?"am":h>=12&&h<18?"pm":h>=18?"night":"";/* 0〜5時も1時間ごとの気温はのこす（メーター用） */if(!b){const x0=(q.data.instant||{}).details||{};if(x0.air_temperature!=null)(HR[k]=HR[k]||[]).push([h,x0.air_temperature,x0.relative_humidity!=null?x0.relative_humidity:null]);return}
       const D=A[k]=A[k]||{},a=D[b]=D[b]||{t:[],h:[],w:[],m1:0,h1:0,m6:0,h6:0},x=(q.data.instant||{}).details||{},n1=q.data.next_1_hours,n6=q.data.next_6_hours;
       if(x.air_temperature!=null){a.t.push(x.air_temperature);(HR[k]=HR[k]||[]).push([h,x.air_temperature,x.relative_humidity!=null?x.relative_humidity:null])}if(x.relative_humidity!=null)a.h.push(x.relative_humidity);if(x.wind_speed!=null)a.w.push(x.wind_speed);
       if(n1&&n1.details){a.m1+=n1.details.precipitation_amount||0;a.h1++}else if(n6&&n6.details&&!a.h6){a.m6+=n6.details.precipitation_amount||0;a.h6=6}});
@@ -6302,9 +6303,9 @@ function warnLv(c){const n=WARN_N[c]||"";return /特別警報/.test(n)?3:/警報
 function gomiBag(col,em){return `<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M23 13c3 5 6 7 9 8 3-1 6-3 9-8" fill="none" stroke="#1F2140" stroke-width="2.8" stroke-linecap="round"/><path d="M26 21h12l2 3H24z" fill="${col}" stroke="#1F2140" stroke-width="2.4" stroke-linejoin="round"/><path d="M24 24h16c7 6 12 14 12 21 0 8-6 12-12 12H24c-6 0-12-4-12-12 0-7 5-15 12-21z" fill="${col}" stroke="#1F2140" stroke-width="2.8" stroke-linejoin="round"/><path d="M19 38q3-6 8-9" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".7"/><circle cx="34" cy="43" r="10" fill="#fff" opacity=".92"/><text x="34" y="48" font-size="13" text-anchor="middle">${em}</text></svg>`}
 const GOMI_COL={burn:"#FF9F7A",r1:"#6FD3A0",r2:"#8FB2FF"};
 function kesaRender(){const el=document.getElementById("kesaCard");if(!el)return;
-  const now=new Date(),h=now.getHours(),eve=h>=18,d=new Date(now);if(eve)d.setDate(d.getDate()+1);
+  /* 11/26 天気と時間は、いつも「いま」（前は18時からあしたを出していた） */const now=new Date(),h=now.getHours(),eve=false,d=new Date(now);
   const k=ymd(d),day=`${d.getMonth()+1}月${d.getDate()}日（${WD[d.getDay()]}）`;
-  const ttl=eve?"🌙 あしたのじゅんび":h<12?"🌅 けさの3秒":"🕒 きょうの3秒",band=eve?"am":h<12?"am":"pm";
+  const ttl=eve?"🌙 あしたのじゅんび":h<12?"🌅 けさの3秒":"🕒 きょうの3秒",band=h<12?"am":h<18?"pm":"night";
   const wb=t=>(t||"").replace(/([、。／・])(?![^<]*>)/g,"$1<wbr>");
   /* 天気（背景になる） */
   let w=null;try{w=(wxGet().d||{})[k]}catch(e){}
@@ -6350,8 +6351,19 @@ function kesaRender(){const el=document.getElementById("kesaCard");if(!el)return
   if(el.dataset.h===html&&!el.hidden)return;el.dataset.h=html;el.innerHTML=html;
   el.hidden=false;const tl=document.getElementById("wxTelop");if(tl)tl.classList.add("kesa-off");kqInitMeter()}
 /* ===== 11/26 朝・日中・夜の気温とスライドメーター ===== */
+/* 11/26 すぎた時間は、気象庁が実際に測った気温・湿度（アメダス さいたま 43241。3時間ごとのファイル、20分ごとに読みなおし） */
+function obsGet(){const o=LS.get("wolly.obs");return o&&o.day===ymd(new Date())?o:{day:ymd(new Date()),at:0,h:[]}}
+let obsBusy=false;
+function obsLoad(){const o=obsGet();if(Date.now()-o.at<20*60e3||obsBusy)return;obsBusy=true;const n=new Date(),day=ymd(n),ds=day.replace(/-/g,""),hh=n.getHours();
+  const bl=[];for(let b=3;b<=hh;b+=3)bl.push(b);bl.unshift(0);
+  Promise.all(bl.map(b=>fetch(`https://www.jma.go.jp/bosai/amedas/data/point/43241/${ds}_${String(b).padStart(2,"0")}.json`).then(r=>r.ok?r.json():{}).catch(()=>({}))))
+   .then(A=>{const H={};A.forEach(j=>Object.keys(j||{}).forEach(t=>{if(t.slice(10,14)!=="0000")return;const x=j[t],hr=+t.slice(8,10);if(x.temp&&x.temp[0]!=null)H[hr]=[hr,x.temp[0],x.humidity?x.humidity[0]:null]}));
+     const L=Object.values(H).sort((a,b)=>a[0]-b[0]);LS.set("wolly.obs",{day,at:Date.now(),h:L});obsBusy=false;try{kesaRender()}catch(e){}}).catch(()=>{obsBusy=false})}
+function obsFor(k){const o=obsGet();return k===o.day?o.h:[]}
 function kqTemps(k,hi,lo){let H=((wx2Get().h||{})[k]||[]).slice().sort((a,b)=>a[0]-b[0]);
-  if(H.length>=3){H=kqFit(H,hi,lo);if(H[0][0]>7&&lo!=null)H.unshift([6,lo]);return H}if(hi==null)return null;const l=lo!=null?lo:hi-7;return [[6,l],[9,l+(hi-l)*.45],[14,hi],[18,l+(hi-l)*.55],[23,l+(hi-l)*.2]]}
+  const O=obsFor(k);
+  if(H.length>=3||O.length){H=H.length>=3?kqFit(H,hi,lo):H;if(O.length){const last=O[O.length-1][0],lt=O[O.length-1][1],fr=H.find(r=>r[0]===last),dl=fr?lt-fr[1]:0;/* 予報とのずれを、6時間かけて少しずつ予報にもどす */H=O.map(r=>[r[0],r[1],r[2],1]).concat(H.filter(r=>r[0]>last).map(r=>[r[0],r[1]+dl*Math.max(0,1-(r[0]-last)/6)].concat(r.slice(2))))}
+    else if(H[0][0]>7&&lo!=null)H.unshift([5,lo]);if(H.length>=2)return H}if(hi==null)return null;const l=lo!=null?lo:hi-7;return [[6,l],[9,l+(hi-l)*.45],[14,hi],[18,l+(hi-l)*.55],[23,l+(hi-l)*.2]]}
 /* 11/26 気象庁の最高・最低気温に合わせる（1時間ごとの形は MET Norway、高さは気象庁の予報） */
 function kqFit(H,hi,lo){if(hi==null)return H;const am=H.filter(r=>r[0]<=9).map(r=>r[1]),dy=H.filter(r=>r[0]>=9&&r[0]<=18).map(r=>r[1]);if(!dy.length)return H;
   const mhi=Math.max(...dy),mlo=lo!=null&&am.length?Math.min(...am):Math.min(...H.map(r=>r[1]));if(!(mhi>mlo))return H;
@@ -6363,29 +6375,29 @@ function kqHiCol(hi){if(hi>=23)return [255,48,64];const f=Math.max(0,Math.min(1,
 const KQ_ABS=[[-5,[46,58,158]],[0,[52,84,214]],[4,[61,128,255]],[8,[64,168,240]],[11,[92,196,236]],[14,[150,190,240]],[17,[196,170,236]],[20,[240,160,206]],[23,[255,128,140]],[27,[255,74,94]],[31,[214,32,78]],[35,[150,20,70]]];
 function kqAbs(t){const A=KQ_ABS;if(t<=A[0][0])return A[0][1];for(let i=1;i<A.length;i++){if(t<=A[i][0]){const f=(t-A[i-1][0])/(A[i][0]-A[i-1][0]);return A[i-1][1].map((v,j)=>v+(A[i][1][j]-v)*f)}}return A[A.length-1][1]}
 function kqCol(t,lo,hi){const f=hi>lo?Math.max(0,Math.min(1,(t-lo)/(hi-lo))):1,H=kqHiCol(hi),R=KQ_BLUE.map((v,i)=>v+(H[i]-v)*f),A=kqAbs(t),w=.3+.5*Math.abs(f-.5)*2;return `rgb(${A.map((v,i)=>Math.round(v*(1-w)+R[i]*w)).join(",")})`}
-function kqMeter(k,eve,hi0,lo0){const H=kqTemps(k,hi0,lo0);if(!H)return "";const X0=6,X1=24;
+function kqMeter(k,eve,hi0,lo0){const H=kqTemps(k,hi0,lo0);if(!H)return "";const X0=0,X1=24;/* 11/26 0〜24時のリアルタイム */
   const xs=[];for(let x=X0;x<=X1;x+=.5)xs.push(kqT(H,x));const lo=Math.min(...xs),hi=Math.max(...xs);
   const pos=x=>((x-X0)/(X1-X0)*100).toFixed(2);
   let dh=11,dv=-99;for(let x=10;x<=16;x+=.5){const v=kqT(H,x);if(v>dv){dv=v;dh=x}}
   const P3=[["🌅","朝",7],["☀️","日中",dh],["🌙","夜",21]];
   const HU={};["am","pm","night"].forEach(b=>{try{const x=wx2(k,b);if(x&&x.hu!=null)HU[b]=x.hu}catch(e){}});const hb=x=>x<12?"am":x<18?"pm":"night";
-  const HM=((wx2Get().h||{})[k]||[]).filter(r=>r[2]!=null).map(r=>[r[0],r[2]]).sort((a,b)=>a[0]-b[0]);const huAt=x=>HM.length>=3?Math.round(kqT(HM,x)):HU[hb(x)];
-  const stops=[];for(let x=X0;x<=X1;x+=.5)stops.push(`${kqCol(kqT(H,x),lo,hi)} ${pos(x)}%`);
-  const nh=new Date(),cur=eve?7:Math.max(X0,Math.min(X1,nh.getHours()+nh.getMinutes()/60));
-  return `<div class="kq-tm" data-kqk="${k}" data-h='${JSON.stringify(H.map(([a,b])=>[a,Math.round(b*10)/10]))}' data-lo="${lo}" data-hi="${hi}" data-hu='${JSON.stringify(HU)}' data-hm='${JSON.stringify(HM.length>=3?HM.map(([a,b])=>[a,Math.round(b)]):[])}'>
-   <div class="kq-t3">${P3.map(([ic,n,x])=>{const v=kqT(H,x);return `<button type="button" data-kqh="${x}"><small>${ic} ${n}</small><b style="color:${kqCol(v,lo,hi)}">${Math.round(v)}°</b>${huAt(x)!=null?`<span class="kq-hu${huAt(x)>70?" wet":""}">💧${huAt(x)}%</span>`:""}</button>`}).join("")}</div>
-   <div class="kq-mt" role="slider" tabindex="0" aria-label="時間ごとの気温" aria-valuemin="6" aria-valuemax="24" aria-valuenow="${Math.round(cur)}"><div class="kq-trk" style="background:linear-gradient(90deg,${stops.join(",")})"></div><div class="kq-th" data-x="${cur}" style="left:${pos(cur)}%"><span class="kq-bub"></span><i></i></div></div>
-   <div class="kq-tl"><span>6時</span><span>12時</span><span>18時</span><span>24時</span></div><p class="kq-cr">気温・湿度：MET Norway／天気・警報：気象庁</p></div>`}
+  const HM=(()=>{const O=obsFor(k).filter(r=>r[2]!=null),last=O.length?O[O.length-1][0]:-1;return O.map(r=>[r[0],r[2]]).concat(((wx2Get().h||{})[k]||[]).filter(r=>r[2]!=null&&r[0]>last).map(r=>[r[0],r[2]])).sort((a,b)=>a[0]-b[0])})();const huAt=x=>HM.length>=3?Math.round(kqT(HM,x)):HU[hb(x)];
+  const stops=[];for(let x=X0;x<=X1;x+=.5)stops.push(`${x<H[0][0]-.01?"#D9DBE6":kqCol(kqT(H,x),lo,hi)} ${pos(x)}%`);
+  const nh=new Date(),cur=Math.max(X0,Math.min(X1,nh.getHours()+nh.getMinutes()/60)),f0=H[0][0],no=x=>x<f0-.01;const ob=obsFor(k),oLast=ob.length?ob[ob.length-1][0]:-1,isOb=x=>x<=oLast;
+  return `<div class="kq-tm" data-kqk="${k}" data-f0="${f0}" data-ob="${oLast}" data-h='${JSON.stringify(H.map(([a,b])=>[a,Math.round(b*10)/10]))}' data-lo="${lo}" data-hi="${hi}" data-hu='${JSON.stringify(HU)}' data-hm='${JSON.stringify(HM.length>=3?HM.map(([a,b])=>[a,Math.round(b)]):[])}'>
+   <div class="kq-t3">${P3.map(([ic,n,x])=>{const v=kqT(H,x);if(no(x))return `<button type="button" data-kqh="${x}" class="kq-past"><small>${ic} ${n}</small><b>—</b><span class="kq-pst">すぎたよ</span></button>`;return `<button type="button" data-kqh="${x}"><small>${ic} ${n}</small><b style="color:${kqCol(v,lo,hi)}">${Math.round(v)}°</b>${isOb(x)?`<span class="kq-pst">じっさい</span>`:""}${huAt(x)!=null?`<span class="kq-hu${huAt(x)>70?" wet":""}">💧${huAt(x)}%</span>`:""}</button>`}).join("")}</div>
+   <div class="kq-mt" role="slider" tabindex="0" aria-label="時間ごとの気温" aria-valuemin="0" aria-valuemax="24" aria-valuenow="${Math.round(cur)}"><div class="kq-trk" style="background:linear-gradient(90deg,${stops.join(",")})"></div><div class="kq-th" data-x="${cur}" style="left:${pos(cur)}%"><span class="kq-bub"></span><i></i></div></div>
+   <div class="kq-tl"><span>0時</span><span>6時</span><span>12時</span><span>18時</span><span>24時</span></div><p class="kq-cr">すぎた時間：気象庁の観測（さいたま）／これから：MET Norway（最高・最低は気象庁の予報）</p></div>`}
 function kqSet(tm,x,anim){const H=tm._H||(tm._H=JSON.parse(tm.dataset.h)),lo=+tm.dataset.lo,hi=+tm.dataset.hi,th=tm.querySelector(".kq-th"),mt=tm.querySelector(".kq-mt");if(!th)return;
-  x=Math.max(6,Math.min(24,x));const draw=v=>{const p=(v-6)/18*100,t=kqT(H,v),c=kqCol(t,lo,hi);th.style.left=p+"%";th.dataset.x=v;th.style.setProperty("--c",c);
+  x=Math.max(0,Math.min(24,x));const draw=v=>{const p=v/24*100,t=kqT(H,v),c=kqCol(t,lo,hi);th.style.left=p+"%";th.dataset.x=v;th.style.setProperty("--c",c);
     const hh=Math.floor(v),mm=Math.round((v-hh)*6)*10;const lab=(mm===60?hh+1:hh)+":"+String(mm===60?0:mm).padStart(2,"0");
-    const b=th.querySelector(".kq-bub");b.style.transform=`translateX(${-(10+80*p/100)}%)`;/* はしでもカードからはみ出さない */const HU=tm._HU||(tm._HU=JSON.parse(tm.dataset.hu||"{}")),HM=tm._HM||(tm._HM=JSON.parse(tm.dataset.hm||"[]")),hv=HM.length>=3?Math.round(kqT(HM,v)):HU[v<12?"am":v<18?"pm":"night"];b.innerHTML=`<em>${lab}</em><b style="color:${c}">${Math.round(t)}°</b>${hv!=null?`<span class="kq-hu${hv>70?" wet":""}">💧${hv}%</span>`:""}`;mt.setAttribute("aria-valuenow",Math.round(v));mt.setAttribute("aria-valuetext",lab+" "+Math.round(t)+"度");
+    const b=th.querySelector(".kq-bub");b.style.transform=`translateX(${-(10+80*p/100)}%)`;/* はしでもカードからはみ出さない */const HU=tm._HU||(tm._HU=JSON.parse(tm.dataset.hu||"{}")),HM=tm._HM||(tm._HM=JSON.parse(tm.dataset.hm||"[]")),hv=HM.length>=3?Math.round(kqT(HM,v)):HU[v<12?"am":v<18?"pm":"night"];const past=v<(+tm.dataset.f0||0)-.01;b.innerHTML=past?`<em>${lab}</em><b style="color:#8A8DA8">すぎた時間</b>`:`<em>${lab}</em><b style="color:${c}">${Math.round(t)}°</b>${v<=(+tm.dataset.ob)?`<span class="kq-pst">じっさい</span>`:""}${hv!=null?`<span class="kq-hu${hv>70?" wet":""}">💧${hv}%</span>`:""}`;mt.setAttribute("aria-valuenow",Math.round(v));mt.setAttribute("aria-valuetext",lab+" "+Math.round(t)+"度");
     tm.querySelectorAll("[data-kqh]").forEach(q=>q.classList.toggle("on",Math.abs(+q.dataset.kqh-v)<1.6))};
   cancelAnimationFrame(tm._raf);if(!anim)return draw(x);const x0=+th.dataset.x||x,t0=performance.now(),D=420;
   const step=n=>{const f=Math.min(1,(n-t0)/D),e=1-Math.pow(1-f,3);draw(x0+(x-x0)*e);if(f<1)tm._raf=requestAnimationFrame(step)};tm._raf=requestAnimationFrame(step)}
 function kqInitMeter(){document.querySelectorAll("#kesaCard .kq-tm").forEach(tm=>{if(tm._ok)return;tm._ok=1;const th=tm.querySelector(".kq-th");kqSet(tm,+th.dataset.x,false)})}
 (function(){let drag=null;
-  const xAt=(mt,cx)=>{const r=mt.getBoundingClientRect();return 6+Math.max(0,Math.min(1,(cx-r.left)/r.width))*18};
+  const xAt=(mt,cx)=>{const r=mt.getBoundingClientRect();return Math.max(0,Math.min(1,(cx-r.left)/r.width))*24};
   /* 11/26 さわった所へすぐ動く・指についてくる（動かしている間は1フレームに1回だけ描く） */
   let raf=0,lx=0;const paint=()=>{raf=0;if(drag)kqSet(drag.tm,xAt(drag.mt,lx),false)};
   document.addEventListener("pointerdown",e=>{const mt=e.target.closest("#kesaCard .kq-mt");if(!mt)return;const tm=mt.closest(".kq-tm");
@@ -6490,52 +6502,12 @@ document.addEventListener("click",e=>{
   if(e.target.closest("[data-gm-save]")){const o={};document.querySelectorAll(".gm-d").forEach(x=>{o[x.dataset.gm]=[...x.querySelectorAll("button.on")].map(y=>+y.dataset.w)});
     o.early=!!(document.getElementById("gmEarly")||{}).checked;
     if(!GOMI_K.some(g=>(o[g[0]]||[]).length))LS.set("wolly.gomi",null);else LS.set("wolly.gomi",o);kesaRender();sheetBack()}});
-function kesaInit(){try{kesaRender()}catch(e){}try{warnLoad()}catch(e){}try{wx2Load()}catch(e){}try{trLoad()}catch(e){}}
+function kesaInit(){try{kesaRender()}catch(e){}try{warnLoad()}catch(e){}try{wx2Load()}catch(e){}try{obsLoad()}catch(e){}try{trLoad()}catch(e){}}
 if(typeof wx2Paint==="function"){const _w2=wx2Paint;wx2Paint=function(){_w2.apply(this,arguments);try{kesaRender()}catch(e){}}}
 [300,2500,7000].forEach(ms=>setTimeout(kesaInit,ms));
 setInterval(kesaInit,20*60e3);
 document.addEventListener("visibilitychange",()=>{if(!document.hidden)kesaInit()});
-/*/kesa-js*//*chiiki-js*/
-/* ===== きょうの地域（11/26 見本） ===== */
-function ckHoli(d){return d.getDay()===0||(typeof SOS_HOLI!=="undefined"&&SOS_HOLI.includes(ymd(d)))}
-function ckStamp(iso){const t=new Date(iso);if(isNaN(t))return"";const n=new Date(),same=t.toDateString()===n.toDateString();
-  const y=new Date(n);y.setDate(n.getDate()-1);const hm=`${t.getHours()}:${String(t.getMinutes()).padStart(2,"0")}`;
-  return (same?"きょう ":t.toDateString()===y.toDateString()?"きのう ":`${t.getMonth()+1}/${t.getDate()} `)+hm+" 更新"}
-function ckDoctor(){
-  const n=new Date(),h=n.getHours(),hol=ckHoli(n),sat=n.getDay()===6;
-  const ki=typeof HEALTH!=="undefined"?HEALTH.findIndex(x=>x.kyu):-1,map=ki>=0?"#x-"+ki:"#kyubyo";
-  if(!hol&&!sat){
-    return `<div class="ck-s"><p class="ck-st"><em>🏥</em>夜に子どもが熱を出したら</p>
-      <div class="ck-row" style="--b:#F1F0FF"><span class="ck-ri">🌙</span><span class="ck-rt"><b>こども医療電話相談 #8000</b><small>看護師さんに相談できるよ（毎日 24時間）</small></span><a class="ck-tel" href="tel:%238000" data-tap="きょうの地域：#8000">📞<span> かける</span></a></div>
-      <a class="ck-more" href="${map}">急患電話マップを見る ›</a></div>`;
-  }
-  const r=typeof clinicRank==="function"?clinicRank():null;
-  const idx=KYU_CLINICS.map((c,i)=>i).sort((a,b)=>r?(r[a].n-r[b].n):a-b).slice(0,2);
-  const hrs=c=>{const x=(c.h||[]).find(z=>/内科/.test(z[0]));const t=x?x[1]:"";const m=hol?t.match(/休日\s*([^／]+)/):t.match(/土曜夜\s*([^／]+)/);return m?m[1].trim():t};
-  const rows=idx.map(i=>{const c=KYU_CLINICS[i];const km=r&&r[i]&&(r.home||r.here)?`約${r[i].km.toFixed(1)}km・`:"";
-    return `<div class="ck-row" style="--b:#FFF0F6"><span class="ck-ri">🏥</span><span class="ck-rt"><b>${esc(c.n)}</b><small>${esc(km)}内科 ${esc(hrs(c))}</small></span><a class="ck-tel" href="tel:${esc(c.t.replace(/[^0-9]/g,""))}" data-tap="きょうの地域：${esc(c.n)}">📞<span> かける</span></a></div>`}).join("");
-  const dent=hol&&typeof HDENT!=="undefined"&&HDENT[0]?`<div class="ck-row" style="--b:#EAF6FF"><span class="ck-ri">🦷</span><span class="ck-rt"><b>休日の歯医者さん</b><small>${esc(HDENT[0][0])}ほか・9〜12時</small></span><a class="ck-go" href="#hdent">›</a></div>`:"";
-  return `<div class="ck-s"><p class="ck-st"><em>🏥</em>${hol?"きょうは休日。あいている急患診療所":"土曜の夜にあいている急患診療所"}</p>${rows}${dent}
-    <p class="ck-note">${r?(r.home?"おうちから近い順":"登録した区から近い順"):"区を登録すると近い順になるよ"}。行く前に電話でたしかめてね</p>
-    <a class="ck-more" href="${map}">急患電話マップを見る ›</a></div>`;
-}
-function ckBoard(){
-  return `<div class="ck-s"><p class="ck-st"><em>💬</em>地域の掲示板</p>
-    <div class="ck-row" style="--b:#F6F5FF"><span class="ck-ri">🗣️</span><span class="ck-rt"><b>近くのママ・パパの声</b><small>相談やおすすめの新着が、ここに出るよ</small></span><span class="ck-soon">もうすぐ</span></div></div>`;
-}
-function chiikiRender(){const el=document.getElementById("chiikiCard");if(!el)return;
-  const ward=S&&S.profile&&S.profile.ward;
-  const html='<div id="ckEvSlot"></div><div id="ckShSlot"></div>';/* 11/26 見出し「きょうの地域」と掲示板は出さない（掲示板は公開したら ckBoard() を足す） *//* 急患は上の帯にあるので出さない */
-  /* 11/26 今週のイベント・おトク情報（#feedEvents）をそのままカードの中へ。描き直すときは一度はずしてから戻す */
-  /* 11/26 さいたまのお店情報（#feedShops）もイベントの下へ */
-  const MV=[["feedEvents","ckEvSlot"],["feedShops","ckShSlot"]].map(([i,sl])=>[document.getElementById(i),sl]);
-  if(el.dataset.h!==html){MV.forEach(([x])=>{if(x&&el.contains(x))x.remove()});el.innerHTML=html;el.dataset.h=html;
-    MV.forEach(([x,sl])=>{const slot=el.querySelector("#"+sl);if(x&&slot){x.classList.add("ck-s","ck-evs");slot.replaceWith(x)}})}
-  el.hidden=false}
-[400,2600,7500].forEach(ms=>setTimeout(()=>{try{chiikiRender()}catch(e){console.warn(e)}},ms));
-setInterval(()=>{try{chiikiRender()}catch(e){}},10*60e3);
-document.addEventListener("visibilitychange",()=>{if(!document.hidden)try{chiikiRender()}catch(e){}});
-/*/chiiki-js*//*kurashi-js*/
+/*/kesa-js*//*kurashi-js*/
 /* ===== きょうのくらしメモ（11/26） ===== */
 const KM_SC={wash:["🧺","洗濯"],futon:["🛏️","布団"],adult:["👕","大人の服"],kids:["🧒","子どもの服"],kasa:["☂️","かさ"],
  bike:["🚲","自転車"],car:["🚗","車"],walk:["🚶","歩き・行き帰り"],play:["🛝","子どもの外遊び"],bento:["🍱","お弁当・食べもの"],
@@ -6546,13 +6518,13 @@ const KM_LIFE={bike:["🚲","自転車で送り迎え",["bike","kids","kasa","ad
  work:["👜","お仕事に出る",["adult","kasa","walk","bento"]],bento:["🍳","毎日お弁当を作る",["bento","heat"]]};
 const KM_DEF=["wash","adult","kasa"];
 function kmSt(){const o=LS.get("wolly.kurashi")||{};return {b:o.b||[],on:o.on||[],off:o.off||[]}}
-function kmTk(){const h=new Date().getHours();return h<9?"am":h<16?"day":h<18?"eve":"night"}
+function kmTk(){const h=new Date().getHours();return h<9?"am":h<16?"day":h<21?"eve":"night"}/* 11/26 21時から「あした」 */
 function kmOrder(st){st=st||kmSt();let a=[];st.b.forEach(b=>(KM_LIFE[b]||["","",[]])[2].forEach(k=>{if(!a.includes(k))a.push(k)}));
   st.on.forEach(k=>{if(KM_SC[k]&&!a.includes(k))a.push(k)});if(!a.length)a=KM_DEF.slice();
   if(kmTk()==="eve")["wash","kasa"].forEach(k=>{if(a.includes(k))a=[k,...a.filter(x=>x!==k)]});
   return a.filter(k=>!st.off.includes(k))}
 /* 天気をまとめる（eve＝あしたの分） */
-function kmWx(){const now=new Date(),eve=now.getHours()>=18,d=new Date(now);if(eve)d.setDate(d.getDate()+1);const k=ymd(d);
+function kmWx(){const now=new Date(),eve=now.getHours()>=21,d=new Date(now);if(eve)d.setDate(d.getDate()+1);const k=ymd(d);
   const w=(wxGet().d||{})[k];if(!w||!(w.c||w.t))return null;
   const hi0=w.th!=null?w.th:w.hi,lo0=(w.tl!=null&&w.th!=null&&w.tl<w.th)?w.tl:w.lo;let H=null;try{H=kqTemps(k,hi0,lo0)}catch(e){}
   const T=x=>H?Math.round(kqT(H,x)):null;let hi=hi0;if(H){hi=-99;for(let x=10;x<=16;x+=.5)hi=Math.max(hi,kqT(H,x));hi=Math.round(hi)}
@@ -6675,9 +6647,13 @@ function kmStory(w,ks){const must=["heat"].filter(k=>!ks.includes(k)).map(k=>kmS
   let s=kmIntro(w)+use.map(x=>x.t.replace(new RegExp("^朝は"+w.am+"度(、風([0-9.]+)m/s)?。"),(m,a,v)=>v?"風は"+v+"m/s。":"").split(/(?<=。)/).filter(z=>z&&!seen.has(z)&&seen.add(z)).join("")).join("");
   if(!use.length)s+="とくに気をつけることはなさそう。すごしやすい日だよ。";else if(use.length<2)s+="ほかは、とくに気をつけることはなさそう。";return s}
 /* カードの1行（kesaRender から） */
+/* 11/26 21時からは、いまの天気（気象庁の観測・予報）をひとこと入れてから、あしたの話 */
+function kmNowLine(){try{const n=new Date(),td=ymd(n);let wd=null;try{wd=wxWord(td,"night")}catch(e){}
+  let t=null;try{const H=kqTemps(td,null,null);if(H&&H.length)t=Math.round(kqT(H,n.getHours()+n.getMinutes()/60))}catch(e){}/* メーターと同じ数 */
+  const nm=wd?wd[1].replace(/（.*?）/,""):"";if(!nm&&t==null)return "";return esc(`いまは${nm}${t!=null?(nm?"で":"")+t+"度":""}。`)}catch(e){return ""}}
 function kmTip(){const w=kmWx();if(!w)return "";const ks=kmOrder(),L=ks.map(k=>[k,kmSay(k,w)]).filter(x=>x[1].t);
   const top=L.slice().sort((a,b)=>b[1].lv-a[1].lv)[0];if(!top)return "";
-  return `<a class="kq-tip kml-tip" href="#kurashi"><span>${KM_SC[top[0]][0]}</span><span class="kml-tx">${esc(top[1].s||top[1].t)}</span><span class="kml-go" aria-label="くわしく">›</span></a>`}
+  return `<a class="kq-tip kml-tip" href="#kurashi"><span>${KM_SC[top[0]][0]}</span><span class="kml-tx">${w.eve?kmNowLine()+"あしたは、":""}${esc(top[1].s||top[1].t)}</span><span class="kml-go" aria-label="くわしく">›</span></a>`}
 function kmRow(k,x){return `<div class="kml-row ${x.lv===2?"warn":x.lv===0?"ok":""}"><span class="kml-ri">${KM_SC[k][0]}</span><span class="kml-rb"><b>${KM_SC[k][1]}${x.lv===2?"・気をつけて":""}</b><span>${esc(x.t)}</span></span></div>`}
 function sheetKurashi(){const w=kmWx(),st=kmSt();
   if(!w)return `<div class="kms"><p class="kml-h">きょうのくらしメモ</p><p class="kml-t">天気をよみこみ中だよ</p><p>少し待ってから、もう一度ひらいてね。</p></div>`;
@@ -6699,7 +6675,47 @@ document.addEventListener("click",e=>{const b=e.target.closest("button[data-kmb]
     else{st.off=st.off.filter(x=>x!==v);if(!kmOrder(st).includes(v))st.on=[...st.on,v]}}
   LS.set("wolly.kurashi",st);const sb=document.getElementById("sheetBody"),sh=document.getElementById("sheet"),y=sh?sh.scrollTop:0;
   if(sb&&sb.querySelector(".kms"))sb.innerHTML=sheetKurashi();if(sh)sh.scrollTop=y;try{kesaRender()}catch(_){}});
-/*/kurashi-js*//*/dh-js*/
+/*/kurashi-js*//*chiiki-js*/
+/* ===== きょうの地域（11/26 見本） ===== */
+function ckHoli(d){return d.getDay()===0||(typeof SOS_HOLI!=="undefined"&&SOS_HOLI.includes(ymd(d)))}
+function ckStamp(iso){const t=new Date(iso);if(isNaN(t))return"";const n=new Date(),same=t.toDateString()===n.toDateString();
+  const y=new Date(n);y.setDate(n.getDate()-1);const hm=`${t.getHours()}:${String(t.getMinutes()).padStart(2,"0")}`;
+  return (same?"きょう ":t.toDateString()===y.toDateString()?"きのう ":`${t.getMonth()+1}/${t.getDate()} `)+hm+" 更新"}
+function ckDoctor(){
+  const n=new Date(),h=n.getHours(),hol=ckHoli(n),sat=n.getDay()===6;
+  const ki=typeof HEALTH!=="undefined"?HEALTH.findIndex(x=>x.kyu):-1,map=ki>=0?"#x-"+ki:"#kyubyo";
+  if(!hol&&!sat){
+    return `<div class="ck-s"><p class="ck-st"><em>🏥</em>夜に子どもが熱を出したら</p>
+      <div class="ck-row" style="--b:#F1F0FF"><span class="ck-ri">🌙</span><span class="ck-rt"><b>こども医療電話相談 #8000</b><small>看護師さんに相談できるよ（毎日 24時間）</small></span><a class="ck-tel" href="tel:%238000" data-tap="きょうの地域：#8000">📞<span> かける</span></a></div>
+      <a class="ck-more" href="${map}">急患電話マップを見る ›</a></div>`;
+  }
+  const r=typeof clinicRank==="function"?clinicRank():null;
+  const idx=KYU_CLINICS.map((c,i)=>i).sort((a,b)=>r?(r[a].n-r[b].n):a-b).slice(0,2);
+  const hrs=c=>{const x=(c.h||[]).find(z=>/内科/.test(z[0]));const t=x?x[1]:"";const m=hol?t.match(/休日\s*([^／]+)/):t.match(/土曜夜\s*([^／]+)/);return m?m[1].trim():t};
+  const rows=idx.map(i=>{const c=KYU_CLINICS[i];const km=r&&r[i]&&(r.home||r.here)?`約${r[i].km.toFixed(1)}km・`:"";
+    return `<div class="ck-row" style="--b:#FFF0F6"><span class="ck-ri">🏥</span><span class="ck-rt"><b>${esc(c.n)}</b><small>${esc(km)}内科 ${esc(hrs(c))}</small></span><a class="ck-tel" href="tel:${esc(c.t.replace(/[^0-9]/g,""))}" data-tap="きょうの地域：${esc(c.n)}">📞<span> かける</span></a></div>`}).join("");
+  const dent=hol&&typeof HDENT!=="undefined"&&HDENT[0]?`<div class="ck-row" style="--b:#EAF6FF"><span class="ck-ri">🦷</span><span class="ck-rt"><b>休日の歯医者さん</b><small>${esc(HDENT[0][0])}ほか・9〜12時</small></span><a class="ck-go" href="#hdent">›</a></div>`:"";
+  return `<div class="ck-s"><p class="ck-st"><em>🏥</em>${hol?"きょうは休日。あいている急患診療所":"土曜の夜にあいている急患診療所"}</p>${rows}${dent}
+    <p class="ck-note">${r?(r.home?"おうちから近い順":"登録した区から近い順"):"区を登録すると近い順になるよ"}。行く前に電話でたしかめてね</p>
+    <a class="ck-more" href="${map}">急患電話マップを見る ›</a></div>`;
+}
+function ckBoard(){
+  return `<div class="ck-s"><p class="ck-st"><em>💬</em>地域の掲示板</p>
+    <div class="ck-row" style="--b:#F6F5FF"><span class="ck-ri">🗣️</span><span class="ck-rt"><b>近くのママ・パパの声</b><small>相談やおすすめの新着が、ここに出るよ</small></span><span class="ck-soon">もうすぐ</span></div></div>`;
+}
+function chiikiRender(){const el=document.getElementById("chiikiCard");if(!el)return;
+  const ward=S&&S.profile&&S.profile.ward;
+  const html='<div id="ckEvSlot"></div><div id="ckShSlot"></div>';/* 11/26 見出し「きょうの地域」と掲示板は出さない（掲示板は公開したら ckBoard() を足す） *//* 急患は上の帯にあるので出さない */
+  /* 11/26 今週のイベント・おトク情報（#feedEvents）をそのままカードの中へ。描き直すときは一度はずしてから戻す */
+  /* 11/26 さいたまのお店情報（#feedShops）もイベントの下へ */
+  const MV=[["feedEvents","ckEvSlot"],["feedShops","ckShSlot"]].map(([i,sl])=>[document.getElementById(i),sl]);
+  if(el.dataset.h!==html){MV.forEach(([x])=>{if(x&&el.contains(x))x.remove()});el.innerHTML=html;el.dataset.h=html;
+    MV.forEach(([x,sl])=>{const slot=el.querySelector("#"+sl);if(x&&slot){x.classList.add("ck-s","ck-evs");slot.replaceWith(x)}})}
+  el.hidden=false}
+[400,2600,7500].forEach(ms=>setTimeout(()=>{try{chiikiRender()}catch(e){console.warn(e)}},ms));
+setInterval(()=>{try{chiikiRender()}catch(e){}},10*60e3);
+document.addEventListener("visibilitychange",()=>{if(!document.hidden)try{chiikiRender()}catch(e){}});
+/*/chiiki-js*//*/dh-js*/
 /*today-js*/
 /* きょうの予定：午前・午後・夜＋天気（ホログラム） */
 function todayPopOld(){const k=ymd(new Date()),L=schSortT(schGet().filter(e=>e.date===k)),w=wxGet().d[k];
@@ -7486,8 +7502,8 @@ let RAWQ="";function setRaw(v){RAWQ=(v||"").normalize("NFKC").replace(NOISE,"").
 function qph(ws){const k=ws.join("|")+"#"+RAWQ;if(k===QPK&&QP)return QP;const list=ws.map(qk);const j=qk(RAWQ||ws.join(""));if(ws.length>1||RAWQ)list.push(j);QPK=k;QP={list,all:Math.max(3,j.length)};return QP}
 function load(){if(DATA)return Promise.resolve(DATA);
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
-  const kp=fetch(base+"near-data/tel-kana.json?v=11261928").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
-  return Promise.all([fetch(base+"near-data/tel.json?v=11261928").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
+  const kp=fetch(base+"near-data/tel-kana.json?v=11262024").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
+  return Promise.all([fetch(base+"near-data/tel.json?v=11262024").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
     .catch(()=>{DATA=[];return DATA})}
 /* 聞きとった文 → キーワード */
 function terms(text){let s=(text||"").normalize("NFKC").replace(NOISE," ");
