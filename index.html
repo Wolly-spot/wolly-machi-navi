@@ -2863,7 +2863,7 @@ function holoTouch(map){if(!map||map._wtouch)return;map._wtouch=1;const box=map.
   if(window.IntersectionObserver)new IntersectionObserver(es=>es.forEach(e=>{if(e.intersectionRatio<.35)lock()}),{threshold:[0,.35,.6]}).observe(box);
 }
 /* ==== /holo-map ==== */
-/*vcheck*/(function(){var V="11261046";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
+/*vcheck*/(function(){var V="11261057";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
 <script>
 (()=>{
 const $=s=>document.querySelector(s);
@@ -5393,7 +5393,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11261046");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11261057");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -6114,15 +6114,15 @@ function todayPop(){const h=new Date().getHours(),b=h<12?"am":h<18?"pm":"night";
 const WX2_URL="https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=35.8617&lon=139.6455";
 function wx2Get(){const o=LS.get("wolly.wx2");return o&&o.d?o:{at:0,d:{}}}
 let wx2Busy=false;
-function wx2Load(){const o=wx2Get();if(Date.now()-o.at<2*3600e3&&o.v===2)return;if(wx2Busy)return;wx2Busy=true;
+function wx2Load(){const o=wx2Get();if(Date.now()-o.at<2*3600e3&&o.v===3)return;if(wx2Busy)return;wx2Busy=true;
   fetch(WX2_URL).then(r=>r.json()).then(j=>{const A={},HR={};
     (j.properties.timeseries||[]).forEach(q=>{const t=new Date(Date.parse(q.time)+9*3600e3),k=t.toISOString().slice(0,10),h=t.getUTCHours(),b=h>=6&&h<12?"am":h>=12&&h<18?"pm":h>=18?"night":"";if(!b)return;
       const D=A[k]=A[k]||{},a=D[b]=D[b]||{t:[],h:[],w:[],m1:0,h1:0,m6:0,h6:0},x=(q.data.instant||{}).details||{},n1=q.data.next_1_hours,n6=q.data.next_6_hours;
-      if(x.air_temperature!=null){a.t.push(x.air_temperature);(HR[k]=HR[k]||[]).push([h,x.air_temperature])}if(x.relative_humidity!=null)a.h.push(x.relative_humidity);if(x.wind_speed!=null)a.w.push(x.wind_speed);
+      if(x.air_temperature!=null){a.t.push(x.air_temperature);(HR[k]=HR[k]||[]).push([h,x.air_temperature,x.relative_humidity!=null?x.relative_humidity:null])}if(x.relative_humidity!=null)a.h.push(x.relative_humidity);if(x.wind_speed!=null)a.w.push(x.wind_speed);
       if(n1&&n1.details){a.m1+=n1.details.precipitation_amount||0;a.h1++}else if(n6&&n6.details&&!a.h6){a.m6+=n6.details.precipitation_amount||0;a.h6=6}});
     const d={};Object.keys(A).forEach(k=>{d[k]={};Object.keys(A[k]).forEach(b=>{const a=A[k][b];if(!a.t.length)return;const mm=a.h1?a.m1:a.m6,hr=a.h1||a.h6||1;
       d[k][b]={hi:Math.round(Math.max(...a.t)),lo:Math.round(Math.min(...a.t)),hu:a.h.length?Math.round(a.h.reduce((p,v)=>p+v,0)/a.h.length):null,ws:a.w.length?Math.round(Math.max(...a.w)*10)/10:null,mm:Math.round(mm*10)/10,r:Math.round(mm/hr*10)/10}})});
-    LS.set("wolly.wx2",{at:Date.now(),d,h:HR,v:2});wx2Busy=false;wx2Paint()}).catch(()=>{wx2Busy=false})}
+    LS.set("wolly.wx2",{at:Date.now(),d,h:HR,v:3});wx2Busy=false;wx2Paint()}).catch(()=>{wx2Busy=false})}
 function wx2(k,b){const d=wx2Get().d[k];return d&&d[b]||null}
 /* 雨の強さ：0＝雨じゃない 1＝小雨・にわか雨 2＝しっかり雨（気象庁が雨のときだけ。量は MET Norway） */
 function wxRain(k,b){if(wxBand(k,b)!=="rain")return 0;const x=wx2(k,b),w=wxGet().d[k]||{};if(/強い|激しい|大雨|雷/.test(w.t||""))return 2;if(x&&(x.r>=1||x.mm>=3))return 2;return 1}
@@ -6338,16 +6338,17 @@ function kqMeter(k,eve,hi0,lo0){const H=kqTemps(k,hi0,lo0);if(!H)return "";const
   let dh=11,dv=-99;for(let x=10;x<=16;x+=.5){const v=kqT(H,x);if(v>dv){dv=v;dh=x}}
   const P3=[["🌅","朝",7],["☀️","日中",dh],["🌙","夜",21]];
   const HU={};["am","pm","night"].forEach(b=>{try{const x=wx2(k,b);if(x&&x.hu!=null)HU[b]=x.hu}catch(e){}});const hb=x=>x<12?"am":x<18?"pm":"night";
+  const HM=((wx2Get().h||{})[k]||[]).filter(r=>r[2]!=null).map(r=>[r[0],r[2]]).sort((a,b)=>a[0]-b[0]);const huAt=x=>HM.length>=3?Math.round(kqT(HM,x)):HU[hb(x)];
   const stops=[];for(let x=X0;x<=X1;x+=.5)stops.push(`${kqCol(kqT(H,x),lo,hi)} ${pos(x)}%`);
   const nh=new Date(),cur=eve?7:Math.max(X0,Math.min(X1,nh.getHours()+nh.getMinutes()/60));
-  return `<div class="kq-tm" data-kqk="${k}" data-h='${JSON.stringify(H.map(([a,b])=>[a,Math.round(b*10)/10]))}' data-lo="${lo}" data-hi="${hi}" data-hu='${JSON.stringify(HU)}'>
-   <div class="kq-t3">${P3.map(([ic,n,x])=>{const v=kqT(H,x);return `<button type="button" data-kqh="${x}"><small>${ic} ${n}</small><b style="color:${kqCol(v,lo,hi)}">${Math.round(v)}°</b>${HU[hb(x)]!=null?`<span class="kq-hu${HU[hb(x)]>70?" wet":""}">💧${HU[hb(x)]}%</span>`:""}</button>`}).join("")}</div>
+  return `<div class="kq-tm" data-kqk="${k}" data-h='${JSON.stringify(H.map(([a,b])=>[a,Math.round(b*10)/10]))}' data-lo="${lo}" data-hi="${hi}" data-hu='${JSON.stringify(HU)}' data-hm='${JSON.stringify(HM.length>=3?HM.map(([a,b])=>[a,Math.round(b)]):[])}'>
+   <div class="kq-t3">${P3.map(([ic,n,x])=>{const v=kqT(H,x);return `<button type="button" data-kqh="${x}"><small>${ic} ${n}</small><b style="color:${kqCol(v,lo,hi)}">${Math.round(v)}°</b>${huAt(x)!=null?`<span class="kq-hu${huAt(x)>70?" wet":""}">💧${huAt(x)}%</span>`:""}</button>`}).join("")}</div>
    <div class="kq-mt" role="slider" tabindex="0" aria-label="時間ごとの気温" aria-valuemin="6" aria-valuemax="23" aria-valuenow="${Math.round(cur)}"><div class="kq-trk" style="background:linear-gradient(90deg,${stops.join(",")})"></div><div class="kq-th" data-x="${cur}" style="left:${pos(cur)}%"><span class="kq-bub"></span><i></i></div></div>
    <div class="kq-tl"><span>6時</span><span>12時</span><span>18時</span><span>24時</span></div><p class="kq-cr">気温・湿度：MET Norway／天気・警報：気象庁</p></div>`}
 function kqSet(tm,x,anim){const H=JSON.parse(tm.dataset.h),lo=+tm.dataset.lo,hi=+tm.dataset.hi,th=tm.querySelector(".kq-th"),mt=tm.querySelector(".kq-mt");if(!th)return;
   x=Math.max(6,Math.min(23,x));const draw=v=>{const p=(v-6)/17*100,t=kqT(H,v),c=kqCol(t,lo,hi);th.style.left=p+"%";th.dataset.x=v;th.style.setProperty("--c",c);
     const hh=Math.floor(v),mm=Math.round((v-hh)*6)*10;const lab=(mm===60?hh+1:hh)+":"+String(mm===60?0:mm).padStart(2,"0");
-    const b=th.querySelector(".kq-bub");const HU=JSON.parse(tm.dataset.hu||"{}"),hv=HU[v<12?"am":v<18?"pm":"night"];b.innerHTML=`<em>${lab}</em><b style="color:${c}">${Math.round(t)}°</b>${hv!=null?`<span class="kq-hu${hv>70?" wet":""}">💧${hv}%</span>`:""}`;mt.setAttribute("aria-valuenow",Math.round(v));mt.setAttribute("aria-valuetext",lab+" "+Math.round(t)+"度");
+    const b=th.querySelector(".kq-bub");const HU=JSON.parse(tm.dataset.hu||"{}"),HM=JSON.parse(tm.dataset.hm||"[]"),hv=HM.length>=3?Math.round(kqT(HM,v)):HU[v<12?"am":v<18?"pm":"night"];b.innerHTML=`<em>${lab}</em><b style="color:${c}">${Math.round(t)}°</b>${hv!=null?`<span class="kq-hu${hv>70?" wet":""}">💧${hv}%</span>`:""}`;mt.setAttribute("aria-valuenow",Math.round(v));mt.setAttribute("aria-valuetext",lab+" "+Math.round(t)+"度");
     tm.querySelectorAll("[data-kqh]").forEach(q=>q.classList.toggle("on",Math.abs(+q.dataset.kqh-v)<1.6))};
   cancelAnimationFrame(tm._raf);if(!anim)return draw(x);const x0=+th.dataset.x||x,t0=performance.now(),D=420;
   const step=n=>{const f=Math.min(1,(n-t0)/D),e=1-Math.pow(1-f,3);draw(x0+(x-x0)*e);if(f<1)tm._raf=requestAnimationFrame(step)};tm._raf=requestAnimationFrame(step)}
@@ -7196,8 +7197,8 @@ let RAWQ="";function setRaw(v){RAWQ=(v||"").normalize("NFKC").replace(NOISE,"").
 function qph(ws){const k=ws.join("|")+"#"+RAWQ;if(k===QPK&&QP)return QP;const list=ws.map(qk);const j=qk(RAWQ||ws.join(""));if(ws.length>1||RAWQ)list.push(j);QPK=k;QP={list,all:Math.max(3,j.length)};return QP}
 function load(){if(DATA)return Promise.resolve(DATA);
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
-  const kp=fetch(base+"near-data/tel-kana.json?v=11261046").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
-  return Promise.all([fetch(base+"near-data/tel.json?v=11261046").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
+  const kp=fetch(base+"near-data/tel-kana.json?v=11261057").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
+  return Promise.all([fetch(base+"near-data/tel.json?v=11261057").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
     .catch(()=>{DATA=[];return DATA})}
 /* 聞きとった文 → キーワード */
 function terms(text){let s=(text||"").normalize("NFKC").replace(NOISE," ");
