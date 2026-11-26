@@ -1507,7 +1507,10 @@ html[data-theme="dark"] .wxt{color:#d9d4ff}
 .wt-g.wtp.anim>.wt{transition:transform .38s cubic-bezier(.22,.8,.3,1)}
 .wt-g.wtp>.wt.off .wt-fx,.wt-g.wtp>.wt.off .wt-fx *{animation-play-state:paused!important}
 @media (prefers-reduced-motion:reduce){.wt-g.wtp.anim>.wt{transition:none}}
-/*/wxmore-css*//*kesa-css*/
+/*/wxmore-css*//*swipe-css*/
+.row,.cats,.feedrow,.filt,.wa-row{scroll-snap-type:x proximity!important;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y}
+.row>*,.cats>*,.feedrow>*{scroll-snap-stop:normal!important}
+/*/swipe-css*//*kesa-css*/
 .kesa{margin:8px 0 16px}
 .kesa-sq.wt{aspect-ratio:1/1;overflow:visible;border-radius:26px;box-shadow:0 0 0 2px rgba(255,255,255,.95),0 0 24px rgba(120,180,255,.45),0 18px 30px -20px rgba(40,40,120,.6)}
 .kesa-sq.wt::before{border-radius:inherit;opacity:1}
@@ -1555,7 +1558,7 @@ html[data-theme="dark"] .wxt{color:#d9d4ff}
 .kq-t3 button.on{background:rgba(90,90,239,.08)}
 .kq-t3 small{font-size:11.5px;font-weight:800;color:#6B6F8E;white-space:nowrap}
 .kq-t3 b{font-size:24px;font-weight:900;line-height:1.15;font-variant-numeric:tabular-nums}
-.kq-mt{position:relative;height:40px;touch-action:pan-y;cursor:pointer;outline:0;-webkit-tap-highlight-color:transparent;margin:16px 4px 0}
+.kq-mt{position:relative;height:44px;touch-action:pan-y;user-select:none;-webkit-user-select:none;cursor:pointer;outline:0;-webkit-tap-highlight-color:transparent;margin:16px 4px 0}
 .kq-trk{position:absolute;left:0;right:0;top:16px;height:10px;border-radius:999px;box-shadow:inset 0 1px 2px rgba(0,0,0,.18),0 0 10px rgba(255,255,255,.7)}
 .kq-th{position:absolute;top:21px;width:0;height:0;will-change:left}
 .kq-th i{position:absolute;left:-13px;top:-13px;width:26px;height:26px;border-radius:50%;background:#fff;box-shadow:0 0 0 5px var(--c,#5A5AEF) inset,0 3px 10px rgba(30,30,80,.35),0 0 14px var(--c,#5A5AEF);transition:transform .2s}
@@ -2938,7 +2941,7 @@ function holoTouch(map){if(!map||map._wtouch)return;map._wtouch=1;const box=map.
   if(window.IntersectionObserver)new IntersectionObserver(es=>es.forEach(e=>{if(e.intersectionRatio<.35)lock()}),{threshold:[0,.35,.6]}).observe(box);
 }
 /* ==== /holo-map ==== */
-/*vcheck*/(function(){var V="11261838";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
+/*vcheck*/(function(){var V="11261855";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
 <script>
 (()=>{
 const $=s=>document.querySelector(s);
@@ -5469,7 +5472,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11261838");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11261855");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -6199,6 +6202,8 @@ function wx2Load(){const o=wx2Get();if(Date.now()-o.at<2*3600e3&&o.v===3)return;
       if(n1&&n1.details){a.m1+=n1.details.precipitation_amount||0;a.h1++}else if(n6&&n6.details&&!a.h6){a.m6+=n6.details.precipitation_amount||0;a.h6=6}});
     const d={};Object.keys(A).forEach(k=>{d[k]={};Object.keys(A[k]).forEach(b=>{const a=A[k][b];if(!a.t.length)return;const mm=a.h1?a.m1:a.m6,hr=a.h1||a.h6||1;
       d[k][b]={hi:Math.round(Math.max(...a.t)),lo:Math.round(Math.min(...a.t)),hu:a.h.length?Math.round(a.h.reduce((p,v)=>p+v,0)/a.h.length):null,ws:a.w.length?Math.round(Math.max(...a.w)*10)/10:null,mm:Math.round(mm*10)/10,r:Math.round(mm/hr*10)/10}})});
+    /* 11/26 きょうのすぎた時間は新しい予報に入らないので、前に覚えた分をのこす（きょう以降の日だけ） */
+    const td=new Date(Date.now()+9*3600e3).toISOString().slice(0,10),OH=(wx2Get().h)||{};Object.keys(OH).forEach(k=>{if(k<td)return;const have=new Set((HR[k]||[]).map(r=>r[0]));(OH[k]||[]).forEach(r=>{if(!have.has(r[0]))(HR[k]=HR[k]||[]).push(r)});HR[k]&&HR[k].sort((a,b)=>a[0]-b[0])});
     LS.set("wolly.wx2",{at:Date.now(),d,h:HR,v:3});wx2Busy=false;wx2Paint()}).catch(()=>{wx2Busy=false})}
 function wx2(k,b){const d=wx2Get().d[k];return d&&d[b]||null}
 /* 雨の強さ：0＝雨じゃない 1＝小雨・にわか雨 2＝しっかり雨（気象庁が雨のときだけ。量は MET Norway） */
@@ -6319,11 +6324,13 @@ function kesaRender(){const el=document.getElementById("kesaCard");if(!el)return
     tip=(typeof kmTip==="function"&&kmTip())||`<p class="kq-tip">${tips.map(t=>`<i>${wb(t)}</i>`).join("")}</p>`}
   else wxh=`<a class="kq-wx" href="#sched"><span class="kq-wi">🌤️</span><span class="kq-ww"><b>天気をよみこみ中…</b></span></a>`;
   /* ゴミ（いちばん大きく） */
-  const g=gomiOn(d),o=gomiGet()||{},wh=eve?"あしたは":"きょうは";let gh;
+  /* 11/26 ゴミは朝9時（出す時間がすぎたら）からあしたの分。0時になったら「きょうは」 */
+  const gtom=h>=9,gd=new Date(now);if(gtom)gd.setDate(gd.getDate()+1);
+  const g=gomiOn(gd),o=gomiGet()||{},wh=gtom?"あしたは":"きょうは";let gh;
   if(!g)gh=`<a class="kq-gomi set" href="#" data-gomi-set><span class="kq-gi" style="--c:#EEF0F4">${gomiBag("#C9CEDA","？")}</span><span class="kq-gt"><b>ゴミの日を入れよう<span class="kq-new">NEW</span></b><small>${wb("曜日を1回えらぶと、毎朝おしえるよ")}</small></span><span class="kq-go">›</span></a>`;
   else if(g.length){const dl=(o.early&&g.some(x=>x[0]==="burn"))?"朝5:30":"朝8:30";
     gh=`<a class="kq-gomi" href="#" data-gomi-set><span class="kq-gi" style="--c:${g[0][5]}">${gomiBag(GOMI_COL[g[0][0]],g[0][1])}</span><span class="kq-gt"><small>${wh}</small><b>${wb(g.map(x=>x[2]).join("・"))}</b><em>⏰ ${dl}までに出してね</em></span><span class="kq-go">›</span></a>`}
-  else{let nx="";for(let i=1;i<=7&&!nx;i++){const n=new Date(d);n.setDate(n.getDate()+i);const q=gomiOn(n);if(q&&q.length)nx=(i===1?(eve?"あさって":"あした"):`${n.getMonth()+1}/${n.getDate()}（${WD[n.getDay()]}）`)+"は "+q.map(x=>x[2]).join("・")}
+  else{let nx="";for(let i=1;i<=7&&!nx;i++){const n=new Date(gd);n.setDate(n.getDate()+i);const q=gomiOn(n);if(q&&q.length)nx=(i===1?(gtom?"あさって":"あした"):`${n.getMonth()+1}/${n.getDate()}（${WD[n.getDay()]}）`)+"は "+q.map(x=>x[2]).join("・")}
     gh=`<a class="kq-gomi" href="#" data-gomi-set><span class="kq-gi" style="--c:#EEF0F4">${gomiBag("#D5D9E3","💤")}</span><span class="kq-gt"><small>${wh}</small><b>ゴミの日<wbr>じゃないよ</b>${nx?`<em style="color:#5A5AEF">${wb(esc(nx))}</em>`:""}</span><span class="kq-go">›</span></a>`}
   /* 警報・予定（小さく2つ） */
   const wn=warnGet(),J='href="https://www.jma.go.jp/bosai/warning/#area_type=class20s&area_code=1110000" target="_blank" rel="noopener"';let ch="";
@@ -6335,7 +6342,7 @@ function kesaRender(){const el=document.getElementById("kesaCard");if(!el)return
   ch+=ev.length?`<a class="kq-c" href="#sched"><span>📅</span><span>予定 ${ev.length}件<small class="kq-1">${ev[0].at?esc(t12(ev[0].at))+" ":""}${esc(ev[0].t||"")}</small></span></a>`
     :`<a class="kq-c" href="#sched"><span>📅</span><span>予定はないよ<small>＋ 予定を入れる</small></span></a>`;
   if(LS.get("wolly.kesafold")){let wi="🌤️",wt="";try{const wd=wxWord(k,band);if(wd){wi=wd[0];wt=wd[1].replace(/（.*?）/,"")}}catch(e){}
-    const hi=w&&(w.th!=null?w.th:w.hi),gm=g&&g.length?`<span class="km-g">${g[0][1]} ${esc(g.map(x=>x[2]).join("・"))}</span>`:g?`<span>🗑️ ゴミなし</span>`:"",
+    const hi=w&&(w.th!=null?w.th:w.hi),gm=g&&g.length?`<span class="km-g">${g[0][1]} ${gtom?"あした ":""}${esc(g.map(x=>x[2]).join("・"))}</span>`:g?`<span>🗑️ ${gtom?"あしたは":""}ゴミなし</span>`:"",
       wk=(wn&&wn.k&&wn.k.length)?`<span class="km-w">${WARN_ICON[wn.k[0]]||"⚠️"} ${esc(WARN_N[wn.k[0]]||"注意報")}</span>`:"";
     const mh=`<div class="kesa-mini wt wt-${c} wb-${band}${cls}"><span class="wt-fx"><i></i><i></i><i></i></span><div class="km"><span class="km-i">${wi}</span><span class="km-t"><span>${eve?"あした ":""}${esc(wt)}${hi!=null?` ${hi}°`:""}</span>${gm}${kqMiniKn()}${kqMiniTr()}</span><button type="button" class="kq-fold km-open" data-kesa-fold aria-expanded="false" aria-label="ひらく">▼</button></div></div>`;
     if(el.dataset.h===mh&&!el.hidden)return;el.dataset.h=mh;el.innerHTML=mh;el.hidden=false;const tl0=document.getElementById("wxTelop");if(tl0)tl0.classList.add("kesa-off");return}
@@ -6343,15 +6350,20 @@ function kesaRender(){const el=document.getElementById("kesaCard");if(!el)return
   if(el.dataset.h===html&&!el.hidden)return;el.dataset.h=html;el.innerHTML=html;
   el.hidden=false;const tl=document.getElementById("wxTelop");if(tl)tl.classList.add("kesa-off");kqInitMeter()}
 /* ===== 11/26 朝・日中・夜の気温とスライドメーター ===== */
-function kqTemps(k,hi,lo){const H=((wx2Get().h||{})[k]||[]).slice().sort((a,b)=>a[0]-b[0]);
-  if(H.length>=3)return H;if(hi==null)return null;const l=lo!=null?lo:hi-7;return [[6,l],[9,l+(hi-l)*.45],[14,hi],[18,l+(hi-l)*.55],[23,l+(hi-l)*.2]]}
+function kqTemps(k,hi,lo){let H=((wx2Get().h||{})[k]||[]).slice().sort((a,b)=>a[0]-b[0]);
+  if(H.length>=3){H=kqFit(H,hi,lo);if(H[0][0]>7&&lo!=null)H.unshift([6,lo]);return H}if(hi==null)return null;const l=lo!=null?lo:hi-7;return [[6,l],[9,l+(hi-l)*.45],[14,hi],[18,l+(hi-l)*.55],[23,l+(hi-l)*.2]]}
+/* 11/26 気象庁の最高・最低気温に合わせる（1時間ごとの形は MET Norway、高さは気象庁の予報） */
+function kqFit(H,hi,lo){if(hi==null)return H;const am=H.filter(r=>r[0]<=9).map(r=>r[1]),dy=H.filter(r=>r[0]>=9&&r[0]<=18).map(r=>r[1]);if(!dy.length)return H;
+  const mhi=Math.max(...dy),mlo=lo!=null&&am.length?Math.min(...am):Math.min(...H.map(r=>r[1]));if(!(mhi>mlo))return H;
+  const tlo=lo!=null&&am.length?lo:mlo;if(!(hi>tlo))return H;
+  return H.map(r=>[r[0],tlo+(r[1]-mlo)*(hi-tlo)/(mhi-mlo)].concat(r.slice(2)))}
 function kqT(H,x){if(x<=H[0][0])return H[0][1];for(let i=1;i<H.length;i++){const [a,p]=H[i-1],[b,q]=H[i];if(x<=b){const f=(x-a)/(b-a),e=f*f*(3-2*f);return p+(q-p)*e}}return H[H.length-1][1]}
 const KQ_BLUE=[61,139,255];
 function kqHiCol(hi){if(hi>=23)return [255,48,64];const f=Math.max(0,Math.min(1,(hi-8)/14));return [Math.round(246-(246-238)*f),Math.round(170-(170-104)*f),Math.round(170-(170-112)*f)]}
 const KQ_ABS=[[-5,[46,58,158]],[0,[52,84,214]],[4,[61,128,255]],[8,[64,168,240]],[11,[92,196,236]],[14,[150,190,240]],[17,[196,170,236]],[20,[240,160,206]],[23,[255,128,140]],[27,[255,74,94]],[31,[214,32,78]],[35,[150,20,70]]];
 function kqAbs(t){const A=KQ_ABS;if(t<=A[0][0])return A[0][1];for(let i=1;i<A.length;i++){if(t<=A[i][0]){const f=(t-A[i-1][0])/(A[i][0]-A[i-1][0]);return A[i-1][1].map((v,j)=>v+(A[i][1][j]-v)*f)}}return A[A.length-1][1]}
 function kqCol(t,lo,hi){const f=hi>lo?Math.max(0,Math.min(1,(t-lo)/(hi-lo))):1,H=kqHiCol(hi),R=KQ_BLUE.map((v,i)=>v+(H[i]-v)*f),A=kqAbs(t),w=.3+.5*Math.abs(f-.5)*2;return `rgb(${A.map((v,i)=>Math.round(v*(1-w)+R[i]*w)).join(",")})`}
-function kqMeter(k,eve,hi0,lo0){const H=kqTemps(k,hi0,lo0);if(!H)return "";const X0=6,X1=23;
+function kqMeter(k,eve,hi0,lo0){const H=kqTemps(k,hi0,lo0);if(!H)return "";const X0=6,X1=24;
   const xs=[];for(let x=X0;x<=X1;x+=.5)xs.push(kqT(H,x));const lo=Math.min(...xs),hi=Math.max(...xs);
   const pos=x=>((x-X0)/(X1-X0)*100).toFixed(2);
   let dh=11,dv=-99;for(let x=10;x<=16;x+=.5){const v=kqT(H,x);if(v>dv){dv=v;dh=x}}
@@ -6362,24 +6374,24 @@ function kqMeter(k,eve,hi0,lo0){const H=kqTemps(k,hi0,lo0);if(!H)return "";const
   const nh=new Date(),cur=eve?7:Math.max(X0,Math.min(X1,nh.getHours()+nh.getMinutes()/60));
   return `<div class="kq-tm" data-kqk="${k}" data-h='${JSON.stringify(H.map(([a,b])=>[a,Math.round(b*10)/10]))}' data-lo="${lo}" data-hi="${hi}" data-hu='${JSON.stringify(HU)}' data-hm='${JSON.stringify(HM.length>=3?HM.map(([a,b])=>[a,Math.round(b)]):[])}'>
    <div class="kq-t3">${P3.map(([ic,n,x])=>{const v=kqT(H,x);return `<button type="button" data-kqh="${x}"><small>${ic} ${n}</small><b style="color:${kqCol(v,lo,hi)}">${Math.round(v)}°</b>${huAt(x)!=null?`<span class="kq-hu${huAt(x)>70?" wet":""}">💧${huAt(x)}%</span>`:""}</button>`}).join("")}</div>
-   <div class="kq-mt" role="slider" tabindex="0" aria-label="時間ごとの気温" aria-valuemin="6" aria-valuemax="23" aria-valuenow="${Math.round(cur)}"><div class="kq-trk" style="background:linear-gradient(90deg,${stops.join(",")})"></div><div class="kq-th" data-x="${cur}" style="left:${pos(cur)}%"><span class="kq-bub"></span><i></i></div></div>
+   <div class="kq-mt" role="slider" tabindex="0" aria-label="時間ごとの気温" aria-valuemin="6" aria-valuemax="24" aria-valuenow="${Math.round(cur)}"><div class="kq-trk" style="background:linear-gradient(90deg,${stops.join(",")})"></div><div class="kq-th" data-x="${cur}" style="left:${pos(cur)}%"><span class="kq-bub"></span><i></i></div></div>
    <div class="kq-tl"><span>6時</span><span>12時</span><span>18時</span><span>24時</span></div><p class="kq-cr">気温・湿度：MET Norway／天気・警報：気象庁</p></div>`}
-function kqSet(tm,x,anim){const H=JSON.parse(tm.dataset.h),lo=+tm.dataset.lo,hi=+tm.dataset.hi,th=tm.querySelector(".kq-th"),mt=tm.querySelector(".kq-mt");if(!th)return;
-  x=Math.max(6,Math.min(23,x));const draw=v=>{const p=(v-6)/17*100,t=kqT(H,v),c=kqCol(t,lo,hi);th.style.left=p+"%";th.dataset.x=v;th.style.setProperty("--c",c);
+function kqSet(tm,x,anim){const H=tm._H||(tm._H=JSON.parse(tm.dataset.h)),lo=+tm.dataset.lo,hi=+tm.dataset.hi,th=tm.querySelector(".kq-th"),mt=tm.querySelector(".kq-mt");if(!th)return;
+  x=Math.max(6,Math.min(24,x));const draw=v=>{const p=(v-6)/18*100,t=kqT(H,v),c=kqCol(t,lo,hi);th.style.left=p+"%";th.dataset.x=v;th.style.setProperty("--c",c);
     const hh=Math.floor(v),mm=Math.round((v-hh)*6)*10;const lab=(mm===60?hh+1:hh)+":"+String(mm===60?0:mm).padStart(2,"0");
-    const b=th.querySelector(".kq-bub");const HU=JSON.parse(tm.dataset.hu||"{}"),HM=JSON.parse(tm.dataset.hm||"[]"),hv=HM.length>=3?Math.round(kqT(HM,v)):HU[v<12?"am":v<18?"pm":"night"];b.innerHTML=`<em>${lab}</em><b style="color:${c}">${Math.round(t)}°</b>${hv!=null?`<span class="kq-hu${hv>70?" wet":""}">💧${hv}%</span>`:""}`;mt.setAttribute("aria-valuenow",Math.round(v));mt.setAttribute("aria-valuetext",lab+" "+Math.round(t)+"度");
+    const b=th.querySelector(".kq-bub");b.style.transform=`translateX(${-(10+80*p/100)}%)`;/* はしでもカードからはみ出さない */const HU=tm._HU||(tm._HU=JSON.parse(tm.dataset.hu||"{}")),HM=tm._HM||(tm._HM=JSON.parse(tm.dataset.hm||"[]")),hv=HM.length>=3?Math.round(kqT(HM,v)):HU[v<12?"am":v<18?"pm":"night"];b.innerHTML=`<em>${lab}</em><b style="color:${c}">${Math.round(t)}°</b>${hv!=null?`<span class="kq-hu${hv>70?" wet":""}">💧${hv}%</span>`:""}`;mt.setAttribute("aria-valuenow",Math.round(v));mt.setAttribute("aria-valuetext",lab+" "+Math.round(t)+"度");
     tm.querySelectorAll("[data-kqh]").forEach(q=>q.classList.toggle("on",Math.abs(+q.dataset.kqh-v)<1.6))};
   cancelAnimationFrame(tm._raf);if(!anim)return draw(x);const x0=+th.dataset.x||x,t0=performance.now(),D=420;
   const step=n=>{const f=Math.min(1,(n-t0)/D),e=1-Math.pow(1-f,3);draw(x0+(x-x0)*e);if(f<1)tm._raf=requestAnimationFrame(step)};tm._raf=requestAnimationFrame(step)}
 function kqInitMeter(){document.querySelectorAll("#kesaCard .kq-tm").forEach(tm=>{if(tm._ok)return;tm._ok=1;const th=tm.querySelector(".kq-th");kqSet(tm,+th.dataset.x,false)})}
 (function(){let drag=null;
-  const xAt=(mt,cx)=>{const r=mt.getBoundingClientRect();return 6+Math.max(0,Math.min(1,(cx-r.left)/r.width))*17};
-  document.addEventListener("pointerdown",e=>{const mt=e.target.closest("#kesaCard .kq-mt");if(!mt)return;const tm=mt.closest(".kq-tm");drag={mt,tm,x0:e.clientX,y0:e.clientY,on:false,id:e.pointerId};
-    const th=e.target.closest(".kq-th");if(th){drag.on=true;try{mt.setPointerCapture(e.pointerId)}catch(_){}}});
-  document.addEventListener("pointermove",e=>{if(!drag||e.pointerId!==drag.id)return;const dx=e.clientX-drag.x0,dy=e.clientY-drag.y0;
-    if(!drag.on){if(Math.abs(dx)>6&&Math.abs(dx)>Math.abs(dy)){drag.on=true;try{drag.mt.setPointerCapture(e.pointerId)}catch(_){}}else if(Math.abs(dy)>8){drag=null;return}else return}
-    drag.tm.classList.add("drag");kqSet(drag.tm,xAt(drag.mt,e.clientX),false)},{passive:true});
-  const end=e=>{if(!drag||e.pointerId!==drag.id)return;const d=drag;drag=null;d.tm.classList.remove("drag");if(!d.on&&e.type==="pointerup")kqSet(d.tm,xAt(d.mt,e.clientX),true)};
+  const xAt=(mt,cx)=>{const r=mt.getBoundingClientRect();return 6+Math.max(0,Math.min(1,(cx-r.left)/r.width))*18};
+  /* 11/26 さわった所へすぐ動く・指についてくる（動かしている間は1フレームに1回だけ描く） */
+  let raf=0,lx=0;const paint=()=>{raf=0;if(drag)kqSet(drag.tm,xAt(drag.mt,lx),false)};
+  document.addEventListener("pointerdown",e=>{const mt=e.target.closest("#kesaCard .kq-mt");if(!mt)return;const tm=mt.closest(".kq-tm");
+    drag={mt,tm,x0:e.clientX,y0:e.clientY,on:true,id:e.pointerId};try{mt.setPointerCapture(e.pointerId)}catch(_){}tm.classList.add("drag");lx=e.clientX;kqSet(tm,xAt(mt,lx),false)});
+  document.addEventListener("pointermove",e=>{if(!drag||e.pointerId!==drag.id)return;lx=e.clientX;if(!raf)raf=requestAnimationFrame(paint)},{passive:true});
+  const end=e=>{if(!drag||e.pointerId!==drag.id)return;const d=drag;if(e.type==="pointerup"){lx=e.clientX;kqSet(d.tm,xAt(d.mt,lx),false)}drag=null;d.tm.classList.remove("drag")};
   document.addEventListener("pointerup",end);document.addEventListener("pointercancel",end);
   document.addEventListener("click",e=>{const b=e.target.closest("#kesaCard [data-kqh]");if(!b)return;e.preventDefault();kqSet(b.closest(".kq-tm"),+b.dataset.kqh,true)});
   document.addEventListener("keydown",e=>{const mt=e.target.closest&&e.target.closest("#kesaCard .kq-mt");if(!mt)return;const tm=mt.closest(".kq-tm"),x=+tm.querySelector(".kq-th").dataset.x;
@@ -7450,8 +7462,8 @@ let RAWQ="";function setRaw(v){RAWQ=(v||"").normalize("NFKC").replace(NOISE,"").
 function qph(ws){const k=ws.join("|")+"#"+RAWQ;if(k===QPK&&QP)return QP;const list=ws.map(qk);const j=qk(RAWQ||ws.join(""));if(ws.length>1||RAWQ)list.push(j);QPK=k;QP={list,all:Math.max(3,j.length)};return QP}
 function load(){if(DATA)return Promise.resolve(DATA);
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
-  const kp=fetch(base+"near-data/tel-kana.json?v=11261838").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
-  return Promise.all([fetch(base+"near-data/tel.json?v=11261838").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
+  const kp=fetch(base+"near-data/tel-kana.json?v=11261855").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
+  return Promise.all([fetch(base+"near-data/tel.json?v=11261855").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
     .catch(()=>{DATA=[];return DATA})}
 /* 聞きとった文 → キーワード */
 function terms(text){let s=(text||"").normalize("NFKC").replace(NOISE," ");

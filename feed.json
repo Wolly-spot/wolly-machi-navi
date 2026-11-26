@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-26T08:05:00+09:00",
+ "updatedAt": "2026-11-26T19:00:00+09:00",
  "events": [
   {
    "id": "e-thomas-skipcity",
@@ -184,6 +184,19 @@
    "added": "2026-11-23T08:40:00+09:00"
   },
   {
+   "id": "e-kawaguchi-nabe-2026",
+   "kind": "free",
+   "title": "川口の鍋祭り（12/4〜6）入場無料",
+   "desc": "川口駅東口のキュポ・ラ広場で、いろいろな鍋が楽しめるよ。",
+   "date": "2026-12-04",
+   "area": "川口市",
+   "src": "さいたまイベント情報",
+   "url": "https://www.saitama-e.com/kawaguchi-nabe-matsuri/",
+   "img": "https://www.saitama-e.com/wp-content/uploads/2026/11/kawaguchi-nabe-matsuri-eyecatch-1122.jpg",
+   "ai": false,
+   "added": "2026-11-26T19:00:00+09:00"
+  },
+  {
    "id": "e-reds-kids-play-park",
    "kind": "kids",
    "title": "埼スタ前でキッズプレイパーク（12/5）",
@@ -221,34 +234,9 @@
    "img": "https://rstatic.enjoytokyo.jp/assets/images/event_draft/a0/2091359/img_1.jpg?1794210312&p=t&w=1200",
    "ai": false,
    "added": "2026-11-22T09:37:38+09:00"
-  },
-  {
-   "id": "e-tsujimura-iwatsuki",
-   "kind": "facility",
-   "title": "岩槻人形博物館 辻村寿三郎展（〜12/6）",
-   "desc": "人形の特別展。着物で行くと無料、ふだんは一般500円。",
-   "date": "2026-12-06",
-   "area": "さいたま市岩槻区",
-   "src": "さいたまイベント情報",
-   "url": "https://www.saitama-e.com/tsujimura-jusaburo-iwatsuki/",
-   "img": "https://www.saitama-e.com/wp-content/uploads/2026/10/tsujimura-jusaburo-eyecatch.png",
-   "ai": false,
-   "added": "2026-11-23T08:40:00+09:00"
   }
  ],
  "shops": [
-  {
-   "id": "s-maratan-omiya",
-   "kind": "coupon",
-   "title": "大宮の麻辣湯のお店 レシートで割引（〜12/6）",
-   "desc": "11/22までのレシートを見せると、麻辣湯がその分安くなるよ。",
-   "date": "2026-11-23",
-   "src": "宮原大宮ドットコム",
-   "url": "https://miyahara-kitaku.com/rishouchi-maratan-omiya-open/",
-   "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/11/IMG_5247.jpg",
-   "ai": false,
-   "added": "2026-11-14T07:55:00+09:00"
-  },
   {
    "id": "s-motsuyaki-ban",
    "kind": "open",
@@ -425,6 +413,18 @@
    "img": "https://www.ryutsuu.biz/main/images/2026/05/20260525thumbnail_yaoko.jpg",
    "ai": false,
    "added": "2026-11-26T08:05:00+09:00"
+  },
+  {
+   "id": "s-menya-gen-shintoshin",
+   "kind": "open",
+   "title": "さいたま新都心に「麺家 玄」オープン（11/18）",
+   "desc": "新都心に新しい麺のお店ができたよ。",
+   "date": "2026-11-18",
+   "src": "宮原大宮ドットコム",
+   "url": "https://miyahara-kitaku.com/menya-gen-saitama-shintoshin-open/",
+   "img": "https://miyahara-kitaku.com/wp-content/uploads/2026/11/IMG_4939.jpg",
+   "ai": false,
+   "added": "2026-11-26T19:00:00+09:00"
   }
  ],
  "news": [
