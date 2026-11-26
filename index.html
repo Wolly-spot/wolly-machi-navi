@@ -1706,16 +1706,17 @@ a.ck-row:active{transform:scale(.985)}
 .ck-tel{flex:none;display:inline-flex;align-items:center;gap:3px;font-size:11.5px;font-weight:900;color:#fff;background:linear-gradient(120deg,#FF5FA2,#B977FF);border-radius:999px;padding:7px 11px;text-decoration:none;white-space:nowrap}
 .ck-soon{flex:none;font-size:10.5px;font-weight:900;color:#5A5AEF;background:#fff;border:1.5px dashed #C9C6F2;border-radius:999px;padding:3px 9px;white-space:nowrap}
 .ck-note{margin:6px 2px 0;font-size:10px;font-weight:700;color:#8A8DA8;line-height:1.5}
-#chiikiCard #feedEvents{background:none!important;border:0!important;border-top:1.5px dashed #E6E3F6!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;border-radius:0!important;margin:10px 0 0!important;padding:10px 0 0!important}
-#chiikiCard #feedEvents::before,#chiikiCard #feedEvents::after{content:none}
-#chiikiCard #feedEvents .thp,#chiikiCard #feedEvents .eyebrow,#chiikiCard #feedEvents .sec-lead{display:none}
-#chiikiCard #feedEvents .head{margin:0 0 6px}
-#chiikiCard #feedEvents h2{margin:0;font-size:14px;font-weight:900;color:#1F2250;letter-spacing:0}
+#chiikiCard #feedEvents,#chiikiCard #feedShops{background:none!important;border:0!important;border-top:1.5px dashed #E6E3F6!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;border-radius:0!important;margin:10px 0 0!important;padding:10px 0 0!important}
+#chiikiCard #feedEvents::before,#chiikiCard #feedEvents::after,#chiikiCard #feedShops::before,#chiikiCard #feedShops::after{content:none}
+#chiikiCard #feedEvents .thp,#chiikiCard #feedEvents .eyebrow,#chiikiCard #feedEvents .sec-lead,#chiikiCard #feedShops .thp,#chiikiCard #feedShops .eyebrow,#chiikiCard #feedShops .sec-lead{display:none}
+#chiikiCard #feedEvents .head,#chiikiCard #feedShops .head{margin:0 0 6px}
+#chiikiCard #feedEvents h2,#chiikiCard #feedShops h2{margin:0;font-size:14px;font-weight:900;color:#1F2250;letter-spacing:0}
 #chiikiCard #feedEvents h2::before{content:"🎪";font-size:18px;margin-right:6px;vertical-align:-1px}
-#chiikiCard #feedEvents .filt{margin:0 -14px 4px;padding:0 14px}
-#chiikiCard #feedEvents .feedrow{margin:0 -14px;padding:4px 14px 10px;scroll-padding-inline:14px}
-#chiikiCard #feedEvents .stamp{margin-top:2px;font-size:10px}
-html[data-theme="dark"] #chiikiCard #feedEvents h2{color:#E6E7F5}
+#chiikiCard #feedShops h2::before{content:"🛍️";font-size:18px;margin-right:6px;vertical-align:-1px}
+#chiikiCard #feedEvents .filt,#chiikiCard #feedShops .filt{margin:0 -14px 4px;padding:0 14px}
+#chiikiCard #feedEvents .feedrow,#chiikiCard #feedShops .feedrow{margin:0 -14px;padding:4px 14px 10px;scroll-padding-inline:14px}
+#chiikiCard #feedEvents .stamp,#chiikiCard #feedShops .stamp{margin-top:2px;font-size:10px}
+html[data-theme="dark"] #chiikiCard #feedEvents h2,html[data-theme="dark"] #chiikiCard #feedShops h2{color:#E6E7F5}
 @media (max-width:389px){.ck-tel span{display:none}.ck-tel{padding:8px 10px}}
 @media (max-width:359px){.ck{padding:12px 11px 10px}.ck-ev{gap:6px}.ck-e b{font-size:11px}.ck-tel{padding:6px 9px}}
 html[data-theme="dark"] .ck{background:linear-gradient(160deg,rgba(40,42,70,.96),rgba(32,30,60,.94))}
@@ -2931,7 +2932,7 @@ function holoTouch(map){if(!map||map._wtouch)return;map._wtouch=1;const box=map.
   if(window.IntersectionObserver)new IntersectionObserver(es=>es.forEach(e=>{if(e.intersectionRatio<.35)lock()}),{threshold:[0,.35,.6]}).observe(box);
 }
 /* ==== /holo-map ==== */
-/*vcheck*/(function(){var V="11261449";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
+/*vcheck*/(function(){var V="11261554";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
 <script>
 (()=>{
 const $=s=>document.querySelector(s);
@@ -5462,7 +5463,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11261449");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11261554");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -6640,11 +6641,12 @@ function ckBoard(){
 function chiikiRender(){const el=document.getElementById("chiikiCard");if(!el)return;
   const ward=S&&S.profile&&S.profile.ward;
   const html=`<div class="ck-h"><h2>📍 きょうの地域</h2>${ward?`<span class="ck-ward">${esc(ward)}</span>`:'<a class="ck-ward no" href="#mypage">区を登録する ›</a>'}</div>`
-    +'<div id="ckEvSlot"></div>'+ckBoard();/* 11/26 急患は上の帯にあるので出さない */
+    +'<div id="ckEvSlot"></div><div id="ckShSlot"></div>'+ckBoard();/* 11/26 急患は上の帯にあるので出さない */
   /* 11/26 今週のイベント・おトク情報（#feedEvents）をそのままカードの中へ。描き直すときは一度はずしてから戻す */
-  const fe=document.getElementById("feedEvents");
-  if(el.dataset.h!==html){if(fe&&el.contains(fe))fe.remove();el.innerHTML=html;el.dataset.h=html;
-    const slot=el.querySelector("#ckEvSlot");if(fe&&slot){fe.classList.add("ck-s","ck-evs");slot.replaceWith(fe)}}
+  /* 11/26 さいたまのお店情報（#feedShops）もイベントの下へ */
+  const MV=[["feedEvents","ckEvSlot"],["feedShops","ckShSlot"]].map(([i,sl])=>[document.getElementById(i),sl]);
+  if(el.dataset.h!==html){MV.forEach(([x])=>{if(x&&el.contains(x))x.remove()});el.innerHTML=html;el.dataset.h=html;
+    MV.forEach(([x,sl])=>{const slot=el.querySelector("#"+sl);if(x&&slot){x.classList.add("ck-s","ck-evs");slot.replaceWith(x)}})}
   el.hidden=false}
 [400,2600,7500].forEach(ms=>setTimeout(()=>{try{chiikiRender()}catch(e){console.warn(e)}},ms));
 setInterval(()=>{try{chiikiRender()}catch(e){}},10*60e3);
@@ -7436,8 +7438,8 @@ let RAWQ="";function setRaw(v){RAWQ=(v||"").normalize("NFKC").replace(NOISE,"").
 function qph(ws){const k=ws.join("|")+"#"+RAWQ;if(k===QPK&&QP)return QP;const list=ws.map(qk);const j=qk(RAWQ||ws.join(""));if(ws.length>1||RAWQ)list.push(j);QPK=k;QP={list,all:Math.max(3,j.length)};return QP}
 function load(){if(DATA)return Promise.resolve(DATA);
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
-  const kp=fetch(base+"near-data/tel-kana.json?v=11261449").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
-  return Promise.all([fetch(base+"near-data/tel.json?v=11261449").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
+  const kp=fetch(base+"near-data/tel-kana.json?v=11261554").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
+  return Promise.all([fetch(base+"near-data/tel.json?v=11261554").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
     .catch(()=>{DATA=[];return DATA})}
 /* 聞きとった文 → キーワード */
 function terms(text){let s=(text||"").normalize("NFKC").replace(NOISE," ");
