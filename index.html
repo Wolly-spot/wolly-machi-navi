@@ -1547,7 +1547,44 @@ a.ck-row:active{transform:scale(.985)}
 html[data-theme="dark"] .ck{background:linear-gradient(160deg,rgba(40,42,70,.96),rgba(32,30,60,.94))}
 html[data-theme="dark"] .ck-h h2,html[data-theme="dark"] .ck-st,html[data-theme="dark"] .ck-e,html[data-theme="dark"] .ck-row{color:#E6E7F5}
 html[data-theme="dark"] .ck-row{background:rgba(255,255,255,.07)}
-/*/chiiki-css*//*kesa-css*/
+/*/chiiki-css*//*kurashi-css*/
+a.kq-tip.kml-tip{display:flex;align-items:center;gap:6px;text-decoration:none;cursor:pointer;animation:kmGlow 2.8s ease-in-out infinite}
+a.kml-tip .kml-tx{flex:1;min-width:0}
+a.kml-tip .kml-go{flex:0 0 auto;font-size:11px;font-weight:900;color:#5A5AEF;white-space:nowrap}
+.kq-tm a.kml-tip{max-width:none;width:100%;margin:8px 0 2px;padding:8px 10px;border-radius:12px;background:transparent;box-shadow:none;animation:none;font-size:13px;line-height:1.5;color:#1F2250;-webkit-backdrop-filter:none;backdrop-filter:none}
+.kq-tm a.kml-tip .kml-go{font-size:20px;line-height:1;font-weight:700;color:#8E7BFF}
+@keyframes kmGlow{50%{box-shadow:0 0 0 2px rgba(190,170,255,.7)}}
+@keyframes kmGlow{50%{box-shadow:0 0 0 3px rgba(190,170,255,.6)}}
+@media (prefers-reduced-motion:reduce){a.kml-tip{animation:none}}
+.kms .kml-h{font-size:12px;color:#8A8CA8;margin:0 0 2px}
+.kms .kml-t{font-size:19px;font-weight:900;margin:0 0 10px;color:#2B2D4A}
+.kms .kml-who{display:flex;flex-wrap:wrap;gap:5px;margin:0 0 12px}
+.kms .kml-who i{font-style:normal;font-size:11px;background:#EFEDFF;color:#5A5AEF;border-radius:99px;padding:3px 9px}
+.kms .kml-story{border-radius:18px;padding:14px;background:linear-gradient(135deg,#FFF0F7,#F1EEFF 55%,#EAF6FF);font-size:14.5px;line-height:1.9;box-shadow:0 0 0 1px #ECE6FF inset}
+.kms .kml-lb{display:inline-block;font-size:10.5px;font-weight:800;color:#fff;background:linear-gradient(90deg,#FF7EB6,#9B7BFF);border-radius:99px;padding:2px 9px;margin-bottom:6px}
+.kms .kml-story p{margin:0}
+.kms .kml-sec{margin:18px 0 6px;font-size:13px;font-weight:900;color:#4A4C6E}
+.kms .kml-sec small{font-weight:400;color:#8A8CA8;font-size:11px;margin-left:6px}
+.kms .kml-row{display:flex;gap:10px;align-items:flex-start;padding:10px 2px;border-bottom:1px dashed #E4E1F3}
+.kms .kml-ri{flex:0 0 38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:21px;background:#F3F1FF}
+.kms .kml-rb{flex:1;min-width:0}
+.kms .kml-rb b{display:block;font-size:12px;color:#8A8CA8}
+.kms .kml-rb span{display:block;font-size:14px;line-height:1.6}
+.kms .kml-row.warn .kml-ri{background:#FFE6EF}
+.kms .kml-row.warn .kml-rb span{color:#B0124F;font-weight:800}
+.kms .kml-row.ok .kml-rb span{color:#6E7090}
+.kms details.kml-more summary{list-style:none;cursor:pointer;font-size:12.5px;color:#5A5AEF;font-weight:800;padding:10px 2px}
+.kms details.kml-more summary::-webkit-details-marker{display:none}
+.kms .kml-set{margin-top:18px;border-radius:18px;background:#F7F6FD;padding:12px}
+.kms .kml-set h3{margin:0 0 4px;font-size:13.5px}
+.kms .kml-set p{margin:0 0 8px;font-size:11.5px;color:#7A7C98;line-height:1.6}
+.kms .kml-set h4{margin:12px 0 6px;font-size:12px;color:#4A4C6E}
+.kms .kml-chips{display:flex;flex-wrap:wrap;gap:6px}
+.kms .kml-chips button{border:1px solid #DCD8F5;background:#fff;border-radius:99px;padding:7px 11px;font:inherit;font-size:12.5px;color:#4A4C6E}
+.kms .kml-chips button.on{background:#EFEDFF;border-color:#9B8BFF;color:#4B3FD6;font-weight:800}
+.kms .kml-chips button.on::before{content:"✓ "}
+.kms .kml-src{margin-top:14px;font-size:10.5px;color:#9A9CB6;line-height:1.6}
+/*/kurashi-css*//*kesa-css*/
 .kesa{margin:8px 0 16px}
 .kesa-sq.wt{aspect-ratio:1/1;overflow:visible;border-radius:26px;box-shadow:0 0 0 2px rgba(255,255,255,.95),0 0 24px rgba(120,180,255,.45),0 18px 30px -20px rgba(40,40,120,.6)}
 .kesa-sq.wt::before{border-radius:inherit;opacity:1}
@@ -1629,6 +1666,12 @@ html[data-theme="dark"] .ck-row{background:rgba(255,255,255,.07)}
 .kq-trpop .tr-dl{background:rgba(255,250,232,.95)}.kq-trpop .tr-ng{background:rgba(255,238,238,.95)}
 .kq-trpop .tr-r a{font-size:11px;font-weight:800;color:#5A5AEF;text-decoration:none;white-space:nowrap}
 .kq-trpop .tr-m p.tr-jrn{color:#6B6F8E}
+.kq-trpop .tr-jrbox{background:rgba(255,255,255,.88);border-radius:16px;padding:11px 12px 12px;margin:0 0 8px;box-shadow:0 6px 14px -10px rgba(30,30,80,.35)}
+.kq-trpop .tr-jrh{margin:0;font-size:13.5px;font-weight:900;color:#1F2140}.kq-trpop .tr-jrs{margin:3px 0 9px;font-size:11.5px;font-weight:700;color:#6B6F8E;line-height:1.55}
+.kq-trpop .tr-jrl{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.kq-trpop .tr-jrl a{display:flex;align-items:center;gap:7px;padding:9px 10px;border-radius:12px;background:#F4F3FF;color:#1F2140;text-decoration:none;font-size:12.5px;font-weight:900;min-width:0}
+.kq-trpop .tr-jrl a i{flex:none;width:6px;height:18px;border-radius:3px;background:var(--lc)}.kq-trpop .tr-jrl a b{margin-left:auto;color:#5A5AEF;font-size:12px}
+.kq-trpop .tr-jrl a:active{transform:scale(.97)}
 .kq-trpop .tr-note{margin:12px 2px 0;font-size:10.5px;font-weight:700;color:#6B6F8E;line-height:1.6}
 .kq-knpop .kqp{text-align:left}.kq-knpop .kqp-t{display:block;font-size:19px;font-weight:900;color:#1F2250;margin:2px 0 10px;text-align:center}
 .kq-knpop .kqp-h{display:flex;align-items:baseline;gap:6px;margin:14px 2px 6px;font-size:13.5px;font-weight:900;color:#1F2250}.kq-knpop .kqp-h small{font-size:11px;color:#8A8DA8}
@@ -1667,44 +1710,7 @@ html[data-theme="dark"] .ck-row{background:rgba(255,255,255,.07)}
 .gm-save{background:#5A5AEF;color:#fff}
 .gm-off{background:var(--accent-soft,#F1ECFF);color:#5A5AEF!important}
 .wxt.kesa-off{display:none!important}
-/*/kesa-css*//*kurashi-css*/
-a.kq-tip.kml-tip{display:flex;align-items:center;gap:6px;text-decoration:none;cursor:pointer;animation:kmGlow 2.8s ease-in-out infinite}
-a.kml-tip .kml-tx{flex:1;min-width:0}
-a.kml-tip .kml-go{flex:0 0 auto;font-size:11px;font-weight:900;color:#5A5AEF;white-space:nowrap}
-.kq-tm a.kml-tip{max-width:none;width:100%;margin:8px 0 2px;padding:8px 10px;border-radius:12px;background:transparent;box-shadow:none;animation:none;font-size:13px;line-height:1.5;color:#1F2250;-webkit-backdrop-filter:none;backdrop-filter:none}
-.kq-tm a.kml-tip .kml-go{font-size:20px;line-height:1;font-weight:700;color:#8E7BFF}
-@keyframes kmGlow{50%{box-shadow:0 0 0 2px rgba(190,170,255,.7)}}
-@keyframes kmGlow{50%{box-shadow:0 0 0 3px rgba(190,170,255,.6)}}
-@media (prefers-reduced-motion:reduce){a.kml-tip{animation:none}}
-.kms .kml-h{font-size:12px;color:#8A8CA8;margin:0 0 2px}
-.kms .kml-t{font-size:19px;font-weight:900;margin:0 0 10px;color:#2B2D4A}
-.kms .kml-who{display:flex;flex-wrap:wrap;gap:5px;margin:0 0 12px}
-.kms .kml-who i{font-style:normal;font-size:11px;background:#EFEDFF;color:#5A5AEF;border-radius:99px;padding:3px 9px}
-.kms .kml-story{border-radius:18px;padding:14px;background:linear-gradient(135deg,#FFF0F7,#F1EEFF 55%,#EAF6FF);font-size:14.5px;line-height:1.9;box-shadow:0 0 0 1px #ECE6FF inset}
-.kms .kml-lb{display:inline-block;font-size:10.5px;font-weight:800;color:#fff;background:linear-gradient(90deg,#FF7EB6,#9B7BFF);border-radius:99px;padding:2px 9px;margin-bottom:6px}
-.kms .kml-story p{margin:0}
-.kms .kml-sec{margin:18px 0 6px;font-size:13px;font-weight:900;color:#4A4C6E}
-.kms .kml-sec small{font-weight:400;color:#8A8CA8;font-size:11px;margin-left:6px}
-.kms .kml-row{display:flex;gap:10px;align-items:flex-start;padding:10px 2px;border-bottom:1px dashed #E4E1F3}
-.kms .kml-ri{flex:0 0 38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:21px;background:#F3F1FF}
-.kms .kml-rb{flex:1;min-width:0}
-.kms .kml-rb b{display:block;font-size:12px;color:#8A8CA8}
-.kms .kml-rb span{display:block;font-size:14px;line-height:1.6}
-.kms .kml-row.warn .kml-ri{background:#FFE6EF}
-.kms .kml-row.warn .kml-rb span{color:#B0124F;font-weight:800}
-.kms .kml-row.ok .kml-rb span{color:#6E7090}
-.kms details.kml-more summary{list-style:none;cursor:pointer;font-size:12.5px;color:#5A5AEF;font-weight:800;padding:10px 2px}
-.kms details.kml-more summary::-webkit-details-marker{display:none}
-.kms .kml-set{margin-top:18px;border-radius:18px;background:#F7F6FD;padding:12px}
-.kms .kml-set h3{margin:0 0 4px;font-size:13.5px}
-.kms .kml-set p{margin:0 0 8px;font-size:11.5px;color:#7A7C98;line-height:1.6}
-.kms .kml-set h4{margin:12px 0 6px;font-size:12px;color:#4A4C6E}
-.kms .kml-chips{display:flex;flex-wrap:wrap;gap:6px}
-.kms .kml-chips button{border:1px solid #DCD8F5;background:#fff;border-radius:99px;padding:7px 11px;font:inherit;font-size:12.5px;color:#4A4C6E}
-.kms .kml-chips button.on{background:#EFEDFF;border-color:#9B8BFF;color:#4B3FD6;font-weight:800}
-.kms .kml-chips button.on::before{content:"✓ "}
-.kms .kml-src{margin-top:14px;font-size:10.5px;color:#9A9CB6;line-height:1.6}
-/*/kurashi-css*//*kn-slim*/.kn{border-radius:18px}.kn .kn-h{padding:5px 10px;gap:8px;min-height:0}.kn .kn-h b{font-size:12px!important;line-height:1.35}.kn .kn-h .kn-tk{font-size:10px!important}.kn .kn-h>span:nth-child(2){gap:0}.kn .kn-tk{line-height:1.35}.kn .kn-bell{width:30px;height:30px}.kn .kn-bell svg{width:21px;height:21px}.kn .kn-bell em{min-width:16px;height:16px;font-size:10px;line-height:16px;top:-3px;right:-4px;padding:0 4px}.kn .kn-chev{font-size:11px;padding:3px 9px}.kn::before{height:22px}/*/kn-slim*/
+/*/kesa-css*//*kn-slim*/.kn{border-radius:18px}.kn .kn-h{padding:5px 10px;gap:8px;min-height:0}.kn .kn-h b{font-size:12px!important;line-height:1.35}.kn .kn-h .kn-tk{font-size:10px!important}.kn .kn-h>span:nth-child(2){gap:0}.kn .kn-tk{line-height:1.35}.kn .kn-bell{width:30px;height:30px}.kn .kn-bell svg{width:21px;height:21px}.kn .kn-bell em{min-width:16px;height:16px;font-size:10px;line-height:16px;top:-3px;right:-4px;padding:0 4px}.kn .kn-chev{font-size:11px;padding:3px 9px}.kn::before{height:22px}/*/kn-slim*/
 /*kn-noboost*/html{-webkit-text-size-adjust:100%;text-size-adjust:100%}.kn .kn-h b,.kn .kn-h .kn-tk,.kn .kn-tkr i{-webkit-text-size-adjust:none;text-size-adjust:none;max-height:1.5em}/*/kn-noboost*/
 
 
@@ -2914,7 +2920,7 @@ function holoTouch(map){if(!map||map._wtouch)return;map._wtouch=1;const box=map.
   if(window.IntersectionObserver)new IntersectionObserver(es=>es.forEach(e=>{if(e.intersectionRatio<.35)lock()}),{threshold:[0,.35,.6]}).observe(box);
 }
 /* ==== /holo-map ==== */
-/*vcheck*/(function(){var V="11261226";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
+/*vcheck*/(function(){var V="11261239";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
 <script>
 (()=>{
 const $=s=>document.querySelector(s);
@@ -5445,7 +5451,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11261226");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11261239");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -6294,7 +6300,147 @@ function chiikiRender(){const el=document.getElementById("chiikiCard");if(!el)re
 [400,2600,7500].forEach(ms=>setTimeout(()=>{try{chiikiRender()}catch(e){console.warn(e)}},ms));
 setInterval(()=>{try{chiikiRender()}catch(e){}},10*60e3);
 document.addEventListener("visibilitychange",()=>{if(!document.hidden)try{chiikiRender()}catch(e){}});
-/*/chiiki-js*//*kesa-js*/
+/*/chiiki-js*//*kurashi-js*/
+/* ===== きょうのくらしメモ（11/26） ===== */
+const KM_SC={wash:["🧺","洗濯"],futon:["🛏️","布団"],adult:["👕","大人の服"],kids:["🧒","子どもの服"],kasa:["☂️","かさ"],
+ bike:["🚲","自転車"],car:["🚗","車"],walk:["🚶","歩き・行き帰り"],play:["🛝","子どもの外遊び"],bento:["🍱","お弁当・食べもの"],
+ heat:["🥵","暑さ・熱中症"],dry:["🤧","乾燥・かぜ"],damp:["🍄","じめじめ・カビ"],sleep:["🌙","夜・寝るとき"]};
+const KM_LIFE={bike:["🚲","自転車で送り迎え",["bike","kids","kasa","adult"]],car:["🚗","車で送り迎え",["car","kids"]],
+ walk:["🚶","歩いて送り迎え",["walk","kasa","kids"]],school:["🎒","小学生の登校がある",["kids","kasa","heat","play"]],
+ baby:["👶","赤ちゃん・小さい子がいる",["kids","heat","dry","sleep"]],home:["🏠","家にいることが多い",["wash","futon","damp","dry"]],
+ work:["👜","お仕事に出る",["adult","kasa","walk","bento"]],bento:["🍳","毎日お弁当を作る",["bento","heat"]]};
+const KM_DEF=["wash","adult","kasa"];
+function kmSt(){const o=LS.get("wolly.kurashi")||{};return {b:o.b||[],on:o.on||[],off:o.off||[]}}
+function kmTk(){const h=new Date().getHours();return h<9?"am":h<16?"day":h<18?"eve":"night"}
+function kmOrder(st){st=st||kmSt();let a=[];st.b.forEach(b=>(KM_LIFE[b]||["","",[]])[2].forEach(k=>{if(!a.includes(k))a.push(k)}));
+  st.on.forEach(k=>{if(KM_SC[k]&&!a.includes(k))a.push(k)});if(!a.length)a=KM_DEF.slice();
+  if(kmTk()==="eve")["wash","kasa"].forEach(k=>{if(a.includes(k))a=[k,...a.filter(x=>x!==k)]});
+  return a.filter(k=>!st.off.includes(k))}
+/* 天気をまとめる（eve＝あしたの分） */
+function kmWx(){const now=new Date(),eve=now.getHours()>=18,d=new Date(now);if(eve)d.setDate(d.getDate()+1);const k=ymd(d);
+  const w=(wxGet().d||{})[k];if(!w||!(w.c||w.t))return null;
+  const hi0=w.th!=null?w.th:w.hi,lo0=(w.tl!=null&&w.th!=null&&w.tl<w.th)?w.tl:w.lo;let H=null;try{H=kqTemps(k,hi0,lo0)}catch(e){}
+  const T=x=>H?Math.round(kqT(H,x)):null;let hi=hi0;if(H){hi=-99;for(let x=10;x<=16;x+=.5)hi=Math.max(hi,kqT(H,x));hi=Math.round(hi)}
+  const B=["am","pm","night"].map(b=>{try{return wx2(k,b)}catch(e){return null}}).filter(Boolean);
+  const hus=B.map(x=>x.hu).filter(v=>v!=null),wss=B.map(x=>x.ws).filter(v=>v!=null);
+  const HR=((wx2Get().h||{})[k]||[]).filter(r=>r[2]!=null&&r[0]>=6);const hm=HR.map(r=>r[2]);
+  const p=w.pop||{},pop=Math.max(0,...Object.values(p).map(Number).filter(v=>!isNaN(v))),t=w.t||"";
+  const pm=(()=>{try{return wx2(k,"pm")}catch(e){return null}})();
+  return {k,eve,ic:"",w:t.replace(/\s+/g,""),c:w.c||"cloud",am:T(7)!=null?T(7):lo0,hi:hi!=null?hi:hi0,night:T(21)!=null?T(21):lo0,
+    hu:pm&&pm.hu!=null?pm.hu:(hus.length?Math.round(hus.reduce((a,b)=>a+b,0)/hus.length):60),huMin:hm.length?Math.min(...hm):(hus.length?Math.min(...hus):60),
+    ws:wss.length?Math.max(...wss):0,pop,mo:d.getMonth()+1,thunder:/雷/.test(t),
+    later:w.c!=="rain"&&w.c!=="snow"&&/雨|雪/.test(t)?"rain":(w.c==="rain"&&/(のち|から).*晴/.test(t)?"sun":null)}}
+/* 場面ごとのことば。lv：2＝気をつけて 1＝ふつう 0＝とくになし */
+function kmSay(k,w){const diff=w.hi-w.am,rain=w.c==="rain"||w.c==="snow"||w.pop>=50,R=(t,lv=1)=>({t,lv});
+ switch(k){
+ case"wash":
+  if(rain&&w.later!=="sun")return R("雨だから部屋干しがいいよ。");
+  if(w.later==="sun")return R("あとから晴れるよ。外に干すなら午後からがおすすめ。");
+  if(w.later==="rain")return R("あとから雨になるよ。外に干すなら、早めに取りこんでね。",2);
+  if(w.ws>=10)return R("風がとても強いよ。外干しはやめておこう。",2);
+  if(w.hu>=85)return R("じめじめで乾きにくいよ。部屋干しなら除湿機やエアコンを使ってね。");
+  if(w.hu>=70)return R("乾きにくいかも。部屋干しがいいよ。");
+  if(w.ws>=6)return R("風で飛びやすいよ。洗濯ばさみはしっかりね。");
+  if(w.c==="sun"&&w.hu<55)return R("空気がかわいて、外でよく乾きそう。");
+  if(w.c==="cloud")return R("乾くのに時間がかかりそう。");
+  return R("外干しでだいじょうぶそう。",0);
+ case"futon":
+  if(w.c==="sun"&&w.hu<=55&&w.ws<6&&w.pop<30&&!w.later)return R("布団を干すのにいい日だよ。15時までに取りこんでね。");
+  return R("きょうは布団干しはお休みがよさそう。",0);
+ case"adult":{let t=w.hi>=30?"半袖で、帽子があると安心。":w.hi>=25?"半袖ですごせるよ。":w.hi>=20?"半袖に、うすい羽織があると安心。":w.hi>=15?"うすい上着がちょうどいいよ。":w.hi>=10?"セーターや上着がいるよ。":w.hi>=5?"あたたかいコートを着ていこう。":"コートに、手ぶくろとマフラーもね。";
+  if(diff>=10)t="朝と昼で"+diff+"度ちがうよ。"+t;return R(t)}
+ case"kids":
+  if(diff>=10)return R("朝と昼で"+diff+"度ちがうよ。脱ぎ着しやすい服にしてね。");
+  if(w.hi>=28)return R("汗をかくから、着がえを1枚入れておくと安心。");
+  if(w.am<=5)return R("朝は上着と手ぶくろを。動くとあたたまるから、着せすぎに気をつけてね。");
+  return R("いつもの服でだいじょうぶそう。",0);
+ case"kasa":
+  if(rain&&w.ws>=10)return R("かさがこわれやすいよ。レインコートが安心。",2);
+  if(rain)return R("かさを持っていこう。");
+  if(w.pop>=30||w.later)return R("折りたたみがさがあると安心。");
+  return R("かさはいらないよ。",0);
+ case"bike":
+  if(w.am<=0)return R("道がこおっているかも。ゆっくり走ってね。",2);
+  if(w.c==="snow")return R("雪の日の自転車はとてもすべるよ。できれば歩きにしよう。",2);
+  if(rain)return R("雨の日はすべりやすいよ。レインコートで、ゆっくりね。");
+  if(w.ws>=6)return R("風でこぎにくいよ。時間に余裕をもって出てね。");
+  if(w.hi>=30&&w.c==="sun")return R("サドルやチャイルドシートが熱くなるよ。さわってたしかめてね。");
+  if(w.am<=5)return R("手ぶくろがあると安心。");
+  return R("走りやすそう。",0);
+ case"car":
+  if(w.am<=1)return R("フロントガラスがこおっているかも。早めに出てね。",2);
+  if(w.hi>=30&&w.c==="sun")return R("車の中がとても熱くなるよ。チャイルドシートをさわってたしかめてね。",2);
+  if(rain)return R("雨で道がこみやすいよ。");
+  return R("ふだんどおりでOK。",0);
+ case"walk":
+  if(w.c==="snow"||w.am<=0)return R("足もとがすべりやすいよ。いつもより早めに出よう。",2);
+  if(rain)return R("長ぐつがあると安心。");
+  if(w.hi>=30)return R("日かげを選んで歩こう。");
+  return R("歩きやすそう。",0);
+ case"play":
+  if(w.thunder)return R("雷のおそれ。鳴ったら建物の中に入ってね。",2);
+  if(rain)return R("きょうは室内あそびの日。児童センターもあるよ。");
+  if(w.hi>=31)return R("外遊びは朝か夕方にしよう。");
+  if(w.ws>=10)return R("風が強いから、公園では気をつけてね。",2);
+  if(w.hi<=8)return R("あたたかくして、短めに遊ぼう。");
+  return R("公園日和だよ。");
+ case"bento":
+  if(w.hi>=25&&w.hu>=70)return R("食べものがいたみやすいよ。保冷剤をわすれずに。",2);
+  if(w.hi>=25)return R("保冷剤があると安心。");
+  return R("いつもどおりでだいじょうぶ。",0);
+ case"heat":
+  if(w.hi>=35)return R("とても暑いよ。エアコンはがまんしないでね。",2);
+  if(w.hi>=28&&w.hu>=70)return R("むし暑くて熱中症になりやすいよ。水分をこまめにね。",2);
+  if(w.hi>=28)return R("水分をこまめにね。");
+  return R("暑さの心配はなさそう。",0);
+ case"dry":
+  if(w.huMin<30)return R("とても乾燥しているよ。加湿とうがいをしてね。"+(w.mo<=3||w.mo>=11?"静電気も起きやすいよ。":""));
+  if(w.huMin<40)return R("少し乾燥ぎみ。のどに気をつけてね。");
+  return R("乾燥の心配はなさそう。",0);
+ case"damp":
+  if(w.hu>=85)return R("じめじめするよ。換気してカビに気をつけてね。");
+  if(w.hu>=70)return R("少しじめじめ。");
+  return R("からっとしているよ。",0);
+ case"sleep":
+  if(w.night>=25)return R("夜も暑いよ。寝るときはエアコンを上手に使ってね。");
+  if(w.night<=5)return R("夜は冷えるよ。スリーパーなどで寝冷えに気をつけてね。");
+  return R("夜もすごしやすそう。",0);
+ }return R("",0)}
+function kmIntro(w){const tk=kmTk(),f=w.am<=5?"ひんやり":w.am>=25?"朝からむしっと":"すずしめ",up=w.hi-w.am>=5?"まで上がるよ":"くらいだよ";
+  if(tk==="night")return `あしたの朝は${w.am}度。お昼は${w.hi}度${up}。`;
+  if(tk==="eve")return `夜は${w.night}度まで下がるよ。`;
+  if(tk==="day")return `けさは${w.am}度だったけど、お昼は${w.hi}度${up}。`;
+  return `けさは${w.am}度で${f}。お昼は${w.hi}度${up}。`}
+function kmStory(w,ks){const must=["heat"].filter(k=>!ks.includes(k)).map(k=>kmSay(k,w)).filter(x=>x.lv===2).slice(0,1);
+  const use=[...must,...ks.map(k=>kmSay(k,w)).filter(x=>x.lv>0)].slice(0,4),seen=new Set();
+  let s=kmIntro(w)+use.map(x=>x.t.split(/(?<=。)/).filter(z=>z&&!seen.has(z)&&seen.add(z)).join("")).join("");
+  if(!use.length)s+="とくに気をつけることはなさそう。すごしやすい日だよ。";else if(use.length<2)s+="ほかは、とくに気をつけることはなさそう。";return s}
+/* カードの1行（kesaRender から） */
+function kmTip(){const w=kmWx();if(!w)return "";const ks=kmOrder(),L=ks.map(k=>[k,kmSay(k,w)]).filter(x=>x[1].t);
+  const top=L.slice().sort((a,b)=>b[1].lv-a[1].lv)[0];if(!top)return "";
+  return `<a class="kq-tip kml-tip" href="#kurashi"><span>${KM_SC[top[0]][0]}</span><span class="kml-tx">${esc(top[1].t)}</span><span class="kml-go" aria-label="くわしく">›</span></a>`}
+function kmRow(k,x){return `<div class="kml-row ${x.lv===2?"warn":x.lv===0?"ok":""}"><span class="kml-ri">${KM_SC[k][0]}</span><span class="kml-rb"><b>${KM_SC[k][1]}${x.lv===2?"・気をつけて":""}</b><span>${esc(x.t)}</span></span></div>`}
+function sheetKurashi(){const w=kmWx(),st=kmSt();
+  if(!w)return `<div class="kms"><p class="kml-h">きょうのくらしメモ</p><p class="kml-t">天気をよみこみ中だよ</p><p>少し待ってから、もう一度ひらいてね。</p></div>`;
+  const ks=kmOrder(st),others=Object.keys(KM_SC).filter(k=>!ks.includes(k)),d=new Date(w.k+"T00:00:00");
+  const day=`${d.getMonth()+1}月${d.getDate()}日（${"日月火水木金土"[d.getDay()]}）`;
+  const who=st.b.length?st.b.map(b=>`<i>${KM_LIFE[b][0]} ${KM_LIFE[b][1]}</i>`).join(""):`<i>まだえらんでいないよ（洗濯・服・かさ）</i>`;
+  return `<div class="kms"><p class="kml-h">${w.eve?"あしたの":"きょうの"}くらしメモ・${day}</p>
+  <p class="kml-t">${esc(w.w||"")}　${w.am}度 → ${w.hi}度</p><div class="kml-who">${who}</div>
+  <div class="kml-story"><span class="kml-lb">Wollyのお話</span><p>${esc(kmStory(w,ks))}</p></div>
+  <p class="kml-sec">📝 場面ごとに<small>えらんだ順</small></p>${ks.map(k=>kmRow(k,kmSay(k,w))).join("")}
+  ${others.length?`<details class="kml-more"><summary>＋ ほかの場面も見る（${others.length}）</summary>${others.map(k=>kmRow(k,kmSay(k,w))).join("")}</details>`:""}
+  <div class="kml-set"><h3>⚙️ わたしの暮らしに合わせる</h3><p>えらぶと、お話と順番があなた向けになるよ。いくつでもOK。このスマホの中だけに覚えるよ。</p>
+   <h4>どんな毎日？</h4><div class="kml-chips">${Object.keys(KM_LIFE).map(b=>`<button type="button" data-kmb="${b}" class="${st.b.includes(b)?"on":""}" aria-pressed="${st.b.includes(b)}">${KM_LIFE[b][0]} ${KM_LIFE[b][1]}</button>`).join("")}</div>
+   <h4>見たい場面（えらんだものが上に来るよ）</h4><div class="kml-chips">${Object.keys(KM_SC).map(k=>`<button type="button" data-kmk="${k}" class="${ks.includes(k)?"on":""}" aria-pressed="${ks.includes(k)}">${KM_SC[k][0]} ${KM_SC[k][1]}</button>`).join("")}</div></div>
+  <p class="kml-src">天気：気象庁／気温・湿度・風：MET Norway。ことばはWollyのめやすだよ。</p></div>`}
+document.addEventListener("click",e=>{const b=e.target.closest("button[data-kmb],button[data-kmk]");if(!b)return;e.preventDefault();
+  const st=kmSt();if(b.dataset.kmb){const v=b.dataset.kmb;st.b=st.b.includes(v)?st.b.filter(x=>x!==v):[...st.b,v]}
+  else{const v=b.dataset.kmk;if(kmOrder(st).includes(v)){st.on=st.on.filter(x=>x!==v);if(kmOrder(st).includes(v))st.off=[...new Set([...st.off,v])]}
+    else{st.off=st.off.filter(x=>x!==v);if(!kmOrder(st).includes(v))st.on=[...st.on,v]}}
+  LS.set("wolly.kurashi",st);const sb=document.getElementById("sheetBody"),sh=document.getElementById("sheet"),y=sh?sh.scrollTop:0;
+  if(sb&&sb.querySelector(".kms"))sb.innerHTML=sheetKurashi();if(sh)sh.scrollTop=y;try{kesaRender()}catch(_){}});
+/*/kurashi-js*//*kesa-js*/
 /* ゴミ：さいたま市は区分ごとに毎週同じ曜日（もえるごみ週2回、資源物1類 週1回、もえないごみ・有害危険ごみ・資源物2類は同じ曜日に週1回）。祝日も収集、1/1〜3はなし */
 const GOMI_K=[["burn","🔥","もえるごみ","生ごみ・紙くずなど",2,"#FFE4D6"],["r1","🍾","資源物1類","びん・缶・ペットボトル・食品のプラ",1,"#DDF3E6"],["r2","📦","もえないごみ・資源物2類","紙・布・電池・小さな金物など",1,"#E4ECFF"]];
 function gomiMan(){const o=LS.get("wolly.gomi");return o&&typeof o==="object"?o:null}
@@ -6450,6 +6596,9 @@ const TR_ST=[["浦和",35.8581,139.6571,["jk","ut","ta","js","jt"]],["南浦和"
  ["北大宮",35.9177,139.6251,["tu"]],["大宮公園",35.9265,139.6330,["tu"]],["大和田",35.9292,139.6511,["tu"]],["七里",35.9380,139.6658,["tu"]],["岩槻",35.9518,139.6928,["tu"]],["東岩槻",35.9633,139.7123,["tu"]],["豊春",35.9695,139.7261,["tu"]],
  ["浦和美園",35.8938,139.7278,["sr"]],["鉄道博物館",35.9202,139.6178,["ns"]],["加茂宮",35.9357,139.6169,["ns"]],["東宮原",35.9427,139.6184,["ns"]],["今羽",35.9501,139.6197,["ns"]],["吉野原",35.9571,139.6210,["ns"]]];
 const TR_COL={jk:"#00B2E5",ut:"#F68B1E",ta:"#F68B1E",ja:"#00AC9A",kw:"#00AC9A",jm:"#F15A22",js:"#E21F26",jt:"#91278F",sk1:"#41A13A",sk2:"#E85298",sk3:"#9C3C96",tu:"#0F6CC3",sr:"#0077C8",ns:"#2E3F8F"};
+const TR_JRURL={jk:"keihin-tohokuline",ut:"utsunomiyaline",ta:"takasakiline",ja:"saikyoline",kw:"kawagoeline",jm:"musashinoline",js:"shonan-shinjukuline",jt:"ueno-tokyoline"};
+function trJrUrl(id){return TR_JRURL[id]?"https://traininfo.jreast.co.jp/train_info/line.aspx?gid=1&lineid="+TR_JRURL[id]:"https://traininfo.jreast.co.jp/train_info/shinkansen.aspx"}
+const TR_SHORT={"東武鉄道":"東武","埼玉高速鉄道":"埼玉高速","埼玉新都市交通":"ニューシャトル"};
 let trBusy=false,TR_HERE=null;
 function trGet(){const o=LS.get("wolly.train");return o&&o.d?o:null}
 function trLoad(force){const o=trGet();if(trBusy||(!force&&o&&Date.now()-o.at<3*60e3))return;trBusy=true;
@@ -6464,20 +6613,20 @@ function kqTrainRow(){const o=trGet();if(!o)return `<button type="button" class=
   const L=o.d.lines,nr=trNear(),mine=nr?L.filter(l=>nr.ids.includes(l.id)):L,known=mine.filter(l=>l.lv>=0),bad=known.filter(l=>l.lv>0).sort((a,b)=>b.lv-a.lv);
   const others=L.filter(l=>!mine.includes(l)&&l.lv>0).length,st=nr?nr.near.slice(0,2).map(x=>x.s[0]+"駅").join("・")+(nr.near.length>2?"など":""):"さいたま市";let t,sub,cls="";
   if(bad.length){t=`${bad[0].n}：${bad[0].st}`;sub=bad.length>1?`ほか${bad.length-1}路線も`:`${st}の路線`;cls=bad[0].lv>=2?" lv2":" lv1"}
-  else if(known.length){t="電車：いつもどおり";sub=`${st}の路線`+(mine.length>known.length?"（JRは公式で）":"")}
-  else{t=`${st}の路線`;sub="JR東日本は公式で見てね"}
-  if(others&&!bad.length)sub+=`・ほかの路線で遅れ${others}`;
+  else if(known.length){const sh=[...new Set(known.map(l=>TR_SHORT[l.co]||l.co))];t=`${sh.join("・")}：いつもどおり`;sub=`${st}の路線`+(mine.length>known.length?"・JRの状況は公式で":"")}
+  else{t="JRの運行状況は公式で見てね";sub=`${st}の路線`}
+  if(others&&!bad.length)sub+=`・ほかで遅れ${others}`;
   return `<button type="button" class="kq-tr${cls}" data-kesa-tr><span class="kq-tri">🚃</span><span class="kq-trt">${esc(t)}<small>${esc(sub)}</small></span><i>›</i></button>`}
 function trCard(l){const p=l.lv<0?(l.co==="JR東日本"?["公式で見てね","g"]:["いま取れません","g"]):l.lv===0?["平常運転","ok"]:[l.st,l.lv>=2?"ng":"dl"];
   return `<div class="tr-c tr-${p[1]}" style="--lc:${TR_COL[l.id]||"#8A8DA8"}"><span class="tr-bar"></span><div class="tr-m"><b>${esc(l.n)}</b><small>${esc(l.co)}</small>${l.why?`<p>${esc(l.why)}</p>`:""}</div><div class="tr-r"><em>${esc(p[0])}</em><a href="${esc(l.url)}" target="_blank" rel="noopener">公式 ↗</a></div></div>`}
 function trList(A){const ok=A.filter(l=>l.lv>=0).sort((a,b)=>b.lv-a.lv),jr=A.filter(l=>l.lv<0&&l.co==="JR東日本"),ng=A.filter(l=>l.lv<0&&l.co!=="JR東日本");
-  return ok.map(trCard).join("")+ng.map(trCard).join("")+(jr.length?`<div class="tr-c tr-g tr-jr" style="--lc:#2E8B57"><span class="tr-bar"></span><div class="tr-m"><b>JR東日本</b><small>${esc(jr.map(l=>l.n).join("・"))}</small><p class="tr-jrn">JRの運行情報は、こちらから読めないので公式で見てね</p></div><div class="tr-r"><em>公式で見てね</em><a href="${esc(jr.some(l=>/新幹線/.test(l.n))&&jr.every(l=>/新幹線/.test(l.n))?jr[0].url:"https://traininfo.jreast.co.jp/train_info/kanto.aspx")}" target="_blank" rel="noopener">公式 ↗</a></div></div>`:"")}
+  return ok.map(trCard).join("")+ng.map(trCard).join("")+(jr.length?`<div class="tr-jrbox"><p class="tr-jrh">🚃 JRの運行状況は、ここでは出せないよ</p><p class="tr-jrs">遅れているかどうかは、JRの公式で見てね。路線をタップすると、その路線のページがひらくよ。</p><div class="tr-jrl">${jr.map(l=>`<a href="${esc(trJrUrl(l.id))}" target="_blank" rel="noopener" style="--lc:${TR_COL[l.id]||"#8A8DA8"}"><i></i>${esc(l.n)}<b>↗</b></a>`).join("")}</div></div>`:"")}
 function trPop(){const o=trGet(),nr=trNear(),L=o?o.d.lines:[];const mine=nr?L.filter(l=>nr.ids.includes(l.id)):[],rest=L.filter(l=>!mine.includes(l));
   const at=o?new Date(o.at):null,hm=at?`${at.getHours()}:${String(at.getMinutes()).padStart(2,"0")}`:"";
   const from=nr?`<p class="tr-from">📍 ${esc(nr.f.t)}から近い駅：<b>${nr.near.map(x=>esc(x.s[0])+"駅").join("・")}</b></p>`:`<p class="tr-from">📍 マイページで住所を登録すると、近い駅の路線を先に出すよ</p>`;
   const html=`<div class="tr-p"><p class="tw-k">TRAIN INFO</p><b class="kqp-t">電車の運行情報</b>${from}<button type="button" class="tr-here" data-tr-here>${TR_HERE?"🏠 おうちの近くにもどす":"📡 いまいる場所の近くにする"}</button>
    ${!o?`<p class="kn-none">よみこみ中…</p>`:(mine.length?`<p class="kqp-h">近くの駅の路線</p>${trList(mine)}`:"")+`<p class="kqp-h">${mine.length?"そのほかの路線":"さいたま市の路線"}</p>${trList(rest)}`}
-   <p class="tr-note">${hm?hm+"に":""}各社の公式の運行情報から読んだよ（5分ごと）。JR東日本は、こちらから読めないので公式のページで見てね。出かける前に、公式でもたしかめてね。</p></div>`;
+   <p class="tr-note">${hm?hm+"に":""}各社の公式の運行情報から読んだよ（5分ごと）。JR東日本は、ここでは出せないので公式で見てね。出かける前に、公式でもたしかめてね。</p></div>`;
   const cur=document.querySelector(".kq-trpop");if(cur){const b=cur.querySelector(".tr-p");if(b){b.outerHTML=html;return}}
   openPop(html,"電車の運行情報","holo hfull kq-trpop")}
 document.addEventListener("click",e=>{
@@ -6507,147 +6656,7 @@ if(typeof wx2Paint==="function"){const _w2=wx2Paint;wx2Paint=function(){_w2.appl
 [300,2500,7000].forEach(ms=>setTimeout(kesaInit,ms));
 setInterval(kesaInit,20*60e3);
 document.addEventListener("visibilitychange",()=>{if(!document.hidden)kesaInit()});
-/*/kesa-js*//*kurashi-js*/
-/* ===== きょうのくらしメモ（11/26） ===== */
-const KM_SC={wash:["🧺","洗濯"],futon:["🛏️","布団"],adult:["👕","大人の服"],kids:["🧒","子どもの服"],kasa:["☂️","かさ"],
- bike:["🚲","自転車"],car:["🚗","車"],walk:["🚶","歩き・行き帰り"],play:["🛝","子どもの外遊び"],bento:["🍱","お弁当・食べもの"],
- heat:["🥵","暑さ・熱中症"],dry:["🤧","乾燥・かぜ"],damp:["🍄","じめじめ・カビ"],sleep:["🌙","夜・寝るとき"]};
-const KM_LIFE={bike:["🚲","自転車で送り迎え",["bike","kids","kasa","adult"]],car:["🚗","車で送り迎え",["car","kids"]],
- walk:["🚶","歩いて送り迎え",["walk","kasa","kids"]],school:["🎒","小学生の登校がある",["kids","kasa","heat","play"]],
- baby:["👶","赤ちゃん・小さい子がいる",["kids","heat","dry","sleep"]],home:["🏠","家にいることが多い",["wash","futon","damp","dry"]],
- work:["👜","お仕事に出る",["adult","kasa","walk","bento"]],bento:["🍳","毎日お弁当を作る",["bento","heat"]]};
-const KM_DEF=["wash","adult","kasa"];
-function kmSt(){const o=LS.get("wolly.kurashi")||{};return {b:o.b||[],on:o.on||[],off:o.off||[]}}
-function kmTk(){const h=new Date().getHours();return h<9?"am":h<16?"day":h<18?"eve":"night"}
-function kmOrder(st){st=st||kmSt();let a=[];st.b.forEach(b=>(KM_LIFE[b]||["","",[]])[2].forEach(k=>{if(!a.includes(k))a.push(k)}));
-  st.on.forEach(k=>{if(KM_SC[k]&&!a.includes(k))a.push(k)});if(!a.length)a=KM_DEF.slice();
-  if(kmTk()==="eve")["wash","kasa"].forEach(k=>{if(a.includes(k))a=[k,...a.filter(x=>x!==k)]});
-  return a.filter(k=>!st.off.includes(k))}
-/* 天気をまとめる（eve＝あしたの分） */
-function kmWx(){const now=new Date(),eve=now.getHours()>=18,d=new Date(now);if(eve)d.setDate(d.getDate()+1);const k=ymd(d);
-  const w=(wxGet().d||{})[k];if(!w||!(w.c||w.t))return null;
-  const hi0=w.th!=null?w.th:w.hi,lo0=(w.tl!=null&&w.th!=null&&w.tl<w.th)?w.tl:w.lo;let H=null;try{H=kqTemps(k,hi0,lo0)}catch(e){}
-  const T=x=>H?Math.round(kqT(H,x)):null;let hi=hi0;if(H){hi=-99;for(let x=10;x<=16;x+=.5)hi=Math.max(hi,kqT(H,x));hi=Math.round(hi)}
-  const B=["am","pm","night"].map(b=>{try{return wx2(k,b)}catch(e){return null}}).filter(Boolean);
-  const hus=B.map(x=>x.hu).filter(v=>v!=null),wss=B.map(x=>x.ws).filter(v=>v!=null);
-  const HR=((wx2Get().h||{})[k]||[]).filter(r=>r[2]!=null&&r[0]>=6);const hm=HR.map(r=>r[2]);
-  const p=w.pop||{},pop=Math.max(0,...Object.values(p).map(Number).filter(v=>!isNaN(v))),t=w.t||"";
-  const pm=(()=>{try{return wx2(k,"pm")}catch(e){return null}})();
-  return {k,eve,ic:"",w:t.replace(/\s+/g,""),c:w.c||"cloud",am:T(7)!=null?T(7):lo0,hi:hi!=null?hi:hi0,night:T(21)!=null?T(21):lo0,
-    hu:pm&&pm.hu!=null?pm.hu:(hus.length?Math.round(hus.reduce((a,b)=>a+b,0)/hus.length):60),huMin:hm.length?Math.min(...hm):(hus.length?Math.min(...hus):60),
-    ws:wss.length?Math.max(...wss):0,pop,mo:d.getMonth()+1,thunder:/雷/.test(t),
-    later:w.c!=="rain"&&w.c!=="snow"&&/雨|雪/.test(t)?"rain":(w.c==="rain"&&/(のち|から).*晴/.test(t)?"sun":null)}}
-/* 場面ごとのことば。lv：2＝気をつけて 1＝ふつう 0＝とくになし */
-function kmSay(k,w){const diff=w.hi-w.am,rain=w.c==="rain"||w.c==="snow"||w.pop>=50,R=(t,lv=1)=>({t,lv});
- switch(k){
- case"wash":
-  if(rain&&w.later!=="sun")return R("雨だから部屋干しがいいよ。");
-  if(w.later==="sun")return R("あとから晴れるよ。外に干すなら午後からがおすすめ。");
-  if(w.later==="rain")return R("あとから雨になるよ。外に干すなら、早めに取りこんでね。",2);
-  if(w.ws>=10)return R("風がとても強いよ。外干しはやめておこう。",2);
-  if(w.hu>=85)return R("じめじめで乾きにくいよ。部屋干しなら除湿機やエアコンを使ってね。");
-  if(w.hu>=70)return R("乾きにくいかも。部屋干しがいいよ。");
-  if(w.ws>=6)return R("風で飛びやすいよ。洗濯ばさみはしっかりね。");
-  if(w.c==="sun"&&w.hu<55)return R("空気がかわいて、外でよく乾きそう。");
-  if(w.c==="cloud")return R("乾くのに時間がかかりそう。");
-  return R("外干しでだいじょうぶそう。",0);
- case"futon":
-  if(w.c==="sun"&&w.hu<=55&&w.ws<6&&w.pop<30&&!w.later)return R("布団を干すのにいい日だよ。15時までに取りこんでね。");
-  return R("きょうは布団干しはお休みがよさそう。",0);
- case"adult":{let t=w.hi>=30?"半袖で、帽子があると安心。":w.hi>=25?"半袖ですごせるよ。":w.hi>=20?"半袖に、うすい羽織があると安心。":w.hi>=15?"うすい上着がちょうどいいよ。":w.hi>=10?"セーターや上着がいるよ。":w.hi>=5?"あたたかいコートを着ていこう。":"コートに、手ぶくろとマフラーもね。";
-  if(diff>=10)t="朝と昼で"+diff+"度ちがうよ。"+t;return R(t)}
- case"kids":
-  if(diff>=10)return R("朝と昼で"+diff+"度ちがうよ。脱ぎ着しやすい服にしてね。");
-  if(w.hi>=28)return R("汗をかくから、着がえを1枚入れておくと安心。");
-  if(w.am<=5)return R("朝は上着と手ぶくろを。動くとあたたまるから、着せすぎに気をつけてね。");
-  return R("いつもの服でだいじょうぶそう。",0);
- case"kasa":
-  if(rain&&w.ws>=10)return R("かさがこわれやすいよ。レインコートが安心。",2);
-  if(rain)return R("かさを持っていこう。");
-  if(w.pop>=30||w.later)return R("折りたたみがさがあると安心。");
-  return R("かさはいらないよ。",0);
- case"bike":
-  if(w.am<=0)return R("道がこおっているかも。ゆっくり走ってね。",2);
-  if(w.c==="snow")return R("雪の日の自転車はとてもすべるよ。できれば歩きにしよう。",2);
-  if(rain)return R("雨の日はすべりやすいよ。レインコートで、ゆっくりね。");
-  if(w.ws>=6)return R("風でこぎにくいよ。時間に余裕をもって出てね。");
-  if(w.hi>=30&&w.c==="sun")return R("サドルやチャイルドシートが熱くなるよ。さわってたしかめてね。");
-  if(w.am<=5)return R("手ぶくろがあると安心。");
-  return R("走りやすそう。",0);
- case"car":
-  if(w.am<=1)return R("フロントガラスがこおっているかも。早めに出てね。",2);
-  if(w.hi>=30&&w.c==="sun")return R("車の中がとても熱くなるよ。チャイルドシートをさわってたしかめてね。",2);
-  if(rain)return R("雨で道がこみやすいよ。");
-  return R("ふだんどおりでOK。",0);
- case"walk":
-  if(w.c==="snow"||w.am<=0)return R("足もとがすべりやすいよ。いつもより早めに出よう。",2);
-  if(rain)return R("長ぐつがあると安心。");
-  if(w.hi>=30)return R("日かげを選んで歩こう。");
-  return R("歩きやすそう。",0);
- case"play":
-  if(w.thunder)return R("雷のおそれ。鳴ったら建物の中に入ってね。",2);
-  if(rain)return R("きょうは室内あそびの日。児童センターもあるよ。");
-  if(w.hi>=31)return R("外遊びは朝か夕方にしよう。");
-  if(w.ws>=10)return R("風が強いから、公園では気をつけてね。",2);
-  if(w.hi<=8)return R("あたたかくして、短めに遊ぼう。");
-  return R("公園日和だよ。");
- case"bento":
-  if(w.hi>=25&&w.hu>=70)return R("食べものがいたみやすいよ。保冷剤をわすれずに。",2);
-  if(w.hi>=25)return R("保冷剤があると安心。");
-  return R("いつもどおりでだいじょうぶ。",0);
- case"heat":
-  if(w.hi>=35)return R("とても暑いよ。エアコンはがまんしないでね。",2);
-  if(w.hi>=28&&w.hu>=70)return R("むし暑くて熱中症になりやすいよ。水分をこまめにね。",2);
-  if(w.hi>=28)return R("水分をこまめにね。");
-  return R("暑さの心配はなさそう。",0);
- case"dry":
-  if(w.huMin<30)return R("とても乾燥しているよ。加湿とうがいをしてね。"+(w.mo<=3||w.mo>=11?"静電気も起きやすいよ。":""));
-  if(w.huMin<40)return R("少し乾燥ぎみ。のどに気をつけてね。");
-  return R("乾燥の心配はなさそう。",0);
- case"damp":
-  if(w.hu>=85)return R("じめじめするよ。換気してカビに気をつけてね。");
-  if(w.hu>=70)return R("少しじめじめ。");
-  return R("からっとしているよ。",0);
- case"sleep":
-  if(w.night>=25)return R("夜も暑いよ。寝るときはエアコンを上手に使ってね。");
-  if(w.night<=5)return R("夜は冷えるよ。スリーパーなどで寝冷えに気をつけてね。");
-  return R("夜もすごしやすそう。",0);
- }return R("",0)}
-function kmIntro(w){const tk=kmTk(),f=w.am<=5?"ひんやり":w.am>=25?"朝からむしっと":"すずしめ",up=w.hi-w.am>=5?"まで上がるよ":"くらいだよ";
-  if(tk==="night")return `あしたの朝は${w.am}度。お昼は${w.hi}度${up}。`;
-  if(tk==="eve")return `夜は${w.night}度まで下がるよ。`;
-  if(tk==="day")return `けさは${w.am}度だったけど、お昼は${w.hi}度${up}。`;
-  return `けさは${w.am}度で${f}。お昼は${w.hi}度${up}。`}
-function kmStory(w,ks){const must=["heat"].filter(k=>!ks.includes(k)).map(k=>kmSay(k,w)).filter(x=>x.lv===2).slice(0,1);
-  const use=[...must,...ks.map(k=>kmSay(k,w)).filter(x=>x.lv>0)].slice(0,4),seen=new Set();
-  let s=kmIntro(w)+use.map(x=>x.t.split(/(?<=。)/).filter(z=>z&&!seen.has(z)&&seen.add(z)).join("")).join("");
-  if(!use.length)s+="とくに気をつけることはなさそう。すごしやすい日だよ。";else if(use.length<2)s+="ほかは、とくに気をつけることはなさそう。";return s}
-/* カードの1行（kesaRender から） */
-function kmTip(){const w=kmWx();if(!w)return "";const ks=kmOrder(),L=ks.map(k=>[k,kmSay(k,w)]).filter(x=>x[1].t);
-  const top=L.slice().sort((a,b)=>b[1].lv-a[1].lv)[0];if(!top)return "";
-  return `<a class="kq-tip kml-tip" href="#kurashi"><span>${KM_SC[top[0]][0]}</span><span class="kml-tx">${esc(top[1].t)}</span><span class="kml-go" aria-label="くわしく">›</span></a>`}
-function kmRow(k,x){return `<div class="kml-row ${x.lv===2?"warn":x.lv===0?"ok":""}"><span class="kml-ri">${KM_SC[k][0]}</span><span class="kml-rb"><b>${KM_SC[k][1]}${x.lv===2?"・気をつけて":""}</b><span>${esc(x.t)}</span></span></div>`}
-function sheetKurashi(){const w=kmWx(),st=kmSt();
-  if(!w)return `<div class="kms"><p class="kml-h">きょうのくらしメモ</p><p class="kml-t">天気をよみこみ中だよ</p><p>少し待ってから、もう一度ひらいてね。</p></div>`;
-  const ks=kmOrder(st),others=Object.keys(KM_SC).filter(k=>!ks.includes(k)),d=new Date(w.k+"T00:00:00");
-  const day=`${d.getMonth()+1}月${d.getDate()}日（${"日月火水木金土"[d.getDay()]}）`;
-  const who=st.b.length?st.b.map(b=>`<i>${KM_LIFE[b][0]} ${KM_LIFE[b][1]}</i>`).join(""):`<i>まだえらんでいないよ（洗濯・服・かさ）</i>`;
-  return `<div class="kms"><p class="kml-h">${w.eve?"あしたの":"きょうの"}くらしメモ・${day}</p>
-  <p class="kml-t">${esc(w.w||"")}　${w.am}度 → ${w.hi}度</p><div class="kml-who">${who}</div>
-  <div class="kml-story"><span class="kml-lb">Wollyのお話</span><p>${esc(kmStory(w,ks))}</p></div>
-  <p class="kml-sec">📝 場面ごとに<small>えらんだ順</small></p>${ks.map(k=>kmRow(k,kmSay(k,w))).join("")}
-  ${others.length?`<details class="kml-more"><summary>＋ ほかの場面も見る（${others.length}）</summary>${others.map(k=>kmRow(k,kmSay(k,w))).join("")}</details>`:""}
-  <div class="kml-set"><h3>⚙️ わたしの暮らしに合わせる</h3><p>えらぶと、お話と順番があなた向けになるよ。いくつでもOK。このスマホの中だけに覚えるよ。</p>
-   <h4>どんな毎日？</h4><div class="kml-chips">${Object.keys(KM_LIFE).map(b=>`<button type="button" data-kmb="${b}" class="${st.b.includes(b)?"on":""}" aria-pressed="${st.b.includes(b)}">${KM_LIFE[b][0]} ${KM_LIFE[b][1]}</button>`).join("")}</div>
-   <h4>見たい場面（えらんだものが上に来るよ）</h4><div class="kml-chips">${Object.keys(KM_SC).map(k=>`<button type="button" data-kmk="${k}" class="${ks.includes(k)?"on":""}" aria-pressed="${ks.includes(k)}">${KM_SC[k][0]} ${KM_SC[k][1]}</button>`).join("")}</div></div>
-  <p class="kml-src">天気：気象庁／気温・湿度・風：MET Norway。ことばはWollyのめやすだよ。</p></div>`}
-document.addEventListener("click",e=>{const b=e.target.closest("button[data-kmb],button[data-kmk]");if(!b)return;e.preventDefault();
-  const st=kmSt();if(b.dataset.kmb){const v=b.dataset.kmb;st.b=st.b.includes(v)?st.b.filter(x=>x!==v):[...st.b,v]}
-  else{const v=b.dataset.kmk;if(kmOrder(st).includes(v)){st.on=st.on.filter(x=>x!==v);if(kmOrder(st).includes(v))st.off=[...new Set([...st.off,v])]}
-    else{st.off=st.off.filter(x=>x!==v);if(!kmOrder(st).includes(v))st.on=[...st.on,v]}}
-  LS.set("wolly.kurashi",st);const sb=document.getElementById("sheetBody"),sh=document.getElementById("sheet"),y=sh?sh.scrollTop:0;
-  if(sb&&sb.querySelector(".kms"))sb.innerHTML=sheetKurashi();if(sh)sh.scrollTop=y;try{kesaRender()}catch(_){}});
-/*/kurashi-js*//*/dh-js*/
+/*/kesa-js*//*/dh-js*/
 /*today-js*/
 /* きょうの予定：午前・午後・夜＋天気（ホログラム） */
 function todayPopOld(){const k=ymd(new Date()),L=schSortT(schGet().filter(e=>e.date===k)),w=wxGet().d[k];
@@ -7434,8 +7443,8 @@ let RAWQ="";function setRaw(v){RAWQ=(v||"").normalize("NFKC").replace(NOISE,"").
 function qph(ws){const k=ws.join("|")+"#"+RAWQ;if(k===QPK&&QP)return QP;const list=ws.map(qk);const j=qk(RAWQ||ws.join(""));if(ws.length>1||RAWQ)list.push(j);QPK=k;QP={list,all:Math.max(3,j.length)};return QP}
 function load(){if(DATA)return Promise.resolve(DATA);
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
-  const kp=fetch(base+"near-data/tel-kana.json?v=11261226").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
-  return Promise.all([fetch(base+"near-data/tel.json?v=11261226").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
+  const kp=fetch(base+"near-data/tel-kana.json?v=11261239").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
+  return Promise.all([fetch(base+"near-data/tel.json?v=11261239").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
     .catch(()=>{DATA=[];return DATA})}
 /* 聞きとった文 → キーワード */
 function terms(text){let s=(text||"").normalize("NFKC").replace(NOISE," ");
