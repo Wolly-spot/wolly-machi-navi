@@ -1610,7 +1610,12 @@ html[data-theme="dark"] .ck-row{background:rgba(255,255,255,.07)}
 .kq-cr{margin:3px 0 0;text-align:right;font-size:8.5px;font-weight:600;color:#A2A5BC}
 .kq-kn{display:flex;align-items:center;gap:6px;width:100%;border:0;background:transparent;padding:4px 2px;margin:0;font:inherit;font-size:9.5px;font-weight:700;text-align:left;cursor:pointer;min-height:30px}
 .kq-kn .kq-kn1{flex:none;white-space:nowrap}.kq-kn .kq-kn2{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:.92}.kq-kn i{flex:none;font-style:normal;font-size:13px}
-.kq-knbox{margin:2px 0 0;width:100%;box-sizing:border-box}.kesa-sq .kq-knbox .kn-h{width:100%}
+.kq-knbox{margin:2px 0 0;width:100%;box-sizing:border-box}
+.kesa-sq .kn.kq-knbox{background:rgba(255,255,255,.55)!important;border:0!important;box-shadow:0 6px 16px -12px rgba(30,30,80,.35)!important;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-radius:20px}
+.kesa-sq .kn.kq-knbox::before,.kesa-sq .kn.kq-knbox::after{content:none!important;display:none!important}
+.kesa-sq .kq-knbox .kn-h:active{transform:scale(.985)}
+/* 前からあったホームの「Wollyからのお知らせ」は出さない（お知らせはカードの中から） */
+#kidNotice{display:none!important}.kesa-sq .kq-knbox .kn-h{width:100%}
 .kq-knpop .kqp{text-align:left}.kq-knpop .kqp-t{display:block;font-size:19px;font-weight:900;color:#1F2250;margin:2px 0 10px;text-align:center}
 .kq-knpop .kqp-h{display:flex;align-items:baseline;gap:6px;margin:14px 2px 6px;font-size:13.5px;font-weight:900;color:#1F2250}.kq-knpop .kqp-h small{font-size:11px;color:#8A8DA8}
 .kq-knpop .kqp-list{margin:0;background:transparent;box-shadow:none;padding:0;border:0}.kq-knpop .kqp-list::before,.kq-knpop .kqp-list::after{content:none!important;display:none!important}.kq-knpop .kqp-list .kn-b{display:block;padding:0}
@@ -2588,7 +2593,7 @@ html .hl-ring{box-shadow:0 0 6px #ffd6ea;opacity:.8}
         <div class="members" id="membersStrip"></div>
       </div>
       <!--wguide--><section class="wg" id="wGuide"></section>
-      <!--/wguide--><!--chiiki-html--><section class="ck" id="chiikiCard" hidden aria-label="きょうの地域"></section><!--/chiiki-html--><!--kesa-html--><section class="kesa" id="kesaCard" hidden aria-label="けさの3秒"></section><!--/kesa-html--><section class="kn" id="kidNotice" hidden></section><!--wxt--><div class="wxt" id="wxTelop" hidden></div><!--/wxt--><!--wgrow--><section class="gr" id="wGrow" hidden></section><!--/wgrow-->
+      <!--/wguide--><!--kesa-html--><section class="kesa" id="kesaCard" hidden aria-label="けさの3秒"></section><!--/kesa-html--><!--chiiki-html--><section class="ck" id="chiikiCard" hidden aria-label="きょうの地域"></section><!--/chiiki-html--><section class="kn" id="kidNotice" hidden></section><!--wxt--><div class="wxt" id="wxTelop" hidden></div><!--/wxt--><!--wgrow--><section class="gr" id="wGrow" hidden></section><!--/wgrow-->
 
       <!-- いちばん上：Wolly spot ＋ さがす -->
       <section class="hero2">
@@ -2858,7 +2863,7 @@ function holoTouch(map){if(!map||map._wtouch)return;map._wtouch=1;const box=map.
   if(window.IntersectionObserver)new IntersectionObserver(es=>es.forEach(e=>{if(e.intersectionRatio<.35)lock()}),{threshold:[0,.35,.6]}).observe(box);
 }
 /* ==== /holo-map ==== */
-/*vcheck*/(function(){var V="11261034";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
+/*vcheck*/(function(){var V="11261046";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
 <script>
 (()=>{
 const $=s=>document.querySelector(s);
@@ -5388,7 +5393,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11261034");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11261046");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -6324,14 +6329,16 @@ function kqTemps(k,hi,lo){const H=((wx2Get().h||{})[k]||[]).slice().sort((a,b)=>
 function kqT(H,x){if(x<=H[0][0])return H[0][1];for(let i=1;i<H.length;i++){const [a,p]=H[i-1],[b,q]=H[i];if(x<=b){const f=(x-a)/(b-a),e=f*f*(3-2*f);return p+(q-p)*e}}return H[H.length-1][1]}
 const KQ_BLUE=[61,139,255];
 function kqHiCol(hi){if(hi>=23)return [255,48,64];const f=Math.max(0,Math.min(1,(hi-8)/14));return [Math.round(246-(246-238)*f),Math.round(170-(170-104)*f),Math.round(170-(170-112)*f)]}
-function kqCol(t,lo,hi){const f=hi>lo?Math.max(0,Math.min(1,(t-lo)/(hi-lo))):1,H=kqHiCol(hi),c=KQ_BLUE.map((v,i)=>Math.round(v+(H[i]-v)*f));return `rgb(${c.join(",")})`}
+const KQ_ABS=[[-5,[46,58,158]],[0,[52,84,214]],[4,[61,128,255]],[8,[64,168,240]],[11,[92,196,236]],[14,[150,190,240]],[17,[196,170,236]],[20,[240,160,206]],[23,[255,128,140]],[27,[255,74,94]],[31,[214,32,78]],[35,[150,20,70]]];
+function kqAbs(t){const A=KQ_ABS;if(t<=A[0][0])return A[0][1];for(let i=1;i<A.length;i++){if(t<=A[i][0]){const f=(t-A[i-1][0])/(A[i][0]-A[i-1][0]);return A[i-1][1].map((v,j)=>v+(A[i][1][j]-v)*f)}}return A[A.length-1][1]}
+function kqCol(t,lo,hi){const f=hi>lo?Math.max(0,Math.min(1,(t-lo)/(hi-lo))):1,H=kqHiCol(hi),R=KQ_BLUE.map((v,i)=>v+(H[i]-v)*f),A=kqAbs(t),w=.3+.5*Math.abs(f-.5)*2;return `rgb(${A.map((v,i)=>Math.round(v*(1-w)+R[i]*w)).join(",")})`}
 function kqMeter(k,eve,hi0,lo0){const H=kqTemps(k,hi0,lo0);if(!H)return "";const X0=6,X1=23;
   const xs=[];for(let x=X0;x<=X1;x+=.5)xs.push(kqT(H,x));const lo=Math.min(...xs),hi=Math.max(...xs);
   const pos=x=>((x-X0)/(X1-X0)*100).toFixed(2);
   let dh=11,dv=-99;for(let x=10;x<=16;x+=.5){const v=kqT(H,x);if(v>dv){dv=v;dh=x}}
   const P3=[["🌅","朝",7],["☀️","日中",dh],["🌙","夜",21]];
   const HU={};["am","pm","night"].forEach(b=>{try{const x=wx2(k,b);if(x&&x.hu!=null)HU[b]=x.hu}catch(e){}});const hb=x=>x<12?"am":x<18?"pm":"night";
-  const stops=[];for(let x=X0;x<=X1;x+=1)stops.push(`${kqCol(kqT(H,x),lo,hi)} ${pos(x)}%`);
+  const stops=[];for(let x=X0;x<=X1;x+=.5)stops.push(`${kqCol(kqT(H,x),lo,hi)} ${pos(x)}%`);
   const nh=new Date(),cur=eve?7:Math.max(X0,Math.min(X1,nh.getHours()+nh.getMinutes()/60));
   return `<div class="kq-tm" data-kqk="${k}" data-h='${JSON.stringify(H.map(([a,b])=>[a,Math.round(b*10)/10]))}' data-lo="${lo}" data-hi="${hi}" data-hu='${JSON.stringify(HU)}'>
    <div class="kq-t3">${P3.map(([ic,n,x])=>{const v=kqT(H,x);return `<button type="button" data-kqh="${x}"><small>${ic} ${n}</small><b style="color:${kqCol(v,lo,hi)}">${Math.round(v)}°</b>${HU[hb(x)]!=null?`<span class="kq-hu${HU[hb(x)]>70?" wet":""}">💧${HU[hb(x)]}%</span>`:""}</button>`}).join("")}</div>
@@ -6368,7 +6375,7 @@ function kqKnGroup(o){
 const KQ_G=[["dead","⏰ しめきり"],["age","👶 お子さんの年齢に合わせて"],["sel","✅ えらんだお知らせ"],["reco","💡 知ってトク"]];
 function kqKnLine(){const L=kqKnList().filter(o=>!o._reco);let bell="";try{bell=HNEW?riSvg("お知らせ"):svg(KIC("cal")||MINI.star,40)}catch(e){}
   const tk=L.length?(()=>{const t=L.map(o=>esc(o.t)).join("　✦　");return `<span class="kn-tkr" style="--d:${Math.max(14,Math.round(t.length*.32))}s"><i>${t}</i><i aria-hidden="true">${t}</i></span>`})():"いまのお知らせはありません";
-  return `<div class="kn kq-knbox"><button type="button" class="kn-h" data-kesa-kn aria-haspopup="dialog"><span class="kn-bell">${bell}${L.length?`<em>${L.length}</em>`:""}</span><span><b>Wollyからのお知らせ</b><small class="kn-tk">${tk}</small></span><i class="kn-chev">ひらく ›</i></button></div>`}
+  return `<div class="kn kq-knbox"><button type="button" class="kn-h" data-kesa-kn aria-haspopup="dialog"><span class="kn-bell">${bell}${L.length?`<em>${L.length}</em>`:""}</span><span><b>Wollyからのお知らせ</b><small class="kn-tk">${tk}</small></span></button></div>`}
 function kqKnPop(){const L=kqKnList();
   const g={};L.forEach(o=>{const k=kqKnGroup(o);(g[k]=g[k]||[]).push(o)});let i=0;
   const body=KQ_G.filter(([k])=>g[k]&&g[k].length).map(([k,n])=>`<p class="kqp-h">${n}<small>${g[k].length}件</small></p>`+g[k].map(o=>knItem(o,i++)).join("")).join("")||`<p class="kn-none">いまはお知らせがないよ。時期が来たら、ここに出るよ。</p>`;
@@ -7189,8 +7196,8 @@ let RAWQ="";function setRaw(v){RAWQ=(v||"").normalize("NFKC").replace(NOISE,"").
 function qph(ws){const k=ws.join("|")+"#"+RAWQ;if(k===QPK&&QP)return QP;const list=ws.map(qk);const j=qk(RAWQ||ws.join(""));if(ws.length>1||RAWQ)list.push(j);QPK=k;QP={list,all:Math.max(3,j.length)};return QP}
 function load(){if(DATA)return Promise.resolve(DATA);
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
-  const kp=fetch(base+"near-data/tel-kana.json?v=11261034").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
-  return Promise.all([fetch(base+"near-data/tel.json?v=11261034").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
+  const kp=fetch(base+"near-data/tel-kana.json?v=11261046").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
+  return Promise.all([fetch(base+"near-data/tel.json?v=11261046").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
     .catch(()=>{DATA=[];return DATA})}
 /* 聞きとった文 → キーワード */
 function terms(text){let s=(text||"").normalize("NFKC").replace(NOISE," ");
