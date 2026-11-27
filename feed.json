@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-27T09:45:00+09:00",
+ "updatedAt": "2026-11-27T19:00:00+09:00",
  "events": [
   {
    "id": "e-thomas-skipcity",
@@ -91,19 +91,6 @@
    "img": "https://www.saitama-e.com/wp-content/uploads/2026/10/saitama-organic-city-fes-eyecatch.png",
    "ai": false,
    "added": "2026-11-22T09:37:38+09:00"
-  },
-  {
-   "id": "e-asaka-akari-terrace",
-   "kind": "free",
-   "title": "朝霞 冬のあかりテラス 点灯式（11/28）",
-   "desc": "駅前や公園が光るイルミネーション。初日は15時から縁日も。",
-   "date": "2026-11-28",
-   "area": "朝霞市",
-   "src": "さいたマガジン",
-   "url": "https://www.saitama-e.com/asaka-fuyu-akari-terrace/",
-   "img": "https://www.saitama-e.com/wp-content/uploads/2026/11/asaka-fuyu-akari-terrace-eyecatch.jpg",
-   "ai": false,
-   "added": "2026-11-23T19:00:00+09:00"
   },
   {
    "id": "e-keyaki-illumi-2026",
@@ -234,6 +221,19 @@
    "img": "https://rstatic.enjoytokyo.jp/assets/images/event_draft/a0/2091359/img_1.jpg?1794210312&p=t&w=1200",
    "ai": false,
    "added": "2026-11-22T09:37:38+09:00"
+  },
+  {
+   "id": "e-keyaki-xmas-market-2026",
+   "kind": "free",
+   "title": "けやきひろばクリスマスマーケット（12/11〜）",
+   "desc": "新都心に大きなツリーが登場。入場無料でワークショップもあるよ",
+   "date": "2026-12-11",
+   "area": "さいたま市中央区",
+   "src": "ジョルダン",
+   "url": "https://sp.jorudan.co.jp/illumi/news/jrd_261118_1.html",
+   "img": "https://sp.jorudan.co.jp/illumi/images/news/640/jrd_261118_1_1.jpg",
+   "ai": false,
+   "added": "2026-11-27T19:00:00+09:00"
   }
  ],
  "shops": [
