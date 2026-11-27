@@ -1511,6 +1511,10 @@ html[data-theme="dark"] .wxt{color:#d9d4ff}
 .row,.cats,.feedrow,.filt,.wa-row{scroll-snap-type:x proximity!important;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y}
 .row>*,.cats>*,.feedrow>*{scroll-snap-stop:normal!important}
 /*/swipe-css*//*kesa-css*/
+/* 11/27 朝（5〜12時）のはれは朝日 */
+.kesa .kesa-sq.wb-am.wt-sun::before,.kesa .kesa-mini.wb-am.wt-sun::before{background:linear-gradient(180deg,#FF9F7A 0%,#FFBF8E 16%,#FFDDB0 34%,#FCEBD3 50%,#D3E6F8 74%,#A8CFF4 100%)}
+.kesa .kesa-sq.wb-am.wt-sun .wt-fx::before,.kesa .kesa-mini.wb-am.wt-sun .wt-fx::before{top:-10%;right:-8%;width:56%;background:radial-gradient(circle,#FFFBEA 0 12%,#FFE3A0 18%,rgba(255,190,110,.85) 27%,rgba(255,160,100,.38) 44%,rgba(255,150,100,0) 68%);animation:sunGlow 5s ease-in-out infinite}
+.kesa .kesa-sq.wb-am.wt-sun .wt-fx::after,.kesa .kesa-mini.wb-am.wt-sun .wt-fx::after{background:repeating-conic-gradient(from 0deg,rgba(255,236,200,.35) 0 4deg,transparent 4deg 18deg)}
 .kesa{margin:8px 0 16px}
 .kesa-sq.wt{aspect-ratio:1/1;overflow:visible;border-radius:26px;box-shadow:0 0 0 2px rgba(255,255,255,.95),0 0 24px rgba(120,180,255,.45),0 18px 30px -20px rgba(40,40,120,.6)}
 .kesa-sq.wt::before{border-radius:inherit;opacity:1}
@@ -2942,7 +2946,7 @@ function holoTouch(map){if(!map||map._wtouch)return;map._wtouch=1;const box=map.
   if(window.IntersectionObserver)new IntersectionObserver(es=>es.forEach(e=>{if(e.intersectionRatio<.35)lock()}),{threshold:[0,.35,.6]}).observe(box);
 }
 /* ==== /holo-map ==== */
-/*vcheck*/(function(){var V="11270933";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
+/*vcheck*/(function(){var V="11271036";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
 <script>
 (()=>{
 const $=s=>document.querySelector(s);
@@ -5473,7 +5477,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11270933");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11271036");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -5885,12 +5889,12 @@ function wxLoad(){try{wx2Load()}catch(e){}const o=wxGet();if(Date.now()-o.at<3*3
     try{const s=j[0].timeSeries,a0=s[0].areas.find(a=>a.area.code==="110010")||s[0].areas[0];
       s[0].timeDefines.forEach((tm,i)=>{const k=tm.slice(0,10);d[k]={c:wxCat(a0.weatherCodes[i]),t:(a0.weathers[i]||"").replace(/　/g," "),pop:{}}});
       const a1=s[1].areas.find(a=>a.area.code==="110010")||s[1].areas[0];
-      s[1].timeDefines.forEach((tm,i)=>{const k=tm.slice(0,10),h=+tm.slice(11,13),b=h===6?"am":h===12?"pm":h===18?"night":"";if(b&&d[k]&&a1.pops[i]!=="")d[k].pop[b]=+a1.pops[i]});/*wxt-temp*/const a2=s[2]&&(s[2].areas.find(a=>/さいたま/.test(a.area.name))||s[2].areas[0]);if(a2)s[2].timeDefines.forEach((tm,i)=>{const k=tm.slice(0,10),h=+tm.slice(11,13),v=a2.temps[i];if(!d[k]||v===""||v==null)return;if(h===9)d[k].th=+v;else if(h===0)d[k].tl=+v});/*/wxt-temp*/}catch(e){}
+      s[1].timeDefines.forEach((tm,i)=>{const k=tm.slice(0,10),h=+tm.slice(11,13),b=h===0?"mn":h===6?"am":h===12?"pm":h===18?"night":"";if(b&&d[k]&&a1.pops[i]!=="")d[k].pop[b]=+a1.pops[i]});/*wxt-temp*/const a2=s[2]&&(s[2].areas.find(a=>/さいたま/.test(a.area.name))||s[2].areas[0]);if(a2)s[2].timeDefines.forEach((tm,i)=>{const k=tm.slice(0,10),h=+tm.slice(11,13),v=a2.temps[i];if(!d[k]||v===""||v==null)return;if(h===9)d[k].th=+v;else if(h===0)d[k].tl=+v});/*/wxt-temp*/}catch(e){}
     try{const w=j[1].timeSeries,aw=w[0].areas[0];w[0].timeDefines.forEach((tm,i)=>{const k=tm.slice(0,10);if(!d[k])d[k]={c:wxCat(aw.weatherCodes[i]),t:"",pop:{}};if(aw.pops[i]!=="")d[k].p=+aw.pops[i]});
       const at=w[1].areas.find(a=>/さいたま/.test(a.area.name))||w[1].areas[0];w[1].timeDefines.forEach((tm,i)=>{const k=tm.slice(0,10);if(d[k]){if(at.tempsMax[i])d[k].hi=+at.tempsMax[i];if(at.tempsMin[i])d[k].lo=+at.tempsMin[i]}});}catch(e){}
     LS.set("wolly.wx",{at:Date.now(),day:ymd(new Date()),d,v:2});try{wxTelop()}catch(e){};try{kesaRender()}catch(e){};wxBusy=false;if($("#sheetBody .sch-cal"))schRedraw()}).catch(()=>{wxBusy=false})}
 /* その日・その時間帯の天気（6時間ごとの降水確率が50%以上なら雨、夜の晴れは月と星） */
-function wxBand(k,b){const w=wxGet().d[k];if(!w||!w.c)return "";let c=w.c;const p=w.pop[b]!=null?w.pop[b]:w.p;if(p!=null&&p>=50&&c!=="snow")c="rain";if(b==="night"&&c==="sun")c="moon";return c}
+function wxBand(k,b){const w=wxGet().d[k];if(!w||!w.c)return "";let c=w.c;const p=w.pop[b]!=null?w.pop[b]:w.p;if(p!=null&&p>=50&&c!=="snow")c="rain";if((b==="night"||b==="mn")&&c==="sun")c="moon";return c}
 /* 時間帯のしるしは時計（天気のアイコンとまちがえないように） */const SCH_BAND={am:["午前の用事","🕘",[6,7,8,9,10,11]],pm:["午後の用事","🕒",[12,13,14,15,16,17]],night:["夜の用事","🕗",[18,19,20,21,22,23]]};
 function schBand(e){if(e.band&&SCH_BAND[e.band])return e.band;if(e.at){const h=+e.at.split(":")[0];return h<12?"am":h<18?"pm":"night"}return "am"}
 const WX_BIC={sun:"☀️",moon:"🌙",cloud:"☁️",rain:"☔",snow:"⛄"};
@@ -6305,14 +6309,14 @@ const GOMI_COL={burn:"#FF9F7A",r1:"#6FD3A0",r2:"#8FB2FF"};
 function kesaRender(){const el=document.getElementById("kesaCard");if(!el)return;
   /* 11/26 天気と時間は、いつも「いま」（前は18時からあしたを出していた） */const now=new Date(),h=now.getHours(),eve=false,d=new Date(now);
   const k=ymd(d),day=`${d.getMonth()+1}月${d.getDate()}日（${WD[d.getDay()]}）`;
-  const ttl=eve?"🌙 あしたのじゅんび":h<12?"🌅 けさの3秒":"🕒 きょうの3秒",band=h<12?"am":h<18?"pm":"night";
-  const wb=t=>(t||"").replace(/([、。／・])(?![^<]*>)/g,"$1<wbr>");
+  const ttl=eve?"🌙 あしたのじゅんび":h<12?"🌅 けさの3秒":"🕒 きょうの3秒",band=(h<5||h>=18)?"night":h<12?"am":"pm",wb=h<5?"mn":band;/* 11/27 夜中の0〜5時も夜の絵。天気は0〜6時の枠（mn）で */
+  const wbr=t=>(t||"").replace(/([、。／・])(?![^<]*>)/g,"$1<wbr>");
   /* 天気（背景になる） */
   let w=null;try{w=(wxGet().d||{})[k]}catch(e){}
-  let c="none";try{c=wxBand(k,band)||(w&&w.c)||"none"}catch(e){}
-  let cls="";try{cls=wxCls(k,band)}catch(e){}
+  let c="none";try{c=wxBand(k,wb)||(w&&w.c)||"none"}catch(e){}
+  let cls="";try{cls=wxCls(k,wb)}catch(e){}
   let wxh="",tip="";
-  if(w&&(w.c||w.t)){let wd=null;try{wd=wxWord(k,band)}catch(e){}
+  if(w&&(w.c||w.t)){let wd=null;try{wd=wxWord(k,wb)}catch(e){}
     const ic=wd?wd[0]:({sun:"☀️",moon:"🌙",cloud:"☁️",rain:"☔",snow:"⛄"}[c]||"🌤️"),nm=wd?wd[1].replace(/（.*?）/,""):({sun:"はれ",cloud:"くもり",rain:"雨",snow:"雪"}[w.c]||"");
     const hi=w.th!=null?w.th:w.hi,lo=(w.tl!=null&&w.th!=null&&w.tl<w.th)?w.tl:w.lo,p=w.pop||{};
     const wet=/雨|雪/.test(w.t||"")||["am","pm","night"].some(b=>p[b]>=50);
@@ -6322,27 +6326,27 @@ function kesaRender(){const el=document.getElementById("kesaCard");if(!el)return
     if(x2&&x2.ws>=6)tips.push("💨 風が強め");
     if(!tips.length&&hi!=null)tips.push(hi>=28?"🥤 水分をこまめにね":lo!=null&&lo<=5?"🧣 朝は冷えるよ。上着をわすれずに":"🙂 すごしやすそう");
     wxh=`<a class="kq-wx" href="#sched"><span class="kq-wi">${ic}</span><span class="kq-ww"><b>${esc(nm)}</b></span></a>`+kqMeter(k,eve,hi,lo);
-    tip=(typeof kmTip==="function"&&kmTip())||`<p class="kq-tip">${tips.map(t=>`<i>${wb(t)}</i>`).join("")}</p>`}
+    tip=(typeof kmTip==="function"&&kmTip())||`<p class="kq-tip">${tips.map(t=>`<i>${wbr(t)}</i>`).join("")}</p>`}
   else wxh=`<a class="kq-wx" href="#sched"><span class="kq-wi">🌤️</span><span class="kq-ww"><b>天気をよみこみ中…</b></span></a>`;
   /* ゴミ（いちばん大きく） */
   /* 11/26 ゴミは朝9時（出す時間がすぎたら）からあしたの分。0時になったら「きょうは」 */
   const gtom=h>=9,gd=new Date(now);if(gtom)gd.setDate(gd.getDate()+1);
   const g=gomiOn(gd),o=gomiGet()||{},wh=gtom?"あしたは":"きょうは";let gh;
-  if(!g)gh=`<a class="kq-gomi set" href="#" data-gomi-set><span class="kq-gi" style="--c:#EEF0F4">${gomiBag("#C9CEDA","？")}</span><span class="kq-gt"><b>ゴミの日を入れよう<span class="kq-new">NEW</span></b><small>${wb("曜日を1回えらぶと、毎朝おしえるよ")}</small></span><span class="kq-go">›</span></a>`;
+  if(!g)gh=`<a class="kq-gomi set" href="#" data-gomi-set><span class="kq-gi" style="--c:#EEF0F4">${gomiBag("#C9CEDA","？")}</span><span class="kq-gt"><b>ゴミの日を入れよう<span class="kq-new">NEW</span></b><small>${wbr("曜日を1回えらぶと、毎朝おしえるよ")}</small></span><span class="kq-go">›</span></a>`;
   else if(g.length){const dl=(o.early&&g.some(x=>x[0]==="burn"))?"朝5:30":"朝8:30";
-    gh=`<a class="kq-gomi" href="#" data-gomi-set><span class="kq-gi" style="--c:${g[0][5]}">${gomiBag(GOMI_COL[g[0][0]],g[0][1])}</span><span class="kq-gt"><small>${wh}</small><b>${wb(g.map(x=>x[2]).join("・"))}</b><em>⏰ ${dl}までに出してね</em></span><span class="kq-go">›</span></a>`}
+    gh=`<a class="kq-gomi" href="#" data-gomi-set><span class="kq-gi" style="--c:${g[0][5]}">${gomiBag(GOMI_COL[g[0][0]],g[0][1])}</span><span class="kq-gt"><small>${wh}</small><b>${wbr(g.map(x=>x[2]).join("・"))}</b><em>⏰ ${dl}までに出してね</em></span><span class="kq-go">›</span></a>`}
   else{let nx="";for(let i=1;i<=7&&!nx;i++){const n=new Date(gd);n.setDate(n.getDate()+i);const q=gomiOn(n);if(q&&q.length)nx=(i===1?(gtom?"あさって":"あした"):`${n.getMonth()+1}/${n.getDate()}（${WD[n.getDay()]}）`)+"は "+q.map(x=>x[2]).join("・")}
-    gh=`<a class="kq-gomi" href="#" data-gomi-set><span class="kq-gi" style="--c:#EEF0F4">${gomiBag("#D5D9E3","💤")}</span><span class="kq-gt"><small>${wh}</small><b>ゴミの日<wbr>じゃないよ</b>${nx?`<em style="color:#5A5AEF">${wb(esc(nx))}</em>`:""}</span><span class="kq-go">›</span></a>`}
+    gh=`<a class="kq-gomi" href="#" data-gomi-set><span class="kq-gi" style="--c:#EEF0F4">${gomiBag("#D5D9E3","💤")}</span><span class="kq-gt"><small>${wh}</small><b>ゴミの日<wbr>じゃないよ</b>${nx?`<em style="color:#5A5AEF">${wbr(esc(nx))}</em>`:""}</span><span class="kq-go">›</span></a>`}
   /* 警報・予定（小さく2つ） */
   const wn=warnGet(),J='href="https://www.jma.go.jp/bosai/warning/#area_type=class20s&area_code=1110000" target="_blank" rel="noopener"';let ch="";
   if(wn){const ks=wn.k||[];if(ks.length){const lv=Math.max(...ks.map(warnLv)),top=ks.slice().sort((a,b)=>warnLv(b)-warnLv(a))[0];
-      ch+=`<a class="kq-c w-${lv}" ${J}><span>${WARN_ICON[top]||"⚠️"}</span><span>${wb(ks.map(c=>esc(WARN_N[c]||"気象の注意報")).join("・"))}${WARN_SAY[top]?`<small>${wb(WARN_SAY[top])}</small>`:""}</span></a>`}
+      ch+=`<a class="kq-c w-${lv}" ${J}><span>${WARN_ICON[top]||"⚠️"}</span><span>${wbr(ks.map(c=>esc(WARN_N[c]||"気象の注意報")).join("・"))}${WARN_SAY[top]?`<small>${wbr(WARN_SAY[top])}</small>`:""}</span></a>`}
     else ch+=`<a class="kq-c" ${J}><span>✅</span><span>警報・注意報なし<small>さいたま市</small></span></a>`}
   else ch+=`<a class="kq-c" ${J}><span>⚠️</span><span>警報・注意報<small>よみこみ中…</small></span></a>`;
   let ev=[];try{ev=schGet().filter(e=>e.date===k).sort((p,q)=>(p.at||p.time||"99").localeCompare(q.at||q.time||"99"))}catch(e){}
   ch+=ev.length?`<a class="kq-c" href="#sched"><span>📅</span><span>予定 ${ev.length}件<small class="kq-1">${ev[0].at?esc(t12(ev[0].at))+" ":""}${esc(ev[0].t||"")}</small></span></a>`
     :`<a class="kq-c" href="#sched"><span>📅</span><span>予定はないよ<small>＋ 予定を入れる</small></span></a>`;
-  if(LS.get("wolly.kesafold")){let wi="🌤️",wt="";try{const wd=wxWord(k,band);if(wd){wi=wd[0];wt=wd[1].replace(/（.*?）/,"")}}catch(e){}
+  if(LS.get("wolly.kesafold")){let wi="🌤️",wt="";try{const wd=wxWord(k,wb);if(wd){wi=wd[0];wt=wd[1].replace(/（.*?）/,"")}}catch(e){}
     const hi=w&&(w.th!=null?w.th:w.hi),gm=g&&g.length?`<span class="km-g">${g[0][1]} ${gtom?"あした ":""}${esc(g.map(x=>x[2]).join("・"))}</span>`:g?`<span>🗑️ ${gtom?"あしたは":""}ゴミなし</span>`:"",
       wk=(wn&&wn.k&&wn.k.length)?`<span class="km-w">${WARN_ICON[wn.k[0]]||"⚠️"} ${esc(WARN_N[wn.k[0]]||"注意報")}</span>`:"";
     const mh=`<div class="kesa-mini wt wt-${c} wb-${band}${cls}"><span class="wt-fx"><i></i><i></i><i></i></span><div class="km"><span class="km-i">${wi}</span><span class="km-t"><span>${eve?"あした ":""}${esc(wt)}${hi!=null?` ${hi}°`:""}</span>${gm}${kqMiniKn()}${kqMiniTr()}</span><button type="button" class="kq-fold km-open" data-kesa-fold aria-expanded="false" aria-label="ひらく">▼</button></div></div>`;
@@ -6564,7 +6568,7 @@ function kmOrder(st){st=st||kmSt();let a=[];st.b.forEach(b=>(KM_LIFE[b]||["","",
   if(kmTk()==="eve")["wash","kasa"].forEach(k=>{if(a.includes(k))a=[k,...a.filter(x=>x!==k)]});
   return a.filter(k=>!st.off.includes(k))}
 /* 天気をまとめる（eve＝あしたの分） */
-function kmWx(){const now=new Date(),eve=now.getHours()>=21,d=new Date(now);if(eve)d.setDate(d.getDate()+1);const k=ymd(d);
+function kmWx(tom){const now=new Date(),eve=tom!=null?tom:now.getHours()>=21,d=new Date(now);if(eve)d.setDate(d.getDate()+1);const k=ymd(d);
   const w=(wxGet().d||{})[k];if(!w||!(w.c||w.t))return null;
   const hi0=w.th!=null?w.th:w.hi,lo0=(w.tl!=null&&w.th!=null&&w.tl<w.th)?w.tl:w.lo;let H=null;try{H=kqTemps(k,hi0,lo0)}catch(e){}
   const T=x=>H?Math.round(kqT(H,x)):null;let hi=hi0;if(H){hi=-99;for(let x=10;x<=16;x+=.5)hi=Math.max(hi,kqT(H,x));hi=Math.round(hi)}
@@ -6685,12 +6689,65 @@ function kmStory(w,ks){const must=["heat"].filter(k=>!ks.includes(k)).map(k=>kmS
   const tk=kmTk();s+=tk==="am"?"きょうもいってらっしゃい。":tk==="day"?"午後もいい時間を。":tk==="eve"?"きょうもおつかれさま。":"あしたもいい1日になりますように。";return s}
 /* カードの1行（kesaRender から） */
 /* 11/26 21時からは、いまの天気（気象庁の観測・予報）をひとこと入れてから、あしたの話 */
-function kmNowLine(){try{const n=new Date(),td=ymd(n);let wd=null;try{wd=wxWord(td,"night")}catch(e){}
-  let t=null;try{const H=kqTemps(td,null,null);if(H&&H.length)t=Math.round(kqT(H,n.getHours()+n.getMinutes()/60))}catch(e){}/* メーターと同じ数 */
+function kmNowLine(){try{const n=new Date(),td=ymd(n);let wd=null;try{wd=wxWord(td,n.getHours()<5?"mn":"night")}catch(e){}
+  let t=null;try{const w=(wxGet().d||{})[td]||{},hi=w.th!=null?w.th:w.hi,lo=(w.tl!=null&&w.th!=null&&w.tl<w.th)?w.tl:w.lo,H=kqTemps(td,hi,lo);/* 11/27 メーターと同じ（気象庁の最高・最低に合わせた）気温 */if(H&&H.length)t=Math.round(kqT(H.map(([a,b])=>[a,Math.round(b*10)/10]),n.getHours()+n.getMinutes()/60))}catch(e){}/* メーターと同じ数 */
   const nm=wd?wd[1].replace(/（.*?）/,""):"";if(!nm&&t==null)return "";return esc(`いまは${nm}${t!=null?(nm?"で":"")+t+"度":""}。`)}catch(e){return ""}}
-function kmTip(){const w=kmWx();if(!w)return "";const ks=kmOrder(),L=ks.map(k=>[k,kmSay(k,w)]).filter(x=>x[1].t);
-  const top=L.slice().sort((a,b)=>b[1].lv-a[1].lv)[0];if(!top)return "";
-  return `<a class="kq-tip kml-tip" href="#kurashi"><span>${KM_SC[top[0]][0]}</span><span class="kml-tx">${w.eve?kmNowLine()+"あしたは、":""}${esc(top[1].s||top[1].t)}</span><span class="kml-go" aria-label="くわしく">›</span></a>`}
+/* 11/27 カードのひとこと：朝（〜10時）＝きょう1日＋夕方までに気をつけること（なければ楽しみ）、
+   昼（10〜18時）＝夕方までのこと（よい天気なら楽しみ）、夜（18時〜）＝今夜しておくこと＋あしたの朝のようす。
+   同じ天気でも毎日ことばが変わる（日にちで言い方を順番に入れかえる。前の日と同じにはならない） */
+function kmDay(){return Math.floor((Date.now()+9*3600e3)/864e5)}
+function kmPick(a,salt){return a[(kmDay()+(salt||0))%a.length]}
+function kmWd(w){const b={sun:"晴れ",cloud:"くもり",rain:"雨",snow:"雪"}[w.c]||"くもり";return w.later==="rain"?b+"のち雨":w.later==="sun"?b+"のち晴れ":b}
+function kmFun(w,day){const m=w.mo,c=w.c,nice=c==="sun"&&w.hi>=12&&w.hi<=28&&!w.later;
+  if(c==="rain"||c==="snow")return kmPick(["雨の音を聞きながら、絵本タイムもいいね。","おうちでお絵かきやおやつ作りもいいかも。","図書館や児童センターでのんびりもいいね。","長ぐつで水たまりさがしも楽しそう。"],3);
+  if(day&&nice)return kmPick(["ランチは外のテラス席も気持ちよさそう。","カフェでひと休みにもいい天気だよ。","帰り道に少し遠まわりのお散歩もいいかも。","公園のベンチでおやつもいいね。"],1);
+  if(c!=="sun")return kmPick(["おうちでおやつ作りもいいかも。","図書館で絵本をえらぶのもいいね。","ゆっくりお買いものにいい日かも。"],2);
+  if(m>=9&&m<=11)return kmPick(["どんぐりや落ち葉さがしにいい天気。","色づいた葉っぱを見ながらお散歩もいいかも。","焼きいもがおいしい季節だね。","いちょう並木がきれいな時期だよ。"],0);
+  if(m===12||m<=2)return kmPick(["空気が澄んで、遠くまでよく見えそう。","ひなたぼっこが気持ちよさそう。","あったかい飲みものを持ってお出かけもいいね。"],0);
+  if(m<=5)return kmPick(["お花がきれいな季節。お散歩にいいかも。","ぽかぽかで、公園が気持ちよさそう。","外でお弁当を食べるのもいいね。"],0);
+  return kmPick(["夕方の水あそびが気持ちよさそう。","かき氷がおいしい日になりそう。","木かげの公園が気持ちよさそう。"],0)}
+/* 夕方までに気をつけること（えらんだ場面の順に1つ） */
+function kmCare(w,ks,day){const L=ks.map(k=>[k,kmSay(k,w)]).filter(x=>x[1].lv>0&&x[1].t);
+  const top=L.slice().sort((a,b)=>b[1].lv-a[1].lv)[0];
+  if(day){if(w.later==="rain")return ["kasa",kmPick(["折りたたみがさがあると安心。","洗濯物は早めに取りこむと安心。","お迎えにはかさがあると安心。"],2)];
+    const tin=kmSeason(w.mo)==="sum"?17:kmSeason(w.mo)==="mid"?16:15;
+    if(ks.includes("wash")&&w.c==="sun"&&w.hu<80)return ["wash",kmPick(["洗濯物は"+tin+"時ごろまでに取りこむと、しっとりしにくいよ。",tin+"時をすぎると湿気がもどるから、取りこみは早めがよさそう。"],2)];
+    if(w.night<=8||w.hi-w.night>=8)return ["adult",kmPick(["夕方からは"+w.night+"度くらいまで下がりそう。お迎えには上着があると安心。","日がかたむくと、ぐっと冷えそう。帰りの上着があると安心。"],4)];
+    if(w.mo>=11||w.mo<=1)return ["walk",kmPick(["16時半ごろから暗くなるよ。お迎えは明るい色の服だと安心。","日が暮れるのが早い時期。帰りは足もとに気をつけてね。"],5)];
+    if(w.hi>=28)return ["heat",kmPick(["夕方まで暑さが続きそう。こまめにお水を飲むと安心。","午後も暑いから、日かげで休みながらがよさそう。"],6)];
+    return null}
+  if(!top)return null;let t=top[1].s||top[1].t;const m=t.match(/^(\d+)時までに干せば、(\d+)時までに乾きそう。$/);
+  if(m)t=kmPick([t,"洗濯物は"+m[1]+"時ごろまでに干すと、"+m[2]+"時には乾きそう。","干すなら"+m[1]+"時までがよさそう。"+m[2]+"時の取りこみに間に合うよ。"],7);
+  return [top[0],t]}
+/* 今夜しておくと朝が楽なこと（あしたの天気 w2 で） */
+function kmPrep(w2,ks){const se=kmSeason(w2.mo),rain=w2.c==="rain"||w2.c==="snow"||w2.pop>=50,o=[];
+  if(rain)o.push(["kasa",kmPick(["かさとレインコートを玄関に出しておくと、朝があわてないよ。","かさを玄関に出しておくと、朝が楽かも。","長ぐつとかさを用意しておくと安心。"],1)]);
+  else if(w2.pop>=30||w2.later==="rain")o.push(["kasa",kmPick(["折りたたみがさをかばんに入れておくと安心。","念のため、折りたたみがさを入れておくといいかも。"],1)]);
+  if(ks.includes("car")&&w2.am<=3)o.push(["car",kmPick(["フロントガラスにカバーをかけておくと、朝の霜取りが楽だよ。","車のガラスにカバーをかけておくと、朝が楽かも。"],2)]);
+  if(ks.includes("bike")&&w2.am<=8)o.push(["bike",kmPick(["手ぶくろを自転車のかごの近くに出しておくと安心。","手ぶくろと耳あてを玄関に出しておくと、朝が楽かも。"],3)]);
+  if(w2.am<=6)o.push(["adult",kmPick(["あったかい上着と手ぶくろを出しておくと、朝が楽だよ。","朝は冷えそうだから、上着を出しておくと安心。","子どもの手ぶくろも、玄関に出しておくといいかも。"],4)]);
+  else if(w2.hi-w2.am>=10)o.push(["kids",kmPick(["脱ぎ着しやすい服を用意しておくと安心。","はおれる上着を1枚出しておくといいかも。"],4)]);
+  if(ks.includes("bento")&&w2.hi>=25)o.push(["bento",kmPick(["保冷剤を冷凍庫に入れておくと安心。","保冷剤を冷やしておくと、朝のお弁当が楽だよ。"],5)]);
+  if(ks.includes("wash")&&w2.c==="sun"&&w2.hu<65&&!w2.later)o.push(["wash",kmPick(["朝いちばんに干せるよう、洗濯の用意をしておくのもいいかも。","あしたは洗濯日和。夜のうちにタイマーをかけておくのもいいかも。"],6)]);
+  if(w2.huMin<35)o.push(["dry",kmPick(["寝る前に加湿器にお水を入れておくと、のどが楽かも。","ぬれタオルを部屋にほしておくと、のどにやさしいよ。"],7)]);
+  if(w2.am<=4)o.push(["sleep",kmPick(["今夜は冷えそう。毛布を1枚足すと、ぐっすり眠れそう。","寝るときはスリーパーがあると安心。"],8)]);
+  if(w2.hi>=30)o.push(["heat",kmPick(["水筒と帽子を出しておくと、朝が楽だよ。","あしたは暑そう。水筒を冷やしておくといいかも。"],9)]);
+  const urg=o.filter(x=>x[0]==="kasa"||x[0]==="car"||(x[0]==="adult"&&w2.am<=3)),pri=ks.map(k=>o.find(x=>x[0]===k)).filter(Boolean);return urg[0]||pri[0]||o[0]||null}
+function kmReport(w2){const wd=kmWd(w2),a=w2.am,h=w2.hi,f=a<=3?"きりっと冷えた":a<=8?"ひんやりした":a<=15?"すずしい":a<=22?"すごしやすい":"むしっとした";
+  return kmPick(["あしたの朝は"+a+"度で"+wd+"。お昼は"+h+"度くらいまで上がりそう。","あしたは"+f+"朝になりそう（"+a+"度）。日中は"+wd+"で"+h+"度くらい。","あしたは"+wd+"。朝"+a+"度から、お昼は"+h+"度まで。","朝起きたら"+a+"度くらい。あしたは"+wd+"で、お昼は"+h+"度の予報だよ。"],0)}
+function kmNightRest(w2){return kmPick(["きょうもおつかれさま。あたたかくして、ゆっくり休んでね。","おふろであたたまって、ぐっすり眠れますように。","きょうも1日おつかれさま。","今夜はゆっくり休めますように。"],2)}
+function kmTipText(){const h=new Date().getHours(),ks=kmOrder();
+  if(h>=18){const w2=kmWx(true);if(!w2)return null;const p=kmPrep(w2,ks),r=kmReport(w2),now=h>=21?kmNowLine():"";
+    const ic=p?KM_SC[p[0]][0]:"🌙",pt=p?p[1]:kmNightRest(w2);
+    return [ic,now+(kmDay()%2?r+pt:pt+r)]}
+  const w=kmWx(false);if(!w)return null;const day=h>=10,c=kmCare(w,ks,day),wd=kmWd(w);
+  const head=day?(w.later==="rain"?kmPick(["このあと雨になりそう。","午後は雨が近づいてきそう。","夕方にかけて雨になりそう。"],1):w.later==="sun"?kmPick(["このあと晴れてきそう。","午後は晴れ間が出てきそう。"],1):kmPick(["このあと夕方までは"+wd+"。","午後も"+wd+"が続きそう。","夕方までは"+wd+"で、"+w.hi+"度くらい。"],1))
+    :kmPick(["きょうは"+wd+"。お昼は"+w.hi+"度くらいまで上がりそう。","朝は"+w.am+"度、日中は"+wd+"で"+w.hi+"度くらい。","きょうの日中は"+wd+"。"+w.am+"度から"+w.hi+"度まで。","おはよう。きょうは"+wd+"で、お昼は"+w.hi+"度くらい。"],0);
+  if(c)return [KM_SC[c[0]][0],head+(day||!["kasa","adult","kids","heat","walk"].includes(c[0])?c[1]:kmPick(["お出かけには、",""],2)+c[1])];
+  return [day?"☕":"✨",head+kmFun(w,day)]}
+function kmTip(){let x=null;try{x=kmTipText()}catch(e){}
+  if(!x){const w=kmWx();if(!w)return "";const L=kmOrder().map(k=>[k,kmSay(k,w)]).filter(x=>x[1].t),top=L.slice().sort((a,b)=>b[1].lv-a[1].lv)[0];if(!top)return "";x=[KM_SC[top[0]][0],esc(top[1].s||top[1].t)]}else x=[x[0],x[1]];
+  return `<a class="kq-tip kml-tip" href="#kurashi"><span>${x[0]}</span><span class="kml-tx">${x[1]}</span><span class="kml-go" aria-label="くわしく">›</span></a>`}
 function kmRow(k,x){return `<div class="kml-row ${x.lv===2?"warn":x.lv===0?"ok":""}"><span class="kml-ri">${KM_SC[k][0]}</span><span class="kml-rb"><b>${KM_SC[k][1]}${x.lv===2?"・気をつけて":""}</b><span>${esc(x.t)}</span></span></div>`}
 function sheetKurashi(){const w=kmWx(),st=kmSt();
   if(!w)return `<div class="kms"><p class="kml-h">きょうのくらしメモ</p><p class="kml-t">天気をよみこみ中だよ</p><p>少し待ってから、もう一度ひらいてね。</p></div>`;
@@ -7499,8 +7556,8 @@ let RAWQ="";function setRaw(v){RAWQ=(v||"").normalize("NFKC").replace(NOISE,"").
 function qph(ws){const k=ws.join("|")+"#"+RAWQ;if(k===QPK&&QP)return QP;const list=ws.map(qk);const j=qk(RAWQ||ws.join(""));if(ws.length>1||RAWQ)list.push(j);QPK=k;QP={list,all:Math.max(3,j.length)};return QP}
 function load(){if(DATA)return Promise.resolve(DATA);
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
-  const kp=fetch(base+"near-data/tel-kana.json?v=11270933").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
-  return Promise.all([fetch(base+"near-data/tel.json?v=11270933").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
+  const kp=fetch(base+"near-data/tel-kana.json?v=11271036").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
+  return Promise.all([fetch(base+"near-data/tel.json?v=11271036").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
     .catch(()=>{DATA=[];return DATA})}
 /* 聞きとった文 → キーワード */
 function terms(text){let s=(text||"").normalize("NFKC").replace(NOISE," ");
