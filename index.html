@@ -1511,10 +1511,19 @@ html[data-theme="dark"] .wxt{color:#d9d4ff}
 .row,.cats,.feedrow,.filt,.wa-row{scroll-snap-type:x proximity!important;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y}
 .row>*,.cats>*,.feedrow>*{scroll-snap-stop:normal!important}
 /*/swipe-css*//*kesa-css*/
-/* 11/27 朝（5〜12時）のはれは朝日 */
-.kesa .kesa-sq.wb-am.wt-sun::before,.kesa .kesa-mini.wb-am.wt-sun::before{background:linear-gradient(180deg,#FF9F7A 0%,#FFBF8E 16%,#FFDDB0 34%,#FCEBD3 50%,#D3E6F8 74%,#A8CFF4 100%)}
-.kesa .kesa-sq.wb-am.wt-sun .wt-fx::before,.kesa .kesa-mini.wb-am.wt-sun .wt-fx::before{top:-10%;right:-8%;width:56%;background:radial-gradient(circle,#FFFBEA 0 12%,#FFE3A0 18%,rgba(255,190,110,.85) 27%,rgba(255,160,100,.38) 44%,rgba(255,150,100,0) 68%);animation:sunGlow 5s ease-in-out infinite}
-.kesa .kesa-sq.wb-am.wt-sun .wt-fx::after,.kesa .kesa-mini.wb-am.wt-sun .wt-fx::after{background:repeating-conic-gradient(from 0deg,rgba(255,236,200,.35) 0 4deg,transparent 4deg 18deg)}
+/* 11/27 夜はその日の月の形 */
+.kesa .kq-ph .wt-fx::before{display:none}
+.kesa .kq-moon{position:absolute;top:8%;right:10%;width:26%;aspect-ratio:1;filter:drop-shadow(0 0 10px rgba(255,248,214,.5)) drop-shadow(0 0 26px rgba(255,248,214,.2))}
+.kesa .kesa-mini .kq-moon{top:50%;right:auto;left:60%;width:auto;height:70%;transform:translateY(-50%)}
+/* 11/27 日の入りのころのはれは夕焼け（kq-dusk） */
+.kesa .kesa-sq.kq-dusk.wt-sun::before,.kesa .kesa-mini.kq-dusk.wt-sun::before{background:linear-gradient(180deg,#5A4FA8 0%,#B5709F 16%,#FF8E6E 32%,#FFB27A 50%,#FFD6A0 100%)}
+.kesa .kesa-sq.kq-dusk.wt-sun .wt-fx::before,.kesa .kesa-mini.kq-dusk.wt-sun .wt-fx::before{top:4%;bottom:auto;right:-10%;left:auto;width:52%;background:radial-gradient(circle,#FFF4D8 0 11%,#FFC77A 18%,rgba(255,130,80,.85) 28%,rgba(255,110,90,.38) 45%,rgba(255,110,90,0) 68%);animation:sunGlow 5s ease-in-out infinite}
+.kesa .kesa-sq.kq-dusk.wt-sun .wt-fx::after,.kesa .kesa-mini.kq-dusk.wt-sun .wt-fx::after{top:-30%;bottom:auto;right:-38%;left:auto;background:repeating-conic-gradient(from 0deg,rgba(255,210,170,.3) 0 4deg,transparent 4deg 18deg)}
+.kesa .kq-dusk.wt-sun .kq-wx{color:#fff;text-shadow:0 1px 2px rgba(80,30,60,.55),0 2px 12px rgba(80,30,60,.45)}
+/* 11/27 日の出のころのはれは朝日（kq-dawn） */
+.kesa .kesa-sq.kq-dawn.wt-sun::before,.kesa .kesa-mini.kq-dawn.wt-sun::before{background:linear-gradient(180deg,#FF9F7A 0%,#FFBF8E 16%,#FFDDB0 34%,#FCEBD3 50%,#D3E6F8 74%,#A8CFF4 100%)}
+.kesa .kesa-sq.kq-dawn.wt-sun .wt-fx::before,.kesa .kesa-mini.kq-dawn.wt-sun .wt-fx::before{top:-10%;right:-8%;width:56%;background:radial-gradient(circle,#FFFBEA 0 12%,#FFE3A0 18%,rgba(255,190,110,.85) 27%,rgba(255,160,100,.38) 44%,rgba(255,150,100,0) 68%);animation:sunGlow 5s ease-in-out infinite}
+.kesa .kesa-sq.kq-dawn.wt-sun .wt-fx::after,.kesa .kesa-mini.kq-dawn.wt-sun .wt-fx::after{background:repeating-conic-gradient(from 0deg,rgba(255,236,200,.35) 0 4deg,transparent 4deg 18deg)}
 .kesa{margin:8px 0 16px}
 .kesa-sq.wt{aspect-ratio:1/1;overflow:visible;border-radius:26px;box-shadow:0 0 0 2px rgba(255,255,255,.95),0 0 24px rgba(120,180,255,.45),0 18px 30px -20px rgba(40,40,120,.6)}
 .kesa-sq.wt::before{border-radius:inherit;opacity:1}
@@ -1647,7 +1656,44 @@ html[data-theme="dark"] .wxt{color:#d9d4ff}
 .gm-save{background:#5A5AEF;color:#fff}
 .gm-off{background:var(--accent-soft,#F1ECFF);color:#5A5AEF!important}
 .wxt.kesa-off{display:none!important}
-/*/kesa-css*//*chiiki-css*/
+/*/kesa-css*//*kurashi-css*/
+a.kq-tip.kml-tip{display:flex;align-items:center;gap:6px;text-decoration:none;cursor:pointer;animation:kmGlow 2.8s ease-in-out infinite}
+a.kml-tip .kml-tx{flex:1;min-width:0}
+a.kml-tip .kml-go{flex:0 0 auto;font-size:11px;font-weight:900;color:#5A5AEF;white-space:nowrap}
+.kq-tm a.kml-tip{max-width:none;width:100%;margin:8px 0 2px;padding:8px 10px;border-radius:12px;background:transparent;box-shadow:none;animation:none;font-size:13px;line-height:1.5;color:#1F2250;-webkit-backdrop-filter:none;backdrop-filter:none}
+.kq-tm a.kml-tip .kml-go{font-size:20px;line-height:1;font-weight:700;color:#8E7BFF}
+@keyframes kmGlow{50%{box-shadow:0 0 0 2px rgba(190,170,255,.7)}}
+@keyframes kmGlow{50%{box-shadow:0 0 0 3px rgba(190,170,255,.6)}}
+@media (prefers-reduced-motion:reduce){a.kml-tip{animation:none}}
+.kms .kml-h{font-size:12px;color:#8A8CA8;margin:0 0 2px}
+.kms .kml-t{font-size:19px;font-weight:900;margin:0 0 10px;color:#2B2D4A}
+.kms .kml-who{display:flex;flex-wrap:wrap;gap:5px;margin:0 0 12px}
+.kms .kml-who i{font-style:normal;font-size:11px;background:#EFEDFF;color:#5A5AEF;border-radius:99px;padding:3px 9px}
+.kms .kml-story{border-radius:18px;padding:14px;background:linear-gradient(135deg,#FFF0F7,#F1EEFF 55%,#EAF6FF);font-size:14.5px;line-height:1.9;box-shadow:0 0 0 1px #ECE6FF inset}
+.kms .kml-lb{display:inline-block;font-size:10.5px;font-weight:800;color:#fff;background:linear-gradient(90deg,#FF7EB6,#9B7BFF);border-radius:99px;padding:2px 9px;margin-bottom:6px}
+.kms .kml-story p{margin:0}
+.kms .kml-sec{margin:18px 0 6px;font-size:13px;font-weight:900;color:#4A4C6E}
+.kms .kml-sec small{font-weight:400;color:#8A8CA8;font-size:11px;margin-left:6px}
+.kms .kml-row{display:flex;gap:10px;align-items:flex-start;padding:10px 2px;border-bottom:1px dashed #E4E1F3}
+.kms .kml-ri{flex:0 0 38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:21px;background:#F3F1FF}
+.kms .kml-rb{flex:1;min-width:0}
+.kms .kml-rb b{display:block;font-size:12px;color:#8A8CA8}
+.kms .kml-rb span{display:block;font-size:14px;line-height:1.6}
+.kms .kml-row.warn .kml-ri{background:#FFE6EF}
+.kms .kml-row.warn .kml-rb span{color:#B0124F;font-weight:800}
+.kms .kml-row.ok .kml-rb span{color:#6E7090}
+.kms details.kml-more summary{list-style:none;cursor:pointer;font-size:12.5px;color:#5A5AEF;font-weight:800;padding:10px 2px}
+.kms details.kml-more summary::-webkit-details-marker{display:none}
+.kms .kml-set{margin-top:18px;border-radius:18px;background:#F7F6FD;padding:12px}
+.kms .kml-set h3{margin:0 0 4px;font-size:13.5px}
+.kms .kml-set p{margin:0 0 8px;font-size:11.5px;color:#7A7C98;line-height:1.6}
+.kms .kml-set h4{margin:12px 0 6px;font-size:12px;color:#4A4C6E}
+.kms .kml-chips{display:flex;flex-wrap:wrap;gap:6px}
+.kms .kml-chips button{border:1px solid #DCD8F5;background:#fff;border-radius:99px;padding:7px 11px;font:inherit;font-size:12.5px;color:#4A4C6E}
+.kms .kml-chips button.on{background:#EFEDFF;border-color:#9B8BFF;color:#4B3FD6;font-weight:800}
+.kms .kml-chips button.on::before{content:"✓ "}
+.kms .kml-src{margin-top:14px;font-size:10.5px;color:#9A9CB6;line-height:1.6}
+/*/kurashi-css*//*chiiki-css*/
 .ck{margin:0 0 18px;position:relative;border-radius:24px;padding:14px 14px 12px;background:linear-gradient(160deg,rgba(255,255,255,.96),rgba(246,244,255,.92));
   box-shadow:0 0 0 1.5px rgba(255,255,255,.95),0 0 0 3px rgba(190,180,255,.35),0 16px 30px -22px rgba(60,50,140,.55)}
 .ck-h{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-bottom:4px}
@@ -1699,44 +1745,7 @@ html[data-theme="dark"] #chiikiCard #feedEvents h2,html[data-theme="dark"] #chii
 html[data-theme="dark"] .ck{background:linear-gradient(160deg,rgba(40,42,70,.96),rgba(32,30,60,.94))}
 html[data-theme="dark"] .ck-h h2,html[data-theme="dark"] .ck-st,html[data-theme="dark"] .ck-e,html[data-theme="dark"] .ck-row{color:#E6E7F5}
 html[data-theme="dark"] .ck-row{background:rgba(255,255,255,.07)}
-/*/chiiki-css*//*kurashi-css*/
-a.kq-tip.kml-tip{display:flex;align-items:center;gap:6px;text-decoration:none;cursor:pointer;animation:kmGlow 2.8s ease-in-out infinite}
-a.kml-tip .kml-tx{flex:1;min-width:0}
-a.kml-tip .kml-go{flex:0 0 auto;font-size:11px;font-weight:900;color:#5A5AEF;white-space:nowrap}
-.kq-tm a.kml-tip{max-width:none;width:100%;margin:8px 0 2px;padding:8px 10px;border-radius:12px;background:transparent;box-shadow:none;animation:none;font-size:13px;line-height:1.5;color:#1F2250;-webkit-backdrop-filter:none;backdrop-filter:none}
-.kq-tm a.kml-tip .kml-go{font-size:20px;line-height:1;font-weight:700;color:#8E7BFF}
-@keyframes kmGlow{50%{box-shadow:0 0 0 2px rgba(190,170,255,.7)}}
-@keyframes kmGlow{50%{box-shadow:0 0 0 3px rgba(190,170,255,.6)}}
-@media (prefers-reduced-motion:reduce){a.kml-tip{animation:none}}
-.kms .kml-h{font-size:12px;color:#8A8CA8;margin:0 0 2px}
-.kms .kml-t{font-size:19px;font-weight:900;margin:0 0 10px;color:#2B2D4A}
-.kms .kml-who{display:flex;flex-wrap:wrap;gap:5px;margin:0 0 12px}
-.kms .kml-who i{font-style:normal;font-size:11px;background:#EFEDFF;color:#5A5AEF;border-radius:99px;padding:3px 9px}
-.kms .kml-story{border-radius:18px;padding:14px;background:linear-gradient(135deg,#FFF0F7,#F1EEFF 55%,#EAF6FF);font-size:14.5px;line-height:1.9;box-shadow:0 0 0 1px #ECE6FF inset}
-.kms .kml-lb{display:inline-block;font-size:10.5px;font-weight:800;color:#fff;background:linear-gradient(90deg,#FF7EB6,#9B7BFF);border-radius:99px;padding:2px 9px;margin-bottom:6px}
-.kms .kml-story p{margin:0}
-.kms .kml-sec{margin:18px 0 6px;font-size:13px;font-weight:900;color:#4A4C6E}
-.kms .kml-sec small{font-weight:400;color:#8A8CA8;font-size:11px;margin-left:6px}
-.kms .kml-row{display:flex;gap:10px;align-items:flex-start;padding:10px 2px;border-bottom:1px dashed #E4E1F3}
-.kms .kml-ri{flex:0 0 38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:21px;background:#F3F1FF}
-.kms .kml-rb{flex:1;min-width:0}
-.kms .kml-rb b{display:block;font-size:12px;color:#8A8CA8}
-.kms .kml-rb span{display:block;font-size:14px;line-height:1.6}
-.kms .kml-row.warn .kml-ri{background:#FFE6EF}
-.kms .kml-row.warn .kml-rb span{color:#B0124F;font-weight:800}
-.kms .kml-row.ok .kml-rb span{color:#6E7090}
-.kms details.kml-more summary{list-style:none;cursor:pointer;font-size:12.5px;color:#5A5AEF;font-weight:800;padding:10px 2px}
-.kms details.kml-more summary::-webkit-details-marker{display:none}
-.kms .kml-set{margin-top:18px;border-radius:18px;background:#F7F6FD;padding:12px}
-.kms .kml-set h3{margin:0 0 4px;font-size:13.5px}
-.kms .kml-set p{margin:0 0 8px;font-size:11.5px;color:#7A7C98;line-height:1.6}
-.kms .kml-set h4{margin:12px 0 6px;font-size:12px;color:#4A4C6E}
-.kms .kml-chips{display:flex;flex-wrap:wrap;gap:6px}
-.kms .kml-chips button{border:1px solid #DCD8F5;background:#fff;border-radius:99px;padding:7px 11px;font:inherit;font-size:12.5px;color:#4A4C6E}
-.kms .kml-chips button.on{background:#EFEDFF;border-color:#9B8BFF;color:#4B3FD6;font-weight:800}
-.kms .kml-chips button.on::before{content:"✓ "}
-.kms .kml-src{margin-top:14px;font-size:10.5px;color:#9A9CB6;line-height:1.6}
-/*/kurashi-css*//*kn-slim*/.kn{border-radius:18px}.kn .kn-h{padding:5px 10px;gap:8px;min-height:0}.kn .kn-h b{font-size:12px!important;line-height:1.35}.kn .kn-h .kn-tk{font-size:10px!important}.kn .kn-h>span:nth-child(2){gap:0}.kn .kn-tk{line-height:1.35}.kn .kn-bell{width:30px;height:30px}.kn .kn-bell svg{width:21px;height:21px}.kn .kn-bell em{min-width:16px;height:16px;font-size:10px;line-height:16px;top:-3px;right:-4px;padding:0 4px}.kn .kn-chev{font-size:11px;padding:3px 9px}.kn::before{height:22px}/*/kn-slim*/
+/*/chiiki-css*//*kn-slim*/.kn{border-radius:18px}.kn .kn-h{padding:5px 10px;gap:8px;min-height:0}.kn .kn-h b{font-size:12px!important;line-height:1.35}.kn .kn-h .kn-tk{font-size:10px!important}.kn .kn-h>span:nth-child(2){gap:0}.kn .kn-tk{line-height:1.35}.kn .kn-bell{width:30px;height:30px}.kn .kn-bell svg{width:21px;height:21px}.kn .kn-bell em{min-width:16px;height:16px;font-size:10px;line-height:16px;top:-3px;right:-4px;padding:0 4px}.kn .kn-chev{font-size:11px;padding:3px 9px}.kn::before{height:22px}/*/kn-slim*/
 /*kn-noboost*/html{-webkit-text-size-adjust:100%;text-size-adjust:100%}.kn .kn-h b,.kn .kn-h .kn-tk,.kn .kn-tkr i{-webkit-text-size-adjust:none;text-size-adjust:none;max-height:1.5em}/*/kn-noboost*/
 
 
@@ -2946,7 +2955,7 @@ function holoTouch(map){if(!map||map._wtouch)return;map._wtouch=1;const box=map.
   if(window.IntersectionObserver)new IntersectionObserver(es=>es.forEach(e=>{if(e.intersectionRatio<.35)lock()}),{threshold:[0,.35,.6]}).observe(box);
 }
 /* ==== /holo-map ==== */
-/*vcheck*/(function(){var V="11271036";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
+/*vcheck*/(function(){var V="11271047";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
 <script>
 (()=>{
 const $=s=>document.querySelector(s);
@@ -5477,7 +5486,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11271036");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11271047");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -6306,10 +6315,25 @@ function warnLoad(){const o=warnGet();if(warnBusy||(o&&Date.now()-o.at<20*60e3))
 function warnLv(c){const n=WARN_N[c]||"";return /特別警報/.test(n)?3:/警報/.test(n)?2:1}
 function gomiBag(col,em){return `<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M23 13c3 5 6 7 9 8 3-1 6-3 9-8" fill="none" stroke="#1F2140" stroke-width="2.8" stroke-linecap="round"/><path d="M26 21h12l2 3H24z" fill="${col}" stroke="#1F2140" stroke-width="2.4" stroke-linejoin="round"/><path d="M24 24h16c7 6 12 14 12 21 0 8-6 12-12 12H24c-6 0-12-4-12-12 0-7 5-15 12-21z" fill="${col}" stroke="#1F2140" stroke-width="2.8" stroke-linejoin="round"/><path d="M19 38q3-6 8-9" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".7"/><circle cx="34" cy="43" r="10" fill="#fff" opacity=".92"/><text x="34" y="48" font-size="13" text-anchor="middle">${em}</text></svg>`}
 const GOMI_COL={burn:"#FF9F7A",r1:"#6FD3A0",r2:"#8FB2FF"};
+/* 11/27 その日の月の形（月齢を計算。基準は2000年1月6日18:14 UTCの新月） */
+/* 11/27 さいたま市の日の出（時。季節で変わる。NOAAの近似式） */
+/* set=true で日の入り */
+function kqSunrise(t,set){const R=Math.PI/180,y0=new Date(t.getFullYear(),0,1),N=Math.floor((t-y0)/864e5)+1,g=2*Math.PI/365*(N-1),
+  eq=229.18*(.000075+.001868*Math.cos(g)-.032077*Math.sin(g)-.014615*Math.cos(2*g)-.040849*Math.sin(2*g)),
+  de=.006918-.399912*Math.cos(g)+.070257*Math.sin(g)-.006758*Math.cos(2*g)+.000907*Math.sin(2*g)-.002697*Math.cos(3*g)+.00148*Math.sin(3*g),
+  la=35.86*R,ha=Math.acos(Math.cos(90.833*R)/(Math.cos(la)*Math.cos(de))-Math.tan(la)*Math.tan(de))/R;
+  return (720-4*(139.65+(set?-ha:ha))-eq+540)/60}
+function kqMoonAge(t){const S=29.530588853,p=((((t-Date.UTC(2000,0,6,18,14))/864e5/S)%1)+1)%1,i=Math.round(p*8)%8;
+  return [p,p*S,["🌑","🌒","🌓","🌔","🌕","🌖","🌗","🌘"][i],["新月","三日月","半月","十三夜の月","満月","満月すぎの月","半月","細い月"][i]]}
+function kqMoon(t){const [p]=kqMoonAge(t),r=50,c=Math.cos(2*Math.PI*p),rx=Math.abs(r*c).toFixed(1),wax=p<.5,gib=c<0;
+  const d=p<.02||p>.98?"":`M0,-${r} A${r},${r} 0 0 ${wax?1:0} 0,${r} A${rx},${r} 0 0 ${wax?(gib?1:0):(gib?0:1)} 0,-${r}Z`;
+  return `<svg class="kq-moon" viewBox="-56 -56 112 112" aria-hidden="true"><defs><radialGradient id="kqmg" cx=".38" cy=".38" r=".7"><stop offset="0" stop-color="#FFFDF0"/><stop offset=".7" stop-color="#F3EBC6"/><stop offset="1" stop-color="#E2D7A8"/></radialGradient></defs><circle r="${r}" fill="rgba(200,205,240,.16)"/>${d?`<path d="${d}" fill="url(#kqmg)"/>`:""}</svg>`}
 function kesaRender(){const el=document.getElementById("kesaCard");if(!el)return;
   /* 11/26 天気と時間は、いつも「いま」（前は18時からあしたを出していた） */const now=new Date(),h=now.getHours(),eve=false,d=new Date(now);
   const k=ymd(d),day=`${d.getMonth()+1}月${d.getDate()}日（${WD[d.getDay()]}）`;
-  const ttl=eve?"🌙 あしたのじゅんび":h<12?"🌅 けさの3秒":"🕒 きょうの3秒",band=(h<5||h>=18)?"night":h<12?"am":"pm",wb=h<5?"mn":band;/* 11/27 夜中の0〜5時も夜の絵。天気は0〜6時の枠（mn）で */
+  const ttl=eve?"🌙 あしたのじゅんび":h<12?"🌅 けさの3秒":"🕒 きょうの3秒",tn=h+now.getMinutes()/60,sr=kqSunrise(now),ss=kqSunrise(now,true),dawn=tn>=sr-.5&&tn<Math.max(6.5,sr+.5),dusk=tn>=ss-.75&&tn<ss+.33,band=(tn>=ss+.33||tn<sr-.5)?"night":h<12?"am":"pm",wb=band==="night"?(h<12?"mn":"night"):band;
+  /* 11/27 夕方：日の入りの45分前〜20分後は夕焼け（はれの日だけ）。そのあとは夜の絵（前は18時から） */
+  /* 11/27 夜は日の出の30分前まで（夜中の天気は0〜6時の枠 mn）。日の出の30分前〜朝6時半（日の出がおそい冬は日の出の30分後）は朝日。そのあと朝の天気 */
   const wbr=t=>(t||"").replace(/([、。／・])(?![^<]*>)/g,"$1<wbr>");
   /* 天気（背景になる） */
   let w=null;try{w=(wxGet().d||{})[k]}catch(e){}
@@ -6317,7 +6341,7 @@ function kesaRender(){const el=document.getElementById("kesaCard");if(!el)return
   let cls="";try{cls=wxCls(k,wb)}catch(e){}
   let wxh="",tip="";
   if(w&&(w.c||w.t)){let wd=null;try{wd=wxWord(k,wb)}catch(e){}
-    const ic=wd?wd[0]:({sun:"☀️",moon:"🌙",cloud:"☁️",rain:"☔",snow:"⛄"}[c]||"🌤️"),nm=wd?wd[1].replace(/（.*?）/,""):({sun:"はれ",cloud:"くもり",rain:"雨",snow:"雪"}[w.c]||"");
+    const ic=c==="moon"?kqMoonAge(now)[2]:wd?wd[0]:({sun:"☀️",moon:"🌙",cloud:"☁️",rain:"☔",snow:"⛄"}[c]||"🌤️"),nm=wd?wd[1].replace(/（.*?）/,""):({sun:"はれ",cloud:"くもり",rain:"雨",snow:"雪"}[w.c]||"");
     const hi=w.th!=null?w.th:w.hi,lo=(w.tl!=null&&w.th!=null&&w.tl<w.th)?w.tl:w.lo,p=w.pop||{};
     const wet=/雨|雪/.test(w.t||"")||["am","pm","night"].some(b=>p[b]>=50);
     let x2=null;try{x2=wx2(k,"pm")}catch(e){}
@@ -6346,12 +6370,12 @@ function kesaRender(){const el=document.getElementById("kesaCard");if(!el)return
   let ev=[];try{ev=schGet().filter(e=>e.date===k).sort((p,q)=>(p.at||p.time||"99").localeCompare(q.at||q.time||"99"))}catch(e){}
   ch+=ev.length?`<a class="kq-c" href="#sched"><span>📅</span><span>予定 ${ev.length}件<small class="kq-1">${ev[0].at?esc(t12(ev[0].at))+" ":""}${esc(ev[0].t||"")}</small></span></a>`
     :`<a class="kq-c" href="#sched"><span>📅</span><span>予定はないよ<small>＋ 予定を入れる</small></span></a>`;
-  if(LS.get("wolly.kesafold")){let wi="🌤️",wt="";try{const wd=wxWord(k,wb);if(wd){wi=wd[0];wt=wd[1].replace(/（.*?）/,"")}}catch(e){}
+  if(LS.get("wolly.kesafold")){let wi="🌤️",wt="";try{const wd=wxWord(k,wb);if(wd){wi=c==="moon"?kqMoonAge(now)[2]:wd[0];wt=wd[1].replace(/（.*?）/,"")}}catch(e){}
     const hi=w&&(w.th!=null?w.th:w.hi),gm=g&&g.length?`<span class="km-g">${g[0][1]} ${gtom?"あした ":""}${esc(g.map(x=>x[2]).join("・"))}</span>`:g?`<span>🗑️ ${gtom?"あしたは":""}ゴミなし</span>`:"",
       wk=(wn&&wn.k&&wn.k.length)?`<span class="km-w">${WARN_ICON[wn.k[0]]||"⚠️"} ${esc(WARN_N[wn.k[0]]||"注意報")}</span>`:"";
-    const mh=`<div class="kesa-mini wt wt-${c} wb-${band}${cls}"><span class="wt-fx"><i></i><i></i><i></i></span><div class="km"><span class="km-i">${wi}</span><span class="km-t"><span>${eve?"あした ":""}${esc(wt)}${hi!=null?` ${hi}°`:""}</span>${gm}${kqMiniKn()}${kqMiniTr()}</span><button type="button" class="kq-fold km-open" data-kesa-fold aria-expanded="false" aria-label="ひらく">▼</button></div></div>`;
+    const mh=`<div class="kesa-mini wt wt-${c} wb-${band}${cls}${c==="moon"?" kq-ph":""}${dawn?" kq-dawn":""}${dusk?" kq-dusk":""}"><span class="wt-fx"><i></i><i></i><i></i>${c==="moon"?kqMoon(now):""}</span><div class="km"><span class="km-i">${wi}</span><span class="km-t"><span>${eve?"あした ":""}${esc(wt)}${hi!=null?` ${hi}°`:""}</span>${gm}${kqMiniKn()}${kqMiniTr()}</span><button type="button" class="kq-fold km-open" data-kesa-fold aria-expanded="false" aria-label="ひらく">▼</button></div></div>`;
     if(el.dataset.h===mh&&!el.hidden)return;el.dataset.h=mh;el.innerHTML=mh;el.hidden=false;const tl0=document.getElementById("wxTelop");if(tl0)tl0.classList.add("kesa-off");return}
-  const html=`<div class="kesa-sq wt wt-${c} wb-${band}${cls}"><span class="wt-fx"><i></i><i></i><i></i></span><div class="kq"><p class="kq-top"><span class="kq-tag">${eve?"🌙 あした ":""}${day}</span><button type="button" class="kq-x" data-kesa-fold aria-expanded="true" aria-label="たたむ">✕</button></p>${tip&&wxh.indexOf('<p class="kq-cr">')>=0?wxh.replace('<p class="kq-cr">',tip+'<p class="kq-cr">'):wxh+tip}${gh}<div class="kq-chips">${ch}</div>${kqTrainRow()}${kqKnLine()}</div></div>`;
+  const html=`<div class="kesa-sq wt wt-${c} wb-${band}${cls}${c==="moon"?" kq-ph":""}${dawn?" kq-dawn":""}${dusk?" kq-dusk":""}"><span class="wt-fx"><i></i><i></i><i></i>${c==="moon"?kqMoon(now):""}</span><div class="kq"><p class="kq-top"><span class="kq-tag">${eve?"🌙 あした ":""}${day}</span><button type="button" class="kq-x" data-kesa-fold aria-expanded="true" aria-label="たたむ">✕</button></p>${tip&&wxh.indexOf('<p class="kq-cr">')>=0?wxh.replace('<p class="kq-cr">',tip+'<p class="kq-cr">'):wxh+tip}${gh}<div class="kq-chips">${ch}</div>${kqTrainRow()}${kqKnLine()}</div></div>`;
   if(el.dataset.h===html&&!el.hidden)return;el.dataset.h=html;el.innerHTML=html;
   el.hidden=false;const tl=document.getElementById("wxTelop");if(tl)tl.classList.add("kesa-off");kqInitMeter()}
 /* ===== 11/26 朝・日中・夜の気温とスライドメーター ===== */
@@ -6511,47 +6535,7 @@ if(typeof wx2Paint==="function"){const _w2=wx2Paint;wx2Paint=function(){_w2.appl
 [300,2500,7000].forEach(ms=>setTimeout(kesaInit,ms));
 setInterval(kesaInit,20*60e3);
 document.addEventListener("visibilitychange",()=>{if(!document.hidden)kesaInit()});
-/*/kesa-js*//*chiiki-js*/
-/* ===== きょうの地域（11/26 見本） ===== */
-function ckHoli(d){return d.getDay()===0||(typeof SOS_HOLI!=="undefined"&&SOS_HOLI.includes(ymd(d)))}
-function ckStamp(iso){const t=new Date(iso);if(isNaN(t))return"";const n=new Date(),same=t.toDateString()===n.toDateString();
-  const y=new Date(n);y.setDate(n.getDate()-1);const hm=`${t.getHours()}:${String(t.getMinutes()).padStart(2,"0")}`;
-  return (same?"きょう ":t.toDateString()===y.toDateString()?"きのう ":`${t.getMonth()+1}/${t.getDate()} `)+hm+" 更新"}
-function ckDoctor(){
-  const n=new Date(),h=n.getHours(),hol=ckHoli(n),sat=n.getDay()===6;
-  const ki=typeof HEALTH!=="undefined"?HEALTH.findIndex(x=>x.kyu):-1,map=ki>=0?"#x-"+ki:"#kyubyo";
-  if(!hol&&!sat){
-    return `<div class="ck-s"><p class="ck-st"><em>🏥</em>夜に子どもが熱を出したら</p>
-      <div class="ck-row" style="--b:#F1F0FF"><span class="ck-ri">🌙</span><span class="ck-rt"><b>こども医療電話相談 #8000</b><small>看護師さんに相談できるよ（毎日 24時間）</small></span><a class="ck-tel" href="tel:%238000" data-tap="きょうの地域：#8000">📞<span> かける</span></a></div>
-      <a class="ck-more" href="${map}">急患電話マップを見る ›</a></div>`;
-  }
-  const r=typeof clinicRank==="function"?clinicRank():null;
-  const idx=KYU_CLINICS.map((c,i)=>i).sort((a,b)=>r?(r[a].n-r[b].n):a-b).slice(0,2);
-  const hrs=c=>{const x=(c.h||[]).find(z=>/内科/.test(z[0]));const t=x?x[1]:"";const m=hol?t.match(/休日\s*([^／]+)/):t.match(/土曜夜\s*([^／]+)/);return m?m[1].trim():t};
-  const rows=idx.map(i=>{const c=KYU_CLINICS[i];const km=r&&r[i]&&(r.home||r.here)?`約${r[i].km.toFixed(1)}km・`:"";
-    return `<div class="ck-row" style="--b:#FFF0F6"><span class="ck-ri">🏥</span><span class="ck-rt"><b>${esc(c.n)}</b><small>${esc(km)}内科 ${esc(hrs(c))}</small></span><a class="ck-tel" href="tel:${esc(c.t.replace(/[^0-9]/g,""))}" data-tap="きょうの地域：${esc(c.n)}">📞<span> かける</span></a></div>`}).join("");
-  const dent=hol&&typeof HDENT!=="undefined"&&HDENT[0]?`<div class="ck-row" style="--b:#EAF6FF"><span class="ck-ri">🦷</span><span class="ck-rt"><b>休日の歯医者さん</b><small>${esc(HDENT[0][0])}ほか・9〜12時</small></span><a class="ck-go" href="#hdent">›</a></div>`:"";
-  return `<div class="ck-s"><p class="ck-st"><em>🏥</em>${hol?"きょうは休日。あいている急患診療所":"土曜の夜にあいている急患診療所"}</p>${rows}${dent}
-    <p class="ck-note">${r?(r.home?"おうちから近い順":"登録した区から近い順"):"区を登録すると近い順になるよ"}。行く前に電話でたしかめてね</p>
-    <a class="ck-more" href="${map}">急患電話マップを見る ›</a></div>`;
-}
-function ckBoard(){
-  return `<div class="ck-s"><p class="ck-st"><em>💬</em>地域の掲示板</p>
-    <div class="ck-row" style="--b:#F6F5FF"><span class="ck-ri">🗣️</span><span class="ck-rt"><b>近くのママ・パパの声</b><small>相談やおすすめの新着が、ここに出るよ</small></span><span class="ck-soon">もうすぐ</span></div></div>`;
-}
-function chiikiRender(){const el=document.getElementById("chiikiCard");if(!el)return;
-  const ward=S&&S.profile&&S.profile.ward;
-  const html='<div id="ckEvSlot"></div><div id="ckShSlot"></div>';/* 11/26 見出し「きょうの地域」と掲示板は出さない（掲示板は公開したら ckBoard() を足す） *//* 急患は上の帯にあるので出さない */
-  /* 11/26 今週のイベント・おトク情報（#feedEvents）をそのままカードの中へ。描き直すときは一度はずしてから戻す */
-  /* 11/26 さいたまのお店情報（#feedShops）もイベントの下へ */
-  const MV=[["feedEvents","ckEvSlot"],["feedShops","ckShSlot"]].map(([i,sl])=>[document.getElementById(i),sl]);
-  if(el.dataset.h!==html){MV.forEach(([x])=>{if(x&&el.contains(x))x.remove()});el.innerHTML=html;el.dataset.h=html;
-    MV.forEach(([x,sl])=>{const slot=el.querySelector("#"+sl);if(x&&slot){x.classList.add("ck-s","ck-evs");slot.replaceWith(x)}})}
-  el.hidden=false}
-[400,2600,7500].forEach(ms=>setTimeout(()=>{try{chiikiRender()}catch(e){console.warn(e)}},ms));
-setInterval(()=>{try{chiikiRender()}catch(e){}},10*60e3);
-document.addEventListener("visibilitychange",()=>{if(!document.hidden)try{chiikiRender()}catch(e){}});
-/*/chiiki-js*//*kurashi-js*/
+/*/kesa-js*//*kurashi-js*/
 /* ===== きょうのくらしメモ（11/26） ===== */
 const KM_SC={wash:["🧺","洗濯"],futon:["🛏️","布団"],adult:["👕","大人の服"],kids:["🧒","子どもの服"],kasa:["☂️","かさ"],
  bike:["🚲","自転車"],car:["🚗","車"],walk:["🚶","歩き・行き帰り"],play:["🛝","子どもの外遊び"],bento:["🍱","お弁当・食べもの"],
@@ -6769,7 +6753,47 @@ document.addEventListener("click",e=>{const b=e.target.closest("button[data-kmb]
     else{st.off=st.off.filter(x=>x!==v);if(!kmOrder(st).includes(v))st.on=[...st.on,v]}}
   LS.set("wolly.kurashi",st);const sb=document.getElementById("sheetBody"),sh=document.getElementById("sheet"),y=sh?sh.scrollTop:0;
   if(sb&&sb.querySelector(".kms"))sb.innerHTML=sheetKurashi();if(sh)sh.scrollTop=y;try{kesaRender()}catch(_){}});
-/*/kurashi-js*//*/dh-js*/
+/*/kurashi-js*//*chiiki-js*/
+/* ===== きょうの地域（11/26 見本） ===== */
+function ckHoli(d){return d.getDay()===0||(typeof SOS_HOLI!=="undefined"&&SOS_HOLI.includes(ymd(d)))}
+function ckStamp(iso){const t=new Date(iso);if(isNaN(t))return"";const n=new Date(),same=t.toDateString()===n.toDateString();
+  const y=new Date(n);y.setDate(n.getDate()-1);const hm=`${t.getHours()}:${String(t.getMinutes()).padStart(2,"0")}`;
+  return (same?"きょう ":t.toDateString()===y.toDateString()?"きのう ":`${t.getMonth()+1}/${t.getDate()} `)+hm+" 更新"}
+function ckDoctor(){
+  const n=new Date(),h=n.getHours(),hol=ckHoli(n),sat=n.getDay()===6;
+  const ki=typeof HEALTH!=="undefined"?HEALTH.findIndex(x=>x.kyu):-1,map=ki>=0?"#x-"+ki:"#kyubyo";
+  if(!hol&&!sat){
+    return `<div class="ck-s"><p class="ck-st"><em>🏥</em>夜に子どもが熱を出したら</p>
+      <div class="ck-row" style="--b:#F1F0FF"><span class="ck-ri">🌙</span><span class="ck-rt"><b>こども医療電話相談 #8000</b><small>看護師さんに相談できるよ（毎日 24時間）</small></span><a class="ck-tel" href="tel:%238000" data-tap="きょうの地域：#8000">📞<span> かける</span></a></div>
+      <a class="ck-more" href="${map}">急患電話マップを見る ›</a></div>`;
+  }
+  const r=typeof clinicRank==="function"?clinicRank():null;
+  const idx=KYU_CLINICS.map((c,i)=>i).sort((a,b)=>r?(r[a].n-r[b].n):a-b).slice(0,2);
+  const hrs=c=>{const x=(c.h||[]).find(z=>/内科/.test(z[0]));const t=x?x[1]:"";const m=hol?t.match(/休日\s*([^／]+)/):t.match(/土曜夜\s*([^／]+)/);return m?m[1].trim():t};
+  const rows=idx.map(i=>{const c=KYU_CLINICS[i];const km=r&&r[i]&&(r.home||r.here)?`約${r[i].km.toFixed(1)}km・`:"";
+    return `<div class="ck-row" style="--b:#FFF0F6"><span class="ck-ri">🏥</span><span class="ck-rt"><b>${esc(c.n)}</b><small>${esc(km)}内科 ${esc(hrs(c))}</small></span><a class="ck-tel" href="tel:${esc(c.t.replace(/[^0-9]/g,""))}" data-tap="きょうの地域：${esc(c.n)}">📞<span> かける</span></a></div>`}).join("");
+  const dent=hol&&typeof HDENT!=="undefined"&&HDENT[0]?`<div class="ck-row" style="--b:#EAF6FF"><span class="ck-ri">🦷</span><span class="ck-rt"><b>休日の歯医者さん</b><small>${esc(HDENT[0][0])}ほか・9〜12時</small></span><a class="ck-go" href="#hdent">›</a></div>`:"";
+  return `<div class="ck-s"><p class="ck-st"><em>🏥</em>${hol?"きょうは休日。あいている急患診療所":"土曜の夜にあいている急患診療所"}</p>${rows}${dent}
+    <p class="ck-note">${r?(r.home?"おうちから近い順":"登録した区から近い順"):"区を登録すると近い順になるよ"}。行く前に電話でたしかめてね</p>
+    <a class="ck-more" href="${map}">急患電話マップを見る ›</a></div>`;
+}
+function ckBoard(){
+  return `<div class="ck-s"><p class="ck-st"><em>💬</em>地域の掲示板</p>
+    <div class="ck-row" style="--b:#F6F5FF"><span class="ck-ri">🗣️</span><span class="ck-rt"><b>近くのママ・パパの声</b><small>相談やおすすめの新着が、ここに出るよ</small></span><span class="ck-soon">もうすぐ</span></div></div>`;
+}
+function chiikiRender(){const el=document.getElementById("chiikiCard");if(!el)return;
+  const ward=S&&S.profile&&S.profile.ward;
+  const html='<div id="ckEvSlot"></div><div id="ckShSlot"></div>';/* 11/26 見出し「きょうの地域」と掲示板は出さない（掲示板は公開したら ckBoard() を足す） *//* 急患は上の帯にあるので出さない */
+  /* 11/26 今週のイベント・おトク情報（#feedEvents）をそのままカードの中へ。描き直すときは一度はずしてから戻す */
+  /* 11/26 さいたまのお店情報（#feedShops）もイベントの下へ */
+  const MV=[["feedEvents","ckEvSlot"],["feedShops","ckShSlot"]].map(([i,sl])=>[document.getElementById(i),sl]);
+  if(el.dataset.h!==html){MV.forEach(([x])=>{if(x&&el.contains(x))x.remove()});el.innerHTML=html;el.dataset.h=html;
+    MV.forEach(([x,sl])=>{const slot=el.querySelector("#"+sl);if(x&&slot){x.classList.add("ck-s","ck-evs");slot.replaceWith(x)}})}
+  el.hidden=false}
+[400,2600,7500].forEach(ms=>setTimeout(()=>{try{chiikiRender()}catch(e){console.warn(e)}},ms));
+setInterval(()=>{try{chiikiRender()}catch(e){}},10*60e3);
+document.addEventListener("visibilitychange",()=>{if(!document.hidden)try{chiikiRender()}catch(e){}});
+/*/chiiki-js*//*/dh-js*/
 /*today-js*/
 /* きょうの予定：午前・午後・夜＋天気（ホログラム） */
 function todayPopOld(){const k=ymd(new Date()),L=schSortT(schGet().filter(e=>e.date===k)),w=wxGet().d[k];
@@ -7556,8 +7580,8 @@ let RAWQ="";function setRaw(v){RAWQ=(v||"").normalize("NFKC").replace(NOISE,"").
 function qph(ws){const k=ws.join("|")+"#"+RAWQ;if(k===QPK&&QP)return QP;const list=ws.map(qk);const j=qk(RAWQ||ws.join(""));if(ws.length>1||RAWQ)list.push(j);QPK=k;QP={list,all:Math.max(3,j.length)};return QP}
 function load(){if(DATA)return Promise.resolve(DATA);
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
-  const kp=fetch(base+"near-data/tel-kana.json?v=11271036").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
-  return Promise.all([fetch(base+"near-data/tel.json?v=11271036").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
+  const kp=fetch(base+"near-data/tel-kana.json?v=11271047").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
+  return Promise.all([fetch(base+"near-data/tel.json?v=11271047").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
     .catch(()=>{DATA=[];return DATA})}
 /* 聞きとった文 → キーワード */
 function terms(text){let s=(text||"").normalize("NFKC").replace(NOISE," ");
