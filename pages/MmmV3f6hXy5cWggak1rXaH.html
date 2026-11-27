@@ -886,4 +886,36 @@ function go(){document.head.appendChild(st);run(document.body);
   new MutationObserver(function(ms){ms.forEach(function(m){m.addedNodes.forEach(function(x){if(x.nodeType===1)run(x);else if(x.nodeType===3&&x.parentNode)run(x.parentNode)})})}).observe(document.body,{childList:true,subtree:true})}
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",go);else go();
 })();</script><!--/wolly-tel2-->
-</body></html>
+<style id="wolly-smooth">
+/* 11/27 横スライド：はしまで行っても画面全体がゆれない */
+body *{overscroll-behavior-x:contain}
+</style><script id="wolly-smooth-js">
+/* 11/27 くり返しのアニメは、見えていない・指で動かしている・パネルの後ろ のときは止める（スマホの力を横スライドに回す） */
+(function(){if(!document.getAnimations||!window.IntersectionObserver)return;
+  const OVER="#sheet,#rmOv,.rm-ov,#viewer,#vtel,[role=dialog]";
+  const map=new Map(),vis=new Set();let swiping=false,covered=false,tm=0,sq=0;
+  const inf=a=>{try{return a.effect&&a.effect.target&&a.effect.getTiming().iterations===Infinity}catch(e){return false}};
+  /* 見えているかは、動くもの1つずつ（SVGの中の部品は、いちばん外の svg）で見る */
+  const contOf=t=>{if(t instanceof SVGElement){let v=t.ownerSVGElement||t;while(v.ownerSVGElement)v=v.ownerSVGElement;return v}return t};
+  const want=c=>vis.has(c)&&!swiping&&!(covered&&!c.closest(OVER));
+  const apply=c=>{const S=map.get(c);if(!S)return;const w=want(c);S.forEach(a=>{try{if(!w){if(a.playState==="running"){a.pause();a.__sp=1}}else if(a.__sp){a.__sp=0;a.play()}}catch(e){}})};
+  const io=new IntersectionObserver(es=>es.forEach(e=>{e.isIntersecting?vis.add(e.target):vis.delete(e.target);apply(e.target)}),{rootMargin:"60px"});
+  function scan(){sq=0;const seen=new Map();
+    document.getAnimations().forEach(a=>{if(!inf(a))return;const t=a.effect.target;if(!t.isConnected)return;const c=contOf(t);let S=seen.get(c);if(!S)seen.set(c,S=new Set());S.add(a)});
+    map.forEach((S,c)=>{if(!seen.has(c)){io.unobserve(c);vis.delete(c);map.delete(c)}});
+    seen.forEach((S,c)=>{const had=map.has(c);map.set(c,S);if(!had)io.observe(c);else apply(c)})}
+  const later=()=>{if(sq)return;sq=setTimeout(()=>{(window.requestIdleCallback||(f=>f()))(scan,{timeout:800})},500)};
+  /* 指で動かしているあいだ（はなして少しのあいだも）止める */
+  const all=()=>map.forEach((S,c)=>apply(c));
+  const sw=()=>{if(!swiping){swiping=true;all()}clearTimeout(tm);tm=setTimeout(()=>{swiping=false;all()},240)};
+  addEventListener("scroll",sw,{capture:true,passive:true});addEventListener("touchmove",sw,{passive:true});addEventListener("wheel",sw,{passive:true});
+  /* パネル・小窓が出ているあいだは、後ろの画面のアニメを止める */
+  const cov=()=>{const b=document.body.classList,v=b.contains("sheet-open")||b.contains("rm-open");if(v!==covered){covered=v;map.forEach((S,c)=>apply(c))}};
+  new MutationObserver(cov).observe(document.body,{attributes:true,attributeFilter:["class"]});
+  document.addEventListener("animationstart",later,true);addEventListener("hashchange",later);
+  document.addEventListener("visibilitychange",later);
+  window.__animPz={map,vis,scan,st:()=>({swiping,covered})};
+  /* ページの中のしくみで、見えないところのアニメがまた動き出すことがあるので、ときどき見なおす */
+  setInterval(()=>{if(!document.hidden&&!swiping)all()},3000);
+  cov();setTimeout(scan,300);setTimeout(scan,2500)})();
+</script></body></html>
