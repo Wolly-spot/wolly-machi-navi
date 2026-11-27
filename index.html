@@ -3034,7 +3034,7 @@ function holoTouch(map){if(!map||map._wtouch)return;map._wtouch=1;const box=map.
   if(window.IntersectionObserver)new IntersectionObserver(es=>es.forEach(e=>{if(e.intersectionRatio<.35)lock()}),{threshold:[0,.35,.6]}).observe(box);
 }
 /* ==== /holo-map ==== */
-/*vcheck*/(function(){var V="11280044";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
+/*vcheck*/(function(){var V="11280113";if(/localhost|127\.0\.0\.1/.test(location.host)||V.indexOf("{")===0)return;function chk(){try{fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=(t||"").trim();if(!t||t===V)return;var k="wolly.vre";if(sessionStorage.getItem(k)===t)return;sessionStorage.setItem(k,t);var u=new URL(location.href);u.searchParams.set("v",t);location.replace(u.toString())}).catch(function(){})}catch(e){}}chk();document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()})})();/*/vcheck*/</script>
 <script>
 (()=>{
 const $=s=>document.querySelector(s);
@@ -5569,7 +5569,7 @@ function openViewer(id,title){
   const v=$("#viewer");
   $("#vTitle").textContent=title||"";v.classList.remove("ready");
   /* 11/18 LINEの中のブラウザが前のページを覚えていて古いまま出ることがある → 公開のたびに変わる番号（?v=）を付けて、いつも新しいページを読む */
-  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11280044");
+  let u=PAGES_BASE+id.replace(/^[^?#]+/,m=>m+".html");u=u.replace(/^([^#]*)/,m=>m+(m.includes("?")?"&":"?")+"v=11280113");
   const f=freshFrame(u,title);
   f.onload=()=>{v.classList.add("ready");sendHome()};
   v.hidden=false;void v.offsetWidth;v.classList.add("on");viewerOpen=true;
@@ -6791,11 +6791,11 @@ function kmIntro(w){const tk=kmTk(),f=w.am<=5?"ひんやり":w.am>=25?"朝から
   if(tk==="eve")return `夜は${w.night}度まで下がるよ。`;
   if(tk==="day")return `けさは${w.am}度だったけど、お昼は${w.hi}度${up}。`;
   return `けさは${w.am}度で${f}。お昼は${w.hi}度${up}。`}
-function kmStory(w,ks){const must=["heat"].filter(k=>!ks.includes(k)).map(k=>kmSay(k,w)).filter(x=>x.lv===2).slice(0,1);
-  const use=[...must,...ks.filter(k=>!(k==="adult"&&ks.includes("kids")&&w.hi-w.am>=10)).map(k=>kmSay(k,w)).filter(x=>x.lv>0)].slice(0,3),seen=new Set();
-  let s=kmIntro(w)+use.map(x=>x.t.replace(/^朝と昼で\d+度ちがうよ。/,"").replace(new RegExp("^朝は"+w.am+"度(、風([0-9.]+)m/s)?。"),(m,a,v)=>v?"風は"+v+"m/s。":"").split(/(?<=。)/).filter(z=>z&&!seen.has(z)&&seen.add(z)).join("")).join("");
-  if(!use.length)s+="とくに気をつけることはなさそう。すごしやすい日だよ。";else if(use.length<2)s+="ほかは、とくに気をつけることはなさそう。";
-  const tk=kmTk();s+=tk==="am"?"きょうもいってらっしゃい。":tk==="day"?"午後もいい時間を。":tk==="eve"?"きょうもおつかれさま。":"あしたもいい1日になりますように。";return s}
+function kmStory(w,ks){const tk=kmTk(),nt=tk==="night",use=ks.map(k=>kmSay(k,w)).filter(x=>x.lv>0),seen=new Set(),t=[];
+  const hot=kmSay("heat",w);if(hot.lv===2&&!ks.includes("heat"))use.unshift(hot);
+  use.forEach(x=>{const z=x.s||x.t;if(t.length<2&&!seen.has(z)){seen.add(z);t.push(z)}});
+  const ts=kmTsk(w.hi-w.am,4),bk=ts||kmBoke(w,"am",4);
+  return (nt?"あしたは":"きょうは")+kmPick([w.am+"度→"+w.hi+"度。",w.am+"度から"+w.hi+"度まで。"],2)+bk+(t.join("")||kmPick(["とくに気をつけることはなさそう。","のんびりいける日。"],5))}
 /* カードの1行（kesaRender から） */
 /* 11/26 21時からは、いまの天気（気象庁の観測・予報）をひとこと入れてから、あしたの話 */
 function kmNowLine(){try{const n=new Date(),td=ymd(n);let wd=null;try{wd=wxWord(td,n.getHours()<5?"mn":"night")}catch(e){}
@@ -6820,50 +6820,63 @@ function kmCare(w,ks,day){const L=ks.map(k=>[k,kmSay(k,w)]).filter(x=>x[1].lv>0&
   const top=L.slice().sort((a,b)=>b[1].lv-a[1].lv)[0];
   if(day){if(w.later==="rain")return ["kasa",kmPick(["折りたたみがさがあると安心。","洗濯物は早めに取りこむと安心。","お迎えにはかさがあると安心。"],2)];
     const tin=kmSeason(w.mo)==="sum"?17:kmSeason(w.mo)==="mid"?16:15;
-    if(ks.includes("wash")&&w.c==="sun"&&w.hu<80)return ["wash",kmPick(["洗濯物は"+tin+"時ごろまでに取りこむと、しっとりしにくいよ。",tin+"時をすぎると湿気がもどるから、取りこみは早めがよさそう。"],2)];
+    if(ks.includes("wash")&&w.c==="sun"&&w.hu<80)return ["wash",kmPick([tin+"時ごろまでに取りこむと安心。","取りこみは"+tin+"時までがよさそう。"],2)];
     if(w.night<=8||w.hi-w.night>=8)return ["adult",kmPick(["夕方からは"+w.night+"度くらいまで下がりそう。お迎えには上着があると安心。","日がかたむくと、ぐっと冷えそう。帰りの上着があると安心。"],4)];
     if(w.mo>=11||w.mo<=1)return ["walk",kmPick(["16時半ごろから暗くなるよ。お迎えは明るい色の服だと安心。","日が暮れるのが早い時期。帰りは足もとに気をつけてね。"],5)];
     if(w.hi>=28)return ["heat",kmPick(["夕方まで暑さが続きそう。こまめにお水を飲むと安心。","午後も暑いから、日かげで休みながらがよさそう。"],6)];
     return null}
   if(!top)return null;let t=top[1].s||top[1].t;const m=t.match(/^(\d+)時までに干せば、(\d+)時までに乾きそう。$/);
-  if(m)t=kmPick([t,"洗濯物は"+m[1]+"時ごろまでに干すと、"+m[2]+"時には乾きそう。","干すなら"+m[1]+"時までがよさそう。"+m[2]+"時の取りこみに間に合うよ。"],7);
+  if(m)t=kmPick([t,"干すなら"+m[1]+"時までがよさそう。",m[1]+"時までに干せば、夕方には乾きそう。"],7);
   return [top[0],t]}
-/* 今夜しておくと朝が楽なこと（あしたの天気 w2 で） */
-function kmPrep(w2,ks){const se=kmSeason(w2.mo),rain=w2.c==="rain"||w2.c==="snow"||w2.pop>=50,o=[];
-  if(rain)o.push(["kasa",kmPick(["かさとレインコートを玄関に出しておくと、朝があわてないよ。","かさを玄関に出しておくと、朝が楽かも。","長ぐつとかさを用意しておくと安心。"],1)]);
-  else if(w2.pop>=30||w2.later==="rain")o.push(["kasa",kmPick(["折りたたみがさをかばんに入れておくと安心。","念のため、折りたたみがさを入れておくといいかも。"],1)]);
-  if(ks.includes("car")&&w2.am<=3)o.push(["car",kmPick(["フロントガラスにカバーをかけておくと、朝の霜取りが楽だよ。","車のガラスにカバーをかけておくと、朝が楽かも。"],2)]);
-  if(ks.includes("bike")&&w2.am<=8)o.push(["bike",kmPick(["手ぶくろを自転車のかごの近くに出しておくと安心。","手ぶくろと耳あてを玄関に出しておくと、朝が楽かも。"],3)]);
-  if(w2.am<=6)o.push(["adult",kmPick(["あったかい上着と手ぶくろを出しておくと、朝が楽だよ。","朝は冷えそうだから、上着を出しておくと安心。","子どもの手ぶくろも、玄関に出しておくといいかも。"],4)]);
-  else if(w2.hi-w2.am>=10)o.push(["kids",kmPick(["脱ぎ着しやすい服を用意しておくと安心。","はおれる上着を1枚出しておくといいかも。"],4)]);
-  if(ks.includes("bento")&&w2.hi>=25)o.push(["bento",kmPick(["保冷剤を冷凍庫に入れておくと安心。","保冷剤を冷やしておくと、朝のお弁当が楽だよ。"],5)]);
-  if(ks.includes("wash")&&w2.c==="sun"&&w2.hu<65&&!w2.later)o.push(["wash",kmPick(["朝いちばんに干せるよう、洗濯の用意をしておくのもいいかも。","あしたは洗濯日和。夜のうちにタイマーをかけておくのもいいかも。"],6)]);
-  if(w2.hi>=30)o.push(["heat",kmPick(["水筒と帽子を出しておくと、朝が楽だよ。","あしたは暑そう。水筒を冷やしておくといいかも。"],9)]);
+/* 今夜しておくと朝が楽なこと（あしたの天気 w2 で。11/28 短く） */
+function kmPrep(w2,ks){const rain=w2.c==="rain"||w2.c==="snow"||w2.pop>=50,o=[];
+  if(rain)o.push(["kasa",kmPick(["かさを玄関に出しておくと安心。","かさと長ぐつを出しておくと楽かも。","レインコートも出しておくと安心。"],1)]);
+  else if(w2.pop>=30||w2.later==="rain")o.push(["kasa",kmPick(["折りたたみがさがあると安心。","念のため折りたたみがさを。"],1)]);
+  if(ks.includes("car")&&w2.am<=3)o.push(["car",kmPick(["車のガラスにカバーをかけると朝が楽。","ガラスにカバーをかけておくと安心。"],2)]);
+  if(ks.includes("bike")&&w2.am<=8)o.push(["bike",kmPick(["手ぶくろを出しておくと安心。","手ぶくろと耳あてを玄関に。"],3)]);
+  if(w2.am<=6)o.push(["adult",kmPick(["上着と手ぶくろを出しておくと楽だよ。","あったかい上着を出しておくと安心。","子どもの手ぶくろも玄関に。"],4)]);
+  else if(w2.hi-w2.am>=10)o.push(["kids",kmPick(["脱ぎ着しやすい服を出しておくと安心。","はおれる上着を1枚出しておくといいかも。"],4)]);
+  if(ks.includes("bento")&&w2.hi>=25)o.push(["bento",kmPick(["保冷剤を冷凍庫に入れておくと安心。","保冷剤を冷やしておくと楽だよ。"],5)]);
+  if(ks.includes("wash")&&w2.c==="sun"&&w2.hu<65&&!w2.later)o.push(["wash",kmPick(["あしたは洗濯日和。","朝いちばんに干せそうだよ。"],6)]);
+  if(w2.hi>=30)o.push(["heat",kmPick(["水筒と帽子を出しておくと楽だよ。","水筒を冷やしておくといいかも。"],9)]);
   const urg=o.filter(x=>x[0]==="kasa"||x[0]==="car"||(x[0]==="adult"&&w2.am<=3)),pri=ks.map(k=>o.find(x=>x[0]===k)).filter(Boolean);return urg[0]||pri[0]||o[0]||null}
-function kmReport(w2){const wd=kmWd(w2),a=w2.am,h=w2.hi,f=a<=3?"きりっと冷えた":a<=8?"ひんやりした":a<=15?"すずしい":a<=22?"すごしやすい":"むしっとした";
-  return kmPick(["あしたの朝は"+a+"度で"+wd+"。お昼は"+h+"度くらいまで上がりそう。","あしたは"+f+"朝になりそう（"+a+"度）。日中は"+wd+"で"+h+"度くらい。","あしたは"+wd+"。朝"+a+"度から、お昼は"+h+"度まで。","朝起きたら"+a+"度くらい。あしたは"+wd+"で、お昼は"+h+"度の予報だよ。"],0)}
-/* 今夜のこと（18時〜。きょうの夜の気温・雨・湿度から1つ。0〜4時は「いまの天気」だけ） */
+function kmReport(w2){const wd=kmWd(w2),a=w2.am,h=w2.hi;
+  return kmPick(["あしたの朝は"+a+"度で"+wd+"。","あしたは"+wd+"、朝は"+a+"度。","あしたの朝は"+a+"度、日中は"+wd+"。","あしたは"+wd+"で、お昼は"+h+"度。"],0)}
 /* 11/28 気温差がすごい日は、ときどきツッコミ（3日に2日くらい。言い方も入れかえる） */
 function kmTsk(d,salt,eve){if(d<12||(kmDay()+salt)%3===2)return "";
   return kmPick(eve?["夕方からの冷えこみ、すごっ！","昼との差、やばっ！","日がしずむと別の季節！？"]:["気温差やばっ！","寒暖差すごっ！","朝と昼でこんなにちがうの！？","1日で季節が変わりそう！"],salt)}
 function kmTonight(){const h=new Date().getHours();if(h<4)return ["🌙",""];const wt=kmWx(false);if(!wt)return ["🌙",""];const t=wt.night;
-  if(wt.popN>=50)return ["☔",kmPick(["今夜は雨がふりそう。洗濯物は部屋の中に入れておくと安心。","夜は雨になりそう。帰り道は足もとに気をつけてね。","今夜は雨の音が聞こえそう。窓をしめておくと安心。"],11)];
-  if(t<=3)return ["🌙",kmPick(["今夜は"+t+"度くらいまで冷えこみそう。おふろでしっかりあたたまってね。","今夜はぐっと冷えそう（"+t+"度くらい）。毛布を1枚足すと、ぐっすり眠れそう。","夜は"+t+"度くらいまで下がりそう。寝るときは足もとをあたたかくすると安心。"],12)];
-  if(t>=25)return ["🌙",kmPick(["今夜も"+t+"度くらいで暑そう。エアコンを上手に使うと、ぐっすり眠れそう。","寝苦しい夜になりそう。寝る前に水分をとっておくと安心。"],12)];
-  if(wt.huMin<35)return ["🤧",kmPick(["今夜は空気がかわいているよ。寝る前に加湿器にお水を入れておくと、のどが楽かも。","乾燥した夜になりそう。ぬれタオルを部屋にほしておくと、のどにやさしいよ。"],13)];
-  if(t<=10)return ["🌙",kmPick(["今夜は"+t+"度くらい。あったかくしてすごしてね。","夜は"+t+"度まで下がりそう。あたたかい飲みものでほっとひと息もいいね。","今夜はひんやり"+t+"度くらい。子どもの寝冷えに気をつけてね。"],12)];
-  return ["🌙",kmPick(["今夜は"+t+"度くらいで、すごしやすい夜になりそう。","おだやかな夜になりそう。ゆっくり休んでね。","今夜は"+t+"度くらい。窓を少しあけると気持ちいいかも。"],12)]}
+  if(wt.popN>=50)return ["☔",kmPick(["今夜は雨になりそう。","夜は雨がふりそう。","今夜は雨の音が聞こえそう。"],11)];
+  if(t<=3)return ["🌙",kmPick(["今夜は"+t+"度まで冷えこみそう。","今夜はぐっと冷えそう。","今夜は冷えるよ。おふろであたたまってね。"],12)];
+  if(t>=25)return ["🌙",kmPick(["今夜も暑そう。","寝苦しい夜になりそう。"],12)];
+  if(wt.huMin<35)return ["🤧",kmPick(["今夜は乾燥ぎみ。","空気がかわいた夜になりそう。"],13)];
+  if(t<=10)return ["🌙",kmPick(["今夜は"+t+"度くらい。あったかくしてね。","今夜はひんやり"+t+"度くらい。","夜は"+t+"度まで下がりそう。"],12)];
+  return ["🌙",kmPick(["今夜は"+t+"度くらい。","おだやかな夜になりそう。","すごしやすい夜になりそう。"],12)]}
 function kmNightRest(w2){return kmPick(["きょうもおつかれさま。あたたかくして、ゆっくり休んでね。","おふろであたたまって、ぐっすり眠れますように。","きょうも1日おつかれさま。","今夜はゆっくり休めますように。"],2)}
+/* 11/28 シンプルで笑えるひとこと（ボケ）。天気ごとに数種類、日にちで入れかえる。night＝今夜の天気 */
+function kmBoke(w,mode,salt){salt=salt||0;const n=mode==="night",t=n?w.night:w.am;
+  if(w.thunder)return kmPick(["雷さん、きょうはお休みしてほしい…","おへそはしっかり隠してね。"],salt);
+  if(w.c==="snow")return kmPick(["雪だるま、作れるかな？","白い世界にテンション上がる日。"],salt);
+  if(n&&w.popN>=50||!n&&(w.c==="rain"||w.pop>=50)&&!(mode==="day"&&/(のち|から)(くもり|晴)/.test(w.w||"")))return n?kmPick(["雨音BGMでおやすみの夜。","しとしと雨の夜。","カエルさんが合唱してそうな夜。"],salt):kmPick(["かさの出番です！","カエルさんは大よろこびの日。","水たまりジャンプ日和（子ども目線）。"],salt);
+  if(!n&&w.ws>=8)return kmPick(["前髪の命運が試される日。","自転車がトレーニングモードに。","洗濯物が空を飛びたがる日。"],salt);
+  if(!n&&w.hi>=33)return kmPick(["アイスが正義の日。","とけそう…人間も。","太陽さん、張りきりすぎ。"],salt);
+  if(n&&t>=25)return kmPick(["寝苦しさ、本気出してる夜。","扇風機が大活躍の夜。"],salt);
+  if(n&&t<=6)return kmPick(["おふとんが恋しい夜。","湯たんぽと仲よくしたい夜。","こたつから出られない予感。"],salt);
+  if(mode==="am"&&t<=4)return kmPick(["布団から出たくない選手権、開幕。","息が白い！ちょっと楽しい。","手がかじかむ〜！"],salt);
+  if(mode==="day"&&w.hi<=10)return kmPick(["お昼でもひんやり〜。","日なたが特等席の日。","ポケットに手を入れたくなる日。"],salt);
+  if(!n&&w.huMin<30)return kmPick(["お肌がカサカサ警報。","のどがイガイガしやすい日。"],salt);
+  if(n)return kmPick(["ほっとひと息の夜。","のんびりタイムの夜。","おつかれさまの夜。"],salt);
+  if(w.c==="sun")return kmPick(["おひさま、ごきげんな日。","洗濯物がよろこぶ日。","青空がまぶしい〜！"],salt);
+  return kmPick(["空はちょっとおやすみモード。","おひさまはかくれんぼ中。","グレーの空でも気分は晴れで。"],salt)}
 function kmTipText(){const h=new Date().getHours(),ks=kmOrder();
-  if(h>=18||h<4){const w2=kmWx(h>=18);if(!w2)return null;const p=kmPrep(w2,ks),r=kmReport(w2),now=h>=21||h<4?kmNowLine():"",tn=kmTonight();if(now)tn[1]=tn[1].replace(/今夜は-?\d+度くらいまで冷えこみそう/,"今夜は冷えこみそう").replace(/（-?\d+度くらい）/,"").replace(/夜は-?\d+度くらいまで下がりそう/,"夜はもう少し冷えそう").replace(/夜は-?\d+度まで下がりそう/,"夜はもう少し冷えそう").replace(/今夜も-?\d+度くらいで暑そう/,"今夜も暑そう").replace(/今夜はひんやり-?\d+度くらい/,"今夜はひんやり").replace(/今夜は-?\d+度くらいで、/,"今夜は").replace(/今夜は-?\d+度くらい。/,"");
-    const r2=r+kmTsk(w2.hi-w2.am,2),ic=p?KM_SC[p[0]][0]:tn[0],tail=p?(kmDay()%2?r2+p[1]:p[1].replace(/^/,"あしたに向けて、")+r2):r2;
-    return [ic,now+tn[1]+tail]}
+  if(h>=18||h<4){const w2=kmWx(h>=18);if(!w2)return null;const p=kmPrep(w2,ks),now=h>=21||h<4?kmNowLine():"",wt=h>=18?kmWx(false):null;
+    const ts=kmTsk(w2.hi-w2.am,2),r=ts?"あしたは朝"+w2.am+"度→昼"+w2.hi+"度。"+ts:kmReport(w2),bk=ts?"":(wt?kmBoke(wt,"night",1):"");
+    return [p?KM_SC[p[0]][0]:"🌙",now+bk+r+(p?p[1]:"")]}
   const w=kmWx(false);if(!w)return null;const day=h>=10,c=kmCare(w,ks,day),wd=kmWd(w);
-  const head=day?(w.later==="rain"?kmPick(["このあと雨になりそう。","午後は雨が近づいてきそう。","夕方にかけて雨になりそう。"],1):w.later==="sun"?kmPick(["このあと晴れてきそう。","午後は晴れ間が出てきそう。"],1):kmPick(["このあと夕方までは"+wd+"。","午後も"+wd+"が続きそう。","夕方までは"+wd+"で、"+w.hi+"度くらい。"],1))
-    :kmPick(["きょうは"+wd+"。お昼は"+w.hi+"度くらいまで上がりそう。","朝は"+w.am+"度、日中は"+wd+"で"+w.hi+"度くらい。","きょうの日中は"+wd+"。"+w.am+"度から"+w.hi+"度まで。","きょうは"+wd+"で、お昼は"+w.hi+"度くらいになりそう。"],0);
-  const hi_=day?"":"おはようございます。",tsk=day?kmTsk(w.hi-w.night,1,true):kmTsk(w.hi-w.am,0);
-  if(c)return [KM_SC[c[0]][0],hi_+head+tsk+(day||!["kasa","adult","kids","heat","walk"].includes(c[0])?c[1]:kmPick(["お出かけには、",""],2)+c[1])];
-  return [day?"☕":"✨",hi_+head+tsk+kmFun(w,day)]}
+  const tsk=day?kmTsk(w.hi-w.night,1,true):kmTsk(w.hi-w.am,0),bk=tsk||kmBoke(w,day?"day":"am",day?2:0);
+  if(!day){const d=kmPick([wd+"、"+w.am+"→"+w.hi+"度。",w.am+"度→"+w.hi+"度の"+wd+"。"],1);
+    return [c?KM_SC[c[0]][0]:"✨","おはようございます。"+(tsk?d+tsk:bk+d)+(c?c[1]:"")]}
+  return [c?KM_SC[c[0]][0]:"☕",(w.later==="rain"&&!tsk?"このあと雨みたい。":bk)+(c?c[1]:kmFun(w,true))]}
 function kmTip(){let x=null;try{x=kmTipText()}catch(e){}
   if(!x){const w=kmWx();if(!w)return "";const L=kmOrder().map(k=>[k,kmSay(k,w)]).filter(x=>x[1].t),top=L.slice().sort((a,b)=>b[1].lv-a[1].lv)[0];if(!top)return "";x=[KM_SC[top[0]][0],esc(top[1].s||top[1].t)]}else x=[x[0],x[1]];
   return `<a class="kq-tip kml-tip" href="#kurashi"><span>${x[0]}</span><span class="kml-tx">${x[1]}</span><span class="kml-go" aria-label="くわしく">›</span></a>`}
@@ -6875,7 +6888,7 @@ function sheetKurashi(){const w=kmWx(),st=kmSt();
   const who=st.b.length?st.b.map(b=>`<i>${KM_LIFE[b][0]} ${KM_LIFE[b][1]}</i>`).join(""):`<i>まだえらんでいないよ（洗濯・服・かさ）</i>`;
   return `<div class="kms"><p class="kml-h">${w.eve||new Date().getHours()<4?"あしたの":"きょうの"}くらしメモ・${day}</p>
   <p class="kml-t">${esc(w.w||"")}　${w.am}度 → ${w.hi}度</p><div class="kml-who">${who}</div>
-  <div class="kml-story"><span class="kml-lb">Wollyのお話</span><p>${esc(kmStory(w,ks))}</p></div>
+  <div class="kml-story"><p>${esc(kmStory(w,ks))}</p></div>
   <p class="kml-sec">📝 場面ごとに<small>えらんだ順</small></p>${ks.map(k=>kmRow(k,kmSay(k,w))).join("")}
   ${others.length?`<details class="kml-more"><summary>＋ ほかの場面も見る（${others.length}）</summary>${others.map(k=>kmRow(k,kmSay(k,w))).join("")}</details>`:""}
   <div class="kml-set"><h3>⚙️ わたしの暮らしに合わせる</h3><p>えらぶと、お話と順番があなた向けになるよ。いくつでもOK。このスマホの中だけに覚えるよ。</p>
@@ -7675,8 +7688,8 @@ let RAWQ="";function setRaw(v){RAWQ=(v||"").normalize("NFKC").replace(NOISE,"").
 function qph(ws){const k=ws.join("|")+"#"+RAWQ;if(k===QPK&&QP)return QP;const list=ws.map(qk);const j=qk(RAWQ||ws.join(""));if(ws.length>1||RAWQ)list.push(j);QPK=k;QP={list,all:Math.max(3,j.length)};return QP}
 function load(){if(DATA)return Promise.resolve(DATA);
   const base=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?location.origin+"/pages/":"https://wolly-spot.github.io/wolly-machi-navi/pages/";
-  const kp=fetch(base+"near-data/tel-kana.json?v=11280044").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
-  return Promise.all([fetch(base+"near-data/tel.json?v=11280044").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
+  const kp=fetch(base+"near-data/tel-kana.json?v=11280113").then(r=>r.json()).then(d=>{KANA=d}).catch(()=>{});
+  return Promise.all([fetch(base+"near-data/tel.json?v=11280113").then(r=>r.json()),kp]).then(([d])=>{DATA=d.map(r=>({n:r[0],t:r[1],c:r[2],w:r[3],ll:r[4]?[r[4],r[5]]:null,note:r[6]||"",key:nz(r[0]+" "+(r[6]||"")),nk:nz(r[0]),a:r[8]||"",u:r[9]||"",ky:r[7]?nz(r[7]):"",ph:(()=>{let q=phon(r[7]||toKana(r[0]));SYN.forEach(([a,b])=>q=q.replace(a,b));return q})()}));return DATA})
     .catch(()=>{DATA=[];return DATA})}
 /* 聞きとった文 → キーワード */
 function terms(text){let s=(text||"").normalize("NFKC").replace(NOISE," ");
