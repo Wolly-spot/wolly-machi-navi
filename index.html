@@ -6866,6 +6866,7 @@ function kmBoke(w,mode,salt){salt=salt||0;const n=mode==="night",t=n?w.night:w.a
   if(mode==="day"&&w.hi<=10)return kmPick(["お昼でもひんやり〜。","日なたが特等席の日。","ポケットに手を入れたくなる日。"],salt);
   if(!n&&w.huMin<30)return kmPick(["お肌がカサカサ警報。","のどがイガイガしやすい日。"],salt);
   if(n)return kmPick(["ほっとひと息の夜。","のんびりタイムの夜。","おつかれさまの夜。"],salt);
+  if(w.c==="sun"&&mode==="day"&&new Date().getHours()>=12)return kmPick(["午後はおひさまの時間帯。","午後は外干しのチャンスの時間帯かも。","午後は青空が広がる時間帯。"],salt);
   if(w.c==="sun")return kmPick(["おひさま、ごきげんな日。","洗濯物がよろこぶ日。","青空がまぶしい〜！"],salt);
   return kmPick(["空はちょっとおやすみモード。","おひさまはかくれんぼ中。","グレーの空でも気分は晴れで。"],salt)}
 function kmTipText(){const h=new Date().getHours(),ks=kmOrder();
