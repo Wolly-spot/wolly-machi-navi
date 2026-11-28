@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-28T08:05:00+09:00",
+ "updatedAt": "2026-11-28T19:05:00+09:00",
  "events": [
   {
    "id": "e-thomas-skipcity",
@@ -13,32 +13,6 @@
    "img": "https://www.pref.saitama.lg.jp/shared/images/sns/logo.png",
    "ai": false,
    "added": "2026-11-22T09:37:38+09:00"
-  },
-  {
-   "id": "e-laketown-xmas-market",
-   "kind": "mall",
-   "title": "レイクタウンのクリスマスマーケット（11/27〜）",
-   "desc": "山小屋風のお店が並び、サンタさんと写真も。16時からイルミも。",
-   "date": "2026-11-27",
-   "area": "越谷市",
-   "src": "さいたまイベント情報",
-   "url": "https://www.saitama-e.com/laketown-christmas/",
-   "img": "https://wolly-spot.github.io/wolly-machi-navi/img/feed/e-laketown-xmas-market.jpg",
-   "ai": true,
-   "added": "2026-11-23T08:40:00+09:00"
-  },
-  {
-   "id": "e-ario-happyday",
-   "kind": "point",
-   "title": "アリオ川口 nanacoポイント4倍（11/28）",
-   "desc": "8のつく日は専門店街でnanaco払いのポイントが4倍に。",
-   "date": "2026-11-28",
-   "area": "川口市",
-   "src": "アリオ川口",
-   "url": "https://kawaguchi.ario.jp/event/1700012385",
-   "img": "https://kawaguchi.ario.jp/app/17/img/event/1700012385/img_3s1np1ftxhogo.png",
-   "ai": false,
-   "added": "2026-11-11T09:50:00+09:00"
   },
   {
    "id": "e-cocoon-shimajiro",
@@ -132,6 +106,19 @@
    "added": "2026-11-18T09:50:00+09:00"
   },
   {
+   "id": "e-kawaguchi-planet-kids",
+   "kind": "facility",
+   "title": "川口の科学館 キッズのプラネタリウム（〜12/27）",
+   "desc": "冬の星座のお話を子ども向けに。週末のおでかけにどうぞ。",
+   "date": "2026-11-29",
+   "area": "川口市",
+   "src": "ウォーカープラス",
+   "url": "https://www.walkerplus.com/event/ar0311e622034/",
+   "img": "https://ms-cache.walkerplus.com/walkertouch/wtd/event/34/l2/622034.jpg",
+   "ai": false,
+   "added": "2026-11-28T19:05:00+09:00"
+  },
+  {
    "id": "e-gakudo-r9",
    "kind": "deadline",
    "title": "学童（放課後児童クラブ）4月入室 〆11/30",
@@ -197,17 +184,17 @@
    "added": "2026-11-22T09:37:38+09:00"
   },
   {
-   "id": "e-kuki-lib-ohanashi-dec",
-   "kind": "facility",
-   "title": "県立久喜図書館のおはなし会（12/5〜）無料",
-   "desc": "12月の土曜14時から30分。申込みなしで親子で聞けるよ。",
+   "id": "e-harenoterasu-noel",
+   "kind": "free",
+   "title": "ハレノテラスdeノエル（12/5・6）入場無料",
+   "desc": "サンタと写真やワークショップ、スタンプラリーも。雨の日は中止のことも。",
    "date": "2026-12-05",
-   "area": "久喜市",
-   "src": "埼玉県立図書館",
-   "url": "https://www.pref.saitama.lg.jp/g2208/library-info/0812-01.html",
-   "img": "https://www.pref.saitama.lg.jp/shared/images/sns/logo.png",
+   "area": "さいたま市見沼区",
+   "src": "ウォーカープラス",
+   "url": "https://www.walkerplus.com/event/ar0311e622948/",
+   "img": "https://ms-cache.walkerplus.com/walkertouch/wtd/event/48/l2/622948.jpg",
    "ai": false,
-   "added": "2026-11-25T09:40:00+09:00"
+   "added": "2026-11-28T19:05:00+09:00"
   },
   {
    "id": "e-orchestra-0sai",
@@ -221,6 +208,19 @@
    "img": "https://rstatic.enjoytokyo.jp/assets/images/event_draft/a0/2091359/img_1.jpg?1794210312&p=t&w=1200",
    "ai": false,
    "added": "2026-11-22T09:37:38+09:00"
+  },
+  {
+   "id": "e-precure-sonic",
+   "kind": "kids",
+   "title": "プリキュアのショーが大宮に（12/6）",
+   "desc": "ソニックシティで2回公演。3歳以上は有料、前売4,000円。",
+   "date": "2026-12-06",
+   "area": "さいたま市大宮区",
+   "src": "ウォーカープラス",
+   "url": "https://www.walkerplus.com/event/ar0311e612960/",
+   "img": "https://ms-cache.walkerplus.com/walkertouch/wtd/event/60/l2/612960.jpg",
+   "ai": false,
+   "added": "2026-11-28T19:05:00+09:00"
   },
   {
    "id": "e-keyaki-xmas-market-2026",
